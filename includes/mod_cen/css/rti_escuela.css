@@ -1,0 +1,87 @@
+input[type="text"] {
+     width: 100%;
+     box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     -moz-box-sizing: border-box;
+}
+.ui-dialog-titlebar-close {
+  	visibility: hidden;
+}
+.ui-widget button {
+	margin: 5px 5px 5px 5px;
+	float:right;	
+}
+.ui-widget-content {
+    background: -webkit-linear-gradient(180deg,#ffffff,#C7F5F0);
+	background: -moz-linear-gradient(180deg,#ffffff,#C7F5F0);
+    border-radius: 5px;
+	border:1px solid #999999;
+  
+}
+.ui-widget-header {
+	background: -moz-linear-gradient(90deg,#3B2020,#3B684F);
+	background: -webkit-linear-gradient(90deg,#3B2020,#3B684F);
+	padding: 5px 15px;
+	border: 0;
+	color: #fff;
+	font-weight: normal;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.ui-dialog {
+    left: 0;
+    outline: 0 none;
+    padding: 0 !important;
+    position: absolute;
+    top: 0;
+	 box-shadow: -2px 5px 8px  #888888;
+}
+.ui-dialog .ui-dialog-titlebar {
+    padding: 0.5em 1.2em;
+    position: relative;
+    font-size: 1.2em;
+	text-align:left;
+	font-weight:bold;
+	
+}
+#dialog-form {
+	padding:10px 10px 10px 10px ;
+	width: 70%;
+	margin: 10px;	
+	text-align: left;
+	border: 1px solid #AEB3B3;
+	border-radius: 10px;
+	background: #ffffff;
+}
+
+#dialog-form table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#dialog-form table tr:nth-child(even) {
+	/*background: -moz-linear-gradient(0deg,#8CD3CA,#ffffff);
+	background: -webkit-linear-gradient(0deg,#8CD3CA,#ffffff);*/
+	background: -moz-linear-gradient(0deg,#8BCCDC,#8BCCDC);
+	background: -webkit-linear-gradient(0deg,#8BCCDC,#8BCCDC);*/
+	
+}
+
+#dialog-form table tr:nth-child(even) {
+	background-color: white;
+}
+
+#dialog-form th{	
+	border: 0px solid #999;
+	padding: 0.25rem;
+	/*width: 20%;*/
+		
+}
+
+#centralpopup td{	
+	border: 0px solid #999;
+	padding: 0.25rem;
+	/*width: 20%;*/
+		
+}
+
