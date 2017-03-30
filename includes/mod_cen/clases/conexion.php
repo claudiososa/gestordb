@@ -4,7 +4,7 @@ class Conexion
 
  private $host="localhost";
  private $user="vicomser_conect";
- private $pass="vicomser_conect";
+ private $pass="Vicomser.c79";
  private $db="vicomser_conect";
 
 function __construct()
