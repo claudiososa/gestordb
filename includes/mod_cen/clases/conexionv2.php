@@ -3,14 +3,14 @@ class Conexion
 {
 
 	private $host="localhost";
-  	private $user="conectar";
-	private $pass="conectar";
-	private $db="conectar";*/
+	private $user="vicomser_conectar";
+	private $pass="Conectar.79";
+	private $db="vicomser_conectar";
 	private $stmt;
 	private $array;
 	static $_instance;
 	private $conexion;
- 
+
   /*Realiza la conexión a la base de datos.*/
 	private function conectar(){
 	  $this->conexion=mysqli_connect($this->host,$this->user,$this->pass,$this->db);
