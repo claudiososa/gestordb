@@ -1,7 +1,7 @@
 <?php
 include_once("clases/login.php");
 
-if($_POST["username"])
+if(isset($_POST["username"]))
 	{
 		$username=$_POST["username"];
 		$password=$_POST["password"];
