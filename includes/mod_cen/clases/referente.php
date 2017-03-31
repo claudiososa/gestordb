@@ -29,22 +29,28 @@ class Referente
 	}
 
 	public function agregar()
-	{
-
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
-
-		$sentencia="INSERT INTO referentes (referenteId,personaId,tipo,rol,etjcargo,fechaIngreso,titulo,estado)
-		VALUES (NULL,'". $this->personaId."','". $this->tipo."','". $this->rol."','".$this->etjcargo."','". $this->fechaIngreso."','". $this->titulo."','". $this->estado."');";
-
-		if ($conexion->query($sentencia)) {
-			header("Location:index.php?id=1");
-		}else
 		{
-			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
-		}
+			$stmt = ConexionPdo::getConexion()->prepare("INSERT INTO referentes (referenteId,personaId,tipo,rol,etjcargo,fechaIngreso,titulo,estado)
+			VALUES (null,:persona_id,:tipo,:rol,:etjcargo,:fechaingreso,:titulo,:estado)");
 
-	}
+			//$stmt->bindParam(":referente_id",$this->referenteId);
+			$stmt->bindParam(":persona_id",$this->personaId,PDO::PARAM_INT);
+			$stmt->bindParam(":tipo",$this->tipo,PDO::PARAM_STR);
+			$stmt->bindParam(":rol",$this->rol,PDO::PARAM_STR);
+			$stmt->bindParam(":etjcargo",$this->etjcargo,PDO::PARAM_INT);
+			$stmt->bindParam(":fechaingreso",$this->fechaIngreso);
+			$stmt->bindParam(":titulo",$this->titulo,PDO::PARAM_STR);
+			$stmt->bindParam(":estado",$this->estado,PDO::PARAM_STR
+		);
+	    var_dump($stmt);
+			if($stmt->execute()){
+				return "Referente se guardo con éxito";
+			} else{
+				return "Error al guardar";
+			}
+
+
+		}
 
 	public function editar()
 	{
@@ -179,6 +185,12 @@ class Referente
 		return $conexion->query($sentencia);
     }
 
+		public function tipoReferente(){
+ 	 	$nuevaConexion=new Conexion();
+  		$conexion=$nuevaConexion->getConexion();
+  		$sentencia="SELECT DISTINCT tipo FROM referentes";
+ 		return $conexion->query($sentencia);
+ 	 }
 
     public function Tipo($tipo=mull,$estado=null)
 	{
