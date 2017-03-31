@@ -37,6 +37,15 @@
         </li>
 
 
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">NUEVO<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+                <li ><a href="index.php?mod=slat&men=personas&id=8">Alta Vice-Director</a></li>
+          </ul>
+        </li>
+
+
+
 		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>  
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Encuentros <span class="caret"></span></a>
