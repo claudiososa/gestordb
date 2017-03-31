@@ -23,7 +23,20 @@
           <ul class="dropdown-menu">                
                 <li><a href="index.php?mod=slat&men=referentes&id=1">Referentes</a></li>
                 <li ><a href="index.php?mod=slat&men=admin&id=4">Escuelas</a></li>
-          </ul>		  
+          </ul>		
+          </li>
+
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+                <li><a href="index.php?mod=slat&men=informe&id=10">Nueva Categoría</a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=11">Buscar Editar Categoría</a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=12">Nueva Sub-Categoría</a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=13">Listar Sub-Categoría</a></li>
+          </ul>
+        </li>
+
+
 		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>  
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Encuentros <span class="caret"></span></a>

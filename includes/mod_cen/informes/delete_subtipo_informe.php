@@ -19,7 +19,7 @@ if(isset($_POST["delete_sub_categoria"]) ){
     echo $borrado; 
     
      
-      $variablephp = "index.php?mod=slat&men=referentes&id=12";
+      $variablephp = "index.php?mod=slat&men=informe&id=13";
 
 
 ?>

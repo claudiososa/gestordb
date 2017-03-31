@@ -55,8 +55,8 @@ $subtipo=new SubTipoInforme(NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 //hasta aqui
       echo "<td>".$nomModif."</td>";
      // echo "<td>".$fila->userModif."</td>";
-      echo "<td>"."<a href='index.php?mod=slat&men=referentes&id=13&subTipoId=$fila->subTipoId&tipoId=$fila->tipoId&nombre=$fila->nombre&descripcion=$fila->descripcion&estado=$fila->estado'>MODIFICAR</a>"."</td>";
-      echo "<td>"."<a href='index.php?mod=slat&men=referentes&id=14&subTipoId=$fila->subTipoId&tipoId=$fila->tipoId&nombre=$fila->nombre&descripcion=$fila->descripcion&estado=$fila->estado'>ELIMINAR</a>"."</td>";
+      echo "<td>"."<a href='index.php?mod=slat&men=informe&id=14&subTipoId=$fila->subTipoId&tipoId=$fila->tipoId&nombre=$fila->nombre&descripcion=$fila->descripcion&estado=$fila->estado'>MODIFICAR</a>"."</td>";
+      echo "<td>"."<a href='index.php?mod=slat&men=informe&id=15&subTipoId=$fila->subTipoId&tipoId=$fila->tipoId&nombre=$fila->nombre&descripcion=$fila->descripcion&estado=$fila->estado'>ELIMINAR</a>"."</td>";
       
      
       

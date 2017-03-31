@@ -22,7 +22,7 @@ if(isset($_POST["modificar_sub_categoria"]) ){
     echo $editado; 
     
      
-      $variablephp = "index.php?mod=slat&men=referentes&id=12";
+      $variablephp = "index.php?mod=slat&men=informe&id=13";
 
 
 ?>

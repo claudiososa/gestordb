@@ -39,8 +39,8 @@ if(isset($_POST["guardar_sub_categoria"]) AND $_POST["nombre"]<>"" AND $_POST["d
     
    
 
-$variablephp = "index.php?mod=slat&men=referentes&id=12";
-
+//$variablephp = "index.php?mod=slat&men=referentes&id=12";
+  $variablephp = "index.php?mod=slat&men=informe&id=13";
 
 ?>
            

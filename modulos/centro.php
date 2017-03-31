@@ -268,23 +268,40 @@
 							include("includes/mod_cen/escuela_ett_etj.php");
 							break;
 						case 6:
-								include("includes/mod_cen/informes/list_my_report.php");
-								break;
+							include("includes/mod_cen/informes/list_my_report.php");
+							break;
 						case 7:
-								include("includes/mod_cen/informes/new_update_response.php");
-								break;
+							include("includes/mod_cen/informes/new_update_response.php");
+							break;
 						case 8:
-										include("includes/mod_cen/informes/summary_report.php");
-										break;
-					 case 9:
-								include("includes/mod_cen/informes/calendarByMonth.php");
-								break;
-					 case 10:
-										 include("includes/mod_cen/informes/nuevoTipoInforme.php");
-										 break;
-					 case 11:
-					 					include("includes/mod_cen/informes/buscarEditarTipoInforme.php");
-					 					break;
+							include("includes/mod_cen/informes/summary_report.php");
+							break;
+					 	case 9:
+							include("includes/mod_cen/informes/calendarByMonth.php");
+							break;
+					 	case 10:
+							include("includes/mod_cen/informes/nuevoTipoInforme.php");
+							 break;
+					 	case 11:
+					 		include("includes/mod_cen/informes/buscarEditarTipoInforme.php");
+					 		break;
+
+					 	 case 12:	
+					        include("includes/mod_cen/informes/nuevoSubTipoInforme.php");
+					 		break;
+
+					 	 case 13:
+					    	include("includes/mod_cen/informes/listarSubtipo.php");
+					 		break;		
+
+					     case 14:	
+					        include("includes/mod_cen/informes/update_subtipo_informe.php");
+					 		break;
+					     case 15:	
+					        include("includes/mod_cen/informes/delete_subtipo_informe.php");
+					 		break;
+
+
 					}
 					break;
 
