@@ -37,6 +37,11 @@
 					case 7:
 							include("includes/mod_cen/personas/persona_ver_director.php");
 							break;
+					case 8:
+							include("includes/mod_cen/personas/vicedirector_nuevo.php");
+							break;
+
+
 				}
 				break;
 			case "referentes":
