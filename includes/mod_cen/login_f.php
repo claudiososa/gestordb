@@ -38,40 +38,32 @@ if(isset($_POST["username"]))
 
 		?>
 
-		<div class="container">
+		<div class="container" >
+	    <div class="row">
+	    <div class="Absolute-Center is-Responsive">
+	    <div class="col-md-4 col-md-offset-4">
+	<form action="" name="iniciosesion"method="POST">
+		<label class="">Inicio de Sesión</label>
 
-			<form class="form-horizontal" name="iniciosesion" action="" method="POST">
-				<div class="form-group">
-					<label class="col-md-12 col-md-offset-2">Inicio de Sesión</label>
-				</div>
-				<div class="form-group">
+			<div class="form-group input-group">
+	      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			<input class="form-control" type="text" name="username"  placeholder="Ingrese Usuario" id="formulario"  size="50" required>
+			</div>
 
-					<label class="control-label col-md-2">Usuario</label>
-					<div class="col-md-10">
-						<div class="row">
-							 <div class="col-sm-5">
-								<input type="text" class="form-control"  name="username" placeholder="Usuario" autofocus>
-							 </div>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2">Contraseña</label>
-					<div class="col-md-10">
-						<div class="row">
-							 <div class="col-sm-5">
-								<input class="form-control" type="password" placeholder="Contraseña" name="password">
-							 </div>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-md-6 col-md-offset-2">
-						<input class="btn btn-primary" type="submit" value="Ingresar">
-					</div>
-				</div>
-			</form>
-		</div>
+			<!--<div id="alerta" style="display:none;"><font color="crimsol">Ingrese 8 caracteres (solo números)</font></div>-->
+			<div class="form-group input-group">
+	        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	        <input class="form-control" type="password" name="password" placeholder="Ingrese Contraseña" size="50" required>
+	    </div>
+
+	    <div class="form-group" "input-group">
+	        <button class="btn btn-lg btn-primary btn-block" type="submit" id="btnvalidar" value="Ingresar">Ingresar</button>
+		  </div>
+	</form>
+	    </div>
+	    </div>
+	    </div>
+	</div>
 	<?php
 	}
 		if(isset($_SESSION["referenteId"])) {
