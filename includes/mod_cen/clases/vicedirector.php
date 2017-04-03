@@ -39,7 +39,7 @@ class ViceDirector
 			$stmt->bindParam(":fechaModif",$this->fechaModif);
 			$stmt->bindParam(":userModif",$this->userModif,PDO::PARAM_INT);
 			
-		var_dump($stmt);
+		//var_dump($stmt);
 			if($stmt->execute()){
 				return "vicedirector guardado con éxito!!";
 			} else{
@@ -71,6 +71,84 @@ public function editar()
 
 
 	}
+
+
+public function eliminar()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="DELETE FROM vicedirector WHERE vicedirectorId = '$this->vicedirectorId'";
+		if ($conexion->query($sentencia)) {
+			return 1;
+
+		}else
+		{
+			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		}
+
+	}
+
+
+
+public function buscar()
+	{
+
+
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="SELECT * FROM vicedirector";
+		if($this->vicedirectorId!=NULL || $this->escuelaId!=NULL || $this->personaId!=NULL || $this->turno!=NULL  || $this->fechaModif!=NULL || $this->userModif!=NULL)
+		{
+			$sentencia.=" WHERE ";
+
+
+		if($this->vicedirectorId!=NULL)
+		{
+			$sentencia.=" vicedirectorId = $this->vicedirectorId && ";
+		}
+
+		if($this->escuelaId!=NULL)
+		{
+			$sentencia.=" escuelaId = $this->escuelaId && ";
+		}
+
+		if($this->personaId!=NULL)
+		{
+			$sentencia.=" personaId=$this->personaId && ";
+		}
+
+		if($this->turno!=NULL)
+		{
+			$sentencia.=" turno = $this->turno && ";
+		}
+
+		if($this->fechaModif!=NULL)
+		{
+			$sentencia.=" fechaModif=$this->fechaModif && ";
+		}
+
+		if($this->userModif!=NULL)
+		{
+			$sentencia.=" userModif='$this->userModif' && ";
+		}
+
+		
+
+		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+		}
+
+		$sentencia.="  ORDER BY vicedirectorId ASC"; 
+		//if(isset($limit)){
+			//$sentencia.=" LIMIT ".$limit;
+		//}
+		
+		return $conexion->query($sentencia);
+
+	}
+
 	
 
 
