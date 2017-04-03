@@ -1,7 +1,7 @@
 <?php
 
-include_once('includes/mod_cen/clases/conexion.php');
-include_once("includes/mod_cen/clases/maestro.php");
+include_once("conexion.php");
+include_once("maestro.php");
 
 class TipoPermisos
 {
@@ -57,16 +57,24 @@ function __construct($tipoPermisosId=NULL,$tipoId=NULL,$tipoReferente=NULL)
 
 	public function buscar($limit=NULL)
 	{
+/*
+		SELECT tipoId,tipoReferente,tipoinformes.nombre
+		FROM
+		tipopermisos
+		JOIN tipoinformes
+		ON (tipopermisos.tipoId = tipoinformes.tipoInformeId)
+		WHERE tipoReferente="ETJ"*/
+
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-	  $sentencia="SELECT * FROM tipopermisos";
+	  $sentencia="SELECT tipoId,tipoinformes.nombre FROM tipopermisos JOIN tipoinformes ON (tipopermisos.tipoId=tipoinformes.tipoInformeId)";
 
 		if($this->tipoPermisosId!=NULL || $this->tipoId!=NULL || $this->tipoReferente!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
 
-		if($this->tipoPermisosid!=NULL)
+		if($this->tipoPermisosId!=NULL)
 		{
 			$sentencia.=" tipoPermisosId = $this->tipoPermisosId && ";
 		}
@@ -78,18 +86,18 @@ function __construct($tipoPermisosId=NULL,$tipoId=NULL,$tipoReferente=NULL)
 
 		if($this->tipoReferente!=NULL)
 		{
-			$sentencia.=" tipoReferente=$this->tipoReferente && ";
+			$sentencia.=" tipoReferente='$this->tipoReferente' && ";
 		}
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 
 		}
 
-		$sentencia.="  ORDER BY tipoPermisosId DESC";
+		$sentencia.="  ORDER BY tipoinformes.nombre DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-		//echo $sentencia;
+	//	echo $sentencia;
 		return $conexion->query($sentencia);
 
 	}

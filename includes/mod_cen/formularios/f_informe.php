@@ -1,14 +1,12 @@
+<script src="includes/mod_cen/js/s_ajax_informe.js"></script>
+
+</script>
 <?php
-
   if($informe->informeId==""){
-
-
   }
   //var_dump($informe);
-
 ?>
-
- <form name="form" class="informef" action="index.php?mod=slat&men=informe&id=1&escuelaId=<?php echo $_GET["escuelaId"]?>" method="post">
+<form name="form" class="informef" id="formInforme" action="index.php?mod=slat&men=informe&id=1&escuelaId=<?php echo $_GET["escuelaId"]?>" method="post">
  		<div class="form-group">
       <div class="col-md-12">
         <label class="control-label"><br>Escuela</label>
@@ -70,26 +68,50 @@
           <label class="control-label">Categoría</label>
         </div>
         <div class="col-md-12">
-    <?php
-        $tipo=Informe::camposet('tipo','informes');
-        ?>
-        <select  class="form-control" name="tipo" <?php
-         if($informe->informeId<>"" && $informe->referenteId<>$_SESSION['referenteId'] )
-          {            //if($dato_escuela->referenteId<>$_SESSION['referenteId'] && isset($nuevo))
-            echo 'disabled';}?> >
-          <?php
-            foreach ($tipo AS $valor)
-
-              if($valor==$informe->tipo) {
-                echo "<option selected value='$valor'>$valor</option>";
-              }else {
-                echo "<option value='$valor'>$valor</option>";
-              }
-
-          echo '</select>';
-        ?>
- 		   </div>
+        <select  class="form-control" id="tipo" name="nuevotipo">
+              <option value='0'>Seleccione</option>
+              <?php
+                $selected="";
+                while($fila=mysqli_fetch_object($buscarPermisos)){
+                  if($fila->tipoId==$informe->nuevotipo){
+                    $selected="selected ";
+                  }
+                  echo "<option ".$selected."value=".$fila->tipoId.">".$fila->nombre."</option>";
+                  $selected="";
+                }
+              ?>
+        </select>
+        </div>
     </div>
+
+    <input type="hidden" name="tipo" value="Acta de Visita">
+
+    <div class="form-group">
+       <div class="col-md-12">
+         <label class="control-label">Sub Categoría</label>
+       </div>
+
+       <div class="col-md-12" id="divsubtipo">
+       <select  class="form-control" id="subtipo" name="subtipo">
+           <?php
+                if(isset($ver)){
+                  echo "<option value='0'>Seleccione</option>";
+                    $selected="";
+                  while($fila=mysqli_fetch_object($buscarSubTipo)){
+                    if($fila->subTipoId==$informe->subtipo){
+                      $selected="selected ";
+                    }
+                    echo "<option ".$selected."value='".$fila->subTipoId."'>".$fila->nombre."</option>";
+                    $selected="";
+                  }
+                } else{
+                      echo "<option selected value='0'>Seleccione</option>";
+                }
+            ?>
+
+       </select>
+       </div>
+   </div>
 
      <div class="form-group">
        <div class="col-md-12">

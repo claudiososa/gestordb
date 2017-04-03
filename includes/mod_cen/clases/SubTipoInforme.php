@@ -1,7 +1,7 @@
 <?php
 
-include_once('includes/mod_cen/clases/conexion.php');
-include_once("includes/mod_cen/clases/maestro.php");
+include_once('conexion.php');
+include_once("maestro.php");
 
 class SubTipoInforme
 {
@@ -12,7 +12,7 @@ class SubTipoInforme
  	private $estado;
  	private $fechaModif;
 	private $userModif;
-	
+
 
 function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL,
 	$estado=NULL, $fechaModif=NULL,$userModif=NULL)
@@ -24,7 +24,7 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
  		$this->estado =$estado;
  		$this->fechaModif =$fechaModif;
  		$this->userModif =$userModif;
-		
+
 	}
 
 
@@ -33,12 +33,12 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		
+
 		$sentencia="INSERT INTO SubTipoInforme (subTipoId,tipoId,nombre,descripcion,estado,fechaModif,userModif)
 		VALUES (NULL,'". $this->tipoId."','". $this->nombre."','".$this->descripcion."',
 		'".$this->estado."','". $this->fechaModif."','". $this->userModif."');";
-    
-    	
+
+
 
 		if ($conexion->query($sentencia)) {
 			return 1;
@@ -47,15 +47,15 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
 	}
-	
-	
+
+
 
 	public function editar()
 	{
-	
+
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		
+
 		$sentencia="UPDATE SubTipoInforme SET  tipoId = '$this->tipoId', nombre = '$this->nombre',descripcion = '$this->descripcion'
 		,estado = '$this->estado', fechaModif = '$this->fechaModif',
 		userModif = '$this->userModif'
@@ -66,7 +66,7 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
 		//echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
-			
+
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
@@ -107,15 +107,15 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
 		$sentencia="SELECT * FROM SubTipoInforme WHERE tipoId=".$this->tipoId;
 		$resultado=$conexion->query($sentencia);
 		$elemento = mysqli_fetch_object($resultado);
-		
-		$this->supTipoId = $elemento->subTipoId;
+
+		$this->subTipoId = $elemento->subTipoId;
  		$this->tipoId = $elemento->tipoId;
  		$this->nombre =$elemento->nombre;
 		$this->descripcion =$elemento->descripcion;
  		$this->estado =$elemento->estado;
  		$this->fechaModif =$elemento->fechaModif;
 		$this->userModif =$elemento->userModif;
-		
+
 		return $this;
 
     }
@@ -133,7 +133,7 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
     	return $result;
     }
 
-    
+
 
 	public function buscar()
 	{
@@ -146,7 +146,7 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
 			$sentencia.=" WHERE ";
 
 
-		if($this->subtipoId!=NULL)
+		if($this->subTipoId!=NULL)
 		{
 			$sentencia.=" subTipoId = $this->subTipoId && ";
 		}
@@ -181,13 +181,13 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
 			$sentencia.=" userModif='$this->userModif' && ";
 		}
 
-		
+
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 
 		}
 
-		$sentencia.="  ORDER BY subTipoId ASC"; 
+		$sentencia.="  ORDER BY subTipoId ASC";
 		//if(isset($limit)){
 			//$sentencia.=" LIMIT ".$limit;
 		//}
@@ -208,4 +208,25 @@ function __construct($subTipoId=NULL,$tipoId=NULL,$nombre=NULL,$descripcion=NULL
 		$this->$var=$valor;
 	}
 
+}
+
+if(isset($_POST["opcion"])){
+	$subTipo=new SubTipoInforme(NULL,$_POST["opcion"]);
+	$buscarSubTipo=$subTipo->buscar();
+	//$lista=array();
+	$indiceFila=0;
+	$indiceColumna=0;
+	//$resultado="";
+	if(mysqli_num_rows($buscarSubTipo)>0) {
+		$resultado="<select class='form-control' id='subtipo' name='subtipo' >";
+		$resultado.="<option selected value='0'>Seleccione</option>";
+		while($fila = mysqli_fetch_object($buscarSubTipo))
+		{
+			$resultado.="<option value='".$fila->subTipoId."'>".$fila->nombre."</option>";
+		}
+		//echo json_encode($lista);
+		$resultado.="</select>";
+	}
+
+	echo $resultado;
 }

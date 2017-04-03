@@ -17,13 +17,15 @@ class informe
  	private $fechaVisita;
  	private $fechaCarga;
  	private $fechaModificado;
+	private $nuevoTipo;
+	private $subTipo;
 
 
 
 function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$prioridad=NULL,
 	$tipo=NULL,	$titulo=NULL, $contenido=NULL, $leido=NULL, $estado=NULL,
 	$fechaVisita=NULL,	$fechaCarga=NULL,
-	$fechaModificado=NULL)
+	$fechaModificado=NULL,$nuevoTipo=NULL,$subTipo=NULL)
 	{
 		$this->informeId = $informeId;
  		$this->escuelaId = $escuelaId;
@@ -37,6 +39,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
  		$this->fechaVisita = $fechaVisita;
  		$this->fechaCarga = $fechaCarga;
  		$this->fechaModificado = $fechaModificado;
+		$this->nuevoTipo = $nuevoTipo;
+		$this->subTipo = $subTipo;
 	}
 
 
@@ -45,11 +49,11 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO informes (informeId,escuelaId,referenteId,prioridad,tipo,titulo,contenido,leido,estado,fechaVisita,fechaCarga,fechaModificado)
+		$sentencia="INSERT INTO informes (informeId,escuelaId,referenteId,prioridad,tipo,titulo,contenido,leido,estado,fechaVisita,fechaCarga,fechaModificado,nuevotipo,subtipo)
 		VALUES (NULL,'". $this->escuelaId."','". $this->referenteId."','".$this->prioridad."',
 		'".$this->tipo."','".$this->titulo."','". $this->contenido."','". $this->leido."',
 		'". $this->estado."','". $this->fechaVisita."','". $this->fechaCarga."',
-		'". $this->fechaModificado."');";
+		'". $this->fechaModificado."','". $this->nuevoTipo."','". $this->subTipo."');";
     echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
@@ -100,7 +104,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
  		$this->fechaVisita = $elemento->fechaVisita;
  		$this->fechaCarga = $elemento->fechaCarga;
  		$this->fechaModificado = $elemento->fechaModificado;
-
+		$this->nuevoTipo = $elemento->nuevoTipo;
+		$this->subTipo = $elemento->subTipo;
 		return $this;
 
     }
@@ -183,7 +188,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
 		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL
-		|| $this->fechaVisita!=NULL || $this->contenido!=NULL)
+		|| $this->fechaVisita!=NULL || $this->contenido!=NULL || $this->nuevoTipo!=NULL || $this->subTipo!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -201,6 +206,16 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		if($this->tipo!=NULL)
 		{
 			$sentencia.=" tipo=$this->tipo && ";
+		}
+
+		if($this->nuevoTipo!=NULL)
+		{
+			$sentencia.=" nuevotipo=$this->nuevoTipo && ";
+		}
+
+		if($this->subTipo!=NULL)
+		{
+			$sentencia.=" subtipo=$this->subTipo && ";
 		}
 
 		if($this->prioridad!=NULL)

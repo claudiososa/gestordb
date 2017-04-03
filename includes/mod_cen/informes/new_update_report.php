@@ -2,38 +2,48 @@
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/escuela.php");
+include_once("includes/mod_cen/clases/TipoInforme.php");
+include_once("includes/mod_cen/clases/TipoPermisos.php");
+include_once("includes/mod_cen/clases/SubTipoInforme.php");
 $nuevo=0;
 if(isset($_POST['save_report']))
 {
 
 	//var_dump($_POST);
 //  sleep(10);
-    if(!isset($_POST["edit_report"])){
-    //creo objeto informe
+    if(!isset($_POST["edit_report"]))
+    {
+      //creo objeto informe
+      $fecha=date("Y-m-d H:i:s");
 
-    $fecha=date("Y-m-d H:i:s");
-    //$fechaVisita=$_POST[""]date("Y-m-d");
-    $informe= new Informe(null,$_GET["escuelaId"],$_SESSION["referenteId"],$_POST["prioridad"],
-		$_POST["tipo"],$_POST["titulo"],$_POST["contenido"],
-		NULL,NULL,$_POST["fechaVisita"],$fecha,Null);
+      $informe= new Informe(null,
+                            $_GET["escuelaId"],
+                            $_SESSION["referenteId"],
+                            $_POST["prioridad"],
+                            $_POST["tipo"],
+                            $_POST["titulo"],
+                            $_POST["contenido"],
+                            NULL,
+                            NULL,
+                            $_POST["fechaVisita"],
+                            $fecha,
+                            Null,
+                            $_POST["nuevotipo"],
+                            $_POST["subtipo"]);
+
         $guardar_informe=$informe->agregar(); // hasta aqui deberia haber guardado el informe nuevo
 
+        // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
+        $escuela= new Escuela($_GET["escuelaId"]);
+        $buscar_escuela=$escuela->buscar();
+        $dato_escuela=mysqli_fetch_object($buscar_escuela);
+        $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID
 
-
-            // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
-
-            $escuela= new Escuela($_GET["escuelaId"]);
-            $buscar_escuela=$escuela->buscar();
-            $dato_escuela=mysqli_fetch_object($buscar_escuela);
-            $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID
-
-
-             // en el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
-
-            $dato_ref_esc =  new Referente($id_referente_escuela);
-            $buscar_dato_ref_esc =  $dato_ref_esc->Persona($id_referente_escuela);
-            $ref_esc = mysqli_fetch_object($buscar_dato_ref_esc);
-            $ref_esc_mail= $ref_esc->email;   //  aqui obtenemos el mail del referente de la escuela
+        // en el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
+        $dato_ref_esc =  new Referente($id_referente_escuela);
+        $buscar_dato_ref_esc =  $dato_ref_esc->Persona($id_referente_escuela);
+        $ref_esc = mysqli_fetch_object($buscar_dato_ref_esc);
+        $ref_esc_mail= $ref_esc->email;   //  aqui obtenemos el mail del referente de la escuela
 
 
 
@@ -289,22 +299,20 @@ if(isset($_POST['save_report']))
 					}
 
     }
-    //echo "llego post";
-  //  echo $_GET["escuelaId"];
-   // echo $_SESSION["referenteId"];
 
 }else{
-	//sino entre por post, entonces debe cargarse formulario de informe
-	//echo "no llego post";
-	// crea objeto escuela, de acuerdo al id de escuela provisto por GET
-	$escuela= new Escuela($_GET["escuelaId"]);
+
+  $permisos = new TipoPermisos(NULL,
+                               NULL,
+                               $_SESSION["tipo"]);
+  $buscarPermisos = $permisos->buscar();
+
+  $escuela= new Escuela($_GET["escuelaId"]);
 	$buscar_escuela=$escuela->buscar();
 	$dato_escuela=mysqli_fetch_object($buscar_escuela);
+
 	$informe = new Informe();
-    $nuevo=1;
-
-	//$dato_informe = mysqli_fetch_object($informe);
-
+  $nuevo=1;
 	include_once("includes/mod_cen/formularios/f_informe.php");
 
 }

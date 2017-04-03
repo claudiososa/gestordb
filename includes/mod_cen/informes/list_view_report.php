@@ -3,6 +3,7 @@ include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/persona.php");
+include_once("includes/mod_cen/clases/TipoInforme.php");
 
 if(isset($_POST["escuelaId"])){
 	$informe = new Informe(null,$_POST["escuelaId"]);
@@ -45,12 +46,16 @@ if ($cantidad>0){
 		$buscar_persona=$persona->buscar();
 		$dato_persona=mysqli_fetch_object($buscar_persona);
 
+		$tipoInforme = new TipoInforme($fila->nuevotipo);
+		$buscarTipoInforme = $tipoInforme->buscar();
+		$datoTipoInforme = mysqli_fetch_object($buscarTipoInforme);
+
 	?>
 
 		<tr>
 			<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
 			<td><?php echo $fila->fechaCarga;?></td>
-			<td><?php echo $fila->tipo;?></td>
+			<td><?php echo $datoTipoInforme->nombre;?></td>
 			<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
 			<td><?php echo $fila->fechaVisita;?></td>
 			<td><?php echo $dato_persona->apellido.", ".$dato_persona->nombre;?></td>

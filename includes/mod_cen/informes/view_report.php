@@ -5,6 +5,9 @@ include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/leido.php");
+include_once("includes/mod_cen/clases/TipoInforme.php");
+include_once("includes/mod_cen/clases/TipoPermisos.php");
+include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
 
 
@@ -64,6 +67,17 @@ $nuevo=1;
 <a class="btn btn-primary" href="index.php?mod=slat&men=informe&id=7&informeId=<?php echo $informe->informeId ?>">Responder</a>
 </div>
 <?php
+
+$permisos = new TipoPermisos(NULL,
+                             NULL,
+                             $_SESSION["tipo"]);
+$buscarPermisos = $permisos->buscar();
+$ver="si";
+
+$listaSubTipo = new SubTipoInforme(NULL,$informe->nuevotipo);
+$buscarSubTipo= $listaSubTipo->buscar();
+//$datoSubTipo = mysqli_fetch_object($buscarSubTipo);
+
 include_once("includes/mod_cen/formularios/f_informe.php");
 ?>
   <div class="col-md-12">

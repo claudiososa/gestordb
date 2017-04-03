@@ -72,7 +72,7 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 		$conexion=$nuevaConexion->getConexion();
 	  $sentencia="SELECT * FROM tipoinformes";
 
-		if($this->tipoInformeId!=NULL || $this->nombre!=NULL || $this->descripcion!=NULL || $this->estado!=NULL || $this->tipo!=NULL || $this->descripcion!=NULL
+		if($this->tipoInformeId!=NULL || $this->nombre!=NULL || $this->descripcion!=NULL || $this->estado!=NULL || $this->descripcion!=NULL
 		|| $this->fechaModif!=NULL || $this->usuarioModif!=NULL)
 		{
 			$sentencia.=" WHERE ";
@@ -117,7 +117,7 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-	//	echo $sentencia;
+		//echo $sentencia;
 		return $conexion->query($sentencia);
 
 	}
