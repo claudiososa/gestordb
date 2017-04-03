@@ -41,6 +41,16 @@
 							include("includes/mod_cen/personas/vicedirector_nuevo.php");
 							break;
 
+					case 9:
+							include("includes/mod_cen/personas/listado_vicedirector.php");
+							break;
+
+					case 10:
+							include("includes/mod_cen/personas/vicedirector_editar.php");
+							break;
+					case 11:
+							include("includes/mod_cen/personas/vicedirector_borrar.php");
+							break;
 
 				}
 				break;
