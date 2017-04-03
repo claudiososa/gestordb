@@ -88,8 +88,21 @@
 						break;
 					case 3:
 							if(isset($_GET["escuelaId"])) {
-								$escuela=new Escuela($_GET["escuelaId"],$_SESSION['referenteId']);
-								$b_escuela= $escuela->buscarRef();
+
+								switch ($_SESSION["tipo"]) {
+									case 'ETT':
+												$escuela=new Escuela($_GET["escuelaId"],$_SESSION['referenteId']);
+												break;
+									case 'ATT':
+												$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
+												break;
+
+									default:
+										# code...
+										break;
+								}
+
+								$b_escuela= $escuela->buscarRef($_SESSION["tipo"]);
 								$dato_escuela=mysqli_num_rows($b_escuela);
 								if($dato_escuela>0 || $_SESSION['tipo']=='admin') {
 							  		include("includes/mod_cen/escuelas/escuela_editar.php");
@@ -291,18 +304,18 @@
 					 		include("includes/mod_cen/informes/buscarEditarTipoInforme.php");
 					 		break;
 
-					 	 case 12:	
+					 	 case 12:
 					        include("includes/mod_cen/informes/nuevoSubTipoInforme.php");
 					 		break;
 
 					 	 case 13:
 					    	include("includes/mod_cen/informes/listarSubtipo.php");
-					 		break;		
+					 		break;
 
-					     case 14:	
+					     case 14:
 					        include("includes/mod_cen/informes/update_subtipo_informe.php");
 					 		break;
-					     case 15:	
+					     case 15:
 					        include("includes/mod_cen/informes/delete_subtipo_informe.php");
 					 		break;
 

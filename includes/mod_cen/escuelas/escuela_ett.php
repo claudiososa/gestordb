@@ -10,14 +10,25 @@ include_once('includes/mod_cen/clases/rti.php');//Agregada Arredes
 //identifica al usuario logeado y asigna dato a la variable $referenteId
 $referenteId=$_SESSION['referenteId'];
 
+switch ($_SESSION["tipo"]) {
+	case 'ETT':
+				$escuela= new Escuela(null,$referenteId);
+				break;
+	case 'ATT':
+				$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
+				break;
 
-$escuela= new Escuela(null,$referenteId);
+	default:
+		# code...
+		break;
+}
+
 
 
 
 $escuelas_ett= $escuela->buscar();
 
-$resultado = $escuela->Cargo();
+$resultado = $escuela->Cargo($_SESSION["tipo"]);
 
 $referente= new Referente($referenteId);
 

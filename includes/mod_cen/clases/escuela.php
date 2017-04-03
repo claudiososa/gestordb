@@ -21,8 +21,25 @@ class Escuela
 	private $facebook;
 	private $twitter;
 	private $youtube;
+	private $referenteIdPmi;
 
- 	function __construct($escuelaId=NULL,$referenteId=NULL,$cue=NULL,$numero=NULL,$nombre=NULL,$domicilio=NULL,$nivel=NULL,$localidadId=NULL,$turnos=NULL,$telefono=NULL,$supervisorid=NULL,$ubicacion=NULL,$sitio=NULL,$facebook=NULL,$twitter=NULL,$youtube=NULL)
+ 	function __construct($escuelaId=NULL,
+											$referenteId=NULL,
+											$cue=NULL,
+											$numero=NULL,
+											$nombre=NULL,
+											$domicilio=NULL,
+											$nivel=NULL,
+											$localidadId=NULL,
+											$turnos=NULL,
+											$telefono=NULL,
+											$supervisorid=NULL,
+											$ubicacion=NULL,
+											$sitio=NULL,
+											$facebook=NULL,
+											$twitter=NULL,
+											$youtube=NULL,
+											$referenteIdPmi=NULL)
 	{
 			 //seteo los atributos
 		 	$this->escuelaId = $escuelaId;
@@ -41,6 +58,7 @@ class Escuela
 			$this->facebook = $facebook;
 			$this->twitter = $twitter;
 			$this->youtube = $youtube;
+			$this->referenteIdPmi = $referenteIdPmi;
 	}
 
 	public function agregar()
@@ -107,10 +125,16 @@ class Escuela
 		}
 	}
 
-	public function buscarRef(){
+	public function buscarRef($tipoReferente=NULL){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteId=$this->referenteId";
+		if($tipoReferente<>"ATT"){
+			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteId=$this->referenteId";
+		}else{
+			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteIdPmi=$this->referenteIdPmi";
+		}
+
+
 		return $conexion->query($sentencia);
 	}
 
@@ -159,7 +183,11 @@ class Escuela
 		$sentencia="SELECT * FROM escuelas";
 		$carga=0;
 		$cargalocali=0;
-		if($this->referenteId!=NULL || $this->cue!=NULL || $this->numero!=NULL || $this->nombre!=NULL || $this->domicilio!=NULL || $this->nivel!=NULL || $this->localidadId!=NULL || $this->turnos!=NULL || $this->escuelaId!=NULL)
+		if($this->referenteId!=NULL || $this->cue!=NULL
+			 || $this->numero!=NULL || $this->nombre!=NULL
+			 || $this->domicilio!=NULL || $this->nivel!=NULL
+			 || $this->localidadId!=NULL || $this->turnos!=NULL
+			 || $this->escuelaId!=NULL || $this->referenteIdPmi!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -167,6 +195,12 @@ class Escuela
 		if($this->referenteId!=NULL)
 		{
 			$sentencia.=" referenteId =$this->referenteId && ";
+			$carga=1;
+		}
+
+		if($this->referenteIdPmi!=NULL)
+		{
+			$sentencia.=" referenteIdPmi =$this->referenteIdPmi && ";
 			$carga=1;
 		}
 
@@ -247,16 +281,22 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 
 		$sentencia.="  ORDER BY numero";
 
-	//echo $sentencia."<br>";
+	echo $sentencia."<br>";
 		return $conexion->query($sentencia);
 
 	}
 
-	public function Cargo()
+	public function Cargo($tipoReferente=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		$sentencia="SELECT * FROM escuelas WHERE referenteId=".$this->referenteId;
+
+		if($tipoReferente<>"ATT"){
+			$sentencia="SELECT * FROM escuelas WHERE referenteId=".$this->referenteId;
+		}else{
+			$sentencia="SELECT * FROM escuelas WHERE referenteIdPmi=".$this->referenteIdPmi;
+		}
+
 		//echo $sentencia;
 		//echo $this->referenteId;
 		return $conexion->query($sentencia);
