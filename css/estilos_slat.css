@@ -1,31 +1,31 @@
 *{
 	margin:0px;
-	padding: 0px;	
+	padding: 0px;
  }
 
 header,section,footer,article,aside,nav,figure,figcaption{display: block;}
 
 body {background: #fbfbfb; font-family: Arial,verdana,georgia, Helvetica, sans-serif;
-		font-size:12px; 
-		text-align: center;		
+		font-size:12px;
+		text-align: center;
 	 }
-	 
+
 #principal{
 	width: 98%;
-	margin: 3px auto;	
+	margin: 3px auto;
 	text-align: left;
 	border: 1px solid #AEB3B3;
 	border-radius: 20px;
-	background: #ffffff;		
+	background: #ffffff;
 }
 #encabezado{
 		background: -webkit-linear-gradient(260deg,#ffffff,#C7F5F0);
-		background: -moz-linear-gradient(260deg,#ffffff,#C7F5F0);		
+		background: -moz-linear-gradient(260deg,#ffffff,#C7F5F0);
 		border:0px solid #0033CC;
-		padding: 15px;		
-		border-radius: 20px 20px 0px 0px;		
+		padding: 15px;
+		border-radius: 20px 20px 0px 0px;
 		text-shadow: 3px 3px 5px #888888;
-			
+
 }
 
 /*/#D8DA93;**/
@@ -36,23 +36,23 @@ body {background: #fbfbfb; font-family: Arial,verdana,georgia, Helvetica, sans-s
 	padding: 0px 0px;
 	width: 100%;
 	height: 32px;
-	
+
 }
 
 #menu li {
 		display: block;
 		list-style: none;
 		padding: 0px;
-		font-size: 13px;	
-		
+		font-size: 13px;
+
 }
 .portada_principal > lu{
-	
+
     width: 200px;
-	
+
 }
 
-.lista > li {	 
+.lista > li {
     margin: 6px;
     display:block;
 	float:left;
@@ -64,20 +64,20 @@ body {background: #fbfbfb; font-family: Arial,verdana,georgia, Helvetica, sans-s
 	float:left;
 	margin-top:10px;
 }
- 
+
 
 .nav > li {
 float:left;
 list-style: none;
 }
- 
+
 .nav li a {
 background: -moz-linear-gradient(90deg,#3B2020,#3B684F);
 background: -webkit-linear-gradient(90deg,#3B2020,#3B684F);
 display:block;
 padding:8px 10px;
 }
- 
+
 .nav li a:hover {
 list-style: none;
 }
@@ -93,7 +93,7 @@ display:block;
 .nav li ul li {
 position:relative;
 }
- 
+
 .nav li ul li ul {
 right:-140px;
 top:0;
@@ -102,9 +102,9 @@ top:0;
 
 #central{
 		width: 98%;
-		margin: 5px;		
+		margin: 5px;
 		float: left;
-		
+
 }
 
 #central table {
@@ -117,25 +117,25 @@ top:0;
 		background: -webkit-linear-gradient(0deg,#8CD3CA,#ffffff);*/
 		background: -moz-linear-gradient(0deg,#8BCCDC,#8BCCDC);
 		background: -webkit-linear-gradient(0deg,#8BCCDC,#8BCCDC);*/
-		
+
 }
 
 #central table tr:nth-child(even) {
 		background-color: white;
 }
 
-#central th{	
+#central th{
 		border: 0px solid #999;
 		padding: 0.25rem;
 		/*width: 20%;*/
-		
+
 }
 
-#central td{	
+#central td{
 		border: 0px solid #999;
 		padding: 0.25rem;
 		/*width: 20%;*/
-		
+
 }
 
 
@@ -144,7 +144,7 @@ top:0;
 		margin: 30px 0px 30px 15px;
 		float: left;
 		padding: 15px;
-		background: #D8DA93; 	
+		background: #D8DA93;
 		border-radius: 15px;
 		box-shadow: 5px 5px 15px #888888;
 		background: -moz-linear-gradient(90deg,#3B2020,#3B684F);
@@ -155,7 +155,7 @@ top:0;
 	  text-align: center;
 	  padding: 20px;
 	  /*background: #3B684F;*/
-	  border-radius: 0px 0px 20px 20px;	
+	  border-radius: 0px 0px 20px 20px;
 	  background: -moz-linear-gradient(90deg,#3B2020,#3B684F);
    background: -webkit-linear-gradient(90deg,#3B2020,#3B684F);
 
@@ -167,7 +167,7 @@ p{
 
 li{
 	font-family: 'Ubuntu', sans-serif;
-	
+
 }
 
 p#articulo{
@@ -176,7 +176,7 @@ p#articulo{
 
 tr{
 	font-family: 'Ubuntu', sans-serif;
-	
+
 }
 
 #menu a:visited{text-decoration:none;font-size:14px ;color:#ffffff }
@@ -192,26 +192,26 @@ tr{
 .divSimple{
 	border: 0px solid #999;
 	float:left;
-	
+
 }
 .divSimple1{
 	border: 0px solid #999;
 	float:left;
-	
+
 }
 
-.informe tr{	
+.informe tr{
 		border: 0px solid #999;
 		padding: 0.25rem;
 		/*width: 20%;*/
-		
+
 }
 
-.informe th{	
+.informe th{
 		border: 0px solid #999;
 		padding: 0.25rem;
 		width: 20%;
-		
+
 }
 
 label{
@@ -326,39 +326,36 @@ cursor:pointer;
 			display: none;
 	}
 	.container{
-			width: 100%;	
+			width: 100%;
 	}
 	.prenda{
-		width: 50%;	
+		width: 50%;
 	}
-	
-	
-	
-}	
+
+
+
+}
 
 @media screen and (max-width:400px){
 	/*#principial{
-		width: 100%;	
+		width: 100%;
 	}*/
 	.container{
-			width: 100%;	
+			width: 100%;
 	}
 	.banner{
-		display: none;	
+		display: none;
 	}
 	.prenda{
-		width: 100%;	
+		width: 100%;
 	}
-	
+
 	.c_izquierda{
 		width: 100%;
-			
+
 	}
 	.c_derecha{
 		width: 100%;
-		
+
 	}
-}	
-
-
-
+}

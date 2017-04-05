@@ -1,10 +1,10 @@
-<?php 
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		<title>DBMS-Conectar</title>   	
+		<title>DBMS-Conectar</title>
    	<meta charset="utf-8" />
    	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
    	<meta name="description" content="Sistema de administración de base de datos de Conectar Salta">
@@ -14,24 +14,24 @@ session_start();
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script type="text/javascript" src="gmap/gmaps.js"></script>
   <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css" />
-   	
+
    	<link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
    	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
    	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
    	<link rel="stylesheet" href="css/estilos.css"/>
 	</head>
 	<body>
-		<div id="principal">			
+		<div id="principal">
 			<header id="encabezado">
-            <?php		
+            <?php
 					if (file_exists($path_modulo6))
 		       		include ($path_modulo6);
 					else
 		       		die ('error al cargar el modulo');
       			?>
-      	</header>		
+      	</header>
          <nav id="menu">
-                <?php		
+                <?php
                 if (file_exists($path_modulo2))
 		       		include ($path_modulo2);
                 else
@@ -46,8 +46,8 @@ session_start();
 		   			else
 		       			die ('error al cargar el modulo');
       			?>
-      		</article>	
-			</section>		
+      		</article>
+			</section>
     		<aside id="derecha">
 	 			<?php
 	    		if (file_exists($path_modulo4))
@@ -63,7 +63,7 @@ session_start();
 	 				else
 	       			die ('error al cargar el modulo');
       		?>
-			</footer>		
+			</footer>
 		</div>
 	</body>
 </html>
