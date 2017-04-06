@@ -38,7 +38,7 @@ if(isset($_POST["username"]))
 		}
 
 		?>
-		<script type="text/javascript" src="includes/mod_cen/formularios/js/form_login.js"></script>
+		<!--<script type="text/javascript" src="includes/mod_cen/formularios/js/form_login.js"></script>-->
 		<div class="container" >
 	    <div class="row">
 	    <div class="Absolute-Center is-Responsive">
