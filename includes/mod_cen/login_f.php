@@ -1,3 +1,4 @@
+
 <?php
 include_once("clases/login.php");
 
@@ -37,6 +38,7 @@ if(isset($_POST["username"]))
 		}
 
 		?>
+		<script type="text/javascript" src="includes/mod_cen/formularios/js/form_login.js"></script>
 		<div class="container" >
 	    <div class="row">
 	    <div class="Absolute-Center is-Responsive">
@@ -49,8 +51,8 @@ if(isset($_POST["username"]))
 			<input class="form-control" type="text" name="username"  placeholder="Ingrese Usuario" id="formulario-login"  size="50" required>
 			</div>
 
-			<!--<div id="alerta" style="display:none;"><font color="crimsol">Ingrese 8 caracteres (solo números)</font></div>-->
-			<div class="form-group input-group">
+			<div id="alerta" style="display:none;"></div>
+					<div class="form-group input-group">
 	        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 	        <input class="form-control" type="password" name="password" placeholder="Ingrese Contraseña" size="50" required>
 	    </div>

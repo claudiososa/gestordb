@@ -1,51 +1,9 @@
-<script type="text/javascript">
-
-$(document).ready(function (e) {
-    var tel = /^[0-9]+$/;
-		var sitioweb = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-    $("#botonF_escuela").click(function (){
-        $("#error").remove();
-        if( $("#nombref_escuela").val() == "" ){
-            $("#nombref_escuela").focus().after("<span class='error'>Ingrese su nombre</span>");
-            return false;
-        }else if( $("#tel_escuela").val() == "" || !tel.test($("#tel_escuela").val()) ){
-            $("#tel_escuela").focus().after("<span class='error'>Ingrese un tel correcto</span>");
-            return false;
-					}else if( $("#sitio_escuela").val() == "" || !sitioweb.test($("#sitio_escuela").val()) ){
-							$("#sitio_escuela").focus().after("<span class='error'>Ingrese un sitio correcto</span>");
-							return false;
-
-        }
-    });
-    $("#nombref_escuela").keydown(function(){
-        if( $(this).val() != "" ){
-            $(".error").fadeOut();
-            return false;
-        }
-    });
-    $("#sitio_escuela").keyup(function(){
-        if( $(this).val() != "" && sitioweb.test($(this).val())){
-            $(".error").fadeOut();
-            return false;
-        }
-    });
-		$("#tel_escuela").keyup(function(){
-        if( $(this).val() != "" && tel.test($(this).val())){
-            $(".error").fadeOut();
-            return false;
-        }
-    });
-});
-
-</script>
-
-
-
+<script type="text/javascript" src="includes/mod_cen/formularios/js/form_escuelas.js"></script>
 
 <form name="form" action="index.php?men=escuelas&id=4" method="POST" >
 		<input type="hidden" name="escuelaId" value="<?php echo $escuelaId ?>"/>
       <input type="hidden" name="referenteId" value="<?php echo $datos->getReferenteId() ?>"/>
-		<table><?php
+<table><?php
 			if($_SESSION["tipo"]=="Coordinador")
 				{
 					?>
@@ -77,7 +35,6 @@ $(document).ready(function (e) {
            </div>
 
 					<?php
-
 				}else {
 					?>
 
@@ -95,7 +52,7 @@ $(document).ready(function (e) {
 							<label class="control-label"><br>CUE:</label>
 						</div>
 						<div class="col-md-12">
-					<input class="form-control"size="30"  placeholder="solo números - 7 a 9 digitos" type="text" name="cue" pattern="[0-9]{7,9}" value="<?php echo $datos->getNumero()?>" readonly>
+					<input class="form-control"size="30"  placeholder="solo números - 7 a 9 digitos" type="text" name="cue" pattern="[0-9]{7,9}" value="<?php echo $datos->getCue()?>" readonly>
 								</div>
 					</div>
 
@@ -112,7 +69,6 @@ $(document).ready(function (e) {
 
 						<?php
 				}
-
 				?>
 				<div class="form-group">
 					<div class="col-md-12">
@@ -287,33 +243,20 @@ $(document).ready(function (e) {
 									</div>
 						</div>
 
+            <div colspan="2">
+            				  <div class="span11">
+                  					<div id="map"></div>
+                				</div>
+            			</div>
 
+            <div align="center">
 
-			<tr><td colspan="2">
-					<div class="span11">
-								<div id="map"></div>
-						</div>
-			</td>
-			</tr>
-			<tr>
+                		<div class="form-group" "input-group">
+				                <button type="submit" class="btn btn-success btn-lg" id="botonF_escuela">
+                               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Aplicar cambios
+                        </button>
+                    </div>
 
-
-
-
-
-
-
-
-
-
-
-<!--<input type="submit" value="Aplicar cambios" /> -->
-
-
-
-		<div class="form-group" "input-group">
-				<button type="submit" class="btn btn-success btn-md" id="botonF_escuela">
-<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Aplicar cambios
-</button></div>
+            </div>
 </table>
-	</form>
+</form>

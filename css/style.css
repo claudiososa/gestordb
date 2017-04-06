@@ -102,3 +102,6 @@ background-color: #8dbdd8;
   padding-top: 30px;
   border-top: 1px solid #7f8c8d;
 }
+.error{
+  color: red;
+}
