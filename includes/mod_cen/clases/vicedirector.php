@@ -52,9 +52,10 @@ class ViceDirector
 public function editar()
 	{
 
-		$stmt = ConexionPdo::getConexion()->prepare("UPDATE vicedirector SET escuelaId = :escuelaId, personaId = :personaId, turno = :turno, fechaModif = :fechaModif, userModif = :userModif WHERE vicedirectorId = '$this->vicedirectorId'");
+		$stmt = ConexionPdo::getConexion()->prepare("UPDATE vicedirector SET escuelaId = :escuelaId, personaId = :personaId, turno = :turno, fechaModif = :fechaModif, userModif = :userModif WHERE vicedirectorId = :vicedirectorId");
 
 
+			$stmt->bindParam(":vicedirectorId",$this->vicedirectorId,PDO::PARAM_INT);
 			$stmt->bindParam(":escuelaId",$this->escuelaId,PDO::PARAM_INT);
 			$stmt->bindParam(":personaId",$this->personaId,PDO::PARAM_INT);
 			$stmt->bindParam(":turno",$this->turno);
@@ -75,24 +76,26 @@ public function editar()
 
 public function eliminar()
 	{
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="DELETE FROM vicedirector WHERE vicedirectorId = '$this->vicedirectorId'";
-		if ($conexion->query($sentencia)) {
-			return 1;
+		$stmt = ConexionPdo::getConexion()->prepare("DELETE FROM vicedirector WHERE vicedirectorId = :vicedirectorId");
+		
+		$stmt->bindParam(":vicedirectorId",$this->vicedirectorId,PDO::PARAM_INT);
 
-		}else
-		{
-			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		var_dump($stmt);
+		if($stmt->execute()){
+			return " Baja Exitosa.!!";
+		} else{
+			return "Error!!";
 		}
 
+		
 	}
 
 
 
 public function buscar()
 	{
+
 
 
 		$nuevaConexion=new Conexion();
@@ -147,31 +150,9 @@ public function buscar()
 		
 		return $conexion->query($sentencia);
 
-	}
-
-	
-
-
-
-/*
-
-	public function eliminar()
-	{
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
-
-		$sentencia="DELETE FROM directores WHERE directorId=".$this->directorId;
-		if ($conexion->query($sentencia)) {
-			header("Location:index.php?id=1");
-
-		}else
-		{
-			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
-		}
 
 	}
 
-	*/
 	
 }
 
