@@ -1,17 +1,25 @@
 $(document).ready(function () {
 
   $("#formInforme").submit(function(event){
-
+    var fecha = $("#fechaVisita").val();
     var tipo = $("#tipo").val();
     var subtipo = $("#subtipo").val();
     if(tipo=="0"){
       alert("Debe seleccionar una categoría");
       event.preventDefault();
     }
+
+
     if(subtipo=="0"){
       alert("Debe seleccionar una subcategoría");
-      event.preventDefault();  
+      event.preventDefault();
     }
+
+    
+    if(tipo=="1" && fecha==""){
+        alert("Debe ingresar Fecha de Visita");
+      event.preventDefault();
+}
 
   });
 
@@ -19,6 +27,13 @@ $(document).ready(function () {
     $("#tipo").change(function (ev){
       //ev.preventDefault();
       var opcion = $(this).val();
+      if (opcion==2) {
+        $("#fechaVisita").attr("disabled","disabled");
+        $("#fechaVisita").val("");
+      }else if (opcion==1) {
+        $("#fechaVisita").removeAttr("disabled");
+
+      }
 
       if(opcion!=0){
       $.ajax({

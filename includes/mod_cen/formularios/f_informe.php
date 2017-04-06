@@ -118,7 +118,7 @@
          <label class="control-label">Fecha de visita (opcional)</label>
       </div>
       <div class="col-md-12">
-        <input type='date'  name="fechaVisita"  class="form-control"
+        <input type='date'  name="fechaVisita" id="fechaVisita"  class="form-control"
         value="<?php echo $informe->fechaVisita.'"'; if($informe->informeId<>"" && $informe->referenteId<>$_SESSION['referenteId']){echo 'disabled';}?>>
       </div>
     </div>

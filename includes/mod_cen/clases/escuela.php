@@ -281,7 +281,7 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 
 		$sentencia.="  ORDER BY numero";
 
-	echo $sentencia."<br>";
+	//echo $sentencia."<br>";
 		return $conexion->query($sentencia);
 
 	}

@@ -103,6 +103,9 @@
 									case 'ETT':
 												$escuela=new Escuela($_GET["escuelaId"],$_SESSION['referenteId']);
 												break;
+									case 'ETJ':
+												$escuela=new Escuela($_GET["escuelaId"],$_SESSION['referenteId']);
+															break;															
 									case 'ATT':
 												$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
 												break;

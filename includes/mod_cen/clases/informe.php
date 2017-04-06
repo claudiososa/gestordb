@@ -185,7 +185,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 	  $sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
-								,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,escuelas.numero
+								,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
+								informes.subtipo,escuelas.numero
 								FROM informes
 								JOIN escuelas
 								ON (informes.escuelaId=escuelas.escuelaId)";

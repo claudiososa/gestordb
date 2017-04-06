@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php">DBMS</a>
+      <a class="navbar-brand" href="index.php">DBMS 2017</a>
     </div>
 
 
