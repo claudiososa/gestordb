@@ -90,3 +90,18 @@ table.tablesorter thead tr .headerSortDown {
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
 background-color: #8dbdd8;
 }*/
+
+#DBMS-footer{
+  width: 100%;
+  min-height: 10vh;
+}
+#DBMS-footer p{
+  margin: 0 auto;
+  width: 40%;
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid #7f8c8d;
+}
+.error{
+  color: red;
+}
