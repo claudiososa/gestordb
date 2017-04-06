@@ -14,6 +14,9 @@ switch ($_SESSION["tipo"]) {
 	case 'ETT':
 				$escuela= new Escuela(null,$referenteId);
 				break;
+	case 'ETJ':
+							$escuela= new Escuela(null,$referenteId);
+							break;
 	case 'ATT':
 				$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
 				break;

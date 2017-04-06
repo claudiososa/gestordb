@@ -23,8 +23,11 @@
 			case "Supervisor-Nivel-Superior":
 				include("includes/mod_men/supervisor-nivel-superior.php");
 				break;
+			case "CoordinadorPMI":
+					include("includes/mod_men/coordinadorPmi.php");
+					break;
 			case "ATT":
-					include("includes/mod_men/att.php"); 
+					include("includes/mod_men/att.php");
 					break;
 			}
 		}

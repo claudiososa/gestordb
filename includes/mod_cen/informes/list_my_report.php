@@ -24,13 +24,6 @@ $persona= new Persona($dato_referente->personaId);
 $buscar_persona=$persona->buscar();
 $dato_persona=mysqli_fetch_object($buscar_persona);
 
-/*$escuela = new Escuela($_GET["escuelaId"]);
-$buscar_escuela = $escuela->buscar();
-$dato_escuela = mysqli_fetch_object($buscar_escuela);
-
-
-$buscar_informe = $informe->buscar();*/
-
 $cantidad=mysqli_num_rows($buscar_informe);
 if ($cantidad>0){
 
@@ -48,6 +41,7 @@ if ($cantidad>0){
 				<th>Fecha creación</th>
 				<th>Tipo</th>
 				<th>Título</th>
+				<th>Escuela</th>
 				<th>Fecha de Visita</th>
 				<th>ETJ</th>
 				<th>Prioridad</th>
@@ -71,6 +65,7 @@ if ($cantidad>0){
 			<td><?php echo $fila->fechaCarga;?></td>
 			<td><?php echo $fila->tipo;?></td>
 			<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
+			<td><?php echo $fila->numero;?></td>
 			<td><?php echo $fila->fechaVisita;?></td>
 			<?php
 			$leido= new Leido(null,$fila->informeId,$dato_referente->etjcargo);

@@ -184,7 +184,11 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-	  $sentencia="SELECT * FROM informes";
+	  $sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+								,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,escuelas.numero
+								FROM informes
+								JOIN escuelas
+								ON (informes.escuelaId=escuelas.escuelaId)";
 
 		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
 		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL
@@ -195,57 +199,57 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 		if($this->informeId!=NULL)
 		{
-			$sentencia.=" informeId = $this->informeId && ";
+			$sentencia.=" informes.informeId = $this->informeId && ";
 		}
 
 		if($this->escuelaId!=NULL)
 		{
-			$sentencia.=" escuelaId = $this->escuelaId && ";
+			$sentencia.=" informes.escuelaId = $this->escuelaId && ";
 		}
 
 		if($this->tipo!=NULL)
 		{
-			$sentencia.=" tipo=$this->tipo && ";
+			$sentencia.=" informes.tipo=$this->tipo && ";
 		}
 
 		if($this->nuevoTipo!=NULL)
 		{
-			$sentencia.=" nuevotipo=$this->nuevoTipo && ";
+			$sentencia.=" informes.nuevotipo=$this->nuevoTipo && ";
 		}
 
 		if($this->subTipo!=NULL)
 		{
-			$sentencia.=" subtipo=$this->subTipo && ";
+			$sentencia.=" informes.subtipo=$this->subTipo && ";
 		}
 
 		if($this->prioridad!=NULL)
 		{
-			$sentencia.=" prioridad = '$this->prioridad' && ";
+			$sentencia.=" informes.prioridad = '$this->prioridad' && ";
 		}
 
 		if($this->leido!=NULL)
 		{
-			$sentencia.=" leido=$this->leido && ";
+			$sentencia.=" informes.leido=$this->leido && ";
 		}
 
 		if($this->estado!=NULL)
 		{
-			$sentencia.=" estado=$this->estado && ";
+			$sentencia.=" informes.estado=$this->estado && ";
 		}
 
 		if($this->referenteId!=NULL)
 		{
-			$sentencia.=" referenteId='$this->referenteId' && ";
+			$sentencia.=" informes.referenteId='$this->referenteId' && ";
 		}
 
 		if($this->fechaVisita!=NULL)
 		{
-			$sentencia.=" fechaVisita='$this->fechaVisita' && ";
+			$sentencia.=" informes.fechaVisita='$this->fechaVisita' && ";
 		}
 
 		if($this->contenido!=NULL)
 		{
-			$sentencia.=" contenido=$this->contenido && ";
+			$sentencia.=" informes.contenido=$this->contenido && ";
 		}
 
 
@@ -253,7 +257,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 		}
 
-		$sentencia.="  ORDER BY fechaCarga DESC";
+		$sentencia.="  ORDER BY informes.fechaCarga DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

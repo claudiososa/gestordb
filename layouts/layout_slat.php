@@ -33,7 +33,7 @@ session_start();
 	<body>
     		<div class="container">
     			   <header>
-
+							
           	 </header>
              <nav class="navbar navbar-inverse" >
                     <?php

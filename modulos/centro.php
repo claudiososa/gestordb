@@ -368,6 +368,14 @@
 								include("includes/mod_cen/denegado.php");
 							}
 							break;
+
+				case 8:
+									//if($_SESSION['tipo']=='CoordinadorPMI' || $_SESSION['tipo']=='admin') {
+										include("includes/mod_cen/admin/escuelaAsignarPmi.php");
+								//	}else {
+								//		include("includes/mod_cen/denegado.php");
+								//	}
+									break;
 				}
 
 			//   default:

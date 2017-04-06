@@ -103,6 +103,29 @@ class Referente
 		return $conexion->query($sentencia);
 	}
 
+	public function buscarRef2($tipo=NULL){
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		if(isset($tipo)){
+			switch ($tipo) {
+				case 'ATT':
+					$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido,personas.personaId
+											FROM referentes
+											inner join personas
+											on referentes.personaId=personas.personaId
+					WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
+					break;
+
+				default:
+					# code...
+					break;
+			}
+		}
+
+		return $conexion->query($sentencia);
+	}
+
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();
