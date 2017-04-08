@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php">DBMS</a>
+      <a class="navbar-brand" href="index.php">DBMS 2017</a>
     </div>
 
 
@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.php?mod=slat&men=user&id=3">Mis Escuelas <span class="sr-only">(current)</span></a></li>
-        <li><a href="index.php?mod=slat&men=user&id=4">Mis RTI</a></li>
+      
         <!--<li><a href="index.php?mod=slat&men=admin&id=5">Asignar Mis Escuelas</a></li>-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
@@ -25,15 +25,7 @@
                 <li ><a href="index.php?mod=slat&men=referentes&id=10">RTI</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Encuentros <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-                 <li><a href="index.php?mod=slat&men=encuentros&id=1">Nuevo Primaria</a></li>
-                 <li><a href="index.php?mod=slat&men=encuentros&id=1&secu=1">Nuevo Secundaria</a></li>
-                 <li><a href="index.php?mod=slat&men=encuentros&id=2">Ver Mis Encuentros</a></li>
-                 <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
-          </ul>
-        </li>
+
 
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Perfil <span class="caret"></span></a>

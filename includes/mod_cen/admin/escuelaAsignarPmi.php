@@ -24,7 +24,7 @@ if(($_POST))
 			  	echo "<th>CUE</th>";
 			  	echo "<th>Nombre de Escuela</th>";
 			  	echo "<th>Localidad</th>";
-			  	echo "<th>Referente a Cargo</th>";
+			  	echo "<th>Referente PMI a Cargo</th>";
 			  	//echo "<th></th>";
 			  	echo "<th>Ver</th>";
 				echo "</tr>";
@@ -74,10 +74,11 @@ if(($_POST))
 			  				//echo "<input type='hidden' id='esc_$fila->referenteId'/>";
 
 			  				echo "<div class='divSimple' id='sel_".$fila->referenteIdPmi."'>";
-			  				$ett= new Referente();
+			  			$ett= new Referente();
+
 							$buscar_ett=$ett->buscarRef2("ATT");
 
-							echo "<select id='seleref_".$fila->referenteIdPmi."' name='referentes' >";
+							echo "<select disabled id='seleref_".$fila->referenteIdPmi."' name='referentes' >";
 							//echo	"<option value=0>Todos</option>";
 							echo	"<option value='0001'>Sin Asignar</option>";
 							while ($fila1 = mysqli_fetch_object($buscar_ett))
@@ -87,9 +88,9 @@ if(($_POST))
 										$nombre=$persona->getNombre();
 										$apellido=$persona->getApellido();
 										if($fila1->referenteId==$_SESSION["referenteId"])
-											echo	"<option value='$fila1->referenteIdPmi' selected >$apellido".",&nbsp;".$nombre."</option>";
+											echo	"<option value='".$fila1->referenteId."' selected >$apellido".",&nbsp;".$nombre."</option>";
 										else
-											echo	"<option value='$fila1->referenteIdPmi' >$apellido".",&nbsp;".$nombre."</option>";
+											echo	"<option value='".$fila1->referenteId."' >$apellido".",&nbsp;".$nombre."</option>";
 									}
 
 							echo "</select></div>";
@@ -103,7 +104,7 @@ if(($_POST))
 			  			$ett= new Referente();
 							$buscar_ett=$ett->buscarRef2('ATT');
 
-			  			echo "<select id='seleref_".$fila->referenteIdPmi.$encontrado."' name='referentes' >";
+			  			echo "<select  disabled id='seleref_".$fila->referenteIdPmi.$encontrado."' name='referentes' >";
 			  			//echo	"<option value=0>Todos</option>";
 			  			echo	"<option value='0001'>Sin Asignar</option>";
 			  			while ($fila1 = mysqli_fetch_object($buscar_ett))
@@ -113,7 +114,7 @@ if(($_POST))
 			  				$nombre=$persona->getNombre();
 			  				$apellido=$persona->getApellido();
 			  				if($fila1->referenteIdPmi==$_SESSION["referenteId"])
-								echo	"<option value='$fila1->referenteIdPmi' selected >$apellido".",&nbsp;".$nombre."</option>";
+								echo	"<option value='".$fila1->referenteId."' selected >$apellido".",&nbsp;".$nombre."</option>";
 								//echo	"<option value='$fila1->referenteId' >$apellido".",&nbsp;".$nombre."</option>";
 								}
 
@@ -167,7 +168,7 @@ if(($_POST))
 			<script language="javascript">
 			$(document).ready(function(){
 				//alert("llego hasta aqui");
-				$('[id^=sel_]').hide();
+				//$('[id^=sel_]').hide();
 				$('[id^=g_]').hide();
 				//alert(boton);
 				 $('[id^=b_]').click(function () {
@@ -202,7 +203,9 @@ if(($_POST))
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 var escuela_id=escuela.substring(4,8);
 
-					 $.post("includes/mod_cen/clases/escuela.php", { referente_id: referente_id, escuela_id: escuela_id }, function(data){
+					 var pmi = 'pmi'
+
+					 $.post("includes/mod_cen/clases/escuela.php", { pmi:pmi,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);
 					 var dato = resultado['estado'];
 
