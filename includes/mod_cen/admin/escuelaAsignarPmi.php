@@ -18,6 +18,7 @@ if(($_POST))
 				$escuela=new Escuela(NULL,null,$cue,$numero,$nombre,null,null,null,null);
 
 				$resultado = $escuela->buscar();
+				echo '<div class="table-responsive">';
 				echo "<table class='table table-hover table-striped table-condensed'>";
 				echo "<tr>";
 			  	echo "<th>Nº</th>";
@@ -25,8 +26,6 @@ if(($_POST))
 			  	echo "<th>Nombre de Escuela</th>";
 			  	echo "<th>Localidad</th>";
 			  	echo "<th>Referente PMI a Cargo</th>";
-			  	//echo "<th></th>";
-			  	echo "<th>Ver</th>";
 				echo "</tr>";
 				$arreglo[]=array();
 				$arreglo["0"]="0";
@@ -63,7 +62,7 @@ if(($_POST))
 
 			  		echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
-			  		echo "<td>".substr($fila->nombre,0, 40)."</td>";
+						echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>".substr($fila->nombre,0, 40)."</td>";
 
 			  		$locali=new Localidad($fila->localidadId,null);
 			  		$busca_loc= $locali->buscar();
@@ -152,12 +151,12 @@ if(($_POST))
 			  		*			  		<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".
 			  				"<img  src='img/iconos/modificar_p.png' alt='modificar' longdesc='Modificar Datos de Persona'></a></div></td>";
 			  		**/
-			  		echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=10&escuelaId=".$fila->escuelaId."'>Ver más</a>"."</td>";
 			  		echo "</tr>";
 		  	  		echo "\n";
 
 	      	}
 	      	echo "</table>";
+					echo "</div>";
 			//}
 		}else{
 			$escuela=new Escuela(NULL);
@@ -168,7 +167,7 @@ if(($_POST))
 			<script language="javascript">
 			$(document).ready(function(){
 				//alert("llego hasta aqui");
-				//$('[id^=sel_]').hide();
+				$('[id^=sel_]').hide();
 				$('[id^=g_]').hide();
 				//alert(boton);
 				 $('[id^=b_]').click(function () {

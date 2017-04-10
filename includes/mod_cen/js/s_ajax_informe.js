@@ -15,7 +15,7 @@ $(document).ready(function () {
       event.preventDefault();
     }
 
-    
+
     if(tipo=="1" && fecha==""){
         alert("Debe ingresar Fecha de Visita");
       event.preventDefault();

@@ -186,10 +186,14 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		$conexion=$nuevaConexion->getConexion();
 	  $sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
 								,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
-								informes.subtipo,escuelas.numero
+								informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
 								FROM informes
 								JOIN escuelas
-								ON (informes.escuelaId=escuelas.escuelaId)";
+								ON (informes.escuelaId=escuelas.escuelaId)
+								JOIN referentes
+								ON referentes.referenteId=informes.referenteId
+								JOIN personas
+								ON personas.personaId=referentes.personaId";
 
 		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
 		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL

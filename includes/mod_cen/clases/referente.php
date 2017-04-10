@@ -131,8 +131,13 @@ class Referente
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT * FROM referentes";
-		if($this->referenteId!=NULL ||$this->personaId!=NULL || $this->tipo!=NULL || $this->rol!=NULL || $this->etjcargo!=NULL || $this->fechaIngreso!=NULL || $this->titulo!=NULL || $this->estado!=NULL )
+		$sentencia="SELECT
+											referentes.referenteId,referentes.personaId ,referentes.tipo ,referentes.rol ,referentes.etjcargo,
+											referentes.fechaIngreso,referentes.titulo,referentes.estado,personas.nombre,personas.apellido,personas.telefonoM,personas.email
+							 FROM referentes
+							 JOIN personas
+							 ON referentes.personaId=personas.personaId";
+		if($this->referenteId!=NULL ||$this->personaId!=NULL ||$this->personaId!=NULL || $this->tipo!=NULL || $this->rol!=NULL || $this->etjcargo!=NULL || $this->fechaIngreso!=NULL || $this->titulo!=NULL || $this->estado!=NULL )
 		{
 			$sentencia.=" WHERE ";
 
@@ -180,7 +185,7 @@ class Referente
 
 		}
 
-		$sentencia.="  ORDER BY tipo";
+		$sentencia.="  ORDER BY referentes.tipo";
 
 		//echo $sentencia;
 		return $conexion->query($sentencia);

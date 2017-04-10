@@ -4,51 +4,8 @@ include_once("includes/mod_cen/clases/departamentos.php");
 include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/referente.php");
-?>
-<div class="container">
-	<form class="form-horizontal" action='' method='POST'>
-		<div class="form-group">
-			<label class="col-md-3 col-md-offset-2"><h3>Busqueda de Escuelas</h3></label>
-		</div>
 
-			<div class="form-group">
-			<label class="control-label col-md-2">CUE</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-						  <input type="text" size="4" class="form-control"  name="cue" placeholder="Ingrese CUE" autofocus>
-					 </div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-md-2">Número</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-							<input type="text" size="4" class="form-control"  name="numero" placeholder="Ingrese número" autofocus>
-					 </div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-md-2">Nombre</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-						  <input type="text" size="4" class="form-control"  name="nombre" placeholder="Ingrese nombre" autofocus>
-					 </div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-md-2 col-md-offset-2">
-				<input type='submit' class="btn btn-primary" value='Buscar'>
-			</div>
-		</div>
-	</form>
-</div>
-		<?php
+include_once("includes/mod_cen/formularios/f_asignar_escuela.php");
 
 if(($_POST))
 	{
@@ -61,6 +18,7 @@ if(($_POST))
 				$escuela=new Escuela(NULL,null,$cue,$numero,$nombre,null,null,null,null);
 
 				$resultado = $escuela->buscar();
+				echo '<div class="table-responsive">';
 				echo "<table class='table table-hover table-striped table-condensed'>";
 				echo "<tr>";
 			  	echo "<th>Nº</th>";
@@ -68,8 +26,6 @@ if(($_POST))
 			  	echo "<th>Nombre de Escuela</th>";
 			  	echo "<th>Localidad</th>";
 			  	echo "<th>Referente a Cargo</th>";
-			  	//echo "<th></th>";
-			  	echo "<th>Ver</th>";
 				echo "</tr>";
 				$arreglo[]=array();
 				$arreglo["0"]="0";
@@ -107,7 +63,8 @@ if(($_POST))
 
 			  		echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
-			  		echo "<td>".substr($fila->nombre,0, 40)."</td>";
+						echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>".substr($fila->nombre,0, 40)."</td>";
+
 
 			  		$locali=new Localidad($fila->localidadId,null);
 			  		$busca_loc= $locali->buscar();
@@ -194,13 +151,13 @@ if(($_POST))
 			  		/*echo "<td>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>"."<img src='img/iconos/modificar_p.png' alt='modificar' longdesc='Modificar Datos de Persona'></a></td>";
 			  		*			  		<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".
 			  				"<img  src='img/iconos/modificar_p.png' alt='modificar' longdesc='Modificar Datos de Persona'></a></div></td>";
-			  		**/
-			  		echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=10&escuelaId=".$fila->escuelaId."'>Ver más</a>"."</td>";
+			  		**/			  		
 			  		echo "</tr>";
 		  	  		echo "\n";
 
 	      	}
 	      	echo "</table>";
+					echo "</div>";
 			//}
 		}else{
 			$escuela=new Escuela(NULL);
