@@ -23,15 +23,15 @@
 
 
 
-$vice=new ViceDirector(NULL,NULL,NULL,NULL,NULL,NULL);
+$vice= new ViceDirector();
 
       $resultado=$vice->buscar();
+     
+      
+      while ($fila = $resultado->fetchobject()){
+    
 
-/*
-      while ($fila = mysqli_fetch_object($resultado))
-      {
-
-
+        
 
       echo "<tr>";
       echo "<td>".$fila->vicedirectorId."</td>";
@@ -60,9 +60,9 @@ $vice=new ViceDirector(NULL,NULL,NULL,NULL,NULL,NULL);
       echo "\n";
 
 
-      }
+      } 
 
-    */
+    
 
 
 	echo "</table>";
