@@ -77,7 +77,8 @@ public function editar()
 public function eliminar()
 	{
 
-		$stmt = ConexionPdo::getConexion()->prepare("DELETE FROM vicedirector WHERE vicedirectorId = :vicedirectorId");
+		$sentencia="DELETE FROM vicedirector WHERE vicedirectorId = :vicedirectorId";
+		$stmt = ConexionPdo::getConexion()->prepare($sentencia);
 		
 		$stmt->bindParam(":vicedirectorId",$this->vicedirectorId,PDO::PARAM_INT);
 
@@ -96,12 +97,10 @@ public function eliminar()
 public function buscar()
 	{
 
-
-
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
-
-		$sentencia="SELECT * FROM vicedirector";
+		
+       $sentencia="SELECT * FROM vicedirector ";
+		
+		
 		if($this->vicedirectorId!=NULL || $this->escuelaId!=NULL || $this->personaId!=NULL || $this->turno!=NULL  || $this->fechaModif!=NULL || $this->userModif!=NULL)
 		{
 			$sentencia.=" WHERE ";
@@ -109,32 +108,32 @@ public function buscar()
 
 		if($this->vicedirectorId!=NULL)
 		{
-			$sentencia.=" vicedirectorId = $this->vicedirectorId && ";
+			$sentencia.=" vicedirectorId = :vicedirectorId && ";
 		}
 
 		if($this->escuelaId!=NULL)
 		{
-			$sentencia.=" escuelaId = $this->escuelaId && ";
+			$sentencia.=" escuelaId = :escuelaId && ";
 		}
 
 		if($this->personaId!=NULL)
 		{
-			$sentencia.=" personaId=$this->personaId && ";
+			$sentencia.=" personaId = :personaId && ";
 		}
 
 		if($this->turno!=NULL)
 		{
-			$sentencia.=" turno = $this->turno && ";
+			$sentencia.=" turno = :turno && ";
 		}
 
 		if($this->fechaModif!=NULL)
 		{
-			$sentencia.=" fechaModif=$this->fechaModif && ";
+			$sentencia.=" fechaModif = :fechaModif && ";
 		}
 
 		if($this->userModif!=NULL)
 		{
-			$sentencia.=" userModif='$this->userModif' && ";
+			$sentencia.=" userModif = :userModif && ";
 		}
 
 		
@@ -143,16 +142,33 @@ public function buscar()
 
 		}
 
-		$sentencia.="  ORDER BY vicedirectorId ASC"; 
-		//if(isset($limit)){
-			//$sentencia.=" LIMIT ".$limit;
-		//}
+		$sentencia.=" ORDER BY vicedirectorId ASC"; 
+		//echo $sentencia;
+	
+			//var_dump($this->vicedirectorId);
 		
-		return $conexion->query($sentencia);
+		    $stmt = ConexionPdo::getConexion()->prepare($sentencia);
+
+		    $stmt->bindParam(":vicedirectorId",$this->vicedirectorId,PDO::PARAM_INT);
+			$stmt->bindParam(":escuelaId",$this->escuelaId,PDO::PARAM_INT);
+			$stmt->bindParam(":personaId",$this->personaId,PDO::PARAM_INT);
+			$stmt->bindParam(":turno",$this->turno);
+			$stmt->bindParam(":fechaModif",$this->fechaModif);
+			$stmt->bindParam(":userModif",$this->userModif,PDO::PARAM_INT);
+
+
+		    $stmt->execute();
+			//var_dump($stmt);
+		
+		 return $stmt;
 
 
 	}
 
+	
+
+			
+	
 	
 }
 
