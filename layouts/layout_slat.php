@@ -14,14 +14,16 @@ session_start();
 			 <script src="js/bootstrap.min.js"></script>
 
 				<script type="text/javascript" src="jquery/jquery.tablesorter.js"></script>
-				
+
         <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
        	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
        	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
        	<link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
 
-
+				<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+				<script src="js/fileinput.min.js"></script>
+				<script src="js/locales/es.js"></script>
         <!-- Optional theme -->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 				-->

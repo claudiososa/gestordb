@@ -1,4 +1,15 @@
 $(document).ready(function () {
+  $("#input-img").fileinput({
+      browseClass: "btn btn-success btn-block",
+      allowedFileExtensions: ["jpg", "pdf"],
+      maxFileCount: 5,
+      showCaption: true,
+      initialCaption: "Seleccione archivos para informe",
+      showRemove: false,
+      maxFileSize: 1024,
+      maxFilePreviewSize: 1024,
+      showUpload: false
+  });
 
   $("#formInforme").submit(function(event){
     var fecha = $("#fechaVisita").val();
