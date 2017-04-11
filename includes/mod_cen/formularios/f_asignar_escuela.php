@@ -1,18 +1,7 @@
 <div class="container">
 	<form class="form-horizontal" action='' method='POST'>
 		<div class="form-group">
-			<label class="col-md-3 col-md-offset-2"><h3>Busqueda de Escuelas</h3></label>
-		</div>
-
-			<div class="form-group">
-			<label class="control-label col-md-2">CUE</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-						  <input type="text" size="4" class="form-control"  name="cue" placeholder="Ingrese CUE" autofocus>
-					 </div>
-				</div>
-			</div>
+			<label class="col-md-5 col-md-offset-2"><h4>Asignación de Escuelas - Busqueda de Escuelas</h4></label>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-2">Número</label>
@@ -24,6 +13,17 @@
 				</div>
 			</div>
 		</div>
+			<div class="form-group">
+			<label class="control-label col-md-2">CUE</label>
+			<div class="col-md-10">
+				<div class="row">
+					 <div class="col-sm-5">
+						  <input type="text" size="4" class="form-control"  name="cue" placeholder="Ingrese CUE" autofocus>
+					 </div>
+				</div>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<label class="control-label col-md-2">Nombre</label>
 			<div class="col-md-10">

@@ -10,22 +10,20 @@ session_start();
        	<meta name="description" content="Sistema de administración de base de datos de Conectar Salta">
        	<meta name="keywords" content="conectar,dbms,salta">
        	<link rel="shortcut icon" href="img/iconos/favicon.ico">
-        <script src="js/jquery-3.1.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+				<script src="js/jquery-3.1.0.min.js"></script>
+			 <script src="js/bootstrap.min.js"></script>
 
-				</script>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        <script type="text/javascript" src="gmap/gmaps.js"></script>
 				<script type="text/javascript" src="jquery/jquery.tablesorter.js"></script>
-				<script type="text/javascript" src="jquery/jquery.tablesorter.pager.js">	</script>
+
         <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
        	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
        	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
        	<link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/bootstrap.css"/>
-				<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-				<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 
+				<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+				<script src="js/fileinput.min.js"></script>
+				<script src="js/locales/es.js"></script>
         <!-- Optional theme -->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 				-->
@@ -33,7 +31,7 @@ session_start();
 	<body>
     		<div class="container">
     			   <header>
-							
+
           	 </header>
              <nav class="navbar navbar-inverse" >
                     <?php

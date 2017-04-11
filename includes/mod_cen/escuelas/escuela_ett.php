@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="gmap/gmaps.js"></script>
 <?php
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/referente.php");

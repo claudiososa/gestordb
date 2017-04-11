@@ -1,6 +1,6 @@
-<?php 
+<?php
 class Maestro{
-public function estructura($campo,$tabla){
+public static function estructura($campo,$tabla){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		$sentencia="SHOW COLUMNS FROM $tabla LIKE '$campo'";
@@ -10,9 +10,9 @@ public function estructura($campo,$tabla){
   		$result=substr($result, 5, strlen($result)-5);
   		$result=substr($result, 0, strlen($result)-2);
   		$result = explode("','",$result);
-		return $result;	
+		return $result;
 	}
-	
+
 	public function existeCampo($valor,$campo,$tabla)
 	{
 		$nuevaConexion= new Conexion();

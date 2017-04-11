@@ -94,13 +94,28 @@ class Escuela
 		}
 	}
 
-	public function editarref()
+	public function editarref($tipo=NULL)
 	{
 
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
+		if(isset($tipo)){
+
+		switch ($tipo) {
+			case 'pmi':
+				$sentencia="UPDATE escuelas SET referenteIdPmi ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
+				break;
+
+			default:
+				# code...
+				break;
+		}
+
+		}else{
+			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
+		}
+
 
 		if ($conexion->query($sentencia)) {
 			return 1;
@@ -427,10 +442,16 @@ if(isset($_POST["referente_id"])) {
 	$buscar_persona=$persona->buscar();
 	$dato_persona=mysqli_fetch_object($buscar_persona);
 	//********************************************************************************
-
+$escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
 	//busca escueala de acuerdo a escuelaId enviado por post y actualiza el referenteId acargo del colegio
-	$escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
-	$editar_escuela=$escuela->editarref();
+	if(isset($_POST['pmi'])){
+		$editar_escuela=$escuela->editarref("pmi");
+	}else{
+		$editar_escuela=$escuela->editarref();
+	}
+
+
+	$editar_escuela=$escuela->editarref("pmi");
 
 	if($editar_escuela==1){
 		$borrar= 1;

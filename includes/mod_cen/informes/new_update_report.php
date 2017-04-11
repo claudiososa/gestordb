@@ -9,7 +9,10 @@ $nuevo=0;
 if(isset($_POST['save_report']))
 {
 
-	//var_dump($_POST);
+	if (isset($_FILES)){
+      $img1 = $_FILES['file_data']['name'];
+      echo "si llego foto"." ".$img1;
+  }
 //  sleep(10);
     if(!isset($_POST["edit_report"]))
     {
@@ -246,7 +249,7 @@ if(isset($_POST['save_report']))
             ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",0);
+                setTimeout ("redireccion()",14000);
                     </script>
             <?php
         }
@@ -267,7 +270,7 @@ if(isset($_POST['save_report']))
             ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",0);
+                setTimeout ("redireccion()",14000);
                     </script>
             <?php
 					}else{

@@ -109,7 +109,13 @@ class Director
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT directorId,escuelaId,personaId,directores.tipoautoridad_id,tipoautoridad FROM directores left join tipoautoridad on directores.tipoautoridad_id=tipoautoridad.tipoautoridad_id";
+		$sentencia="SELECT directores.directorId,directores.escuelaId,directores.personaId,directores.tipoautoridad_id,tipoautoridad,
+		 personas.nombre,personas.apellido,personas.telefonoM,personas.email
+		FROM directores
+		left join tipoautoridad
+		on directores.tipoautoridad_id=tipoautoridad.tipoautoridad_id
+		join personas
+		on directores.personaId=personas.personaId";
 		if($this->directorId!=NULL || $this->escuelaId!=NULL)
 		{
 			$sentencia.=" WHERE ";

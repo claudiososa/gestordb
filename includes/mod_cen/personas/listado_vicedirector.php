@@ -1,12 +1,12 @@
 <?php
-	
-	
+
+
 	include_once("includes/mod_cen/clases/persona.php");
 	//include_once("includes/mod_cen/clases/categoria.php");
 	include_once("includes/mod_cen/clases/vicedirector.php");
-	
-	
-	
+
+
+
 	echo '<div class="table-responsive">';
 	echo '<div class="container">';
 	echo "<table class='table table-hover table-striped table-condensed '>";
@@ -19,19 +19,19 @@
 	echo "<td>User Modif</td>";
 	echo "<td>Accion</td>";
 	echo "<td>Accion</td>";
-	echo "</tr>";	
-		
-	
+	echo "</tr>";
 
-$vice=new ViceDirector(NULL,NULL,NULL,NULL,NULL,NULL);
-      
+
+
+$vice= new ViceDirector();
+
       $resultado=$vice->buscar();
      
+      
+      while ($fila = $resultado->fetchobject()){
+    
 
-      while ($fila = mysqli_fetch_object($resultado))
-      {
-
-        	
+        
 
       echo "<tr>";
       echo "<td>".$fila->vicedirectorId."</td>";
@@ -41,7 +41,7 @@ $vice=new ViceDirector(NULL,NULL,NULL,NULL,NULL,NULL);
       echo "<td>".$fila->fechaModif."</td>";
 
 
-       
+
        $persona= new Persona($fila->userModif);
                     $buscar_persona=$persona->buscar();
                     $dato_persona=mysqli_fetch_object($buscar_persona);
@@ -49,22 +49,22 @@ $vice=new ViceDirector(NULL,NULL,NULL,NULL,NULL,NULL);
 
 
       echo "<td>".$nomModif."</td>";
-     
+
       echo "<td>"."<a href='index.php?mod=slat&men=personas&id=10&vicedirectorId=$fila->vicedirectorId&escuelaId=$fila->escuelaId&personaId=$fila->personaId&turno=$fila->turno'>MODIFICAR</a>"."</td>";
 
       echo "<td>"."<a href='index.php?mod=slat&men=personas&id=11&vicedirectorId=$fila->vicedirectorId&escuelaId=$fila->escuelaId&personaId=$fila->personaId&turno=$fila->turno'>ELIMINAR</a>"."</td>";
-      
-     
-      
+
+
+
       echo "</tr>";
       echo "\n";
- 
-          
-      }
+
+
+      } 
 
     
 
-    
+
 	echo "</table>";
 	echo "</div>";
 	echo "</div>";

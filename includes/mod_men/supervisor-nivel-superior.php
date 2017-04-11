@@ -7,7 +7,7 @@
         <span class="icon-bar">das</span>
         <span class="icon-bar">dfdf</span>
       </button>
-      <a class="navbar-brand" href="index.php">DBMS</a>
+      <a class="navbar-brand" href="index.php">DBMS 2017</a>
     </div>
 
 
@@ -17,7 +17,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
           <ul class="dropdown-menu">
-                
+
                  <li ><a href="index.php?mod=slat&men=escuelas&id=1">Escuelas</a></li>
           </ul>
 		    <li class="dropdown">

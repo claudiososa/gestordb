@@ -7,23 +7,30 @@
         <span class="icon-bar">das</span>
         <span class="icon-bar">dfdf</span>
       </button>
-      <a class="navbar-brand" href="index.php">DBMS</a>
+      <a class="navbar-brand" href="index.php">DBMS 2017</a>
     </div>
 
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php?men=rtis&id=1">RTI <span class="sr-only">(current)</span></a></li>	
-		<li><a href="index.php?mod=slat&men=admin&id=6">Asignar Escuelas</a></li>
+        <li class="active"><a href="index.php?men=rtis&id=1">RTI <span class="sr-only">(current)</span></a></li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tareas<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+              <li><a href="index.php?mod=slat&men=admin&id=6">Asignar Escuelas Conectar</a></li>
+              <li><a href="index.php?mod=slat&men=admin&id=8">Asignar Escuelas PMI</a></li>
+        </ul>
+      </li>
+
 		<li><a href="index.php?mod=slat&men=escuelas&id=9">Informe Escuelas</a></li>
 		<li><a href="index.php?mod=slat&men=escuelas&id=12">ADM</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
-          <ul class="dropdown-menu">                
+          <ul class="dropdown-menu">
                 <li><a href="index.php?mod=slat&men=referentes&id=1">Referentes</a></li>
                 <li ><a href="index.php?mod=slat&men=admin&id=4">Escuelas</a></li>
-          </ul>		
+          </ul>
           </li>
 
           <li class="dropdown">
@@ -48,32 +55,27 @@
 
 
 
-		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>  
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Encuentros <span class="caret"></span></a>
-          <ul class="dropdown-menu">               
-                 <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
-          </ul>
-        </li>  
+		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>
+
 
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Perfil <span class="caret"></span></a>
           <ul class="dropdown-menu">
-                  <li><?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."'>";?>Actualizar</a></li> 
+                  <li><?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."'>";?>Actualizar</a></li>
                   <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?>Cambiar Contraseña</a></li>
           </ul>
-        </li>  
+        </li>
 
         </li>
-        <li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>  
-  		<li><a href="">Hola,<?php echo $_SESSION["nombre"]?></a></li>
+        <li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
+
       </ul>
-     
-     
+
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 
-<?php /* 
+<?php /*
 <ul class="nav">
 	<li><a href="index.php">Inicio</a></li>
 	<li><a href="index.php?men=referentes&id=1">Referentes</a></li>
@@ -86,8 +88,8 @@
         <ul>
            <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
          </ul>
-   </li>	
-	<li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>	
-	<li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>	
+   </li>
+	<li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>
+	<li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
 </ul>*/
 ?>

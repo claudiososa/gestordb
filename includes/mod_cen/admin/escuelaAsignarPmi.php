@@ -18,15 +18,14 @@ if(($_POST))
 				$escuela=new Escuela(NULL,null,$cue,$numero,$nombre,null,null,null,null);
 
 				$resultado = $escuela->buscar();
+				echo '<div class="table-responsive">';
 				echo "<table class='table table-hover table-striped table-condensed'>";
 				echo "<tr>";
 			  	echo "<th>Nº</th>";
 			  	echo "<th>CUE</th>";
 			  	echo "<th>Nombre de Escuela</th>";
 			  	echo "<th>Localidad</th>";
-			  	echo "<th>Referente a Cargo</th>";
-			  	//echo "<th></th>";
-			  	echo "<th>Ver</th>";
+			  	echo "<th>Referente PMI a Cargo</th>";
 				echo "</tr>";
 				$arreglo[]=array();
 				$arreglo["0"]="0";
@@ -63,7 +62,7 @@ if(($_POST))
 
 			  		echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
-			  		echo "<td>".substr($fila->nombre,0, 40)."</td>";
+						echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>".substr($fila->nombre,0, 40)."</td>";
 
 			  		$locali=new Localidad($fila->localidadId,null);
 			  		$busca_loc= $locali->buscar();
@@ -74,10 +73,11 @@ if(($_POST))
 			  				//echo "<input type='hidden' id='esc_$fila->referenteId'/>";
 
 			  				echo "<div class='divSimple' id='sel_".$fila->referenteIdPmi."'>";
-			  				$ett= new Referente();
+			  			$ett= new Referente();
+
 							$buscar_ett=$ett->buscarRef2("ATT");
 
-							echo "<select id='seleref_".$fila->referenteIdPmi."' name='referentes' >";
+							echo "<select disabled id='seleref_".$fila->referenteIdPmi."' name='referentes' >";
 							//echo	"<option value=0>Todos</option>";
 							echo	"<option value='0001'>Sin Asignar</option>";
 							while ($fila1 = mysqli_fetch_object($buscar_ett))
@@ -87,9 +87,9 @@ if(($_POST))
 										$nombre=$persona->getNombre();
 										$apellido=$persona->getApellido();
 										if($fila1->referenteId==$_SESSION["referenteId"])
-											echo	"<option value='$fila1->referenteIdPmi' selected >$apellido".",&nbsp;".$nombre."</option>";
+											echo	"<option value='".$fila1->referenteId."' selected >$apellido".",&nbsp;".$nombre."</option>";
 										else
-											echo	"<option value='$fila1->referenteIdPmi' >$apellido".",&nbsp;".$nombre."</option>";
+											echo	"<option value='".$fila1->referenteId."' >$apellido".",&nbsp;".$nombre."</option>";
 									}
 
 							echo "</select></div>";
@@ -103,7 +103,7 @@ if(($_POST))
 			  			$ett= new Referente();
 							$buscar_ett=$ett->buscarRef2('ATT');
 
-			  			echo "<select id='seleref_".$fila->referenteIdPmi.$encontrado."' name='referentes' >";
+			  			echo "<select  disabled id='seleref_".$fila->referenteIdPmi.$encontrado."' name='referentes' >";
 			  			//echo	"<option value=0>Todos</option>";
 			  			echo	"<option value='0001'>Sin Asignar</option>";
 			  			while ($fila1 = mysqli_fetch_object($buscar_ett))
@@ -113,7 +113,7 @@ if(($_POST))
 			  				$nombre=$persona->getNombre();
 			  				$apellido=$persona->getApellido();
 			  				if($fila1->referenteIdPmi==$_SESSION["referenteId"])
-								echo	"<option value='$fila1->referenteIdPmi' selected >$apellido".",&nbsp;".$nombre."</option>";
+								echo	"<option value='".$fila1->referenteId."' selected >$apellido".",&nbsp;".$nombre."</option>";
 								//echo	"<option value='$fila1->referenteId' >$apellido".",&nbsp;".$nombre."</option>";
 								}
 
@@ -151,12 +151,12 @@ if(($_POST))
 			  		*			  		<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".
 			  				"<img  src='img/iconos/modificar_p.png' alt='modificar' longdesc='Modificar Datos de Persona'></a></div></td>";
 			  		**/
-			  		echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=10&escuelaId=".$fila->escuelaId."'>Ver más</a>"."</td>";
 			  		echo "</tr>";
 		  	  		echo "\n";
 
 	      	}
 	      	echo "</table>";
+					echo "</div>";
 			//}
 		}else{
 			$escuela=new Escuela(NULL);
@@ -202,7 +202,9 @@ if(($_POST))
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 var escuela_id=escuela.substring(4,8);
 
-					 $.post("includes/mod_cen/clases/escuela.php", { referente_id: referente_id, escuela_id: escuela_id }, function(data){
+					 var pmi = 'pmi'
+
+					 $.post("includes/mod_cen/clases/escuela.php", { pmi:pmi,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);
 					 var dato = resultado['estado'];
 

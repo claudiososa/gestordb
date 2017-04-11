@@ -1,6 +1,6 @@
 <script src="includes/mod_cen/js/s_ajax_informe.js"></script>
 
-</script>
+
 <?php
   if($informe->informeId==""){
   }
@@ -161,7 +161,16 @@
             <textarea  readonly  rows='20' name="contenido" class="form-control" ><?php echo $informe->contenido ?></textarea>
           </div>
         </div>
-
+        <p>&nbsp;</p>
+        <div class="form-group">
+          <div class="col-md-12">
+            <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
+          </div>
+          <div class="col-md-12">
+            <input id="input-img" name="img" type="file" class="file-loading">
+          </div>
+        </div>
+        <p>&nbsp;</p>
 
         <div class="form-group">
 
@@ -195,6 +204,7 @@
                 echo '<div class="col-md-12">';
                 echo "<input class='btn btn-primary' type='submit' name='save_report' class='boton' value='Enviar'>";
                 echo "<br>";
+                echo "<p>&nbsp;</p>";
                 echo '<span style="color:#000066">Revisar el informe antes de enviarlo</span>';
                 echo "</div>";
               }

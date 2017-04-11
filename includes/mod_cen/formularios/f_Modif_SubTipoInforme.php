@@ -1,7 +1,7 @@
 <?php
 
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
-include_once("includes/mod_cen/informes/listarSubTipo.php");
+include_once("includes/mod_cen/informes/listarSubtipo.php");
 include_once("includes/mod_cen/informes/update_subtipo_informe.php");
 include_once("includes/mod_cen/clases/categoria.php");
 
@@ -17,33 +17,33 @@ $b_referente= $c_categoria->buscar();
     <div class="panel-heading">
       MODIFICAR SUB-CATEGORIA
     </div>
-    
+
     <div class="panel-body">
 
       <form class="" action="" method="post">
-      
+
 
        <div class="form-group">
         <div class="col-md-12">
 
         <label class="control-label" for="tipoId">Categoria</label>
         </div>
-        
+
         <div class="col-md-12">
-         
+
            <select class="form-control" name="tipoId" >
-           "<option value='<?php echo $_GET["tipoId"]; ?>'> 
+           "<option value='<?php echo $_GET["tipoId"]; ?>'>
                   <?php echo $_GET["tipoId"]; ?>
-                
+
               </option>";
 
 
-          
+
           <?php
           while($fila = mysqli_fetch_object($b_referente)) {
-            
+
             if($fila->idCategoria>0) {
-              
+
               echo "<option value=".$fila->idCategoria.">".$fila->idCategoria."-".$fila->nombre."</option>";
             }
           }
@@ -63,7 +63,7 @@ $b_referente= $c_categoria->buscar();
       </div>
 
 
-      
+
 
       <div class="form-group">
         <div class="col-md-12">
@@ -96,7 +96,7 @@ $b_referente= $c_categoria->buscar();
           </select>
         </div>
       </div>
-          
+
 
 
       <div class="form-group"><br>
@@ -109,7 +109,3 @@ $b_referente= $c_categoria->buscar();
     </div>
     </div>
 </div>
-
-
-
-
