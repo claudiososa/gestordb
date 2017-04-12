@@ -6,7 +6,7 @@
   }
   //var_dump($informe);
 ?>
-<form name="form" class="informef" id="formInforme" action="index.php?mod=slat&men=informe&id=1&escuelaId=<?php echo $_GET["escuelaId"]?>" method="post">
+<form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="index.php?mod=slat&men=informe&id=1&escuelaId=<?php echo $_GET["escuelaId"]?>" method="post">
  		<div class="form-group">
       <div class="col-md-12">
         <label class="control-label"><br>Escuela</label>
@@ -167,7 +167,7 @@
             <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
           </div>
           <div class="col-md-12">
-            <input id="input-img" name="img" type="file" class="file-loading">
+            <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
           </div>
         </div>
         <p>&nbsp;</p>

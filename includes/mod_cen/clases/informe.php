@@ -54,10 +54,19 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		'".$this->tipo."','".$this->titulo."','". $this->contenido."','". $this->leido."',
 		'". $this->estado."','". $this->fechaVisita."','". $this->fechaCarga."',
 		'". $this->fechaModificado."','". $this->nuevoTipo."','". $this->subTipo."');";
-    echo $sentencia;
+
+		//echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
-			return 1;
+			$informeId=$conexion->insert_id;
+			//printf ("Nuevo registro con el id %d.\n", $conexion->insert_id);
+			/*$sentencia="INSERT INTO img (imgId,informeId,nombre,formato)
+			VALUES (NULL,$informeId,$nombre,'jpg');
+			if ($conexion->query($sentencia)) {
+			echo 'se guardo todo completo'
+		}*/
+
+			return $informeId;
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;

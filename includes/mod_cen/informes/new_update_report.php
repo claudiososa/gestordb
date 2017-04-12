@@ -5,14 +5,14 @@ include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
+include_once("includes/mod_cen/clases/img.php");
+
+
 $nuevo=0;
 if(isset($_POST['save_report']))
 {
+	//var_dump($_FILES);
 
-	if (isset($_FILES)){
-      $img1 = $_FILES['file_data']['name'];
-      echo "si llego foto"." ".$img1;
-  }
 //  sleep(10);
     if(!isset($_POST["edit_report"]))
     {
@@ -33,8 +33,56 @@ if(isset($_POST['save_report']))
                             Null,
                             $_POST["nuevotipo"],
                             $_POST["subtipo"]);
+														/*array(1) { ["input-img"]=> array(5)
+															             { ["name"]=> array(2){ [0]=> string(14) "000375853W.jpg" [1]=> string(14) "trujillo-2.jpg" }
+														                 ["type"]=> array(2) { [0]=> string(10) "image/jpeg" [1]=> string(10) "image/jpeg" }
+                                             ["tmp_name"]=> array(2) { [0]=> string(14) "/tmp/phpRzFX4u" [1]=> string(14) "/tmp/phpNFrbnK" }
+																					   ["error"]=> array(2) { [0]=> int(0) [1]=> int(0) }
+																					   ["size"]=> array(2) { [0]=> int(269079) [1]=> int(41088) }
+																				} } si llego foto /tmp/phpRzFX4u
+														si llego foto trujillo-2.jpg*/
+
+
+
 
         $guardar_informe=$informe->agregar(); // hasta aqui deberia haber guardado el informe nuevo
+
+
+				foreach ($_FILES['input-img'] as $clave) {
+				    // $array[3] se actualizará con cada valor de $array...
+						foreach ($_FILES['input-img'][$clave] as $key => $value) {
+							# code...
+							echo 'nonbrePrimerArchivo1'.$_FILES['input-img'][$clave][$key].'<br>';
+						}
+				}
+				var_dump($_FILES);
+
+				if (isset($_FILES)){
+						$img1 = $_FILES['input-img']['tmp_name'][0];
+						echo "si llego foto "." ".$img1."<br>";
+
+						$img1 = $_FILES['input-img']['name'][1];
+						echo "si llego foto "." ".$img1."<br>";
+
+						$dir_subida = './img/informes/';
+						//$dir_subida = "/tmp/";
+						$nombreArchivo='img_'.$guardar_informe.'.jpg';
+						//$fichero_subido = $dir_subida . basename($_FILES['input-img']['name'][0]);
+						$fichero_subido = $dir_subida . $nombreArchivo;
+						echo $fichero_subido;
+
+
+						echo '<pre>';
+						if (move_uploaded_file($_FILES['input-img']['tmp_name'][0], $fichero_subido)) {
+							$imagen = new Img(null,$guardar_informe,$nombreArchivo,'jpg');
+							$agregarImg = $imagen->agregar();
+							echo "El fichero es válido y se subió con éxito.\n";
+						}	 else {
+							echo "¡Posible ataque de subida de ficheros!\n";
+						}
+				}
+
+
 
         // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
         $escuela= new Escuela($_GET["escuelaId"]);
