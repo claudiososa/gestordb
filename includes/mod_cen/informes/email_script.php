@@ -167,18 +167,15 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 	            $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
 	            $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
 		        	
-            	/*if (mail($para, $titulo, $mensaje, $header)) {
+            	if (mail($para, $titulo, $mensaje, $header)) {
             		
             		$enviado=1;
             	} else {
             		echo "Falló el envio";
-            	}*/
+            	}
 
             
-              echo " </br> De:  ".$creadopor."    mail: ".$header;
-              echo " </br> Para:  ".$para;
-              echo " </br> Titulo:  ".$titulo;
-              echo " </br> Mensaje:  ".$mensaje;
+              
 
 
 
