@@ -38,7 +38,7 @@ if(isset($_POST['save_report']))
 
         $guardar_informe=$informe->agregar(); // hasta aqui deberia haber guardado el informe nuevo
 
-        var_dump($_FILES);
+      //  var_dump($_FILES);
         foreach ($_FILES['input-img'] as $key) {
           $cantidadElmentos=count($_FILES['input-img']['name']);
 
@@ -87,7 +87,7 @@ if(isset($_POST['save_report']))
           break;
         }
 
-       
+
 
 
         if($guardar_informe>0){
@@ -111,7 +111,7 @@ if(isset($_POST['save_report']))
             ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",8000);
+                setTimeout ("redireccion()",0);
                     </script>
             <?php
 					}else{

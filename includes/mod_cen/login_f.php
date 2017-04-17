@@ -70,6 +70,9 @@ if(isset($_POST["username"]))
 		if(isset($_SESSION["referenteId"])) {
 
 			switch ($_SESSION["tipo"]) {
+				case 'ATT':
+					include_once('includes/mod_cen/portada/ett.php');
+					break;
 				case 'ETT':
 					include_once('includes/mod_cen/portada/ett.php');
 					break;
@@ -79,6 +82,9 @@ if(isset($_POST["username"]))
 				case 'Coordinador':
 					include_once('includes/mod_cen/portada/coordinador.php');
 					break;
+			 case 'CoordinadorPmi':
+						include_once('includes/mod_cen/portada/coordinadorpmi.php');
+						break;
 				case 'Supervisor':
 					include_once('includes/mod_cen/portada/supervisor-secundaria.php');
 					break;

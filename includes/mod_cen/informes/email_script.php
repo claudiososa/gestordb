@@ -6,7 +6,7 @@ include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
-	 		
+
 	 // a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
 
 
@@ -16,7 +16,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
           // entra si es ett o etj o coordinador de Conectar Igualdad
 
-          if($referente_actual->tipo=="ETT" || $referente_actual->tipo=="ETJ" || $referente_actual->tipo=="Coordinador" ){ 
+          if($referente_actual->tipo=="ETT" || $referente_actual->tipo=="ETJ" || $referente_actual->tipo=="Coordinador" ){
 
  // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
 	        $escuela= new Escuela($_GET["escuelaId"]);
@@ -141,7 +141,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
                          }
 
-              }  
+              }
 
             }else{   // aqui debe ingresar el coordinador
                    //aqui armar los mail para los ett y etj
@@ -166,25 +166,25 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
 	            $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
 	            $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
-		        	
+
             	if (mail($para, $titulo, $mensaje, $header)) {
-            		
+
             		$enviado=1;
             	} else {
             		echo "Falló el envio";
             	}
 
-            
-              
 
 
 
 
-           
+
+
+
         }else{  // aqui entra si es ATT O COORDINADOR PMI
 
 
-        	if($referente_actual->tipo=="ATT" ||  $referente_actual->tipo=="CoordinadorPmi" ){ 
+        	if($referente_actual->tipo=="ATT" ||  $referente_actual->tipo=="CoordinadorPmi" ){
 
 
         	// en el siguiente codigo usamos el escuelaID para encontrar el referentePmi de la escuela asociada al informe por crear
@@ -200,7 +200,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 	        $ref_esc_mail= $ref_esc->email;   //  aqui obtenemos el mail del referentePmi de la escuela
 
 
-	       
+
 
             $dato_ref_origen =  new Referente($id_referente_escuela);
             $buscar_dato_ref_origen =  $dato_ref_origen->buscar();
@@ -216,7 +216,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
               $mail__etj_responsable=$mail_etj_asociado->email; //aqui obtenemos el mail del CoordinadorPmi superior al referentePmi de la escuela.
 
         	 //Envio de email - notificación de informe
-              
+
               $dato_referente =  new Referente($_SESSION["referenteId"]);
               $buscar_dato = $dato_referente->Persona($_SESSION["referenteId"]);
               $origen =  mysqli_fetch_object($buscar_dato);
@@ -226,41 +226,41 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
               $mail_propio=$origen->email;
 
 
-              
+
 
               $header = "From: ". $origen->email;
-              
+
               $dato_referente2 =  new Referente($origen->etjcargo);
               $buscar_dato2 = $dato_referente2->Persona($origen->etjcargo);
               $origen2 =  mysqli_fetch_object($buscar_dato2);
 
-             
+
 
               	 if($referente_actual->tipo=="ATT"){
 
 
               	          $para=$origen2->email;
 
-              	 
+
                           	    if($_SESSION["referenteId"] != $id_referente_escuela) // pregunta si el informe creado es de otro referente
                                   {
 
                                         $para=$para.",".$ref_esc_mail.",".$mail__etj_responsable;// mail del referentePmi de la escuela y su Coordinador
 
                                   }
- 
+
 
 
                                    }else{ // el referente que inicio sesion es el coordinador pmi
 
-                                	 $para= $ref_esc_mail; 
+                                	 $para= $ref_esc_mail;
 
                                            if($_SESSION["referenteId"] != $referente_origen->etjcargo){ // preguntamos si el ATT es de otro CoordinadorPMI
 
                                            		$para=$para.",".$mail__etj_responsable;
 
-                                           	
-                                           } 
+
+                                           }
 
 
 
@@ -279,38 +279,31 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
 	            $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
 	            $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
-		        	
+
             	/*if (mail($para, $titulo, $mensaje, $header)) {
-            		
+
             		$enviado=1;
             	} else {
             		echo "Falló el envio";
             	}*/
 
-            
-              
+
+
         		 }// fin att o coordinador pmi
 
 
-        	
+
 
         }// fin del if-else principal
 
         $variablephp = "index.php?mod=slat&men=informe&id=2&escuelaId=".$_POST["escuelaId"];
 
-       
+
        ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",4000);
+                setTimeout ("redireccion()",0);
                     </script>
         <?php
 
   ?>
-
-
-                               
-
-                                    
-
-                                   
