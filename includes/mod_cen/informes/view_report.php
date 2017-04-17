@@ -1,3 +1,4 @@
+
 <?php
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/respuesta.php");
@@ -8,6 +9,7 @@ include_once("includes/mod_cen/clases/leido.php");
 include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
+include_once("includes/mod_cen/clases/img.php");
 
 
 
@@ -15,6 +17,10 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 $dato_informe = new Informe($_GET["informeId"]);
 $buscar_informe = $dato_informe->buscar();
 $informe = mysqli_fetch_object($buscar_informe);
+
+$dato_img = new Img(null,$_GET["informeId"]);
+$buscar_img = $dato_img->buscar();
+
 
 //marca el informe como leido.
 if(isset($_GET['informeId'])<>""){
@@ -113,3 +119,21 @@ while ($fila = mysqli_fetch_object($buscar_respuesta)) {
 //echo "</div>";
 echo "</div>";
 echo "</div>";
+
+/*
+<script type="text/javascript">
+var arrayFile = new Array();
+<?php
+      foreach ($arrayFile as $indice=>$valor)
+      {
+        ?>
+        archivo =
+        alert('aqui');
+        <?php
+        //  echo 'arrayFile['. $i .'] = '. $arrayFile($i) .';\n';
+      }
+?>
+//alert(arrayFile[0]);
+</script>
+*/
+?>

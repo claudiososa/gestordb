@@ -1,3 +1,4 @@
+<script src="includes/mod_cen/js/s_ajax_informe.js"></script>
 <?php
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/referente.php");
@@ -32,57 +33,59 @@ if(isset($_POST['save_report']))
                             $fecha,
                             Null,
                             $_POST["nuevotipo"],
-                            $_POST["subtipo"]);
-														/*array(1) { ["input-img"]=> array(5)
-															             { ["name"]=> array(2){ [0]=> string(14) "000375853W.jpg" [1]=> string(14) "trujillo-2.jpg" }
-														                 ["type"]=> array(2) { [0]=> string(10) "image/jpeg" [1]=> string(10) "image/jpeg" }
-                                             ["tmp_name"]=> array(2) { [0]=> string(14) "/tmp/phpRzFX4u" [1]=> string(14) "/tmp/phpNFrbnK" }
-																					   ["error"]=> array(2) { [0]=> int(0) [1]=> int(0) }
-																					   ["size"]=> array(2) { [0]=> int(269079) [1]=> int(41088) }
-																				} } si llego foto /tmp/phpRzFX4u
-														si llego foto trujillo-2.jpg*/
-
-
-
+                            $_POST["subtipo"]
+                          );
 
         $guardar_informe=$informe->agregar(); // hasta aqui deberia haber guardado el informe nuevo
 
+        var_dump($_FILES);
+        foreach ($_FILES['input-img'] as $key) {
+          $cantidadElmentos=count($_FILES['input-img']['name']);
 
-				foreach ($_FILES['input-img'] as $clave) {
-				    // $array[3] se actualizará con cada valor de $array...
-						foreach ($_FILES['input-img'][$clave] as $key => $value) {
-							# code...
-							echo 'nonbrePrimerArchivo1'.$_FILES['input-img'][$clave][$key].'<br>';
-						}
-				}
-				var_dump($_FILES);
+          for ($i=0; $i < $cantidadElmentos ; $i++) {
+            # code...
+          //  echo $_FILES['input-img']['name'][$i];
+          //  echo $_FILES['input-img']['tmp_name'][$i];
 
-				if (isset($_FILES)){
-						$img1 = $_FILES['input-img']['tmp_name'][0];
-						echo "si llego foto "." ".$img1."<br>";
+            $img1 = $_FILES['input-img']['tmp_name'][$i];
+        //    echo "si llego foto "." ".$img1."<br>";
 
-						$img1 = $_FILES['input-img']['name'][1];
-						echo "si llego foto "." ".$img1."<br>";
+            $img1 = $_FILES['input-img']['name'][$i];
+                //"image/jpeg"
 
-						$dir_subida = './img/informes/';
-						//$dir_subida = "/tmp/";
-						$nombreArchivo='img_'.$guardar_informe.'.jpg';
-						//$fichero_subido = $dir_subida . basename($_FILES['input-img']['name'][0]);
-						$fichero_subido = $dir_subida . $nombreArchivo;
-						echo $fichero_subido;
+        //    echo "si llego foto "." ".$img1."<br>";
 
-
-						echo '<pre>';
-						if (move_uploaded_file($_FILES['input-img']['tmp_name'][0], $fichero_subido)) {
-							$imagen = new Img(null,$guardar_informe,$nombreArchivo,'jpg');
-							$agregarImg = $imagen->agregar();
-							echo "El fichero es válido y se subió con éxito.\n";
-						}	 else {
-							echo "¡Posible ataque de subida de ficheros!\n";
-						}
-				}
+            $dir_subida = './img/informes/';
+            //$dir_subida = "/tmp/";
+            if($_FILES['input-img']['type'][$i]=='image/jpeg'){
+              $nombreArchivo='doc_'.$guardar_informe.'_'.$i.'.jpg';
+              $nombreArchivoMediano='doc_'.$guardar_informe.'_'.$i.'m.jpg';
+              $tipoArchivo='image/jpeg';
+            } elseif($_FILES['input-img']['type'][$i]=='application/pdf') {
+              $nombreArchivo='doc_'.$guardar_informe.'_'.$i.'.pdf';
+              $tipoArchivo='application/pdf';
+            }
+            //$fichero_subido = $dir_subida . basename($_FILES['input-img']['name'][0]);
+            $fichero_subido = $dir_subida . $nombreArchivo;
+      //      echo $fichero_subido;
 
 
+      //echo '<pre>';
+            if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
+              if($_FILES['input-img']['type'][$i]=='image/jpeg'){
+                $nuevoArchivo = $dir_subida.$nombreArchivoMediano;
+                copy($fichero_subido,$nuevoArchivo);
+              }
+              $imagen = new Img(null,$guardar_informe,$nombreArchivo,$tipoArchivo);
+              $agregarImg = $imagen->agregar();
+          //    echo "El fichero es válido y se subió con éxito.\n";
+            }	 else {
+      // echo "¡Posible ataque de subida de ficheros!\n";
+            }
+
+          }
+          break;
+        }
 
         // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
         $escuela= new Escuela($_GET["escuelaId"]);
@@ -116,7 +119,7 @@ if(isset($_POST['save_report']))
               $mail__etj_responsable=$mail_etj_asociado->email; //aqui obtenemos el mail del etj superior al referente de la escuela
 
 
-        if($guardar_informe==1){
+        if($guardar_informe>0){
 
 
 
@@ -297,7 +300,7 @@ if(isset($_POST['save_report']))
             ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",14000);
+                setTimeout ("redireccion()",8000);
                     </script>
             <?php
         }
@@ -318,7 +321,7 @@ if(isset($_POST['save_report']))
             ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",14000);
+                setTimeout ("redireccion()",8000);
                     </script>
             <?php
 					}else{

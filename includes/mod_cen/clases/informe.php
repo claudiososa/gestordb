@@ -72,6 +72,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
 	}
+
+	
 	public function editar()
 	{
 	//	$fecha_a=date("Y-m-d H:i:s");

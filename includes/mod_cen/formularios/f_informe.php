@@ -1,4 +1,4 @@
-<script src="includes/mod_cen/js/s_ajax_informe.js"></script>
+
 
 
 <?php
@@ -162,14 +162,37 @@
           </div>
         </div>
         <p>&nbsp;</p>
-        <div class="form-group">
-          <div class="col-md-12">
-            <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
+        <?php
+        if($_GET['id']==3){
+          ?>
+          <div class="form-group">
+            <div class="col-md-12">
+              <label class="control-label">Archivos Adjuntos</label>
+            </div>
+            <div class="col-md-12">
+              <?php
+              while ($fila = mysqli_fetch_object($buscar_img)) {
+                echo "<a href='img/informes/".$fila->nombre."'>".$fila->nombre."</a><br>";
+              }
+              ?>
+            </div>
           </div>
-          <div class="col-md-12">
-            <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
+          <?php
+        }elseif($_GET['id']==1){
+          ?>
+          <div class="form-group">
+            <div class="col-md-12">
+              <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
+            </div>
+            <div class="col-md-12">
+              <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
+            </div>
           </div>
-        </div>
+          <?php
+        }
+
+
+        ?>
         <p>&nbsp;</p>
 
         <div class="form-group">
