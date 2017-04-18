@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/formularios/js/form_personaf.js"></script>
 			<?php
 			if($_SESSION["tipo"]=="Coordinador")
 				{
@@ -22,8 +23,10 @@
 							</div>
 						</div>
 					</div>
+
 					<?php
 					//echo $_SESSION["tipo"];
+
 				}else {
 					?>
 					<div class="form-group">
@@ -65,7 +68,7 @@
 					<label class="control-label">CUIL</label>
 				</div>
 				<div class="col-md-3">
-					<input class="form-control" placeholder="Nº CUIL sin puntos, ni guiones" size="30" title="Ingresar sin guiones ni puntos"  type="text" name="cuil" pattern="[0-9]{1,11}" value="<?php echo $persona->getCuil()?>">
+					<input class="form-control" placeholder="Nº CUIL sin puntos, ni guiones" size="30" title="Ingresar sin guiones ni puntos"  type="text" name="cuil" id="cuil" pattern="[0-9]{11}" value="<?php echo $persona->getCuil()?>">
 				</div>
 			</div>
 
