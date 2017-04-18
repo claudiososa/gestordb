@@ -12,17 +12,17 @@ include_once("includes/mod_cen/clases/escuela.php");
             $informeId= $_POST["informeId"];
 
              $variablephp = "index.php?mod=slat&men=informe&id=3&informeId=$informeId";
-            ?>    <script type="text/javascript"> 
+            ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",0);
+                setTimeout ("redireccion()",8000);
                     </script>
-           
+
             <?php
 
 
             // preparo el header con el referente que inicio sesion
-/* 
+/*
             $referente= new Referente($_SESSION["referenteId"]);
             $buscar_ref = $referente->Persona($_SESSION["referenteId"]);
             $dato_ref = mysqli_fetch_object($buscar_ref);
@@ -145,7 +145,7 @@ include_once("includes/mod_cen/clases/escuela.php");
                   }
 
               $variablephp = "index.php?mod=slat&men=informe&id=3&informeId=$informeId";
-            ?>    <script type="text/javascript"> 
+            ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
                 setTimeout ("redireccion()",0);

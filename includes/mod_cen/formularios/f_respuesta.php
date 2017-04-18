@@ -48,7 +48,6 @@
               echo '</script>';
         //}
         ?>
-
         <div class="form-group">
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
@@ -58,6 +57,14 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <div class="col-md-12">
+            <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
+          </div>
+          <div class="col-md-12">
+            <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
+          </div>
+        </div>
 
         <div class="form-group">
 
@@ -73,12 +80,17 @@
               echo '<div class="col-md-12">';
               echo "<input class='btn btn-primary' type='submit' name='save_report' class='boton' value='Enviar'>";
               echo "<br>";
+              echo "<br>";
+              echo "</div>";
+              echo "<p>&nbsp;</p>";
+              echo "<p>&nbsp;</p>";
+              echo '<div class="col-md-12">';
               echo '<span style="color:#000066">Revisar el informe antes de enviarlo</span>';
               echo "</div>";
 
               echo "</div>";
 
-        
+
 
         ?>
 

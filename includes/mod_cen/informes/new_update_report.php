@@ -44,19 +44,11 @@ if(isset($_POST['save_report']))
 
           for ($i=0; $i < $cantidadElmentos ; $i++) {
             # code...
-          //  echo $_FILES['input-img']['name'][$i];
-          //  echo $_FILES['input-img']['tmp_name'][$i];
-
             $img1 = $_FILES['input-img']['tmp_name'][$i];
-        //    echo "si llego foto "." ".$img1."<br>";
-
             $img1 = $_FILES['input-img']['name'][$i];
-                //"image/jpeg"
-
-        //    echo "si llego foto "." ".$img1."<br>";
 
             $dir_subida = './img/informes/';
-            //$dir_subida = "/tmp/";
+
             if($_FILES['input-img']['type'][$i]=='image/jpeg'){
               $nombreArchivo='doc_'.$guardar_informe.'_'.$i.'.jpg';
               $nombreArchivoMediano='doc_'.$guardar_informe.'_'.$i.'m.jpg';
@@ -86,9 +78,6 @@ if(isset($_POST['save_report']))
           }
           break;
         }
-
-
-
 
         if($guardar_informe>0){
 
