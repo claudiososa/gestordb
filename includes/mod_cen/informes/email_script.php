@@ -187,86 +187,45 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
         	if($referente_actual->tipo=="ATT" ||  $referente_actual->tipo=="CoordinadorPmi" ){
 
 
-        	// en el siguiente codigo usamos el escuelaID para encontrar el referentePmi de la escuela asociada al informe por crear
-	        $escuela= new Escuela($_GET["escuelaId"]);
-	        $buscar_escuela=$escuela->buscar();
-	        $dato_escuela=mysqli_fetch_object($buscar_escuela);
-	        $id_referente_escuela= $dato_escuela->referenteIdPmi; //hasta aqui obtengo el referentID PMI
+              // en el siguiente codigo usamos el escuelaID para encontrar el referentePmi de la escuela asociada al informe por crear
+              $escuela= new Escuela($_GET["escuelaId"]);
+              $buscar_escuela=$escuela->buscar();
+              $dato_escuela=mysqli_fetch_object($buscar_escuela);
+              $id_referente_escuela= $dato_escuela->referenteIdPmi; //hasta aqui obtengo el referentID PMI
 
- //En el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
-	        $dato_ref_esc =  new Referente($id_referente_escuela);
-	        $buscar_dato_ref_esc =  $dato_ref_esc->Persona($id_referente_escuela);
-	        $ref_esc = mysqli_fetch_object($buscar_dato_ref_esc);
-	        $ref_esc_mail= $ref_esc->email;   //  aqui obtenemos el mail del referentePmi de la escuela
+              //En el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
+              $dato_ref_esc =  new Referente($id_referente_escuela);
+              $buscar_dato_ref_esc =  $dato_ref_esc->Persona($id_referente_escuela);
+              $ref_esc = mysqli_fetch_object($buscar_dato_ref_esc);
+              $ref_esc_mail= $ref_esc->email;   //  aqui obtenemos el mail del referentePmi de la escuela
 
-
-
-
-            $dato_ref_origen =  new Referente($id_referente_escuela);
-            $buscar_dato_ref_origen =  $dato_ref_origen->buscar();
-            $referente_origen = mysqli_fetch_object($buscar_dato_ref_origen);
-            $cargo_origen=$referente_origen->tipo; // aqui obtenemos informacion para saber si es ATT
-
-
-           //  en el siguiente codigo obtenemos  el mail del CoordinadorPmi responsable del ATT de la escuela
-
-              $dato_ref_asociado =  new Referente($referente_origen->etjcargo);
-              $buscar_dato_ref_asociado = $dato_ref_asociado->Persona($referente_origen->etjcargo);
-              $mail_etj_asociado =  mysqli_fetch_object($buscar_dato_ref_asociado);
-              $mail__etj_responsable=$mail_etj_asociado->email; //aqui obtenemos el mail del CoordinadorPmi superior al referentePmi de la escuela.
-
-        	 //Envio de email - notificación de informe
-
+              // En el siguiente codigo obtenemos datos del referentePMI que inicio sesion
               $dato_referente =  new Referente($_SESSION["referenteId"]);
               $buscar_dato = $dato_referente->Persona($_SESSION["referenteId"]);
               $origen =  mysqli_fetch_object($buscar_dato);
-
+   
               $creadopor=$origen->nombre." ".$origen->apellido;
               //quien envia el mensaje - (email)
               $mail_propio=$origen->email;
 
+              $header = "From: ". $origen->email; // datos de quien envia el mail
 
+            if ($referente_actual->tipo=="ATT") 
+            { //mandamos mail a los coordinadores PMI
 
+               $para="mmonterosadir@gmail.com,maricel.eg31@gmail.com,noemiemercado@gmail.com";
 
-              $header = "From: ". $origen->email;
-
-              $dato_referente2 =  new Referente($origen->etjcargo);
-              $buscar_dato2 = $dato_referente2->Persona($origen->etjcargo);
-              $origen2 =  mysqli_fetch_object($buscar_dato2);
-
-
-
-              	 if($referente_actual->tipo=="ATT"){
-
-
-              	          $para=$origen2->email;
-
-
-                          	    if($_SESSION["referenteId"] != $id_referente_escuela) // pregunta si el informe creado es de otro referente
+                      if($_SESSION["referenteId"] != $id_referente_escuela) 
+                      // pregunta si el informe creado es de otro referente
                                   {
-
-                                        $para=$para.",".$ref_esc_mail.",".$mail__etj_responsable;// mail del referentePmi de la escuela y su Coordinador
-
+                                        $para=$para.",".$ref_esc_mail;// mail del referentePmi de la escuela tambien
                                   }
 
+            }else{  // entra por que es coordinador pmi y solo envia mail al att de la escuela en cuestion
 
+                $para= $ref_esc_mail;
 
-                                   }else{ // el referente que inicio sesion es el coordinador pmi
-
-                                	 $para= $ref_esc_mail;
-
-                                           if($_SESSION["referenteId"] != $referente_origen->etjcargo){ // preguntamos si el ATT es de otro CoordinadorPMI
-
-                                           		$para=$para.",".$mail__etj_responsable;
-
-
-                                           }
-
-
-
-                                    }
-
-
+                 }
 
               //buscamos el ultimo informe creado por el usuario logeado
               $ultimo= new Informe(null,null,$_SESSION["referenteId"]);
@@ -280,12 +239,12 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 	            $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
 	            $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
 
-            	/*if (mail($para, $titulo, $mensaje, $header)) {
+            	if (mail($para, $titulo, $mensaje, $header)) {
 
             		$enviado=1;
             	} else {
             		echo "Falló el envio";
-            	}*/
+            	}
 
 
 
@@ -304,6 +263,4 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
                 function redireccion(){window.location=variablejs;}
                 setTimeout ("redireccion()",0);
                     </script>
-        <?php
-
-  ?>
+        
