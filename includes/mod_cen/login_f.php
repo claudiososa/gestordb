@@ -48,7 +48,7 @@ if(isset($_POST["username"]))
 
 			<div class="form-group input-group">
 	      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-			<input class="form-control" type="text" name="username"  placeholder="Ingrese Usuario" id="formulario-login"  size="50" required>
+			<input class="form-control" type="text" name="username" autofocus=""placeholder="Ingrese Usuario" id="formulario-login"  size="50" required>
 			</div>
 
 			<div id="alerta" style="display:none;"></div>

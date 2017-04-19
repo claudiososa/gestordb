@@ -11,12 +11,17 @@ $(document).ready(function (e) {
             //return false;
         //}
         //else
-         if( $("#tel_escuela").val() = !tel.test($("#tel_escuela").val()) ){
+         if( $("#tel_escuela").val() != "" &&  !tel.test($("#tel_escuela").val()) ){
             $("#tel_escuela").focus().after("<span class='error'>Ingrese solo números</span>");
             return false;
-					}else if( $("#sitio_escuela").val() == "" || !sitioweb.test($("#sitio_escuela").val()) ){
+          }else {
+            $(".error").fadeOut();
+          }
+				 if( $("#sitio_escuela").val() != "" && !sitioweb.test($("#sitio_escuela").val())){
 							$("#sitio_escuela").focus().after("<span class='error'>Ingrese formato de dirección web correcto( ejemplo: www.mipagina.com )</span>");
 							return false;
+        }else {
+          $(".error").fadeOut();
         }
     });
     //$("#nombref_escuela").keydown(function(){
@@ -26,19 +31,19 @@ $(document).ready(function (e) {
         //}
   //  });
   $("#tel_escuela").keyup(function(){
-      if( $(this).val() !== "" && tel.test($(this).val() )){
+      if( $(this).val() != "" && (tel.test($(this).val() ))){
 
           $(".error").fadeOut();
-          return false;
+          return true;
 
       }
 
   });
     $("#sitio_escuela").keyup(function(){
-        if( $(this).val() != "" && sitioweb.test($(this).val() )){ //
+        if( $(this).val() != "" && (sitioweb.test($(this).val() ))){
 
             $(".error").fadeOut();
-            return false;
+            return true;
         }
     });
 
