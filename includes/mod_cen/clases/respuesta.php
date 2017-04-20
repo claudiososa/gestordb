@@ -189,6 +189,27 @@ function __construct($respuestaId=NULL,$informeId=NULL,$referenteId=NULL, $conte
 
 	}
 
+
+	public function buscarMailRespuesta($informeId)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="SELECT DISTINCT personas.email
+         FROM respuestas
+         JOIN referentes 
+            ON ( referentes.referenteId = respuestas.referenteId )
+         JOIN personas 
+            ON personas.personaId = referentes.personaId
+         WHERE respuestas.informeId = ".$informeId;
+
+			
+
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
 	public function __get($var)
 	{
 		return $this->$var;

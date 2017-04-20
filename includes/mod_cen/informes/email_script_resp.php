@@ -9,14 +9,39 @@ include_once("includes/mod_cen/clases/escuela.php");
 			// ingresa cuando se agrego la respuesta
 
 
-            $informeId= $_POST["informeId"];
+            $informeId = $_POST["informeId"];
+            
+            $resp_mail = new respuesta();
+            
+            $resultad=$resp_mail->buscarMailRespuesta($informeId);
 
-             $variablephp = "index.php?mod=slat&men=informe&id=3&informeId=$informeId";
-            ?>    <script type="text/javascript">
+          /*  while ($fila = mysqli_fetch_object($resultad))
+               {
+               echo "<tr>";
+               echo "<td>".$fila->email."</td>";
+      
+
+
+               //va al final
+               echo "</tr>";
+               echo "\n";
+          
+                }*/
+            
+  
+        
+           
+            
+
+            $variablephp = "index.php?mod=slat&men=informe&id=3&informeId=$informeId";
+            ?>   
+
+            <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",8000);
+                setTimeout ("redireccion()",1000);
                     </script>
+           
 
             <?php
 
