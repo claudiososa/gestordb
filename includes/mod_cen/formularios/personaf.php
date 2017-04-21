@@ -34,7 +34,7 @@
 							<label class="control-label">Apellido</label>
 						</div>
 						<div class="col-md-3">
-							  <input class="form-control" type="text" name="apellido" value="<?php echo $persona->getApellido()?>" placeholder="Ingrese Apellido" required>
+							  <input class="form-control" type="text" name="apellido" id="apellido" value="<?php echo $persona->getApellido()?>" placeholder="Ingrese Apellido" required>
 						</div>
 					</div>
 
@@ -43,7 +43,7 @@
 							<label class="control-label">Nombre</label>
 						</div>
 						<div class="col-md-3">
-							  <input class="form-control" type="text" name="nombre" value="<?php echo $persona->getNombre()?>" placeholder="Ingrese Nombres" required>
+							  <input class="form-control" type="text" name="nombre" id="nombre" value="<?php echo $persona->getNombre()?>" placeholder="Ingrese Nombres" required>
 						</div>
 					</div>
 
@@ -58,7 +58,7 @@
 					<label class="control-label">DNI</label>
 				</div>
 				<div class="col-md-3">
-					  <input class="form-control" placeholder="Nº DNI sin puntos" size="30" title="Es un dato obligatorio - Ingresar sin puntos" type="text" name="dni" pattern="[0-9]{7,8}" value="<?php echo $persona->getDni() ?>" required>
+					  <input class="form-control" placeholder="Nº DNI sin puntos" size="30" title="Es un dato obligatorio - Ingresar sin puntos" type="text" name="dni" id="dni" pattern="[0-9]{7,8}" value="<?php echo $persona->getDni() ?>" required>
 				</div>
 			</div>
 
@@ -77,7 +77,7 @@
 					<label class="control-label">Teléfono Casa</label>
 				</div>
 				<div class="col-md-3">
-					<input class="form-control" placeholder="Nº Teléfono, solo números" size="30" title="Ingresar solo números" type="text" name="telefonoC" pattern="[0-9]{1,18}" value="<?php echo $persona->getTelefonoC() ?>">
+					<input class="form-control" placeholder="Nº Teléfono, solo números" size="30" title="Ingresar solo números" type="text" name="telefonoC" id="telefonoC" pattern="[0-9]{1,18}" value="<?php echo $persona->getTelefonoC() ?>">
 				</div>
 			</div>
 
@@ -86,7 +86,7 @@
 					<label class="control-label">Teléfono Celular</label>
 				</div>
 				<div class="col-md-3">
-					<input class="form-control" placeholder="Nº Teléfono, solo números" size="30" title="Ingresar solo números" type="text" name="telefonoM" pattern="[0-9]{1,18}" value="<?php echo $persona->getTelefonoM() ?>"/>
+					<input class="form-control" placeholder="Nº Teléfono, solo números" size="30" title="Ingresar solo números" type="text" name="telefonoM" id="telefonoM" pattern="[0-9]{1,18}" value="<?php echo $persona->getTelefonoM() ?>"/>
 				</div>
 			</div>
 
@@ -95,7 +95,7 @@
 					<label class="control-label">Correo electrónico</label>
 				</div>
 				<div class="col-md-3">
-					<input class="form-control" placeholder="Correo electrónico 1" title="Dato Obligatorio" size="30" type="email" name="email" value="<?php echo $persona->getEmail() ?>" required >
+					<input class="form-control" placeholder="Correo electrónico 1" title="Dato Obligatorio" size="30" type="email" name="email" id="correo1" value="<?php echo $persona->getEmail() ?>" required >
 				</div>
 			</div>
 
@@ -104,7 +104,7 @@
 					<label class="control-label">Correo electrónico 2</label>
 				</div>
 				<div class="col-md-3">
-					<input class="form-control" placeholder="Correo electrónico 2" size="30" type="email" name="email2" value="<?php echo $persona->getEmail2() ?>">
+					<input class="form-control" placeholder="Correo electrónico 2" size="30" type="email" name="email2" id="correo2" value="<?php echo $persona->getEmail2() ?>">
 				</div>
 			</div>
 
@@ -163,7 +163,7 @@
 					<label class="control-label">Código Postal</label>
 				</div>
 				<div class="col-md-3">
-					<input class="form-control" placeholder="Código postal" size="30" type="text" name="cpostal" value="<?php echo $persona->getCpostal()?>">
+					<input class="form-control" placeholder="Código postal" size="30" type="text" name="cpostal" id="cpostal" value="<?php echo $persona->getCpostal()?>">
 				</div>
 			</div>
 
