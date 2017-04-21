@@ -21,7 +21,7 @@ if(isset($_POST['save_report']))
     $guardar_respuesta=$respuesta->agregar();
 
 /////////////////////////////////////////////////////////////////
-    //  var_dump($_FILES);
+    var_dump($_POST);
       foreach ($_FILES['input-img'] as $key) {
         $cantidadElmentos=count($_FILES['input-img']['name']);
 

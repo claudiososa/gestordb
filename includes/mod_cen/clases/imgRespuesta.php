@@ -5,15 +5,15 @@ include_once("includes/mod_cen/clases/maestro.php");
 class ImgRespuesta
 {
 	private $imgRespuestaId;
- 	private $respuetaId;
+ 	private $respuestaId;
  	private $nombre;
  	private $formato;
 
 
-function __construct($imgRespuestaId=NULL,$respuetaId=NULL,$nombre=NULL, $formato=NULL)
+function __construct($imgRespuestaId=NULL,$respuestaId=NULL,$nombre=NULL, $formato=NULL)
 	{
 		$this->imgRespuestaId = $imgRespuestaId;
- 		$this->respuetaId = $respuetaId;
+ 		$this->respuestaId = $respuestaId;
  		$this->nombre =$nombre;
  		$this->formato = $formato;
 	}
@@ -24,8 +24,8 @@ function __construct($imgRespuestaId=NULL,$respuetaId=NULL,$nombre=NULL, $format
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO img_respuesta (imgRespuestaId,respuetaId,nombre,formato)
-		VALUES (NULL,'". $this->respuetaId."','". $this->nombre."','". $this->formato."');";
+		$sentencia="INSERT INTO img_respuesta (imgRespuestaId,respuestaId,nombre,formato)
+		VALUES (NULL,'". $this->respuestaId."','". $this->nombre."','". $this->formato."');";
     //echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
@@ -59,7 +59,7 @@ function __construct($imgRespuestaId=NULL,$respuetaId=NULL,$nombre=NULL, $format
 		$sentencia="SELECT * FROM img_respuesta WHERE imgRespuestaId=".$this->imgRespuestaId;
 		$resultado=$conexion->query($sentencia);
 		$elemento = mysqli_fetch_object($resultado);
-		$this->respuetaId = $elemento->respuetaId;
+		$this->respuestaId = $elemento->respuestaId;
  		$this->nombre =$elemento->nombre;
 		$this->formato = $elemento->formato;
 		return $this;
@@ -85,15 +85,15 @@ function __construct($imgRespuestaId=NULL,$respuetaId=NULL,$nombre=NULL, $format
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="SELECT * FROM img_respuesta";
-		if($this->respuetaId!=NULL || $this->nombre!=NULL
+		if($this->respuestaId!=NULL || $this->nombre!=NULL
 		|| $this->formato!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
 
-		if($this->respuetaId!=NULL)
+		if($this->respuestaId!=NULL)
 		{
-			$sentencia.=" respuetaId = $this->respuetaId && ";
+			$sentencia.=" respuestaId = $this->respuestaId && ";
 		}
 
 		if($this->nombre!=NULL)

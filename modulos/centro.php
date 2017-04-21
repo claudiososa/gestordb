@@ -105,7 +105,7 @@
 												break;
 									case 'ETJ':
 												$escuela=new Escuela($_GET["escuelaId"],$_SESSION['referenteId']);
-															break;															
+															break;
 									case 'ATT':
 												$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
 												break;
@@ -281,6 +281,22 @@
 							break;
 				}
 				break;
+				case "doc":
+					switch ($id) {
+					case 1:
+							include("includes/mod_cen/documentos/ett.php");
+							break;
+					case 2:
+						  include("includes/mod_cen/documentos/etj.php");
+							break;
+					case 3:
+								  include("includes/mod_cen/documentos/etj.php");
+									break;
+					case 4:
+									include("includes/mod_cen/documentos/etj.php");
+									break;
+					}
+					break;
 				case "informe":
 					switch ($id) {
 						case 1:
