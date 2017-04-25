@@ -98,7 +98,23 @@
           <span class="panel-title clickable"><h3 class="panel-title"><b>Documentos Administrativos</b></h3></span>
           </div>
 <!--contenido de categoria documentos administrativos-->
-              <div class="panel-body">Sin documentos</div>
+              <div class="panel-body">
+                <div class="panel panel-success">
+                <div class="panel-heading"><h3 class="panel-title"><a href="documentacion/administrativos/Acta-visita-modelo2017.docx" download="Acta-visita-modelo2017.docx"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><b>Acta de Visita 2017.</a></h3>
+                </div>
+
+           <div class="panel-body">Documento .docx de Acta de Visita modelo 2017.</div>
+                </div>
+
+                <div class="panel panel-success">
+                <div class="panel-heading"><h3 class="panel-title"><a href="documentacion/administrativos/Hoja-de-ruta2017.docx" download="Hoja-de-ruta2017.docx"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><b>Hoja de Ruta 2017.</a></h3>
+                </div>
+
+           <div class="panel-body">Documento .docx Hoja de Ruta.</div>
+                </div>
+
+
+              </div>
 			        </div>
 		</div>
 
