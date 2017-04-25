@@ -4,7 +4,7 @@
 
 ?>
 
- <form name="form" class="informef" action="index.php?mod=slat&men=informe&id=7" method="post">
+ <form name="form" enctype="multipart/form-data"  class="informef" action="index.php?mod=slat&men=informe&id=7" method="post">
  		<div class="form-group">
       <div class="col-md-12">
         <label class="control-label">Escuela</label>

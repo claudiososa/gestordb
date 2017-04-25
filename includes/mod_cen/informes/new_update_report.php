@@ -38,7 +38,7 @@ if(isset($_POST['save_report']))
 
         $guardar_informe=$informe->agregar(); // hasta aqui deberia haber guardado el informe nuevo
 
-      //  var_dump($_FILES);
+      
         foreach ($_FILES['input-img'] as $key) {
           $cantidadElmentos=count($_FILES['input-img']['name']);
 

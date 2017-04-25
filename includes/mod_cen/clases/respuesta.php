@@ -197,13 +197,13 @@ function __construct($respuestaId=NULL,$informeId=NULL,$referenteId=NULL, $conte
 
 		$sentencia="SELECT DISTINCT personas.email
          FROM respuestas
-         JOIN referentes 
+         JOIN referentes
             ON ( referentes.referenteId = respuestas.referenteId )
-         JOIN personas 
+         JOIN personas
             ON personas.personaId = referentes.personaId
          WHERE respuestas.informeId = ".$informeId;
 
-			
+
 
 		//echo $sentencia;
 		return $conexion->query($sentencia);

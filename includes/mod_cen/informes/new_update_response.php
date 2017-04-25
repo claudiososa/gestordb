@@ -21,7 +21,8 @@ if(isset($_POST['save_report']))
     $guardar_respuesta=$respuesta->agregar();
 
 /////////////////////////////////////////////////////////////////
-    var_dump($_POST);
+    //var_dump($_POST);
+    
       foreach ($_FILES['input-img'] as $key) {
         $cantidadElmentos=count($_FILES['input-img']['name']);
 
@@ -29,15 +30,15 @@ if(isset($_POST['save_report']))
           # code...
           $img1 = $_FILES['input-img']['tmp_name'][$i];
           $img1 = $_FILES['input-img']['name'][$i];
-
+        //  echo 'dato'.img1;
           $dir_subida = './img/respuestas/';
 
           if($_FILES['input-img']['type'][$i]=='image/jpeg'){
-            $nombreArchivo='doc_'.$guardar_informe.'_'.$i.'.jpg';
-            $nombreArchivoMediano='doc_'.$guardar_informe.'_'.$i.'m.jpg';
+            $nombreArchivo='doc_'.$guardar_respuesta.'_'.$i.'.jpg';
+            $nombreArchivoMediano='doc_'.$guardar_respuesta.'_'.$i.'m.jpg';
             $tipoArchivo='image/jpeg';
           } elseif($_FILES['input-img']['type'][$i]=='application/pdf') {
-            $nombreArchivo='doc_'.$guardar_informe.'_'.$i.'.pdf';
+            $nombreArchivo='doc_'.$guardar_respuesta.'_'.$i.'.pdf';
             $tipoArchivo='application/pdf';
           }
           //$fichero_subido = $dir_subida . basename($_FILES['input-img']['name'][0]);
@@ -51,7 +52,7 @@ if(isset($_POST['save_report']))
               $nuevoArchivo = $dir_subida.$nombreArchivoMediano;
               copy($fichero_subido,$nuevoArchivo);
             }
-            $imagen = new ImgRespuesta(null,$guardar_informe,$nombreArchivo,$tipoArchivo);
+            $imagen = new ImgRespuesta(null,$guardar_respuesta,$nombreArchivo,$tipoArchivo);
             $agregarImg = $imagen->agregar();
             echo "El fichero es válido y se subió con éxito.\n";
           }	 else {

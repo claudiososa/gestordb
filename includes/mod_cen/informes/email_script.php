@@ -203,19 +203,19 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
               $dato_referente =  new Referente($_SESSION["referenteId"]);
               $buscar_dato = $dato_referente->Persona($_SESSION["referenteId"]);
               $origen =  mysqli_fetch_object($buscar_dato);
-   
+
               $creadopor=$origen->nombre." ".$origen->apellido;
               //quien envia el mensaje - (email)
               $mail_propio=$origen->email;
 
               $header = "From: ". $origen->email; // datos de quien envia el mail
 
-            if ($referente_actual->tipo=="ATT") 
+            if ($referente_actual->tipo=="ATT")
             { //mandamos mail a los coordinadores PMI
 
                $para="mmonterosadir@gmail.com,maricel.eg31@gmail.com,noemiemercado@gmail.com";
 
-                      if($_SESSION["referenteId"] != $id_referente_escuela) 
+                      if($_SESSION["referenteId"] != $id_referente_escuela)
                       // pregunta si el informe creado es de otro referente
                                   {
                                         $para=$para.",".$ref_esc_mail;// mail del referentePmi de la escuela tambien
@@ -263,4 +263,3 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
                 function redireccion(){window.location=variablejs;}
                 setTimeout ("redireccion()",0);
                     </script>
-        

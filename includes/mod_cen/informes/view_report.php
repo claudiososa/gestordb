@@ -10,6 +10,7 @@ include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
 include_once("includes/mod_cen/clases/img.php");
+include_once("includes/mod_cen/clases/imgRespuesta.php");
 
 
 
@@ -102,6 +103,9 @@ while ($fila = mysqli_fetch_object($buscar_respuesta)) {
   $referente= new Referente($fila->referenteId);
   $buscar_referente = $referente->Persona($fila->referenteId);
   $dato_referente = mysqli_fetch_object($buscar_referente);
+  $dato_img = new imgRespuesta(null,$fila->respuestaId);
+  $buscar_img = $dato_img->buscar();
+
 ?>
   <div class="panel panel-info">
     <div class="panel-heading">
@@ -109,6 +113,14 @@ while ($fila = mysqli_fetch_object($buscar_respuesta)) {
     </div>
     <div class="panel-body">
       <?php echo $fila->contenido ?>
+    </div>
+    <div class="panel-footer">
+    Archivos Adjuntos <br>
+    <?php
+    while ($fila = mysqli_fetch_object($buscar_img)) {
+      echo "<a href='img/respuestas/".$fila->nombre."'>".$fila->nombre."</a><br>";
+    }
+    ?>
     </div>
   </div>
 
