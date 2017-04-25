@@ -290,10 +290,10 @@
 						  include("includes/mod_cen/documentos/etj.php");
 							break;
 					case 3:
-								  include("includes/mod_cen/documentos/etj.php");
+								  include("includes/mod_cen/documentos/att.php");
 									break;
 					case 4:
-									include("includes/mod_cen/documentos/etj.php");
+									include("includes/mod_cen/documentos/coordinador-pmi.php");
 									break;
 					}
 					break;
