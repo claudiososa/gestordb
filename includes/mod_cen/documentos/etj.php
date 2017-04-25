@@ -74,8 +74,8 @@
                    <div class="panel-heading"><h3 class="panel-title"><a href="documentacion/ett/servidores/Tutorial-reparacion-fallas-servicios-tdserver.pdf"download="Tutorial-reparacion-fallas-servicios-tdserver.pdf"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><b>Fallas y Servicios de TDSERVER</a></h3>
                    </div>
 
-                   <div class="panel-body">Tutorial .PDF de reparación de Fallas y Servicios en TDSERVER:<p></p><p><u><b><em>No se a podido encontrar a << services >>.</em> </p><p><em> << 172.16.0.2 no está respondiendo.>></em></b></u></p></div>
-                        </div>
+              <div class="panel-body">Tutorial .PDF de reparación de Fallas y Servicios en TDSERVER:<p></p><p><u><b><em>No se a podido encontrar a << services >>.</em> </p><p><em> << 172.16.0.2 no está respondiendo.>></em></b></u></p></div>
+                   </div>
 
                    <div class="panel panel-success">
                    <div class="panel-heading"><h3 class="panel-title"><a href="documentacion/ett/servidores/Tutorial-reparacion-inicio-servidor-debian.pdf" download="Tutorial-reparacion-inicio-servidor-debian.pdf"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><b>Reparación de Inicio de Servidor</a></h3>
@@ -98,17 +98,7 @@
           <span class="panel-title clickable"><h3 class="panel-title"><b>Documentos Administrativos</b></h3></span>
           </div>
 <!--contenido de categoria documentos administrativos-->
-              <div class="panel-body">
-<!--contenido hoja de ruta para enlazar
-
-              <div class="panel panel-success">
-              <div class="panel-heading"><h3 class="panel-title"><a href="" download="Hoja-de-ruta."><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><b>Hoja de Ruta.</a></h3>
-              </div>
-
-         <div class="panel-body">Documento Hoja de Ruta.</div>
-              </div>
--->
- Sin Documentos.
+              <div class="panel-body">Sin documentos</div>
 			        </div>
 		</div>
 
