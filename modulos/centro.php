@@ -347,6 +347,9 @@
 					     case 15:
 					        include("includes/mod_cen/informes/delete_subtipo_informe.php");
 					 		break;
+					 	case 16:
+					    	include("includes/mod_cen/informes/nuevaCategoriaDoc.php");
+					 		break;
 
 
 					}
