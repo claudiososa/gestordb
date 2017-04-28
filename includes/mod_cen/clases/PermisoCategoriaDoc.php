@@ -36,8 +36,7 @@ function __construct($categoriaPermisoId=NULL,$categoriaDocId=NULL,$tipoReferent
 		}
 	}
 	
-	// aqui cortamos y debemos pegar de nuevo metodos editar y borrar
-
+	
 public function editar()
 	{
 	
@@ -55,7 +54,6 @@ public function editar()
 		}
 	}
 
-// buscar nuevo
 
 public function buscar($limit=NULL)
 	{

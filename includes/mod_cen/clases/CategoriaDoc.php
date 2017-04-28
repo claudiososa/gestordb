@@ -27,37 +27,26 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 
 		$sentencia="INSERT INTO categoria_doc(categoriaDocId,nombreCategoria,descripcionCategoria)
 		VALUES (NULL,'". $this->nombreCategoria."','". $this->descripcionCategoria."');";
-    //echo $sentencia;
-
+           
 		if ($conexion->query($sentencia)) {
-			return 1;
-		}else
-		{
-			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
-		}
-
-       /*
-		if ($conexion->query($sentencia)) {
-			$orden="SELECT MAX(tipoInformeId) AS id FROM tipoinformes";
+			$orden="SELECT MAX(categoriaDocId) AS id FROM categoria_doc";
 
 			$datoFila = mysqli_fetch_object($conexion->query($orden));
 			return $datoFila->id;
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
-		}*/
+		}
 	}
 	public function editar()
 	{
-	//	$fecha_a=date("Y-m-d H:i:s");
+	
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		$sentencia="UPDATE categoria_doc SET nombreCategoria = '$this->nombreCategoria',descripcionCategoria = '$this->descripcionCategoria'
 		 WHERE categoriaDocId = '$this->categoriaDocId'";
 
-			//	$sentencia="UPDATE informes SET prioridad = '$this->prioridad',tipo = '$this->tipo'
-				//,titulo = '$this->titulo', contenido = '$this->contenido', WHERE informeId = '$this->informeId'";
-		//echo $sentencia;
+			
 		if ($conexion->query($sentencia)) {
 			return 1;
 		}else
