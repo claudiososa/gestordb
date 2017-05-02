@@ -295,6 +295,9 @@
 					case 4:
 									include("includes/mod_cen/documentos/coordinador-pmi.php");
 									break;
+					case 5:
+									include("includes/mod_cen/documentos/coordinador-conectar.php");
+									break;
 					}
 					break;
 				case "informe":

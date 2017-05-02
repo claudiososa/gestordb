@@ -1,0 +1,13 @@
+.glyphicon-download-alt:before {
+
+    color: darkolivegreen;}
+.btn{
+  background-color: #dff0d8;
+}
+a{
+color: darkolivegreen;}
+}
+a:link { color: darkolivegreen; text-decoration: none }
+a:active { color: darkolivegreen; text-decoration: none }
+a:visited { color: darkolivegreen; text-decoration: none }
+a:hover { color: darkolivegreen; text-decoration: underline }
