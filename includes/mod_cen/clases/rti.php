@@ -43,11 +43,31 @@ class Rti
 		 	$this->capacitacionPed = $capacitacionPed;
 	}
 
-	public static function existeRtixinstitucion($escuelaId)//agregada por arredes
+	public static function existeRtixinstitucion($escuelaId,$rtiId=NULL,$personaId=NULL)//agregada por arredes
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		$sentencia="SELECT rti.rtiId,escuelaId,rti.personaId,personas.dni,personas.apellido,personas.nombre,personas.telefonoC,personas.telefonoM,personas.email,rtixescuela.turno,rtixescuela.estado,personas.cpostal FROM (rtixescuela left join rti on rtixescuela.rtiId=rti.rtiId) left join personas on rti.personaId=personas.personaId where rtixescuela.escuelaId=".$escuelaId." order by personas.apellido,personas.nombre";
+
+		if(!isset($rtiId))
+		{
+			$sentencia="SELECT 	rti.rtiId,escuelaId,rti.personaId,personas.dni,personas.apellido,personas.nombre,personas.telefonoC,personas.telefonoM,personas.email,rtixescuela.turno,rtixescuela.estado,personas.cpostal
+			FROM (rtixescuela
+			LEFT JOIN rti
+			ON rtixescuela.rtiId=rti.rtiId)
+			LEFT JOIN personas
+			ON rti.personaId=personas.personaId
+			WHERE rtixescuela.escuelaId=".$escuelaId." order by personas.apellido,personas.nombre";
+		}else{
+			$sentencia="SELECT 	rti.rtiId,escuelaId,rti.personaId,personas.dni,personas.apellido,personas.nombre,personas.telefonoC,personas.telefonoM,personas.email,rtixescuela.turno,rtixescuela.estado,personas.cpostal
+			FROM rtixescuela
+			JOIN rti
+			ON (rti.rtiId=".$rtiId.")
+			JOIN personas
+			ON (personas.personaId=rti.personaId)
+			WHERE rtixescuela.rtiId=".$rtiId." order by personas.apellido,personas.nombre";
+		}
+
+
 		return $conexion->query($sentencia);
 
 	}

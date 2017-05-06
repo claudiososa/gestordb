@@ -181,7 +181,7 @@
 								include("includes/mod_cen/rti_ver_escuela.php");
 								break;
 						case 17:
-									include("includes/mod_cen/rti/rti_ver.php");
+									include("includes/mod_cen/rti/rti_escuela.php");
 									break;
 						case 18:
 									include("includes/mod_cen/escuelas/escuela_ver_etj.php");
@@ -251,6 +251,9 @@
 					case 11:
 						include("includes/mod_cen/rti_agregado.php");
 						break;
+					case 12:
+							include("includes/mod_cen/rti/editarRti.php");
+							break;
 				}
 				break;
 			case "user":

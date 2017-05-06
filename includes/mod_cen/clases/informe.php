@@ -73,7 +73,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		}
 	}
 
-	
+
 	public function editar()
 	{
 	//	$fecha_a=date("Y-m-d H:i:s");
@@ -191,10 +191,25 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		return $conexion->query($sentencia);
 	}
 
-	public function buscar($limit=NULL)
+	public function buscar($limit=NULL,$tiporeferente=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
+		if($tiporeferente<>NULL){
+
+			$sentencia="SELECT	 *
+			FROM
+				referentes
+			JOIN escuelas
+			ON (escuelas.referenteIdPmi=referentes.referenteId)
+			JOIN informes
+			ON (informes.referenteId=escuelas.referenteIdPmi)
+			WHERE
+				referentes.tipo='".$tiporeferente."'";
+
+			$sentencia.="  ORDER BY informes.fechaCarga DESC";
+
+		}else{
 	  $sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
 								,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
 								informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
@@ -274,6 +289,9 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		}
 
 		$sentencia.="  ORDER BY informes.fechaCarga DESC";
+
+		}
+
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

@@ -285,7 +285,7 @@ while ($fila = mysqli_fetch_object($resultado))
 	if($rti>0)//Si existe rti para la escuela
 	{
 		//index.php?mod=slat&men=escuelas&id=17&escuelaId=0177
-		echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=escuelas&id=17&escuelaId=".$fila->escuelaId."'>".$rti."</a>";
+		echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=referentes&id=8&escuelaId=".$fila->escuelaId."'>".$rti."</a>";
 	}
 	else
 	{

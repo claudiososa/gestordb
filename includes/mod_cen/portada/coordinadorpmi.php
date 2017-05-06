@@ -7,7 +7,7 @@ require_once("includes/mod_cen/clases/leido.php");
 // create object informe and search of last 20 informe
 $informes= new informe();
 
-$b_informe = $informes->buscar(20);
+$b_informe = $informes->buscar(15,"ATT");
 
 ////////////////////////////////////////////////
 
@@ -108,7 +108,7 @@ if(mysqli_num_rows($b_informe)>0){
 	?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h4>Ultimos informes creados</h4>
+			<h4>Ultimos informes creados por Equipo PMI</h4>
 		</div>
 		<div class="panel-body">
 			<?php

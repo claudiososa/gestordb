@@ -29,6 +29,12 @@
 			case "ATT":
 					include("includes/mod_men/att.php");
 					break;
+			case "CoordinadorFaciilitador":
+							include("includes/mod_men/coordinadorPmi.php");
+							break;
+			case "Facilitador":
+							include("includes/mod_men/facilitador.php");
+							break;
 			}
 		}
 			else {
