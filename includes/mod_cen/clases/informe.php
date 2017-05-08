@@ -197,17 +197,19 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		$conexion=$nuevaConexion->getConexion();
 		if($tiporeferente<>NULL){
 
-			$sentencia="SELECT	 *
-			FROM
-				referentes
-			JOIN escuelas
-			ON (escuelas.referenteIdPmi=referentes.referenteId)
-			JOIN informes
-			ON (informes.referenteId=escuelas.referenteIdPmi)
-			WHERE
-				referentes.tipo='".$tiporeferente."'";
+			$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+									,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
+									informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
+									FROM informes
+									JOIN escuelas
+									ON (informes.escuelaId=escuelas.escuelaId)
+									JOIN referentes
+									ON referentes.referenteId=informes.referenteId
+									JOIN personas
+									ON personas.personaId=referentes.personaId
+									WHERE referentes.tipo='ATT'";
 
-			$sentencia.="  ORDER BY informes.fechaCarga DESC";
+			//$sentencia.="  ORDER BY informeId DESC";
 
 		}else{
 	  $sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
@@ -288,10 +290,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 		}
 
-		$sentencia.="  ORDER BY informes.fechaCarga DESC";
-
 		}
-
+		$sentencia.="  ORDER BY informes.informeId DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

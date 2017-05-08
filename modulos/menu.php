@@ -35,6 +35,9 @@
 			case "Facilitador":
 							include("includes/mod_men/facilitador.php");
 							break;
+			case "Relevamiento":
+									include("includes/mod_men/relevamiento.php");
+									break;
 			}
 		}
 			else {

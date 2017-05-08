@@ -186,6 +186,12 @@
 						case 18:
 									include("includes/mod_cen/escuelas/escuela_ver_etj.php");
 										break;
+						case 19:
+									include("includes/mod_cen/escuelas/buscarRelevamiento.php");
+								  break;
+						case 20:
+									include("includes/mod_cen/escuelas/relevElectricoNuevo.php");
+								  break;
 				}
 				break;
 			 case "encuentros":
