@@ -11,6 +11,7 @@ class RelevamientoElectrico
  	private $matricula;
  	private $energia;
 	private $tipoInstalacion;
+	private $comoFunciona;
 	private $cantidadAulas;
  	private $cantidadPcInstaladas;
  	private $heladera;
@@ -28,6 +29,7 @@ class RelevamientoElectrico
 											$matricula=NULL,
 											$energia=NULL,
 											$tipoInstalacion=NULL,
+											$comoFunciona=NULL,
 											$cantidadAulas=NULL,
 											$cantidadPcInstaladas=NULL,
 											$heladera=NULL,
@@ -46,6 +48,7 @@ class RelevamientoElectrico
 		 	$this->matricula =$matricula;
 		 	$this->energia = $energia;
 		 	$this->tipoInstalacion = $tipoInstalacion;
+			$this->comoFunciona = $comoFunciona;
 		 	$this->cantidadAulas = $cantidadAulas;
 		 	$this->cantidadPcInstaladas = $cantidadPcInstaladas;
 		 	$this->heladera = $heladera;
@@ -62,11 +65,11 @@ class RelevamientoElectrico
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO relevamientoElectrico (escuelaId,otroCue,internado,totalCargos,matricula,energia,tipoInstalacion,cantidadAulas,cantidadPcInstaladas,heladera,otros,suficienteEnergia,calefon,necesitaCalefonSolar,necesitaBombeoAgua,comentario)
-		VALUES (NULL,'". $this->otroCue."','". $this->internado."','". $this->totalCargos."','".$this->matricula."','". $this->energia."','". $this->tipoInstalacion."','". $this->cantidadAulas."','". $this->cantidadPcInstaladas."','".$this->heladera."','".$this->otros."','".$this->suficienteEnergia."','".$this->calefon."','".$this->necesitaCalefonSolar."','".$this->necesitaBombeoAgua."','".$this->comentario."');";
+		$sentencia="INSERT INTO relevamientoElectrico (escuelaId,otroCue,internado,totalCargos,matricula,energia,tipoInstalacion,comoFunciona,cantidadAulas,cantidadPcInstaladas,heladera,otros,suficienteEnergia,calefon,necesitaCalefonSolar,necesitaBombeoAgua,comentario)
+		VALUES ($this->escuelaId,'". $this->otroCue."','". $this->internado."','". $this->totalCargos."','".$this->matricula."','". $this->energia."','". $this->tipoInstalacion."','". $this->comoFunciona."','". $this->cantidadAulas."','". $this->cantidadPcInstaladas."','".$this->heladera."','".$this->otros."','".$this->suficienteEnergia."','".$this->calefon."','".$this->necesitaCalefonSolar."','".$this->necesitaBombeoAgua."','".$this->comentario."');";
 
 		if ($conexion->query($sentencia)) {
-			header("Location:index.php?id=1");
+			return 'success';
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
@@ -80,10 +83,10 @@ class RelevamientoElectrico
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="UPDATE relevamientoElectrico SET otroCue ='$this->otroCue',internado = '$this->internado', totalCargos = '$this->totalCargos', matricula = '$this->matricula',energia = '$this->energia', tipoInstalacion = '$this->tipoInstalacion', cantidadAulas = '$this->cantidadAulas', cantidadPcInstalados = '$this->cantidadPcInstaladas', heladera = '$this->heladera' , suficienteEnergia = '$this->suficienteEnergia', calefon = '$this->calefon', necesitaCalefonSolar = '$this->necesitaCalefonSolar', necesitaBombeoAgua = '$this->necesitaBombeoAgua', comentario = '$this->comentario' WHERE escuelaId = '$this->escuelaId'";
+		$sentencia="UPDATE relevamientoElectrico SET otroCue ='$this->otroCue',internado = '$this->internado', totalCargos = '$this->totalCargos', matricula = '$this->matricula',energia = '$this->energia', tipoInstalacion = '$this->tipoInstalacion',comoFunciona = '$this->comoFunciona', cantidadAulas = '$this->cantidadAulas', cantidadPcInstaladas = '$this->cantidadPcInstaladas', heladera = '$this->heladera', otros = '$this->otros' , suficienteEnergia = '$this->suficienteEnergia', calefon = '$this->calefon', necesitaCalefonSolar = '$this->necesitaCalefonSolar', necesitaBombeoAgua = '$this->necesitaBombeoAgua', comentario = '$this->comentario' WHERE escuelaId = '$this->escuelaId'";
 
 		if ($conexion->query($sentencia)) {
-			return 1;
+			return 'success';
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
@@ -113,7 +116,7 @@ class RelevamientoElectrico
 		$sentencia="SELECT * FROM relevamientoElectrico";
 		$carga=0;
 		$cargalocali=0;
-		if($this->otroCue!=NULL || $this->internado!=NULL
+		if($this->otroCue!=NULL || $this->internado!=NULL || $this->escuelaId!=NULL
 			 || $this->totalCargos!=NULL || $this->matricula!=NULL
 			 || $this->energia!=NULL || $this->tipoInstalacion!=NULL
 			 || $this->cantidadAulas!=NULL || $this->cantidadPcInstaladas!=NULL
@@ -177,7 +180,7 @@ class RelevamientoElectrico
 
 		$sentencia.="  ORDER BY escuelaId";
 
-	echo $sentencia."<br>";
+	//echo $sentencia."<br>";
 		return $conexion->query($sentencia);
 
 	}

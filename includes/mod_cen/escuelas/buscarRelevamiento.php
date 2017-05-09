@@ -2,11 +2,12 @@
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
 include_once("includes/mod_cen/clases/localidades.php");
-include_once("includes/mod_cen/clases/persona.php");
-include_once("includes/mod_cen/clases/referente.php");
-include_once("includes/mod_cen/clases/rti.php");
-include_once("includes/mod_cen/clases/informe.php");
-include_once("includes/mod_cen/clases/director.php");
+include_once("includes/mod_cen/clases/RelevamientoElectrico.php");
+//include_once("includes/mod_cen/clases/persona.php");
+//include_once("includes/mod_cen/clases/referente.php");
+//include_once("includes/mod_cen/clases/rti.php");
+//include_once("includes/mod_cen/clases/informe.php");
+//include_once("includes/mod_cen/clases/director.php");
 
 /**
  * Inclusión de formulario para la busqueda de Escuelas
@@ -42,6 +43,11 @@ if(($_POST))
                 <tbody>';
         while ($fila = mysqli_fetch_object($resultado2))
       	{
+					$relevamiento = new RelevamientoElectrico($fila->escuelaId);
+					$buscarRelevamiento = $relevamiento->buscar();
+					$datoRelevamiento = mysqli_fetch_object($buscarRelevamiento);
+					//var_dump($datoRelevamiento);
+					/*
       		$crearreferente=new Referente($fila->referenteId);
       		$traerreferente= $crearreferente->getContacto();
       		$r_personaId=$traerreferente->getPersonaId();
@@ -50,7 +56,7 @@ if(($_POST))
       		$traerPersona=$crearPersona->getContacto();
       		$nombrePersona= $traerPersona->getNombre();
       		$apellidoPersona= $traerPersona->getApellido();
-      		$persona=$traerPersona->getPersonaId();
+      		$persona=$traerPersona->getPersonaId();*/
           echo '<tr>';
     			echo "<td>".$fila->escuelaId."</td>";
     			echo "<td>".$fila->cue."</td>";
@@ -61,7 +67,13 @@ if(($_POST))
 		  		$busca_loc= $locali->buscar();
 		  		$fila1=mysqli_fetch_object($busca_loc);
 		  		echo "<td>".$fila1->nombre."</td>";
-		  		echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=20&escuelaId=".$fila->escuelaId."'>Registrar Relevamiento</a>"."</td>";
+					if($datoRelevamiento<>NULL)
+					{
+						echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=20&edit&escuelaId=".$fila->escuelaId."'>Modificar Relevamiento</a>"."</td>";
+					}else{
+						echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=20&escuelaId=".$fila->escuelaId."'>Registrar Relevamiento</a>"."</td>";
+					}
+
  	  		  echo "</tr>";
   		  	echo "\n";
       	}

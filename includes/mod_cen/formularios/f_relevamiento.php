@@ -124,7 +124,7 @@
           <div class="col-md-12">
          <?php
              $internado=Maestro::estructura('internado','relevamientoElectrico');
-             var_dump($datoRelevamiento);
+             //var_dump($datoRelevamiento);
              ?>
 
              <select  class="form-control" name="internado">
@@ -150,7 +150,7 @@
 						<label class="control-label"><br>Cantidad Total de Personal (Directivos,Docentes, Auxiliares y otros Cargos:<label>
 					</div>
 					<div class="col-md-12">
-              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="totalCargos" name="totalCargos"  value="<?php if($datoRelevamiento<>NULL) echo $datosRelevamiento->totalCargos ?>" />
+              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="totalCargos" name="totalCargos"  value="<?php if($datoRelevamiento<>NULL)	echo $datoRelevamiento->totalCargos ?>" />
 					</div>
 				</div>
 
@@ -159,7 +159,7 @@
             <label class="control-label"><br>Matricula de Alumnos:<label>
           </div>
           <div class="col-md-12">
-              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="matricula" name="matricula"  value="<?php if($datoRelevamiento<>NULL) echo $datosRelevamiento->matricula ?>" />
+              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="matricula" name="matricula"  value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->matricula ?>" />
           </div>
         </div>
 
@@ -246,7 +246,7 @@
             <label class="control-label"><br>Cantidad de Aulas:<label>
           </div>
           <div class="col-md-12">
-              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="cantidadAulas" name="cantidadAulas"  value="<?php if($datoRelevamiento<>NULL) echo $datosRelevamiento->cantidadAulas ?>" />
+              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="cantidadAulas" name="cantidadAulas"  value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->cantidadAulas ?>" />
           </div>
         </div>
 
@@ -255,7 +255,7 @@
             <label class="control-label"><br>Cantidad de Computadoras Instaladas:<label>
           </div>
           <div class="col-md-12">
-              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="cantidadPcInstaladas" name="cantidadPcInstaladas"  value="<?php if($datoRelevamiento<>NULL) echo $datosRelevamiento->cantidadPcInstaladas ?>" />
+              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="cantidadPcInstaladas" name="cantidadPcInstaladas"  value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->cantidadPcInstaladas ?>" />
           </div>
         </div>
 
@@ -290,7 +290,7 @@
             <label class="control-label"><br>Indicar si tiene otros equipos eléctricos instalados:<label>
               </div>
           <div class="col-md-12">
-						<?php $turnos=str_split($datos->getTurnos()); ?>
+						<?php //$turnos=str_split($datos->getTurnos()); ?>
 
 
             <?php
@@ -298,14 +298,17 @@
 						{
 							$otros=str_split($datoRelevamiento->otros);
 						}else{
-							$otros=array("","","","","");
+							$otros=str_split('nnnnn');
+							//$otros=array("","","","","");
 						}
+						//var_dump($otros);
 						?>
+
             <label class="checkbox-inline">
               <input type="checkbox" name="televisor" value="televisor"
               <?php
               if($datoRelevamiento<>NULL){
-                if($otros[0]=='televisor') echo 'checked';
+                if($otros[0]=='s') echo 'checked';
               }
               ?>
               >Televisor
@@ -314,15 +317,15 @@
               <input type="checkbox" name="cañon" value="cañon"
               <?php
               if($datoRelevamiento<>NULL){
-                if($otros[1]=='cañon') echo 'checked';
+                if($otros[1]=='s') echo 'checked';
               }
               ?> >Cañon
             </label>
             <label class="checkbox-inline">
-              <input type="checkbox" name="reproductor CD/DVD" value="reproductor CD/DVD"
+              <input type="checkbox" name="reproductor" value="reproductor CD/DVD"
               <?php
               if($datoRelevamiento<>NULL){
-                if($otros[2]=='reproductor CD/DVD') echo 'checked';
+                if($otros[2]=='s') echo 'checked';
               }
                 ?> >Reproductor CD/DVD
             </label><br>
@@ -330,7 +333,7 @@
               <input type="checkbox" name="impresora" value="impresora"
               <?php
               if($datoRelevamiento<>NULL){
-                if($otros[3]=='impresora') echo 'checked';
+                if($otros[3]=='s') echo 'checked';
               }
               ?> >Impresora
             </label>
@@ -338,11 +341,22 @@
               <input type="checkbox" name="otro" value="otro"
               <?php
               if($datoRelevamiento<>NULL){
-                if($otros[4]=='otro') echo 'checked';
+                if($otros[4]=='s') echo 'checked';
               }
                 ?>
                  >Otro
             </label>
+
+						<input hidden type="text" name="otrosactual" value="<?php
+						if($datoRelevamiento<>NULL)
+						{
+							echo $datoRelevamiento->otros;
+						}else{
+							echo 'xxxxx';
+							//$otros=array("","","","","");
+						}
+						 //echo $datoRelevamiento->otros
+						 ?>" readonly>
               </div>
         </div>
 
@@ -455,7 +469,7 @@
             <label class="control-label"><br>Comentario:<label>
           </div>
           <div class="col-md-12">
-              <input class="form-control" placeholder="ingrese comentario" title="Ingrese comentario" type="textarea" rows="10" cols="40" id="comentario" name="comentario"  value="<?php if($datoRelevamiento<>NULL) echo $datosRelevamiento->comentario ?>" />
+              <input class="form-control" placeholder="ingrese comentario" title="Ingrese comentario" type="textarea" rows="10" cols="40" id="comentario" name="comentario"  value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->comentario ?>" />
           </div>
         </div>
 

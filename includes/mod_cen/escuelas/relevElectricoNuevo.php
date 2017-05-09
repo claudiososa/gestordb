@@ -2,42 +2,59 @@
     include_once('includes/mod_cen/clases/escuela.php');
 		include_once('includes/mod_cen/clases/RelevamientoElectrico.php');
     if($_POST){
-      var_dump($_POST);
-      $otrosactual=str_split($_POST['otros']);
+      //var_dump($_POST);
+      $otrosactual=str_split($_POST['otrosactual']);
 
-
-      if(isset($_POST['Televisor'])) {
-          $otros[0]="Televisor";
+      if(isset($_POST['televisor'])) {
+          $otros[0]="s";
         }else {
-          $otros[0]="";}
+          $otros[0]="n";}
 
-      if(isset($_POST['Cañon'])) {
-          $otros[1]="Cañon";
+      if(isset($_POST['cañon'])) {
+          $otros[1]="s";
         }else {
-          $otros[1]="";}
+          $otros[1]="n";}
 
-      if(isset($_POST['Reproductor Cd/DVD'])) {
-          $otros[2]="Reproductor Cd/DVD";
+      if(isset($_POST['reproductor'])) {
+          $otros[2]="s";
         }else {
-          $otros[2]="";}
+          $otros[2]="n";}
 
-      if(isset($_POST['Impresora'])) {
-          $otros[3]="Impresora";
+      if(isset($_POST['impresora'])) {
+          $otros[3]="s";
         }else {
-          $otros[3]="";}
+          $otros[3]="n";}
 
-      if(isset($_POST['Otro'])) {
-          $otros[4]="Otro";
+      if(isset($_POST['otro'])) {
+          $otros[4]="s";
         }else {
-          $otros[4]="";}
+          $otros[4]="n";}
 
-
+      //var_dump($otros);
       foreach ($otrosactual AS $clave=>$valor){
         $otrosactual[$clave]=$otros[$clave];
       }
 
       $otros= implode('',$otros);
-      echo 'otros: '.$otros;
+      //echo '<br><br>Como funciona: '.$otros;
+
+     if(isset($_GET['edit'])){
+       $relevamiento = new RelevamientoElectrico($_POST['escuelaId'],$_POST['otroCue'],$_POST['internado'],$_POST['totalCargos'],
+                                                 $_POST['matricula'],$_POST['energia'],$_POST['tipoInstalacion'],$_POST['comoFunciona'],
+                                                 $_POST['cantidadAulas'],$_POST['cantidadPcInstaladas'],$_POST['heladera'],
+                                                 $otros,$_POST['suficienteEnergia'],$_POST['calefon'],$_POST['necesitaCalefonSolar'],
+                                                 $_POST['necesitaBombeoAgua'],$_POST['comentario']);
+       $agregar = $relevamiento->editar();
+     }else{
+       $relevamiento = new RelevamientoElectrico($_POST['escuelaId'],$_POST['otroCue'],$_POST['internado'],$_POST['totalCargos'],
+                                                 $_POST['matricula'],$_POST['energia'],$_POST['tipoInstalacion'],$_POST['comoFunciona'],
+                                                 $_POST['cantidadAulas'],$_POST['cantidadPcInstaladas'],$_POST['heladera'],
+                                                 $otros,$_POST['suficienteEnergia'],$_POST['calefon'],$_POST['necesitaCalefonSolar'],
+                                                 $_POST['necesitaBombeoAgua'],$_POST['comentario']);
+       $agregar = $relevamiento->agregar();
+     }
+
+      //echo '<br><br>'.$agregar;
     }
 
     /**
@@ -49,14 +66,14 @@
 		$datos = $escuela->getContacto();
 
     /**
-     * Crear un objetivo tipo Relevamiento con el id obtenido de url, aplicando metodo de busqueda
+     * Crear un objeto tipo Relevamiento con el id obtenido de url, aplicando metodo de busqueda
      * @var Escuela
      */
      $escuelaId=$_GET['escuelaId'];
      $relevamiento= new RelevamientoElectrico($escuelaId);
      $buscarRelevamiento = $relevamiento->buscar();
      $datoRelevamiento = mysqli_fetch_object($buscarRelevamiento);
-     var_dump($datoRelevamiento);
+     //var_dump($datoRelevamiento);
 
     $nuevalocalidad = new Localidad($datos->getLocalidadId());
     $localidad = $nuevalocalidad->getLocalidad();
