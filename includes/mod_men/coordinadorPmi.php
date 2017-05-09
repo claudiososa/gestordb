@@ -23,6 +23,7 @@
                 <li><a href="index.php?mod=slat&men=referentes&id=1">Referentes</a></li>
                 <li ><a href="index.php?mod=slat&men=escuelas&id=1">Escuelas</a></li>
                 <li ><a href="index.php?mod=slat&men=referentes&id=10">RTI</a></li>
+                <li ><a href="index.php?mod=slat&men=user&id=9">Todos los ATT</a></li>
           </ul>
         </li>
 

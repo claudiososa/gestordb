@@ -13,9 +13,15 @@ $consulta= $referente->DatoPersona();
 $datoref=mysqli_fetch_object($consulta);
 
 
+if($_SESSION['tipo']=='ETJ' || $_SESSION['tipo']=='Coordinador' ){
+	$escuela= new Escuela(null,$referenteId);
+	$resultado = $escuela->Cargo();
+}elseif($_SESSION['tipo']=='CoordinadorPmi'){
+	$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
+	$resultado = $escuela->Cargo('ATT');
+}
 
-$escuela= new Escuela(null,$referenteId);
-$resultado = $escuela->Cargo();
+
 
 	echo '<div class="table-responsive">';
 	echo '<div class="container">';

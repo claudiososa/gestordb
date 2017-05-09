@@ -288,6 +288,9 @@
 				case 8:
 							include("includes/mod_cen/referentes/referente_etj_todos.php");
 							break;
+				case 9:
+							include("includes/mod_cen/referentes/referente_att_todos.php");
+							break;
 				}
 				break;
 				case "doc":

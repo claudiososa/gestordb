@@ -148,7 +148,7 @@ class Referente
 
 		if($this->personaId!=NULL)
 		{
-			$sentencia.=" personaId LIKE '%$this->personaId%' && ";
+			$sentencia.=" referentes.personaId=$this->personaId && ";
 		}
 
 		if($this->tipo!=NULL)

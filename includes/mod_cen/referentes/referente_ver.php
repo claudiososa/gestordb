@@ -60,7 +60,8 @@ include_once("includes/mod_cen/clases/localidades.php");
 <div class="table-responsive">
 <div class="container">
 <?php
-if(($_POST))
+//var_dump($_POST);
+if($_POST)
 		{
 			$apellido=$_POST["apellido"];
 			$nombre=$_POST["nombre"];
@@ -75,8 +76,9 @@ if(($_POST))
 				$localidadId=NULL;
 			}
 
-			$persona=new Persona(NULL,$apellido,$nombre,null,null,null,null,null,null,null,null,null,$localidadId,null);
+			$persona = new Persona(NULL,$apellido,$nombre,null,null,null,null,null,null,null,null,null,$localidadId,null);
 			$resultado = $persona->buscar();
+
 			echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
 			echo "<thead>";
 			echo "<tr><th>Apellido</th>";
@@ -90,28 +92,28 @@ if(($_POST))
 			echo "<tbody>";
 			while ($fila = mysqli_fetch_object($resultado))
 			{
-			$referente= new Referente(NULL,$fila->personaId,NULL,NULL,NULL,NULL,NULL,"Activo");
-				if($resultado2= $referente->buscar())
-			{
-			while ($fila2 = mysqli_fetch_object($resultado2))
-			{
-			echo "<tr>";
-			echo "<td>".$fila->apellido."</td>";
-			echo "<td>".$fila->nombre."</td>";
-			echo "<td>".$fila2->tipo."</td>";
-			echo "<td>".$fila->email."</td>";
-			echo "<td>".$fila->telefonoC."</td>";
+				//var_dump($resultado);
+				$referente= new Referente(NULL,$fila->personaId,NULL,NULL,NULL,NULL,NULL,"Activo");
+				$buscarReferente = $referente->buscar();
+				//$datoreferente=mysqli_fetch_object($buscarReferente);
+				while ($fila2 = mysqli_fetch_object($buscarReferente))
+					{
+						echo "<tr>";
+						echo "<td>".$fila->apellido."</td>";
+						echo "<td>".$fila->nombre."</td>";
+						echo "<td>".$fila2->tipo."</td>";
+						echo "<td>".$fila->email."</td>";
+						echo "<td>".$fila->telefonoC."</td>";
 
-			if($_SESSION["tipo"]=="admin") {
-					echo "<td>"."<a href='index.php?men=referentes&id=2&personaId=".$fila2->personaId."&referenteId=".$fila2->referenteId."'>Ver</a>"."</td>";
-					echo "<td>"."<a href='index.php?men=referentes&id=3&referenteId=".$fila2->referenteId."'>Editar</a>"."</td>";
-			}else {
-					echo "<td>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila2->personaId."&referenteId=".$fila2->referenteId."'>Ver más</a>"."</td>";
-			}
-			echo "</tr>";
-			echo "\n";
-				}
-			}
+						if($_SESSION["tipo"]=="admin") {
+								echo "<td>"."<a href='index.php?men=referentes&id=2&personaId=".$fila2->personaId."&referenteId=".$fila2->referenteId."'>Ver</a>"."</td>";
+								echo "<td>"."<a href='index.php?men=referentes&id=3&referenteId=".$fila2->referenteId."'>Editar</a>"."</td>";
+						}else {
+								echo "<td>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila2->personaId."&referenteId=".$fila2->referenteId."'>Ver más</a>"."</td>";
+						}
+						echo "</tr>";
+						echo "\n";
+					}
 			}
 
 		}

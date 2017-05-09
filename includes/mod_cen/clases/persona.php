@@ -224,7 +224,7 @@ class Persona
 		}
 
 		$sentencia.="  ORDER BY apellido,nombre";
-
+		//echo $sentencia;
 
 		return $conexion->query($sentencia);
 
