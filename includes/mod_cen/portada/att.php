@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/documentos/panel.js"></script>
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -31,7 +32,8 @@ if(mysqli_num_rows($b_mis_informe)>0){
 	?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h4>Mis Informes (últimos 10) &nbsp;&nbsp;&nbsp;&nbsp;  <a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION["referenteId"] ?>" class="btn btn-warning">Ver Todos</a></h4>
+          <span class="panel-title clickable">
+			<h4>Mis Informes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION["referenteId"] ?>" class="pull-center"><font color="SkyBlue">Ver Todos</font></a><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
 		<div class="panel-body">
 			<?php
@@ -107,8 +109,8 @@ echo "<div class='col-md-6'>";
 if(mysqli_num_rows($b_informe)>0){
 	?>
 	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h4>Ultimos informes creados por Equipo PMI</h4>
+		<div class="panel-heading"><span class="panel-title clickable">
+			<h4>Ultimos informes creados por Equipo PMI<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
 		<div class="panel-body">
 			<?php
@@ -179,8 +181,9 @@ $(document).ready(function()
 <div class="row">
 
 <div class="panel panel-primary">
-	<div class="panel-heading">
-		<h4>Tutoriales DBMS</h4>
+	<div class="panel-heading"><span class="panel-title clickable">
+		<h4>Documentación<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4>
+	</span>
 	</div>
 	<div class="panel-body">
 
