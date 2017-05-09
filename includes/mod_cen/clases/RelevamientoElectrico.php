@@ -20,6 +20,8 @@ class RelevamientoElectrico
 	private $calefon;
 	private $necesitaCalefonSolar;
 	private $necesitaBombeoAgua;
+	private $conectividad;
+	private $tipoConectividad;
 	private $comentario;
 
  	function __construct($escuelaId=NULL,
@@ -38,6 +40,8 @@ class RelevamientoElectrico
 											$calefon=NULL,
 											$necesitaCalefonSolar=NULL,
 											$necesitaBombeoAgua=NULL,
+											$conectividad=NUL,
+											$tipoConectividad=NUL,
 											$comentario=NULL)
 	{
 			 //seteo los atributos
@@ -57,6 +61,8 @@ class RelevamientoElectrico
 			$this->calefon = $calefon;
 			$this->necesitaCalefonSolar = $necesitaCalefonSolar;
 			$this->necesitaBombeoAgua = $necesitaBombeoAgua;
+			$this->conectividad = $conectividad;
+			$this->tipoConectividad = $tipoConectividad;
 			$this->comentario = $comentario;
 	}
 
@@ -65,8 +71,8 @@ class RelevamientoElectrico
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO relevamientoElectrico (escuelaId,otroCue,internado,totalCargos,matricula,energia,tipoInstalacion,comoFunciona,cantidadAulas,cantidadPcInstaladas,heladera,otros,suficienteEnergia,calefon,necesitaCalefonSolar,necesitaBombeoAgua,comentario)
-		VALUES ($this->escuelaId,'". $this->otroCue."','". $this->internado."','". $this->totalCargos."','".$this->matricula."','". $this->energia."','". $this->tipoInstalacion."','". $this->comoFunciona."','". $this->cantidadAulas."','". $this->cantidadPcInstaladas."','".$this->heladera."','".$this->otros."','".$this->suficienteEnergia."','".$this->calefon."','".$this->necesitaCalefonSolar."','".$this->necesitaBombeoAgua."','".$this->comentario."');";
+		$sentencia="INSERT INTO relevamientoElectrico (escuelaId,otroCue,internado,totalCargos,matricula,energia,tipoInstalacion,comoFunciona,cantidadAulas,cantidadPcInstaladas,heladera,otros,suficienteEnergia,calefon,necesitaCalefonSolar,necesitaBombeoAgua,conectividad,tipoConectividad,comentario)
+		VALUES ($this->escuelaId,'". $this->otroCue."','". $this->internado."','". $this->totalCargos."','".$this->matricula."','". $this->energia."','". $this->tipoInstalacion."','". $this->comoFunciona."','". $this->cantidadAulas."','". $this->cantidadPcInstaladas."','".$this->heladera."','".$this->otros."','".$this->suficienteEnergia."','".$this->calefon."','".$this->necesitaCalefonSolar."','".$this->necesitaBombeoAgua."','".$this->conectividad."','".$this->tipoConectividad."','".$this->comentario."');";
 
 		if ($conexion->query($sentencia)) {
 			return 'success';
@@ -83,7 +89,7 @@ class RelevamientoElectrico
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="UPDATE relevamientoElectrico SET otroCue ='$this->otroCue',internado = '$this->internado', totalCargos = '$this->totalCargos', matricula = '$this->matricula',energia = '$this->energia', tipoInstalacion = '$this->tipoInstalacion',comoFunciona = '$this->comoFunciona', cantidadAulas = '$this->cantidadAulas', cantidadPcInstaladas = '$this->cantidadPcInstaladas', heladera = '$this->heladera', otros = '$this->otros' , suficienteEnergia = '$this->suficienteEnergia', calefon = '$this->calefon', necesitaCalefonSolar = '$this->necesitaCalefonSolar', necesitaBombeoAgua = '$this->necesitaBombeoAgua', comentario = '$this->comentario' WHERE escuelaId = '$this->escuelaId'";
+		$sentencia="UPDATE relevamientoElectrico SET otroCue ='$this->otroCue',internado = '$this->internado', totalCargos = '$this->totalCargos', matricula = '$this->matricula',energia = '$this->energia', tipoInstalacion = '$this->tipoInstalacion',comoFunciona = '$this->comoFunciona', cantidadAulas = '$this->cantidadAulas', cantidadPcInstaladas = '$this->cantidadPcInstaladas', heladera = '$this->heladera', otros = '$this->otros' , suficienteEnergia = '$this->suficienteEnergia', calefon = '$this->calefon', necesitaCalefonSolar = '$this->necesitaCalefonSolar', necesitaBombeoAgua = '$this->necesitaBombeoAgua',conectividad = '$this->conectividad',tipoConectividad = '$this->tipoConectividad', comentario = '$this->comentario' WHERE escuelaId = '$this->escuelaId'";
 
 		if ($conexion->query($sentencia)) {
 			return 'success';

@@ -129,8 +129,10 @@
 
              <select  class="form-control" name="internado">
                <?php
+							 	echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
                    if($datoRelevamiento<>NULL){
+
                      if($valor==$datoRelevamiento->internado){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
@@ -173,8 +175,10 @@
          ?>
              <select  class="form-control" name="energia">
                <?php
+							 	echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
                    if($datoRelevamiento<>NULL){
+
                      if($valor==$datoRelevamiento->energia){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
@@ -199,9 +203,10 @@
          ?>
              <select  class="form-control" name="tipoInstalacion">
                <?php
+							 		echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
                    if($datoRelevamiento<>NULL){
-                     if($valor==$datoRelevamiento->tipoInstalacion){
+								     if($valor==$datoRelevamiento->tipoInstalacion){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
                        echo "<option value='$valor'>$valor</option>";
@@ -225,9 +230,10 @@
          ?>
              <select  class="form-control" name="comoFunciona">
                <?php
+							 	echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
                    if($datoRelevamiento<>NULL){
-                     if($valor==$datoRelevamiento->comoFunciona){
+								    	if($valor==$datoRelevamiento->comoFunciona){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
                        echo "<option value='$valor'>$valor</option>";
@@ -269,9 +275,10 @@
          ?>
              <select  class="form-control" name="heladera">
                <?php
+							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
                    if($datoRelevamiento<>NULL){
-                     if($valor==$datoRelevamiento->heladera){
+								     if($valor==$datoRelevamiento->heladera){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
                        echo "<option value='$valor'>$valor</option>";
@@ -352,7 +359,7 @@
 						{
 							echo $datoRelevamiento->otros;
 						}else{
-							echo 'xxxxx';
+							echo 'nnnnn';
 							//$otros=array("","","","","");
 						}
 						 //echo $datoRelevamiento->otros
@@ -370,9 +377,10 @@
          ?>
              <select  class="form-control" name="suficienteEnergia">
                <?php
+							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
                    if($datoRelevamiento<>NULL){
-                     if($valor==$datoRelevamiento->suficienteEnergia){
+								     if($valor==$datoRelevamiento->suficienteEnergia){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
                        echo "<option value='$valor'>$valor</option>";
@@ -396,9 +404,10 @@
          ?>
              <select  class="form-control" name="calefon">
                <?php
+							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
-                   if($datoRelevamiento<>NULL){
-                     if($valor==$datoRelevamiento->calefon){
+                 	if($datoRelevamiento<>NULL){
+									  if($valor==$datoRelevamiento->calefon){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
                        echo "<option value='$valor'>$valor</option>";
@@ -422,9 +431,10 @@
          ?>
              <select  class="form-control" name="necesitaCalefonSolar">
                <?php
+							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
                    if($datoRelevamiento<>NULL){
-                     if($valor==$datoRelevamiento->necesitaCalefonSolar){
+									    if($valor==$datoRelevamiento->necesitaCalefonSolar){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
                        echo "<option value='$valor'>$valor</option>";
@@ -448,9 +458,10 @@
          ?>
              <select  class="form-control" name="necesitaBombeoAgua">
                <?php
+							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
                    if($datoRelevamiento<>NULL){
-                     if($valor==$datoRelevamiento->necesitaBombeoAgua){
+							       if($valor==$datoRelevamiento->necesitaBombeoAgua){
                        echo "<option selected value='$valor'>$valor</option>";
                      }else{
                        echo "<option value='$valor'>$valor</option>";
@@ -463,6 +474,118 @@
              ?>
          </div>
         </div>
+
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="control-label"><br>¿Tiene conectividad a Internet?<label>
+					</div>
+					<div class="col-md-12">
+				 <?php
+						 $internado=Maestro::estructura('conectividad','relevamientoElectrico');
+				 ?>
+						 <select  class="form-control" name="conectividad">
+							 <?php
+							 	 echo "<option value='0'>Seleccione...</option>";
+								 foreach ($internado AS $valor)
+									 if($datoRelevamiento<>NULL){
+									    if($valor==$datoRelevamiento->conectividad){
+											 echo "<option selected value='$valor'>$valor</option>";
+										 }else{
+											 echo "<option value='$valor'>$valor</option>";
+										 }
+									 }else{
+										 echo "<option value='$valor'>$valor</option>";
+									 }
+
+							 echo '</select>';
+						 ?>
+				 </div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="control-label"><br>Indicar que proveedor de conectividad (puede indicar más de uno):<label>
+							</div>
+					<div class="col-md-12">
+						<?php //$turnos=str_split($datos->getTurnos()); ?>
+
+
+						<?php
+						if($datoRelevamiento<>NULL)
+						{
+							$otrosC=str_split($datoRelevamiento->tipoConectividad);
+						}else{
+							$otrosC=str_split('nnnnnn');
+							//$otros=array("","","","","");
+						}
+						//var_dump($otros);
+						?>
+
+						<label class="checkbox-inline">
+							<input type="checkbox" name="Claro" value="Claro"
+							<?php
+							if($datoRelevamiento<>NULL){
+								if($otrosC[0]=='s') echo 'checked';
+							}
+							?>
+							>Claro
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="Arnet" value="Arnet"
+							<?php
+							if($datoRelevamiento<>NULL){
+								if($otrosC[1]=='s') echo 'checked';
+							}
+							?> >Arnet
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="Fibertel" value="Fibertel"
+							<?php
+							if($datoRelevamiento<>NULL){
+								if($otrosC[2]=='s') echo 'checked';
+							}
+								?>
+								 >Fibertel (CableVision)
+						</label>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="EmpresaLocal" value="Empresa Local de Conectividad"
+							<?php
+							if($datoRelevamiento<>NULL){
+								if($otrosC[3]=='s') echo 'checked';
+							}
+								?> >Empresa Local de Conectividad
+						</label><br>
+						<label class="checkbox-inline">
+							<input type="checkbox" name="Satelital" value="Satelital"
+							<?php
+							if($datoRelevamiento<>NULL){
+								if($otrosC[4]=='s') echo 'checked';
+							}
+							?> >Satelital
+						</label>
+
+						<label class="checkbox-inline">
+							<input type="checkbox" name="otro" value="otro"
+							<?php
+							if($datoRelevamiento<>NULL){
+								if($otrosC[5]=='s') echo 'checked';
+							}
+								?>
+								 >Otro
+						</label>
+
+						<input hidden type="text" name="otrosconectividad" value="<?php
+						if($datoRelevamiento<>NULL)
+						{
+							echo $datoRelevamiento->tipoConectividad;
+						}else{
+							echo 'nnnnnn';
+							//$otros=array("","","","","");
+						}
+						 //echo $datoRelevamiento->otros
+						 ?>" readonly>
+							</div>
+				</div>
 
         <div class="form-group">
           <div class="col-md-12">
