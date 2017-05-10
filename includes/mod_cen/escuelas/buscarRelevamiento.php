@@ -38,6 +38,7 @@ if(($_POST))
                     <th>Nombre Escuela</th>
                     <th>Localidad</th>
                     <th>Acción</th>
+										<th>Aula Satelite</th>
                   </tr>
                 </thead>
                 <tbody>';
@@ -73,7 +74,7 @@ if(($_POST))
 					}else{
 						echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=20&escuelaId=".$fila->escuelaId."'>Registrar Relevamiento</a>"."</td>";
 					}
-
+					echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=20&edit&escuelaId=".$fila->escuelaId."'>Necesito Agregar Aula Satelite</a>"."</td>";
  	  		  echo "</tr>";
   		  	echo "\n";
       	}
