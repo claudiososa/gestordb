@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/documentos/panel.js"></script>
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -41,9 +42,9 @@ echo '<div class="container">';
 	  if(mysqli_num_rows($buscar_alta)>0){
 	 	?>
 	 	<div class="panel panel-primary">
-	 		<div class="panel-heading">
-	 			<h4>Informes Prioridad Alta</h4>
-	 		</div>
+			<div class="panel-heading"><span class="panel-title clickable">
+				<h4>Informes Prioridad Alta<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
+			</div>
 	 		<div class="panel-body">
 	 			<?php
 
@@ -102,8 +103,8 @@ echo '<div class="container">';
 		if(mysqli_num_rows($resultado_ett_acargo)>0){
 			?>
 			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h4>Informes de ETT a cargo</h4>
+				<div class="panel-heading"><span class="panel-title clickable">
+					<h4>Informes de ETT a cargo<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 				</div>
 				<div class="panel-body">
 					<?php
@@ -169,57 +170,9 @@ echo '<div class="container">';
 
 if(mysqli_num_rows($b_mis_informe)>0){
 	?>
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h4>Mis Informes (últimos 10)</h4>
-		</div>
-		<div class="panel-body">
-			<?php
-
-	echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
-	echo "<thead>";
-	echo "<tr>";
-	echo "<th>Id</th>";
-	echo "<th>Título</th>";
-	echo "<th>Número</th>";
-	echo "<th>Creado por...</th>";
-	echo "</tr>";
-	echo "</thead>";
-
-	echo "<tbody>";
-	while ($fila=mysqli_fetch_object($b_mis_informe)){
-
-		$escuela= new Escuela($fila->escuelaId);
-		$buscar_escuela= $escuela->buscar();
-		$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-		$referente = new Referente($_SESSION["referenteId"]);
-		$b_referente = $referente->buscar();
-
-		$dato_referente= mysqli_fetch_object($b_referente);
-
-		$persona = new Persona($dato_referente->personaId);
-
-		$b_persona = $persona->buscar();
-
-		$dato_persona=mysqli_fetch_object($b_persona);
 
 
 
-		echo "<tr>";
-		?>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-		<?php
-		echo "<td>".$dato_escuela->numero."</td>";
-		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-		echo "</td>";
-	}
-	echo "</tbody>";
-	echo "</table>";
-	?>
-</div>
-</div>
 <?php
 }
 echo "</div>";
@@ -229,8 +182,8 @@ echo "<div class='col-md-6'>";
 if(mysqli_num_rows($b_informe)>0){
 	?>
 	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h4>Ultimos informes creados</h4>
+		<div class="panel-heading"><span class="panel-title clickable">
+			<h4>Ultimos informes creados<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
 		<div class="panel-body">
 			<?php
@@ -277,6 +230,57 @@ if(mysqli_num_rows($b_informe)>0){
 	?>
 </div>
 </div>
+<div class="panel panel-primary">
+	<div class="panel-heading"><span class="panel-title clickable">
+		<h4>Mis Informes (últimos 10)<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
+	</div>
+	<div class="panel-body">
+		<?php
+
+echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
+echo "<thead>";
+echo "<tr>";
+echo "<th>Id</th>";
+echo "<th>Título</th>";
+echo "<th>Número</th>";
+echo "<th>Creado por...</th>";
+echo "</tr>";
+echo "</thead>";
+
+echo "<tbody>";
+while ($fila=mysqli_fetch_object($b_mis_informe)){
+
+	$escuela= new Escuela($fila->escuelaId);
+	$buscar_escuela= $escuela->buscar();
+	$dato_escuela= mysqli_fetch_object($buscar_escuela);
+
+	$referente = new Referente($_SESSION["referenteId"]);
+	$b_referente = $referente->buscar();
+
+	$dato_referente= mysqli_fetch_object($b_referente);
+
+	$persona = new Persona($dato_referente->personaId);
+
+	$b_persona = $persona->buscar();
+
+	$dato_persona=mysqli_fetch_object($b_persona);
+
+
+
+	echo "<tr>";
+	?>
+	<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
+	<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
+	<?php
+	echo "<td>".$dato_escuela->numero."</td>";
+	echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
+	echo "</td>";
+}
+echo "</tbody>";
+echo "</table>";
+?>
+</div>
+</div>
 <?php
 }
 echo "</div>";
@@ -301,8 +305,8 @@ $(document).ready(function()
 <div class="row">
 
 <div class="panel panel-primary">
-	<div class="panel-heading">
-		<h4>Ultimos informes creados</h4>
+	<div class="panel-heading"><span class="panel-title clickable">
+		<h4>Documentación<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 	</div>
 	<div class="panel-body">
 
