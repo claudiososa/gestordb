@@ -3,11 +3,16 @@
 		include_once('includes/mod_cen/clases/localidades.php');
 
     if($_POST){
-      //echo "hola mundo";
+      var_dump($_POST);
 
-       $relevamiento = new Escuela ($_POST['escuelaId'],$_POST['nombre'],$_POST['domicilio'],$_POST['telefono'],$_POST['localidadId']);
+       $relevamiento = new Escuela ($_POST['escuelaId'],NULL,NULL,NULL,
+                            $_POST['nombre'],$_POST['domicilio'],
+                            NULL,
+                            $_POST['localidadId'],
+                            NULL,
+                            $_POST['telefono']);
        $agregar = $relevamiento->editar('soloBasico');
-     
+
 
       //echo '<br><br>'.$agregar;
       $variablephp = "?index.php?mod=slat&men=escuelas&id=19&escuelaId=".$_POST['escuelaId'];

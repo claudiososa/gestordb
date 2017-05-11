@@ -74,7 +74,7 @@ if($_POST || isset($_GET['escuelaId']))
 		  		$busca_loc= $locali->buscar();
 		  		$fila1=mysqli_fetch_object($busca_loc);
 		  		echo "<td>".$fila1->nombre."</td>";
-					echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=23&escuelaId=".$fila->escuelaId."'>Modificar Datos de Aula</a>"."</td>";
+					echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=23&escuelaId=".$fila->escuelaId."'>Modificar Datos Institución</a>"."</td>";
 
 					if($datoRelevamiento<>NULL)
 					{
