@@ -262,7 +262,7 @@
 
 
         <?php
-        if($datosAulaSatelite<>NULL)
+        if($datosAulaSatelite<>NULL && $datosAulaSatelite->otros<>"")
         {
           $otros=str_split($datosAulaSatelite->otros);
         }else{
@@ -472,7 +472,7 @@
 
 
         <?php
-        if($datosAulaSatelite<>NULL)
+        if($datosAulaSatelite<>NULL  && $datosAulaSatelite->otrosC<>"")
         {
           $otrosC=str_split($datosAulaSatelite->tipoConectividad);
         }else{
