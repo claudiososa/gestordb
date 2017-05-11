@@ -86,23 +86,23 @@
                                                  $_POST['necesitaBombeoAgua'],$_POST['conectividad'],$otrosC,$_POST['comentario']);
        $agregar = $relevamiento->editar('relevamiento');
      }else{
-       $relevamiento = new AulaSatelite ($_POST['aulaSateliteId'],$_POST['escuelaId'],$_POST['otroCue'],$_POST['internado'],$_POST['totalCargos'],
+       $relevamiento = new AulaSatelite ($_POST['aulaSateliteId'],$_POST['escuelaId'],null,null,null,null,$_POST['otroCue'],$_POST['internado'],$_POST['totalCargos'],
                                                  $_POST['matricula'],$_POST['energia'],$_POST['tipoInstalacion'],$_POST['comoFunciona'],
                                                  $_POST['cantidadAulas'],$_POST['cantidadPcInstaladas'],$_POST['heladera'],
                                                  $otros,$_POST['suficienteEnergia'],$_POST['calefon'],$_POST['necesitaCalefonSolar'],
                                                  $_POST['necesitaBombeoAgua'],$_POST['conectividad'],$otrosC,$_POST['comentario']);
-       $agregar = $relevamiento->editar('relevamiento');
+       $editar = $relevamiento->editar('relevamiento');
      }
       //echo '<br><br>'.$agregar;
       $variablephp = "?index.php?mod=slat&men=escuelas&id=19&escuelaId=".$_POST['escuelaId'];
       ?>
 
       <script type="text/javascript">
-        var guardado = "<?php echo $agregar; ?>" ;
+        var guardado = "<?php echo $editar; ?>" ;
         if (guardado=='success') {
-          alert ("El relevamiento para Aula Satelite fue creada");
-        }else{
-          alert ("Erro al guardar");
+           alert ("El relevamiento para Aula Satelite fue creada");
+         }else{
+          alert (guardado);
         }
     		var variablejs = "<?php echo $variablephp; ?>" ;
     	   function redireccion(){window.location=variablejs;}

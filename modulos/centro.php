@@ -198,6 +198,9 @@
 						case 22:
 									include("includes/mod_cen/escuelas/relevamientoAulaSatelite.php");
 									break;
+						case 23:
+									include("includes/mod_cen/escuelas/escuelaDatosBasicos.php");
+									break;
 				}
 				break;
 			 case "encuentros":

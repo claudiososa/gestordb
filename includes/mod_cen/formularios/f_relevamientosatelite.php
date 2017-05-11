@@ -262,11 +262,14 @@
 
 
         <?php
+//var_dump($datosAulaSatelite->otros);
         if($datosAulaSatelite<>NULL && $datosAulaSatelite->otros<>"")
         {
           $otros=str_split($datosAulaSatelite->otros);
+					//var_dump($otros);
         }else{
           $otros=str_split('nnnnn');
+					//var_dump($otros);
           //$otros=array("","","","","");
         }
         //var_dump($otros);
@@ -316,7 +319,7 @@
         </label>
 
         <input hidden type="text" name="otrosactual" value="<?php
-        if($datosAulaSatelite<>NULL)
+        if($datosAulaSatelite<>NULL && $datosAulaSatelite->otros<>"")
         {
           echo $datosAulaSatelite->otros;
         }else{
@@ -472,7 +475,7 @@
 
 
         <?php
-        if($datosAulaSatelite<>NULL  && $datosAulaSatelite->otrosC<>"")
+        if($datosAulaSatelite<>NULL  && $datosAulaSatelite->tipoConectividad<>"")
         {
           $otrosC=str_split($datosAulaSatelite->tipoConectividad);
         }else{

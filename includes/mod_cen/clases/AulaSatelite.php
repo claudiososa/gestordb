@@ -143,10 +143,9 @@ class AulaSatelite
                       tipoConectividad = '$this->tipoConectividad',
                       comentario = '$this->comentario'
                     WHERE aulaSateliteId = '$this->aulaSateliteId'";
-
     }
 
-
+		//echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
 			return 'editarcompleto';
@@ -278,10 +277,13 @@ class AulaSatelite
 	 	$this->cantidadAulas = $elemento->cantidadAulas;
 	 	$this->cantidadPcInstaladas = $elemento->cantidadPcInstaladas;
 	 	$this->heladera = $elemento->heladera;
+		$this->otros = $elemento->otros;
 	 	$this->suficienteEnergia = $elemento->suficienteEnergia;
 	 	$this->calefon = $elemento->calefon;
 	 	$this->necesitaCalefonSolar = $elemento->necesitaCalefonSolar;
 	 	$this->necesitaBombeoAgua = $elemento->necesitaBombeoAgua;
+		$this->conectividad = $elemento->conectividad;
+		$this->tipoConectividad = $elemento->tipoConectividad;
 	 	$this->comentario = $elemento->comentario;
 		return $this;
 

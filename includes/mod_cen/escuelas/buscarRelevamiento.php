@@ -42,6 +42,7 @@ if($_POST || isset($_GET['escuelaId']))
                     <th>Nombre Escuela</th>
                     <th>Localidad</th>
                     <th>Acción</th>
+										  <th>Acción</th>
 										<th>Aula Satelite</th>
                   </tr>
                 </thead>
@@ -73,6 +74,8 @@ if($_POST || isset($_GET['escuelaId']))
 		  		$busca_loc= $locali->buscar();
 		  		$fila1=mysqli_fetch_object($busca_loc);
 		  		echo "<td>".$fila1->nombre."</td>";
+					echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=23&escuelaId=".$fila->escuelaId."'>Modificar Datos de Aula</a>"."</td>";
+
 					if($datoRelevamiento<>NULL)
 					{
 						echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=20&edit&escuelaId=".$fila->escuelaId."'>Modificar Relevamiento</a>"."</td>";
@@ -106,7 +109,11 @@ if($_POST || isset($_GET['escuelaId']))
 								$fila2=mysqli_fetch_object($busca_loc);
 								echo "<td>".$fila2->nombre."</td>";
 								echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=21&escuelaId=".$fila->escuelaId."&aulaSateliteId=".$fila1->aulaSateliteId."'>Modificar Datos de Aula</a>"."</td>";
-								echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=22&escuelaId=".$fila->escuelaId."&aulaSateliteId=".$fila1->aulaSateliteId."'>Registrar Relevamiento</a>"."</td>";
+								if($fila1->otros<>""){
+									echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=22&escuelaId=".$fila->escuelaId."&aulaSateliteId=".$fila1->aulaSateliteId."'>Modificar Relevamiento</a>"."</td>";
+								}else{
+									echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=22&escuelaId=".$fila->escuelaId."&aulaSateliteId=".$fila1->aulaSateliteId."'>Registrar Relevamiento</a>"."</td>";
+								}
 								echo '</tr>';
 
 						}
