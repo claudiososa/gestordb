@@ -40,8 +40,8 @@ class RelevamientoElectrico
 											$calefon=NULL,
 											$necesitaCalefonSolar=NULL,
 											$necesitaBombeoAgua=NULL,
-											$conectividad=NUL,
-											$tipoConectividad=NUL,
+											$conectividad=NULL,
+											$tipoConectividad=NULL,
 											$comentario=NULL)
 	{
 			 //seteo los atributos

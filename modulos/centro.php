@@ -192,6 +192,12 @@
 						case 20:
 									include("includes/mod_cen/escuelas/relevElectricoNuevo.php");
 								  break;
+						case 21:
+									include("includes/mod_cen/escuelas/agregarAulaSatelite.php");
+								  break;
+						case 22:
+									include("includes/mod_cen/escuelas/relevamientoAulaSatelite.php");
+									break;
 				}
 				break;
 			 case "encuentros":
