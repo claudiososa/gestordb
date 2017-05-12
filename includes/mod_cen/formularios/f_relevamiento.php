@@ -260,7 +260,7 @@
 
         <div class="form-group">
           <div class="col-md-12">
-            <label class="control-label" ><br>Cantidad de Computadoras Instaladas:<label>
+            <label class="control-label" ><br>Cantidad de Computadoras Instaladas (total de computadoras de escritorio y netbook de carro ADM):<label>
           </div>
           <div class="col-md-12">
               <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="cantidadPcInstaladas" name="cantidadPcInstaladas"  value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->cantidadPcInstaladas ?>" />

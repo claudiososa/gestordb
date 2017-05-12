@@ -13,8 +13,15 @@ include_once("includes/mod_cen/clases/AulaSatelite.php");
 /**
  * Inclusión de formulario para la busqueda de Escuelas
  */
-include_once("includes/mod_cen/formularios/f_buscar_escuela.php");
+ if(!isset($_GET['escuelaId']))
+ {
+	 include_once("includes/mod_cen/formularios/f_buscar_escuela.php");
 
+}else{
+	?>
+	<a class='btn btn-primary' href='?mod=slat&men=escuelas&id=19'> Buscar otra Institución</a>
+	<?php
+}
 if($_POST || isset($_GET['escuelaId']))
 	{
 
