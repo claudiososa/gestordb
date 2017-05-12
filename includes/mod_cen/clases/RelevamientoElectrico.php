@@ -206,6 +206,7 @@ class RelevamientoElectrico
 	 	$this->matricula = $elemento->matricula;
 	 	$this->energia = $elemento->energia;
 	 	$this->tipoInstalacion = $elemento->tipoInstalacion;
+		$this->comoFunciona = $elemento->comoFunciona;
 	 	$this->cantidadAulas = $elemento->cantidadAulas;
 	 	$this->cantidadPcInstaladas = $elemento->cantidadPcInstaladas;
 	 	$this->heladera = $elemento->heladera;
