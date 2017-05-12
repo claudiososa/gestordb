@@ -12,7 +12,7 @@
 						      	<label class="control-label"><br>Número</label>
 		          </div>
 				   	  <div class="col-md-12">
-			              <input class="form-control"type="text" placeholder="solo números - 4 digitos"  name="numero" pattern="[0-9]{4}" value="<?php echo $datos->getNumero()?>"/>
+			              <input class="form-control"type="text" placeholder="solo números - 4 digitos"  name="numero" pattern="[0-9]{4}" value="<?php echo $datos->getNumero()?>" readonly/>
 			        </div>
 			    </div>
 
@@ -21,7 +21,7 @@
 					    	    <label class="control-label"><br>CUE:</label>
 					    </div>
 					    <div class="col-md-12">
-                    <input class="form-control"size="30" placeholder="solo números - 7 a 9 digitos"  type="text" name="cue" pattern="[0-9]{7,9}" value="<?php echo $datos->getCue()?>"/>
+                    <input class="form-control"size="30" placeholder="solo números - 7 a 9 digitos"  type="text" name="cue" pattern="[0-9]{7,9}" value="<?php echo $datos->getCue()?>" readonly/>
 					    </div>
 				  </div>
 
@@ -30,7 +30,7 @@
 		                 <label class="control-label"><br>Nombre:</label>
 	             </div>
 	             <div class="col-md-12">
-                     <input class="form-control"size="30" type="text" name="nombre" id="nombref_escuela" value="<?php echo $datos->getNombre() ?>"/>
+                     <input class="form-control"size="30" type="text" name="nombre" id="nombref_escuela" value="<?php echo $datos->getNombre() ?>" readonly/>
 			         </div>
            </div>
 
@@ -86,7 +86,7 @@
 
 					</div>
 					<div class="col-md-12">
-<input class="form-control" placeholder="Nº Teléfono, solo números" title="Ingresar solo números" type="text" id="tel_escuela"name="telefono" pattern="[0-9]{1,18}" value="<?php echo $datos->getTelefono()?>" />
+<input class="form-control" placeholder="Nº Teléfono, solo números" title="Ingresar solo números" type="text" id="tel_escuela"name="telefono" pattern="[0-9]{1,18}" value="<?php echo $datos->getTelefono()?>" readonly/>
 
 							</div>
 				</div>
@@ -96,7 +96,7 @@
 								 <label class="control-label"><br>Localidad</label>
 							 </div>
 							 <div class="col-md-12">
-								 <select name="localidadId" class="form-control">
+								 <select name="localidadId" class="form-control" disabled>
  								<?php while($fila = mysqli_fetch_object($resultado))
  								{
  								if ($fila->localidadId == $escuela->getLocalidadId()) {
@@ -112,7 +112,7 @@
 				</div>
         <div class="form-group">
           <div class="col-md-12">
-            <label class="control-label" ><br>Cue de otras instituciones que funcionan en el mismo edificio:<label>
+            <label class="control-label" ><br>Cue de otras instituciones que funcionan en el mismo edificio (Si es mas de un CUE ingréselos separandolos por coma):<label>
           </div>
           <div class="col-md-12">
               <input class="form-control"size="30" type="text" name="otroCue" placeholder="Si es mas de un CUE ingréselos separandolos por comas (,)" id="cue" value="<?php if($datoRelevamiento<>NULL){echo $datoRelevamiento->otroCue;} ?>" >
@@ -195,7 +195,7 @@
          </div>
         </div>
 
-        <div class="form-group"id="tipoInstalacion">
+        <div class="form-group" id="tipoInstalacion">
           <div class="col-md-12">
             <label class="control-label" ><br>En caso de respuesta afirmativa a la pregunta anterior indicar -> Tipo de Instalacion de Energia eléctrica<label>
           </div>
@@ -524,7 +524,7 @@
 						?>
 
 						<label class="checkbox-inline">
-							<input type="checkbox" name="Claro" value="Claro"id="claro"
+							<input type="checkbox" name="Claro" value="Claro" id="claro"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[0]=='s') echo 'checked';
@@ -533,7 +533,7 @@
 							>Claro
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="Arnet" value="Arnet"id="arnet"
+							<input type="checkbox" name="Arnet" value="Arnet" id="arnet"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[1]=='s') echo 'checked';
@@ -567,7 +567,7 @@
 						</label>
 
 						<label class="checkbox-inline">
-							<input type="checkbox" name="otro" value="otro" id="otro"
+							<input type="checkbox" name="otroC" value="otro" id="otroC"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[5]=='s') echo 'checked';

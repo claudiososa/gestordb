@@ -1,8 +1,16 @@
 $(document).ready(function() {
+//  alert($('#conectividad option:selected').val() );
+  if(($('#conectividad option:selected').val()==='No') || ($('#conectividad option:selected').val()==='0'))
+  {
+      $("#proveedor").hide();
+  }
 
-  $("#proveedor").hide();
-  $("#tipoInstalacion").hide();
-  $("#Funcion").hide();
+  if(($('#energia option:selected').val()==='No') || ($('#energia option:selected').val()==='0'))
+  {
+    $("#tipoInstalacion, #Funcion").hide();
+  }
+
+
 
   $("#conectividad").change(function (ev){
 
@@ -13,7 +21,7 @@ $(document).ready(function() {
 
     }else if (opcion!= 'Si') {
       $("#proveedor").hide();
-$("#claro , #arnet , #fibertel , #local , #satelital , #otro").prop("checked", false);
+$("#claro , #arnet , #fibertel , #local , #satelital , #otroC").prop("checked", false);
         $('.error').hide();
       }
   });
@@ -22,23 +30,34 @@ $("#claro , #arnet , #fibertel , #local , #satelital , #otro").prop("checked", f
 
     var opcion = $(this).val();
     if (opcion== 'Si') {
-      $("#tipoInstalacion , #Funcion").show();
-var select=$("select#tipoInstalacion");
-select.val(value='Sin registrar').remove();
-var select=$("select#Funcion");
-select.val(value='Sin registrar').remove();
+      $("#tipoInstalacion").show();
+      $("#Funcion").show();
+
+      $("#tipoinstalacion option[value='Sin Registrar']").remove();
+      $("#funcion option[value='Sin Registrar']").remove();
+
+      /*var select=$("select#tipoinstalacion");
+      select.val(value='Sin registrar').remove();
+      var select=$("select#funcion");
+      select.val(value='Sin registrar').remove();*/
       $('.error').hide();
 
     }else if (opcion == 'No') {
-      $("#tipoInstalacion").hide()
-      var select = $("select#tipoinstalacion");
-      select.append('<option value="Sin registrar" selected="selected">Sin registar</option>');
-    select.val(value='Sin registrar').attr('selected','selected');
+      $("#tipoInstalacion , #Funcion").hide();
 
-        $('.error').hide();
+      var select = $("select#tipoinstalacion");
+      select.append('<option value="Sin Registrar">Sin registar</option>');
+      select.val(value='Sin Registrar').attr('selected','selected');
+
+      //alert($('#tipoinstalacion option:selected').val() );
+
+      var select = $("select#funcion");
+      select.append('<option value="Sin Registrar" >Sin registar</option>');
+      select.val(value='Sin Registrar').attr('selected','selected');
+      $('.error').hide();
       }
   });
-  $("#energia").change(function (ev){
+/*  $("#energia").change(function (ev){
 
     var opcion = $(this).val();
     if (opcion== 'Si') {
@@ -53,7 +72,7 @@ select.val(value='Sin registrar').remove();
 
         $('.error').hide();
       }
-  });
+  });*/
 
 
 

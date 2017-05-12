@@ -2,7 +2,7 @@
     include_once('includes/mod_cen/clases/escuela.php');
 		include_once('includes/mod_cen/clases/RelevamientoElectrico.php');
     if($_POST){
-
+      //var_dump($_POST);
       $otrosconectividad=str_split($_POST['otrosconectividad']);
 
       if(isset($_POST['Claro'])) {
@@ -29,7 +29,7 @@
           $otrosC[4]="s";
         }else {
           $otrosC[4]="n";}
-      if(isset($_POST['otro'])) {
+      if(isset($_POST['otroC'])) {
               $otrosC[5]="s";
             }else {
               $otrosC[5]="n";}
@@ -95,7 +95,7 @@
      }
 
       //echo '<br><br>'.$agregar;
-      $variablephp = "?index.php?mod=slat&men=escuelas&id=19";
+      $variablephp = "?index.php?mod=slat&men=escuelas&id=19&escuelaId=".$_POST['escuelaId'];
       ?>
 
       <script type="text/javascript">

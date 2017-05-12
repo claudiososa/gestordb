@@ -2,7 +2,7 @@
     include_once('includes/mod_cen/clases/escuela.php');
 		include_once('includes/mod_cen/clases/AulaSatelite.php');
     if($_POST){
-
+      //var_dump($_POST);
       $otrosconectividad=str_split($_POST['otrosconectividad']);
 
       if(isset($_POST['Claro'])) {
