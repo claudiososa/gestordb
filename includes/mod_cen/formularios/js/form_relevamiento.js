@@ -84,7 +84,7 @@ $("#claro , #arnet , #fibertel , #local , #satelital , #otroC").prop("checked", 
 
 */
 var cue= /^[0-9,]+$/;
-var num= /^[1-9][0-9]+$/;
+var num= /^[0-9]+$/;
 var compu= /^[0-9]+$/;
 
 $("#botonF_escuela").click(function() {
@@ -102,11 +102,11 @@ $("#botonF_escuela").click(function() {
     $("#internado").focus().after("<span class='error'>Campo obligatorio.Seleccione una opcion</span>");
     return false;
 
-  }else if ($("#totalCargos").val() =="" || !num.test($("#totalCargos").val())) {
+  }else if ($("#totalCargos").val() =="" || $("#totalCargos").val() <1) {
     $("#totalCargos").focus().after("<span class='error'>Campo obligatorio.Solo Números mayores a 0.</span>");
     return false;
 
-  }else if ($("#matricula").val() =="" || !num.test($("#matricula").val())) {
+  }else if ($("#matricula").val() =="" || $("#matricula").val() <1) {
     $("#matricula").focus().after("<span class='error'>Campo obligatorio.Solo Números mayores a 0.</span>");
     return false;
   }else if ($("#energia").val().trim() == '0') {
@@ -121,7 +121,7 @@ $("#botonF_escuela").click(function() {
     $("#funcion").focus().after("<span class='error'>Campo obligatorio.Seleccione una opcion</span>");
     return false;
 
-}else if ($("#cantidadAulas").val() =="" || !num.test($("#cantidadAulas").val())) {
+}else if ($("#cantidadAulas").val() =="" || $("#cantidadAulas").val() <1) {
   $("#cantidadAulas").focus().after("<span class='error'>Campo obligatorio.Solo Números mayores a 0.</span>");
   return false;
 }else if ($("#cantidadPcInstaladas").val() !="" && !compu.test($("#cantidadPcInstaladas").val())) {
