@@ -1,5 +1,7 @@
-
-<form name="form" action="" method="POST" >
+<script type="text/javascript" src="includes/mod_cen/formularios/js/form_relevamiento.js"></script>
+<!--
+<script type="text/javascript" src="includes/mod_cen/formularios/js/prueba.js"></script>-->
+<form name="form" action="" method="POST">
 	<input type="hidden" name="escuelaId" value="<?php echo $escuelaId ?>"/>
 <table><?php
 			if($_SESSION["tipo"]=="Coordinador")
@@ -110,10 +112,10 @@
 				</div>
         <div class="form-group">
           <div class="col-md-12">
-            <label class="control-label"><br>Cue de otras instituciones que funcionan en el mismo edificio:<label>
+            <label class="control-label" ><br>Cue de otras instituciones que funcionan en el mismo edificio:<label>
           </div>
           <div class="col-md-12">
-              <input class="form-control"size="30" type="text" name="otroCue" value="<?php if($datoRelevamiento<>NULL){echo $datoRelevamiento->otroCue;} ?>" >
+              <input class="form-control"size="30" type="text" name="otroCue" placeholder="Si es mas de un CUE ingréselos separandolos por comas (,)" id="cue" value="<?php if($datoRelevamiento<>NULL){echo $datoRelevamiento->otroCue;} ?>" >
           </div>
         </div>
 
@@ -127,7 +129,7 @@
              //var_dump($datoRelevamiento);
              ?>
 
-             <select  class="form-control" name="internado">
+             <select  class="form-control" name="internado" id="internado">
                <?php
 							 	echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -149,16 +151,16 @@
 
         <div class="form-group">
 					<div class="col-md-12">
-						<label class="control-label"><br>Cantidad Total de Personal (Directivos,Docentes, Auxiliares y otros Cargos:<label>
+						<label class="control-label" ><br>Cantidad Total de Personal (Directivos,Docentes, Auxiliares y otros Cargos:<label>
 					</div>
 					<div class="col-md-12">
-              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="totalCargos" name="totalCargos"  value="<?php if($datoRelevamiento<>NULL)	echo $datoRelevamiento->totalCargos ?>" />
+              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="totalCargos" name="totalCargos" value="<?php if($datoRelevamiento<>NULL)	echo $datoRelevamiento->totalCargos ?>" />
 					</div>
 				</div>
 
         <div class="form-group">
           <div class="col-md-12">
-            <label class="control-label"><br>Matricula de Alumnos:<label>
+            <label class="control-label" ><br>Matricula de Alumnos:<label>
           </div>
           <div class="col-md-12">
               <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="matricula" name="matricula"  value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->matricula ?>" />
@@ -173,7 +175,7 @@
          <?php
              $internado=Maestro::estructura('energia','relevamientoElectrico');
          ?>
-             <select  class="form-control" name="energia">
+             <select  class="form-control" name="energia" id="energia">
                <?php
 							 	echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -193,15 +195,15 @@
          </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group"id="tipoInstalacion">
           <div class="col-md-12">
-            <label class="control-label"><br>En caso de respuesta afirmativa a la pregunta anterior indicar -> Tipo de Instalacion de Energia eléctrica<label>
+            <label class="control-label" ><br>En caso de respuesta afirmativa a la pregunta anterior indicar -> Tipo de Instalacion de Energia eléctrica<label>
           </div>
           <div class="col-md-12">
          <?php
              $internado=Maestro::estructura('tipoInstalacion','relevamientoElectrico');
          ?>
-             <select  class="form-control" name="tipoInstalacion">
+             <select  class="form-control" name="tipoInstalacion" id="tipoinstalacion">
                <?php
 							 		echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -220,7 +222,7 @@
          </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="Funcion">
           <div class="col-md-12">
             <label class="control-label"><br>¿Cómo funciona?<label>
           </div>
@@ -228,7 +230,7 @@
          <?php
              $internado=Maestro::estructura('comoFunciona','relevamientoElectrico');
          ?>
-             <select  class="form-control" name="comoFunciona">
+             <select  class="form-control" name="comoFunciona" id="funcion">
                <?php
 							 	echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -249,16 +251,16 @@
 
         <div class="form-group">
           <div class="col-md-12">
-            <label class="control-label"><br>Cantidad de Aulas:<label>
+            <label class="control-label" ><br>Cantidad de Aulas:<label>
           </div>
           <div class="col-md-12">
-              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="cantidadAulas" name="cantidadAulas"  value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->cantidadAulas ?>" />
+              <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="cantidadAulas" name="cantidadAulas"   value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->cantidadAulas ?>" />
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-md-12">
-            <label class="control-label"><br>Cantidad de Computadoras Instaladas:<label>
+            <label class="control-label" ><br>Cantidad de Computadoras Instaladas:<label>
           </div>
           <div class="col-md-12">
               <input class="form-control" placeholder="Cantidad Total" title="Ingresar un número total" type="text" id="cantidadPcInstaladas" name="cantidadPcInstaladas"  value="<?php if($datoRelevamiento<>NULL) echo $datoRelevamiento->cantidadPcInstaladas ?>" />
@@ -273,7 +275,7 @@
          <?php
              $internado=Maestro::estructura('heladera','relevamientoElectrico');
          ?>
-             <select  class="form-control" name="heladera">
+             <select  class="form-control" name="heladera" id="heladera">
                <?php
 							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -375,7 +377,7 @@
          <?php
              $internado=Maestro::estructura('suficienteEnergia','relevamientoElectrico');
          ?>
-             <select  class="form-control" name="suficienteEnergia">
+             <select  class="form-control" name="suficienteEnergia" id="energiasuf">
                <?php
 							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -402,7 +404,7 @@
          <?php
              $internado=Maestro::estructura('calefon','relevamientoElectrico');
          ?>
-             <select  class="form-control" name="calefon">
+             <select  class="form-control" name="calefon" id="calefon">
                <?php
 							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -429,7 +431,7 @@
          <?php
              $internado=Maestro::estructura('necesitaCalefonSolar','relevamientoElectrico');
          ?>
-             <select  class="form-control" name="necesitaCalefonSolar">
+             <select  class="form-control" name="necesitaCalefonSolar" id="calefonsolar">
                <?php
 							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -456,7 +458,7 @@
          <?php
              $internado=Maestro::estructura('necesitaBombeoAgua','relevamientoElectrico');
          ?>
-             <select  class="form-control" name="necesitaBombeoAgua">
+             <select  class="form-control" name="necesitaBombeoAgua" id="bombeo">
                <?php
 							 	 echo "<option value='0'>Seleccione...</option>";
                  foreach ($internado AS $valor)
@@ -483,7 +485,7 @@
 				 <?php
 						 $internado=Maestro::estructura('conectividad','relevamientoElectrico');
 				 ?>
-						 <select  class="form-control" name="conectividad">
+						 <select  class="form-control" name="conectividad" id="conectividad">
 							 <?php
 							 	 echo "<option value='0'>Seleccione...</option>";
 								 foreach ($internado AS $valor)
@@ -502,7 +504,7 @@
 				 </div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" id="proveedor">
 					<div class="col-md-12">
 						<label class="control-label"><br>Indicar que proveedor de conectividad (puede indicar más de uno):<label>
 							</div>
@@ -522,7 +524,7 @@
 						?>
 
 						<label class="checkbox-inline">
-							<input type="checkbox" name="Claro" value="Claro"
+							<input type="checkbox" name="Claro" value="Claro"id="claro"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[0]=='s') echo 'checked';
@@ -531,7 +533,7 @@
 							>Claro
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="Arnet" value="Arnet"
+							<input type="checkbox" name="Arnet" value="Arnet"id="arnet"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[1]=='s') echo 'checked';
@@ -539,7 +541,7 @@
 							?> >Arnet
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="Fibertel" value="Fibertel"
+							<input type="checkbox" name="Fibertel" value="Fibertel"id="fibertel"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[2]=='s') echo 'checked';
@@ -548,7 +550,7 @@
 								 >Fibertel (CableVision)
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="EmpresaLocal" value="Empresa Local de Conectividad"
+							<input type="checkbox" name="EmpresaLocal" value="Empresa Local de Conectividad" id="local"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[3]=='s') echo 'checked';
@@ -556,7 +558,7 @@
 								?> >Empresa Local de Conectividad
 						</label><br>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="Satelital" value="Satelital"
+							<input type="checkbox" name="Satelital" value="Satelital" id="satelital"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[4]=='s') echo 'checked';
@@ -565,7 +567,7 @@
 						</label>
 
 						<label class="checkbox-inline">
-							<input type="checkbox" name="otro" value="otro"
+							<input type="checkbox" name="otro" value="otro" id="otro"
 							<?php
 							if($datoRelevamiento<>NULL){
 								if($otrosC[5]=='s') echo 'checked';
