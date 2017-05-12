@@ -78,13 +78,22 @@ class Escuela
 
 	}
 
-	public function editar()
+	public function editar($tipo=NULL)
 	{
 
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
+		if($tipo=='soloBasico'){
+			$sentencia="UPDATE escuelas
+									SET nombre = '$this->nombre',
+											domicilio = '$this->domicilio',
+											localidadId = '$this->localidadId',
+											telefono = '$this->telefono'
+										WHERE escuelaId = '$this->escuelaId'";
 
-		$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId',cue = '$this->cue', numero = '$this->numero', nombre = '$this->nombre',domicilio = '$this->domicilio', nivel = '$this->nivel', localidadId = '$this->localidadId', turnos = '$this->turnos', telefono = '$this->telefono' , ubicacion = '$this->ubicacion', sitio = '$this->sitio', facebook = '$this->facebook', twitter = '$this->twitter', youtube = '$this->youtube' WHERE escuelaId = '$this->escuelaId'";
+		}else{
+			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId',cue = '$this->cue', numero = '$this->numero', nombre = '$this->nombre',domicilio = '$this->domicilio', nivel = '$this->nivel', localidadId = '$this->localidadId', turnos = '$this->turnos', telefono = '$this->telefono' , ubicacion = '$this->ubicacion', sitio = '$this->sitio', facebook = '$this->facebook', twitter = '$this->twitter', youtube = '$this->youtube' WHERE escuelaId = '$this->escuelaId'";
+		}
 
 		if ($conexion->query($sentencia)) {
 			return 1;
@@ -116,7 +125,7 @@ class Escuela
 			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 		}
 
-
+   echo $sentencia; 
 		if ($conexion->query($sentencia)) {
 			return 1;
 		}else
@@ -348,6 +357,11 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
    {
 		return $this->referenteId;
 	}
+
+	public function getEscuelaId()
+	{
+	 return $this->escuelaId;
+ }
 
 	public function getCue()
    {

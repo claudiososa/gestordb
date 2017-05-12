@@ -1,10 +1,16 @@
 <?php
 include_once('includes/mod_cen/clases/conexion.php');
 include_once("includes/mod_cen/clases/maestro.php");
+include_once("includes/mod_cen/clases/localidades.php");
 
-class RelevamientoElectrico
+class AulaSatelite
 {
-	private $escuelaId;
+	private $aulaSateliteId;
+  private $escuelaId;
+  private $nombre;
+  private $domicilio;
+  private $telefono;
+  private $localidadId;
  	private $otroCue;
  	private $internado;
  	private $totalCargos;
@@ -24,7 +30,12 @@ class RelevamientoElectrico
 	private $tipoConectividad;
 	private $comentario;
 
- 	function __construct($escuelaId=NULL,
+ 	function __construct($aulaSateliteId=NULL,
+                      $escuelaId=NULL,
+                      $nombre=NULL,
+                      $domicilio=NULL,
+                      $telefono=NULL,
+                      $localidadId=NULL,
 											$otroCue=NULL,
 											$internado=NULL,
 											$totalCargos=NULL,
@@ -45,7 +56,12 @@ class RelevamientoElectrico
 											$comentario=NULL)
 	{
 			 //seteo los atributos
-		 	$this->escuelaId = $escuelaId;
+		 	$this->aulaSateliteId = $aulaSateliteId;
+      $this->escuelaId = $escuelaId;
+      $this->nombre = $nombre;
+      $this->domicilio = $domicilio;
+      $this->telefono = $telefono;
+      $this->localidadId = $localidadId;
 		 	$this->otroCue = $otroCue;
 		 	$this->internado = $internado;
 		 	$this->totalCargos = $totalCargos;
@@ -66,16 +82,26 @@ class RelevamientoElectrico
 			$this->comentario = $comentario;
 	}
 
-	public function agregar()
+	public function agregar($tipo)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
+    if($tipo=='soloAula'){
+      $sentencia="INSERT INTO aulaSatelite (aulaSateliteId,escuelaId,nombre,domicilio,telefono,localidadId)
+      VALUES (NULL,
+              '". $this->escuelaId."',
+              '". $this->nombre."',
+              '". $this->domicilio."',
+              '". $this->telefono."',
+              '". $this->localidadId."');";
+    }elseif($tipo=='relevamiento'){
+      $sentencia="INSERT INTO aulaSatelite (aulaSateliteId,escuelaId,nombre,domicilio,telefono,localidadId,otroCue,internado,totalCargos,matricula,energia,tipoInstalacion,comoFunciona,cantidadAulas,cantidadPcInstaladas,heladera,otros,suficienteEnergia,calefon,necesitaCalefonSolar,necesitaBombeoAgua,conectividad,tipoConectividad,comentario)
+      VALUES ($this->aulaSateliteId,'". $this->escuelaId."','". $this->nombre."','". $this->domicilio."','". $this->telefono."','". $this->localidadId."','". $this->otroCue."','". $this->internado."','". $this->totalCargos."','".$this->matricula."','". $this->energia."','". $this->tipoInstalacion."','". $this->comoFunciona."','". $this->cantidadAulas."','". $this->cantidadPcInstaladas."','".$this->heladera."','".$this->otros."','".$this->suficienteEnergia."','".$this->calefon."','".$this->necesitaCalefonSolar."','".$this->necesitaBombeoAgua."','".$this->conectividad."','".$this->tipoConectividad."','".$this->comentario."');";
 
-		$sentencia="INSERT INTO relevamientoElectrico (escuelaId,otroCue,internado,totalCargos,matricula,energia,tipoInstalacion,comoFunciona,cantidadAulas,cantidadPcInstaladas,heladera,otros,suficienteEnergia,calefon,necesitaCalefonSolar,necesitaBombeoAgua,conectividad,tipoConectividad,comentario)
-		VALUES ($this->escuelaId,'". $this->otroCue."','". $this->internado."','". $this->totalCargos."','".$this->matricula."','". $this->energia."','". $this->tipoInstalacion."','". $this->comoFunciona."','". $this->cantidadAulas."','". $this->cantidadPcInstaladas."','".$this->heladera."','".$this->otros."','".$this->suficienteEnergia."','".$this->calefon."','".$this->necesitaCalefonSolar."','".$this->necesitaBombeoAgua."','".$this->conectividad."','".$this->tipoConectividad."','".$this->comentario."');";
+    }
 
 		if ($conexion->query($sentencia)) {
-			return 'success';
+			return 'agregarcompleto';
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
@@ -83,16 +109,46 @@ class RelevamientoElectrico
 
 	}
 
-	public function editar()
+	public function editar($tipo)
 	{
 
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
+    if($tipo=='soloAula'){
+    $sentencia="UPDATE aulaSatelite
+                SET escuelaId ='$this->escuelaId',
+										nombre ='$this->nombre',
+                    domicilio ='$this->domicilio',
+                    telefono ='$this->telefono',
+                    localidadId ='$this->localidadId'
+                WHERE aulaSateliteId = '$this->aulaSateliteId'";
+    }elseif($tipo=='relevamiento'){
+      $sentencia="UPDATE aulaSatelite
+                  SET otroCue ='$this->otroCue',
+                      internado = '$this->internado',
+                      totalCargos = '$this->totalCargos',
+                      matricula = '$this->matricula',
+                      energia = '$this->energia',
+                      tipoInstalacion = '$this->tipoInstalacion',
+                      comoFunciona = '$this->comoFunciona',
+                      cantidadAulas = '$this->cantidadAulas',
+                      cantidadPcInstaladas = '$this->cantidadPcInstaladas',
+                      heladera = '$this->heladera',
+                      otros = '$this->otros',
+                      suficienteEnergia = '$this->suficienteEnergia',
+                      calefon = '$this->calefon',
+                      necesitaCalefonSolar = '$this->necesitaCalefonSolar',
+                      necesitaBombeoAgua = '$this->necesitaBombeoAgua',
+                      conectividad = '$this->conectividad',
+                      tipoConectividad = '$this->tipoConectividad',
+                      comentario = '$this->comentario'
+                    WHERE aulaSateliteId = '$this->aulaSateliteId'";
+    }
 
-		$sentencia="UPDATE relevamientoElectrico SET otroCue ='$this->otroCue',internado = '$this->internado', totalCargos = '$this->totalCargos', matricula = '$this->matricula',energia = '$this->energia', tipoInstalacion = '$this->tipoInstalacion',comoFunciona = '$this->comoFunciona', cantidadAulas = '$this->cantidadAulas', cantidadPcInstaladas = '$this->cantidadPcInstaladas', heladera = '$this->heladera', otros = '$this->otros' , suficienteEnergia = '$this->suficienteEnergia', calefon = '$this->calefon', necesitaCalefonSolar = '$this->necesitaCalefonSolar', necesitaBombeoAgua = '$this->necesitaBombeoAgua',conectividad = '$this->conectividad',tipoConectividad = '$this->tipoConectividad', comentario = '$this->comentario' WHERE escuelaId = '$this->escuelaId'";
+		//echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
-			return 'success';
+			return 'editarcompleto';
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
@@ -101,10 +157,10 @@ class RelevamientoElectrico
 
 	public function eliminar()
 	{
-        $nuevaConexion=new Conexion();
+    $nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="DELETE FROM relevamientoElectrico WHERE escuelaId=".$this->escuelaId;
+		$sentencia="DELETE FROM aulaSatelite WHERE aulaSateliteId=".$this->aulaSateliteId;
 		if ($conexion->query($sentencia)) {
 			header("Location:index.php?id=1");
 
@@ -119,14 +175,14 @@ class RelevamientoElectrico
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT * FROM relevamientoElectrico";
+		$sentencia="SELECT * FROM aulaSatelite";
 		$carga=0;
 		$cargalocali=0;
-		if($this->otroCue!=NULL || $this->internado!=NULL || $this->escuelaId!=NULL
+		if($this->otroCue!=NULL || $this->internado!=NULL || $this->aulaSateliteId!=NULL
 			 || $this->totalCargos!=NULL || $this->matricula!=NULL
 			 || $this->energia!=NULL || $this->tipoInstalacion!=NULL
 			 || $this->cantidadAulas!=NULL || $this->cantidadPcInstaladas!=NULL
-			 || $this->escuelaId!=NULL || $this->otroCuePmi!=NULL)
+			 || $this->aulaSateliteId!=NULL || $this->otroCue!=NULL || $this->escuelaId!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -148,9 +204,16 @@ class RelevamientoElectrico
 			$sentencia.=" totalCargos = $this->totalCargos && ";
 			$carga=1;
 		}
+
 		if($this->escuelaId!=NULL)
 		{
-			$sentencia.=" escuelaId=$this->escuelaId && ";
+			$sentencia.=" escuelaId = $this->escuelaId && ";
+			$carga=1;
+		}
+
+		if($this->aulaSateliteId!=NULL)
+		{
+			$sentencia.=" aulaSateliteId=$this->aulaSateliteId && ";
 			$carga=1;
 		}
 
@@ -184,7 +247,7 @@ class RelevamientoElectrico
 
 		}
 
-		$sentencia.="  ORDER BY escuelaId";
+		$sentencia.="  ORDER BY aulaSateliteId";
 
 	//echo $sentencia."<br>";
 		return $conexion->query($sentencia);
@@ -196,10 +259,15 @@ class RelevamientoElectrico
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT * FROM relevamientoElectrico WHERE escuelaId=".$this->escuelaId;
+		$sentencia="SELECT * FROM aulaSatelite WHERE aulaSateliteId=".$this->aulaSateliteId;
 		$resultado=$conexion->query($sentencia);
 		$elemento = mysqli_fetch_object($resultado);
-		$this->escuelaId = $elemento->escuelaId;
+		$this->aulaSateliteId = $elemento->aulaSateliteId;
+    $this->escuelaId = $elemento->escuelaId;
+    $this->nombre = $elemento->nombre;
+    $this->telefono = $elemento->telefono;
+    $this->domicilio = $elemento->domicilio;
+		$this->localidadId = $elemento->localidadId;
 	 	$this->otroCue = $elemento->otroCue;
 	 	$this->internado = $elemento->internado;
 	 	$this->totalCargos = $elemento->totalCargos;
@@ -209,10 +277,13 @@ class RelevamientoElectrico
 	 	$this->cantidadAulas = $elemento->cantidadAulas;
 	 	$this->cantidadPcInstaladas = $elemento->cantidadPcInstaladas;
 	 	$this->heladera = $elemento->heladera;
+		$this->otros = $elemento->otros;
 	 	$this->suficienteEnergia = $elemento->suficienteEnergia;
 	 	$this->calefon = $elemento->calefon;
 	 	$this->necesitaCalefonSolar = $elemento->necesitaCalefonSolar;
 	 	$this->necesitaBombeoAgua = $elemento->necesitaBombeoAgua;
+		$this->conectividad = $elemento->conectividad;
+		$this->tipoConectividad = $elemento->tipoConectividad;
 	 	$this->comentario = $elemento->comentario;
 		return $this;
 
@@ -230,43 +301,4 @@ class RelevamientoElectrico
 			$this->$var=$valor;
 		}
 
-}
-
-$estado=array();
-
-if(isset($_POST["referente_id"])) {
-	//incluye clase referente - crear referente y busca segun el referente_id enviado por post
-	include_once('referente.php');
-	$referente=new Referente($_POST["referente_id"]);
-	$buscar_referente=$referente->buscar();
-	$dato_referente=mysqli_fetch_object($buscar_referente);
-	//****************************************************************************
-
-	// crea persona y busca persona de acuerdo a personaId obtenido del objeto $dato_referente
-	$persona=new Persona($dato_referente->personaId);
-
-	$buscar_persona=$persona->buscar();
-	$dato_persona=mysqli_fetch_object($buscar_persona);
-	//********************************************************************************
-$escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
-	//busca escueala de acuerdo a escuelaId enviado por post y actualiza el referenteId acargo del colegio
-	if(isset($_POST['pmi'])){
-		$editar_escuela=$escuela->editarref("pmi");
-	}else{
-		$editar_escuela=$escuela->editarref();
-	}
-
-
-	$editar_escuela=$escuela->editarref("pmi");
-
-	if($editar_escuela==1){
-		$borrar= 1;
-	}
-
-
-	if($borrar==1) {
-
-		$estado=array("estado"=>$dato_persona->apellido.", ".$dato_persona->nombre,	"total"=>$dato_persona->apellido,);
-	}
-	echo json_encode($estado);
 }

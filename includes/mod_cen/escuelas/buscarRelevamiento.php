@@ -3,6 +3,7 @@ include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
 include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/RelevamientoElectrico.php");
+include_once("includes/mod_cen/clases/AulaSatelite.php");
 //include_once("includes/mod_cen/clases/persona.php");
 //include_once("includes/mod_cen/clases/referente.php");
 //include_once("includes/mod_cen/clases/rti.php");
@@ -14,15 +15,18 @@ include_once("includes/mod_cen/clases/RelevamientoElectrico.php");
  */
 include_once("includes/mod_cen/formularios/f_buscar_escuela.php");
 
-if(($_POST))
+if($_POST || isset($_GET['escuelaId']))
 	{
-				$cue=$_POST["cue"];
-				$numero=$_POST["numero"];
-				$nombre=$_POST["nombre"];
-				$localidadId=$_POST["localidadId"];
 
-				$escuela=new Escuela(NULL,null,$cue,$numero,$nombre,null,null,$localidadId,null);
-
+				if(isset($_GET['escuelaId'])){
+					$escuela=new Escuela($_GET['escuelaId']);
+				}else{
+					$cue=$_POST["cue"];
+					$numero=$_POST["numero"];
+					$nombre=$_POST["nombre"];
+					$localidadId=$_POST["localidadId"];
+					$escuela=new Escuela(NULL,null,$cue,$numero,$nombre,null,null,$localidadId,null);
+				}
 				//$resultado = $escuela->buscar();
 				$resultado2= $escuela->buscar();
 				$cantidadEscuela=mysqli_num_rows($resultado2);
@@ -38,6 +42,8 @@ if(($_POST))
                     <th>Nombre Escuela</th>
                     <th>Localidad</th>
                     <th>Acción</th>
+										  <th>Acción</th>
+										<th>Aula Satelite</th>
                   </tr>
                 </thead>
                 <tbody>';
@@ -46,6 +52,7 @@ if(($_POST))
 					$relevamiento = new RelevamientoElectrico($fila->escuelaId);
 					$buscarRelevamiento = $relevamiento->buscar();
 					$datoRelevamiento = mysqli_fetch_object($buscarRelevamiento);
+
 					//var_dump($datoRelevamiento);
 					/*
       		$crearreferente=new Referente($fila->referenteId);
@@ -67,21 +74,56 @@ if(($_POST))
 		  		$busca_loc= $locali->buscar();
 		  		$fila1=mysqli_fetch_object($busca_loc);
 		  		echo "<td>".$fila1->nombre."</td>";
+					echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=23&escuelaId=".$fila->escuelaId."'>Modificar Datos Institución</a>"."</td>";
+
 					if($datoRelevamiento<>NULL)
 					{
 						echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=20&edit&escuelaId=".$fila->escuelaId."'>Modificar Relevamiento</a>"."</td>";
 					}else{
 						echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=20&escuelaId=".$fila->escuelaId."'>Registrar Relevamiento</a>"."</td>";
 					}
-
+					echo "<td><a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=21&escuelaId=".$fila->escuelaId."'>Necesito Agregar Aula Satelite</a>"."</td>";
  	  		  echo "</tr>";
+					$aulaSatelite = new AulaSatelite(null,$fila->escuelaId);
+					$buscarAula = $aulaSatelite->buscar();
+					if($buscarAula){
+						echo "<tr>
+									<td colspan='4'>Aulas Satelites</td>
+									</tr>";
+						echo "<tr>
+									<td>Id</td>
+									<td>Cue</td>
+									<td>Nº Institución</td>
+									<td>Nombre de Satelite</td>
+									<td>Localidad</td>
+									<td>Acción 1</td>
+									<td>Acción 2</td></tr>";
+						while ($fila1 = mysqli_fetch_object($buscarAula)) {
+							  echo '<tr>';
+								echo '<td>'.$fila1->aulaSateliteId.'</td>';
+								echo '<td>'.$fila->cue.'</td>';
+								echo '<td>'.$fila->numero.'</td>';
+								echo '<td>'.$fila1->nombre.'</td>';
+								$locali=new Localidad($fila1->localidadId,null);
+								$busca_loc= $locali->buscar();
+								$fila2=mysqli_fetch_object($busca_loc);
+								echo "<td>".$fila2->nombre."</td>";
+								echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=21&escuelaId=".$fila->escuelaId."&aulaSateliteId=".$fila1->aulaSateliteId."'>Modificar Datos de Aula</a>"."</td>";
+								if($fila1->otros<>""){
+									echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=22&escuelaId=".$fila->escuelaId."&aulaSateliteId=".$fila1->aulaSateliteId."'>Modificar Relevamiento</a>"."</td>";
+								}else{
+									echo "<td>"."<a class='btn btn-primary' href='index.php?mod=slat&men=escuelas&id=22&escuelaId=".$fila->escuelaId."&aulaSateliteId=".$fila1->aulaSateliteId."'>Registrar Relevamiento</a>"."</td>";
+								}
+								echo '</tr>';
+
+						}
+					}
   		  	echo "\n";
       	}
         echo '</table>';
 			  	echo "<div class='span11'>";
 	      	echo "<div id='map'></div>";
 	      	echo "</div>";
-
 
 			//}
 		}else{
