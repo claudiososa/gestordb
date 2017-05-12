@@ -84,7 +84,8 @@ $("#claro , #arnet , #fibertel , #local , #satelital , #otroC").prop("checked", 
 
 */
 var cue= /^[0-9,]+$/;
-var num= /^[0-9]+$/;
+var num= /^[1-9]+[0-9]+$/;
+var compu= /^[0-9]+$/;
 
 $("#botonF_escuela").click(function() {
 
@@ -102,11 +103,11 @@ $("#botonF_escuela").click(function() {
     return false;
 
   }else if ($("#totalCargos").val() =="" || !num.test($("#totalCargos").val())) {
-    $("#totalCargos").focus().after("<span class='error'>Campo obligatorio.Solo Números</span>");
+    $("#totalCargos").focus().after("<span class='error'>Campo obligatorio.Solo Números mayores a 0.</span>");
     return false;
 
   }else if ($("#matricula").val() =="" || !num.test($("#matricula").val())) {
-    $("#matricula").focus().after("<span class='error'>Campo obligatorio.Solo Números</span>");
+    $("#matricula").focus().after("<span class='error'>Campo obligatorio.Solo Números mayores a 0.</span>");
     return false;
   }else if ($("#energia").val().trim() == '0') {
     $("#energia").focus().after("<span class='error'>Campo obligatorio.Seleccione una opcion</span>");
@@ -121,10 +122,10 @@ $("#botonF_escuela").click(function() {
     return false;
 
 }else if ($("#cantidadAulas").val() =="" || !num.test($("#cantidadAulas").val())) {
-  $("#cantidadAulas").focus().after("<span class='error'>Campo obligatorio.Solo Números</span>");
+  $("#cantidadAulas").focus().after("<span class='error'>Campo obligatorio.Solo Números mayores a 0.</span>");
   return false;
-}else if ($("#cantidadPcInstaladas").val() !="" && !num.test($("#cantidadPcInstaladas").val())) {
-  $("#cantidadPcInstaladas").focus().after("<span class='error'>Campo obligatorio.Solo Números</span>");
+}else if ($("#cantidadPcInstaladas").val() !="" && !compu.test($("#cantidadPcInstaladas").val())) {
+  $("#cantidadPcInstaladas").focus().after("<span class='error'>Campo obligatorio.Solo Números mayores a 0.</span>");
   return false;
 }else if ($("#heladera").val().trim() == '0') {
   $("#heladera").focus().after("<span class='error'>Campo obligatorio.Seleccione una opcion</span>");
