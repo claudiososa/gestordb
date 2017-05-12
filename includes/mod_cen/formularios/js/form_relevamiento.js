@@ -163,8 +163,8 @@ $("#cue").keyup(function(){
   }
 })
 
-$("#internado , #energia , #tipoinstalacion , #funcion , #heladera , #energiasuf , #calefon , #calefonsolar , #bombeo , #conectividad").keyup(function(){
-  if ($(this).val() != "0" &&($(this).val())) {
+$("#internado , #energia , #tipoinstalacion , #funcion , #heladera , #energiasuf , #calefon , #calefonsolar , #bombeo , #conectividad").click(function(){
+  if ($(this).val() != '0' && ($(this).val())) {
     $(".error").fadeOut();
     return false;
     //checkbox
