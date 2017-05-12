@@ -212,7 +212,8 @@ class RelevamientoElectrico
 	 	$this->suficienteEnergia = $elemento->suficienteEnergia;
 	 	$this->calefon = $elemento->calefon;
 	 	$this->necesitaCalefonSolar = $elemento->necesitaCalefonSolar;
-	 	$this->necesitaBombeoAgua = $elemento->necesitaBombeoAgua;
+		$this->conectividad = $elemento->conectividad;
+		$this->tipoConectividad = $elemento->tipoConectividad;
 	 	$this->comentario = $elemento->comentario;
 		return $this;
 
