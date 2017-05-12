@@ -84,7 +84,7 @@ $("#claro , #arnet , #fibertel , #local , #satelital , #otroC").prop("checked", 
 
 */
 var cue= /^[0-9,]+$/;
-var num= /^[1-9]+[0-9]+$/;
+var num= /^[1-9][0-9]+$/;
 var compu= /^[0-9]+$/;
 
 $("#botonF_escuela").click(function() {
