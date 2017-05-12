@@ -1,3 +1,5 @@
+<script type="text/javascript" src="includes/mod_cen/formularios/js/aulasatelite.js">
+</script>
 <form name="form" action="" method="POST" >
 	<input type="hidden" name="escuelaId" value="<?php echo $escuelaId ?>"/>
   <?php
@@ -37,7 +39,7 @@
 				<label class="control-label"><br>Domicilio de Aula Satelite:<label>
     </div>
     <div class="col-md-12">
-      <input class="form-control"size="30" type="text" name="domicilio" value="<?php if($datosAulaSatelite) echo $datosAulaSatelite->domicilio  ?>">
+      <input class="form-control"size="30" type="text" id="domicilio"name="domicilio" value="<?php if($datosAulaSatelite) echo $datosAulaSatelite->domicilio  ?>">
     </div>
 </div>
 <div class="form-group">
