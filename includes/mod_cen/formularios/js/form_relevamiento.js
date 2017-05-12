@@ -170,8 +170,14 @@ $("#internado , #energia , #tipoinstalacion , #funcion , #heladera , #energiasuf
     //checkbox
   }
 })
-$("#totalCargos , #matricula , #cantidadAulas , #cantidadPcInstaladas").keyup(function(){
+$("#totalCargos , #matricula , #cantidadAulas").keyup(function(){
   if ($(this).val() != "" && num.test($(this).val())) {
+    $(".error").fadeOut();
+    return false;
+  }
+})
+$("#cantidadPcInstaladas").keyup(function(){
+  if ($(this).val() != "" && compu.test($(this).val())) {
     $(".error").fadeOut();
     return false;
   }
