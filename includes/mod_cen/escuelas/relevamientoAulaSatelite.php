@@ -128,7 +128,7 @@
      if(isset($_GET['aulaSateliteId'])){
        $relevamiento= new AulaSatelite($_GET['aulaSateliteId']);
        $datosAulaSatelite=$relevamiento->getContacto();
-       //var_dump($datosAulaSatelite);
+       var_dump($datosAulaSatelite);
      }else{
        $datosAulaSatelite=false;
      }
