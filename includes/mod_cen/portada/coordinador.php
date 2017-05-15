@@ -394,21 +394,6 @@ $(document).ready(function()
 		}
 );
 </script>
-<div class="row">
 
-
-<div class="panel panel-primary">
-	<div class="panel-heading"><span class="panel-title clickable">
-		<h4>Documentación<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4>
-	</span>
-	</div>
-	<div class="panel-body">
-		
-<?php
-
-require_once("includes/mod_cen/documentos/coordinador-conectar.php");
- ?>
-
-</div>
 </div>
 </div>
