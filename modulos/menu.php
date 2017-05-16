@@ -38,6 +38,9 @@
 			case "Relevamiento":
 									include("includes/mod_men/relevamiento.php");
 									break;
+			case "DirectorNivelSecundario":
+									include("includes/mod_men/directorNivelSecundario.php");
+									break;
 			}
 		}
 			else {
