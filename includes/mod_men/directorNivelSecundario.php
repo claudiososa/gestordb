@@ -17,13 +17,7 @@
         <li class="active"><a href="index.php?mod=slat&men=user&id=2">Mis ETJ <span class="sr-only">(current)</span></a></li>
         <li><a href="index.php?mod=slat&men=admin&id=9">Asignar Escuelas PMI</a></li>
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informes <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-                <li ><a href="index.php?mod=slat&men=informe&id=8">Estadisticas</a></li>
-                <li ><a href="index.php?mod=slat&men=informe&id=9&ref=coordinador">Visitas Mesuales</a></li>
-          </ul>
-        </li>
+  
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
           <ul class="dropdown-menu">
