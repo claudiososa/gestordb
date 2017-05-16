@@ -16,7 +16,6 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.php?mod=slat&men=user&id=3">Mis Escuelas <span class="sr-only">(current)</span></a></li>
 
-        <li><a href="index.php?mod=slat&men=admin&id=9">Asignar Escuelas PMI</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
           <ul class="dropdown-menu">
