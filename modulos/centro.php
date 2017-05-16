@@ -109,6 +109,9 @@
 									case 'ATT':
 												$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
 												break;
+									case 'Supervisor-Secundaria':
+															$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
+															break;
 
 									default:
 										# code...
