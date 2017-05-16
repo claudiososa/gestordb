@@ -1,8 +1,8 @@
-<!--<script type="text/javascript" src="includes/mod_cen/documentos/panel.js"></script>-->
-<link href="includes/mod_cen/documentos/estilos.css" rel="stylesheet" type="text/css">
+<!--<script type="text/javascript" src="includes/mod_cen/documentos/panel.js"></script>
+<link href="includes/mod_cen/documentos/estilos.css" rel="stylesheet" type="text/css">-->
 
 
-<div class="container">
+<div class="container-fluid">
   <!--categoria AYUDA DBMS-->
   <div class="row">
        <div class="col-md-6">
@@ -16,10 +16,10 @@
   <div class="panel-body">
   <div class="panel-group">
     <div class="panel panel-success">
-      <div class="panel-heading"><a data-toggle="collapse" href="#collapse"><h3 class="panel-title"><b>Asignación de Escuelas</b></h3></a>
+      <div class="panel-heading"><a data-toggle="collapse" href="#collapse"><h3 class="panel-title"><font color="darkolivegreen"><b>Asignación de Escuelas</b></font></h3></a>
       </div>
   <div id="collapse" class="panel-collapse collapse">
-      <div class="panel-body"><center><a href="documentacion/cordinador-pmi/Tutorial-asignacion-escuelas-DBMS.pdf" download="Tutorial-asignacion-escuelas-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><font color="darkolivegreen">Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para asignación de escuelas a Referentes </div>
+      <div class="panel-body"><center><a href="documentacion/cordinador-pmi/Tutorial-asignacion-escuelas-DBMS.pdf" download="Tutorial-asignacion-escuelas-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><font color="darkolivegreen"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span>Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para asignación de escuelas a Referentes </div>
       </div>
   </div>
   </div>
@@ -27,10 +27,10 @@
 
   <div class="panel-group">
     <div class="panel panel-success">
-      <div class="panel-heading"><a data-toggle="collapse" href="#collapse1"><h3 class="panel-title"><b>Cambio de Contraseña</b></h3></a>
+      <div class="panel-heading"><a data-toggle="collapse" href="#collapse1"><h3 class="panel-title"><font color="darkolivegreen"><b>Cambio de Contraseña</b></font></h3></a>
       </div>
   <div id="collapse1" class="panel-collapse collapse">
-      <div class="panel-body"><center><a href="documentacion/general/Tutorial-cambio-contraseña-DBMS.pdf" download="Tutorial-cambio-contraseña-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><font color="darkolivegreen">Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para el cambio de contraseña del usuario. </div>
+      <div class="panel-body"><center><a href="documentacion/general/Tutorial-cambio-contraseña-DBMS.pdf" download="Tutorial-cambio-contraseña-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><font color="darkolivegreen"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span>Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para el cambio de contraseña del usuario. </div>
       </div>
   </div>
   </div>
@@ -38,41 +38,41 @@
 
   <div class="panel-group">
             <div class="panel panel-success">
-                 <div class="panel-heading"><a data-toggle="collapse" href="#collapse2"><h3 class="panel-title"><b>Creación de Informes</b></h3></a>
+                 <div class="panel-heading"><a data-toggle="collapse" href="#collapse2"><h3 class="panel-title"><font color="darkolivegreen"><b>Creación de Informes</b></font></h3></a>
                  </div>
   <div id="collapse2" class="panel-collapse collapse">
-            <div class="panel-body"><center><a href="documentacion/general/Tutorial-creacion-informes-DBMS.pdf" download="Tutorial-creacion-informes-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><font color="darkolivegreen">Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para la creación de informes de Instituciones. </div>
+            <div class="panel-body"><center><a href="documentacion/general/Tutorial-creacion-informes-DBMS.pdf" download="Tutorial-creacion-informes-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><font color="darkolivegreen"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span>Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para la creación de informes de Instituciones. </div>
             </div>
             </div>
             </div>
 
   <div class="panel-group">
             <div class="panel panel-success">
-                <div class="panel-heading"><a data-toggle="collapse" href="#collapse3"><h3 class="panel-title"><b>Edición Perfil:Ubicación</b></h3></a>
+                <div class="panel-heading"><a data-toggle="collapse" href="#collapse3"><h3 class="panel-title"><font color="darkolivegreen"><b>Edición Perfil:Ubicación</b></font></h3></a>
            </div>
   <div id="collapse3" class="panel-collapse collapse">
-           <div class="panel-body"><center><a href="documentacion/general/Tutorial-edicionperfil-ubicacion-DBMS.pdf" download="Tutorial-edicionperfil-ubicacion-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><font color="darkolivegreen">Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para actualizar datos del perfil del usuario incorporando las coordenadas desde Google Maps en el campo "Ubicación". </div>
+           <div class="panel-body"><center><a href="documentacion/general/Tutorial-edicionperfil-ubicacion-DBMS.pdf" download="Tutorial-edicionperfil-ubicacion-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><font color="darkolivegreen"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span>Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para actualizar datos del perfil del usuario incorporando las coordenadas desde Google Maps en el campo "Ubicación". </div>
            </div>
            </div></div>
 
   <div class="panel-group">
     <div class="panel panel-success">
-                 <div class="panel-heading"><a data-toggle="collapse" href="#collapse4"><h3 class="panel-title"><b>Edición de Escuelas</b></h3></a>
+                 <div class="panel-heading"><a data-toggle="collapse" href="#collapse4"><h3 class="panel-title"><font color="darkolivegreen"><b>Edición de Escuelas</b></font></h3></a>
                  </div>
   <div id="collapse4" class="panel-collapse collapse">
-            <div class="panel-body"><center><a href="documentacion/ett/Tutorial-edicion-escuelas-DBMS.pdf" download="Tutorial-edicion-escuelas-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><font color="darkolivegreen">Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para la modificación de los datos de escuelas (Nombre, Domicilio, Teléfonos, Nivel, Turnos, Localidad,etc.).</div>
+            <div class="panel-body"><center><a href="documentacion/ett/Tutorial-edicion-escuelas-DBMS.pdf" download="Tutorial-edicion-escuelas-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><font color="darkolivegreen"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span>Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para la modificación de los datos de escuelas (Nombre, Domicilio, Teléfonos, Nivel, Turnos, Localidad,etc.).</div>
             </div>
         </div>
           </div>
 
   <div class="panel-group">
             <div class="panel panel-success">
-                 <div class="panel-heading"><a data-toggle="collapse" href="#collapse5"><h3 class="panel-title"><b>Modificación del Director</b></h3></a>
+                 <div class="panel-heading"><a data-toggle="collapse" href="#collapse5"><h3 class="panel-title"><font color="darkolivegreen"><b>Modificación del Director</b></font></h3></a>
                  </div>
 
             </div>
   <div id="collapse5" class="panel-collapse collapse">
-            <div class="panel-body"><center><a href="documentacion/ett/Tutorial-modificacion-datos-director-DBMS.pdf" download="Tutorial-modificacion-datos-director-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><font color="darkolivegreen">Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para la modificación o asignación de los datos del director/a de una institución.(Nombre, Apellido, Teléfonos, etc.).</div>
+            <div class="panel-body"><center><a href="documentacion/ett/Tutorial-modificacion-datos-director-DBMS.pdf" download="Tutorial-modificacion-datos-director-DBMS.pdf"><button type="button" class="btn btn-default btn-lg"><font color="darkolivegreen"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span>Descargar&nbsp;</font></button></a></center><br>Tutorial .PDF para la modificación o asignación de los datos del director/a de una institución.(Nombre, Apellido, Teléfonos, etc.).</div>
        </div>
                </div>
 

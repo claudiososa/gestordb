@@ -109,6 +109,9 @@
 									case 'ATT':
 												$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
 												break;
+									case 'Supervisor-Secundaria':
+															$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
+															break;
 
 									default:
 										# code...
@@ -422,6 +425,13 @@
 								//		include("includes/mod_cen/denegado.php");
 								//	}
 									break;
+				case 9:
+								//if($_SESSION['tipo']=='CoordinadorPMI' || $_SESSION['tipo']=='admin') {
+								include("includes/mod_cen/admin/escuelaAsignarSuperSec.php");
+								//	}else {
+							//		include("includes/mod_cen/denegado.php");
+								//	}
+								break;
 				}
 
 			//   default:

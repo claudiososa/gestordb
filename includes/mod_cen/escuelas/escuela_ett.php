@@ -22,6 +22,9 @@ switch ($_SESSION["tipo"]) {
 	case 'ATT':
 				$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
 				break;
+	case 'Supervisor-Secundaria':
+							$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
+							break;
 
 	default:
 		# code...
