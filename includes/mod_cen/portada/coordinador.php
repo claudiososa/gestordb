@@ -1,4 +1,4 @@
-	<script type="text/javascript" src="includes/mod_cen/documentos/panel.js"></script>
+	<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -53,7 +53,7 @@ echo '<div class="container">';
 	 if(mysqli_num_rows($buscar_alta)>0){
 	 	?>
 	 	<div class="panel panel-primary">
-			<div class="panel-heading"><span class="panel-title clickable">
+			<div class="panel-heading" id="panel1"><span class="panel-title clickable">
 				<h4>Informes Prioridad Alta<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 			</div>
 	 		<div class="panel-body">
@@ -114,7 +114,7 @@ echo '<div class="container">';
 	 if(mysqli_num_rows($buscar_media)>0){
 		?>
 		<div class="panel panel-primary">
-			<div class="panel-heading"><span class="panel-title clickable">
+			<div class="panel-heading" id="panel2"><span class="panel-title clickable">
 				<h4>Informes prioridad Media<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 			</div>
 			<div class="panel-body">
@@ -176,7 +176,7 @@ echo '<div class="container">';
 		if(mysqli_num_rows($buscar_ett)>0){
 			?>
 			<div class="panel panel-primary">
-				<div class="panel-heading"><span class="panel-title clickable">
+				<div class="panel-heading" id="panel3"><span class="panel-title clickable">
 					<h4>Informes por ETT<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 				</div>
 				<div class="panel-body">
@@ -226,7 +226,7 @@ echo "<div class='col-md-6'>";
 if(mysqli_num_rows($b_informe)>0){
 	?>
 	<div class="panel panel-primary">
-		<div class="panel-heading"><span class="panel-title clickable">
+		<div class="panel-heading" id="panel4"><span class="panel-title clickable">
 			<h4>Ultimos informes creados<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
 		<div class="panel-body">
@@ -276,7 +276,7 @@ if(mysqli_num_rows($b_informe)>0){
 
 
 <div class="panel panel-primary">
-	<div class="panel-heading"><span class="panel-title clickable">
+	<div class="panel-heading" id="panel5"><span class="panel-title clickable">
 		<h4>Informes ETJ a Cargo<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 	</div>
 	<div class="panel-body">
@@ -319,7 +319,7 @@ if(mysqli_num_rows($b_informe)>0){
 if(mysqli_num_rows($b_mis_informe)>0){
 ?>
 <div class="panel panel-primary">
-	<div class="panel-heading"><span class="panel-title clickable">
+	<div class="panel-heading" id="panel6"><span class="panel-title clickable">
 		<h4>Mis Informes (últimos 10)<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 	</div>
 <div class="panel-body">
@@ -394,6 +394,19 @@ $(document).ready(function()
 		}
 );
 </script>
+<div class="row">
 
+<div class="panel panel-primary">
+	<div class="panel-heading" id="panel7"><span class="panel-title clickable">
+		<h4>Documentación<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
+	</div>
+	<div class="panel-body">
+
+<?php
+require_once("includes/mod_cen/documentos/coordinador-conectar.php");
+?>
+</div>
+</div>
+</div>
 </div>
 </div>
