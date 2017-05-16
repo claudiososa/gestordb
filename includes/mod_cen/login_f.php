@@ -91,9 +91,9 @@ if(isset($_POST["username"]))
 			 case 'CoordinadorPmi':
 						include_once('includes/mod_cen/portada/coordinadorpmi.php');
 						break;
-				case 'Supervisor':
-					include_once('includes/mod_cen/portada/supervisor-secundaria.php');
-					break;
+				case 'Supervisor-Secundaria':
+						include_once('includes/mod_cen/portada/supervisor-secundaria.php');
+						break;
 				case 'Supervisor-Nivel-Superior':
 					include_once('includes/mod_cen/portada/Supervisor-Nivel-Superior.php');
 					break;

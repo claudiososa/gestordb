@@ -22,6 +22,7 @@ class Escuela
 	private $twitter;
 	private $youtube;
 	private $referenteIdPmi;
+	private $referenteIdSuperSec;
 
  	function __construct($escuelaId=NULL,
 											$referenteId=NULL,
@@ -39,7 +40,8 @@ class Escuela
 											$facebook=NULL,
 											$twitter=NULL,
 											$youtube=NULL,
-											$referenteIdPmi=NULL)
+											$referenteIdPmi=NULL,
+											$referenteIdSuperSec=NULL)
 	{
 			 //seteo los atributos
 		 	$this->escuelaId = $escuelaId;
@@ -59,6 +61,7 @@ class Escuela
 			$this->twitter = $twitter;
 			$this->youtube = $youtube;
 			$this->referenteIdPmi = $referenteIdPmi;
+			$this->referenteIdSuperSec = $referenteIdSuperSec;
 	}
 
 	public function agregar()
@@ -115,6 +118,9 @@ class Escuela
 			case 'pmi':
 				$sentencia="UPDATE escuelas SET referenteIdPmi ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 				break;
+			case 'supervisor':
+					$sentencia="UPDATE escuelas SET referenteIdSuperSec ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
+					break;
 
 			default:
 				# code...
@@ -125,7 +131,7 @@ class Escuela
 			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 		}
 
-   echo $sentencia; 
+   echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
 		}else
@@ -152,10 +158,12 @@ class Escuela
 	public function buscarRef($tipoReferente=NULL){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		if($tipoReferente<>"ATT"){
-			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteId=$this->referenteId";
-		}else{
+		if($tipoReferente=="ATT"){
 			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteIdPmi=$this->referenteIdPmi";
+		}elseif($tipoReferente=="Supervisor-Secundaria"){
+			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteIdSuperSec=$this->referenteIdSuperSec";
+		}else{
+			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteId=$this->referenteId";
 		}
 
 
@@ -211,7 +219,7 @@ class Escuela
 			 || $this->numero!=NULL || $this->nombre!=NULL
 			 || $this->domicilio!=NULL || $this->nivel!=NULL
 			 || $this->localidadId!=NULL || $this->turnos!=NULL
-			 || $this->escuelaId!=NULL || $this->referenteIdPmi!=NULL)
+			 || $this->escuelaId!=NULL || $this->referenteIdPmi!=NULL || $this->referenteIdSuperSec!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -225,6 +233,12 @@ class Escuela
 		if($this->referenteIdPmi!=NULL)
 		{
 			$sentencia.=" referenteIdPmi =$this->referenteIdPmi && ";
+			$carga=1;
+		}
+
+		if($this->referenteIdSuperSec!=NULL)
+		{
+			$sentencia.=" referenteIdSuperSec =$this->referenteIdSuperSec && ";
 			$carga=1;
 		}
 
@@ -315,10 +329,12 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		if($tipoReferente<>"ATT"){
-			$sentencia="SELECT * FROM escuelas WHERE referenteId=".$this->referenteId;
-		}else{
+		if($tipoReferente=="ATT"){
 			$sentencia="SELECT * FROM escuelas WHERE referenteIdPmi=".$this->referenteIdPmi;
+		}elseif($tipoReferente=="Supervisor-Secundaria"){
+			$sentencia="SELECT * FROM escuelas WHERE referenteIdSuperSec=".$this->referenteIdSuperSec;
+		}else{
+			$sentencia="SELECT * FROM escuelas WHERE referenteId=".$this->referenteId;
 		}
 
 		//echo $sentencia;
@@ -349,6 +365,8 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 	 	$this->facebook = $elemento->facebook;
 	 	$this->twitter = $elemento->twitter;
 	 	$this->youtube = $elemento->youtube;
+		$this->referenteIdPmi = $elemento->referenteIdPmi;
+		$this->referenteIdSuperSec = $elemento->referenteIdSuperSec;
 		return $this;
 
     }
@@ -460,12 +478,14 @@ $escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
 	//busca escueala de acuerdo a escuelaId enviado por post y actualiza el referenteId acargo del colegio
 	if(isset($_POST['pmi'])){
 		$editar_escuela=$escuela->editarref("pmi");
+	}elseif(isset($_POST['supervisor'])){
+		$editar_escuela=$escuela->editarref("supervisor");
 	}else{
 		$editar_escuela=$escuela->editarref();
 	}
 
 
-	$editar_escuela=$escuela->editarref("pmi");
+	//$editar_escuela=$escuela->editarref("pmi");
 
 	if($editar_escuela==1){
 		$borrar= 1;

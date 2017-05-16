@@ -17,8 +17,8 @@
 			case "Primaria":
 				include("includes/mod_men/primaria.php");
 				break;
-			case "Supervisor":
-				include("includes/mod_men/supervisor.php");
+			case "Supervisor-Secundaria":
+				include("includes/mod_men/supervisor-secundaria.php");
 				break;
 			case "Supervisor-Nivel-Superior":
 				include("includes/mod_men/supervisor-nivel-superior.php");
