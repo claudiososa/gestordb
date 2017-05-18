@@ -55,6 +55,44 @@ public function editar()
 	}
 
 
+
+public function eliminar()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="DELETE FROM permiso_categoria_doc WHERE $categoriaPermisoId = '$this->categoriaPermisoId'";
+		if ($conexion->query($sentencia)) {
+			return 1;
+
+		}else
+		{
+			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		}
+
+	}
+
+public function eliminarPermisos()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="DELETE FROM permiso_categoria_doc WHERE categoriaDocId = '$this->categoriaDocId'";
+		if ($conexion->query($sentencia)) {
+			return 1;
+
+		}else
+		{
+			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		}
+
+	}
+
+
+
+
+
+
 public function buscar($limit=NULL)
 	{
 		$nuevaConexion=new Conexion();
@@ -87,7 +125,7 @@ public function buscar($limit=NULL)
 
 		}
 
-		$sentencia.="  ORDER BY categoriaPermisoId DESC";
+		$sentencia.="  ORDER BY categoriaPermisoId ASC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
@@ -156,3 +194,24 @@ public function buscar($limit=NULL)
 	}
 
 }
+
+if(isset($_POST["opcion"])){
+
+
+$tipoPermiso = new PermisoCategoriaDoc(NULL,$_POST["opcion"],Null);
+$buscarTipoPermiso = $tipoPermiso->buscar();
+
+
+   $resultado="<ul class='form-group' id='subtipo' name='subtipo'> ";
+
+
+	while($fila = mysqli_fetch_object($buscarTipoPermiso))
+		{
+			$resultado.="<li class='checkbox'><input type='checkbox' name='tipo[]' value='".$fila->tipoReferente."'>".$fila->tipoReferente."</li>";
+		}
+		
+	$resultado.="</ul>";	
+	
+	echo $resultado;
+}
+

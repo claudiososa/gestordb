@@ -42,14 +42,18 @@ function __construct($documentoId=NULL,$categoriaDocId=NULL,$nombreArchivo=NULL,
    // echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
-			return 1;
+			
+			$orden="SELECT MAX(documentoId) AS id FROM documentos";
+			$datoFila = mysqli_fetch_object($conexion->query($orden));
+
+			return $datoFila->id;
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
 	}
 	
-	// aqui cortamos y debemos pegar de nuevo metodos editar y borrar
+	
 
 public function editar()
 	{
@@ -130,7 +134,7 @@ public function buscar($limit=NULL)
 
 		}
 
-		$sentencia.="  ORDER BY documentoId DESC";
+		$sentencia.="  ORDER BY documentoId ASC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

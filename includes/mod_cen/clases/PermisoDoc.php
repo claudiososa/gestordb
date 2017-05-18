@@ -3,6 +3,7 @@
 include_once("conexion.php");
 include_once("maestro.php");
 
+
 class PermisoDoc
 {
 	private $docPermisoId;
@@ -54,6 +55,27 @@ public function editar()
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
 	}
+
+public function eliminarPermisos()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="DELETE FROM permiso_doc WHERE documentoId = '$this->documentoId'";
+		if ($conexion->query($sentencia)) {
+			return 1;
+
+		}else
+		{
+			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		}
+
+	}
+
+
+
+
+
 
 // buscar nuevo
 
@@ -158,3 +180,11 @@ public function buscar($limit=NULL)
 	}
 
 }
+
+
+
+
+
+
+
+?>

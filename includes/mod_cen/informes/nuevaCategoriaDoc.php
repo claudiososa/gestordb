@@ -34,22 +34,25 @@ if(isset($_POST["guardar_categoria_doc"]) AND $_POST["nombre"]<>""){
   }else{
     echo "Error al guardar";
   }
+
+
+ $variablephp = "index.php?mod=slat&men=informe&id=18";
+
+?>
+
+              <script type="text/javascript">
+                var variablejs = "<?php echo $variablephp; ?>" ;
+                function redireccion(){window.location=variablejs;}
+                setTimeout ("redireccion()",0);
+                    </script>
+
+<?php
+  
 }else{
   //// inclusión de formulario para Crear CategoriaDoc
 
-  include_once("includes/mod_cen/formularios/f_nueva_categoria_doc.php");
-
-
-  // pruebas 
-  /*
-
- $permisos = new PermisoCategoriaDoc(NULL,NULL,$_SESSION["tipo"]);
-  $buscarPermisos = $permisos->buscar();
-  include_once("includes/mod_cen/formularios/f_documento.php"); 
-  
-   ver el buscar del metodo permisos!!!
-
-  */
+  include_once("includes/mod_cen/formularios/f_nueva_categoria_doc.php"); 
+ 
 }
 
 
