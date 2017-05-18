@@ -3,17 +3,18 @@ include_once('includes/mod_cen/clases/conexionv2.php');
 //	echo '<p> <strong>Autoridad:</strong></p>';
 if($_POST){
 
-	var_dump($_POST);
+	//var_dump($_POST);
 
 	/*Creamos la instancia del objeto. Ya estamos conectados*/
 	$bd=Conexion2::getInstance();
 	if(trim($_POST['txtidpersona'])!=""){//Si existe la persona en la base
 		//var_dump($_POST);
-		$grabarrti="UPDATE rtixescuela SET turno=".$_POST['cbestado']." WHERE rtiID=".$_POST['idrti'];
+		$grabarrti="UPDATE rtixescuela SET  estado='".$_POST['estado']."', turno='".$_POST['cbestado']."' WHERE rtiId=".$_POST['idrti'];
+		//echo $grabarrti;
 		$resultado=$bd->ejecutar($grabarrti);
 		$sentencia="UPDATE personas SET apellido ='".strtoupper($_POST['txtapellido'])."', nombre ='".strtoupper($_POST['txtnombre'])."', dni= ".$_POST['txtdni'].", cuil=".$_POST['txtcuit'].", telefonoC = '".$_POST['txttelefono1']."', telefonoM = '".$_POST['txttelefono2']."', direccion= '".strtoupper($_POST['txtdomicilio'])."', email = '".$_POST['txtemail1']."', email2 = '".$_POST['txtemail2']."', facebook = '".$_POST['txtfacebook']."', twitter = '".$_POST['txttwitter']."', localidadId = ".round($_POST['cblocalidad'],0).", cpostal = '".$_POST['txtcp']."' WHERE personaId =".$_POST['txtidpersona'];
 		$resultado=$bd->ejecutar($sentencia);
-		var_dump($resultado);
+		//var_dump($resultado);
 	}
 	else//No existe la persona en la base de datos
 	{
@@ -23,14 +24,15 @@ if($_POST){
 		$grabarsupervisor="UPDATE escuelas SET supervisor_id=".$idpersona." WHERE escuelaId=".$_POST['txtidesacuela'];
 		$resultado=$bd->ejecutar($grabarsupervisor);
 	}
+	$variablephp="index.php?mod=slat&men=referentes&id=8&escuelaId=".$_POST['txtidesacuela'];
 	?>
 
 
 	<!--Redirecciono por javascrit-->
 	<script type="text/javascript">
 			var variablejs = "<?php echo $variablephp; ?>" ;
-			function redireccion(){window.location="index.php?mod=slat&men=referentes&id=8&escuelaId=0040";}
-			setTimeout ("redireccion()",20000);
+			function redireccion(){window.location=variablejs;}
+			setTimeout ("redireccion()",0);
 					</script>
 	<?php
 }

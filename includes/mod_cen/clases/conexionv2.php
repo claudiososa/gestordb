@@ -1,8 +1,6 @@
 <?php
 class Conexion2
-{
-
-	private $host="localhost";
+{	private $host="localhost";
 	private $user="vicomser_conect";
 	private $pass="Vicomser.c79";
 	private $db="vicomser_conect";

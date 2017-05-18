@@ -7,7 +7,7 @@
       <label for="" class="control-label">Estado</label>
     </div>
     <div class="col-md-12">
-      <select class="form-control" name="">
+      <select class="form-control" name="estado">
         <?php foreach ($datoestado AS $valor)
 				if($valor==$info_rti->estado){
 					echo "<option value='$valor' selected>$valor</option>";
@@ -43,10 +43,10 @@
 			<label for="" class="control-label">Nro. de Documento</label>
 		</div>
 		<div class="col-md-12">
-			<input  class="form-control" name="txtdni" type="text" id="txtdni" value="<?php if(isset($_GET['personaId'])){ echo $persona->dni;}?>" <?php //if(isset($_GET['personaId'])){?> <?php ?>autofocus="autofocus" />
+			<input  class="form-control" name="txtdni" type="text" id="txtdni" readonly value="<?php if(isset($_GET['personaId'])){ echo $persona->dni;}?>" <?php //if(isset($_GET['personaId'])){?> <?php ?>/>
 
 
-    
+
 		</div>
 	</div>
 
@@ -57,7 +57,7 @@
 			<label for="" class="control-label">Apellido</label>
 		</div>
 		<div class="col-md-12">
-			<input class="form-control" type="text" name="txtapellido" id="txtapellido" class="hades" />
+			<input class="form-control" type="text" name="txtapellido" id="txtapellido" class="hades" autofocus="autofocus" />
 		</div>
 	</div>
 

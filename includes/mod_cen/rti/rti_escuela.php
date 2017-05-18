@@ -2,7 +2,7 @@
 	include_once('includes/mod_cen/clases/localidades.php');
 	include_once('includes/mod_cen/clases/maestro.php');
 	include_once('includes/mod_cen/clases/escuela.php');
-	include_once('includes/mod_cen/clases/personas.php');
+	include_once('includes/mod_cen/clases/persona.php');
 	include_once('includes/mod_cen/clases/rti.php');
 
 	$datoestado= Maestro::estructura('estado','rtixescuela');//Cargo los estados posibles de un RTI x institución
