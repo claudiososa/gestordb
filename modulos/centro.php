@@ -377,7 +377,21 @@
 					 	case 16:
 					    	include("includes/mod_cen/informes/nuevaCategoriaDoc.php");
 					 		break;
-
+					 	case 17:
+					    	include("includes/mod_cen/documentos/nuevo_documento.php");
+					 		break;
+					 	case 18:
+					    	include("includes/mod_cen/informes/listarCategoriaDoc.php");
+					 		break;
+					 	case 19:
+					    	include("includes/mod_cen/informes/modificarCategoriaDoc.php");
+					 		break;
+					 	case 20:
+					    	include("includes/mod_cen/documentos/listarDocumentos.php");
+					 		break;
+					 	case 21:
+					    	include("includes/mod_cen/documentos/modificarDocumento.php");
+					 		break;
 
 					}
 					break;

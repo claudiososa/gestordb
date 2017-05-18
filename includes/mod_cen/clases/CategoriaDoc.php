@@ -87,7 +87,7 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 
 		}
 
-		$sentencia.="  ORDER BY categoriaDocId DESC";
+		$sentencia.="  ORDER BY categoriaDocId ASC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

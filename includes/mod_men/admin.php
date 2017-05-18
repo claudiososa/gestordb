@@ -40,7 +40,12 @@
                 <li ><a href="index.php?mod=slat&men=informe&id=11">Buscar Editar Categoría</a></li>
                 <li ><a href="index.php?mod=slat&men=informe&id=12">Nueva Sub-Categoría</a></li>
                 <li ><a href="index.php?mod=slat&men=informe&id=13">Listar Sub-Categoría</a></li>
-                <li ><a href="index.php?mod=slat&men=informe&id=16">Nueva Categoría Documentos</a></li>
+            <li ><a href="index.php?mod=slat&men=informe&id=16">Nueva Categoría Documentos</a></li>
+            <li ><a href="index.php?mod=slat&men=informe&id=18">Listar Categoría Documentos</a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=17">Nuevo Documento</a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=20">Listar Documentos</a></li>
+
+
           </ul>
         </li>
 
