@@ -130,6 +130,22 @@ class Rti
 
 	}
 
+	public function delete()
+	{
+		$nuevaConexion=new Conexion3();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="DELETE FROM rti WHERE rtiId=".$this->rtiId;
+		if ($conexion->query($sentencia)) {
+			return 1;
+
+		}else
+		{
+			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		}
+
+	}
+
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();

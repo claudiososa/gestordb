@@ -272,6 +272,9 @@
 					case 12:
 							include("includes/mod_cen/rti/editarRti.php");
 							break;
+					case 13:
+									include("includes/mod_cen/rti/eliminarRti.php");
+									break;
 				}
 				break;
 			case "user":
