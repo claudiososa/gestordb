@@ -32,8 +32,11 @@
 
 	echo "RTI Escuela Número ".$escuela->numero." - ".$escuela->nombre;
 echo '</div>
-<div class="panel-body">
-	<input type="button" name="cmdnuevorti" class="btn btn-primary" id="0" 	value="Nuevo">';
+<div class="panel-body">';
+?>
+<a href='index.php?mod=slat&men=rtis&id=14&escuelaId=<?php echo $escuela->escuelaId?>' class="btn btn-primary">Nuevo RTI</a>
+
+<?php
 	//Tabla con RTI
 	echo "<table class='table'>";
 	echo "<tr><th colspan='4'><h4>Referentes TIC Institucional</h4></th></tr>";
@@ -48,12 +51,7 @@ echo '</div>
 	echo "</tr>";
 	while ($fila = mysqli_fetch_object($dato_rti))
 	{
-		?>
-		<form class="" action="index.php?mod=slat&men=rtis&id=13" method="post">
-			<input type="hidden" name="rtiId" value="rtiId">
-			<input type="hidden" name="rtiId<?php echo $fila->rtiId ?>" value="<?php echo $fila->rtiId ?>">
 
-		<?php
 		$total=$total+1;
 		echo "<tr  class='editarrtidc'>";
 		echo "<td>".$fila->apellido."</td>";
@@ -63,7 +61,7 @@ echo '</div>
 		echo "<td>".$fila->email."</td>";
 		echo "<td>".$fila->estado."</td>";
 		echo "<td><a href='index.php?mod=slat&men=rtis&id=12&rtiId=".$fila->rtiId."&personaId=".$fila->personaId."&escuelaId=".$fila->escuelaId."'><buttom class='btn btn-primary'>Editar</buttom></a></td>";
-		echo "<td><input class='btn btn-primary' type='submit' name='submit' value='Eliminar'></a></td>";
+	  //echo "<td><input class='btn btn-primary' type='submit' name='submit' value='Eliminar'></a></td>";
 
 
 		//echo "<td><input type='button' name='cmddetalle".$fila->rtiId."' class='btn btn-primary' id='".$fila->rtiId."' 	value='Editar' /></td>";
@@ -84,7 +82,7 @@ echo '</div>
 		}
 
 	}
-	echo '</form>';
+
 	echo "</table>";
 
 	echo '</div></div>';

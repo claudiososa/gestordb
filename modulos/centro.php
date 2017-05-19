@@ -275,6 +275,9 @@
 					case 13:
 									include("includes/mod_cen/rti/eliminarRti.php");
 									break;
+				 case 14:
+								include("includes/mod_cen/rti/nuevoRti.php");
+								break;
 				}
 				break;
 			case "user":

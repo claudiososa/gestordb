@@ -35,6 +35,7 @@ class Conexion2
 /*Método para ejecutar una sentencia sql*/
    public function ejecutar($sql){
       $this->stmt=mysqli_query($this->conexion,$sql);
+			//echo $sql;
       return $this->stmt;
    }
    /*Método para obtener una fila de resultados de la sentencia sql*/
