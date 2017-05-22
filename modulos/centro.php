@@ -321,6 +321,13 @@
 									break;
 					}
 					break;
+					case "estadistica":
+						switch ($id) {
+						case 1:
+								include("includes/mod_cen/estadisticas/prueba-estadistica.php");
+								break;
+						}
+						break;
 				case "informe":
 					switch ($id) {
 						case 1:
