@@ -459,6 +459,13 @@
 							//		include("includes/mod_cen/denegado.php");
 								//	}
 								break;
+					case 10:
+								//if($_SESSION['tipo']=='CoordinadorPMI' || $_SESSION['tipo']=='admin') {
+									include("includes/mod_cen/admin/escuelaAsignarSuperSuperior.php");
+									//	}else {
+								//		include("includes/mod_cen/denegado.php");
+									//	}
+								break;
 				}
 
 			//   default:
