@@ -126,7 +126,7 @@ class RelevamientoElectrico
 			 || $this->totalCargos!=NULL || $this->matricula!=NULL
 			 || $this->energia!=NULL || $this->tipoInstalacion!=NULL
 			 || $this->cantidadAulas!=NULL || $this->cantidadPcInstaladas!=NULL
-			 || $this->escuelaId!=NULL || $this->otroCuePmi!=NULL)
+			 || $this->escuelaId!=NULL || $this->otroCuePmi!=NULL  || $this->conectividad!=NULL )
 		{
 			$sentencia.=" WHERE ";
 
@@ -157,6 +157,12 @@ class RelevamientoElectrico
 		if($this->matricula!=NULL)
 		{
 			$sentencia.=" matricula = $this->matricula && ";
+			$carga=1;
+		}
+
+		if($this->conectividad!=NULL)
+		{
+			$sentencia.=" conectividad = '$this->conectividad' && ";
 			$carga=1;
 		}
 
