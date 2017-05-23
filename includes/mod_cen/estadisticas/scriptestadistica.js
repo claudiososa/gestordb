@@ -6,7 +6,7 @@ var ctx = document.getElementById("myChart1").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'pie',
   data: {
-    labels: ["Arnet","Claro","Fibertel","Otro"],
+    labels: ["Arnet","Claro","Fibertel","empresa Local","satelital","Otro"],
     datasets: [{
       backgroundColor: [
         "#2ecc71",
@@ -17,7 +17,7 @@ var myChart = new Chart(ctx, {
         "#e74c3c",
         "#34495e"
       ],
-      data: [13, 13, 13,13]
+      data: [13, 14, 11,24,10,12]
     }]
 
 
