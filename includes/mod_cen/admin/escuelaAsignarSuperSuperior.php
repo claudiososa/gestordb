@@ -171,23 +171,25 @@ if(($_POST))
 				$('[id^=sel_]').hide();
 				$('[id^=g_]').hide();
 				//alert(boton);
+				//al presionar el boton editar (icono lapiz)
 				 $('[id^=b_]').click(function () {
 
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 $('#'+seleref).attr('disabled', false);
 
-					 $('#ref_'+$(this).val()).hide()
+					 $('#ref_'+$(this).val()).hide();
 
 					 $('#sel_'+$(this).val()).show();
 
-					 $('#b_'+$(this).val()).hide()
-					 $('#g_'+$(this).val()).show()
+					 $('#b_'+$(this).val()).hide();
+					 $('#g_'+$(this).val()).show();
 
          			});
 
 
 				 $('[id^=g_]').click(function () {
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
+
 
 					 var refe = $('#ref_'+$(this).val()).attr("id");
 					 var sele = $('#sel_'+$(this).val()).attr("id");
@@ -205,13 +207,27 @@ if(($_POST))
 
 					 var superior = 'superior';
 
+
 					 $.post("includes/mod_cen/clases/escuela.php", {superior:superior,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);
 					 var dato = resultado['estado'];
         //  alert(dato);
+
 					 $('#'+valor).html(dato);
-					 $('#'+sele).hide();
-					 $('#'+refe).show();
+					 $('#ref_'+$(this).val()).show();
+
+					$('#sel_'+$(this).val()).hide();
+
+					 //$('#'+sele).hide();
+					 //$('#'+refe).show();
+
+
+
+
+
+
+
+
 
 						});
          			});
