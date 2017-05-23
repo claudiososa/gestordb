@@ -164,7 +164,8 @@ if(($_POST))
 		//var venta= "<?php echo $_GET['registro']  ";
 ?>
 <script type="text/javascript" src="jquery/jquery113.jsp"></script>
-			<script language="javascript">
+
+<script language="javascript">
 			$(document).ready(function(){
 				//alert("llego hasta aqui");
 				$('[id^=sel_]').hide();
@@ -202,12 +203,12 @@ if(($_POST))
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 var escuela_id=escuela.substring(4,8);
 
-					 var supervisor-superior = 'supervisor-superior';
+					 var superior = 'superior';
 
-					 $.post("includes/mod_cen/clases/escuela.php", { supervisor-superior:supervisor-superior,referente_id: referente_id, escuela_id: escuela_id }, function(data){
+					 $.post("includes/mod_cen/clases/escuela.php", {superior:superior,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);
 					 var dato = resultado['estado'];
-
+        //  alert(dato);
 					 $('#'+valor).html(dato);
 					 $('#'+sele).hide();
 					 $('#'+refe).show();

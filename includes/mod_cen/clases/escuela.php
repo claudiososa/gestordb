@@ -124,7 +124,7 @@ class Escuela
 			case 'supervisor':
 					$sentencia="UPDATE escuelas SET referenteIdSuperSec ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 					break;
-			case 'supervisor-superior':
+			case 'superior':
 					$sentencia="UPDATE escuelas SET referenteIdSuperSup ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 					break;
 
@@ -497,8 +497,8 @@ $escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
 		$editar_escuela=$escuela->editarref("pmi");
 	}elseif(isset($_POST['supervisor'])){
 		$editar_escuela=$escuela->editarref("supervisor");
-	}elseif(isset($_POST['supervisor-superior'])){
-		$editar_escuela=$escuela->editarref("supervisor-superior");
+	}elseif(isset($_POST['superior'])){
+		$editar_escuela=$escuela->editarref("superior");
 	}else{
 		$editar_escuela=$escuela->editarref();
 	}
