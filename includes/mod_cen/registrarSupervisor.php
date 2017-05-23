@@ -1,7 +1,7 @@
-<?php 
+<?php
 include('clases/conexionv2.php');
 /*Creamos la instancia del objeto. Ya estamos conectados*/
-$bd=Conexion::getInstance();
+$bd=Conexion2::getInstance();
 if(trim($_POST['txtidpersona'])!=""){//Si existe la persona en la base
 	$grabarsupervisor="UPDATE escuelas SET supervisor_id=".$_POST['txtidpersona']." WHERE escuelaId=".$_POST['txtidesacuela'];
 	$resultado=$bd->ejecutar($grabarsupervisor);
