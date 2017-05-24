@@ -189,7 +189,7 @@ $(document).ready(function()
 
 				<?php
 
-				require_once("includes/mod_cen/documentos/coordinador-pmi.php");
+				require_once("includes/mod_cen/documentos/documento.php");
 ?>
 </div>
 </div>

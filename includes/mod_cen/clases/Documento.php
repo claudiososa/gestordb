@@ -144,6 +144,40 @@ public function buscar($limit=NULL)
 	}
 
 
+// metodo para buscar documentos segun permiso.
+
+	public function buscarDocPermiso($cargo,$cat_id)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+	    
+	    
+
+
+	    $sentencia="SELECT  documentos.nombreArchivo,documentos.titulo,documentos.destacado,documentos.descripcion
+								FROM documentos
+								JOIN permiso_doc
+								ON (permiso_doc.documentoId = documentos.documentoId ) ";
+
+
+		if($cargo!=NULL && $cat_id!=NULL)
+			{
+				$sentencia.=" WHERE permiso_doc.tipoReferente = '".$cargo."' AND documentos.categoriaDocId = ".$cat_id;
+				
+			}
+
+
+
+		
+
+		$sentencia.="  ORDER BY destacado DESC";
+		//echo $sentencia;
+		
+		return $conexion->query($sentencia);
+
+	}
+
+
 
 // buscar original
 

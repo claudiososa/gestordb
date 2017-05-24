@@ -96,6 +96,43 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 
 	}
 
+
+// metodo buscar categoria para menu ett
+
+	public function buscarCatPermiso($cargo)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+	    
+	    $sentencia="SELECT  categoria_doc.nombreCategoria,categoria_doc.categoriaDocId
+								 FROM categoria_doc
+								JOIN permiso_categoria_doc
+									ON (permiso_categoria_doc.categoriaDocId = categoria_doc.categoriaDocId )
+								
+							    WHERE ";
+
+
+		if($cargo!=NULL)
+			{
+				$sentencia.=" permiso_categoria_doc.tipoReferente = '".$cargo."'";
+				
+			}
+
+
+		
+
+		$sentencia.="  ORDER BY nombreCategoria ASC";
+		//echo $sentencia;
+		
+		return $conexion->query($sentencia);
+
+	}
+
+
+
+
+
+
 	public function __get($var)
 	{
 		return $this->$var;
