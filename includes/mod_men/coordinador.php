@@ -50,6 +50,10 @@
           </ul>
         </li>
 <li class=""><a href="index.php?mod=slat&men=doc&id=1">Documentos<span class="sr-only">(current)</span></a></li>
+=======
+<li class=""><a href="index.php?mod=slat&men=doc&id=5">Documentos<span class="sr-only">(current)</span></a></li>
+<li class=""><a href="index.php?mod=slat&men=estadistica&id=1">Estadisticas<span class="sr-only">(current)</span></a></li>
+
         </li>
         <li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
   		<li><a href="">Hola,<?php echo $_SESSION["nombre"]?></a></li>

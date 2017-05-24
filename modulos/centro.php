@@ -272,6 +272,12 @@
 					case 12:
 							include("includes/mod_cen/rti/editarRti.php");
 							break;
+					case 13:
+									include("includes/mod_cen/rti/eliminarRti.php");
+									break;
+				 case 14:
+								include("includes/mod_cen/rti/nuevoRti.php");
+								break;
 				}
 				break;
 			case "user":
@@ -324,6 +330,13 @@
 									break;
 					}
 					break;
+					case "estadistica":
+						switch ($id) {
+						case 1:
+								include("includes/mod_cen/estadisticas/prueba-estadistica.php");
+								break;
+						}
+						break;
 				case "informe":
 					switch ($id) {
 						case 1:
@@ -445,6 +458,13 @@
 								//	}else {
 							//		include("includes/mod_cen/denegado.php");
 								//	}
+								break;
+					case 10:
+								//if($_SESSION['tipo']=='CoordinadorPMI' || $_SESSION['tipo']=='admin') {
+									include("includes/mod_cen/admin/escuelaAsignarSuperSuperior.php");
+									//	}else {
+								//		include("includes/mod_cen/denegado.php");
+									//	}
 								break;
 				}
 

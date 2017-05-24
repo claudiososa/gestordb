@@ -1,4 +1,5 @@
 <?php
+include_once('conexionv2.php');
 include_once('conexion.php');
 include_once('persona.php');
 class Rtixinstitucion
@@ -82,14 +83,15 @@ class Rti
 	public function agregar()
 	{
 
-		$nuevaConexion=new Conexion();
+		$nuevaConexion=new Conexion2();
 		$conexion=$nuevaConexion->getConexion();
 		$objpersona= new Persona();
 		$sentencia="INSERT INTO rti (rtiId,personaId,titulo,capacitacionTec,capacitacionPed)
 		VALUES (NULL,'". $this->personaId."','". $this->titulo."','". $this->capacitacionTec."','".$this->capacitacionPed."');";
 
 		if ($conexion->query($sentencia)) {
-			return 1;
+			$idRti=$conexion->lastID();
+			return $idRti;
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
@@ -128,6 +130,22 @@ class Rti
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
 
+	}
+
+	public function delete()
+	{
+	/*	$nuevaConexion=new Conexion3();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="DELETE FROM rti WHERE rtiId=".$this->rtiId;
+		if ($conexion->query($sentencia)) {
+			return 1;
+
+		}else
+		{
+			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		}
+*/
 	}
 
 	public function buscar()
@@ -170,7 +188,7 @@ class Rti
 		}
 
 		$sentencia.="  ORDER BY personaId";
-		//echo $sentencia;
+		echo $sentencia;
 
 		return $conexion->query($sentencia);
 
