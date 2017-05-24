@@ -308,7 +308,7 @@
 				case "doc":
 					switch ($id) {
 					case 1:
-							include("includes/mod_cen/documentos/ett.php");
+							include("includes/mod_cen/documentos/documento.php");
 							break;
 					case 2:
 						  include("includes/mod_cen/documentos/etj.php");
