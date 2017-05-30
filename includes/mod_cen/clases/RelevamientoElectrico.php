@@ -122,9 +122,9 @@ class RelevamientoElectrico
 		$sentencia="SELECT * FROM relevamientoElectrico";
 		$carga=0;
 		$cargalocali=0;
-		if($this->otroCue!=NULL || $this->internado!=NULL || $this->escuelaId!=NULL
-			 || $this->totalCargos!=NULL || $this->matricula!=NULL
-			 || $this->energia!=NULL || $this->tipoInstalacion!=NULL
+		if($this->otroCue!=NULL || $this->internado!=NULL || $this->escuelaId!=NULL || $this->heladera!=NULL
+			 || $this->totalCargos!=NULL || $this->matricula!=NULL || $this->suficienteEnergia!=NULL
+			 || $this->energia!=NULL || $this->tipoInstalacion!=NULL || $this->calefon!=NULL
 			 || $this->cantidadAulas!=NULL || $this->cantidadPcInstaladas!=NULL
 			 || $this->escuelaId!=NULL || $this->otroCuePmi!=NULL  || $this->conectividad!=NULL )
 		{
@@ -166,6 +166,24 @@ class RelevamientoElectrico
 			$carga=1;
 		}
 
+		if($this->heladera!=NULL)
+		{
+			$sentencia.=" heladera = '$this->heladera' && ";
+			$carga=1;
+		}
+
+		if($this->suficienteEnergia!=NULL)
+		{
+			$sentencia.=" suficienteEnergia = '$this->suficienteEnergia' && ";
+			$carga=1;
+		}
+
+		if($this->calefon!=NULL)
+		{
+			$sentencia.=" calefon = '$this->calefon' && ";
+			$carga=1;
+		}
+
 		if($this->energia!=NULL)
 		{
 			$sentencia.=" energia  LIKE '%$this->energia%' && ";
@@ -192,7 +210,7 @@ class RelevamientoElectrico
 
 		$sentencia.="  ORDER BY escuelaId";
 
-	//echo $sentencia."<br>";
+	echo $sentencia."<br>";
 		return $conexion->query($sentencia);
 
 	}

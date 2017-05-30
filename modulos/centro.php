@@ -333,7 +333,7 @@
 					case "estadistica":
 						switch ($id) {
 						case 1:
-								include("includes/mod_cen/estadisticas/prueba-estadistica.php");
+								include("includes/mod_cen/estadisticas/estadisPermer.php");
 								break;
 						}
 						break;
