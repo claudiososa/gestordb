@@ -403,7 +403,7 @@ $(document).ready(function()
 	<div class="panel-body">
 
 <?php
-require_once("includes/mod_cen/documentos/coordinador-conectar.php");
+require_once("includes/mod_cen/documentos/documento.php");
 ?>
 </div>
 </div>

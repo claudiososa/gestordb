@@ -311,7 +311,7 @@ $(document).ready(function()
 	<div class="panel-body">
 
 <?php
-require_once("includes/mod_cen/documentos/etj.php");
+require_once("includes/mod_cen/documentos/documento.php");
 ?>
 </div>
 </div>
