@@ -123,8 +123,8 @@ class RelevamientoElectrico
 		$carga=0;
 		$cargalocali=0;
 		if($this->otroCue!=NULL || $this->internado!=NULL || $this->escuelaId!=NULL || $this->heladera!=NULL
-			 || $this->totalCargos!=NULL || $this->matricula!=NULL || $this->suficienteEnergia!=NULL
-			 || $this->energia!=NULL || $this->tipoInstalacion!=NULL || $this->calefon!=NULL
+			 || $this->totalCargos!=NULL || $this->matricula!=NULL || $this->suficienteEnergia!=NULL || $this->necesitaBombeoAgua!=NULL
+			 || $this->energia!=NULL || $this->tipoInstalacion!=NULL || $this->calefon!=NULL || $this->necesitaCalefonSolar!=NULL || $this->comoFunciona!=NULL
 			 || $this->cantidadAulas!=NULL || $this->cantidadPcInstaladas!=NULL
 			 || $this->escuelaId!=NULL || $this->otroCuePmi!=NULL  || $this->conectividad!=NULL )
 		{
@@ -183,6 +183,26 @@ class RelevamientoElectrico
 			$sentencia.=" calefon = '$this->calefon' && ";
 			$carga=1;
 		}
+
+		if($this->necesitaCalefonSolar!=NULL)
+		{
+			$sentencia.=" necesitaCalefonSolar = '$this->necesitaCalefonSolar' && ";
+			$carga=1;
+		}
+
+		if($this->necesitaBombeoAgua!=NULL)
+		{
+			$sentencia.=" necesitaBombeoAgua = '$this->necesitaBombeoAgua' && ";
+			$carga=1;
+		}
+
+		if($this->comoFunciona!=NULL)
+		{
+			$sentencia.=" comoFunciona = '$this->comoFunciona' && ";
+			$carga=1;
+		}
+
+
 
 		if($this->energia!=NULL)
 		{
