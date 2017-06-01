@@ -20,31 +20,32 @@ a {
 <?php
 include_once 'includes/mod_cen/clases/RelevamientoElectrico.php';
 
+$conectividad = new RelevamientoElectrico();
 /**
  * Buscando instituciones con Conectividad a internet
  */
-$conectividad = new RelevamientoElectrico();
+ $conexion = array(
+ array("Si", 0),
+ array("No", 0)
+ );
 $conectividad->conectividad='Si';
-$buscarSi = $conectividad->buscar();
-$si=mysqli_num_rows($buscarSi);
-
+$conexion[0][1]= $conectividad->buscar('cantidad');
 $conectividad->conectividad='No';
-$buscarNo = $conectividad->buscar();
-$no=mysqli_num_rows($buscarNo);
+$conexion[1][1]= $conectividad->buscar('cantidad');
 $conectividad->conectividad=NULL;
 //***************************************************************
 
 /**
  * Buscando instituciones con Albergue o internado
  */
-
+ $internado = array(
+ array("Si", 0),
+ array("No", 0)
+ );
 $conectividad->internado='Si';
-$buscarSi = $conectividad->buscar();
-$InternadoSi=mysqli_num_rows($buscarSi);
-
+$internado[0][1]= $conectividad->buscar('cantidad');
 $conectividad->internado='No';
-$buscarNo = $conectividad->buscar();
-$InternadoNo=mysqli_num_rows($buscarNo);
+$internado[1][1]= $conectividad->buscar('cantidad');
 $conectividad->internado=NULL;
 //***************************************************************
 
@@ -52,58 +53,57 @@ $conectividad->internado=NULL;
 /**
 * Buscando instituciones con Energia Electrica
 */
-
+$energia = array(
+array("Si", 0),
+array("No", 0)
+);
 $conectividad->energia='Si';
-$buscarSi = $conectividad->buscar();
-$EnergiaSi=mysqli_num_rows($buscarSi);
-
+$energia[0][1]= $conectividad->buscar('cantidad');
 $conectividad->energia='No';
-$buscarNo = $conectividad->buscar();
-$EnergiaNo=mysqli_num_rows($buscarNo);
+$energia[1][1]= $conectividad->buscar('cantidad');
 $conectividad->energia=NULL;
 
 /**
 * Buscando instituciones con Heladera
 */
-
+$heladera= array(
+                  array('Si',0),
+                  array('No',0)
+                );
 $conectividad->heladera='Si';
-$buscarSi = $conectividad->buscar();
-$HeladeraSi=mysqli_num_rows($buscarSi);
-
+$heladera[0][1]=$conectividad->buscar('cantidad');
 $conectividad->heladera='No';
-$buscarNo = $conectividad->buscar();
-$HeladeraNo=mysqli_num_rows($buscarNo);
+$heladera[1][1]=$conectividad->buscar('cantidad');
 $conectividad->heladera=NULL;
 
 /**
 * Buscando instituciones con Suficiente Energia
 */
+$suficienteEnergia= array(
+                  array('Si',0),
+                  array('No',0)
+                );
 $conectividad->suficienteEnergia='Si';
-$buscarSi = $conectividad->buscar();
-$suficienteEnergiaSi=mysqli_num_rows($buscarSi);
-
+$suficienteEnergia[0][1]=$conectividad->buscar('cantidad');
 $conectividad->suficienteEnergia='No';
-$buscarNo = $conectividad->buscar();
-$suficienteEnergiaNo=mysqli_num_rows($buscarNo);
+$suficienteEnergia[1][1]=$conectividad->buscar('cantidad');
 $conectividad->suficienteEnergia=NULL;
 
 
 /**
 * Buscando instituciones con Calefon
 */
+$calefon= array(
+                  array('No',0),
+                  array('Si (es a Gas)',0),
+                  array('Si (es con energía Solar)',0)
+                );
 $conectividad->calefon='No';
-$buscarNo = $conectividad->buscar();
-$calefonNo=mysqli_num_rows($buscarNo);
-
+$calefon[0][1]=$conectividad->buscar('cantidad');
 $conectividad->calefon='Si (es a Gas)';
-$buscarSiGas = $conectividad->buscar();
-$calefonSiGas=mysqli_num_rows($buscarSiGas);
-
+$calefon[1][1]=$conectividad->buscar('cantidad');
 $conectividad->calefon='Si (es con energía Solar)';
-$buscarSiSolar = $conectividad->buscar();
-$calefonSiSolar=mysqli_num_rows($buscarSiSolar);
-
-
+$calefon[2][1]=$conectividad->buscar('cantidad');
 $conectividad->calefon=NULL;
 
 /**
@@ -129,19 +129,8 @@ while ($fila=mysqli_fetch_object($buscarOtros)) {
   if(substr($fila->otros,4,1)=='s'){
     $otrosA['otro']=$otrosA['otro']+1;
   }
-  //echo substr($fila->otros,0,1).'<br>';
-  //echo substr($fila->otros,1,1).'<br>';
-  //echo substr($fila->otros,2,1).'<br>';
-  //echo substr($fila->otros,3,1).'<br>';
-  //echo substr($fila->otros,4,1).'<br>';
 
 }
-//echo 'Televisor'.$otrosA['televisor'].'<br>';
-//echo 'Canon'.$otrosA['canon'].'<br>';
-//echo 'Reproducto'.$otrosA['reproductor'].'<br>';
-//echo 'Impresora'.$otrosA['impresora'].'<br>';
-///echo 'Otros'.$otrosA['otro'].'<br>';
-//echo '<br><br>'.$otros;
 
 /**
 * Buscando instituciones con Calefon Solar
@@ -288,37 +277,9 @@ while ($fila=mysqli_fetch_object($buscarTipoConec)) {
     <div class="panel-heading">Instituciones con Energia Eléctrica: </div>
 <div class="panel-body"><!--contenido de grafica instituciones con energia electrica-->
   <canvas id="myChart3" width="600" height="300"></canvas>
-
-  <script type="text/javascript">
-  var ctx = document.getElementById("myChart3").getContext('2d');
-  var si=<?php echo $EnergiaSi ?>;
-  var no=<?php echo $EnergiaNo ?>;
-  var myChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-      labels: ["SI", "NO"],
-      datasets: [{
-        backgroundColor: [
-          "#2ecc71",
-          "#3498db",
-          "#95a5a6",
-          "#9b59b6",
-          "#f1c40f",
-          "#e74c3c",
-          "#34495e"
-        ],
-        data: [si, no]
-      }]
-
-
-    },
-    options:   {
-    pieceLabel: {
-      mode: 'percentage',
-    }
-    }
-  });
-  </script>
+<?php
+    echo $conectividad->grafico('torta',$energia,'myChart3');
+  ?>
 </div>
   </div>
 
@@ -420,37 +381,10 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">La Institucion: ¿Tiene suficiente energia? </div>
 <div class="panel-body">
 <canvas id="myChart5" width="600" height="300"></canvas>
+<?php
+    echo $conectividad->grafico('torta',$suficienteEnergia,'myChart5');
+  ?>
 
-<script type="text/javascript">
-var ctx = document.getElementById("myChart5").getContext('2d');
-var si=<?php echo $suficienteEnergiaSi ?>;
-var no=<?php echo $suficienteEnergiaNo ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -481,37 +415,10 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">Instituciones con heladeras:</div>
 <div class="panel-body">
 <canvas id="myChart4" width="600" height="300"></canvas>
+<?php
+    echo $conectividad->grafico('torta',$heladera,'myChart4');
+  ?>
 
-<script type="text/javascript">
-var ctx = document.getElementById("myChart4").getContext('2d');
-var si=<?php echo $HeladeraSi ?>;
-var no=<?php echo $HeladeraNo ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
   </div>
   </div>
 
@@ -522,37 +429,16 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">Instituciones con televisor:</div>
 <div class="panel-body">
 <canvas id="myChart7" width="600" height="300"></canvas>
+<?php
+  $televisor=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $televisor[0][1]= $otrosA['televisor'];
+  $televisor[1][1]=$cantInstituciones-$otrosA['televisor'];
+  echo $conectividad->grafico('torta',$televisor,'myChart7');
+ ?>
 
-<script type="text/javascript">
-var ctx = document.getElementById("myChart7").getContext('2d');
-var si=<?php echo $otrosA['televisor'] ?>;
-var no=<?php echo $cantInstituciones-$otrosA['televisor'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -565,36 +451,15 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">Instituciones con cañon:</div>
 <div class="panel-body">
 <canvas id="canonId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("canonId").getContext('2d');
-var si=<?php echo $otrosA['canon'] ?>;
-var no=<?php echo $cantInstituciones-$otrosA['canon'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+$canon=array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$canon[0][1]= $otrosA['canon'];
+$canon[1][1]=$cantInstituciones-$otrosA['canon'];
+echo $conectividad->grafico('torta',$canon,'canonId');
+?>
 </div>
   </div>
 
@@ -605,36 +470,15 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">Instituciones con reproductor CD/DVD:</div>
 <div class="panel-body">
 <canvas id="reproductorId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("reproductorId").getContext('2d');
-var si=<?php echo $otrosA['reproductor'] ?>;
-var no=<?php echo $cantInstituciones-$otrosA['reproductor'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+$reproductor=array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$reproductor[0][1]= $otrosA['reproductor'];
+$reproductor[1][1]=$cantInstituciones-$otrosA['reproductor'];
+echo $conectividad->grafico('torta',$reproductor,'reproductorId');
+?>
 </div>
   </div>
 
@@ -731,38 +575,10 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">instituciones con calefon </div>
 <div class="panel-body">
 <canvas id="myChart6" width="600" height="300"></canvas>
+<?php
+    echo $conectividad->grafico('torta',$calefon,'myChart6');
+  ?>
 
-<script type="text/javascript">
-var ctx = document.getElementById("myChart6").getContext('2d');
-var no=<?php echo $calefonNo ?>;
-var siGas=<?php echo $calefonSiGas ?>;
-var siSolar=<?php echo $calefonSiSolar ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["NO", "Si a Gas", "Si con Energia Solar"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [no, siGas, siSolar],
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -882,37 +698,9 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">instituciones con conexion a internet</div>
 <div class="panel-body">
 <canvas id="myChart" width="600" height="300"></canvas>
-
-<script type="text/javascript">
-var ctx = document.getElementById("myChart").getContext('2d');
-var si=<?php echo $si ?>;
-var no=<?php echo $no ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+    echo $conectividad->grafico('torta',$conexion,'myChart');
+ ?>
 
 </div>
   </div>

@@ -2,7 +2,7 @@
 include_once('includes/mod_cen/clases/conexion.php');
 include_once("includes/mod_cen/clases/maestro.php");
 
-class RelevamientoElectrico
+class RelevamientoElectrico extends Maestro
 {
 	private $escuelaId;
  	private $otroCue;
@@ -114,7 +114,7 @@ class RelevamientoElectrico
 		}
 	}
 
-	public function buscar()
+	public function buscar($parametro=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -126,7 +126,7 @@ class RelevamientoElectrico
 			 || $this->totalCargos!=NULL || $this->matricula!=NULL || $this->suficienteEnergia!=NULL || $this->necesitaBombeoAgua!=NULL
 			 || $this->energia!=NULL || $this->tipoInstalacion!=NULL || $this->calefon!=NULL || $this->necesitaCalefonSolar!=NULL || $this->comoFunciona!=NULL
 			 || $this->cantidadAulas!=NULL || $this->cantidadPcInstaladas!=NULL
-			 || $this->escuelaId!=NULL || $this->otroCuePmi!=NULL  || $this->conectividad!=NULL )
+			 || $this->escuelaId!=NULL || $this->otroCue!=NULL  || $this->conectividad!=NULL )
 		{
 			$sentencia.=" WHERE ";
 
@@ -230,8 +230,14 @@ class RelevamientoElectrico
 
 		$sentencia.="  ORDER BY escuelaId";
 
-	echo $sentencia."<br>";
+	//echo $sentencia."<br>";
+	//
+	if($parametro=='cantidad'){
+		return mysqli_num_rows($conexion->query($sentencia));
+	}else{
 		return $conexion->query($sentencia);
+	}
+
 
 	}
 

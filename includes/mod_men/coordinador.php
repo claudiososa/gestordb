@@ -49,8 +49,6 @@
                   <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?>Cambiar Contraseña</a></li>
           </ul>
         </li>
-<li class=""><a href="index.php?mod=slat&men=doc&id=1">Documentos<span class="sr-only">(current)</span></a></li>
-=======
 <li class=""><a href="index.php?mod=slat&men=doc&id=5">Documentos<span class="sr-only">(current)</span></a></li>
 <li class=""><a href="index.php?mod=slat&men=estadistica&id=1">Estadisticas<span class="sr-only">(current)</span></a></li>
 
