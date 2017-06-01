@@ -100,13 +100,13 @@ $("#boton1").click(function (){
         }else {
             $(".error").fadeOut();
         }
-
+});
 
 
 ///////////////
 
 
-          $("#apellido").keyup(function(){
+          $("#apellido").keyup(function(event){
               if( $(this).val() != "" && (persona.test($(this).val() ))){
                   $(".error").fadeOut();
                   return true;
@@ -194,5 +194,5 @@ $("#boton1").click(function (){
 
 
 
-});
+
 });

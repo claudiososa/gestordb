@@ -31,7 +31,7 @@ var myChart = new Chart(ctx, {
 
 
 
-var ctx = document.getElementById("myChart233").getContext('2d');
+var ctx = document.getElementById("myChart2").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'pie',
   data: {
