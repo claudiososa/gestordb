@@ -4,9 +4,10 @@ class Maestro{
 		$graficoDibujado = '<script type="text/javascript">
 		var ctx = document.getElementById("'.$canvasId.'").getContext("2d");';
 		$valor=0;
+
 		foreach($dato as $fila)
  		{
-			$graficoDibujado.='var '.$fila[0].$valor.'='.$fila[1].';';
+			$graficoDibujado.='var '.str_replace(")",a,str_replace("(",a,preg_replace("[\s+]","", $fila[0]).$valor.'='.$fila[1])).';';
 			$valor++;
  		}
 		$graficoDibujado.='var myChart = new Chart(ctx, {
@@ -36,7 +37,7 @@ class Maestro{
 					$valor=0;
 					foreach($dato as $fila)
 			 		{
-						$graficoDibujado.=$fila[0].$valor.',';
+						$graficoDibujado.=str_replace(")",a,str_replace("(",a,preg_replace("[\s+]","", $fila[0]).$valor.'='.$fila[1])).',';
 						$valor++;
 			 		}
 					$graficoDibujado=trim($graficoDibujado, ',');
