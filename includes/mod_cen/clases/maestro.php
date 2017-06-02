@@ -11,8 +11,9 @@ class Maestro{
 			$valor++;
  		}
 		$graficoDibujado.='var myChart = new Chart(ctx, {
-			type: "pie",
-			data: {
+			type: "'.$tipo.'",
+			data: {';
+				$graficoDibujado.='
 				labels: [';
 				$valor=0;
 				foreach($dato as $fila)
@@ -23,17 +24,22 @@ class Maestro{
 				}
 				$graficoDibujado=trim($graficoDibujado, ',');
 				$graficoDibujado.='],
-				datasets: [{
-					backgroundColor: [
-						"#2ecc71",
-						"#3498db",
-						"#95a5a6",
-						"#9b59b6",
-						"#f1c40f",
-						"#e74c3c",
-						"#34495e"
-					],
-					data: [';
+				datasets: [{';
+					if($tipo=="bar"){
+						$graficoDibujado.='label: "Relevamiento Permer",';
+					}
+						$graficoDibujado.='
+						backgroundColor: [
+							"#2ecc71",
+							"#3498db",
+							"#95a5a6",
+							"#9b59b6",
+							"#f1c40f",
+							"#e74c3c",
+							"#34495e"
+						],';
+
+					$graficoDibujado.='data: [';
 					$valor=0;
 					foreach($dato as $fila)
 			 		{
