@@ -18,8 +18,8 @@
 	echo "<table class='table table-hover table-striped table-condensed '>";
 	echo "<tr><td colspan='6'><h3>Mis ETT</h3></td></tr>";
 	echo "<tr class='info'><td>Apellidos, Nombre</td>";
-	echo "<td>RTI Cargo</td>";
 	echo "<td>Escuelas</td>";
+	echo "<td>RTI</td>";
 	echo "<td>Informes</td>";
 	echo "<td>Localidad, Departamento</td>";
 	echo "<td>Teléfono</td>";
@@ -69,8 +69,8 @@
 		echo "<tr>";
 		echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
 		//echo "<td>".$fila->tipo."</td>";
-		echo "<td>"."<a href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>Ver <b>(".$cant_rti. ")</b></a></td>";
 		echo "<td>"."<a href='index.php?mod=slat&men=user&id=5&referenteId=".$fila->referenteId."'>Escuelas <b>(".$cantidad_escuela.")</b></a></td>";
+		echo "<td>"."<a href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>Ver <b>(".$cant_rti. ")</b></a></td>";
 		echo '<td><a class="btn btn-primary" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a></td>';
 		echo "<td>".$dato_localidad->nombre.", <b>".$dato_depa->descripcion."</b></td>";
 

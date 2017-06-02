@@ -23,7 +23,7 @@ if($_SESSION['tipo']=='ETJ' || $_SESSION['tipo']=='Coordinador' ){
 	$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
   //$escuela= new Escuela();
   //$escuela->referenteIdSuperSec=$referenteId;
-	$resultado = $escuela->Cargo('Supervisor-Secundaria');	
+	$resultado = $escuela->Cargo('Supervisor-Secundaria');
 }
 
 

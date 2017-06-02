@@ -188,7 +188,7 @@ class Rti
 		}
 
 		$sentencia.="  ORDER BY personaId";
-		echo $sentencia;
+		//echo $sentencia;
 
 		return $conexion->query($sentencia);
 

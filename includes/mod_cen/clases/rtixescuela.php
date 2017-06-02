@@ -47,7 +47,7 @@ class rtixescuela
     $sentencia = "UPDATE rtixescuela SET turno=$this->turno, estado=$this->estado  WHERE escuelaId=$this->escuelaId AND rtiID=$this->rtiId";
 
 		//$sentencia="UPDATE rtixescuela SET personaId = '$this->personaId', titulo = '$this->titulo', capacitacionTec = '$this->capacitacionTec', capacitacionPed = '$this->capacitacionPed' WHERE rtiId = '$this->rtiId'";
-    echo $sentencia;
+    //echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
 		}else
@@ -98,7 +98,7 @@ class rtixescuela
 
 		$sentencia.="  ORDER BY escuelaId";
 
-		echo $sentencia;
+		//echo $sentencia;
 		return $conexion->query($sentencia);
 
 	}

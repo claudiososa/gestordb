@@ -19,7 +19,13 @@ $dato_persona =  mysqli_fetch_object($b_persona);
 
 
 //Crear objeto escuela y buscar las escuelas que tiene a cargo el Referente
-$escuela= new Escuela(null,$referenteId);
+if($_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='Supervisor-Secundaria' || $_SESSION['tipo']=='Supervisor-General-Secundaria'){
+	$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
+}else{
+	$escuela= new Escuela(null,$referenteId);
+}
+
+
 $escuela_acargo=$escuela->buscar();
 echo '<div class="table-responsive">';
 echo '<div class="container">';
@@ -40,16 +46,16 @@ while($fila=mysqli_fetch_object($escuela_acargo)){
 	//echo $fila->escuelaId.$fila->nombre."<br><br>";
 	//echo "_______________________<br>";
 	$rtix= new rtixescuela($fila->escuelaId);
-	
+
 	$buscar_rti=$rtix->buscar();
 	//var_dump($rtix);
 	while($filarti=mysqli_fetch_object($buscar_rti)){
-		
-		
+
+
 		$rti=new Rti($filarti->rtiId);
 		$buscar_dato=$rti->buscar();
-		
-		
+
+
 		while($filadato=mysqli_fetch_object($buscar_dato)){
 			$persona= new Persona($filadato->personaId);
 			$buscar_persona=$persona->buscar();
@@ -59,25 +65,25 @@ while($fila=mysqli_fetch_object($escuela_acargo)){
 			echo "<td>".$fila->nombre."</td>";
 			echo "<td>".$dato->apellido.", ".$dato->nombre."</td>";
 			echo "<td>".$dato->dni."</td>";
-			echo "<td>".$dato->email."</td>";				
+			echo "<td>".$dato->email."</td>";
 			echo "<td>".$dato->telefonoM."</td>";
 			echo "<td>".$dato->telefonoC."</td>";
-				
+
 			echo "<td>".$filarti->turno."</td>";
-				
+
 			//echo "<td>"."<a href='index.php?men=rtis&id=2&personaId=".$dato->personaId."&rtiId=".$dato->rtiId."'>Ver</a>"."</td>";
 			//echo "<td>"."<a href='index.php?men=rtis&id=3&personaId=".$dato->personaId."&rtiId=".$dato->rtiId."'>Editar</a>"."</td>";
 			echo "</tr>";
 			echo "\n";
-			
-			
-		
+
+
+
 			//echo $filarti->escuelaId."-> ".$filarti->rtiId."<br>";
 			//echo $dato->apellido."<br><br>";
 		}
-		
+
 	}
-	
+
 }
 
 echo "</table>";
@@ -85,4 +91,3 @@ echo '</div>';
 echo '</div>';
 
 ?>
-

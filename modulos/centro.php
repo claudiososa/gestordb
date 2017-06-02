@@ -316,8 +316,14 @@
 									include("includes/mod_cen/denegado.php");
 							}
 							break;
+				case 11:
+							include("includes/mod_cen/escuelas/escuelaSuperSec.php");
+							break;
+
 				}
 				break;
+
+
 				case "doc":
 					switch ($id) {
 					case 1:
@@ -473,6 +479,13 @@
 								//		include("includes/mod_cen/denegado.php");
 									//	}
 								break;
+						case 11:
+											if($_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='admin') {
+											   include("includes/mod_cen/admin/loginc.php");
+											}else {
+												include("includes/mod_cen/denegado.php");
+											}
+										break;
 				}
 
 			//   default:
