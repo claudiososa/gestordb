@@ -1,5 +1,7 @@
 <script type="text/javascript" src="includes/mod_cen/estadisticas/Chart.min.js"></script>
 <script type="text/javascript" src="includes/mod_cen/estadisticas/Chart.PieceLabel.js-master/build/Chart.PieceLabel.min.js"></script>
+<!--
+<script type="text/javascript" src="includes/mod_cen/estadisticas/jspdf.min.js"></script>-->
 <link rel="stylesheet" type="text/css" >
 <style type="text/css">
 a {
@@ -40,7 +42,7 @@ $conectividad->conectividad=NULL;
  */
  $internado = array(
  array("Si", 0),
- array("No", 0)
+                           array("No", 0)
  );
 $conectividad->internado='Si';
 $internado[0][1]= $conectividad->buscar('cantidad');
@@ -135,7 +137,17 @@ while ($fila=mysqli_fetch_object($buscarOtros)) {
 /**
 * Buscando instituciones con Calefon Solar
 */
+$necesitaCalefonSolar= array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$conectividad->necesitaCalefonSolar='Si';
+$necesitaCalefonSolar[0][1]=$conectividad->buscar('cantidad');
+$conectividad->necesitaCalefonSolar='No';
+$necesitaCalefonSolar[1][1]=$conectividad->buscar('cantidad');
+$conectividad->necesitaCalefonSolar=NULL;
 
+/*
 $conectividad->necesitaCalefonSolar='Si';
 $buscarSi = $conectividad->buscar();
 $SolarSi=mysqli_num_rows($buscarSi);
@@ -148,7 +160,16 @@ $conectividad->necesitaCalefonSolar=NULL;
 /**
 * Buscando instituciones con Bombeo de Agua
 */
-
+$necesitaBombeoAgua= array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$conectividad->necesitaBombeoAgua='Si';
+$necesitaBombeoAgua[0][1]=$conectividad->buscar('cantidad');
+$conectividad->necesitaBombeoAgua='No';
+$necesitaBombeoAgua[1][1]=$conectividad->buscar('cantidad');
+$conectividad->necesitaBombeoAgua=NULL;
+/*
 $conectividad->necesitaBombeoAgua='Si';
 $buscarSi = $conectividad->buscar();
 $bombeoSi=mysqli_num_rows($buscarSi);
@@ -161,52 +182,49 @@ $conectividad->necesitaBombeoAgua=NULL;
 /**
 * Buscando instituciones comoFunciona
 */
+$comoFunciona= array(
+                  array('Muy bien',0),
+                  array('Bien',0),
+                  array('Regular',0),
+                  array('Mal',0)
+                );
 $conectividad->comoFunciona='Muy bien';
-$buscarMuyBien = $conectividad->buscar();
-$muyBien=mysqli_num_rows($buscarMuyBien);
-
+$comoFunciona[0][1]=$conectividad->buscar('cantidad');
 $conectividad->comoFunciona='Bien';
-$buscarBien = $conectividad->buscar();
-$bien=mysqli_num_rows($buscarBien);
-
+$comoFunciona[1][1]=$conectividad->buscar('cantidad');
 $conectividad->comoFunciona='Regular';
-$buscarRegular = $conectividad->buscar();
-$regular=mysqli_num_rows($buscarRegular);
-
+$comoFunciona[2][1]=$conectividad->buscar('cantidad');
 $conectividad->comoFunciona='Mal';
-$buscarMal = $conectividad->buscar();
-$mal=mysqli_num_rows($buscarMal);
-
+$comoFunciona[3][1]=$conectividad->buscar('cantidad');
 $conectividad->comoFunciona=NULL;
+
 
 /**
 * Buscando instituciones tipo de Instalacion
 */
+$tipoInstalacion= array(
+                  array('RE (Red Eléctrica)',0),
+                  array('GE (Grupo Electrógeno)',0),
+                  array('PS (Panel Solar)',0),
+                  array('E (Eólico)',0),
+                  array('GH (Generador Hidráulico)',0),
+                  array('O (otro)',0)
+                );
 $conectividad->tipoInstalacion='RE (Red Eléctrica)';
-$buscarRedElectrica = $conectividad->buscar();
-$redElectrica=mysqli_num_rows($buscarRedElectrica);
-
+$tipoInstalacion[0][1]=$conectividad->buscar('cantidad');
 $conectividad->tipoInstalacion='GE (Grupo Electrógeno)';
-$buscarGrupoE = $conectividad->buscar();
-$grupoE=mysqli_num_rows($buscarGrupoE);
-
+$tipoInstalacion[1][1]=$conectividad->buscar('cantidad');
 $conectividad->tipoInstalacion='PS (Panel Solar)';
-$buscarPanelSolar = $conectividad->buscar();
-$panelSolar=mysqli_num_rows($buscarPanelSolar);
-
+$tipoInstalacion[2][1]=$conectividad->buscar('cantidad');
 $conectividad->tipoInstalacion='E (Eólico)';
-$buscarEolico = $conectividad->buscar();
-$eolico=mysqli_num_rows($buscarEolico);
-
+$tipoInstalacion[3][1]=$conectividad->buscar('cantidad');
 $conectividad->tipoInstalacion='GH (Generador Hidráulico)';
-$buscarHidraulico = $conectividad->buscar();
-$hidraulico=mysqli_num_rows($buscarHidraulico);
-
+$tipoInstalacion[4][1]=$conectividad->buscar('cantidad');
 $conectividad->tipoInstalacion='O (otro)';
-$buscarOtro = $conectividad->buscar();
-$otro=mysqli_num_rows($buscarOtro);
-
+$tipoInstalacion[5][1]=$conectividad->buscar('cantidad');
 $conectividad->tipoInstalacion=NULL;
+
+
 
 /**
 * Buscando tipo de conexion
@@ -276,9 +294,9 @@ while ($fila=mysqli_fetch_object($buscarTipoConec)) {
   <div class="panel panel-primary">
     <div class="panel-heading">Instituciones con Energia Eléctrica: </div>
 <div class="panel-body"><!--contenido de grafica instituciones con energia electrica-->
-  <canvas id="myChart3" width="600" height="300"></canvas>
+  <canvas id="energiaEId" width="600" height="300"></canvas>
 <?php
-    echo $conectividad->grafico('torta',$energia,'myChart3');
+    echo $conectividad->grafico('pie',$energia,'energiaEId');
   ?>
 </div>
   </div>
@@ -287,44 +305,13 @@ while ($fila=mysqli_fetch_object($buscarTipoConec)) {
 
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">tipo de instalacion  </div>
+    <div class="panel-heading">Tipo de Instalación Eléctrica:</div>
 <div class="panel-body">
 <canvas id="tipoInstalacionId" width="600" height="300"></canvas>
+<?php
+    echo $conectividad->grafico('pie',$tipoInstalacion,'tipoInstalacionId');
+  ?>
 
-<script type="text/javascript">
-var ctx = document.getElementById("tipoInstalacionId").getContext('2d');
-var red=<?php echo $redElectrica ?>;
-var grupoE=<?php echo $grupoE ?>;
-var panelSolar=<?php echo $panelSolar ?>;
-var eolico=<?php echo $eolico ?>;
-var hidraulico=<?php echo $hidraulico ?>;
-var otro=<?php echo $otro ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["Red Electrica", "Grupo Electrogeno", "Panel Solar", "Eolico","Hidraulico","Otro"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [red, grupoE, panelSolar, eolico, hidraulico, otro],
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -335,42 +322,13 @@ var myChart = new Chart(ctx, {
 <div class="row">
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">como funciona  </div>
+    <div class="panel-heading">¿Como funciona la Instalación Electrica?:</div>
 <div class="panel-body">
 <canvas id="comoFuncionaId" width="600" height="300"></canvas>
+<?php
+    echo $conectividad->grafico('pie',$comoFunciona,'comoFuncionaId');
+  ?>
 
-<script type="text/javascript">
-var ctx = document.getElementById("comoFuncionaId").getContext('2d');
-var muybien=<?php echo $muyBien ?>;
-var bien=<?php echo $bien ?>;
-var regular=<?php echo $regular ?>;
-var mal=<?php echo $mal ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["Muy Bien", "Bien", "Regular", "Mal"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [muybien, bien, regular, mal],
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -382,7 +340,7 @@ var myChart = new Chart(ctx, {
 <div class="panel-body">
 <canvas id="myChart5" width="600" height="300"></canvas>
 <?php
-    echo $conectividad->grafico('torta',$suficienteEnergia,'myChart5');
+    echo $conectividad->grafico('pie',$suficienteEnergia,'myChart5');
   ?>
 
 </div>
@@ -395,8 +353,8 @@ var myChart = new Chart(ctx, {
 </div>
   </div>
 
-</div><!--cierre de fila energia-->
 
+</div><!--cierre de fila energia-->
 
 
 
@@ -416,7 +374,7 @@ var myChart = new Chart(ctx, {
 <div class="panel-body">
 <canvas id="myChart4" width="600" height="300"></canvas>
 <?php
-    echo $conectividad->grafico('torta',$heladera,'myChart4');
+    echo $conectividad->grafico('pie',$heladera,'myChart4');
   ?>
 
   </div>
@@ -436,7 +394,7 @@ var myChart = new Chart(ctx, {
                   );
   $televisor[0][1]= $otrosA['televisor'];
   $televisor[1][1]=$cantInstituciones-$otrosA['televisor'];
-  echo $conectividad->grafico('torta',$televisor,'myChart7');
+  echo $conectividad->grafico('pie',$televisor,'myChart7');
  ?>
 
 </div>
@@ -458,7 +416,7 @@ $canon=array(
                 );
 $canon[0][1]= $otrosA['canon'];
 $canon[1][1]=$cantInstituciones-$otrosA['canon'];
-echo $conectividad->grafico('torta',$canon,'canonId');
+echo $conectividad->grafico('pie',$canon,'canonId');
 ?>
 </div>
   </div>
@@ -477,7 +435,7 @@ $reproductor=array(
                 );
 $reproductor[0][1]= $otrosA['reproductor'];
 $reproductor[1][1]=$cantInstituciones-$otrosA['reproductor'];
-echo $conectividad->grafico('torta',$reproductor,'reproductorId');
+echo $conectividad->grafico('pie',$reproductor,'reproductorId');
 ?>
 </div>
   </div>
@@ -491,36 +449,15 @@ echo $conectividad->grafico('torta',$reproductor,'reproductorId');
     <div class="panel-heading">Instituciones con impresora:</div>
 <div class="panel-body">
 <canvas id="impresoraId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("impresoraId").getContext('2d');
-var si=<?php echo $otrosA['impresora'] ?>;
-var no=<?php echo $cantInstituciones-$otrosA['impresora'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+  $impresora=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $impresora[0][1]= $otrosA['impresora'];
+  $impresora[1][1]=$cantInstituciones-$otrosA['impresora'];
+  echo $conectividad->grafico('pie',$impresora,'impresoraId');
+ ?>
 </div>
   </div>
 
@@ -528,39 +465,19 @@ var myChart = new Chart(ctx, {
 
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">instituciones con otros artefactos electricos</div>
+    <div class="panel-heading">instituciones con otros artefactos electricos:</div>
 <div class="panel-body">
 <canvas id="otrosId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("otrosId").getContext('2d');
-var si=<?php echo $otrosA['otro'] ?>;
-var no=<?php echo $cantInstituciones-$otrosA['otro'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
+<?php
+  $otro=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $otro[0][1]= $otrosA['otro'];
+  $otro[1][1]=$cantInstituciones-$otrosA['otro'];
+  echo $conectividad->grafico('pie',$otro,'otrosId');
+ ?>
 
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -572,11 +489,11 @@ var myChart = new Chart(ctx, {
 <div class="row">
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">instituciones con calefon </div>
+    <div class="panel-heading">Instituciones con calefón:</div>
 <div class="panel-body">
-<canvas id="myChart6" width="600" height="300"></canvas>
+<canvas id="calefonId" width="600" height="300"></canvas>
 <?php
-    echo $conectividad->grafico('torta',$calefon,'myChart6');
+    echo $conectividad->grafico('pie',$calefon,'calefonId');
   ?>
 
 </div>
@@ -586,40 +503,12 @@ var myChart = new Chart(ctx, {
 
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">Instituciones que necesitan Calefon Solar:</div>
+    <div class="panel-heading">Instituciones que necesitan Calefón Solar:</div>
 <div class="panel-body">
 <canvas id="solarId" width="600" height="300"></canvas>
-
-<script type="text/javascript">
-var ctx = document.getElementById("solarId").getContext('2d');
-var si=<?php echo $SolarSi ?>;
-var no=<?php echo $SolarNo ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no],
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+  echo $conectividad->grafico('pie',$necesitaCalefonSolar,'solarId');
+ ?>
 </div>
   </div>
 
@@ -633,37 +522,10 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">Instituciones que necesitan Bombeo de Agua:</div>
 <div class="panel-body">
 <canvas id="bombeoId" width="600" height="300"></canvas>
+<?php
+  echo $conectividad->grafico('pie',$necesitaBombeoAgua,'bombeoId');
+ ?>
 
-<script type="text/javascript">
-var ctx = document.getElementById("bombeoId").getContext('2d');
-var si=<?php echo $bombeoSi ?>;
-var no=<?php echo $bombeoNo ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no],
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -695,11 +557,11 @@ var myChart = new Chart(ctx, {
 <div class="row">
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">instituciones con conexion a internet</div>
+    <div class="panel-heading">Instituciones con conexion a internet</div>
 <div class="panel-body">
 <canvas id="myChart" width="600" height="300"></canvas>
 <?php
-    echo $conectividad->grafico('torta',$conexion,'myChart');
+    echo $conectividad->grafico('pie',$conexion,'myChart');
  ?>
 
 </div>
@@ -712,36 +574,16 @@ var myChart = new Chart(ctx, {
     <div class="panel-heading">Empresa Claro:</div>
 <div class="panel-body">
 <canvas id="claroId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("claroId").getContext('2d');
-var si=<?php echo $otrasE['claro'] ?>;
-var no=<?php echo $cantInstituciones -$otrasE['claro'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
+<?php
+$claro=array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$claro[0][1]= $otrasE['claro'];
+$claro[1][1]=$cantInstituciones-$otrasE['claro'];
+echo $conectividad->grafico('pie',$claro,'claroId');
+?>
 
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -751,39 +593,18 @@ var myChart = new Chart(ctx, {
 <div class="row">
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">empresa arnet</div>
+    <div class="panel-heading">Empresa Arnet:</div>
 <div class="panel-body">
 <canvas id="arnetId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("arnetId").getContext('2d');
-var si=<?php echo $otrasE['arnet'] ?>;
-var no=<?php echo $cantInstituciones -$otrasE['arnet'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+$arnet=array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$arnet[0][1]= $otrasE['arnet'];
+$arnet[1][1]=$cantInstituciones-$otrasE['arnet'];
+echo $conectividad->grafico('pie',$arnet,'arnetId');
+?>
 </div>
   </div>
 
@@ -791,39 +612,18 @@ var myChart = new Chart(ctx, {
 
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">empresa fibertel</div>
+    <div class="panel-heading">Empresa Fibertel:</div>
 <div class="panel-body">
 <canvas id="fibertelId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("fibertelId").getContext('2d');
-var si=<?php echo $otrasE['fibertel'] ?>;
-var no=<?php echo $cantInstituciones -$otrasE['fibertel'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+$fibertel=array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$fibertel[0][1]= $otrasE['fibertel'];
+$fibertel[1][1]=$cantInstituciones-$otrasE['fibertel'];
+echo $conectividad->grafico('pie',$fibertel,'fibertelId');
+?>
 </div>
   </div>
 
@@ -833,39 +633,19 @@ var myChart = new Chart(ctx, {
 <div class="row">
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">empresa local de conectividad</div>
+    <div class="panel-heading">Empresa Local de Conectividad:</div>
 <div class="panel-body">
 <canvas id="localId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("localId").getContext('2d');
-var si=<?php echo $otrasE['empresaLocal'] ?>;
-var no=<?php echo $cantInstituciones -$otrasE['empresaLocal'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
+<?php
+$empresaLocal=array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$empresaLocal[0][1]= $otrasE['empresaLocal'];
+$empresaLocal[1][1]=$cantInstituciones-$otrasE['empresaLocal'];
+echo $conectividad->grafico('pie',$empresaLocal,'localId');
+?>
 
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
 </div>
   </div>
 
@@ -873,39 +653,18 @@ var myChart = new Chart(ctx, {
 
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">satelital</div>
+    <div class="panel-heading">Conexión Satelital:</div>
 <div class="panel-body">
 <canvas id="satelitalId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("satelitalId").getContext('2d');
-var si=<?php echo $otrasE['satelital'] ?>;
-var no=<?php echo $cantInstituciones -$otrasE['satelital'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+$satelital=array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$satelital[0][1]= $otrasE['satelital'];
+$satelital[1][1]=$cantInstituciones-$otrasE['satelital'];
+echo $conectividad->grafico('pie',$satelital,'satelitalId');
+?>
 </div>
   </div>
 
@@ -917,39 +676,18 @@ var myChart = new Chart(ctx, {
 <div class="row">
 <div class="col-md-6">
   <div class="panel panel-primary">
-    <div class="panel-heading">Otra empresa de conectividad:</div>
+    <div class="panel-heading">Otra Empresa de Conectividad:</div>
 <div class="panel-body">
 <canvas id="otraEmpresaId" width="600" height="300"></canvas>
-<script type="text/javascript">
-var ctx = document.getElementById("otraEmpresaId").getContext('2d');
-var si=<?php echo $otrasE['otro'] ?>;
-var no=<?php echo $cantInstituciones -$otrasE['otro'] ?>;
-var myChart = new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ["SI", "NO"],
-    datasets: [{
-      backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6",
-        "#9b59b6",
-        "#f1c40f",
-        "#e74c3c",
-        "#34495e"
-      ],
-      data: [si, no]
-    }]
-
-
-  },
-  options:   {
-  pieceLabel: {
-    mode: 'percentage',
-  }
-  }
-});
-</script>
+<?php
+$otro=array(
+                  array('Si',0),
+                  array('No',0)
+                );
+$otro[0][1]= $otrasE['otro'];
+$otro[1][1]=$cantInstituciones-$otrasE['otro'];
+echo $conectividad->grafico('pie',$otro,'otraEmpresaId');
+?>
 </div>
   </div>
 
@@ -964,44 +702,19 @@ var myChart = new Chart(ctx, {
 
 
 
-<!--<div class="row">
+<div class="row">
 
     <div class="col-md-12">
       <div class="panel panel-primary">
-        <div class="panel-heading">Escuelas con Albergue o Internado:</div>
+        <div class="panel-heading" align="center"><a data-toggle="collapse" href="#collapse4"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        <span class="panel-title clickable"><h3 class="panel-title">ESCUELAS CON INTERNADO O ALBERGUE:</h3></span></a></div>
+        <div id="collapse4" class="panel-collapse collapse">
+
         <div class="panel-body">
       <canvas id="myChart2" width="600" height="150"></canvas>
-
-      <script type="text/javascript">
-      var ctx = document.getElementById("myChart2").getContext('2d');
-      var si=<?php echo $InternadoSi ?>;
-      var no=<?php echo $InternadoNo ?>;
-      var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: ["SI", "NO"],
-          datasets: [{
-            backgroundColor: [
-              "#2ecc71",
-              "#3498db",
-              "#95a5a6",
-              "#9b59b6",
-              "#f1c40f",
-              "#e74c3c",
-              "#34495e"
-            ],
-            data: [si, no]
-          }]
-
-
-        },
-        options:   {
-        pieceLabel: {
-          mode: 'percentage',
-        }
-        }
-      });
-      </script>
+      <?php
+      echo $conectividad->grafico('pie',$internado,'myChart2');
+      ?>
 
         </div>
       </div>
@@ -1009,12 +722,513 @@ var myChart = new Chart(ctx, {
     </div>
 
 
-</div>-->
+</div>
 
 
 </div>
   </div>
+  </div>
+  <!--graficos barra-->
+
+
+   <div id="barra" style='display:none'>
+
+  <br><br>
+  <div class="row"><!--fila energia-->
+    <div class="panel panel-primary">
+      <div class="panel-heading" align="center"><a data-toggle="collapse" href="#collapse1b"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+      <span class="panel-title clickable"><h3 class="panel-title">ESTADÍSTICAS ENERGÉTICAS:</h3></span></a></div>
+      <div id="collapse1b" class="panel-collapse collapse">
+      <div class="panel-body">
+        <!--fila1-->
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones con Energia Eléctrica: </div>
+  <div class="panel-body"><!--contenido de grafica instituciones con energia electrica-->
+    <canvas id="energiaEIdb" width="600" height="300"></canvas>
+  <?php
+      echo $conectividad->grafico('bar',$energia,'energiaEIdb');
+    ?>
+  </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Tipo de Instalación Eléctrica:</div>
+  <div class="panel-body">
+  <canvas id="tipoInstalacionIdb" width="600" height="300"></canvas>
+  <?php
+      echo $conectividad->grafico('bar',$tipoInstalacion,'tipoInstalacionIdb');
+    ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+  <!--fila2-->
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">¿Como funciona la Instalación Electrica?:</div>
+  <div class="panel-body">
+  <canvas id="comoFuncionaIdb" width="600" height="300"></canvas>
+  <?php
+      echo $conectividad->grafico('bar',$comoFunciona,'comoFuncionaIdb');
+    ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">La Institucion: ¿Tiene suficiente energia? </div>
+  <div class="panel-body">
+  <canvas id="myChart5b" width="600" height="300"></canvas>
+  <?php
+      echo $conectividad->grafico('bar',$suficienteEnergia,'myChart5b');
+    ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+      </div>
+  </div>
+    </div>
+
+
+  </div><!--cierre de fila energia-->
+
+
+
+  <!--fila artefactos-->
+  <div class="row">
+    <div class="panel panel-primary">
+
+      <div class="panel-heading" align="center"><a data-toggle="collapse" href="#collapse2b"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+      <span class="panel-title clickable"><h3 class="panel-title">ESTADISTICAS DE ARTEFACTOS ELECTRICOS E INSTALADOS:</h3></span></a></div>
+      <div id="collapse2b" class="panel-collapse collapse">
+
+      <div class="panel-body">
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones con heladeras:</div>
+  <div class="panel-body">
+  <canvas id="myChart4b" width="600" height="300"></canvas>
+  <?php
+      echo $conectividad->grafico('bar',$heladera,'myChart4b');
+    ?>
+
+    </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones con televisor:</div>
+  <div class="panel-body">
+  <canvas id="myChart7b" width="600" height="300"></canvas>
+  <?php
+    $televisor=array(
+                      array('Si',0),
+                      array('No',0)
+                    );
+    $televisor[0][1]= $otrosA['televisor'];
+    $televisor[1][1]=$cantInstituciones-$otrosA['televisor'];
+    echo $conectividad->grafico('bar',$televisor,'myChart7b');
+   ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones con cañon:</div>
+  <div class="panel-body">
+  <canvas id="canonIdb" width="600" height="300"></canvas>
+  <?php
+  $canon=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $canon[0][1]= $otrosA['canon'];
+  $canon[1][1]=$cantInstituciones-$otrosA['canon'];
+  echo $conectividad->grafico('bar',$canon,'canonIdb');
+  ?>
+  </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones con reproductor CD/DVD:</div>
+  <div class="panel-body">
+  <canvas id="reproductorIdb" width="600" height="300"></canvas>
+  <?php
+  $reproductor=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $reproductor[0][1]= $otrosA['reproductor'];
+  $reproductor[1][1]=$cantInstituciones-$otrosA['reproductor'];
+  echo $conectividad->grafico('bar',$reproductor,'reproductorIdb');
+  ?>
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones con impresora:</div>
+  <div class="panel-body">
+  <canvas id="impresoraIdb" width="600" height="300"></canvas>
+  <?php
+    $impresora=array(
+                      array('Si',0),
+                      array('No',0)
+                    );
+    $impresora[0][1]= $otrosA['impresora'];
+    $impresora[1][1]=$cantInstituciones-$otrosA['impresora'];
+    echo $conectividad->grafico('bar',$impresora,'impresoraIdb');
+   ?>
+  </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">instituciones con otros artefactos electricos:</div>
+  <div class="panel-body">
+  <canvas id="otrosIdb" width="600" height="300"></canvas>
+  <?php
+    $otro=array(
+                      array('Si',0),
+                      array('No',0)
+                    );
+    $otro[0][1]= $otrosA['otro'];
+    $otro[1][1]=$cantInstituciones-$otrosA['otro'];
+    echo $conectividad->grafico('bar',$otro,'otrosIdb');
+   ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+
+
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones con calefón:</div>
+  <div class="panel-body">
+  <canvas id="calefonIdb" width="600" height="300"></canvas>
+  <?php
+      echo $conectividad->grafico('bar',$calefon,'calefonIdb');
+    ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones que necesitan Calefón Solar:</div>
+  <div class="panel-body">
+  <canvas id="solarIdb" width="600" height="300"></canvas>
+  <?php
+    echo $conectividad->grafico('bar',$necesitaCalefonSolar,'solarIdb');
+   ?>
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones que necesitan Bombeo de Agua:</div>
+  <div class="panel-body">
+  <canvas id="bombeoIdb" width="600" height="300"></canvas>
+  <?php
+    echo $conectividad->grafico('bar',$necesitaBombeoAgua,'bombeoIdb');
+   ?>
+
+  </div>
+    </div>
+
+  </div>
+
+
+
+  </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  </div>
+
+
+  <!--fila conectividad-->
+
+  <div class="row">
+    <div class="panel panel-primary">
+
+        <div class="panel-heading" align="center"><a data-toggle="collapse" href="#collapse3b"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+        <span class="panel-title clickable"><h3 class="panel-title">ESTADISTICAS DE CONECTIVIDAD:</h3></span></a></div>
+        <div id="collapse3b" class="panel-collapse collapse">
+
+      <div class="panel-body">
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Instituciones con conexion a internet</div>
+  <div class="panel-body">
+  <canvas id="myChartb" width="600" height="300"></canvas>
+  <?php
+      echo $conectividad->grafico('bar',$conexion,'myChartb');
+   ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Empresa Claro:</div>
+  <div class="panel-body">
+  <canvas id="claroIdb" width="600" height="300"></canvas>
+  <?php
+  $claro=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $claro[0][1]= $otrasE['claro'];
+  $claro[1][1]=$cantInstituciones-$otrasE['claro'];
+  echo $conectividad->grafico('bar',$claro,'claroIdb');
+  ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Empresa Arnet:</div>
+  <div class="panel-body">
+  <canvas id="arnetIdb" width="600" height="300"></canvas>
+  <?php
+  $arnet=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $arnet[0][1]= $otrasE['arnet'];
+  $arnet[1][1]=$cantInstituciones-$otrasE['arnet'];
+  echo $conectividad->grafico('bar',$arnet,'arnetIdb');
+  ?>
+  </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Empresa Fibertel:</div>
+  <div class="panel-body">
+  <canvas id="fibertelIdb" width="600" height="300"></canvas>
+  <?php
+  $fibertel=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $fibertel[0][1]= $otrasE['fibertel'];
+  $fibertel[1][1]=$cantInstituciones-$otrasE['fibertel'];
+  echo $conectividad->grafico('pie',$fibertel,'fibertelIdb');
+  ?>
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Empresa Local de Conectividad:</div>
+  <div class="panel-body">
+  <canvas id="localIdb" width="600" height="300"></canvas>
+  <?php
+  $empresaLocal=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $empresaLocal[0][1]= $otrasE['empresaLocal'];
+  $empresaLocal[1][1]=$cantInstituciones-$otrasE['empresaLocal'];
+  echo $conectividad->grafico('bar',$empresaLocal,'localIdb');
+  ?>
+
+  </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Conexión Satelital:</div>
+  <div class="panel-body">
+  <canvas id="satelitalIdb" width="600" height="300"></canvas>
+  <?php
+  $satelital=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $satelital[0][1]= $otrasE['satelital'];
+  $satelital[1][1]=$cantInstituciones-$otrasE['satelital'];
+  echo $conectividad->grafico('bar',$satelital,'satelitalIdb');
+  ?>
+  </div>
+    </div>
+
+  </div>
+
+  </div>
+
+
+  <div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Otra Empresa de Conectividad:</div>
+  <div class="panel-body">
+  <canvas id="otraEmpresaIdb" width="600" height="300"></canvas>
+  <?php
+  $otro=array(
+                    array('Si',0),
+                    array('No',0)
+                  );
+  $otro[0][1]= $otrasE['otro'];
+  $otro[1][1]=$cantInstituciones-$otrasE['otro'];
+  echo $conectividad->grafico('bar',$otro,'otraEmpresaIdb');
+  ?>
+  </div>
+    </div>
+
+  </div>
+
+
+
+  </div>
+    </div>
+    </div>
+      </div>
+
+
+
+  <div class="row">
+
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading" align="center"><a data-toggle="collapse" href="#collapse4b"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+          <span class="panel-title clickable"><h3 class="panel-title">ESCUELAS CON INTERNADO O ALBERGUE:</h3></span></a></div>
+          <div id="collapse4b" class="panel-collapse collapse">
+
+          <div class="panel-body">
+        <canvas id="myChart2b" width="600" height="150"></canvas>
+        <?php
+        echo $conectividad->grafico('bar',$internado,'myChart2b');
+        ?>
+
+          </div>
+        </div>
+
+      </div>
+
+
+  </div>
+
+
+  </div>
+    </div>
+    <!-- codigo ejemplo de estadisticas barra-->
+    <div class="container">
+      <canvas id="myChartbarra" width="400" height="150"></canvas>
+      <script>
+      var ctx = document.getElementById("myChartbarra");
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [12, 19, 3, 5, 2, 3],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255,99,132,1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      });
+      </script>
+    </div>
+  <!--fin de codigo ejemplo-->
+
+    </div>
+
+</div>
 <script type="text/javascript" src="includes/mod_cen/estadisticas/botongrafico.js"></script>
+
 <!--<script type="text/javascript" src="includes/mod_cen/estadisticas/scriptestadistica.js"></script>
-<script type="text/javascript" src="includes/mod_cen/estadisticas/estadisticabarra.js">-->
-</script>
+<script type="text/javascript" src="includes/mod_cen/estadisticas/estadisticabarra.js">
+</script>-->
