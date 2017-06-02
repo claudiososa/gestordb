@@ -1,5 +1,58 @@
 <?php
 class Maestro{
+	public function grafico($tipo,$dato,$canvasId){
+		$graficoDibujado = '<script type="text/javascript">
+		var ctx = document.getElementById("'.$canvasId.'").getContext("2d");';
+		$valor=0;
+		foreach($dato as $fila)
+ 		{
+			$graficoDibujado.='var '.$fila[0].$valor.'='.$fila[1].';';
+			$valor++;
+ 		}
+		$graficoDibujado.='var myChart = new Chart(ctx, {
+			type: "pie",
+			data: {
+				labels: [';
+				$valor=0;
+				foreach($dato as $fila)
+				{
+					$graficoDibujado.='"'.$fila[0].'",';
+					//echo 'alert ('.$fila[0].');';
+					$valor++;
+				}
+				$graficoDibujado=trim($graficoDibujado, ',');
+				$graficoDibujado.='],
+				datasets: [{
+					backgroundColor: [
+						"#2ecc71",
+						"#3498db",
+						"#95a5a6",
+						"#9b59b6",
+						"#f1c40f",
+						"#e74c3c",
+						"#34495e"
+					],
+					data: [';
+					$valor=0;
+					foreach($dato as $fila)
+			 		{
+						$graficoDibujado.=$fila[0].$valor.',';
+						$valor++;
+			 		}
+					$graficoDibujado=trim($graficoDibujado, ',');
+					$graficoDibujado.=']
+				}]
+			},
+			options:   {
+			pieceLabel: {
+				mode: "percentage",
+			}
+			}
+		});
+		</script>';
+		return $graficoDibujado;
+	}
+
 public static function estructura($campo,$tabla){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
