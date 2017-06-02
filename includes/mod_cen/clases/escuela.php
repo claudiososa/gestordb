@@ -137,7 +137,7 @@ class Escuela
 			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 		}
 
-   echo $sentencia;
+   //echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
 		}else

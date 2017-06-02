@@ -20,6 +20,9 @@
 			case "Supervisor-Secundaria":
 				include("includes/mod_men/supervisor-secundaria.php");
 				break;
+			case "Supervisor-General-Secundaria":
+					include("includes/mod_men/supervisor-general-secundaria.php");
+					break;
 			case "Supervisor-Nivel-Superior":
 				include("includes/mod_men/supervisor-nivel-superior.php");
 				break;

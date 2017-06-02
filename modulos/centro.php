@@ -309,6 +309,13 @@
 				case 9:
 							include("includes/mod_cen/referentes/referente_att_todos.php");
 							break;
+			  case 10:
+							if($_SESSION['tipo']=='admin' || $_SESSION['tipo']=='DirectorNivelSecundario') {
+					 				include("includes/mod_cen/referentes/referenteSupervisores.php");
+							}else {
+									include("includes/mod_cen/denegado.php");
+							}
+							break;
 				}
 				break;
 				case "doc":
