@@ -307,7 +307,7 @@ while ($fila=mysqli_fetch_object($buscarTipoConec)) {
   <div class="panel panel-primary">
     <div class="panel-heading">Tipo de Instalación Eléctrica:</div>
 <div class="panel-body">
-<canvas id="tipoInstalacionId" width="600" height="300"></canvas>
+<canvas id="tipoInstalacionId" width="600" height="400"></canvas>
 <?php
     echo $conectividad->grafico('pie',$tipoInstalacion,'tipoInstalacionId');
   ?>
@@ -711,7 +711,7 @@ echo $conectividad->grafico('pie',$otro,'otraEmpresaId');
         <div id="collapse4" class="panel-collapse collapse">
 
         <div class="panel-body">
-      <canvas id="myChart2" width="600" height="150"></canvas>
+      <canvas id="myChart2" width="600" height="300"></canvas>
       <?php
       echo $conectividad->grafico('pie',$internado,'myChart2');
       ?>
@@ -776,7 +776,7 @@ echo $conectividad->grafico('pie',$otro,'otraEmpresaId');
     <div class="panel panel-primary">
       <div class="panel-heading">¿Como funciona la Instalación Electrica?:</div>
   <div class="panel-body">
-  <canvas id="comoFuncionaIdb" width="600" height="300"></canvas>
+  <canvas id="comoFuncionaIdb" width="600" height="200"></canvas>
   <?php
       echo $conectividad->grafico('bar',$comoFunciona,'comoFuncionaIdb');
     ?>
@@ -1163,7 +1163,7 @@ echo $conectividad->grafico('pie',$otro,'otraEmpresaId');
           <div id="collapse4b" class="panel-collapse collapse">
 
           <div class="panel-body">
-        <canvas id="myChart2b" width="600" height="150"></canvas>
+        <canvas id="myChart2b" width="600" height="200"></canvas>
         <?php
         echo $conectividad->grafico('bar',$internado,'myChart2b');
         ?>
@@ -1179,7 +1179,7 @@ echo $conectividad->grafico('pie',$otro,'otraEmpresaId');
 
   </div>
     </div>
-    
+
 
     </div>
 
