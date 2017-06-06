@@ -10,16 +10,13 @@ include_once("includes/mod_cen/clases/img.php");
 
 
 $nuevo=0;
-if(isset($_POST['save_report']))
+if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de informe nuevo ingresa aqui
 {
-	//var_dump($_FILES);
-
 //  sleep(10);
-    if(!isset($_POST["edit_report"]))
+    if(!isset($_POST["edit_report"]))//sino esta editando un informe ingresa aqui
     {
       //creo objeto informe
       $fecha=date("Y-m-d H:i:s");
-
       $informe= new Informe(null,
                             $_GET["escuelaId"],
                             $_SESSION["referenteId"],
@@ -38,7 +35,7 @@ if(isset($_POST['save_report']))
 
         $guardar_informe=$informe->agregar(); // hasta aqui deberia haber guardado el informe nuevo
 
-      
+
         foreach ($_FILES['input-img'] as $key) {
           $cantidadElmentos=count($_FILES['input-img']['name']);
 

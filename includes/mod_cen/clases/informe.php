@@ -55,7 +55,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		'". $this->estado."','". $this->fechaVisita."','". $this->fechaCarga."',
 		'". $this->fechaModificado."','". $this->nuevoTipo."','". $this->subTipo."');";
 
-		//echo $sentencia;
+		echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
 			$informeId=$conexion->insert_id;
@@ -242,7 +242,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 								ON referentes.referenteId=informes.referenteId
 								JOIN personas
 								ON personas.personaId=referentes.personaId
-								WHERE nuevotipo=8 AND ";
+								WHERE (nuevotipo=8 OR nuevotipo=9)  AND ";
 				}else{
 					$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
 									 ,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
