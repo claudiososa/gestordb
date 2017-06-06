@@ -195,9 +195,11 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		if($tiporeferente<>NULL){
-
-			$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+		$busEspecifica=0;
+		if(isset($tiporeferente)){
+			switch ($tiporeferente) {
+				case 'ATT':
+				$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
 									,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
 									informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
 									FROM informes
@@ -207,12 +209,30 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									ON referentes.referenteId=informes.referenteId
 									JOIN personas
 									ON personas.personaId=referentes.personaId
-									WHERE referentes.tipo='ATT'";
+									WHERE nuevotipo<>8 AND referentes.tipo='ATT'";
+					break;
+				case 'Supervisor-Secundaria':
+				$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+							,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
+							informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
+							FROM informes
+							JOIN escuelas
+							ON (informes.escuelaId=escuelas.escuelaId)
+							JOIN referentes
+							ON referentes.referenteId=informes.referenteId
+							JOIN personas
+							ON personas.personaId=referentes.personaId
+							WHERE referentes.tipo='Supervisor-Secundaria'";
+						break;
 
-			//$sentencia.="  ORDER BY informeId DESC";
+				default:
+					# code...
+					break;
+			}
 
 		}else{
-	  $sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+			if($_SESSION["tipo"]=='Supervisor-Secundaria'){
+	  		$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
 								,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
 								informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
 								FROM informes
@@ -221,17 +241,30 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 								JOIN referentes
 								ON referentes.referenteId=informes.referenteId
 								JOIN personas
-								ON personas.personaId=referentes.personaId";
-
+								ON personas.personaId=referentes.personaId
+								WHERE nuevotipo=8 AND ";
+				}else{
+					$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+									 ,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
+									 informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
+									 FROM informes
+									 JOIN escuelas
+									 ON (informes.escuelaId=escuelas.escuelaId)
+									 JOIN referentes
+									 ON referentes.referenteId=informes.referenteId
+									 JOIN personas
+									 ON personas.personaId=referentes.personaId
+									 WHERE nuevotipo<>8 AND ";
+					}
 		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
 		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL
 		|| $this->fechaVisita!=NULL || $this->contenido!=NULL || $this->nuevoTipo!=NULL || $this->subTipo!=NULL)
 		{
-			$sentencia.=" WHERE ";
-
-
+			//$sentencia.=" WHERE nuevotipo<>8 AND  ";
+			$busEspecifica=1;
 		if($this->informeId!=NULL)
 		{
+
 			$sentencia.=" informes.informeId = $this->informeId && ";
 		}
 
@@ -289,7 +322,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 
 		}
-
+		if($busEspecifica==0)
+			$sentencia=substr($sentencia,0,strlen($sentencia)-4);
 		}
 		$sentencia.="  ORDER BY informes.informeId DESC";
 		if(isset($limit)){
