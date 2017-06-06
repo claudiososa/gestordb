@@ -316,9 +316,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con Energia Eléctrica:");
-  doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+  doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesEnergiaElctrica.pdf');
 }
 
@@ -347,9 +347,10 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Tipo de Instalación Eléctrica:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+  doc.addImage(canvasImg, 'jpg', 30, 30, 250, 150 );
+
 	doc.save('TipoInstalacionElectrica.pdf');
 }
 
@@ -382,9 +383,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(20);
+	doc.setFontSize(15);
 	doc.text(15, 15, "¿Como funciona la Instalación Electrica?:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('ComofuncionaInstalacionElectrica.pdf');
 }
 
@@ -413,9 +414,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "La Institucion: ¿Tiene suficiente energia?:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('LaInstitucionSuficienteEnergia.pdf');
 }
 
@@ -466,9 +467,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con heladeras:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesHeladeras.pdf');
 }
 
@@ -503,9 +504,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con televisor:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesTelevisor.pdf');
 }
 
@@ -542,9 +543,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con cañon:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesCañon.pdf');
 }
 
@@ -579,9 +580,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con reproductor CD/DVD:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesReproductorCD/DVD.pdf');
 }
 
@@ -618,9 +619,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con impresora:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesImpresora.pdf');
 }
 
@@ -655,9 +656,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con otros artefactos electricos:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesArtefactosElectricos.pdf');
 }
 
@@ -690,9 +691,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con calefón:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesCalefon:.pdf');
 }
 
@@ -721,9 +722,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones que necesitan Calefón Solar:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesCalefonSolar.pdf');
 }
 
@@ -755,9 +756,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesBombeoAgua.pdf');
 }
 
@@ -810,9 +811,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con conexion a internet");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesConexionInternet.pdf');
 }
 
@@ -847,9 +848,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Empresa Claro:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('EmpresaClaro.pdf');
 }
 
@@ -886,9 +887,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Empresa Arnet:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('EmpresaArnet.pdf');
 }
 
@@ -923,9 +924,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Empresa Fibertel:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('EmpresaFibertel.pdf');
 }
 
@@ -962,9 +963,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Empresa Local de Conectividad:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('EmpresaLocal.pdf');
 }
 
@@ -999,9 +1000,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Conexión Satelital:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('ConexionSatelital.pdf');
 }
 
@@ -1040,9 +1041,9 @@ function downloadPDF() {
 
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
-	doc.setFontSize(10);
+	doc.setFontSize(15);
 	doc.text(15, 15, "Otra Empresa de Conectividad:");
-	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('OtraEmpresa.pdf');
 }
 
@@ -1085,9 +1086,9 @@ function downloadPDF() {
 
     	//creates PDF from img
     	var doc = new jsPDF('landscape');
-    	doc.setFontSize(10);
+    	doc.setFontSize(15);
     	doc.text(15, 15, "Escuelas con Internado o Albergue:");
-    	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
     	doc.save('EscuelasInternado.pdf');
     }
 
@@ -1137,9 +1138,9 @@ function downloadPDF() {
 
   	//creates PDF from img
   	var doc = new jsPDF('landscape');
-  	doc.setFontSize(10);
+  	doc.setFontSize(15);
   	doc.text(15, 15, "Instituciones con Energia Eléctrica:");
-  	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+  	doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
   	doc.save('InstitucionesEnergiaElectrica.pdf');
   }
 
@@ -1168,9 +1169,9 @@ function downloadPDF() {
 
   	//creates PDF from img
   	var doc = new jsPDF('landscape');
-  	doc.setFontSize(10);
+  	doc.setFontSize(15);
   	doc.text(15, 15, "Tipo de Instalación Eléctrica:");
-  	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+  	doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
   	doc.save('TipoInstalacionElectrica.pdf');
   }
 
@@ -1202,9 +1203,9 @@ function downloadPDF() {
 
   	//creates PDF from img
   	var doc = new jsPDF('landscape');
-  	doc.setFontSize(10);
+  	doc.setFontSize(15);
   	doc.text(15, 15, "¿Como funciona la Instalación Electrica?:");
-  	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+  	doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
   	doc.save('ComoFuncionaInstalacionElectrica.pdf');
   }
 
@@ -1233,9 +1234,9 @@ function downloadPDF() {
 
   	//creates PDF from img
   	var doc = new jsPDF('landscape');
-  	doc.setFontSize(10);
+  	doc.setFontSize(15);
   	doc.text(15, 15, "La Institucion: ¿Tiene suficiente energia?:");
-  	doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+  	doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
   	doc.save('InstitucionSuficienteEnergia.pdf');
   }
 
@@ -1284,9 +1285,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones con heladeras:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesHeladeras.pdf');
     }
 
@@ -1321,9 +1322,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones con televisor:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesTelevisor.pdf');
     }
 
@@ -1360,9 +1361,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones con cañon:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesCañon.pdf');
     }
 
@@ -1397,9 +1398,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones con reproductor CD/DVD:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesReproductorCD/DVD.pdf');
     }
 
@@ -1436,9 +1437,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones con impresora:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesImpresora.pdf');
     }
 
@@ -1473,9 +1474,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones con otros artefactos electricos:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesOtrosArtefactos.pdf');
     }
 
@@ -1508,9 +1509,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones con calefón:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesCalefon.pdf');
     }
 
@@ -1539,9 +1540,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones que necesitan Calefón Solar:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesCalefonSolar.pdf');
     }
 
@@ -1573,9 +1574,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesBombeoAgua.pdf');
     }
 
@@ -1628,9 +1629,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Instituciones con conexion a internet:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('InstitucionesConexionInternet.pdf');
     }
 
@@ -1665,9 +1666,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Empresa Claro:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('EmpresaClaro.pdf');
     }
 
@@ -1704,9 +1705,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Empresa Arnet");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('EmpresaArnet.pdf');
     }
 
@@ -1741,9 +1742,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Empresa Fibertel:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('EmpresaFibertel.pdf');
     }
 
@@ -1780,9 +1781,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Empresa Local de Conectividad:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('EmpresaLocal.pdf');
     }
 
@@ -1817,9 +1818,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Conexión Satelital:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('ConexionSatelital.pdf');
     }
 
@@ -1858,9 +1859,9 @@ function downloadPDF() {
 
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(10);
+    doc.setFontSize(15);
     doc.text(15, 15, "Otra Empresa de Conectividad:");
-    doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('OtraEmpresa.pdf');
     }
 
@@ -1903,9 +1904,9 @@ function downloadPDF() {
 
         //creates PDF from img
         var doc = new jsPDF('landscape');
-        doc.setFontSize(10);
+        doc.setFontSize(15);
         doc.text(15, 15, "Escuelas con Internado o Albergue");
-        doc.addImage(canvasImg, 'jpg', 10, 10, 280, 150 );
+        doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
         doc.save('EscuelasInternado.pdf');
         }
 
