@@ -292,7 +292,7 @@ while ($fila=mysqli_fetch_object($buscarTipoConec)) {
       <!--fila1-->
 <div class="row">
 <div class="col-md-6" >
-  <div class="panel panel-primary" id="energiapdf" >
+  <div class="panel panel-primary">
     <div class="panel-heading" >Instituciones con Energia Eléctrica: </div>
 <div class="panel-body"><!--contenido de grafica instituciones con energia electrica-->
   <canvas id="energiaEId" width="600" height="300"></canvas>
@@ -318,7 +318,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con Energia Eléctrica:");
-  doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+  doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesEnergiaElctrica.pdf');
 }
 
@@ -385,7 +385,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "¿Como funciona la Instalación Electrica?:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('ComofuncionaInstalacionElectrica.pdf');
 }
 
@@ -416,7 +416,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "La Institucion: ¿Tiene suficiente energia?:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('LaInstitucionSuficienteEnergia.pdf');
 }
 
@@ -424,6 +424,40 @@ function downloadPDF() {
 </div>
 
 </div>
+<button type="Button" class="btn btn-primary" id="btn-energia">Descargar Estadisticas Completas de Energia a PDF</button>
+<script>
+
+document.getElementById('btn-energia').addEventListener("click", downloadPDF);
+
+//donwload pdf from original canvas
+function downloadPDF() {
+var canvas = document.querySelector('#energiaEId');
+var canvas1 = document.querySelector('#tipoInstalacionId');
+var canvas2 = document.querySelector('#comoFuncionaId');
+var canvas3 = document.querySelector('#myChart5');
+//creates image
+var canvasImg = canvas.toDataURL("image/jpg", 1.0);
+var canvasImg1 = canvas1.toDataURL("image/jpg", 1.0);
+var canvasImg2 = canvas2.toDataURL("image/jpg", 1.0);
+var canvasImg3 = canvas3.toDataURL("image/jpg", 1.0);
+//creates PDF from img
+var doc = new jsPDF('landscape');
+doc.setFontSize(15);
+doc.text(15, 15, "Instituciones con Energia Eléctrica:");
+doc.addImage(canvasImg, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Tipo de Instalación Eléctrica:")
+doc.addImage(canvasImg1, 'jpg', 30, 30, 250, 140 );
+doc.addPage()
+doc.text(15, 15, "¿Cómo funciona la Instalación Eléctrica?:")
+doc.addImage(canvasImg2, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "¿La Institución tiene suficiente Energía?:")
+doc.addImage(canvasImg3, 'jpg', 30, 30, 260, 140 );
+doc.save('EstadisticasEnergeticas.pdf');
+}
+
+</script>
     </div>
 
 </div>
@@ -469,7 +503,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con heladeras:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesHeladeras.pdf');
 }
 
@@ -506,7 +540,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con televisor:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesTelevisor.pdf');
 }
 
@@ -545,7 +579,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con cañon:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesCañon.pdf');
 }
 
@@ -582,7 +616,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con reproductor CD/DVD:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesReproductorCD/DVD.pdf');
 }
 
@@ -621,7 +655,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con impresora:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesImpresora.pdf');
 }
 
@@ -658,7 +692,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con otros artefactos electricos:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesArtefactosElectricos.pdf');
 }
 
@@ -693,7 +727,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones con calefón:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesCalefon:.pdf');
 }
 
@@ -724,7 +758,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones que necesitan Calefón Solar:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesCalefonSolar.pdf');
 }
 
@@ -758,7 +792,7 @@ function downloadPDF() {
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
 	doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:");
-	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
+	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesBombeoAgua.pdf');
 }
 
@@ -768,6 +802,66 @@ function downloadPDF() {
 
 
 </div>
+<button type="Button" class="btn btn-primary" id="btn-artefactos">Descargar Estadisticas Completas de Artefactos Electricos a PDF</button>
+<script>
+
+document.getElementById('btn-artefactos').addEventListener("click", downloadPDF);
+
+//donwload pdf from original canvas
+function downloadPDF() {
+var canvase = document.querySelector('#myChart4');
+var canvas1e = document.querySelector('#myChart7');
+var canvas2e = document.querySelector('#canonId');
+var canvas3e = document.querySelector('#reproductorId');
+var canvas4e = document.querySelector('#impresoraId');
+var canvas5e = document.querySelector('#otrosId');
+var canvas6e = document.querySelector('#calefonId');
+var canvas7e = document.querySelector('#solarId');
+var canvas8e = document.querySelector('#bombeoId');
+//creates image
+var canvasImge = canvase.toDataURL("image/jpg", 1.0);
+var canvasImg1e = canvas1e.toDataURL("image/jpg", 1.0);
+var canvasImg2e = canvas2e.toDataURL("image/jpg", 1.0);
+var canvasImg3e = canvas3e.toDataURL("image/jpg", 1.0);
+var canvasImg4e = canvas4e.toDataURL("image/jpg", 1.0);
+var canvasImg5e = canvas5e.toDataURL("image/jpg", 1.0);
+var canvasImg6e = canvas6e.toDataURL("image/jpg", 1.0);
+var canvasImg7e = canvas7e.toDataURL("image/jpg", 1.0);
+var canvasImg8e = canvas8e.toDataURL("image/jpg", 1.0);
+//creates PDF from img
+var doc = new jsPDF('landscape');
+doc.setFontSize(15);
+doc.text(15, 15, "Instituciones con Heladera:");
+doc.addImage(canvasImge, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Instituciones con Televisor:")
+doc.addImage(canvasImg1e, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Instituciones con Cañon:")
+doc.addImage(canvasImg2e, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Instituciones con Reproductor CD/DVD:")
+doc.addImage(canvasImg3e, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Instituciones con Impresora:")
+doc.addImage(canvasImg4e, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Instituciones con Otros Artefactos Electricos:")
+doc.addImage(canvasImg5e, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Instituciones con Calefon:")
+doc.addImage(canvasImg6e, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Instituciones que necesitan Calefon Solar:")
+doc.addImage(canvasImg7e, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:")
+doc.addImage(canvasImg8e, 'jpg', 30, 30, 260, 140 );
+doc.save('ArtefactosElectricos.pdf');
+}
+
+</script>
+
     </div>
 
   </div>
@@ -1053,8 +1147,63 @@ function downloadPDF() {
 
 
 </div>
+<button type="Button" class="btn btn-primary" id="btn-inter">Descargar Estadisticas Completas de Conectividad PDF</button>
+<script>
+
+document.getElementById('btn-inter').addEventListener("click", downloadPDF);
+
+//donwload pdf from original canvas
+function downloadPDF() {
+var canvasc = document.querySelector('#myChart');
+var canvas1c = document.querySelector('#claroId');
+var canvas2c = document.querySelector('#arnetId');
+var canvas3c = document.querySelector('#fibertelId');
+var canvas4c = document.querySelector('#localId');
+var canvas5c = document.querySelector('#satelitalId');
+var canvas6c = document.querySelector('#otraEmpresaId');
+//creates image
+var canvasImgc = canvasc.toDataURL("image/jpg", 1.0);
+var canvasImg1c = canvas1c.toDataURL("image/jpg", 1.0);
+var canvasImg2c = canvas2c.toDataURL("image/jpg", 1.0);
+var canvasImg3c = canvas3c.toDataURL("image/jpg", 1.0);
+var canvasImg4c = canvas4c.toDataURL("image/jpg", 1.0);
+var canvasImg5c = canvas5c.toDataURL("image/jpg", 1.0);
+var canvasImg6c = canvas6c.toDataURL("image/jpg", 1.0);
+
+//creates image
+
+//creates PDF from img
+var doc = new jsPDF('landscape');
+doc.setFontSize(15);
+doc.text(15, 15, "Instituciones con Conexion a Internet:");
+doc.addImage(canvasImgc, 'jpg', 30, 30, 260, 150 );
+doc.addPage()
+doc.text(15, 15, "Empresa Claro:")
+doc.addImage(canvasImg1c, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Empresa Arnet:")
+doc.addImage(canvasImg2c, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Empresa Fibertel:")
+doc.addImage(canvasImg3c, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Empresa Local de Conectividad:")
+doc.addImage(canvasImg4c, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Conexion Satelital:")
+doc.addImage(canvasImg5c, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Otra Empresa de Conectividad")
+doc.addImage(canvasImg6c, 'jpg', 30, 30, 260, 140 );
+doc.save('EstadisticasConectividad.pdf');
+}
+
+</script>
+
   </div>
+
   </div>
+
     </div>
 
 
@@ -1074,6 +1223,7 @@ function downloadPDF() {
       ?>
 <button type="Button" class="btn btn-primary"id="cmd21">Descargar a PDF</button>
         </div>
+
       </div>
       <script>
       document.getElementById('cmd21').addEventListener("click", downloadPDF);
@@ -1097,7 +1247,6 @@ function downloadPDF() {
 
 
 </div>
-
 
 </div>
   </div>
@@ -1244,6 +1393,40 @@ function downloadPDF() {
   </div>
 
   </div>
+  <button type="Button" class="btn btn-primary" id="btn-energiab">Descargar Estadisticas Completas de Energia a PDF</button>
+  <script>
+
+  document.getElementById('btn-energiab').addEventListener("click", downloadPDF);
+
+  //donwload pdf from original canvas
+  function downloadPDF() {
+  var canvas = document.querySelector('#energiaEIdb');
+  var canvas1 = document.querySelector('#tipoInstalacionIdb');
+  var canvas2 = document.querySelector('#comoFuncionaIdb');
+  var canvas3 = document.querySelector('#myChart5b');
+  //creates image
+  var canvasImg = canvas.toDataURL("image/jpg", 1.0);
+  var canvasImg1 = canvas1.toDataURL("image/jpg", 1.0);
+  var canvasImg2 = canvas2.toDataURL("image/jpg", 1.0);
+  var canvasImg3 = canvas3.toDataURL("image/jpg", 1.0);
+  //creates PDF from img
+  var doc = new jsPDF('landscape');
+  doc.setFontSize(15);
+  doc.text(15, 15, "Instituciones con Energia Eléctrica:");
+  doc.addImage(canvasImg, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Tipo de Instalación Eléctrica:")
+  doc.addImage(canvasImg1, 'jpg', 30, 30, 240, 140 );
+  doc.addPage()
+  doc.text(15, 15, "¿Cómo funciona la Instalación Eléctrica?:")
+  doc.addImage(canvasImg2, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "¿La Institución tiene suficiente Energía?:")
+  doc.addImage(canvasImg3, 'jpg', 30, 30, 260, 140 );
+  doc.save('EstadisticasEnergeticas.pdf');
+  }
+
+  </script>
       </div>
   </div>
     </div>
@@ -1586,6 +1769,62 @@ function downloadPDF() {
 
 
   </div>
+  <button type="Button" class="btn btn-primary" id="btn-art">Descargar Estadisticas Completas de Artefactos ElectricosF</button>
+  <script>
+  document.getElementById('btn-art').addEventListener("click", downloadPDF);
+
+  function downloadPDF() {
+  var canvaseb = document.querySelector('#myChart4b');
+  var canvas1eb = document.querySelector('#myChart7b');
+  var canvas2eb = document.querySelector('#canonIdb');
+  var canvas3eb = document.querySelector('#reproductorIdb');
+  var canvas4eb = document.querySelector('#impresoraIdb');
+  var canvas5eb = document.querySelector('#otrosIdb');
+  var canvas6eb = document.querySelector('#calefonIdb');
+  var canvas7eb = document.querySelector('#solarIdb');
+  var canvas8eb = document.querySelector('#bombeoIdb');
+  //creates image
+  var canvasImgb = canvaseb.toDataURL("image/jpg", 1.0);
+  var canvasImg1b = canvas1eb.toDataURL("image/jpg", 1.0);
+  var canvasImg2b = canvas2eb.toDataURL("image/jpg", 1.0);
+  var canvasImg3b = canvas3eb.toDataURL("image/jpg", 1.0);
+  var canvasImg4b = canvas4eb.toDataURL("image/jpg", 1.0);
+  var canvasImg5b = canvas5eb.toDataURL("image/jpg", 1.0);
+  var canvasImg6b = canvas6eb.toDataURL("image/jpg", 1.0);
+  var canvasImg7b = canvas7eb.toDataURL("image/jpg", 1.0);
+  var canvasImg8b = canvas8eb.toDataURL("image/jpg", 1.0);
+  //creates PDF from img
+  var doc = new jsPDF('landscape');
+  doc.setFontSize(15);
+  doc.text(15, 15, "Instituciones con Heladera:");
+  doc.addImage(canvasImgb, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Instituciones con Televisor:")
+  doc.addImage(canvasImg1b, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Instituciones con Cañon:")
+  doc.addImage(canvasImg2b, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Instituciones con Reproductor CD/DVD:")
+  doc.addImage(canvasImg3b, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Instituciones con Impresora:")
+  doc.addImage(canvasImg4b, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Instituciones con Otros Artefactos Electricos:")
+  doc.addImage(canvasImg5b, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Instituciones con Calefon:")
+  doc.addImage(canvasImg6b, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Instituciones que necesitan Calefon Solar:")
+  doc.addImage(canvasImg7b, 'jpg', 30, 30, 260, 140 );
+  doc.addPage()
+  doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:")
+  doc.addImage(canvasImg8b, 'jpg', 30, 30, 260, 140 );
+  doc.save('ArtefactosElectricos.pdf');
+  }
+  </script>
       </div>
 
     </div>
@@ -1845,32 +2084,67 @@ function downloadPDF() {
   $otro[1][1]=$cantInstituciones-$otrasE['otro'];
   echo $conectividad->grafico('bar',$otro,'otraEmpresaIdb');
   ?>
-  <button type="Button" class="btn btn-primary" id="cmd41">Descargar a PDF</button>
+
   </div>
     </div>
-    <script>
-    document.getElementById('cmd41').addEventListener("click", downloadPDF);
 
-    //donwload pdf from original canvas
-    function downloadPDF() {
-    var canvas = document.querySelector('#otraEmpresaIdb');
-    //creates image
-    var canvasImg = canvas.toDataURL("image/jpg", 1.0);
 
-    //creates PDF from img
-    var doc = new jsPDF('landscape');
-    doc.setFontSize(15);
-    doc.text(15, 15, "Otra Empresa de Conectividad:");
-    doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
-    doc.save('OtraEmpresa.pdf');
-    }
-
-    </script>
   </div>
+
 
 
 
   </div>
+  <button type="Button" class="btn btn-primary" id="btn-conexion3">Descargar Estadisticas Completas de Conectividad PDF</button>
+  <script>
+  document.getElementById('btn-conexion3').addEventListener("click", downloadPDF);
+
+  //donwload pdf from original canvas
+  function downloadPDF() {
+  var canvasb = document.querySelector('#myChartb');
+  var canvas1b = document.querySelector('#claroIdb');
+  var canvas2b = document.querySelector('#arnetIdb');
+  var canvas3b = document.querySelector('#fibertelIdb');
+  var canvas4b = document.querySelector('#localIdb');
+  var canvas5b = document.querySelector('#satelitalIdb');
+  var canvas6b = document.querySelector('#otraEmpresaIdb');
+
+  //creates image
+  var canvasImgb = canvasb.toDataURL("image/jpg", 1.0);
+  var canvasImg1b = canvas1b.toDataURL("image/jpg", 1.0);
+  var canvasImg2b = canvas2b.toDataURL("image/jpg", 1.0);
+  var canvasImg3b = canvas3b.toDataURL("image/jpg", 1.0);
+  var canvasImg4b = canvas4b.toDataURL("image/jpg", 1.0);
+  var canvasImg5b = canvas5b.toDataURL("image/jpg", 1.0);
+  var canvasImg6b = canvas6b.toDataURL("image/jpg", 1.0);
+
+
+  //creates PDF from img
+  var doc = new jsPDF('landscape');
+doc.setFontSize(15);
+doc.text(15, 15, "Instituciones con Conexion a Internet:");
+doc.addImage(canvasImgb, 'jpg', 30, 30, 200, 150 );
+doc.addPage()
+doc.text(15, 15, "Empresa Claro:")
+doc.addImage(canvasImg1b, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Empresa Arnet:")
+doc.addImage(canvasImg2b, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Empresa Fibertel:")
+doc.addImage(canvasImg3b, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Empresa Local de Conectividad:")
+doc.addImage(canvasImg4b, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Conexion Satelital:")
+doc.addImage(canvasImg5b, 'jpg', 30, 30, 260, 140 );
+doc.addPage()
+doc.text(15, 15, "Otra Empresa de Conectividad")
+doc.addImage(canvasImg6b, 'jpg', 30, 30, 260, 140 );
+doc.save('EstadisticasConectividad.pdf');
+}
+  </script>
     </div>
     </div>
       </div>
