@@ -191,15 +191,13 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		return $conexion->query($sentencia);
 	}
 
-	public function buscar($limit=NULL,$tiporeferente=NULL)
+	public function buscarSupervisorSec()
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		$busEspecifica=0;
-		if(isset($tiporeferente)){
-			switch ($tiporeferente) {
-				case 'ATT':
-				$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+		$sinParam=0;
+
+		$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
 									,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
 									informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
 									FROM informes
@@ -209,62 +207,18 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									ON referentes.referenteId=informes.referenteId
 									JOIN personas
 									ON personas.personaId=referentes.personaId
-									WHERE nuevotipo<>8 AND referentes.tipo='ATT'";
-					break;
-				case 'Supervisor-Secundaria':
-				$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
-							,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
-							informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
-							FROM informes
-							JOIN escuelas
-							ON (informes.escuelaId=escuelas.escuelaId)
-							JOIN referentes
-							ON referentes.referenteId=informes.referenteId
-							JOIN personas
-							ON personas.personaId=referentes.personaId
-							WHERE referentes.tipo='Supervisor-Secundaria'";
-						break;
+									WHERE (informes.nuevotipo=8 || informes.nuevotipo=9) AND ";
 
-				default:
-					# code...
-					break;
-			}
 
-		}else{
-			if($_SESSION["tipo"]=='Supervisor-Secundaria'){
-	  		$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
-								,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
-								informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
-								FROM informes
-								JOIN escuelas
-								ON (informes.escuelaId=escuelas.escuelaId)
-								JOIN referentes
-								ON referentes.referenteId=informes.referenteId
-								JOIN personas
-								ON personas.personaId=referentes.personaId
-								WHERE (nuevotipo=8 OR nuevotipo=9)  AND ";
-				}else{
-					$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
-									 ,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
-									 informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
-									 FROM informes
-									 JOIN escuelas
-									 ON (informes.escuelaId=escuelas.escuelaId)
-									 JOIN referentes
-									 ON referentes.referenteId=informes.referenteId
-									 JOIN personas
-									 ON personas.personaId=referentes.personaId
-									 WHERE nuevotipo<>8 AND ";
-					}
 		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
 		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL
 		|| $this->fechaVisita!=NULL || $this->contenido!=NULL || $this->nuevoTipo!=NULL || $this->subTipo!=NULL)
 		{
-			//$sentencia.=" WHERE nuevotipo<>8 AND  ";
-			$busEspecifica=1;
+			$sentencia.="  ";
+
+
 		if($this->informeId!=NULL)
 		{
-
 			$sentencia.=" informes.informeId = $this->informeId && ";
 		}
 
@@ -320,11 +274,148 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+		if ($sinParam==1) {
+		$sentencia.=' )';
+		}
 
 		}
-		if($busEspecifica==0)
-			$sentencia=substr($sentencia,0,strlen($sentencia)-4);
+
+		  // fin else
+
+		$sentencia.="  ORDER BY informes.informeId DESC";
+		if(isset($limit)){
+			$sentencia.=" LIMIT ".$limit;
 		}
+		echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
+	public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$sinParam=0;
+
+		$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+									,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
+									informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
+									FROM informes
+									JOIN escuelas
+									ON (informes.escuelaId=escuelas.escuelaId)
+									JOIN referentes
+									ON referentes.referenteId=informes.referenteId
+									JOIN personas
+									ON personas.personaId=referentes.personaId ";
+									if ($_SESSION['tipo']=='Supervisor-Secundaria' || $_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='Supervisor-General-Secundaria') {
+										$sentencia.=" WHERE informes.nuevotipo=8 || informes.nuevotipo=9  ";
+									}else{
+									$sentencia.=" WHERE informes.nuevotipo<>8 ";
+									}
+
+		if($tiporeferente<>NULL){
+			$sinParam=1;
+
+			$sentencia.= " AND ( referentes.tipo='".$tiporeferente."'";
+
+
+
+
+			//$sentencia.="  ORDER BY informeId DESC";
+
+		}else{
+
+			if ($listaRefer <> NULL){
+
+				$sinParam=1;
+				$sentencia.="  AND ( ";
+
+				foreach ($listaRefer as $value) {
+
+				$sentencia.=" referentes.tipo='".$value."' || ";
+
+
+				}
+				$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+			}
+
+		else
+		{
+
+
+		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
+		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL
+		|| $this->fechaVisita!=NULL || $this->contenido!=NULL || $this->nuevoTipo!=NULL || $this->subTipo!=NULL)
+		{
+			$sentencia.=" AND ";
+
+
+		if($this->informeId!=NULL)
+		{
+			$sentencia.=" informes.informeId = $this->informeId && ";
+		}
+
+		if($this->escuelaId!=NULL)
+		{
+			$sentencia.=" informes.escuelaId = $this->escuelaId && ";
+		}
+
+		if($this->tipo!=NULL)
+		{
+			$sentencia.=" informes.tipo=$this->tipo && ";
+		}
+
+		if($this->nuevoTipo!=NULL)
+		{
+			$sentencia.=" informes.nuevotipo=$this->nuevoTipo && ";
+		}
+
+		if($this->subTipo!=NULL)
+		{
+			$sentencia.=" informes.subtipo=$this->subTipo && ";
+		}
+
+		if($this->prioridad!=NULL)
+		{
+			$sentencia.=" informes.prioridad = '$this->prioridad' && ";
+		}
+
+		if($this->leido!=NULL)
+		{
+			$sentencia.=" informes.leido=$this->leido && ";
+		}
+
+		if($this->estado!=NULL)
+		{
+			$sentencia.=" informes.estado=$this->estado && ";
+		}
+
+		if($this->referenteId!=NULL)
+		{
+			$sentencia.=" informes.referenteId='$this->referenteId' && ";
+		}
+
+		if($this->fechaVisita!=NULL)
+		{
+			$sentencia.=" informes.fechaVisita='$this->fechaVisita' && ";
+		}
+
+		if($this->contenido!=NULL)
+		{
+			$sentencia.=" informes.contenido=$this->contenido && ";
+		}
+
+
+		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+		if ($sinParam==1) {
+		$sentencia.=' )';
+		}
+
+		}
+
+		}  // fin else
+	}
 		$sentencia.="  ORDER BY informes.informeId DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;

@@ -211,7 +211,7 @@ while ($fila = mysqli_fetch_object($resultado))
 
 	$informe = new Informe(null,$fila->escuelaId);
 
-	$buscar_informe = $informe->buscar();
+	$buscar_informe = $informe->buscarSupervisorSec();
 
 	$cant = mysqli_num_rows($buscar_informe);
 
