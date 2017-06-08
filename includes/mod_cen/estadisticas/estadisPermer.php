@@ -299,7 +299,7 @@ while ($fila=mysqli_fetch_object($buscarTipoConec)) {
               <div class="panel-heading" >Instituciones con Energia Eléctrica: </div>
 
               <div class="panel-body"><!--contenido de grafica instituciones con energia electrica-->
-                   <canvas id="energiaEId" width="600" height="300"></canvas>
+                   <canvas id="energiaEId" width="600" height="300"></canvas><br><br><br><br>
 <?php
     echo $conectividad->grafico('pie',$energia,'energiaEId');
   ?>
