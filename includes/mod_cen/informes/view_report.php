@@ -12,9 +12,6 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 include_once("includes/mod_cen/clases/img.php");
 include_once("includes/mod_cen/clases/imgRespuesta.php");
 
-
-
-
 $dato_informe = new Informe($_GET["informeId"]);
 $buscar_informe = $dato_informe->buscar();
 $informe = mysqli_fetch_object($buscar_informe);
@@ -47,8 +44,6 @@ $dato_localidad= mysqli_fetch_object($localidad);
 
 $o_informe = new Informe($_GET["informeId"]);
 $buscar_informe = $o_informe->buscar();
-
-
 
 $informe=mysqli_fetch_object($buscar_informe);
 $nuevo=1;

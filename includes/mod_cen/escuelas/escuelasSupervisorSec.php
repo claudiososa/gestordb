@@ -189,8 +189,10 @@ $con_ubicacion=0;
 					echo "<th>Nombre</th>";
 					echo "<th>Nivel</th>";
 					echo "<th>Localidad</th>";
-					echo "<th>Informe</th>";
-					echo "<th>Cant</th>";
+					echo "<th>Crear Inf.</th>";
+					echo "<th>Supervisión</th>";
+					echo "<th>Conectar</th>";
+					echo "<th>PMI</th>";
 					echo "<th>Autoridad</th>";
 					echo "<th>Supervisor</th>";
 					echo "<th>RTI</th>";
@@ -215,6 +217,16 @@ while ($fila = mysqli_fetch_object($resultado))
 
 	$cant = mysqli_num_rows($buscar_informe);
 
+	//guarda en $cantConectar  todos los informes creados equipo Conectar Igualdad
+	$arrayTipoReferente = array('ETT','ETJ','Coordinador');
+  $buscarInformeConectar=$informe->buscar(null,null,$arrayTipoReferente);
+	$cantConectar = mysqli_num_rows($buscarInformeConectar);
+
+	//guarda en $cantConectar  todos los informes creados equipo PMI
+	$arrayTipoReferente = array('ATT','CoordinadorPmi');
+  $buscarInformePmi=$informe->buscar(null,null,$arrayTipoReferente);
+	$cantPmi = mysqli_num_rows($buscarInformePmi);
+
 	if($cant==0){
 
 		echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
@@ -225,6 +237,17 @@ while ($fila = mysqli_fetch_object($resultado))
 					 Crear</a></td>";
 		echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>$cant</a></td>";
 	}
+	if($cantConectar==0){//sino existe informes creados por equipo conectar para este colegio
+		echo "<td><a class='btn btn-danger' href='#'>0</a></td>";
+	}else{
+	 	echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&tipo=conectar&id=2&escuelaId=".$fila->escuelaId."'>$cantConectar</a></td>";
+	}
+	if($cantPmi==0){//sino existe informes creados por equipo conectar para este colegio
+		echo "<td><a class='btn btn-danger' href='#'>0</a></td>";
+	}else{
+	 	echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&tipo=pmi&id=2&escuelaId=".$fila->escuelaId."'>$cantPmi</a></td>";
+	}
+
 
 	echo "<td>";
 	$director= director::existeAutoridad($fila->escuelaId);

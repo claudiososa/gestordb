@@ -16,7 +16,27 @@ $buscar_escuela = $escuela->buscar();
 $dato_escuela = mysqli_fetch_object($buscar_escuela);
 
 
-$buscar_informe = $informe->buscar();
+if ($_GET['tipo']) {
+  switch ($_GET['tipo']) {
+    case 'conectar':
+      $arrayTipo = array('ETT','ETJ','Coodinador');
+      break;
+    case 'pmi':
+        $arrayTipo = array('ATT','CoordinadorPmi');
+        break;
+    default:
+      # code...
+      break;
+  }
+    $buscar_informe = $informe->buscar(null,null,$arrayTipo);
+}else{
+  $buscar_informe = $informe->buscar();
+}
+
+//$informe = mysqli_fetch_object($buscar_informe);
+
+
+
 echo '<div class="container">';
 $cantidad=mysqli_num_rows($buscar_informe);
 if ($cantidad>0){

@@ -276,6 +276,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 		if ($sinParam==1) {
 		$sentencia.=' )';
+
 		}
 
 		}
@@ -290,6 +291,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		return $conexion->query($sentencia);
 
 	}
+
+	
 
 	public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL)
 	{
@@ -307,8 +310,14 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									ON referentes.referenteId=informes.referenteId
 									JOIN personas
 									ON personas.personaId=referentes.personaId ";
-									if ($_SESSION['tipo']=='Supervisor-Secundaria' || $_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='Supervisor-General-Secundaria') {
-										$sentencia.=" WHERE informes.nuevotipo=8 || informes.nuevotipo=9  ";
+									if ($_SESSION['tipo']=='Supervisor-Secundaria' || $_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='Supervisor-General-Secundaria')
+									{
+										if (isset($tiporeferente) || isset($listaRefer)) {
+											$sentencia.=" WHERE (informes.nuevotipo<>8 || informes.nuevotipo<>9)  ";
+										}else{
+											$sentencia.=" WHERE (informes.nuevotipo=8 || informes.nuevotipo=9)  ";
+										}
+
 									}else{
 									$sentencia.=" WHERE informes.nuevotipo<>8 ";
 									}
@@ -317,31 +326,20 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 			$sinParam=1;
 
 			$sentencia.= " AND ( referentes.tipo='".$tiporeferente."'";
+		}
 
-
-
-
-			//$sentencia.="  ORDER BY informeId DESC";
-
-		}else{
-
-			if ($listaRefer <> NULL){
-
+		if ($listaRefer <> NULL){
 				$sinParam=1;
 				$sentencia.="  AND ( ";
-
 				foreach ($listaRefer as $value) {
-
-				$sentencia.=" referentes.tipo='".$value."' || ";
-
-
+					$sentencia.=" referentes.tipo='".$value."' || ";
 				}
 				$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+		}
 
-			}
-
-		else
-		{
+		if ($sinParam==1) {
+			$sentencia.=' ) ';
+		}
 
 
 		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
@@ -408,19 +406,18 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
-		if ($sinParam==1) {
-		$sentencia.=' )';
-		}
+
 
 		}
 
-		}  // fin else
-	}
+		  // fin else
+
+
 		$sentencia.="  ORDER BY informes.informeId DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-		//echo $sentencia;
+		//echo $sentencia.'<br><br>';
 		return $conexion->query($sentencia);
 
 	}
