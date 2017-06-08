@@ -24,6 +24,12 @@ a {
 include_once 'includes/mod_cen/clases/RelevamientoElectrico.php';
 
 $conectividad = new RelevamientoElectrico();
+
+/**
+ * Buscando todas las instituciones relevadas
+ */
+$totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo '<div class="container"><p><h4>Cantidad de Escuelas Relevadas <span class="label label-default">'.$totalEscuelasRelevadas.'</span></h4></p></div>';
 /**
  * Buscando instituciones con Conectividad a internet
  */
