@@ -214,7 +214,7 @@ while ($fila = mysqli_fetch_object($resultado))
 	$informe = new Informe(null,$fila->escuelaId);
 
 	$buscar_informe = $informe->buscarSupervisorSec();
-//guarda en cant todos los informes creados por supervisores de secundaria, director de nivel y supervisor general
+
 	$cant = mysqli_num_rows($buscar_informe);
 
 	//guarda en $cantConectar  todos los informes creados equipo Conectar Igualdad
