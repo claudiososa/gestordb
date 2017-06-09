@@ -44,6 +44,7 @@ echo '</div>
 	echo "<th>Nombre</th>";
 	echo "<th>Turno</th>";
 	echo "<th>Teléfono</th>";
+	echo "<th>Teléfono 2</th>";
 	echo "<th>Email</th>";
 	echo "<th>Estado</th>";
 	echo "<th>Acción</th>";
@@ -58,6 +59,7 @@ echo '</div>
 		echo "<td>".$fila->nombre."</td>";
 		echo "<td>".$fila->turno."</td>";
 		echo "<td>".$fila->telefonoC."</td>";
+		echo "<td>".$fila->telefonoM."</td>";
 		echo "<td>".$fila->email."</td>";
 		echo "<td>".$fila->estado."</td>";
 		echo "<td><a href='index.php?mod=slat&men=rtis&id=12&rtiId=".$fila->rtiId."&personaId=".$fila->personaId."&escuelaId=".$fila->escuelaId."'><buttom class='btn btn-primary'>Editar</buttom></a></td>";

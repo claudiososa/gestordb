@@ -287,12 +287,12 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-		echo $sentencia;
+		//echo $sentencia;
 		return $conexion->query($sentencia);
 
 	}
 
-	
+
 
 	public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL)
 	{

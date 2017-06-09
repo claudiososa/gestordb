@@ -44,6 +44,9 @@
 			case "DirectorNivelSecundario":
 									include("includes/mod_men/directorNivelSecundario.php");
 									break;
+			case "Secretariodegestion":
+								include("includes/mod_men/secretariodegestion.php");
+								break;
 			}
 		}
 			else {

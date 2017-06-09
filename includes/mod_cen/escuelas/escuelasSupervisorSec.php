@@ -177,8 +177,7 @@ $con_ubicacion=0;
 		echo '<div class="table-responsive">';
 			echo "<table class='table table-hover table-striped table-condensed '>";
 					echo "<tr><th colspan='10'>Cantidad Total: ".$cantidad." | Secundaria Común: ".$csc_nivel." | Secundaria Rural: ".$csr_nivel
-					." | Secundaria Técnica: ".$cst_nivel." | Primaria Común: ".$cpc_nivel." | Primaria Especial: ".$cpe_nivel
-					." | ISFD: ".$ct_nivel." | SIN REGISTRAR:".$sin_nivel."</h1></th></tr>";
+					." </h1></th></tr>";
 			echo "</table>";
 		echo "</div>";
 		echo '<div class="table-responsive">';

@@ -7,24 +7,20 @@ include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
 
-	 // a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
+// a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
+  $dato_ref =  new Referente($_SESSION["referenteId"]);
+  $buscar_dato_ref =  $dato_ref->buscar();
+  $referente_actual = mysqli_fetch_object($buscar_dato_ref);
 
+  // entra si es ett o etj o coordinador de Conectar Igualdad
+  if($referente_actual->tipo=="ETT" || $referente_actual->tipo=="ETJ" || $referente_actual->tipo=="Coordinador" ){
+    // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
+	   $escuela= new Escuela($_GET["escuelaId"]);
+	   $buscar_escuela=$escuela->buscar();
+	   $dato_escuela=mysqli_fetch_object($buscar_escuela);
+	   $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID conectar igualdad
 
-          $dato_ref =  new Referente($_SESSION["referenteId"]);
-          $buscar_dato_ref =  $dato_ref->buscar();
-          $referente_actual = mysqli_fetch_object($buscar_dato_ref);
-
-          // entra si es ett o etj o coordinador de Conectar Igualdad
-
-          if($referente_actual->tipo=="ETT" || $referente_actual->tipo=="ETJ" || $referente_actual->tipo=="Coordinador" ){
-
- // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
-	        $escuela= new Escuela($_GET["escuelaId"]);
-	        $buscar_escuela=$escuela->buscar();
-	        $dato_escuela=mysqli_fetch_object($buscar_escuela);
-	        $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID conectar igualdad
-
-	 // en el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
+	    // en el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
 	        $dato_ref_esc =  new Referente($id_referente_escuela);
 	        $buscar_dato_ref_esc =  $dato_ref_esc->Persona($id_referente_escuela);
 	        $ref_esc = mysqli_fetch_object($buscar_dato_ref_esc);
@@ -213,7 +209,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
             if ($referente_actual->tipo=="ATT")
             { //mandamos mail a los coordinadores PMI
 
-               $para="mmonterosadir@gmail.com,maricel.eg31@gmail.com,noemiemercado@gmail.com";
+               $para="maricel.eg31@gmail.com,noemiemercado@gmail.com";
 
                       if($_SESSION["referenteId"] != $id_referente_escuela)
                       // pregunta si el informe creado es de otro referente
@@ -249,6 +245,74 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
 
         		 }// fin att o coordinador pmi
+
+             if($referente_actual->tipo=="Supervisor-Secundaria"
+                ||  $referente_actual->tipo=="Supervisor-General-Secundaria"
+                ||  $referente_actual->tipo=="DirectorNivelSecundario"){
+
+
+                 // en el siguiente codigo usamos el escuelaID para encontrar el Supervisor de la escuela asociada al informe por crear
+                 $escuela= new Escuela($_GET["escuelaId"]);
+                 $buscar_escuela=$escuela->buscar();
+                 $dato_escuela=mysqli_fetch_object($buscar_escuela);
+                 $id_referente_escuela= $dato_escuela->referenteIdSuperSec; //hasta aqui obtengo el referentID PMI
+
+                 //En el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
+                 $dato_ref_esc =  new Referente($id_referente_escuela);
+                 $buscar_dato_ref_esc =  $dato_ref_esc->Persona($id_referente_escuela);
+                 $ref_esc = mysqli_fetch_object($buscar_dato_ref_esc);
+                 $ref_esc_mail= $ref_esc->email;   //  aqui obtenemos el mail del supervisor de la escuela
+
+                 // En el siguiente codigo obtenemos datos del Supervisor que inicio sesion
+                 $dato_referente =  new Referente($_SESSION["referenteId"]);
+                 $buscar_dato = $dato_referente->Persona($_SESSION["referenteId"]);
+                 $origen =  mysqli_fetch_object($buscar_dato);
+
+                 $creadopor=$origen->nombre." ".$origen->apellido;
+                 //quien envia el mensaje - (email)
+                 $mail_propio=$origen->email;
+
+                 $header = "From: ". $origen->email; // datos de quien envia el mail
+
+               if ($referente_actual->tipo=="Supervisor-Secundaria")
+               { //mandamos mail a director de nivel y supervisora general
+
+                  $para="martucamerlo@hotmail.com,francomluisa@hotmail.com";
+
+                         if($_SESSION["referenteId"] != $id_referente_escuela)
+                         // pregunta si el informe creado es de otro referente
+                                     {
+                                           $para=$para.",".$ref_esc_mail;// mail del Supervisor de la escuela tambien
+                                     }
+
+               }else{  // entra por que es coordinador pmi y solo envia mail al att de la escuela en cuestion
+
+                   $para= $ref_esc_mail;
+
+                    }
+
+                 //buscamos el ultimo informe creado por el usuario logeado
+                 $ultimo= new Informe(null,null,$_SESSION["referenteId"]);
+                 $buscar_ultimo= $ultimo->buscar(1);
+                 $dato_ultimo = mysqli_fetch_object($buscar_ultimo);
+
+                 $linkinforme="index.php?mod=slat&men=informe&id=3&informeId=".$dato_ultimo->informeId;
+                 $mailobtenido=$para;
+                 //$para="jfvpipo@gmail.com";
+
+   	            $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
+   	            $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
+
+               	if (mail($para, $titulo, $mensaje, $header)) {
+
+               		$enviado=1;
+               	} else {
+               		echo "Falló el envio";
+               	}
+
+
+
+              }// fin de supervisor, DirectorNivelSecundario y Supervisor-General-Secundaria
 
 
 
