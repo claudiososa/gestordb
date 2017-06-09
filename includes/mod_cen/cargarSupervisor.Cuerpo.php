@@ -1,4 +1,4 @@
-<?php 
+<?php
 	include_once('clases/escuela.php');
 	$nuevaConexion=new Conexion();
 	$conexion=$nuevaConexion->getConexion();
@@ -8,8 +8,8 @@
 	$dato_localidad=$objlocalidad->buscar();
 	$localidad = mysqli_fetch_object($dato_localidad);
 	$escuela=mysqli_fetch_object($dato_escuela);
-	echo '<p> <strong>Escuela Número '.$escuela->numero.' - '.$escuela->nombre.'<hr /><br></strong></p>';
-	echo '<p> <strong>Supervisor:</strong></p>';
+
+
 	if(isset($_GET['personaId'])){//Si existe supervisor en la escuela
 		include_once('clases/supervisor.php');
 		$idpersona=round($_GET['personaId'],0);
@@ -23,7 +23,7 @@
 function validacion()
 {
 	var $dni = $('#txtdni').val();
-	var $cuil= $('#txtcuit').val();	
+	var $cuil= $('#txtcuit').val();
 	if( $dni == null || $dni.length == 0 || /^\s+$/.test($dni) || isNaN($dni) || $dni<=0 ) 		{
 		alert('[ATENCIÓN] El campo NRO DOCUMENTO debe ser un número positivo mayor que cero.');
 		$('#txtdni').focus();
@@ -50,13 +50,13 @@ function validacion()
 		return false;
 	}
 	$('#form1').submit();
-		
+
 }
 $(document).ready(function(){
    	$("#txtdni").keypress(function(e){
 			if (e.which == '13') {
 				$("#txtdni").blur();
-			}	
+			}
 	});
 	$("#cmdlimpiar").click(function(){
 		 $('#form1')[0].reset();
@@ -66,7 +66,7 @@ $(document).ready(function(){
 		 validacion();
 	});
     $("#txtdni").blur(function(){
-		
+
 		var $dni=$('#txtdni').val();
 		if($dni.trim()!=""){//si se cargo algo en el campo nro de documento busca la persona y si existe la carga
 			$.post( "includes/mod_cen/clases/supervisor.php",{opcion:'buscarpordni',dni:$dni}, function(data) 			{					if(data!=0){//Si existe una persona con el dni ingresado
@@ -99,8 +99,8 @@ $(document).ready(function(){
 						//$('#txtdni').focus();
 						$('#txtapellido').focus();
 					}
-				
-			
+
+
 			});
 			//.done(function() {
 //			alert( "second success" );
@@ -113,7 +113,7 @@ $(document).ready(function(){
 //			});
 		}
    		 });
-		
+
 });
 </script>
 <style type="text/css">
@@ -125,86 +125,188 @@ input[type="text"] {
      box-sizing: border-box;
      -webkit-box-sizing:border-box;
      -moz-box-sizing: border-box;
-	 
+
 }
 #form1 {
 	font-weight: bold;
 }
 </style>
+<div class="container">
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<?php echo 'Escuela Número '.$escuela->numero.' - '.$escuela->nombre; ?>
+	</div>
+	<div class="panel-body">
+
+<?php echo '<p> <strong>Supervisor:</strong></p>'; ?>
+
+
+
 <form action="includes/mod_cen/registrarSupervisor.php" method="post" id="form1">
-<table width="867">
-  <tr>
-    <td width="130">Nro. de Documento</td>
-    <td colspan="3"><input name="txtdni" type="text" id="txtdni" value="<?php if(isset($_GET['personaId'])){ echo $supervisor->dni;}?>" autofocus="autofocus" />
-      <input name="txtidpersona" type="hidden" id="txtidpersona" value="" />
-      <input name="txtidesacuela" type="hidden" id="txtidesacuela" value="<?php echo $_GET['escuelaId'] ?>"/>
-      <input name="iddirector" type="hidden" id="iddirector" value="<?php if(isset($_GET['personaId'])){ echo round($_GET['personaId'],0);}?>" /></td>
-    </tr>
-  <tr>
-    <td>Apellido</td>
-    <td><input type="text" name="txtapellido" id="txtapellido" class="hades" /></td>
-    <td>Nombre</td>
-    <td><input type="text" name="txtnombre" id="txtnombre" class="hades" /></td>
-  </tr>
-  <tr>
-    <td>Domicilio</td>
-    <td>
-      <input type="text" name="txtdomicilio" id="txtdomicilio" class="hades" /></td>
-    <td>Cuil</td>
-    <td><input type="text" name="txtcuit" id="txtcuit" class="hades" /></td>
-  </tr>
-  <tr>
-    <td>Localidad</td>
-    <td width="281">
-      <select name="cblocalidad" id="cblocalidad" style="width:100%">
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Nro. de Documento</label>
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" name="txtdni" type="text" id="txtdni" value="<?php if(isset($_GET['personaId'])){ echo $supervisor->dni;}?>" autofocus="autofocus" />
+	      <input name="txtidpersona" type="hidden" id="txtidpersona" value="" />
+	      <input name="txtidesacuela" type="hidden" id="txtidesacuela" value="<?php echo $_GET['escuelaId'] ?>"/>
+	      <input name="iddirector" type="hidden" id="iddirector" value="<?php if(isset($_GET['personaId'])){ echo round($_GET['personaId'],0);}?>" />
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Apellido</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" type="text" name="txtapellido" id="txtapellido" class="hades" />
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Nombre</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" type="text" name="txtnombre" id="txtnombre" class="hades" />
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Domicilio</label>
+
+		</div>
+<div class="col-md-12">
+	<input class="form-control" type="text" name="txtdomicilio" id="txtdomicilio" class="hades" />
+
+</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">CUIL</label>
+
+		</div>
+		<div class="col-md-12">
+			<input type="text" class="form-control" name="txtcuit" id="txtcuit" class="hades" />
+
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Localidad</label>
+
+		</div>
+		<div class="col-md-12">
+			<select class="form-control" name="cblocalidad" id="cblocalidad" style="width:100%">
             <?php
-do {  
+do {
 ?>
             <option value="<?php echo $localidad->localidadId?>"><?php echo $localidad->nombre?></option>
             <?php
 } while ($localidad = mysqli_fetch_object($dato_localidad));
-  
+
 ?>
-          </select></td>
-    <td width="87">Código Postal</td>
-    <td width="349">
-    <input type="text" name="txtcp" id="txtcp" class="hades" /></td>
-  </tr>
-  <tr>
-    <td>Teléfono 1</td>
-    <td>
-    <input type="text" name="txttelefono1" id="txttelefono1" class="hades" /></td>
-    <td>Teléfono 2</td>
-    <td>
-    <input type="text" name="txttelefono2" id="txttelefono2" class="hades" /></td>
-  </tr>
-  <tr>
-    <td>Email 1</td>
-    <td>
-    <input type="text" name="txtemail1" id="txtemail1" class="hades" /></td>
-    <td>Email 2</td>
-    <td>
-    <input type="text" name="txtemail2" id="txtemail2" class="hades" /></td>
-  </tr>
-  <tr>
-    <td>Facebook</td>
-    <td>
-    <input type="text" name="txtfacebook" id="txtfacebook" class="hades"/></td>
-    <td>Twitter</td>
-    <td>
-    <input type="text" name="txttwitter" id="txttwitter" class="hades" /></td>
-  </tr>
-  <tr>
-    <td colspan="4">     <div align="right">
-        <?php if(!isset($_GET['personaId'])){?>
-        <input type="button" name="cmdlimpiar" id="cmdlimpiar" value="Limpiar" />
-       	<?php }?>
-        <input type="button" name="cmdregistrar" id="cmdregistrar" value="Registrar" />
-    </div></td>
-  </tr>
-</table>
+          </select>
+
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Código Postal</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" type="text" name="txtcp" id="txtcp" class="hades" />
+
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Teléfono 1</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" type="text" name="txttelefono1" id="txttelefono1" class="hades" />
+
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Teléfono 2</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" type="text" name="txttelefono2" id="txttelefono2" class="hades" />
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Email 1</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control"type="text" name="txtemail1" id="txtemail1" class="hades" />
+
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Email 2</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control"type="text" name="txttelefono2" id="txttelefono2" class="hades" />
+
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Facebook</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" type="text" name="txtfacebook" id="txtfacebook" class="hades"/>
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Twitter</label>
+
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" type="text" name="txttwitter" id="txttwitter" class="hades"/>
+		</div>
+
+	</div>
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label"></label>
+
+		</div>
+		<div class="col-md-12">
+			<?php if(!isset($_GET['personaId'])){?>
+			<input class="btn btn-primary" type="button" name="cmdlimpiar" id="cmdlimpiar" value="Limpiar" />
+			<?php }?>
+			<input class="btn btn-primary" type="button" name="cmdregistrar" id="cmdregistrar" value="Registrar" />
+		</div>
+
+	</div>
+
 </form>
-<?php 
+</div>
+</div>
+</div>
+<?php
 if(isset($_GET['personaId'])){
 ?>
 <script type="text/javascript">
@@ -212,7 +314,7 @@ if(isset($_GET['personaId'])){
 $('#cmdregistrar').attr("value","Modificar");
 var $dni=$('#txtdni').val();
 if($dni.trim()!=""){
-	$.post( "includes/mod_cen/clases/director.php",{opcion:'buscarpordni',dni:$dni}, function(data) 			{		
+	$.post( "includes/mod_cen/clases/director.php",{opcion:'buscarpordni',dni:$dni}, function(data) 			{
 			if(data!=0){
 				var $resultado= JSON.parse(data);
 				//alert($resultado['personaId']);
@@ -246,8 +348,8 @@ if($dni.trim()!=""){
 				//$('#txtdni').focus();
 				$('#txtapellido').focus();
 			}
-		
-	
+
+
 	});
 	/*.done(function() {
 	alert( "second success" );
@@ -262,6 +364,6 @@ if($dni.trim()!=""){
 $('#txtidpersona').val($resultado['personaId']);
 $('#txtdni').attr("disabled","disabled");
 </script>
-<?php 
+<?php
 }
 ?>
