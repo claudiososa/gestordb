@@ -302,7 +302,8 @@ while ($fila=mysqli_fetch_object($buscarTipoConec)) {
               <div class="row">
               <div class="col-md-6" >
               <div class="panel panel-primary">
-              <div class="panel-heading" >Instituciones con Energia Eléctrica: </div>
+              <div class="panel-heading" >Instituciones con Energia Eléctrica:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+              echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
               <div class="panel-body"><!--contenido de grafica instituciones con energia electrica-->
                    <canvas id="energiaEId" width="600" height="300"></canvas><br><br><br><br>
@@ -326,7 +327,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con Energia Eléctrica:");
+	doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20,'Instituciones con Energia Eléctrica:');
   doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesEnergiaElctrica.pdf');
 }
@@ -337,7 +340,8 @@ function downloadPDF() {
 
              <div class="col-md-6">
              <div class="panel panel-primary">
-             <div class="panel-heading">Tipo de Instalación Eléctrica:</div>
+             <div class="panel-heading">Tipo de Instalación Eléctrica:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+             echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
              <div class="panel-body">
                  <canvas id="tipoInstalacionId" width="600" height="400"></canvas>
 <?php
@@ -358,7 +362,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Tipo de Instalación Eléctrica:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Tipo de Instalación Eléctrica:");
   doc.addImage(canvasImg, 'jpg', 30, 30, 250, 150 );
 
 	doc.save('TipoInstalacionElectrica.pdf');
@@ -374,7 +380,8 @@ function downloadPDF() {
 
               <div class="col-md-6">
               <div class="panel panel-primary">
-              <div class="panel-heading">¿Como funciona la Instalación Electrica?:</div>
+              <div class="panel-heading">¿Como funciona la Instalación Electrica?:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+              echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
               <div class="panel-body">
                    <canvas id="comoFuncionaId" width="600" height="300"></canvas>
@@ -397,7 +404,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "¿Como funciona la Instalación Electrica?:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "¿Como funciona la Instalación Electrica?:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('ComofuncionaInstalacionElectrica.pdf');
 }
@@ -407,7 +416,8 @@ function downloadPDF() {
 
               <div class="col-md-6">
               <div class="panel panel-primary">
-              <div class="panel-heading">La Institucion: ¿Tiene suficiente energia?: </div>
+              <div class="panel-heading">La Institucion: ¿Tiene suficiente energia?:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+              echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?> </div>
 
               <div class="panel-body">
                   <canvas id="myChart5" width="600" height="300"></canvas>
@@ -430,9 +440,11 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "La Institucion: ¿Tiene suficiente energia?:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "La Institucion: ¿Tiene suficiente energia?:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
-	doc.save('LaInstitucionSuficienteEnergia.pdf');
+	doc.save('InstitucionSuficienteEnergia.pdf');
 }
 
 </script>
@@ -460,16 +472,24 @@ var canvasImg3 = canvas3.toDataURL("image/jpg", 1.0);
 //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con Energia Eléctrica:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Energia Eléctrica:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Tipo de Instalación Eléctrica:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Tipo de Instalación Eléctrica:")
 doc.addImage(canvasImg1, 'jpg', 30, 30, 250, 140 );
 doc.addPage()
-doc.text(15, 15, "¿Cómo funciona la Instalación Eléctrica?:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "¿Cómo funciona la Instalación Eléctrica?:")
 doc.addImage(canvasImg2, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "¿La Institución tiene suficiente Energía?:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "¿La Institución tiene suficiente Energía?:")
 doc.addImage(canvasImg3, 'jpg', 30, 30, 260, 140 );
 doc.save('EstadisticasEnergeticas.pdf');
 }
@@ -505,7 +525,8 @@ doc.save('EstadisticasEnergeticas.pdf');
                   <div class="row">
                   <div class="col-md-6">
                   <div class="panel panel-primary">
-                  <div class="panel-heading">Instituciones con heladeras:</div>
+                  <div class="panel-heading">Instituciones con heladeras:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+                  echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
                   <div class="panel-body">
                        <canvas id="myChart4" width="600" height="300"></canvas>
@@ -529,7 +550,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con heladeras:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones con heladeras:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesHeladeras.pdf');
 }
@@ -540,7 +563,8 @@ function downloadPDF() {
 
                   <div class="col-md-6">
                   <div class="panel panel-primary">
-                  <div class="panel-heading">Instituciones con televisor:</div>
+                  <div class="panel-heading">Instituciones con televisor:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+                  echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
                   <div class="panel-body">
                       <canvas id="myChart7" width="600" height="300"></canvas>
@@ -571,7 +595,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con televisor:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones con televisor:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesTelevisor.pdf');
 }
@@ -586,7 +612,8 @@ function downloadPDF() {
                 <div class="row">
                 <div class="col-md-6">
                 <div class="panel panel-primary">
-                <div class="panel-heading">Instituciones con cañon:</div>
+                <div class="panel-heading">Instituciones con cañon:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+                echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
                 <div class="panel-body">
                     <canvas id="canonId" width="600" height="300"></canvas>
@@ -615,7 +642,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con cañon:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones con cañon:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesCañon.pdf');
 }
@@ -627,7 +656,8 @@ function downloadPDF() {
 
              <div class="col-md-6">
              <div class="panel panel-primary">
-             <div class="panel-heading">Instituciones con reproductor CD/DVD:</div>
+             <div class="panel-heading">Instituciones con reproductor CD/DVD:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+             echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
                   <div class="panel-body">
                       <canvas id="reproductorId" width="600" height="300"></canvas>
 <?php
@@ -654,7 +684,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con reproductor CD/DVD:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones con reproductor CD/DVD:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesReproductorCD/DVD.pdf');
 }
@@ -667,7 +699,8 @@ function downloadPDF() {
             <div class="row">
             <div class="col-md-6">
             <div class="panel panel-primary">
-            <div class="panel-heading">Instituciones con impresora:</div>
+            <div class="panel-heading">Instituciones con impresora:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+            echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
             <div class="panel-body">
                  <canvas id="impresoraId" width="600" height="300"></canvas>
@@ -696,7 +729,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con impresora:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones con impresora:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesImpresora.pdf');
 }
@@ -707,7 +742,8 @@ function downloadPDF() {
 
             <div class="col-md-6">
             <div class="panel panel-primary">
-            <div class="panel-heading">Instituciones con otros artefactos electricos:</div>
+            <div class="panel-heading">Instituciones con otros artefactos electricos:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+            echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
             <div class="panel-body">
                 <canvas id="otrosId" width="600" height="300"></canvas>
@@ -736,7 +772,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con otros artefactos electricos:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones con otros artefactos electricos:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesArtefactosElectricos.pdf');
 }
@@ -750,7 +788,8 @@ function downloadPDF() {
           <div class="row">
           <div class="col-md-6">
           <div class="panel panel-primary">
-          <div class="panel-heading">Instituciones con calefón:</div>
+          <div class="panel-heading">Instituciones con calefón:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+          echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
               <div class="panel-body">
                    <canvas id="calefonId" width="600" height="300"></canvas>
@@ -773,7 +812,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con calefón:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones con calefón:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesCalefon:.pdf');
 }
@@ -783,7 +824,8 @@ function downloadPDF() {
 
           <div class="col-md-6">
           <div class="panel panel-primary">
-          <div class="panel-heading">Instituciones que necesitan Calefón Solar:</div>
+          <div class="panel-heading">Instituciones que necesitan Calefón Solar:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+          echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
           <div class="panel-body">
                <canvas id="solarId" width="600" height="300"></canvas>
@@ -806,7 +848,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones que necesitan Calefón Solar:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones que necesitan Calefón Solar:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesCalefonSolar.pdf');
 }
@@ -820,7 +864,8 @@ function downloadPDF() {
          <div class="row">
          <div class="col-md-6">
          <div class="panel panel-primary">
-         <div class="panel-heading">Instituciones que necesitan Bombeo de Agua:</div>
+         <div class="panel-heading">Instituciones que necesitan Bombeo de Agua:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+         echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
          <div class="panel-body">
                <canvas id="bombeoId" width="600" height="300"></canvas>
@@ -843,7 +888,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones que necesitan Bombeo de Agua:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 250, 140 );
 	doc.save('InstitucionesBombeoAgua.pdf');
 }
@@ -883,31 +930,49 @@ var canvasImg8e = canvas8e.toDataURL("image/jpg", 1.0);
 //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con Heladera:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Heladera:");
 doc.addImage(canvasImge, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Instituciones con Televisor:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Televisor:")
 doc.addImage(canvasImg1e, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Instituciones con Cañon:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Cañon:")
 doc.addImage(canvasImg2e, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Instituciones con Reproductor CD/DVD:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Reproductor CD/DVD:")
 doc.addImage(canvasImg3e, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Instituciones con Impresora:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Impresora:")
 doc.addImage(canvasImg4e, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Instituciones con Otros Artefactos Electricos:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Otros Artefactos Electricos:")
 doc.addImage(canvasImg5e, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Instituciones con Calefon:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Calefon:")
 doc.addImage(canvasImg6e, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Instituciones que necesitan Calefon Solar:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones que necesitan Calefon Solar:")
 doc.addImage(canvasImg7e, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones que necesitan Bombeo de Agua:")
 doc.addImage(canvasImg8e, 'jpg', 30, 30, 260, 140 );
 doc.save('ArtefactosElectricos.pdf');
 }
@@ -941,7 +1006,8 @@ doc.save('ArtefactosElectricos.pdf');
            <div class="row">
            <div class="col-md-6">
            <div class="panel panel-primary">
-           <div class="panel-heading">Instituciones con conexion a internet</div>
+           <div class="panel-heading">Instituciones con conexion a internet<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+           echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
            <div class="panel-body">
                 <canvas id="myChart" width="600" height="300"></canvas>
@@ -965,7 +1031,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Instituciones con conexion a internet");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Instituciones con conexion a internet");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('InstitucionesConexionInternet.pdf');
 }
@@ -976,7 +1044,8 @@ function downloadPDF() {
 
          <div class="col-md-6">
          <div class="panel panel-primary">
-         <div class="panel-heading">Empresa Claro:</div>
+         <div class="panel-heading">Empresa Claro:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+         echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
          <div class="panel-body">
               <canvas id="claroId" width="600" height="300"></canvas>
@@ -1005,7 +1074,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Empresa Claro:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Empresa Claro:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('EmpresaClaro.pdf');
 }
@@ -1019,7 +1090,8 @@ function downloadPDF() {
          <div class="row">
          <div class="col-md-6">
          <div class="panel panel-primary">
-         <div class="panel-heading">Empresa Arnet:</div>
+         <div class="panel-heading">Empresa Arnet:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+         echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
          <div class="panel-body">
              <canvas id="arnetId" width="600" height="300"></canvas>
@@ -1048,7 +1120,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Empresa Arnet:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Empresa Arnet:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('EmpresaArnet.pdf');
 }
@@ -1059,7 +1133,8 @@ function downloadPDF() {
 
         <div class="col-md-6">
         <div class="panel panel-primary">
-        <div class="panel-heading">Empresa Fibertel:</div>
+        <div class="panel-heading">Empresa Fibertel:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+        echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
         <div class="panel-body">
              <canvas id="fibertelId" width="600" height="300"></canvas>
@@ -1088,7 +1163,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Empresa Fibertel:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Empresa Fibertel:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('EmpresaFibertel.pdf');
 }
@@ -1103,7 +1180,8 @@ function downloadPDF() {
 
          <div class="col-md-6">
          <div class="panel panel-primary">
-         <div class="panel-heading">Empresa Local de Conectividad:</div>
+         <div class="panel-heading">Empresa Local de Conectividad:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+         echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
              <div class="panel-body">
                  <canvas id="localId" width="600" height="300"></canvas>
@@ -1132,7 +1210,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Empresa Local de Conectividad:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Empresa Local de Conectividad:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('EmpresaLocal.pdf');
 }
@@ -1143,7 +1223,8 @@ function downloadPDF() {
 
          <div class="col-md-6">
          <div class="panel panel-primary">
-         <div class="panel-heading">Conexión Satelital:</div>
+         <div class="panel-heading">Conexión Satelital:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+         echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
          <div class="panel-body">
              <canvas id="satelitalId" width="600" height="300"></canvas>
@@ -1172,7 +1253,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Conexión Satelital:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Conexión Satelital:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('ConexionSatelital.pdf');
 }
@@ -1188,7 +1271,8 @@ function downloadPDF() {
 
       <div class="col-md-6">
       <div class="panel panel-primary">
-      <div class="panel-heading">Otra Empresa de Conectividad:</div>
+      <div class="panel-heading">Otra Empresa de Conectividad:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+      echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
       <div class="panel-body">
           <canvas id="otraEmpresaId" width="600" height="300"></canvas>
@@ -1216,7 +1300,9 @@ function downloadPDF() {
 	//creates PDF from img
 	var doc = new jsPDF('landscape');
 	doc.setFontSize(15);
-	doc.text(15, 15, "Otra Empresa de Conectividad:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+	doc.text(15, 20, "Otra Empresa de Conectividad:");
 	doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 	doc.save('OtraEmpresa.pdf');
 }
@@ -1254,25 +1340,39 @@ var canvasImg6c = canvas6c.toDataURL("image/jpg", 1.0);
 //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con Conexion a Internet:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Conexion a Internet:");
 doc.addImage(canvasImgc, 'jpg', 30, 30, 260, 150 );
 doc.addPage()
-doc.text(15, 15, "Empresa Claro:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Empresa Claro:")
 doc.addImage(canvasImg1c, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Empresa Arnet:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Empresa Arnet:")
 doc.addImage(canvasImg2c, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Empresa Fibertel:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Empresa Fibertel:")
 doc.addImage(canvasImg3c, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Empresa Local de Conectividad:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Empresa Local de Conectividad:")
 doc.addImage(canvasImg4c, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Conexion Satelital:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Conexion Satelital:")
 doc.addImage(canvasImg5c, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Otra Empresa de Conectividad")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Otra Empresa de Conectividad")
 doc.addImage(canvasImg6c, 'jpg', 30, 30, 260, 140 );
 doc.save('EstadisticasConectividad.pdf');
 }
@@ -1292,7 +1392,8 @@ doc.save('EstadisticasConectividad.pdf');
     <div class="col-md-12">
         <div class="panel panel-primary">
         <div class="panel-heading" align="center"><a data-toggle="collapse" href="#collapse4"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-        <span class="panel-title clickable"><h3 class="panel-title">ESCUELAS CON INTERNADO O ALBERGUE:</h3></span></a></div>
+        <span class="panel-title clickable"><h3 class="panel-title">ESCUELAS CON INTERNADO O ALBERGUE:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+        echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></h3></span></a></div>
         <div id="collapse4" class="panel-collapse collapse">
 
         <div class="panel-body">
@@ -1316,7 +1417,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     	//creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Escuelas con Internado o Albergue:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Escuelas con Internado o Albergue:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 280, 150 );
 doc.save('EscuelasInternado.pdf');
 }
@@ -1347,7 +1450,8 @@ doc.save('EscuelasInternado.pdf');
              <div class="row">
              <div class="col-md-6">
              <div class="panel panel-primary">
-             <div class="panel-heading">Instituciones con Energia Eléctrica: </div>
+             <div class="panel-heading">Instituciones con Energia Eléctrica:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+             echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?> </div>
              <div class="panel-body"><!--contenido de grafica instituciones con energia electrica-->
                    <canvas id="energiaEIdb" width="600" height="300"></canvas>
            <?php
@@ -1368,7 +1472,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
   	//creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con Energia Eléctrica:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Energia Eléctrica:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesEnergiaElectrica.pdf');
 }
@@ -1379,7 +1485,8 @@ doc.save('InstitucionesEnergiaElectrica.pdf');
 
               <div class="col-md-6">
               <div class="panel panel-primary">
-              <div class="panel-heading">Tipo de Instalación Eléctrica:</div>
+              <div class="panel-heading">Tipo de Instalación Eléctrica:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+              echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
               <div class="panel-body">
                    <canvas id="tipoInstalacionIdb" width="600" height="300"></canvas>
   <?php
@@ -1400,7 +1507,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
   	//creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Tipo de Instalación Eléctrica:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Tipo de Instalación Eléctrica:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('TipoInstalacionElectrica.pdf');
 }
@@ -1415,7 +1524,8 @@ doc.save('TipoInstalacionElectrica.pdf');
             <div class="row">
             <div class="col-md-6">
             <div class="panel panel-primary">
-            <div class="panel-heading">¿Como funciona la Instalación Electrica?:</div>
+            <div class="panel-heading">¿Como funciona la Instalación Electrica?:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+            echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
             <div class="panel-body">
                      <canvas id="comoFuncionaIdb" width="600" height="200"></canvas>
@@ -1438,7 +1548,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
   	//creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "¿Como funciona la Instalación Electrica?:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "¿Como funciona la Instalación Electrica?:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('ComoFuncionaInstalacionElectrica.pdf');
 }
@@ -1449,7 +1561,8 @@ doc.save('ComoFuncionaInstalacionElectrica.pdf');
 
             <div class="col-md-6">
             <div class="panel panel-primary">
-            <div class="panel-heading">La Institucion: ¿Tiene suficiente energia?: </div>
+            <div class="panel-heading">La Institucion: ¿Tiene suficiente energia?:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+            echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?> </div>
 
             <div class="panel-body">
                 <canvas id="myChart5b" width="600" height="300"></canvas>
@@ -1472,7 +1585,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
   	//creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "La Institucion: ¿Tiene suficiente energia?:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "La Institucion: ¿Tiene suficiente energia?:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionSuficienteEnergia.pdf');
 }
@@ -1502,16 +1617,24 @@ var canvasImg3 = canvas3.toDataURL("image/jpg", 1.0);
   //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con Energia Eléctrica:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Energia Eléctrica:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Tipo de Instalación Eléctrica:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Tipo de Instalación Eléctrica:")
 doc.addImage(canvasImg1, 'jpg', 30, 30, 240, 140 );
 doc.addPage()
-doc.text(15, 15, "¿Cómo funciona la Instalación Eléctrica?:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "¿Cómo funciona la Instalación Eléctrica?:")
 doc.addImage(canvasImg2, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "¿La Institución tiene suficiente Energía?:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "¿La Institución tiene suficiente Energía?:")
 doc.addImage(canvasImg3, 'jpg', 30, 30, 260, 140 );
 doc.save('EstadisticasEnergeticas.pdf');
 }
@@ -1542,7 +1665,8 @@ doc.save('EstadisticasEnergeticas.pdf');
          <div class="row">
          <div class="col-md-6">
          <div class="panel panel-primary">
-         <div class="panel-heading">Instituciones con heladeras:</div>
+         <div class="panel-heading">Instituciones con heladeras:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+         echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
          <div class="panel-body">
               <canvas id="myChart4b" width="600" height="300"></canvas>
@@ -1564,7 +1688,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con heladeras:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con heladeras:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesHeladeras.pdf');
 }
@@ -1575,7 +1701,8 @@ doc.save('InstitucionesHeladeras.pdf');
 
          <div class="col-md-6">
          <div class="panel panel-primary">
-         <div class="panel-heading">Instituciones con televisor:</div>
+         <div class="panel-heading">Instituciones con televisor:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+         echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
          <div class="panel-body">
              <canvas id="myChart7b" width="600" height="300"></canvas>
@@ -1604,7 +1731,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con televisor:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con televisor:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesTelevisor.pdf');
 }
@@ -1618,7 +1747,8 @@ doc.save('InstitucionesTelevisor.pdf');
       <div class="row">
       <div class="col-md-6">
       <div class="panel panel-primary">
-      <div class="panel-heading">Instituciones con cañon:</div>
+      <div class="panel-heading">Instituciones con cañon:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+      echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
       <div class="panel-body">
            <canvas id="canonIdb" width="600" height="300"></canvas>
@@ -1647,7 +1777,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con cañon:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con cañon:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesCañon.pdf');
 }
@@ -1658,7 +1790,8 @@ doc.save('InstitucionesCañon.pdf');
 
       <div class="col-md-6">
       <div class="panel panel-primary">
-      <div class="panel-heading">Instituciones con reproductor CD/DVD:</div>
+      <div class="panel-heading">Instituciones con reproductor CD/DVD:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+      echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
       <div class="panel-body">
            <canvas id="reproductorIdb" width="600" height="300"></canvas>
   <?php
@@ -1685,7 +1818,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con reproductor CD/DVD:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con reproductor CD/DVD:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesReproductorCD/DVD.pdf');
 }
@@ -1698,7 +1833,8 @@ doc.save('InstitucionesReproductorCD/DVD.pdf');
       <div class="row">
       <div class="col-md-6">
       <div class="panel panel-primary">
-      <div class="panel-heading">Instituciones con impresora:</div>
+      <div class="panel-heading">Instituciones con impresora:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+      echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
       <div class="panel-body">
             <canvas id="impresoraIdb" width="600" height="300"></canvas>
@@ -1727,7 +1863,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con impresora:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con impresora:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesImpresora.pdf');
 }
@@ -1737,7 +1875,8 @@ doc.save('InstitucionesImpresora.pdf');
 
       <div class="col-md-6">
       <div class="panel panel-primary">
-      <div class="panel-heading">Instituciones con otros artefactos electricos:</div>
+      <div class="panel-heading">Instituciones con otros artefactos electricos:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+      echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
       <div class="panel-body">
           <canvas id="otrosIdb" width="600" height="300"></canvas>
@@ -1766,7 +1905,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con otros artefactos electricos:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con otros artefactos electricos:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesOtrosArtefactos.pdf');
 }
@@ -1780,7 +1921,8 @@ doc.save('InstitucionesOtrosArtefactos.pdf');
      <div class="row">
      <div class="col-md-6">
      <div class="panel panel-primary">
-     <div class="panel-heading">Instituciones con calefón:</div>
+     <div class="panel-heading">Instituciones con calefón:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+     echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
      <div class="panel-body">
          <canvas id="calefonIdb" width="600" height="300"></canvas>
@@ -1803,7 +1945,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con calefón:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con calefón:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesCalefon.pdf');
 }
@@ -1814,7 +1958,8 @@ doc.save('InstitucionesCalefon.pdf');
 
      <div class="col-md-6">
      <div class="panel panel-primary">
-     <div class="panel-heading">Instituciones que necesitan Calefón Solar:</div>
+     <div class="panel-heading">Instituciones que necesitan Calefón Solar:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+     echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
      <div class="panel-body">
           <canvas id="solarIdb" width="600" height="300"></canvas>
@@ -1837,7 +1982,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones que necesitan Calefón Solar:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones que necesitan Calefón Solar:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesCalefonSolar.pdf');
 }
@@ -1850,7 +1997,8 @@ doc.save('InstitucionesCalefonSolar.pdf');
       <div class="row">
       <div class="col-md-6">
       <div class="panel panel-primary">
-      <div class="panel-heading">Instituciones que necesitan Bombeo de Agua:</div>
+      <div class="panel-heading">Instituciones que necesitan Bombeo de Agua:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+      echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
       <div class="panel-body">
           <canvas id="bombeoIdb" width="600" height="300"></canvas>
@@ -1872,7 +2020,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones que necesitan Bombeo de Agua:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesBombeoAgua.pdf');
 }
@@ -1909,31 +2059,49 @@ document.getElementById('btn-art').addEventListener("click", downloadPDF);
   //creates PDF from img
   var doc = new jsPDF('landscape');
   doc.setFontSize(15);
-  doc.text(15, 15, "Instituciones con Heladera:");
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20, "Instituciones con Heladera:");
   doc.addImage(canvasImgb, 'jpg', 30, 30, 260, 140 );
   doc.addPage()
-  doc.text(15, 15, "Instituciones con Televisor:")
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20, "Instituciones con Televisor:")
   doc.addImage(canvasImg1b, 'jpg', 30, 30, 260, 140 );
   doc.addPage()
-  doc.text(15, 15, "Instituciones con Cañon:")
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20 "Instituciones con Cañon:")
   doc.addImage(canvasImg2b, 'jpg', 30, 30, 260, 140 );
   doc.addPage()
-  doc.text(15, 15, "Instituciones con Reproductor CD/DVD:")
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20, "Instituciones con Reproductor CD/DVD:")
   doc.addImage(canvasImg3b, 'jpg', 30, 30, 260, 140 );
   doc.addPage()
-  doc.text(15, 15, "Instituciones con Impresora:")
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20, "Instituciones con Impresora:")
   doc.addImage(canvasImg4b, 'jpg', 30, 30, 260, 140 );
   doc.addPage()
-  doc.text(15, 15, "Instituciones con Otros Artefactos Electricos:")
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20, "Instituciones con Otros Artefactos Electricos:")
   doc.addImage(canvasImg5b, 'jpg', 30, 30, 260, 140 );
   doc.addPage()
-  doc.text(15, 15, "Instituciones con Calefon:")
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20, "Instituciones con Calefon:")
   doc.addImage(canvasImg6b, 'jpg', 30, 30, 260, 140 );
   doc.addPage()
-  doc.text(15, 15, "Instituciones que necesitan Calefon Solar:")
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20, "Instituciones que necesitan Calefon Solar:")
   doc.addImage(canvasImg7b, 'jpg', 30, 30, 260, 140 );
   doc.addPage()
-  doc.text(15, 15, "Instituciones que necesitan Bombeo de Agua:")
+  doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+  echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+  doc.text(15, 20, "Instituciones que necesitan Bombeo de Agua:")
   doc.addImage(canvasImg8b, 'jpg', 30, 30, 260, 140 );
   doc.save('ArtefactosElectricos.pdf');
   }
@@ -1964,7 +2132,8 @@ document.getElementById('btn-art').addEventListener("click", downloadPDF);
        <div class="row">
        <div class="col-md-6">
        <div class="panel panel-primary">
-       <div class="panel-heading">Instituciones con conexion a internet:</div>
+       <div class="panel-heading">Instituciones con conexion a internet:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+       echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
        <div class="panel-body">
            <canvas id="myChartb" width="600" height="300"></canvas>
@@ -1987,7 +2156,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
     //creates PDF from img
 var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con conexion a internet:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con conexion a internet:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('InstitucionesConexionInternet.pdf');
 }
@@ -1998,7 +2169,8 @@ doc.save('InstitucionesConexionInternet.pdf');
 
      <div class="col-md-6">
      <div class="panel panel-primary">
-     <div class="panel-heading">Empresa Claro:</div>
+     <div class="panel-heading">Empresa Claro:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+     echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
      <div class="panel-body">
          <canvas id="claroIdb" width="600" height="300"></canvas>
@@ -2027,7 +2199,9 @@ document.getElementById('cmd36').addEventListener("click", downloadPDF);
     //creates PDF from img
     var doc = new jsPDF('landscape');
     doc.setFontSize(15);
-    doc.text(15, 15, "Empresa Claro:");
+    doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+    echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+    doc.text(15, 20, "Empresa Claro:");
     doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('EmpresaClaro.pdf');
     }
@@ -2041,7 +2215,8 @@ document.getElementById('cmd36').addEventListener("click", downloadPDF);
      <div class="row">
      <div class="col-md-6">
      <div class="panel panel-primary">
-     <div class="panel-heading">Empresa Arnet:</div>
+     <div class="panel-heading">Empresa Arnet:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+     echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
     <div class="panel-body">
          <canvas id="arnetIdb" width="600" height="300"></canvas>
@@ -2070,7 +2245,9 @@ document.getElementById('cmd37').addEventListener("click", downloadPDF);
     //creates PDF from img
     var doc = new jsPDF('landscape');
     doc.setFontSize(15);
-    doc.text(15, 15, "Empresa Arnet");
+    doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+    echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+    doc.text(15, 20, "Empresa Arnet");
     doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('EmpresaArnet.pdf');
     }
@@ -2082,7 +2259,8 @@ document.getElementById('cmd37').addEventListener("click", downloadPDF);
 
      <div class="col-md-6">
      <div class="panel panel-primary">
-     <div class="panel-heading">Empresa Fibertel:</div>
+     <div class="panel-heading">Empresa Fibertel:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+     echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
      <div class="panel-body">
           <canvas id="fibertelIdb" width="600" height="300"></canvas>
@@ -2111,7 +2289,9 @@ document.getElementById('cmd38').addEventListener("click", downloadPDF);
     //creates PDF from img
     var doc = new jsPDF('landscape');
     doc.setFontSize(15);
-    doc.text(15, 15, "Empresa Fibertel:");
+    doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+    echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+    doc.text(15, 20, "Empresa Fibertel:");
     doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('EmpresaFibertel.pdf');
     }
@@ -2124,7 +2304,8 @@ document.getElementById('cmd38').addEventListener("click", downloadPDF);
      <div class="row">
      <div class="col-md-6">
      <div class="panel panel-primary">
-     <div class="panel-heading">Empresa Local de Conectividad:</div>
+     <div class="panel-heading">Empresa Local de Conectividad:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+     echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
      <div class="panel-body">
           <canvas id="localIdb" width="600" height="300"></canvas>
@@ -2153,7 +2334,9 @@ document.getElementById('cmd39').addEventListener("click", downloadPDF);
     //creates PDF from img
     var doc = new jsPDF('landscape');
     doc.setFontSize(15);
-    doc.text(15, 15, "Empresa Local de Conectividad:");
+    doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+    echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+    doc.text(15, 20, "Empresa Local de Conectividad:");
     doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('EmpresaLocal.pdf');
     }
@@ -2164,7 +2347,8 @@ document.getElementById('cmd39').addEventListener("click", downloadPDF);
 
          <div class="col-md-6">
          <div class="panel panel-primary">
-         <div class="panel-heading">Conexión Satelital:</div>
+         <div class="panel-heading">Conexión Satelital:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+         echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
          <div class="panel-body">
                <canvas id="satelitalIdb" width="600" height="300"></canvas>
@@ -2193,7 +2377,9 @@ document.getElementById('cmd40').addEventListener("click", downloadPDF);
     //creates PDF from img
     var doc = new jsPDF('landscape');
     doc.setFontSize(15);
-    doc.text(15, 15, "Conexión Satelital:");
+    doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+    echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+    doc.text(15, 20, "Conexión Satelital:");
     doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
     doc.save('ConexionSatelital.pdf');
     }
@@ -2207,7 +2393,8 @@ document.getElementById('cmd40').addEventListener("click", downloadPDF);
         <div class="row">
         <div class="col-md-6">
         <div class="panel panel-primary">
-        <div class="panel-heading">Otra Empresa de Conectividad:</div>
+        <div class="panel-heading">Otra Empresa de Conectividad:<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+        echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></div>
 
         <div class="panel-body">
              <canvas id="otraEmpresaIdb" width="600" height="300"></canvas>
@@ -2235,7 +2422,9 @@ var canvasImg = canvas.toDataURL("image/jpg", 1.0);
         //creates PDF from img
   var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Otra Empresa de Conectividad:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Otra Empresa de Conectividad:");
 doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
 doc.save('OtraConectividad.pdf');
 }
@@ -2270,25 +2459,39 @@ doc.save('OtraConectividad.pdf');
   //creates PDF from img
   var doc = new jsPDF('landscape');
 doc.setFontSize(15);
-doc.text(15, 15, "Instituciones con Conexion a Internet:");
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Instituciones con Conexion a Internet:");
 doc.addImage(canvasImgb, 'jpg', 30, 30, 200, 150 );
 doc.addPage()
-doc.text(15, 15, "Empresa Claro:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Empresa Claro:")
 doc.addImage(canvasImg1b, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Empresa Arnet:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Empresa Arnet:")
 doc.addImage(canvasImg2b, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Empresa Fibertel:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Empresa Fibertel:")
 doc.addImage(canvasImg3b, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Empresa Local de Conectividad:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Empresa Local de Conectividad:")
 doc.addImage(canvasImg4b, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Conexion Satelital:")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Conexion Satelital:")
 doc.addImage(canvasImg5b, 'jpg', 30, 30, 260, 140 );
 doc.addPage()
-doc.text(15, 15, "Otra Empresa de Conectividad")
+doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+doc.text(15, 20, "Otra Empresa de Conectividad")
 doc.addImage(canvasImg6b, 'jpg', 30, 30, 260, 140 );
 doc.save('EstadisticasConectividad.pdf');
 }
@@ -2309,7 +2512,8 @@ doc.save('EstadisticasConectividad.pdf');
     <div class="col-md-12">
           <div class="panel panel-primary">
           <div class="panel-heading" align="center"><a data-toggle="collapse" href="#collapse4b"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-          <span class="panel-title clickable"><h3 class="panel-title">ESCUELAS CON INTERNADO O ALBERGUE:</h3></span></a></div>
+          <span class="panel-title clickable"><h3 class="panel-title">ESCUELAS CON INTERNADO O ALBERGUE:</h3><?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+          echo '<p>Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.'</p>'; ?></span></a></div>
           <div id="collapse4b" class="panel-collapse collapse">
 
           <div class="panel-body">
@@ -2333,7 +2537,9 @@ document.getElementById('cmd42').addEventListener("click", downloadPDF);
         //creates PDF from img
         var doc = new jsPDF('landscape');
         doc.setFontSize(15);
-        doc.text(15, 15, "Escuelas con Internado o Albergue");
+        doc.text(15, 15, '<?php  $totalEscuelasRelevadas=$conectividad->buscar('cantidad');
+        echo 'Cantidad de Escuelas Relevadas:'.$totalEscuelasRelevadas.''; ?>');
+        doc.text(15, 20,"Escuelas con Internado o Albergue");
         doc.addImage(canvasImg, 'jpg', 30, 30, 200, 150 );
         doc.save('EscuelasInternado.pdf');
         }
