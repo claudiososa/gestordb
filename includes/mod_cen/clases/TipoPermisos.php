@@ -67,7 +67,7 @@ function __construct($tipoPermisosId=NULL,$tipoId=NULL,$tipoReferente=NULL)
 
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-	  $sentencia="SELECT tipoId,tipoinformes.nombre FROM tipopermisos JOIN tipoinformes ON (tipopermisos.tipoId=tipoinformes.tipoInformeId)";
+	  $sentencia="SELECT tipoId,tipoReferente,tipoinformes.nombre FROM tipopermisos JOIN tipoinformes ON (tipopermisos.tipoId=tipoinformes.tipoInformeId)";
 
 		if($this->tipoPermisosId!=NULL || $this->tipoId!=NULL || $this->tipoReferente!=NULL)
 		{

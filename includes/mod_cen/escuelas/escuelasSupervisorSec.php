@@ -228,13 +228,13 @@ while ($fila = mysqli_fetch_object($resultado))
 
 	if($cant==0){
 
-		echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
+		echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&tipo=supervisor-secundaria&escuelaId=".$fila->escuelaId."'>
 					 Crear</a>&nbsp&nbsp</td><td><a class='btn btn-danger' href='#'>0</a></td>";
 
 	}else{
 	 	echo "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
 					 Crear</a></td>";
-		echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>$cant</a></td>";
+		echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&tipo=supervisor-secundaria&id=2&escuelaId=".$fila->escuelaId."'>$cant</a></td>";
 	}
 	if($cantConectar==0){//sino existe informes creados por equipo conectar para este colegio
 		echo "<td><a class='btn btn-danger' href='#'>0</a></td>";

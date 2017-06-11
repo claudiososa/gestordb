@@ -15,6 +15,11 @@ include_once("includes/mod_cen/clases/imgRespuesta.php");
 $dato_informe = new Informe($_GET["informeId"]);
 $buscar_informe = $dato_informe->buscar();
 $informe = mysqli_fetch_object($buscar_informe);
+//var_dump($informe);
+
+if($informe==NULL){
+  echo 'Acceso Denegado';
+}else{
 
 $dato_img = new Img(null,$_GET["informeId"]);
 $buscar_img = $dato_img->buscar();
@@ -44,8 +49,8 @@ $dato_localidad= mysqli_fetch_object($localidad);
 
 $o_informe = new Informe($_GET["informeId"]);
 $buscar_informe = $o_informe->buscar();
-
 $informe=mysqli_fetch_object($buscar_informe);
+
 $nuevo=1;
 ?>
 <div class="container">
@@ -126,7 +131,7 @@ while ($fila = mysqli_fetch_object($buscar_respuesta)) {
 //echo "</div>";
 echo "</div>";
 echo "</div>";
-
+}
 /*
 <script type="text/javascript">
 var arrayFile = new Array();

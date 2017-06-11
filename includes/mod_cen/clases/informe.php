@@ -1,6 +1,7 @@
 <?php
-
 include_once('includes/mod_cen/clases/conexion.php');
+include_once("includes/mod_cen/clases/TipoInforme.php");
+include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/maestro.php");
 
 class informe
@@ -55,7 +56,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		'". $this->estado."','". $this->fechaVisita."','". $this->fechaCarga."',
 		'". $this->fechaModificado."','". $this->nuevoTipo."','". $this->subTipo."');";
 
-		echo $sentencia;
+		//echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
 			$informeId=$conexion->insert_id;
@@ -294,15 +295,23 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 
 
-	public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL)
+	public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
+		/**
+		 * busca y recoge en un array las categorias exclusivas para los que tienen persmiso a la misma
+		 *
+		 */
+		$objTipo = new TipoInforme();
+		$objTipo->exclusiva='si';
+		$buscarTipo=$objTipo->buscar();
+
 		$sinParam=0;
 
 		$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
 									,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
-									informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
+									informes.subtipo,escuelas.numero,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
 									FROM informes
 									JOIN escuelas
 									ON (informes.escuelaId=escuelas.escuelaId)
@@ -310,17 +319,51 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									ON referentes.referenteId=informes.referenteId
 									JOIN personas
 									ON personas.personaId=referentes.personaId ";
-									if ($_SESSION['tipo']=='Supervisor-Secundaria' || $_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='Supervisor-General-Secundaria')
-									{
-										if (isset($tiporeferente) || isset($listaRefer)) {
-											$sentencia.=" WHERE (informes.nuevotipo<>8 || informes.nuevotipo<>9)  ";
-										}else{
-											$sentencia.=" WHERE (informes.nuevotipo=8 || informes.nuevotipo=9)  ";
+									$sentencia.=" WHERE ";
+									$cantExclusiva=0;
+									$encontrado=0;
+									if(!isset($tiporeferente) || !isset($listaRefer)){
+										while ($fila = mysqli_fetch_object($buscarTipo)) {
+												$objTipoPermiso = new TipoPermisos(null,$fila->tipoInformeId);
+												$buscarTipoPermiso=$objTipoPermiso->buscar();
+
+												while ($row = mysqli_fetch_object($buscarTipoPermiso)) {
+													//var_dump($row);
+													if ($_SESSION['tipo']==$row->tipoReferente) {
+														$encontrado=1;
+													}
+												}
+												if ($encontrado==0) {
+													$sentencia.=" informes.nuevotipo<>".$fila->tipoInformeId." AND";	# code...
+													$cantExclusiva=1;
+												}
+												$encontrado=0;
+
+												//var_dump($fila);
 										}
 
-									}else{
-									$sentencia.=" WHERE informes.nuevotipo<>8 ";
 									}
+									if($cantExclusiva==1){
+										$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+									}else{
+										$sentencia.=" 1 ";
+									}
+
+							/*		if ($_SESSION['tipo']=='Supervisor-Secundaria' || $_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='Supervisor-General-Secundaria')
+									{
+										if(isset($tipoConsulta)){
+											$sentencia.=" AND informes.nuevotipo<>8 ";
+										}else{
+											if (isset($tiporeferente) || isset($listaRefer) ) {
+												$sentencia.=" AND (informes.nuevotipo<>8 || informes.nuevotipo<>9)  ";
+											}else{
+												$sentencia.=" AND (informes.nuevotipo=8 || informes.nuevotipo=9)  ";
+											}
+										}
+									}else{
+										$sentencia.=" 1 ";
+									}*/
+
 
 		if($tiporeferente<>NULL){
 			$sinParam=1;

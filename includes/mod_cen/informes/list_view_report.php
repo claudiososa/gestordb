@@ -16,7 +16,7 @@ $buscar_escuela = $escuela->buscar();
 $dato_escuela = mysqli_fetch_object($buscar_escuela);
 
 
-if ($_GET['tipo']) {
+if (isset($_GET['tipo'])) {
   switch ($_GET['tipo']) {
     case 'conectar':
       $arrayTipo = array('ETT','ETJ','Coodinador');
@@ -24,6 +24,9 @@ if ($_GET['tipo']) {
     case 'pmi':
         $arrayTipo = array('ATT','CoordinadorPmi');
         break;
+		case 'supervisor-secundaria':
+		        $arrayTipo = array('Supervisor-Secundaria');
+		        break;
     default:
       # code...
       break;

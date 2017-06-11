@@ -11,11 +11,12 @@ class TipoInforme
 	private $estado;
  	private $fechaModif;
  	private $usuarioModif;
+	private $exclusiva;
 
 
 
 function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado=NULL,
-	$fechaModif=NULL,	$usuarioModif=NULL)
+	$fechaModif=NULL,	$usuarioModif=NULL,	$exclusiva=NULL)
 	{
 		$this->tipoInformeId= $tipoInformeId;
  		$this->nombre = $nombre;
@@ -23,6 +24,7 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 		$this->estado = $estado;
  		$this->fechaModif = $fechaModif;
  		$this->usuarioModif = $usuarioModif;
+		$this->exclusiva = $exclusiva;
  	}
 
 
@@ -32,7 +34,7 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="INSERT INTO tipoinformes (tipoInformeId,nombre,descripcion,estado,fechaModif,usuarioModif)
-		VALUES (NULL,'". $this->nombre."','". $this->descripcion."','". $this->estado."','". $this->fechaModif."','". $this->usuarioModif."');";
+		VALUES (NULL,'". $this->nombre."','". $this->descripcion."','". $this->estado."','". $this->fechaModif."','". $this->usuarioModif."','". $this->exlusivo."');";
     //echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
@@ -52,7 +54,7 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 		$conexion=$nuevaConexion->getConexion();
 		$sentencia="UPDATE tipoinformes SET nombre = '$this->nombre',descripcion = '$this->descripcion'
 		,estado = '$this->estado',fechaModif = '$this->fechaModif'
-		,usuarioModif = '$this->usuarioModif' WHERE tipoInformeId = '$this->tipoInformeId'";
+		,usuarioModif = '$this->usuarioModif' ,exclusiva = '$this->exclusiva' WHERE tipoInformeId = '$this->tipoInformeId'";
 
 			//	$sentencia="UPDATE informes SET prioridad = '$this->prioridad',tipo = '$this->tipo'
 				//,titulo = '$this->titulo', contenido = '$this->contenido', WHERE informeId = '$this->informeId'";
@@ -73,7 +75,7 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 	  $sentencia="SELECT * FROM tipoinformes";
 
 		if($this->tipoInformeId!=NULL || $this->nombre!=NULL || $this->descripcion!=NULL || $this->estado!=NULL || $this->descripcion!=NULL
-		|| $this->fechaModif!=NULL || $this->usuarioModif!=NULL)
+		|| $this->fechaModif!=NULL || $this->usuarioModif!=NULL || $this->exclusiva!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -106,6 +108,11 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 		if($this->usuarioModif!=NULL)
 		{
 			$sentencia.=" usuarioModif=$this->usuarioModif && ";
+		}
+
+		if($this->exclusiva!=NULL)
+		{
+			$sentencia.=" exclusiva='$this->exclusiva' && ";
 		}
 
 
