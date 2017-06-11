@@ -10,18 +10,24 @@ $referenteId=$_SESSION['referenteId'];
 
 $referente= new Referente($referenteId);
 $resultado_ett_acargo = $referente->Cargo("Activo");
+$informes= new informe();
+////////////////////////////////////////////////
+// todos los informes creados por referente Conectar Igualdad
+$arrayReferenteConectar = array ('ETT','ETJ','Coordinador');
+$informeEquipoConectar = $informes->buscar(20,null,$arrayReferenteConectar);
 
 //busqueda de informes de proiridad alta
 $informe_alta= new Informe(null,null,null,"Alta");
-$buscar_alta =$informe_alta->buscar();
+$buscar_alta =$informe_alta->buscar(20,null,$arrayReferenteConectar);
 $total = mysqli_num_rows($buscar_alta);
 
 // creación y busqueda de todos los informes
-$informes= new informe();
+
 
 $b_informe = $informes->buscar(20);
 
 ////////////////////////////////////////////////
+
 
 $mis_informes= new informe(null,null,$_SESSION["referenteId"]);
 
@@ -199,7 +205,7 @@ if(mysqli_num_rows($b_informe)>0){
 	echo "</thead>";
 	echo "<tbody>";
 
-	while ($fila=mysqli_fetch_object($b_informe)){
+	while ($fila=mysqli_fetch_object($informeEquipoConectar)){
 
 		$escuela= new Escuela($fila->escuelaId);
 		$buscar_escuela= $escuela->buscar();

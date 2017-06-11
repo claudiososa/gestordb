@@ -277,7 +277,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
                if ($referente_actual->tipo=="Supervisor-Secundaria")
                { //mandamos mail a director de nivel y supervisora general
 
-                  $para="martucamerlo@hotmail.com,francomluisa@hotmail.com";
+                  $para="martucamerlo@gmail.com,francomaria@gmail.com";
 
                          if($_SESSION["referenteId"] != $id_referente_escuela)
                          // pregunta si el informe creado es de otro referente

@@ -300,7 +300,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		/**
-		 * busca y recoge en un array las categorias exclusivas para los que tienen persmiso a la misma
+		 * busca las categorias de tipo exclusivas "si"
 		 *
 		 */
 		$objTipo = new TipoInforme();
@@ -322,18 +322,18 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									$sentencia.=" WHERE ";
 									$cantExclusiva=0;
 									$encontrado=0;
-									if(!isset($tiporeferente) || !isset($listaRefer)){
-										while ($fila = mysqli_fetch_object($buscarTipo)) {
+									if(!isset($tiporeferente) || !isset($listaRefer)){ //si el metodo no se llamada con los parametros tipode referente y listaRef entonces verifica los permisos
+										while ($fila = mysqli_fetch_object($buscarTipo)) { //recorre las categorias exclusivas
 												$objTipoPermiso = new TipoPermisos(null,$fila->tipoInformeId);
 												$buscarTipoPermiso=$objTipoPermiso->buscar();
 
-												while ($row = mysqli_fetch_object($buscarTipoPermiso)) {
-													//var_dump($row);
-													if ($_SESSION['tipo']==$row->tipoReferente) {
+												while ($row = mysqli_fetch_object($buscarTipoPermiso)) { //recorre los permisos para la categoria exclusiva
+
+													if ($_SESSION['tipo']==$row->tipoReferente) { //si el usuario logueado es igual al tipo de referente que tiene permiso entonces cambia el estado de $encontrado
 														$encontrado=1;
 													}
 												}
-												if ($encontrado==0) {
+												if ($encontrado==0) {//si encontrado es igual a 0, significaque ,el ,usuario ,logueado no tiene permiso a esta categoria de informe
 													$sentencia.=" informes.nuevotipo<>".$fila->tipoInformeId." AND";	# code...
 													$cantExclusiva=1;
 												}
