@@ -6,7 +6,7 @@ require_once("includes/mod_cen/clases/referente.php");
 
 $informes= new informe();
 //create object referenteId and filter of status active
-$referenteId=$_SESSION['referenteId'];
+$referenteId=119;
 
 $referente= new Referente($referenteId);
 $resultado_ett_acargo = $referente->Cargo("Activo");
