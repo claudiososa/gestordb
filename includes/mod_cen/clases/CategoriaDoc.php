@@ -8,7 +8,7 @@ class CategoriaDoc
 	private $categoriaDocId;
  	private $nombreCategoria;
  	private $descripcionCategoria;
-	
+
 
 
 function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCategoria=NULL)
@@ -16,7 +16,7 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 		$this->categoriaDocId= $categoriaDocId;
  		$this->nombreCategoria = $nombreCategoria;
  		$this->descripcionCategoria =$descripcionCategoria;
-		
+
  	}
 
 
@@ -27,7 +27,7 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 
 		$sentencia="INSERT INTO categoria_doc(categoriaDocId,nombreCategoria,descripcionCategoria)
 		VALUES (NULL,'". $this->nombreCategoria."','". $this->descripcionCategoria."');";
-           
+
 		if ($conexion->query($sentencia)) {
 			$orden="SELECT MAX(categoriaDocId) AS id FROM categoria_doc";
 
@@ -40,13 +40,13 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 	}
 	public function editar()
 	{
-	
+
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		$sentencia="UPDATE categoria_doc SET nombreCategoria = '$this->nombreCategoria',descripcionCategoria = '$this->descripcionCategoria'
 		 WHERE categoriaDocId = '$this->categoriaDocId'";
 
-			
+
 		if ($conexion->query($sentencia)) {
 			return 1;
 		}else
@@ -72,17 +72,17 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 			$sentencia.=" categoriaDocId = $this->categoriaDocId && ";
 		}
 
-		if($this->nombre!=NULL)
+		if($this->nombreCategoria!=NULL)
 		{
 			$sentencia.=" nombreCategoria LIKE '%$this->nombreCategoria%'  && ";
 		}
 
-		if($this->descripcion!=NULL)
+		if($this->descripcionCategoria!=NULL)
 		{
 			$sentencia.=" descripcionCategoria=$this->descripcionCategoria && ";
 		}
 
-		
+
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 
 		}
@@ -103,27 +103,27 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-	    
+
 	    $sentencia="SELECT  categoria_doc.nombreCategoria,categoria_doc.categoriaDocId
 								 FROM categoria_doc
 								JOIN permiso_categoria_doc
 									ON (permiso_categoria_doc.categoriaDocId = categoria_doc.categoriaDocId )
-								
+
 							    WHERE ";
 
 
 		if($cargo!=NULL)
 			{
 				$sentencia.=" permiso_categoria_doc.tipoReferente = '".$cargo."'";
-				
+
 			}
 
 
-		
+
 
 		$sentencia.="  ORDER BY nombreCategoria ASC";
 		//echo $sentencia;
-		
+
 		return $conexion->query($sentencia);
 
 	}

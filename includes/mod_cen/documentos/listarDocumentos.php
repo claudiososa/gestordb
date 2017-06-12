@@ -1,12 +1,12 @@
 <?php
-	
+
 	include_once("includes/mod_cen/clases/CategoriaDoc.php");
 	include_once("includes/mod_cen/clases/Documento.php");
 	include_once("includes/mod_cen/clases/PermisoDoc.php");
 
-	
-	
-	
+
+
+
 	echo '<div class="table-responsive">';
 	echo '<div class="container">';
 	echo "<table class='table table-hover table-striped table-condensed '>";
@@ -19,17 +19,17 @@
 	echo "<td>Destacado</td>";
 	echo "<td>Permisos</td>";
 	echo "<td>Accion</td>";
-	echo "</tr>";	
-		
+	echo "</tr>";
+
 	    $doc=new Documento();
-      
+
       $listado_doc=$doc->buscar();
-     
+
 
       while ($fila = mysqli_fetch_object($listado_doc))
       {
 
-        
+
       echo "<tr>";
       echo "<td>".$fila->documentoId."</td>";
 
@@ -37,7 +37,7 @@
     $categoria_doc = new CategoriaDoc($fila->categoriaDocId,null,null);
     $resultado = $categoria_doc->buscar();
     $filaResultado = mysqli_fetch_object($resultado);
-
+		//var_dump($filaResultado);
       echo "<td>".$filaResultado->nombreCategoria."</td>";  // nombre de la categoria a la que pertenece
       echo "<td>".$fila->nombreArchivo."</td>";
       echo "<td>".$fila->titulo."</td>";
@@ -52,9 +52,9 @@
 
       	}
 
-        
-      
-      $permiso_doc = new PermisoDoc(NULL,$fila->documentoId,NULL); 
+
+
+      $permiso_doc = new PermisoDoc(NULL,$fila->documentoId,NULL);
       $listado_permiso = $permiso_doc->buscar();
       $permisos="";
 
@@ -62,21 +62,21 @@
 		{
 			$permisos.= " ".$fila2->tipoReferente;
 		}
-   
+
       echo "<td>". $permisos."</td>";
-             
-      echo "<td>"."<a href='index.php?mod=slat&men=informe&id=21&documentoId=$fila->documentoId&nombreArchivo=$fila->nombreArchivo&titulo=$fila->titulo&descripcion=$fila->descripcion&destacado=$fila->destacado&fechaSubida=$fila->fechaSubida&categoriaDocId=$fila->categoriaDocId&nombreCategoria=$filaResultado->nombreCategoria&destacado_nombre=$destacado_nombre&permiso=$permisos'>MODIFICAR</a>"."</td>";
-     
-     
+
+      echo "<td>"."<a href='index.php?mod=slat&men=informe&id=21&documentoId=$fila->documentoId'>MODIFICAR</a>"."</td>";
+
+
       echo "</tr>";
       echo "\n";
- 
-          
+
+
       }
 
-    
 
-    
+
+
 	echo "</table>";
 	echo "</div>";
 	echo "</div>";

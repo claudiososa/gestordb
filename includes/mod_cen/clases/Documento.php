@@ -13,7 +13,7 @@ class Documento
 	private $destacado;
 	private $fechaSubida;
 	private $fechaUpdate;
- 	
+
 
 
 function __construct($documentoId=NULL,$categoriaDocId=NULL,$nombreArchivo=NULL,$titulo=NULL,$descripcion=NULL,$destacado=NULL,$fechaSubida=NULL,$fechaUpdate=NULL)
@@ -42,7 +42,7 @@ function __construct($documentoId=NULL,$categoriaDocId=NULL,$nombreArchivo=NULL,
    // echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
-			
+
 			$orden="SELECT MAX(documentoId) AS id FROM documentos";
 			$datoFila = mysqli_fetch_object($conexion->query($orden));
 
@@ -52,18 +52,25 @@ function __construct($documentoId=NULL,$categoriaDocId=NULL,$nombreArchivo=NULL,
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
 	}
-	
-	
 
-public function editar()
+
+
+public function editar($tipo=NULL)
 	{
-	
+
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		$sentencia="UPDATE documentos SET categoriaDocId = '$this->categoriaDocId',nombreArchivo = '$this->nombreArchivo',titulo = '$this->titulo',descripcion = '$this->descripcion',destacado = '$this->destacado',fechaSubida = '$this->fechaSubida',fechaUpdate = '$this->fechaUpdate'
-		 WHERE documentoId = '$this->documentoId'";
+		if (isset($tipo)) {
+			if($tipo=='nombreArchivo'){
+				$sentencia="UPDATE documentos SET nombreArchivo = '$this->nombreArchivo'
+			 	WHERE documentoId = '$this->documentoId'";
+			}
+		}else{
+			$sentencia="UPDATE documentos SET categoriaDocId = '$this->categoriaDocId',nombreArchivo = '$this->nombreArchivo',titulo = '$this->titulo',descripcion = '$this->descripcion',destacado = '$this->destacado',fechaSubida = '$this->fechaSubida',fechaUpdate = '$this->fechaUpdate'
+			 WHERE documentoId = '$this->documentoId'";
+		}
 
-			
+
 		if ($conexion->query($sentencia)) {
 			return 1;
 		}else
@@ -78,7 +85,7 @@ public function buscar($limit=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-	 
+
 	  $sentencia="SELECT * FROM documentos";
 
 	if($this->documentoId!=NULL || $this->categoriaDocId!=NULL || $this->nombreArchivo!=NULL || $this->titulo!=NULL || $this->descripcion!=NULL || $this->destacado!=NULL || $this->fechaSubida!=NULL || $this->fechaUpdate!=NULL)
@@ -86,7 +93,7 @@ public function buscar($limit=NULL)
 			$sentencia.=" WHERE ";
 
 
-		
+
 
 		if($this->documentoId != NULL)
 		{
@@ -150,8 +157,8 @@ public function buscar($limit=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-	    
-	    
+
+
 
 
 	    $sentencia="SELECT  documentos.nombreArchivo,documentos.titulo,documentos.destacado,documentos.descripcion
@@ -163,16 +170,16 @@ public function buscar($limit=NULL)
 		if($cargo!=NULL && $cat_id!=NULL)
 			{
 				$sentencia.=" WHERE permiso_doc.tipoReferente = '".$cargo."' AND documentos.categoriaDocId = ".$cat_id;
-				
+
 			}
 
 
 
-		
+
 
 		$sentencia.="  ORDER BY destacado DESC";
 		//echo $sentencia;
-		
+
 		return $conexion->query($sentencia);
 
 	}
