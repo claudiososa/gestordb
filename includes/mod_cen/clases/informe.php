@@ -293,6 +293,108 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 	}
 
+	public function buscarSupervisorSuperior()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$sinParam=0;
+
+		$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+									,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
+									informes.subtipo,escuelas.numero,referentes.personaId,personas.nombre,personas.apellido
+									FROM informes
+									JOIN escuelas
+									ON (informes.escuelaId=escuelas.escuelaId)
+									JOIN referentes
+									ON referentes.referenteId=informes.referenteId
+									JOIN personas
+									ON personas.personaId=referentes.personaId
+									WHERE (informes.nuevotipo=3 || informes.nuevotipo=4) AND ";
+
+
+		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
+		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL
+		|| $this->fechaVisita!=NULL || $this->contenido!=NULL || $this->nuevoTipo!=NULL || $this->subTipo!=NULL)
+		{
+			$sentencia.="  ";
+
+
+		if($this->informeId!=NULL)
+		{
+			$sentencia.=" informes.informeId = $this->informeId && ";
+		}
+
+		if($this->escuelaId!=NULL)
+		{
+			$sentencia.=" informes.escuelaId = $this->escuelaId && ";
+		}
+
+		if($this->tipo!=NULL)
+		{
+			$sentencia.=" informes.tipo=$this->tipo && ";
+		}
+
+		if($this->nuevoTipo!=NULL)
+		{
+			$sentencia.=" informes.nuevotipo=$this->nuevoTipo && ";
+		}
+
+		if($this->subTipo!=NULL)
+		{
+			$sentencia.=" informes.subtipo=$this->subTipo && ";
+		}
+
+		if($this->prioridad!=NULL)
+		{
+			$sentencia.=" informes.prioridad = '$this->prioridad' && ";
+		}
+
+		if($this->leido!=NULL)
+		{
+			$sentencia.=" informes.leido=$this->leido && ";
+		}
+
+		if($this->estado!=NULL)
+		{
+			$sentencia.=" informes.estado=$this->estado && ";
+		}
+
+		if($this->referenteId!=NULL)
+		{
+			$sentencia.=" informes.referenteId='$this->referenteId' && ";
+		}
+
+		if($this->fechaVisita!=NULL)
+		{
+			$sentencia.=" informes.fechaVisita='$this->fechaVisita' && ";
+		}
+
+		if($this->contenido!=NULL)
+		{
+			$sentencia.=" informes.contenido=$this->contenido && ";
+		}
+
+
+		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+		if ($sinParam==1) {
+		$sentencia.=' )';
+
+		}
+
+		}
+
+			// fin else
+
+		$sentencia.="  ORDER BY informes.informeId DESC";
+		if(isset($limit)){
+			$sentencia.=" LIMIT ".$limit;
+		}
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
+
 
 
 	public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)

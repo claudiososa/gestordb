@@ -322,6 +322,9 @@
 				case 12:
 							include("includes/mod_cen/escuelas/escuelasSupervisorSec.php");
 							break;
+				case 13:
+							include("includes/mod_cen/escuelas/escuelasSupervisorSuperior.php");
+							break;
 
 
 				}

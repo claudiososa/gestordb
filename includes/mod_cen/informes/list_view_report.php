@@ -27,6 +27,9 @@ if (isset($_GET['tipo'])) {
 		case 'supervisor-secundaria':
 		        $arrayTipo = array('Supervisor-Secundaria');
 		        break;
+		case 'supervisor-nivel-superior':
+		        $arrayTipo = array('Supervisor-Nivel-Superior');
+		        break;
     default:
       # code...
       break;

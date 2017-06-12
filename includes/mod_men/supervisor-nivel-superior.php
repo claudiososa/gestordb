@@ -14,15 +14,16 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php?mod=slat&men=user&id=3">Mis Escuelas <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="index.php?mod=slat&men=user&id=13">Mis Escuelas <span class="sr-only">(current)</span></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
           <ul class="dropdown-menu">
 
                  <li ><a href="index.php?mod=slat&men=escuelas&id=1">Escuelas</a></li>
           </ul>
-		    <li class="dropdown">
           <li><a href="index.php?mod=slat&men=admin&id=10">Asignar Escuelas Supervisor</a></li>
+
+		    <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Perfil <span class="caret"></span></a>
           <ul class="dropdown-menu">
                   <li><?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."'>";?>Actualizar</a></li>
