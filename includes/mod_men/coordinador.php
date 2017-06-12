@@ -40,16 +40,12 @@
                  <li ><a href="index.php?mod=slat&men=user&id=7">Todos los ETT</a></li>
                 <li ><a href="index.php?mod=slat&men=user&id=8">Todos los ETJ</a></li>
                 <li ><a href="index.php?mod=slat&men=referentes&id=10">RTI</a></li>
+                <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
           </ul>
         </li>
 		  <li><a href="index.php?mod=slat&men=escuelas&id=12">ADM</a></li>
 		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Encuentros <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-                 <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
-          </ul>
-        </li>
+          
 
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Perfil <span class="caret"></span></a>
