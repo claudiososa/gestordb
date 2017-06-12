@@ -42,7 +42,7 @@ if(mysqli_num_rows($b_mis_informe)>0){
 	echo "<tr>";
 	echo "<th>Id</th>";
 	echo "<th>Título</th>";
-	echo "<th>ETJ</th>";
+	echo "<th>Leido</th>";
 	echo "<th>Nº</th>";
 	echo "<th>Prioridad</th>";
 	echo "</tr>";

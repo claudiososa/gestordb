@@ -19,7 +19,7 @@ $dato_escuela = mysqli_fetch_object($buscar_escuela);
 if (isset($_GET['tipo'])) {
   switch ($_GET['tipo']) {
     case 'conectar':
-      $arrayTipo = array('ETT','ETJ','Coodinador');
+      $arrayTipo = array('ETT','ETJ','Coordinador');
       break;
     case 'pmi':
         $arrayTipo = array('ATT','CoordinadorPmi');

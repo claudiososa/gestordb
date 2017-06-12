@@ -14,7 +14,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        
+        <li><a href="index.php?mod=slat&men=admin&id=9">Asignar Escuelas para Supervisor</a></li>
+
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
@@ -24,6 +25,16 @@
                 <li ><a href="index.php?mod=slat&men=referentes&id=10">RTI</a></li>
           </ul>
         </li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentos<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+                <li class=""><a href="index.php?mod=slat&men=doc&id=1">Ver Documentación<span class="sr-only">(current)</span></a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=16">Nueva Categoría</a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=18">Listar Categoría</a></li>
+                <li class=""><a href="index.php?mod=slat&men=informe&id=17">Subir Documento Nuevo<span class="sr-only">(current)</span></a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=20">Listar Documentos</a></li>
+        </ul>
+      </li>
 
 
           <li class="dropdown">
@@ -33,7 +44,7 @@
                   <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?>Cambiar Contraseña</a></li>
           </ul>
         </li>
-<li class=""><a href="index.php?mod=slat&men=doc&id=3">Documentos<span class="sr-only">(current)</span></a></li>
+
         </li>
         <li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
   <li><a href="">Hola,<?php echo $_SESSION["nombre"]?></a></li>
