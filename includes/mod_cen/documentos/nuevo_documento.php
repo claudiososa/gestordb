@@ -1,5 +1,5 @@
 <script src="includes/mod_cen/js/permisos.js"></script>
-<script src="includes/mod_cen/js/s_ajax_informe.js"></script>
+<script src="includes/mod_cen/js/s_ajax_documento.js"></script>
 <?php
 
 include_once("includes/mod_cen/clases/TipoPermisos.php");
@@ -23,7 +23,7 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
 
 
   $fecha=date("Y-m-d H:i:s");
-  $nuevo_doc = new Documento(null,$_POST["categoria_doc"],$nombreArchivo,$_POST["tituloDoc"],$_POST["descripcion"],$_POST["destacado"],$fecha,$fecha);
+  $nuevo_doc = new Documento(null,$_POST["categoria_doc"],NULL,$_POST["tituloDoc"],$_POST["descripcion"],$_POST["destacado"],$fecha,$fecha);
   $guardar = $nuevo_doc->agregar();
 
   foreach ($_FILES['input-img'] as $key) {
@@ -35,26 +35,47 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
       $img1 = $_FILES['input-img']['name'][$i];
 
       $dir_subida = './documentacion/';
+      //echo $_FILES['input-img']['type'][$i];
 
-      if($_FILES['input-img']['type'][$i]=='image/jpeg'){
-        $nombreArchivo='doc_'.$guardar.'_'.$i.'.jpg';
-        $nombreArchivoMediano='doc_'.$guardar.'_'.$i.'m.jpg';
-        $tipoArchivo='image/jpeg';
-      } elseif($_FILES['input-img']['type'][$i]=='application/pdf') {
-        $nombreArchivo='doc_'.$guardar.'_'.$i.'.pdf';
-        $tipoArchivo='application/pdf';
+      switch ($_FILES['input-img']['type'][$i]) {
+        case 'application/pdf':
+          $nombreArchivo='doc_'.$guardar.'_'.$i.'.pdf';
+          break;
+        case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            $nombreArchivo='doc_'.$guardar.'_'.$i.'.xlsx';
+            break;
+        case 'application/vnd.ms-excel':
+                $nombreArchivo='doc_'.$guardar.'_'.$i.'.xls';
+                break;
+       case 'application/msword':
+                $nombreArchivo='doc_'.$guardar.'_'.$i.'.doc';
+                break;
+       case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+               $nombreArchivo='doc_'.$guardar.'_'.$i.'.docx';
+               break;
+       case 'image/jpeg':
+                $nombreArchivo='doc_'.$guardar.'_'.$i.'.jpg';
+                break;
+       case 'image/png':
+               $nombreArchivo='doc_'.$guardar.'_'.$i.'.png';
+               break;
+       case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+               $nombreArchivo='doc_'.$guardar.'_'.$i.'.pptx';
+               break;
+
+
+        default:
+          # code...
+          break;
       }
-      //$fichero_subido = $dir_subida . basename($_FILES['input-img']['name'][0]);
+
       $fichero_subido = $dir_subida . $nombreArchivo;
-//      echo $fichero_subido;
 
-
-//echo '<pre>';
       if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
-        if($_FILES['input-img']['type'][$i]=='image/jpeg'){
+        /*if($_FILES['input-img']['type'][$i]=='image/jpeg'){
           $nuevoArchivo = $dir_subida.$nombreArchivoMediano;
           copy($fichero_subido,$nuevoArchivo);
-        }
+        }*/
         //$imagen = new Img(null,$guardar_informe,$nombreArchivo,$tipoArchivo);
         //$agregarImg = $imagen->agregar();
     //    echo "El fichero es válido y se subió con éxito.\n";

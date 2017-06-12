@@ -1,5 +1,5 @@
 <script src="includes/mod_cen/js/permisos.js"></script>
-<script src="includes/mod_cen/js/s_ajax_informe.js"></script>
+<script src="includes/mod_cen/js/s_ajax_documento.js"></script>
 <?php
 //include_once("includes/mod_cen/documentos/listarDocumentos.php");
 include_once("includes/mod_cen/clases/PermisoCategoriaDoc.php");
