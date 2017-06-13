@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -27,7 +28,7 @@ echo '<div class="container">';
 
 if(mysqli_num_rows($b_mis_informe)>0){
 	?>
-	<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+
 	<div class="panel panel-primary">
 		<div class="panel-heading" id="panel1">
           <span class="panel-title clickable">
