@@ -51,7 +51,7 @@ if(isset($_POST["modif_doc"]) ){
     }
     break;
   }
-  $modif_doc = new Documento($_POST["documentoId"],$_POST["categoria_doc"],$nombreArchivo,$_POST["tituloDoc"],$_POST["descripcion"],$_POST["destacado"],$_GET["fechaSubida"],$fecha);
+  $modif_doc = new Documento($_POST["documentoId"],$_POST["categoria_doc"],$nombreArchivo,$_POST["tituloDoc"],$_POST["descripcion"],$_POST["destacado"],$_GET["fechaSubida"],$fecha,$_SESSION["referenteId"],$_SESSION["tipo"]);
   $guardar = $modif_doc->editar();
 
   if ($guardar >0){

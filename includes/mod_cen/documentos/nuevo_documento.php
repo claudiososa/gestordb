@@ -23,7 +23,7 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
 
 
   $fecha=date("Y-m-d H:i:s");
-  $nuevo_doc = new Documento(null,$_POST["categoria_doc"],NULL,$_POST["tituloDoc"],$_POST["descripcion"],$_POST["destacado"],$fecha,$fecha);
+  $nuevo_doc = new Documento(null,$_POST["categoria_doc"],NULL,$_POST["tituloDoc"],$_POST["descripcion"],$_POST["destacado"],$fecha,$fecha,$_SESSION["referenteId"],$_SESSION["tipo"]);
   $guardar = $nuevo_doc->agregar();
 
   foreach ($_FILES['input-img'] as $key) {
