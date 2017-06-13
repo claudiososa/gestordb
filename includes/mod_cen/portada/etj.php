@@ -1,4 +1,4 @@
-<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -47,6 +47,8 @@ echo '<div class="container">';
 		//informes de prioridad alta ///
 	  if(mysqli_num_rows($buscar_alta)>0){
 	 	?>
+		<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+
 	 	<div class="panel panel-primary">
 			<div class="panel-heading" id="panel1"><span class="panel-title clickable">
 				<h4>Informes Prioridad Alta<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
