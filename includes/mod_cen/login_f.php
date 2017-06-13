@@ -103,6 +103,12 @@ if(isset($_POST["username"]))
 				case 'Supervisor-General-Secundaria':
 					include_once('includes/mod_cen/portada/supervisorGeneralSecundaria.php');
 					break;
+				case 'DirectorNivelSuperior':
+						include_once('includes/mod_cen/portada/directorNivelSuperior.php');
+						break;
+				case 'SupervisorGeneralSuperior':
+						include_once('includes/mod_cen/portada/supervisorGeneralSuperior.php');
+						break;
 
 
 				default:

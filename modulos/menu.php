@@ -44,6 +44,12 @@
 			case "DirectorNivelSecundario":
 									include("includes/mod_men/directorNivelSecundario.php");
 									break;
+			case "DirectorNivelSuperior":
+									include("includes/mod_men/directorNivelSuperior.php");
+									break;
+			case "SupervisorGeneralSuperior":
+									include("includes/mod_men/supervisorGeneralSuperior.php");
+									break;
 			case "Secretariodegestion":
 								include("includes/mod_men/secretariodegestion.php");
 								break;

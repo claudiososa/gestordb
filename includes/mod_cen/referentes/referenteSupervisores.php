@@ -16,7 +16,7 @@
 	echo '<div class="container">';
 	//$fila=mysqli_fetch_object($resultado);
 	echo "<table class='table table-hover table-striped table-condensed '>";
-	echo "<tr><td colspan='6'><h3>Mis ETT</h3></td></tr>";
+	echo "<tr><td colspan='6'><h3>Mis Supervisores</h3></td></tr>";
 	echo "<tr class='info'><td>Apellidos, Nombre</td>";
 	echo "<td>Escuelas</td>";
 	echo "<td>RTI</td>";
@@ -37,7 +37,7 @@
 
 		////////////////////////////////////////
 
-		$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$fila->referenteId);
+		$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$fila->referenteId);
     //$escuela->referenteIdSuperSec=$fila->referenteId;
 		$buscar_escuela = $escuela->buscar();
 		$cantidad_escuela = mysqli_num_rows($buscar_escuela);

@@ -325,6 +325,13 @@
 				case 13:
 							include("includes/mod_cen/escuelas/escuelasSupervisorSuperior.php");
 							break;
+				case 14:
+										if($_SESSION['tipo']=='admin' || $_SESSION['tipo']=='DirectorNivelSuperior') {
+								 				include("includes/mod_cen/referentes/referenteSupervisores.php");
+										}else {
+												include("includes/mod_cen/denegado.php");
+										}
+										break;
 
 
 				}
