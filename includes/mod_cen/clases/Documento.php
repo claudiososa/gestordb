@@ -13,10 +13,13 @@ class Documento
 	private $destacado;
 	private $fechaSubida;
 	private $fechaUpdate;
+	private $referenteId;
+	private $tipo;
 
 
 
-function __construct($documentoId=NULL,$categoriaDocId=NULL,$nombreArchivo=NULL,$titulo=NULL,$descripcion=NULL,$destacado=NULL,$fechaSubida=NULL,$fechaUpdate=NULL)
+
+function __construct($documentoId=NULL,$categoriaDocId=NULL,$nombreArchivo=NULL,$titulo=NULL,$descripcion=NULL,$destacado=NULL,$fechaSubida=NULL,$fechaUpdate=NULL,$referenteId=NULL,$tipo=NULL)
 	{
 		$this->documentoId= $documentoId;
  		$this->categoriaDocId = $categoriaDocId;
@@ -26,6 +29,8 @@ function __construct($documentoId=NULL,$categoriaDocId=NULL,$nombreArchivo=NULL,
  		$this->destacado = $destacado;
  		$this->fechaSubida = $fechaSubida;
  		$this->fechaUpdate = $fechaUpdate;
+ 		$this->referenteId = $referenteId;
+ 		$this->tipo = $tipo;
 
 
 
@@ -37,8 +42,8 @@ function __construct($documentoId=NULL,$categoriaDocId=NULL,$nombreArchivo=NULL,
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO documentos (documentoId,categoriaDocId,nombreArchivo,titulo,descripcion,destacado,fechaSubida,fechaUpdate)
-		VALUES (NULL,'". $this->categoriaDocId."','". $this->nombreArchivo."','". $this->titulo."','". $this->descripcion."','". $this->destacado."','". $this->fechaSubida."','". $this->fechaUpdate."');";
+		$sentencia="INSERT INTO documentos (documentoId,categoriaDocId,nombreArchivo,titulo,descripcion,destacado,fechaSubida,fechaUpdate,referenteId,tipo)
+		VALUES (NULL,'". $this->categoriaDocId."','". $this->nombreArchivo."','". $this->titulo."','". $this->descripcion."','". $this->destacado."','". $this->fechaSubida."','". $this->fechaUpdate."','". $this->referenteId."','". $this->tipo."');";
    // echo $sentencia;
 
 		if ($conexion->query($sentencia)) {
@@ -66,7 +71,7 @@ public function editar($tipo=NULL)
 			 	WHERE documentoId = '$this->documentoId'";
 			}
 		}else{
-			$sentencia="UPDATE documentos SET categoriaDocId = '$this->categoriaDocId',nombreArchivo = '$this->nombreArchivo',titulo = '$this->titulo',descripcion = '$this->descripcion',destacado = '$this->destacado',fechaSubida = '$this->fechaSubida',fechaUpdate = '$this->fechaUpdate'
+			$sentencia="UPDATE documentos SET categoriaDocId = '$this->categoriaDocId',nombreArchivo = '$this->nombreArchivo',titulo = '$this->titulo',descripcion = '$this->descripcion',destacado = '$this->destacado',fechaSubida = '$this->fechaSubida',fechaUpdate = '$this->fechaUpdate',referenteId = '$this->referenteId',tipo = '$this->tipo'
 			 WHERE documentoId = '$this->documentoId'";
 		}
 
