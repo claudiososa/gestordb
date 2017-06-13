@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/formularios/js/f_nuevoDoc.js"></script>
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">Modificar Documento</div>
@@ -10,7 +11,7 @@
           <label class="control-label" for="nombre">Titulo del Documento</label>
         </div>
         <div class="col-md-12">
-          <input type="text" class="form-control" name="tituloDoc" value='<?php echo $datoDocumento->titulo; ?>'>
+          <input type="text" class="form-control" maxlength="40"name="tituloDoc" id="tituloDoc"value='<?php echo $datoDocumento->titulo; ?>'>
         </div>
       </div>
 
@@ -19,7 +20,7 @@
           <label class="control-label" for="descripcion">Descripción</label>
         </div>
         <div class="col-md-12">
-          <input type="text" class="form-control" name="descripcion" value='<?php echo $datoDocumento->descripcion; ?>'>
+          <input type="text" class="form-control" maxlength="120" id="descripcion"name="descripcion" value='<?php echo $datoDocumento->descripcion; ?>'>
         </div>
       </div>
 
@@ -129,7 +130,7 @@
 
       <div class="form-group"><br>
         <div class="col-md-12">
-          <input type="submit" class="btn btn-primary" name="modif_doc" value="Guardar">
+          <input type="submit" class="btn btn-primary" id="btn-ndoc"name="modif_doc" value="Guardar">
         </div>
       </div>
 
