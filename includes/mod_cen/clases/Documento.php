@@ -91,9 +91,20 @@ public function buscar($limit=NULL)
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-	  $sentencia="SELECT * FROM documentos";
+	  $sentencia="SELECT documentos.documentoId,documentos.categoriaDocId,documentos.nombreArchivo,
+		  								 documentos.titulo,documentos.descripcion,documentos.destacado,
+											 documentos.fechaSubida,documentos.fechaUpdate,
+											 personas.apellido,personas.nombre
+												 FROM documentos
+												 INNER JOIN referentes
+												 ON documentos.referenteId=referentes.referenteId
+												 INNER JOIN personas
+												 ON referentes.personaId=personas.personaId"
+												 ;
 
-	if($this->documentoId!=NULL || $this->categoriaDocId!=NULL || $this->nombreArchivo!=NULL || $this->titulo!=NULL || $this->descripcion!=NULL || $this->destacado!=NULL || $this->fechaSubida!=NULL || $this->fechaUpdate!=NULL)
+	if($this->documentoId!=NULL || $this->categoriaDocId!=NULL || $this->nombreArchivo!=NULL
+			|| $this->titulo!=NULL || $this->descripcion!=NULL || $this->destacado!=NULL
+			|| $this->fechaSubida!=NULL || $this->fechaUpdate!=NULL || $this->tipo!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -108,6 +119,11 @@ public function buscar($limit=NULL)
 		if($this->categoriaDocId != NULL)
 		{
 			$sentencia.=" categoriaDocId = $this->categoriaDocId && ";
+		}
+
+		if($this->tipo != NULL)
+		{
+			$sentencia.=" documentos.tipo = '$this->tipo' && ";
 		}
 
 		if($this->nombreArchivo != NULL)
@@ -146,7 +162,7 @@ public function buscar($limit=NULL)
 
 		}
 
-		$sentencia.="  ORDER BY documentoId ASC";
+		$sentencia.="  ORDER BY documentoId DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

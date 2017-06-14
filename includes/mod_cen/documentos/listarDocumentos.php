@@ -18,10 +18,14 @@
 	echo "<td>Descripcion</td>";
 	echo "<td>Destacado</td>";
 	echo "<td>Permisos</td>";
+	echo "<td>Subido por..</td>";
 	echo "<td>Accion</td>";
 	echo "</tr>";
 
 	    $doc=new Documento();
+			if($_SESSION['tipo']<>'admin'){
+				$doc->tipo=$_SESSION['tipo'];	
+			}
 
       $listado_doc=$doc->buscar();
 
@@ -64,6 +68,7 @@
 		}
 
       echo "<td>". $permisos."</td>";
+			echo "<td>". $fila->nombre."</td>";
 
       echo "<td>"."<a href='index.php?mod=slat&men=informe&id=21&documentoId=$fila->documentoId'>MODIFICAR</a>"."</td>";
 

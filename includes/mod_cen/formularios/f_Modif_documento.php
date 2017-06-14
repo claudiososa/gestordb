@@ -1,4 +1,4 @@
-<script type="text/javascript" src="includes/mod_cen/formularios/js/f_nuevoDoc.js"></script>
+<!--<script type="text/javascript" src="includes/mod_cen/formularios/js/f_nuevoDoc.js"></script>-->
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">Modificar Documento</div>
