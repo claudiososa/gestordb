@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/formularios/js/f_nuevoDoc.js"></script>
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -14,7 +15,7 @@
           <label class="control-label" for="nombre">Titulo del Documento</label>
         </div>
         <div class="col-md-12">
-          <input type="text" class="form-control" name="tituloDoc" value="">
+          <input type="text" id="tituloDoc" class="form-control" name="tituloDoc" maxlength="40" value="">
         </div>
       </div>
 
@@ -24,7 +25,7 @@
           <label class="control-label" for="descripcion">Descripción</label>
         </div>
         <div class="col-md-12">
-          <input type="text" class="form-control" name="descripcion" value="">
+          <input type="text" id="descripcion" class="form-control" maxlength="120" name="descripcion" value="">
         </div>
       </div>
 
@@ -57,22 +58,23 @@
         </div>
         <div class="col-md-12">
           <select class="form-control" name="destacado">
-            <option value="1">SI</option>
-            <option value="0">NO</option>
+              <option value="0">NO</option>
+              <option value="1">SI</option>
+
           </select>
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" >
         <div class="col-md-12">
           <label class="control-label">Adjuntar archivos (Peso máximo por archivo 1024 kb)</label>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" id="input2">
           <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
         </div>
       </div>
 
-    
+
        <div class="form-group">
            <div class="col-md-12">
             <label class="control-label">Permisos Documentos</label>
@@ -83,14 +85,16 @@
 
             </ul>
           </div>
+
           </div>
+
 
 
 
 
       <div class="form-group"><br>
         <div class="col-md-12">
-          <input type="submit" class="btn btn-primary" name="guardar_doc" value="Guardar">
+          <input type="submit" class="btn btn-primary" id="btn-ndoc" name="guardar_doc" value="Guardar">
         </div>
       </div>
 
