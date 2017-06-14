@@ -18,11 +18,10 @@ $("#btn-ndoc").click(function(event) {
     $("#tipo").focus().after("<span class='error'>Seleccione una categoria</span>");
     return false;
 
-  } else if(( $("#input-img").val() === "")){
-    $("#input2").focus().after("<span class='error'>Seleccione archivo</span>");
-    return false;
        // file selected
-
+  }else if(( $("#input-img").val() != "")){
+     $("#input2").focus().after("<span class='error'>Seleccione archivo</span>");
+     return false;
         // file selected
     }if($('input[name="tipo[]"]').is(':checked')){
 
@@ -63,13 +62,7 @@ $("#btn-ndoc").click(function(event) {
               //checkbox
             }
           })
-          $("#input-img").click(function(){
-            if ($(this).val() != "" && ($(this).val())) {
-              $(".error").fadeOut();
-              return false;
-              //checkbox
-            }
-          })
+
 /*
 /*
           $("#permisodoc").click(function(){
