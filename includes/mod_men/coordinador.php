@@ -18,9 +18,7 @@
         <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentos<span class="caret"></span></a>
         <ul class="dropdown-menu">
-                <li class=""><a href="index.php?mod=slat&men=doc&id=1">Ver Documentación<span class="sr-only">(current)</span></a></li>
-                <li ><a href="index.php?mod=slat&men=informe&id=16">Nueva Categoría</a></li>
-                <li ><a href="index.php?mod=slat&men=informe&id=18">Listar Categoría</a></li>
+                <li class=""><a href="index.php?mod=slat&men=doc&id=1">Ver Documentación<span class="sr-only">(current)</span></a></li>            
                 <li class=""><a href="index.php?mod=slat&men=informe&id=17">Subir Documento Nuevo<span class="sr-only">(current)</span></a></li>
                 <li ><a href="index.php?mod=slat&men=informe&id=20">Listar Documentos</a></li>
         </ul>
@@ -45,7 +43,7 @@
         </li>
 		  <li><a href="index.php?mod=slat&men=escuelas&id=12">ADM</a></li>
 		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>
-          
+
 
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Perfil <span class="caret"></span></a>
