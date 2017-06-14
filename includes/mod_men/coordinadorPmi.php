@@ -18,6 +18,14 @@
         <li><a href="index.php?mod=slat&men=admin&id=8">Asignar Escuelas PMI</a></li>
         <!--<li><a href="index.php?mod=slat&men=admin&id=5">Asignar Mis Escuelas</a></li>-->
         <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentos<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+                <li class=""><a href="index.php?mod=slat&men=doc&id=1">Ver Documentación<span class="sr-only">(current)</span></a></li>
+                <li class=""><a href="index.php?mod=slat&men=informe&id=17">Subir Documento Nuevo<span class="sr-only">(current)</span></a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=20">Listar Documentos</a></li>
+        </ul>
+      </li>
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
           <ul class="dropdown-menu">
                 <li><a href="index.php?mod=slat&men=referentes&id=1">Referentes</a></li>
