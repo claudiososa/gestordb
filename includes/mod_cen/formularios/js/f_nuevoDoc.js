@@ -1,14 +1,14 @@
 $(document).ready(function() {
-  var alfanum = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ0-9_\s]+$/;
+  var letras= /^[a-zA-Z0-9\_-\s]+$/;
 
 $("#btn-ndoc").click(function(event) {
   $("#error").remove();
   /* Act on the event */
-  if ($("#tituloDoc").val() =="" || !alfanum.test($("#tituloDoc").val())) {
+  if ($("#tituloDoc").val() =="" || !letras.test($("#tituloDoc").val() )) {
     $("#tituloDoc").focus().after("<span class='error'>Ingrese titulo. Solo letras y/o números</span>");
     return false;
 
-  }else if ($("#descripcion").val() =="" || !alfanum.test($("#descripcion").val())) {
+  }else if ($("#descripcion").val() =="" || !letras.test($("#descripcion").val())) {
     $("#descripcion").focus().after("<span class='error'>Ingrese una descripcion del documento.Solo letras y/o números</span>");
     return false;
 
@@ -34,7 +34,7 @@ $("#btn-ndoc").click(function(event) {
 });
 
           $("#tituloDoc").keyup(function(event){
-              if( $(this).val() != "" && (alfanum.test($(this).val() ))){
+              if( $(this).val() != "" && (letras.test($(this).val() ))){
                   $(".error").fadeOut();
                   return true;
 
@@ -42,7 +42,7 @@ $("#btn-ndoc").click(function(event) {
 
            });
           $("#descripcion").keyup(function(event){
-            if ($(this).val() != "" && (alfanum.test($(this).val()))) {
+            if ($(this).val() != "" && (letras.test($(this).val()))) {
               $(".error").fadeOut();
               return true;
 

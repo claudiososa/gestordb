@@ -1,4 +1,4 @@
-<!--<script type="text/javascript" src="includes/mod_cen/formularios/js/f_nuevoDoc.js"></script>-->
+<script type="text/javascript" src="includes/mod_cen/formularios/js/f_nuevoDoc.js"></script>
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">Modificar Documento</div>
@@ -91,7 +91,7 @@
         <div class="col-md-12">
           <label class="control-label">Adjuntar archivos (Peso máximo por archivo 1024 kb)</label>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" id="input2">
           <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
         </div>
       </div>
