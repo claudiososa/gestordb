@@ -127,12 +127,14 @@ include_once("includes/mod_cen/clases/escuela.php");
                   {
 
                     $enviado_resp=1;
+                    
                   } else {
                             echo "Falló el envio";
-
+                            //echo $para;
                          }
               
               $variablephp = "index.php?mod=slat&men=informe&id=3&informeId=$informeId";
+
             ?>   
 
             
