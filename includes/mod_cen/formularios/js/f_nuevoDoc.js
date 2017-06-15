@@ -8,8 +8,8 @@ $("#btn-ndoc").click(function(event) {
     $("#tituloDoc").focus().after("<span class='error'>Ingrese titulo. Solo letras y/o números</span>");
     return false;
 
-  }else if ($("#descripcion").val() =="" || !letras.test($("#descripcion").val())) {
-    $("#descripcion").focus().after("<span class='error'>Ingrese una descripcion del documento.Solo letras y/o números</span>");
+  }else if ($("#descripcion").val() =="" ) {
+    $("#descripcion").focus().after("<span class='error'>Ingrese una descripcion del documento.</span>");
     return false;
 
   }
@@ -43,7 +43,7 @@ $("#btn-ndoc").click(function(event) {
 
            });
           $("#descripcion").keyup(function(event){
-            if ($(this).val() != "" && (letras.test($(this).val()))) {
+            if ($(this).val() != "" ) {
               $(".error").fadeOut();
               return true;
 
