@@ -39,28 +39,28 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
 
       switch ($_FILES['input-img']['type'][$i]) {
         case 'application/pdf':
-          $nombreArchivo='doc_'.$guardar.'_'.$i.'.pdf';
+          $nombreArchivo=$_POST["tituloDoc"].'.pdf';
           break;
         case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-            $nombreArchivo='doc_'.$guardar.'_'.$i.'.xlsx';
+            $nombreArchivo=$_POST["tituloDoc"].'.xlsx';
             break;
         case 'application/vnd.ms-excel':
-                $nombreArchivo='doc_'.$guardar.'_'.$i.'.xls';
+                $nombreArchivo=$_POST["tituloDoc"].'.xls';
                 break;
        case 'application/msword':
-                $nombreArchivo='doc_'.$guardar.'_'.$i.'.doc';
+                $nombreArchivo=$_POST["tituloDoc"].'.doc';
                 break;
        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-               $nombreArchivo='doc_'.$guardar.'_'.$i.'.docx';
+               $nombreArchivo=$_POST["tituloDoc"].'.docx';
                break;
        case 'image/jpeg':
-                $nombreArchivo='doc_'.$guardar.'_'.$i.'.jpg';
+                $nombreArchivo=$_POST["tituloDoc"].'.jpg';
                 break;
        case 'image/png':
-               $nombreArchivo='doc_'.$guardar.'_'.$i.'.png';
+               $nombreArchivo=$_POST["tituloDoc"].'.png';
                break;
        case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-               $nombreArchivo='doc_'.$guardar.'_'.$i.'.pptx';
+               $nombreArchivo=$_POST["tituloDoc"].'.pptx';
                break;
 
 

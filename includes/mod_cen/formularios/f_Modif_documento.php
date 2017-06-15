@@ -11,7 +11,7 @@
           <label class="control-label" for="nombre">Titulo del Documento</label>
         </div>
         <div class="col-md-12">
-          <input type="text" class="form-control" maxlength="40"name="tituloDoc" id="tituloDoc"value='<?php echo $datoDocumento->titulo; ?>'>
+          <input type="text" class="form-control" maxlength="50" name="tituloDoc" id="tituloDoc"value='<?php echo $datoDocumento->titulo; ?>'>
         </div>
       </div>
 

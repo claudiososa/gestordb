@@ -15,7 +15,7 @@
           <label class="control-label" for="nombre">Titulo del Documento</label>
         </div>
         <div class="col-md-12">
-          <input type="text" id="tituloDoc" class="form-control" name="tituloDoc" maxlength="40" value="">
+          <input type="text" id="tituloDoc" class="form-control" name="tituloDoc" maxlength="50" value="">
         </div>
       </div>
 

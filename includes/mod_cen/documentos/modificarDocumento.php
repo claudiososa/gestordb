@@ -11,6 +11,10 @@ if(isset($_POST["modif_doc"]) ){
 	$fecha=date("Y-m-d H:i:s");
   $nombreArchivo=$_POST["nombreArchivo"];
   $guardar=$_POST["documentoId"];
+	//echo "<br><br><br>".$_FILES['input-img']['name'][0]."<br><br><br>";
+	//var_dump($_FILES['input-img']);
+	if($_FILES['input-img']['name'][0]<>'')
+	{
   foreach ($_FILES['input-img'] as $key) {
 
     $cantidadElmentos=count($_FILES['input-img']['name']);
@@ -21,16 +25,37 @@ if(isset($_POST["modif_doc"]) ){
       $img1 = $_FILES['input-img']['name'][$i];
 
       $dir_subida = './documentacion/';
+			switch ($_FILES['input-img']['type'][$i]) {
+				case 'application/pdf':
+					$nombreArchivo=$_POST["tituloDoc"].'.pdf';
+					break;
+				case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+						$nombreArchivo=$_POST["tituloDoc"].'.xlsx';
+						break;
+				case 'application/vnd.ms-excel':
+								$nombreArchivo=$_POST["tituloDoc"].'.xls';
+								break;
+			 case 'application/msword':
+								$nombreArchivo=$_POST["tituloDoc"].'.doc';
+								break;
+			 case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+							 $nombreArchivo=$_POST["tituloDoc"].'.docx';
+							 break;
+			 case 'image/jpeg':
+								$nombreArchivo=$_POST["tituloDoc"].'.jpg';
+								break;
+			 case 'image/png':
+							 $nombreArchivo=$_POST["tituloDoc"].'.png';
+							 break;
+			 case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+							 $nombreArchivo=$_POST["tituloDoc"].'.pptx';
+							 break;
 
-      if($_FILES['input-img']['type'][$i]=='image/jpeg'){
-        $nombreArchivo='doc_'.$guardar.'_'.$i.'.jpg';
-        $nombreArchivoMediano='doc_'.$guardar.'_'.$i.'m.jpg';
-        $tipoArchivo='image/jpeg';
-      } elseif($_FILES['input-img']['type'][$i]=='application/pdf') {
-        $nombreArchivo='doc_'.$guardar.'_'.$i.'.pdf';
-        $tipoArchivo='application/pdf';
-      }
-      //$fichero_subido = $dir_subida . basename($_FILES['input-img']['name'][0]);
+
+				default:
+					# code...
+					break;
+			}
       $fichero_subido = $dir_subida . $nombreArchivo;
 //      echo $fichero_subido;
 
@@ -51,6 +76,19 @@ if(isset($_POST["modif_doc"]) ){
     }
     break;
   }
+  }else{
+		$anterior="./documentacion/".$_POST['nombreArchivo'];
+		//$_POST['nombreArchivo']
+		//echo '<br><br>';
+		//echo strpos($_POST['nombreArchivo'], '|');
+		$finalArchivo=substr($_POST['nombreArchivo'], strpos($_POST['nombreArchivo'], '.'),strlen ($_POST['nombreArchivo']));
+
+		//echo '<br><br>';
+		$nuevo="./documentacion/".$_POST['tituloDoc'].$finalArchivo;
+		$nombreArchivo=$_POST['tituloDoc'].$finalArchivo;
+		rename($anterior, $nuevo);
+		echo 'No fue adjuntado ningun archivo';
+	}
   $modif_doc = new Documento($_POST["documentoId"],$_POST["categoria_doc"],$nombreArchivo,$_POST["tituloDoc"],$_POST["descripcion"],$_POST["destacado"],$_GET["fechaSubida"],$fecha,$_SESSION["referenteId"],$_SESSION["tipo"]);
   $guardar = $modif_doc->editar();
 
