@@ -9,7 +9,7 @@ $("#btn-ndoc").click(function(event) {
     return false;
 
   }else if ($("#descripcion").val() =="") {
-    $("#descripcion").focus().after("<span class='error'>Ingrese una descripcion del documento.Solo letras y/o números</span>");
+    $("#descripcion").focus().after("<span class='error'>Ingrese una descripcion del documento.</span>");
     return false;
 
   }
