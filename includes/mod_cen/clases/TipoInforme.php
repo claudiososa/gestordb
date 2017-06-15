@@ -33,8 +33,8 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO tipoinformes (tipoInformeId,nombre,descripcion,estado,fechaModif,usuarioModif)
-		VALUES (NULL,'". $this->nombre."','". $this->descripcion."','". $this->estado."','". $this->fechaModif."','". $this->usuarioModif."','". $this->exlusivo."');";
+		$sentencia="INSERT INTO tipoinformes (tipoInformeId,nombre,descripcion,estado,fechaModif,usuarioModif,exclusiva)
+		VALUES (NULL,'". $this->nombre."','". $this->descripcion."','". $this->estado."','". $this->fechaModif."','". $this->usuarioModif."','". $this->exlusiva."');";
     //echo $sentencia;
 
 		if ($conexion->query($sentencia)) {

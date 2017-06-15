@@ -15,7 +15,7 @@ if(isset($_POST["guardar_categoria"]) AND $_POST["nombre"]<>""){
   var_dump($_POST["tipo"]);
   echo "<br><br>";
   $fecha=date("Y-m-d H:i:s");
-  $categoria = new TipoInforme(null,$_POST["nombre"],$_POST["descripcion"],$_POST["estado"],$fecha,$_SESSION["referenteId"]);
+  $categoria = new TipoInforme(null,$_POST["nombre"],$_POST["descripcion"],$_POST["estado"],$fecha,$_SESSION["referenteId"],'no');
   $guardar = $categoria->agregar();
   if ($guardar>0){
     if (is_array($_POST["tipo"])) {
