@@ -306,7 +306,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
                  $linkinforme="index.php?mod=slat&men=informe&id=3&informeId=".$dato_ultimo->informeId;
                  $mailobtenido=$para;
-                 //$para="jfvpipo@gmail.com";
+                 //$para="jfvpipo@gmail.com";// prueba de mail a sup secundaria
 
    	            $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
    	            $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
@@ -384,7 +384,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
                  $linkinforme="index.php?mod=slat&men=informe&id=3&informeId=".$dato_ultimo->informeId;
                  $mailobtenido=$para;
-                 //$para="jfvpipo@gmail.com";
+                 //$para="jfvpipo@gmail.com"; // prueba de mail a superior
 
                 $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
                 $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
@@ -396,7 +396,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
                   //sleep(20);
                 } else {
                   
-                  echo "Falló el envio".$para;
+                  echo "Falló el envio";
                   
                   
                 }
