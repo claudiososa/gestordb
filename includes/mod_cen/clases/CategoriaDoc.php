@@ -56,11 +56,23 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 	}
 
 
-	public function buscar($limit=NULL)
+	public function buscar($limit=NULL,$exclusiva=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-	    $sentencia="SELECT * FROM categoria_doc";
+    if(isset($exclusiva)){
+			if($exclusiva=='si'){
+				$sentencia="SELECT * FROM categoria_doc
+														 INNER JOIN permiso_categoria_doc
+														 ON categoria_doc.categoriaDocId=permiso_categoria_doc.categoriaDocId
+														 WHERE permiso_categoria_doc.tipoReferente='".$_SESSION['tipo']."' AND categoria_doc.exclusiva='no'";
+
+			}
+		}else{
+			$sentencia="SELECT * FROM categoria_doc";
+		}
+
+
 
 		if($this->categoriaDocId!=NULL || $this->nombreCategoria!=NULL || $this->descripcionCategoria!=NULL)
 		{
@@ -87,7 +99,7 @@ function __construct($categoriaDocId=NULL,$nombreCategoria=NULL,$descripcionCate
 
 		}
 
-		$sentencia.="  ORDER BY categoriaDocId ASC";
+		$sentencia.="  ORDER BY categoria_doc.categoriaDocId ASC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

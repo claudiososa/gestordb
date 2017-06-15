@@ -127,7 +127,13 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
 
 
   $categ = new CategoriaDoc(NULL,NULL,NULL);
-  $buscarcategoria = $categ->buscar();
+  if($_SESSION['tipo']=='admin')
+  {
+    $buscarcategoria = $categ->buscar();
+  }else{
+    $buscarcategoria = $categ->buscar(null,'si');
+  }
+
 
   $tipoReferente = new Referente();
   $buscarTipoReferente = $tipoReferente->tipoReferente();
