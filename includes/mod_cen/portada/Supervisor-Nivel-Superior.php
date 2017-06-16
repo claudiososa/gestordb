@@ -80,10 +80,12 @@ if(mysqli_num_rows($b_mis_informe)>0){
 		//echo $fila->informeId."-- ".$dato_referente->etjcargo."<br>";
 		$leido= new Leido(null,$fila->informeId,$dato_referente->etjcargo);
 		$dato_leido=$leido->buscar();
-
 		$leyo = mysqli_num_rows($dato_leido);
-		//echo $leyo;
-		if($leyo){
+		$leido= new Leido(null,$fila->informeId,$dato_referente->etjcargo2);
+		$dato_leido=$leido->buscar();
+		$leyo1 = mysqli_num_rows($dato_leido);
+
+		if($leyo || $leyo1){		
 			echo "<td><a href='#' class='btn btn-success'>L&nbsp;</a></td>";
 		}else {
 			echo  "<td><a href='#' class='btn btn-danger'>N L</a></td>";

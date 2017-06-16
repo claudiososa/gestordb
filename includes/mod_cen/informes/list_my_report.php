@@ -71,8 +71,11 @@ if ($cantidad>0){
 			$leido= new Leido(null,$fila->informeId,$dato_referente->etjcargo);
 			$dato_leido=$leido->buscar();
 			$leyo=mysqli_num_rows($dato_leido);
-			//echo $leyo;
-			if($leyo>0){
+			$leido= new Leido(null,$fila->informeId,$dato_referente->etjcargo2);
+			$dato_leido=$leido->buscar();
+			$leyo1 = mysqli_num_rows($dato_leido);
+
+			if($leyo || $leyo1){		
 				echo "<td><a href='#' class='btn btn-success'>&nbsp;&nbsp;Leido&nbsp;&nbsp;&nbsp;</a></td>";
 			}else {
 				echo  "<td><a href='#' class='btn btn-danger'>No Leido</a></td>";

@@ -446,7 +446,14 @@
 						include("includes/mod_cen/referente_ett.php");
 						break;
 				case 3:
-							if($_SESSION['tipo']=='Coordinador' || $_SESSION['tipo']=='admin') {
+							if($_SESSION['tipo']=='Coordinador'
+								|| $_SESSION['tipo']=='admin'
+							  || $_SESSION['tipo']=='SupervisorGeneralSuperior'
+						    || $_SESSION['tipo']=='DirectorNivelSuperior'
+					      || $_SESSION['tipo']=='Supervisor-General-Secundaria'
+								|| $_SESSION['tipo']=='DirectorNivelSecundario'
+								|| $_SESSION['tipo']=='CoordinadorPmi')
+							{
 							   include("includes/mod_cen/admin/loginc.php");
 							}else {
 								include("includes/mod_cen/denegado.php");

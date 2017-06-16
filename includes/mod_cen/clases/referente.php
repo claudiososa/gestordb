@@ -14,8 +14,9 @@ class Referente
  	private $fechaIngreso;
 	private $titulo;
 	private $estado;
+	private $etjcargo2;
 
- 	function __construct($referenteId=NULL,$personaId=NULL,$tipo=NULL,$rol=NULL,$etjcargo=NULL,$fechaIngreso=NULL,$titulo=NULL,$estado=NULL)
+ 	function __construct($referenteId=NULL,$personaId=NULL,$tipo=NULL,$rol=NULL,$etjcargo=NULL,$fechaIngreso=NULL,$titulo=NULL,$estado=NULL,$etjcargo2=NULL)
 	{
 			 //seteo los atributos
 		 	$this->referenteId = $referenteId;
@@ -26,12 +27,13 @@ class Referente
 		 	$this->fechaIngreso = $fechaIngreso;
 		 	$this->titulo = $titulo;
 		 	$this->estado = $estado;
+			$this->etjcargo2 = $etjcargo2;
 	}
 
 	public function agregar()
 		{
-			$stmt = ConexionPdo::getConexion()->prepare("INSERT INTO referentes (referenteId,personaId,tipo,rol,etjcargo,fechaIngreso,titulo,estado)
-			VALUES (null,:persona_id,:tipo,:rol,:etjcargo,:fechaingreso,:titulo,:estado)");
+			$stmt = ConexionPdo::getConexion()->prepare("INSERT INTO referentes (referenteId,personaId,tipo,rol,etjcargo,fechaIngreso,titulo,estado,etjcargo2)
+			VALUES (null,:persona_id,:tipo,:rol,:etjcargo,:fechaingreso,:titulo,:estado,:etjcargo2)");
 
 			//$stmt->bindParam(":referente_id",$this->referenteId);
 			$stmt->bindParam(":persona_id",$this->personaId,PDO::PARAM_INT);
@@ -40,9 +42,9 @@ class Referente
 			$stmt->bindParam(":etjcargo",$this->etjcargo,PDO::PARAM_INT);
 			$stmt->bindParam(":fechaingreso",$this->fechaIngreso);
 			$stmt->bindParam(":titulo",$this->titulo,PDO::PARAM_STR);
-			$stmt->bindParam(":estado",$this->estado,PDO::PARAM_STR
-		);
-	    var_dump($stmt);
+			$stmt->bindParam(":estado",$this->estado,PDO::PARAM_STR);
+			$stmt->bindParam(":etjcargo2",$this->etjcargo2,PDO::PARAM_INT);
+	    //var_dump($stmt);
 			if($stmt->execute()){
 				return "Referente se guardo con éxito";
 			} else{
@@ -59,7 +61,16 @@ class Referente
 		$conexion=$nuevaConexion->getConexion();
 
 
-		$sentencia="UPDATE referentes SET personaId = '$this->personaId', tipo = '$this->tipo', rol = '$this->rol', etjcargo = '$this->etjcargo', fechaIngreso = '$this->fechaIngreso', titulo = '$this->titulo' , estado = '$this->estado' WHERE referenteId = '$this->referenteId'";
+		$sentencia="UPDATE referentes SET
+																	personaId = '$this->personaId',
+																	tipo = '$this->tipo',
+																	rol = '$this->rol',
+																	etjcargo = '$this->etjcargo',
+																	fechaIngreso = '$this->fechaIngreso',
+																	titulo = '$this->titulo' ,
+																	estado = '$this->estado',
+																	etjcargo2 = '$this->etjcargo2'
+																	WHERE referenteId = '$this->referenteId'";
 
 		if ($conexion->query($sentencia)) {
 			return 1;
@@ -149,11 +160,11 @@ class Referente
 
 		$sentencia="SELECT
 											referentes.referenteId,referentes.personaId ,referentes.tipo ,referentes.rol ,referentes.etjcargo,
-											referentes.fechaIngreso,referentes.titulo,referentes.estado,personas.nombre,personas.apellido,personas.telefonoM,personas.email
+											referentes.fechaIngreso,referentes.titulo,referentes.estado,referentes.etjcargo2,personas.nombre,personas.apellido,personas.telefonoM,personas.email
 							 FROM referentes
 							 JOIN personas
 							 ON referentes.personaId=personas.personaId";
-		if($this->referenteId!=NULL ||$this->personaId!=NULL ||$this->personaId!=NULL || $this->tipo!=NULL || $this->rol!=NULL || $this->etjcargo!=NULL || $this->fechaIngreso!=NULL || $this->titulo!=NULL || $this->estado!=NULL )
+		if($this->referenteId!=NULL ||$this->personaId!=NULL ||$this->personaId!=NULL || $this->tipo!=NULL || $this->rol!=NULL || $this->etjcargo!=NULL || $this->fechaIngreso!=NULL || $this->titulo!=NULL || $this->estado!=NULL || $this->etjcargo2!=NULL )
 		{
 			$sentencia.=" WHERE ";
 
@@ -280,6 +291,7 @@ class Referente
 	 	$this->fechaIngreso = $elemento->fechaIngreso;
 	 	$this->titulo = $elemento->titulo;
 	 	$this->estado = $elemento->estado;
+		$this->etjcargo2 = $elemento->etjcargo2;
 		return $this;
 
     }

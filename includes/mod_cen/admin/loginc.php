@@ -3,11 +3,30 @@
 	include_once('includes/mod_cen/clases/referente.php');
 	//$c_referente= new Referente();
 
-	if($_SESSION['tipo']=='DirectorNivelSecundario'){
-		$c_referente= new Referente(null,null,'Supervisor-Secundaria',null,null,null,null,'Activo');	
-	}else{
-		$c_referente= new Referente(null,null,null,null,null,null,null,'Activo');
+	switch ($_SESSION['tipo']) {
+		case 'DirectorNivelSecundario':
+			$c_referente= new Referente(null,null,'Supervisor-Secundaria',null,null,null,null,'Activo');
+			break;
+		case 'Supervisor-General-Secundaria':
+			$c_referente= new Referente(null,null,'Supervisor-Secundaria',null,null,null,null,'Activo');
+			break;
+		case 'SupervisorGeneralSuperior':
+				$c_referente= new Referente(null,null,'Supervisor-Nivel-Superior',null,null,null,null,'Activo');
+				break;
+		case 'DirectorNivelSuperior':
+				$c_referente= new Referente(null,null,'Supervisor-Nivel-Superior',null,null,null,null,'Activo');
+				break;
+		case 'Coordinador':
+			$c_referente= new Referente(null,null,null,null,null,null,null,'Activo');
+			break;
+		case 'admin':
+				$c_referente= new Referente(null,null,null,null,null,null,null,'Activo');
+				break;
+		default:
+			# code...
+			break;
 	}
+
 
 	$b_referente= $c_referente->buscar();
 
