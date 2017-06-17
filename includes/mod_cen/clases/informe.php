@@ -567,6 +567,175 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 	}
 
+	public function buscarEscuelasDelETT($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		/**
+		 * busca las categorias de tipo exclusivas "si"
+		 *
+		 */
+		$objTipo = new TipoInforme();
+		$objTipo->exclusiva='si';
+		$buscarTipo=$objTipo->buscar();
+
+		$sinParam=0;
+
+		$sentencia="SELECT informes.informeId,informes.escuelaId,informes.referenteId,informes.prioridad,informes.tipo,informes.titulo,informes.contenido
+									,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
+									informes.subtipo,escuelas.numero,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
+									FROM informes
+									JOIN escuelas
+									ON (informes.escuelaId=escuelas.escuelaId AND escuelas.referenteId = '".$_SESSION["referenteId"]."')
+									JOIN referentes
+									ON referentes.referenteId=informes.referenteId
+									JOIN personas
+									ON personas.personaId=referentes.personaId ";
+									$sentencia.=" WHERE ";
+									$cantExclusiva=0;
+									$encontrado=0;
+									if(!isset($tiporeferente) || !isset($listaRefer)){ //si el metodo no se llamada con los parametros tipode referente y listaRef entonces verifica los permisos
+										while ($fila = mysqli_fetch_object($buscarTipo)) { //recorre las categorias exclusivas
+												$objTipoPermiso = new TipoPermisos(null,$fila->tipoInformeId);
+												$buscarTipoPermiso=$objTipoPermiso->buscar();
+
+												while ($row = mysqli_fetch_object($buscarTipoPermiso)) { //recorre los permisos para la categoria exclusiva
+
+													if ($_SESSION['tipo']==$row->tipoReferente) { //si el usuario logueado es igual al tipo de referente que tiene permiso entonces cambia el estado de $encontrado
+														$encontrado=1;
+													}
+												}
+												if ($encontrado==0) {//si encontrado es igual a 0, significaque ,el ,usuario ,logueado no tiene permiso a esta categoria de informe
+													$sentencia.=" informes.nuevotipo<>".$fila->tipoInformeId." AND";	# code...
+													$cantExclusiva=1;
+												}
+												$encontrado=0;
+
+												//var_dump($fila);
+										}
+
+									}
+									if($cantExclusiva==1){
+										$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+									}else{
+										$sentencia.=" 1 ";
+									}
+
+							/*		if ($_SESSION['tipo']=='Supervisor-Secundaria' || $_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='Supervisor-General-Secundaria')
+									{
+										if(isset($tipoConsulta)){
+											$sentencia.=" AND informes.nuevotipo<>8 ";
+										}else{
+											if (isset($tiporeferente) || isset($listaRefer) ) {
+												$sentencia.=" AND (informes.nuevotipo<>8 || informes.nuevotipo<>9)  ";
+											}else{
+												$sentencia.=" AND (informes.nuevotipo=8 || informes.nuevotipo=9)  ";
+											}
+										}
+									}else{
+										$sentencia.=" 1 ";
+									}*/
+
+
+		if($tiporeferente<>NULL){
+			$sinParam=1;
+
+			$sentencia.= " AND ( referentes.tipo='".$tiporeferente."'";
+		}
+
+		if ($listaRefer <> NULL){
+				$sinParam=1;
+				$sentencia.="  AND ( ";
+				foreach ($listaRefer as $value) {
+					$sentencia.=" referentes.tipo='".$value."' || ";
+				}
+				$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+		}
+
+		if ($sinParam==1) {
+			$sentencia.=' ) ';
+		}
+
+
+		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
+		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL
+		|| $this->fechaVisita!=NULL || $this->contenido!=NULL || $this->nuevoTipo!=NULL || $this->subTipo!=NULL)
+		{
+			$sentencia.=" AND ";
+
+
+		if($this->informeId!=NULL)
+		{
+			$sentencia.=" informes.informeId = $this->informeId && ";
+		}
+
+		if($this->escuelaId!=NULL)
+		{
+			$sentencia.=" informes.escuelaId = $this->escuelaId && ";
+		}
+
+		if($this->tipo!=NULL)
+		{
+			$sentencia.=" informes.tipo=$this->tipo && ";
+		}
+
+		if($this->nuevoTipo!=NULL)
+		{
+			$sentencia.=" informes.nuevotipo=$this->nuevoTipo && ";
+		}
+
+		if($this->subTipo!=NULL)
+		{
+			$sentencia.=" informes.subtipo=$this->subTipo && ";
+		}
+
+		if($this->prioridad!=NULL)
+		{
+			$sentencia.=" informes.prioridad = '$this->prioridad' && ";
+		}
+
+		if($this->leido!=NULL)
+		{
+			$sentencia.=" informes.leido=$this->leido && ";
+		}
+
+		if($this->estado!=NULL)
+		{
+			$sentencia.=" informes.estado=$this->estado && ";
+		}
+
+		if($this->referenteId!=NULL)
+		{
+			$sentencia.=" informes.referenteId='$this->referenteId' && ";
+		}
+
+		if($this->fechaVisita!=NULL)
+		{
+			$sentencia.=" informes.fechaVisita='$this->fechaVisita' && ";
+		}
+
+		if($this->contenido!=NULL)
+		{
+			$sentencia.=" informes.contenido=$this->contenido && ";
+		}
+
+
+		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+
+		}
+
+		  // fin else
+
+
+		$sentencia.="  ORDER BY informes.informeId DESC";
+		if(isset($limit)){
+			$sentencia.=" LIMIT ".$limit;
+		}
+		//echo $sentencia.'<br><br>';
+		return $conexion->query($sentencia);
+	}
+
 	public function __get($var)
 	{
 		return $this->$var;
