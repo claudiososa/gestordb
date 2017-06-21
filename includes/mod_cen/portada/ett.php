@@ -1,4 +1,5 @@
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/botonLeido.js"></script>
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -71,10 +72,16 @@ if(mysqli_num_rows($b_mis_informe)>0){
 
 
 
-		echo "<tr>";
+
+
+echo "<tr>";
+
+
+
 		?>
 
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
+
+		<td> <?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
 		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
 		<?php
 		//$leyo=0;
@@ -86,18 +93,42 @@ if(mysqli_num_rows($b_mis_informe)>0){
 		$leyo = mysqli_num_rows($dato_leido);
 		//echo $leyo;
 		if($leyo){
-			echo "<td><a href='#' class='btn btn-success'>L&nbsp;</a></td>";
+			echo "<td><button name='leido' class='btn btn-success'>L&nbsp;</button></td>";
 		}else {
 			echo  "<td><a href='#' class='btn btn-danger'>N L</a></td>";
 		}
 		//echo "<td>vio</td>";
 		echo "<td>".$dato_escuela->numero."</td>";
 		echo "<td>".$fila->prioridad."</td>";
-		echo "</td>";
-	}
+
+
+
+	echo "</tr>";
+
+	echo "<tr id= '$fila->informeId' >";
+
+  echo "<td>Fecha</td>";
+	echo "<td>Nombre y Apellido</td>";
+	echo "<td>Hora</td>";
+	echo "<td></td><td></td>";
+
+  echo "<tbody id= '$fila->informeId'>";
+	echo "<td>12-23-12</td>";
+	echo "<td>Juan Perez</td>";
+	echo "<td>12:32</td>";
+	echo "<td></td><td></td>";
+  echo "</tbody>";
+
+	echo "</tr>";
+
+
+		}
+
 	echo "</tbody>";
+
 	echo "</table>";
 	?>
+
 </div>
 </div>
 <?php
@@ -170,7 +201,7 @@ if(mysqli_num_rows($b_informe)>0){
 <?php
 
 }
-echo "</div>"; 
+echo "</div>";
 echo "</div>"; // cierra el row n° 1
 
 ?>
@@ -184,7 +215,7 @@ echo "</div>"; // cierra el row n° 1
 			<h4>Ultimos informes  Creados P.M.I.<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
 	 <div class="panel-body">
- 
+
 
 			<?php
 
@@ -202,15 +233,15 @@ echo "</div>"; // cierra el row n° 1
 	echo "<tr>";
 	echo "<th>Id</th>";
 	echo "<th>Título</th>";
-	echo "<th>Nº</th>"; 
+	echo "<th>Nº</th>";
 	echo "<th>Creado por...</th>";
 	echo "<th>Prioridad</th>";
 	echo "</tr>";
 	echo "</thead>";
 	echo "<tbody>";
-	
+
 	while ($fila=mysqli_fetch_object($b_informe)) {
-        
+
 		$escuela= new Escuela($fila->escuelaId);
 		$buscar_escuela= $escuela->buscar();
 		$dato_escuela= mysqli_fetch_object($buscar_escuela);
@@ -219,7 +250,7 @@ echo "</div>"; // cierra el row n° 1
 		$b_referente = $referente->buscar();
 
 		$dato_referente= mysqli_fetch_object($b_referente);
-			
+
 		$persona = new Persona($dato_referente->personaId);
 
 		$b_persona = $persona->buscar();
@@ -234,11 +265,11 @@ echo "</div>"; // cierra el row n° 1
 		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
 		echo "<td>".$fila->prioridad."</td>";
 		echo "</td>";
-	
+
 }
 	echo "</tbody>";
 	echo "</table>";
-	
+
 	?>
 </div>
 </div>
@@ -247,7 +278,7 @@ echo "</div>"; // cierra el row n° 1
 <div class='col-md-6'>
 
 	<div class="panel panel-primary">
-		
+
 		<div class="panel-heading" id="panel4"><span class="panel-title clickable">
 			<h4>Ultimos informes  Creados Supervisores<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
@@ -265,15 +296,15 @@ echo "</div>"; // cierra el row n° 1
 	echo "<tr>";
 	echo "<th>Id</th>";
 	echo "<th>Título</th>";
-	echo "<th>Nº</th>"; 
+	echo "<th>Nº</th>";
 	echo "<th>Creado por...</th>";
 	echo "<th>Prioridad</th>";
 	echo "</tr>";
 	echo "</thead>";
 	echo "<tbody>";
-	
+
 	while ($fila=mysqli_fetch_object($b_informe)) {
-        
+
 		$escuela= new Escuela($fila->escuelaId);
 		$buscar_escuela= $escuela->buscar();
 		$dato_escuela= mysqli_fetch_object($buscar_escuela);
@@ -283,7 +314,7 @@ echo "</div>"; // cierra el row n° 1
 
 		$dato_referente= mysqli_fetch_object($b_referente);
 
-		
+
 		$persona = new Persona($dato_referente->personaId);
 
 		$b_persona = $persona->buscar();
@@ -298,17 +329,17 @@ echo "</div>"; // cierra el row n° 1
 		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
 		echo "<td>".$fila->prioridad."</td>";
 		echo "</td>";
-	
+
 }
 	echo "</tbody>";
 	echo "</table>";
-	
+
 	?>
 </div>
 </div>
 
 
-</div> 
+</div>
 </div> <!-- cierra el row -->
 
 
