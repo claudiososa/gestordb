@@ -567,7 +567,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 	}
 
-	public function buscarEscuelasDelETT($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
+public function buscarEscuelasDelETT($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -585,16 +585,28 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									,informes.leido,informes.estado,informes.fechaVisita,informes.fechaCarga,informes.fechaModificado,informes.nuevotipo,
 									informes.subtipo,escuelas.numero,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
 									FROM informes
-									JOIN escuelas
-									ON (informes.escuelaId=escuelas.escuelaId AND escuelas.referenteId = '".$_SESSION["referenteId"]."')
-									JOIN referentes
+									JOIN escuelas ";
+
+									if (isset($tipoConsulta ))
+									{
+
+									      $sentencia.="ON (informes.escuelaId=escuelas.escuelaId AND escuelas.referenteId = '".$_SESSION["referenteId"]."')";
+									}
+									else{
+										
+										$sentencia.="ON (informes.escuelaId=escuelas.escuelaId)";
+
+									    }
+
+
+									$sentencia.=" JOIN referentes
 									ON referentes.referenteId=informes.referenteId
 									JOIN personas
 									ON personas.personaId=referentes.personaId ";
 									$sentencia.=" WHERE ";
 									$cantExclusiva=0;
 									$encontrado=0;
-									if(!isset($tiporeferente) || !isset($listaRefer)){ //si el metodo no se llamada con los parametros tipode referente y listaRef entonces verifica los permisos
+									if(!isset($tiporeferente) || !isset($listaRefer ) || isset($tipoConsulta )){ //si el metodo no se llamada con los parametros tipode referente y listaRef entonces verifica los permisos
 										while ($fila = mysqli_fetch_object($buscarTipo)) { //recorre las categorias exclusivas
 												$objTipoPermiso = new TipoPermisos(null,$fila->tipoInformeId);
 												$buscarTipoPermiso=$objTipoPermiso->buscar();
@@ -735,6 +747,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		//echo $sentencia.'<br><br>';
 		return $conexion->query($sentencia);
 	}
+
+	
 
 	public function __get($var)
 	{

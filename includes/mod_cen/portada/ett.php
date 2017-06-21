@@ -254,11 +254,11 @@ echo "</div>"; // cierra el row n° 1
 		<div class="panel-body">
 			<?php
 
-			$listadeReferentes= array("Supervisor","Supervisor-Nivel-Superior");
+			$listadeReferentes= array("DirectorNivelSecundario","Supervisor-General-Secundaria"," Supervisor-Secundaria","DirectorNivelSuperior","SupervisorGeneralSuperior","Supervisor-Nivel-Superior");
 			$informes= new informe();
 			//$informes= new informe(NULL,NULL,'0075',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
-            $b_informe = $informes->buscarEscuelasDelETT(20,"",$listadeReferentes);
+            $b_informe = $informes->buscarEscuelasDelETT(20,"",$listadeReferentes,"exclusiva");
 
 	echo "<table id='myTable1' class='table table-hover table-striped table-condensed tablesorter'>";
 	echo "<thead>";
