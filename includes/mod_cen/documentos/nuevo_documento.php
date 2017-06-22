@@ -93,6 +93,7 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
   if ($guardar>0){
     if (is_array($_POST["tipo"])) {
       foreach ($_POST["tipo"] as $value) {
+
         $permiso_doc = new PermisoDoc(null,$guardar,$value);
         $crearPermiso = $permiso_doc->agregar();
         if($crearPermiso==1){
@@ -101,6 +102,7 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
 
       }
     }
+   // $destino=$doc_guardado->destinatariosMail($value,$guardar);
     echo $guardar;
     echo "Se Guardo con Éxito";
   }
@@ -112,7 +114,7 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
               <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",0);
+                setTimeout ("redireccion()",3000);
                     </script>
 
 <?php

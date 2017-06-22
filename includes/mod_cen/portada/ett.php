@@ -224,7 +224,7 @@ echo "</div>"; // cierra el row n° 1
 			//$informes= new informe(NULL,NULL,'0075',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 
-            $b_informe = $informes->buscarEscuelasDelETT( 20,"",$listadeReferentes);
+            $b_informe = $informes->buscar( 20,"",$listadeReferentes,"exclusiva");
 
 
 
@@ -289,7 +289,7 @@ echo "</div>"; // cierra el row n° 1
 			$informes= new informe();
 			//$informes= new informe(NULL,NULL,'0075',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
-            $b_informe = $informes->buscarEscuelasDelETT(20,"",$listadeReferentes,"exclusiva");
+            $b_informe = $informes->buscar(20,"",$listadeReferentes,"exclusiva");
 
 	echo "<table id='myTable1' class='table table-hover table-striped table-condensed tablesorter'>";
 	echo "<thead>";
