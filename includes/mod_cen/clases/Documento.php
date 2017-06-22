@@ -251,6 +251,26 @@ public function buscar($limit=NULL)
 	}
 */
 
+	public function destinatariosMail($permiso,$idDocumento)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+
+
+
+
+
+
+
+		
+		//echo $sentencia;
+
+		return $conexion->query($sentencia);
+
+	}
+
+
 
 	public function __get($var)
 	{
