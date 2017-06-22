@@ -93,7 +93,7 @@ echo "<tr>";
 		$leyo = mysqli_num_rows($dato_leido);
 		//echo $leyo;
 		if($leyo){
-			echo "<td><button name='leido' class='btn btn-success'>L&nbsp;</button></td>";
+			echo "<td><button id= 'leido.$fila->informeId' class='btn btn-success'>L&nbsp;</button></td>";
 		}else {
 			echo  "<td><a href='#' class='btn btn-danger'>N L</a></td>";
 		}
@@ -107,16 +107,16 @@ echo "<tr>";
 
 	echo "<tr id= '$fila->informeId' >";
 
-  echo "<td>Fecha</td>";
-	echo "<td>Nombre y Apellido</td>";
-	echo "<td>Hora</td>";
-	echo "<td></td><td></td>";
+  echo "<td>Fecha:</td>";
+	echo "<td colspan='2'>Nombre y Apellido</td>";
+	echo "<td colspan='2'>Hora</td>";
+
 
   echo "<tbody id= '$fila->informeId'>";
 	echo "<td>12-23-12</td>";
-	echo "<td>Juan Perez</td>";
-	echo "<td>12:32</td>";
-	echo "<td></td><td></td>";
+	echo "<td colspan='2'>Juan Perez</td>";
+	echo "<td colspan='2'>12:32</td>";
+
   echo "</tbody>";
 
 	echo "</tr>";
