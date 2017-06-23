@@ -1,17 +1,18 @@
 $(document).ready(function() {
-  //$("tr[id]).hide();
-  $('#tablePrincipal tr#fila1673').hide();
+  //oculta todos los tr de la tabla con id tablaPrincipal
+  //donde el id contenga la palabra fila
+  $('#tablaPrincipal tr[id*=fila]').hide();
 
+//si presiona algun boton de leido dentro de la lista de todos los informes que muestra la tabla
   $("button[id]").click(function() {
-  //alert($(this).parent().parent().attr('id'));
-    let idTr = $(this).parent().parent().attr('id').substring(11)
-    //alert(idTr)
-    idTr = '#tr.'+idTr
-    //alert(idTr)
-    /* Act on the event */
-    //$("tr[id] , tbody[id]").show();
 
-    $('tr#tr.1673').hide();
+    let idTr = $(this).parent().parent().attr('id').substring(11)
+    idTr = 'fila'+idTr
+   if( $('#'+idTr).is(':visible') ){
+    $('#'+idTr).hide();
+  }else{
+    $('#'+idTr).show();
+  }
 
 });
 

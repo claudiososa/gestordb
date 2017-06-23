@@ -41,7 +41,7 @@ if(mysqli_num_rows($b_mis_informe)>0){
 			<?php
 
 
-	echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
+	echo "<table id='tablaPrincipal' class='table table-hover table-striped table-condensed tablesorter'>";
 	echo "<thead>";
 	echo "<tr>";
 	echo "<th>Id</th>";
@@ -74,7 +74,7 @@ if(mysqli_num_rows($b_mis_informe)>0){
 
 
 
-echo "<tr>";
+echo "<tr id= 'encabezado.$fila->informeId'>";
 
 
 
@@ -104,21 +104,28 @@ echo "<tr>";
 
 
 	echo "</tr>";
-
-	echo "<tr id= '$fila->informeId' >";
-
-  echo "<td>Fecha:</td>";
-	echo "<td colspan='2'>Nombre y Apellido</td>";
-	echo "<td colspan='2'>Hora</td>";
-
-
-  echo "<tbody id= '$fila->informeId'>";
-	echo "<td>12-23-12</td>";
-	echo "<td colspan='2'>Juan Perez</td>";
-	echo "<td colspan='2'>12:32</td>";
+  echo "<tr></tr>";
+	echo "<tr id= 'fila$fila->informeId' >";
+	echo '<td colspan=5>';
+	echo "<table>";
+	echo "<thead>";
+	echo "<tr>";
+	echo "<th>Usuario</th>";
+	echo "</tr>";
+	echo "</thead>";
+  echo "<tbody>";
+	$leido= new Leido(null,$fila->informeId);
+	$todosLosLeidos=$leido->buscar(null,'distinto');
+	while ($dato = mysqli_fetch_object($todosLosLeidos)) {
+		# code...
+		echo '<tr>';
+		echo '<td>'.$dato->nombre.' '.$dato->apellido.'</td>';
+		echo '</tr>';
+	}
 
   echo "</tbody>";
-
+	echo "</table>";
+	echo '</td>';
 	echo "</tr>";
 
 

@@ -122,12 +122,18 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 			return $conexion->query($sentencia);
 		}
 
-	public function buscar($limit=NULL)
+	public function buscar($limit=NULL,$tipo=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT * FROM leido";
+
+
+		$sentencia="SELECT leido.referenteId, leido.leidoId, leido.informeId, leido.fechaHora, personas.nombre, personas.apellido FROM leido
+												INNER JOIN referentes
+												ON leido.referenteId=referentes.referenteId
+												INNER JOIN personas
+												ON referentes.personaId=personas.personaId";
 		if($this->informeId!=NULL || $this->referenteId!=NULL
 		|| $this->fechaHora!=NULL)
 		{
@@ -136,17 +142,17 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 
 		if($this->informeId!=NULL)
 		{
-			$sentencia.=" informeId = $this->informeId && ";
+			$sentencia.=" leido.informeId = $this->informeId && ";
 		}
 
 		if($this->referenteId!=NULL)
 		{
-			$sentencia.=" referenteId='$this->referenteId' && ";
+			$sentencia.=" leido.referenteId='$this->referenteId' && ";
 		}
 
 		if($this->fechaHora!=NULL)
 		{
-			$sentencia.=" fechaHora='$this->fechaHora' && ";
+			$sentencia.=" leido.fechaHora='$this->fechaHora' && ";
 		}
 
 
@@ -155,7 +161,7 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 
 		}
 
-		$sentencia.="  ORDER BY fechaHora ASC";
+		$sentencia.="  ORDER BY leido.fechaHora ASC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
