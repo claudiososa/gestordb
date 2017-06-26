@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/portada/botonLeido.js"></script>
 <?php
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/referente.php");
@@ -32,7 +33,7 @@ if ($cantidad>0){
 	<div class="table-responsive">
 	<div class='container'>
 	<?php echo "<h3>Informes creados por ".$dato_persona->apellido.", ".$dato_persona->nombre."</h3><br>";	?>
-	<table id='myTable' class='table table-hover table-striped table-condensed '>
+	<table id='tablaPrincipal' class='table table-hover table-striped table-condensed '>
 
 
 		<thead>
@@ -60,7 +61,7 @@ if ($cantidad>0){
 
 	?>
 
-		<tr>
+			<?php echo "<tr id= 'encabezado.$fila->informeId'>";?>
 			<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
 			<td><?php echo $fila->fechaCarga;?></td>
 			<td><?php echo $fila->tipo;?></td>
@@ -75,8 +76,8 @@ if ($cantidad>0){
 			$dato_leido=$leido->buscar();
 			$leyo1 = mysqli_num_rows($dato_leido);
 
-			if($leyo || $leyo1){		
-				echo "<td><a href='#' class='btn btn-success'>&nbsp;&nbsp;Leido&nbsp;&nbsp;&nbsp;</a></td>";
+			if($leyo || $leyo1){
+				echo "<td><button id= 'leido.$fila->informeId' class='btn btn-success'>&nbsp;&nbsp;Leido&nbsp;&nbsp;&nbsp;</button></td>";
 			}else {
 				echo  "<td><a href='#' class='btn btn-danger'>No Leido</a></td>";
 			}
@@ -89,6 +90,29 @@ if ($cantidad>0){
 
 		<?php
 		//}
+		echo "<tr></tr>";
+		echo "<tr id= 'fila$fila->informeId' >";
+		echo '<td colspan=8>';
+		echo "<table>";
+		echo "<thead>";
+		echo "<tr>";
+		echo "<th>Usuario</th>";
+		echo "</tr>";
+		echo "</thead>";
+	  echo "<tbody>";
+		$leido= new Leido(null,$fila->informeId);
+		$todosLosLeidos=$leido->buscar(null,'distinto');
+		while ($dato = mysqli_fetch_object($todosLosLeidos)) {
+			# code...
+			echo '<tr>';
+			echo '<td>'.$dato->nombre.' '.$dato->apellido.'</td>';
+			echo '</tr>';
+		}
+
+	  echo "</tbody>";
+		echo "</table>";
+		echo '</td>';
+		echo "</tr>";
 	}
 	echo "</tbody>";
 	echo "</table>";
@@ -110,5 +134,21 @@ $(document).ready(function()
 			//$("#myTable1").tablesorter( {sortList: [[0,1]]} );
 			//$("#informe_ett").tablesorter( {sortList: [[1,1]]} );
 		}
+		$('#tablaPrincipal tr[id*=fila]').hide();
+
+	//si presiona algun boton de leido dentro de la lista de todos los informes que muestra la tabla
+	  $("button[id]").click(function() {
+
+	    let idTr = $(this).parent().parent().attr('id').substring(11)
+	    idTr = 'fila'+idTr
+	   if( $('#'+idTr).is(':visible') ){
+	    $('#'+idTr).hide();
+	  }else{
+	    $('#'+idTr).show();
+	  }
+
+	});
+
+
 );
 </script>

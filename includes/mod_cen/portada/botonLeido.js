@@ -6,7 +6,7 @@ $(document).ready(function() {
 //si presiona algun boton de leido dentro de la lista de todos los informes que muestra la tabla
   $("button[id]").click(function() {
 
-    let idTr = $(this).parent().parent().attr('id').substring(11)
+    let idTr = $(this).parent().parent().attr('id').substring(11);
     idTr = 'fila'+idTr
    if( $('#'+idTr).is(':visible') ){
     $('#'+idTr).hide();
