@@ -53,6 +53,9 @@
 			case "Secretariodegestion":
 								include("includes/mod_men/secretariodegestion.php");
 								break;
+			case "buscador":
+							include("includes/mod_men/buscador.php");
+							break;
 			}
 		}
 			else {
