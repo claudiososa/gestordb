@@ -110,7 +110,7 @@ if(isset($_POST["username"]))
 						include_once('includes/mod_cen/portada/supervisorGeneralSuperior.php');
 						break;
 				case 'buscador':
-						include("includes/mod_cen/escuelas/escuela_ver_ett.php");
+						include("includes/mod_cen/portada/buscador.php");
 						break;
 
 
