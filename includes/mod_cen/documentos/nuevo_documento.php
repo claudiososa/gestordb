@@ -4,6 +4,7 @@
 
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/referente.php");
+include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/PermisoCategoriaDoc.php");
 include_once("includes/mod_cen/clases/CategoriaDoc.php");
 include_once("includes/mod_cen/clases/PermisoDoc.php");
@@ -97,13 +98,30 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
         $permiso_doc = new PermisoDoc(null,$guardar,$value);
         $crearPermiso = $permiso_doc->agregar();
         if($crearPermiso==1){
-          echo "Se creo permiso".$value," ".$guardar;
+          // se busca el mail del referente
+
+              $dato_referente =  new Referente($_SESSION["referenteId"]);
+              $buscar_dato = $dato_referente->Persona($_SESSION["referenteId"]);
+              $origen =  mysqli_fetch_object($buscar_dato);
+
+              $remitente=$origen->email;
+
+
+
+          // fin de busqueda mail de referente
+
+
+          echo "Se creo permiso".$value;
+
+          $enviado=$doc_guardado->enviarMail($value,$remitente,$_POST["tituloDoc"]);
+          //echo "\n".$destino."\n";
+        
         }
 
       }
     }
-   // $destino=$doc_guardado->destinatariosMail($value,$guardar);
-    echo $guardar;
+  
+    echo $guardar." ".$enviado;
     echo "Se Guardo con Éxito";
   }
 
@@ -114,7 +132,7 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
               <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",3000);
+                setTimeout ("redireccion()",1000);
                     </script>
 
 <?php

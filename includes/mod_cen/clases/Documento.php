@@ -251,12 +251,43 @@ public function buscar($limit=NULL)
 	}
 */
 
-	public function destinatariosMail($permiso,$idDocumento)
+	public function enviarMail($permiso,$remitente,$tituloDoc)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
 
+		$sentencia= "SELECT tipo, referenteId, personas.nombre, personas.apellido, personas.email
+        FROM referentes
+        JOIN personas ON ( referentes.personaId = personas.personaId )
+        WHERE referentes.tipo = '".$permiso."'AND referentes.estado = 'Activo' ";
+
+        $resul=$conexion->query($sentencia);
+
+        $para="";
+         while ($fila = mysqli_fetch_object($resul))
+        {
+
+      	  $para.=$fila->email.",";
+
+        }
+        
+        
+
+      // preparamos el para enviar
+       $header = "From: ". $remitente;
+
+       $titulo = "   Nuevo Documento Disponible   < ".$tituloDoc." > ";
+	   
+	   $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\n Se encuentra disponible un NUEVO Archivo en la seccion Documentos/ \n Nombre del Documento: ".$tituloDoc." \n\nEnlace a documentos ->  http://ticsalta.com.ar/conectar/index.php?mod=slat&men=doc&id=1";
+
+            	if (mail($para, $titulo, $mensaje, $header)) {
+
+            		$enviado=1;
+            	} else {
+            		echo "\n Falló el envio \n";
+            		 $enviado=0;
+            	}
 
 
 
@@ -266,8 +297,8 @@ public function buscar($limit=NULL)
 		
 		//echo $sentencia;
 
-		return $conexion->query($sentencia);
-
+		//return $conexion->query($sentencia);
+      	return $enviado;
 	}
 
 
