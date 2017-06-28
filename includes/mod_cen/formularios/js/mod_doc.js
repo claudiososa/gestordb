@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var letras= /^[a-zA-Z0-9\_-\s]+$/;
+  var letras= /^[a-zA-ZáéíóúÁÉÍÓÚ0-9\_-\s]+$/;
 
 $("#btn-ndoc").click(function(event) {
   $("#error").remove();
