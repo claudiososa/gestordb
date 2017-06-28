@@ -204,6 +204,10 @@
 						case 23:
 									include("includes/mod_cen/escuelas/escuelaDatosBasicos.php");
 									break;
+
+						case 24:
+									include("includes/mod_cen/escuelas/agregarEscuelas.php");
+								  break;
 				}
 				break;
 			 case "encuentros":

@@ -55,6 +55,7 @@
           <ul class="dropdown-menu">
                 <li ><a href="index.php?mod=slat&men=personas&id=8&escuelaId=111">Alta Vice-Director</a></li>
                  <li ><a href="index.php?mod=slat&men=personas&id=9">Editar Vice-Director</a></li>
+                 <li ><a href="index.php?mod=slat&men=escuelas&id=24">Nueva Escuela</a></li>
 
           </ul>
         </li>
