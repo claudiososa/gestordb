@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -30,8 +31,9 @@ echo '<div class="container">';
 if(mysqli_num_rows($b_mis_informe)>0){
 	?>
 	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h4>Mis Informes (últimos 10) &nbsp;&nbsp;&nbsp;&nbsp;  <a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION["referenteId"] ?>" class="btn btn-warning">Ver Todos</a></h4>
+		<div class="panel-heading" id="panel1">
+          <span class="panel-title clickable">
+			<h4>Mis Informes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION["referenteId"] ?>" class="pull-center"><font color="SkyBlue">Ver Todos</font></a><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
 		<div class="panel-body">
 			<?php
@@ -107,8 +109,8 @@ echo "<div class='col-md-6'>";
 if(mysqli_num_rows($b_informe)>0){
 	?>
 	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h4>Ultimos informes creados</h4>
+		<div class="panel-heading" id="panel2"><span class="panel-title clickable">
+			<h4>Ultimos informes  Creados<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
 		<div class="panel-body">
 			<?php
@@ -179,29 +181,14 @@ $(document).ready(function()
 <div class="row">
 
 <div class="panel panel-primary">
-	<div class="panel-heading">
-		<h4>Tutoriales DBMS</h4>
+	<div class="panel-heading" id="panel5"><span class="panel-title clickable">
+		<h4>Documentación<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4>
+	</span>
 	</div>
 	<div class="panel-body">
 
-				<div class="listap">
-				<p><img alt="documentos" src="img/iconos/carpetap.png"> Documentos</p>
-
-				<ul class="lista">
-						<li>Datos Colegio 2015 > Formato: Microsoft Excel > <a href="descarga/documentos/DatoColegio2015.xlsx" target="_blank">Descargar</a></li>
-				</ul>
-				</div>
-				<div class="listap">
-				<p><img alt="tutoriales" src="img/iconos/videotutorialp.png"> Video Tutoriales</p>
-
-				<ul class="lista">
-						<li>Carga de Datos de Colegio (nombre,telefono, etc. > Formato: MP4 > <a href="descarga/videotutorial-dbms/dbm-dato-colegio.mp4" download="dbm-dato-colegio.mp4" target="_blank" >Descargar</a></li><br>
-						<li>Carga de Datos de RTI  > Formato: MP4 > <a href="descarga/videotutorial-dbms/dbm-alta-rti.mp4" download="dbm-alta-rti.mp4" target="_blank" >Descargar</a></li><br>
-						<li>Carga de Dato de Autoridad (director, vicedirector, etc). > Formato: MP4 > <a href="descarga/videotutorial-dbms/dbm-director-dbms.mp4" download="dbm-director-dbms.mp4" target="_blank">Descargar</a></li><br>
-						<li>Asignación de Escuelas > Formato: MP4 > <a href="descarga/videotutorial-dbms/tutorial-asignar-escuelas.mp4" download="tutorial-asignar-escuelas.mp4" target="_blank">Descargar</a></li><br>
-				</ul>
-				</div>
 				<?php
+require_once("includes/mod_cen/documentos/documento.php")
 ?>
 </div>
 </div>

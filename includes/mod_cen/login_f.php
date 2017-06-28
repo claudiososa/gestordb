@@ -112,6 +112,9 @@ if(isset($_POST["username"]))
 				case 'buscador':
 						include("includes/mod_cen/portada/buscador.php");
 						break;
+				case 'Facilitador':
+				    include_once('includes/mod_cen/portada/facilitador.php');
+				    break;
 
 
 				default:
