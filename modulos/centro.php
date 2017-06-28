@@ -334,9 +334,13 @@
 										break;
 
 
-				}
+
 
 				break;
+				case 15:
+				include("includes/mod_cen/referentes/referente_ett.php");
+				break;
+}
 
 
 				case "doc":

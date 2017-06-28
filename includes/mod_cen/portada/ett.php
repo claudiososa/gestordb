@@ -1,5 +1,6 @@
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <script type="text/javascript" src="includes/mod_cen/portada/botonLeido.js"></script>
+
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
