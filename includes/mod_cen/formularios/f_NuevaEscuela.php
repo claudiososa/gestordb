@@ -69,17 +69,21 @@
 							 <label class="control-label"><br>Nivel</label>
 						</div>
 						<div class="col-md-12">
-							 <select name="nivel" class="form-control" >
-								<option value="" label="Sin registrar">Sin registrar</option>
-								<option value="Primaria Común" label="Primaria Común">Primaria Común</option>
-								<option value="Primaria Especial" label="Primaria Especial">Primaria Especial</option>
-								<option value="Secundaria Común" label="Secundaria Común">Secundaria Común</option>
-								<option value="Secundaria Técnica" label="Secundaria Técnica"  >Secundaria Técnica</option>
-								<option value="Secundaria Rural" label="Secundaria Rural">Secundaria Rural</option>
-								<option value="ISFD" label="ISFD">ISFD</option>
-								<option value="IEM" label="IEM">IEM</option>
-								<option value="Capacitación" label="Capacitación">Capacitación</option>
-					 			</select>
+							<?php
+									$nivelInst=Escuela::estructura('nivel','escuelas');
+									?>
+									<select  class="form-control" name="nivel" <?php
+											foreach ($nivelInst AS $valor){
+												echo "<option value='$valor'>$valor</option>";
+											}
+												//if($valor==$escuela->nivel) {
+												//	echo "<option selected value='$valor'>$valor</option>";
+												//}else {
+
+											//	}
+
+										echo '</select>';
+									?>
 							</div>
 						</div>
 

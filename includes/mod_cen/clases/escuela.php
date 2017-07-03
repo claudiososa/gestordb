@@ -67,6 +67,19 @@ class Escuela
 			$this->referenteIdSuperSup = $referenteIdSuperSup;
 	}
 
+	public static function estructura($campo,$tabla){
+			$nuevaConexion=new Conexion();
+			$conexion=$nuevaConexion->getConexion();
+			$sentencia="SHOW COLUMNS FROM $tabla LIKE '$campo'";
+			$query=$conexion->query($sentencia);
+			$result = mysqli_fetch_assoc($query);
+	  		$result=$result['Type'];
+	  		$result=substr($result, 5, strlen($result)-5);
+	  		$result=substr($result, 0, strlen($result)-2);
+	  		$result = explode("','",$result);
+			return $result;
+		}
+
 	public function agregar()
 	{
 		$nuevaConexion=new Conexion();
@@ -99,7 +112,7 @@ class Escuela
 
 			return 1;
 			//header("Location:index.php?id=1");
-		
+
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
