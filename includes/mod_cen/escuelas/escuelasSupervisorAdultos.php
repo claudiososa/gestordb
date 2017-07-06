@@ -11,38 +11,10 @@ include_once('includes/mod_cen/clases/rti.php');//Agregada Arredes
 
 //identifica al usuario logeado y asigna dato a la variable $referenteId
 $referenteId=$_SESSION['referenteId'];
-
-switch ($_SESSION["tipo"]) {
-	case 'ETT':
-				$escuela= new Escuela(null,$referenteId);
-				break;
-	case 'ETJ':
-							$escuela= new Escuela(null,$referenteId);
-							break;
-	case 'ATT':
-				$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
-				break;
-	case 'Supervisor-Secundaria':
-							$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
-							break;
-	case 'SupervisorAdultos':
-							$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
-							break;
-
-	default:
-		# code...
-		break;
-}
-
-
-
-
+$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
 $escuelas_ett= $escuela->buscar();
-
 $resultado = $escuela->Cargo($_SESSION["tipo"]);
-
 $referente= new Referente($referenteId);
-
 $buscandoreferente=$referente->buscar();
 $dato=mysqli_fetch_object($buscandoreferente);
 
@@ -205,8 +177,7 @@ $con_ubicacion=0;
 		echo '<div class="table-responsive">';
 			echo "<table class='table table-hover table-striped table-condensed '>";
 					echo "<tr><th colspan='10'>Cantidad Total: ".$cantidad." | Secundaria Común: ".$csc_nivel." | Secundaria Rural: ".$csr_nivel
-					." | Secundaria Técnica: ".$cst_nivel." | Primaria Común: ".$cpc_nivel." | Primaria Especial: ".$cpe_nivel
-					." | ISFD: ".$ct_nivel." | SIN REGISTRAR:".$sin_nivel."</h1></th></tr>";
+					." </h1></th></tr>";
 			echo "</table>";
 		echo "</div>";
 		echo '<div class="table-responsive">';
@@ -217,9 +188,10 @@ $con_ubicacion=0;
 					echo "<th>Nombre</th>";
 					echo "<th>Nivel</th>";
 					echo "<th>Localidad</th>";
-					echo "<th>Informe</th>";
-					echo "<th>Cant</th>";
-					echo "<th>Piso</th>";
+					echo "<th>Crear Inf.</th>";
+					echo "<th>Supervisión</th>";
+					echo "<th>Conectar</th>";
+					echo "<th>PMI</th>";
 					echo "<th>Autoridad</th>";
 					echo "<th>Supervisor</th>";
 					echo "<th>RTI</th>";
@@ -240,26 +212,41 @@ while ($fila = mysqli_fetch_object($resultado))
 
 	$informe = new Informe(null,$fila->escuelaId);
 
-	$buscar_informe = $informe->buscar();
+	$buscar_informe = $informe->buscarSupervisorSec();
 
 	$cant = mysqli_num_rows($buscar_informe);
 
+	//guarda en $cantConectar  todos los informes creados equipo Conectar Igualdad
+	$arrayTipoReferente = array('ETT','ETJ','Coordinador');
+  $buscarInformeConectar=$informe->buscar(null,null,$arrayTipoReferente);
+	$cantConectar = mysqli_num_rows($buscarInformeConectar);
+
+	//guarda en $cantConectar  todos los informes creados equipo PMI
+	$arrayTipoReferente = array('ATT','CoordinadorPmi');
+  $buscarInformePmi=$informe->buscar(null,null,$arrayTipoReferente);
+	$cantPmi = mysqli_num_rows($buscarInformePmi);
+
 	if($cant==0){
 
-		echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
+		echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&tipo=supervisor-secundaria&escuelaId=".$fila->escuelaId."'>
 					 Crear</a>&nbsp&nbsp</td><td><a class='btn btn-danger' href='#'>0</a></td>";
 
 	}else{
 	 	echo "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
 					 Crear</a></td>";
-		echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>$cant</a></td>";
+		echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&tipo=supervisor-secundaria&id=2&escuelaId=".$fila->escuelaId."'>$cant</a></td>";
+	}
+	if($cantConectar==0){//sino existe informes creados por equipo conectar para este colegio
+		echo "<td><a class='btn btn-danger' href='#'>0</a></td>";
+	}else{
+	 	echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&tipo=conectar&id=2&escuelaId=".$fila->escuelaId."'>$cantConectar</a></td>";
+	}
+	if($cantPmi==0){//sino existe informes creados por equipo conectar para este colegio
+		echo "<td><a class='btn btn-danger' href='#'>0</a></td>";
+	}else{
+	 	echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&tipo=pmi&id=2&escuelaId=".$fila->escuelaId."'>$cantPmi</a></td>";
 	}
 
-	if($fila->nivel=="Primaria Común") {
-		echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=7&escuelaId=".$fila->escuelaId."'>ADM</a>"."</td>";
-	}else {
-		echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=8&escuelaId=".$fila->escuelaId."'>Piso</a>"."</td>";
-	}
 
 	echo "<td>";
 	$director= director::existeAutoridad($fila->escuelaId);

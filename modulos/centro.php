@@ -112,6 +112,9 @@
 									case 'Supervisor-Secundaria':
 															$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
 															break;
+									case 'SupervisorAdultos':
+															$escuela= new Escuela($_GET["escuelaId"],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$_SESSION['referenteId']);
+															break;
 
 									default:
 										# code...
@@ -344,6 +347,9 @@
 				case 15:
 				include("includes/mod_cen/referentes/referente_ett.php");
 				break;
+				case 16:
+				include("includes/mod_cen/escuelas/escuelasSupervisorAdultos.php");
+				break;
 }
 
 
@@ -495,6 +501,7 @@
 								//		include("includes/mod_cen/denegado.php");
 								//	}
 									break;
+
 				case 9:
 								//if($_SESSION['tipo']=='CoordinadorPMI' || $_SESSION['tipo']=='admin') {
 								include("includes/mod_cen/admin/escuelaAsignarSuperSec.php");
@@ -516,6 +523,13 @@
 												include("includes/mod_cen/denegado.php");
 											}
 										break;
+							case 12:
+															//if($_SESSION['tipo']=='CoordinadorPMI' || $_SESSION['tipo']=='admin') {
+																include("includes/mod_cen/admin/escuelasAsignarAdultos.php");
+														//	}else {
+														//		include("includes/mod_cen/denegado.php");
+														//	}
+															break;
 				}
 
 			//   default:

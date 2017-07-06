@@ -24,6 +24,7 @@ class Escuela
 	private $referenteIdPmi;
 	private $referenteIdSuperSec;
 	private $referenteIdSuperSup;
+	private $referenteIdSuperAdultos;
 
  	function __construct($escuelaId=NULL,
 											$referenteId=NULL,
@@ -43,7 +44,8 @@ class Escuela
 											$youtube=NULL,
 											$referenteIdPmi=NULL,
 											$referenteIdSuperSec=NULL,
-											$referenteIdSuperSup=NULL)
+											$referenteIdSuperSup=NULL,
+											$referenteIdSuperAdultos=NULL)
 	{
 			 //seteo los atributos
 		 	$this->escuelaId = $escuelaId;
@@ -65,6 +67,7 @@ class Escuela
 			$this->referenteIdPmi = $referenteIdPmi;
 			$this->referenteIdSuperSec = $referenteIdSuperSec;
 			$this->referenteIdSuperSup = $referenteIdSuperSup;
+			$this->referenteIdSuperAdultos = $referenteIdSuperAdultos;
 	}
 
 	public static function estructura($campo,$tabla){
@@ -86,7 +89,7 @@ class Escuela
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="INSERT INTO escuelas (escuelaId,referenteId,cue,numero,nombre,domicilio,nivel,localidadId,turnos,telefono,supervisor_id,ubicacion,sitio,facebook,twitter,youtube,referenteIdPmi,referenteIdSuperSec,referenteIdSuperSup)
-		VALUES (NULL,'". $this->referenteId."','". $this->cue."','". $this->numero."','".$this->nombre."','". $this->domicilio."','". $this->nivel."','". $this->localidadId."','". $this->turnos."','".$this->telefono."','".$this->supervisor."','".$this->ubicacion."','".$this->sitio."','".$this->facebook."','".$this->twitter."','".$this->youtube."','".$this->referenteIdPmi."','".$this->referenteIdSuperSec."','".$this->referenteIdSuperSup."');";
+		VALUES (NULL,'". $this->referenteId."','". $this->cue."','". $this->numero."','".$this->nombre."','". $this->domicilio."','". $this->nivel."','". $this->localidadId."','". $this->turnos."','".$this->telefono."','".$this->supervisor."','".$this->ubicacion."','".$this->sitio."','".$this->facebook."','".$this->twitter."','".$this->youtube."','".$this->referenteIdPmi."','".$this->referenteIdSuperSec."','".$this->referenteIdSuperSup."','".$this->referenteIdSuperAdultos."');";
 
 		if ($conexion->query($sentencia)) {
 			//header("Location:index.php?id=1");
@@ -163,6 +166,9 @@ class Escuela
 			case 'superior':
 					$sentencia="UPDATE escuelas SET referenteIdSuperSup ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 					break;
+			case 'adultos':
+							$sentencia="UPDATE escuelas SET referenteIdSuperAdultos ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
+							break;
 
 			default:
 				# code...
@@ -206,6 +212,8 @@ class Escuela
 			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteIdSuperSec=$this->referenteIdSuperSec";
 		}elseif($tipoReferente=="Supervisor-Nivel-Superior"){
 			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteIdSuperSup=$this->referenteIdSuperSup";
+		}elseif($tipoReferente=="SupervisorAdultos"){
+			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteIdSuperAdultos=$this->referenteIdSuperAdultos";
 		}else{
 			$sentencia="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId AND referenteId=$this->referenteId";
 		}
@@ -263,7 +271,8 @@ class Escuela
 			 || $this->numero!=NULL || $this->nombre!=NULL
 			 || $this->domicilio!=NULL || $this->nivel!=NULL
 			 || $this->localidadId!=NULL || $this->turnos!=NULL
-			 || $this->escuelaId!=NULL || $this->referenteIdPmi!=NULL || $this->referenteIdSuperSec!=NULL || $this->referenteIdSuperSup!=NULL)
+			 || $this->escuelaId!=NULL || $this->referenteIdPmi!=NULL ||
+			  $this->referenteIdSuperSec!=NULL || $this->referenteIdSuperSup!=NULL || $this->referenteIdSuperAdultos!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -277,6 +286,12 @@ class Escuela
 		if($this->referenteIdPmi!=NULL)
 		{
 			$sentencia.=" referenteIdPmi =$this->referenteIdPmi && ";
+			$carga=1;
+		}
+
+		if($this->referenteIdSuperAdultos!=NULL)
+		{
+			$sentencia.=" referenteIdSuperAdultos =$this->referenteIdSuperAdultos && ";
 			$carga=1;
 		}
 
@@ -385,6 +400,8 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 			$sentencia="SELECT * FROM escuelas WHERE referenteIdSuperSec=".$this->referenteIdSuperSec;
 		}elseif($tipoReferente=="Supervisor-Nivel-Superior"){
 			$sentencia="SELECT * FROM escuelas WHERE referenteIdSuperSup=".$this->referenteIdSuperSup;
+		}elseif($tipoReferente=="SupervisorAdultos"){
+			$sentencia="SELECT * FROM escuelas WHERE referenteIdSuperAdultos=".$this->referenteIdSuperAdultos;
 		}else{
 			$sentencia="SELECT * FROM escuelas WHERE referenteId=".$this->referenteId;
 		}
@@ -419,7 +436,8 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 	 	$this->youtube = $elemento->youtube;
 		$this->referenteIdPmi = $elemento->referenteIdPmi;
 		$this->referenteIdSuperSec = $elemento->referenteIdSuperSec;
-		$this->referenteIdSuperSup = $elemento->referenteIdSuperSup;
+		$this->referenteIdSuperAdultos = $elemento->referenteIdSuperAdultos;
+
 		return $this;
 
     }
@@ -535,6 +553,8 @@ $escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
 		$editar_escuela=$escuela->editarref("supervisor");
 	}elseif(isset($_POST['superior'])){
 		$editar_escuela=$escuela->editarref("superior");
+	}elseif(isset($_POST['adultos'])){
+		$editar_escuela=$escuela->editarref("adultos");
 	}else{
 		$editar_escuela=$escuela->editarref();
 	}

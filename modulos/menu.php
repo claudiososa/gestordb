@@ -56,6 +56,15 @@
 			case "buscador":
 							include("includes/mod_men/buscador.php");
 							break;
+			case 'SupervisorGeneralAdultos':
+						include_once('includes/mod_men/supervisorGeneralAdultos.php');
+						break;
+			case 'DirectorNivelAdultos':
+						include_once('includes/mod_men/directorNivelAdultos.php');
+						break;
+			case 'SupervisorAdultos':
+						include_once('includes/mod_men/supervisorAdultos.php');
+						break;
 			}
 		}
 			else {
