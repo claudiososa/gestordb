@@ -8,12 +8,22 @@ if(isset($_POST["guardar_escuela"]) AND $_POST["nombre"]<>"" AND $_POST["cue"]<>
 
 
 
-$nuevaEscuela = new Escuela(null,'0001',$_POST["cue"],$_POST["numero"],$_POST["nombre"],$_POST["domicilio"],$_POST["nivel"],$_POST["localidadId"],null,$_POST["telefono"],null);
+$nuevaEscuela = new Escuela(null,
+													'0001',
+													$_POST["cue"],
+													$_POST["numero"],
+													$_POST["nombre"],
+													$_POST["domicilio"],
+													$_POST["nivel"],
+													$_POST["localidadId"],
+													null,
+													$_POST["telefono"],
+													null);
 
 
 $nuevo= $nuevaEscuela->agregar();
 
-//var_dump($nuevaEscuela)
+var_dump($nuevaEscuela);
 
 if ($nuevo == 1) {
 
@@ -40,11 +50,3 @@ echo " Error al Guardar: ".$nuevo;
   include_once("includes/mod_cen/formularios/f_NuevaEscuela.php");
 }
 ?>
-
-
-
-
-
-
-
-
