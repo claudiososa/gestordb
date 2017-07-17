@@ -280,7 +280,7 @@ if(($_POST))
 					 echo"<div><b>Apellido y Nombre</b></div>";
 					 echo "<div>".$datoEtt->apellido.", ".$datoEtt->nombre."</div>";
 					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoEtt->telefonoM."</div>";
+					 echo "<div>".$datoEtt->telefonoM." / ".$datoEtt->telefonoC."</div>";
 					 echo"<div><b>Correo Electrónico</b></div>";
 					 echo "<div>".$datoEtt->email."</div>";
 					 echo "<br></div>";
@@ -290,7 +290,7 @@ if(($_POST))
 					 echo"<div><b>Apellido y Nombre</b></div>";
 					 echo "<div>".$datoEtj->apellido.", ".$datoEtj->nombre."</div>";
 					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoEtj->telefonoM."</div>";
+					 echo "<div>".$datoEtj->telefonoM." / ".$datoEtj->telefonoC."</div>";
 					 echo"<div><b>Correo Electrónico</b></div>";
 					 echo "<div>".$datoEtj->email."</div>";
 					 echo "<br></div>";
@@ -300,7 +300,7 @@ if(($_POST))
 					 echo"<div><b>Apellido y Nombre</b></div>";
 					 echo "<div>".$datoAtt->apellido.", ".$datoAtt->nombre."</div>";
 					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoAtt->telefonoM."</div>";
+					 echo "<div>".$datoAtt->telefonoM." / ".$datoAtt->telefonoC."</div>";
 					 echo"<div><b>Correo Electrónico</b></div>";
 					 echo "<div>".$datoAtt->email."</div>";
 					 echo "<br></div>";
@@ -310,7 +310,7 @@ if(($_POST))
 					 echo"<div><b>Apellido y Nombre</b></div>";
 					 echo "<div>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
 					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoDirector->telefonoM."</div>";
+					 echo "<div>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";
 					 echo"<div><b>Correo Electrónico</b></div>";
 					 echo "<div>".$datoDirector->email."</div>";
 					 echo "<br></div>";
@@ -320,7 +320,7 @@ if(($_POST))
 					 echo"<div><b>Apellido y Nombre</b></div>";
 					 echo "<div>".$datoSupervisor->apellido.", ".$datoSupervisor->nombre."</div>";
 					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoSupervisor->telefonoM."</div>";
+					 echo "<div>".$datoSupervisor->telefonoM." / ".$datoSupervisor->telefonoC."</div>";
 					 echo"<div><b>Correo Electrónico</b></div>";
 					 echo "<div>".$datoSupervisor->email."</div>";
 					 echo "<br></div>";

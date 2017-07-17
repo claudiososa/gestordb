@@ -110,7 +110,7 @@ class Director
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="SELECT directores.directorId,directores.escuelaId,directores.personaId,directores.tipoautoridad_id,tipoautoridad,
-		 personas.nombre,personas.apellido,personas.telefonoM,personas.email
+		 personas.nombre,personas.apellido,personas.telefonoM,personas.telefonoC,personas.email
 		FROM directores
 		left join tipoautoridad
 		on directores.tipoautoridad_id=tipoautoridad.tipoautoridad_id
