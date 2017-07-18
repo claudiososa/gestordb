@@ -175,7 +175,7 @@ if(($_POST))
 						 * Buscar dato de persona de referente ETJ de la escuela actual
 						 * guarda el dato en $datoEtj
 						 */
-						$persona= new Persona($datoEtt->etjcargo);
+						$persona= new Referente($datoEtt->etjcargo);
 						$buscar_referente=$persona->buscar();
 						$datoEtj=mysqli_fetch_object($buscar_referente);
 

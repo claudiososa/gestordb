@@ -530,6 +530,13 @@
 														//		include("includes/mod_cen/denegado.php");
 														//	}
 															break;
+								case 13:
+															//if($_SESSION['tipo']=='CoordinadorPMI' || $_SESSION['tipo']=='admin') {
+															include("includes/mod_cen/admin/escuelaAsignarFacilitador.php");
+															//	}else {
+												    	//		include("includes/mod_cen/denegado.php");
+															//	}
+															break;
 				}
 
 			//   default:

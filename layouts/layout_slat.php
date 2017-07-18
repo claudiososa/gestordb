@@ -41,6 +41,18 @@ session_start();
     		       		     die ('error al cargar el modulosssss');
           			   ?>
              </nav>
+						 <div class="row">
+									 <article>
+										 <?php
+										 /*
+									 if (file_exists($path_modulo6))
+											 include ($path_modulo6);
+									 else
+											 die ('error al cargar el modulo');
+											 */
+									 ?>
+								 </article>
+						</div>
              <div class="row">
                  	<article>
                  		<?php
