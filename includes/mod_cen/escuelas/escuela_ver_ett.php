@@ -247,6 +247,8 @@ if(($_POST))
 					 echo "<div>".$fila->domicilio."</div>";
 					 echo"<div><b>Teléfono</b></div>";
 					 echo "<div>".$fila->telefono."</div>";
+					 echo"<div><b>Email</b></div>";
+					 echo "<div>".$fila->email."</div>";
 					 echo "<br></div>";
 
 					 echo '<div class="col-md-6">';
