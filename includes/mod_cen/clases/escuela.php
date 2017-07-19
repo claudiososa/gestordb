@@ -15,6 +15,7 @@ class Escuela
 	private $localidadId;
  	private $turnos;
  	private $telefono;
+	private $email;
 	private $supervisorid;//Agregado por arredes en todos los metodos
 	private $ubicacion;
 	private $sitio;
@@ -37,6 +38,7 @@ class Escuela
 											$localidadId=NULL,
 											$turnos=NULL,
 											$telefono=NULL,
+											$email=NULL,
 											$supervisorid=NULL,
 											$ubicacion=NULL,
 											$sitio=NULL,
@@ -60,6 +62,7 @@ class Escuela
 		 	$this->localidadId = $localidadId;
 		 	$this->turnos = $turnos;
 		 	$this->telefono = $telefono;
+			$this->email = $email;
 			$this->supervisor_id = $supervisorid;
 			$this->ubicacion = $ubicacion;
 			$this->sitio = $sitio;
@@ -91,8 +94,8 @@ class Escuela
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO escuelas (escuelaId,referenteId,cue,numero,nombre,domicilio,nivel,localidadId,turnos,telefono,supervisor_id,ubicacion,sitio,facebook,twitter,youtube,referenteIdPmi,referenteIdSuperSec,referenteIdSuperSup,referenteIdSuperAdultos,referenteIdFacilitador)
-		VALUES (NULL,'". $this->referenteId."','". $this->cue."','". $this->numero."','".$this->nombre."','". $this->domicilio."','". $this->nivel."','". $this->localidadId."','". $this->turnos."','".$this->telefono."','".$this->supervisor."','".$this->ubicacion."','".$this->sitio."','".$this->facebook."','".$this->twitter."','".$this->youtube."','".$this->referenteIdPmi."','".$this->referenteIdSuperSec."','".$this->referenteIdSuperSup."','".$this->referenteIdSuperAdultos."','".$this->referenteIdFacilitador."');";
+		$sentencia="INSERT INTO escuelas (escuelaId,referenteId,cue,numero,nombre,domicilio,nivel,localidadId,turnos,telefono,email,supervisor_id,ubicacion,sitio,facebook,twitter,youtube,referenteIdPmi,referenteIdSuperSec,referenteIdSuperSup,referenteIdSuperAdultos,referenteIdFacilitador)
+		VALUES (NULL,'". $this->referenteId."','". $this->cue."','". $this->numero."','".$this->nombre."','". $this->domicilio."','". $this->nivel."','". $this->localidadId."','". $this->turnos."','".$this->telefono."','".$this->email."','".$this->supervisor."','".$this->ubicacion."','".$this->sitio."','".$this->facebook."','".$this->twitter."','".$this->youtube."','".$this->referenteIdPmi."','".$this->referenteIdSuperSec."','".$this->referenteIdSuperSup."','".$this->referenteIdSuperAdultos."','".$this->referenteIdFacilitador."');";
 
 		echo $sentencia;
 		if ($conexion->query($sentencia)) {
@@ -141,7 +144,7 @@ class Escuela
 										WHERE escuelaId = '$this->escuelaId'";
 
 		}else{
-			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId',cue = '$this->cue', numero = '$this->numero', nombre = '$this->nombre',domicilio = '$this->domicilio', nivel = '$this->nivel', localidadId = '$this->localidadId', turnos = '$this->turnos', telefono = '$this->telefono' , ubicacion = '$this->ubicacion', sitio = '$this->sitio', facebook = '$this->facebook', twitter = '$this->twitter', youtube = '$this->youtube' WHERE escuelaId = '$this->escuelaId'";
+			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId',cue = '$this->cue', numero = '$this->numero', nombre = '$this->nombre',domicilio = '$this->domicilio', nivel = '$this->nivel', localidadId = '$this->localidadId', turnos = '$this->turnos', telefono = '$this->telefono' ,email = '$this->email' , ubicacion = '$this->ubicacion', sitio = '$this->sitio', facebook = '$this->facebook', twitter = '$this->twitter', youtube = '$this->youtube' WHERE escuelaId = '$this->escuelaId'";
 		}
 
 		if ($conexion->query($sentencia)) {
@@ -446,6 +449,7 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 	 	$this->localidadId = $elemento->localidadId;
 	 	$this->turnos = $elemento->turnos;
 	 	$this->telefono = $elemento->telefono;
+		$this->email = $elemento->email;
 	 	$this->ubicacion = $elemento->ubicacion;
 	 	$this->sitio = $elemento->sitio;
 	 	$this->facebook = $elemento->facebook;
@@ -502,6 +506,10 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 	public function getTelefono()
 	{
 		return $this->telefono;
+	}
+	public function getEmail()
+	{
+		return $this->email;
 	}
 
 	public function getLocalidadId()
