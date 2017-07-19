@@ -91,6 +91,16 @@
 							</div>
 				</div>
 
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="control-label"><br>Email:<label>
+
+					</div>
+					<div class="col-md-12">
+				<input class="form-control" size="30" type="text" id="email_escuela"name="email" value="<?php echo $datos->getEmail()?>"/>
+
+							</div>
+				</div>
 
 
 				<div class="form-group">
