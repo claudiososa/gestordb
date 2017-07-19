@@ -1,5 +1,6 @@
 	<?php
 		include_once('includes/mod_cen/clases/escuela.php');
+		include_once('includes/mod_cen/clases/FacilEscuelas.php');
 		if (!empty($_GET['id']) AND isset($_SESSION["tipo"]))
 		{
 		$id=$_GET['id'];
@@ -99,6 +100,9 @@
 					case 3:
 							if(isset($_GET["escuelaId"])) {
 
+								if ($_SESSION["tipo"]<>'Facilitador'){
+
+
 								switch ($_SESSION["tipo"]) {
 									case 'ETT':
 												$escuela=new Escuela($_GET["escuelaId"],$_SESSION['referenteId']);
@@ -123,6 +127,12 @@
 
 								$b_escuela= $escuela->buscarRef($_SESSION["tipo"]);
 								$dato_escuela=mysqli_num_rows($b_escuela);
+							}else{
+								$escuela = new FacilEscuelas(null,null,$_SESSION["referenteId"]);
+								$b_escuela = $escuela->buscar();
+								$dato_escuela=mysqli_num_rows($b_escuela);
+							}
+
 								if($dato_escuela>0 || $_SESSION['tipo']=='admin') {
 							  		include("includes/mod_cen/escuelas/escuela_editar.php");
 								}else {
@@ -349,6 +359,9 @@
 				break;
 				case 16:
 				include("includes/mod_cen/escuelas/escuelasSupervisorAdultos.php");
+				break;
+				case 17:
+				include("includes/mod_cen/escuelas/escuela_facilitador.php");
 				break;
 }
 
