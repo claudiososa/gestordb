@@ -124,6 +124,9 @@ if(isset($_POST["username"]))
 				case 'Facilitador':
 				    include_once('includes/mod_cen/portada/facilitador.php');
 				    break;
+				case 'CoordinadorFacilitador':
+						    include_once('includes/mod_cen/portada/coordinadorfacilitador.php');
+						    break;
 
 
 				default:

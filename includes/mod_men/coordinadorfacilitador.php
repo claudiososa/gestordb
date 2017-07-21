@@ -15,7 +15,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-        <li><a href="index.php?mod=slat&men=admin&id=13">Asignar Escuelas Facilitador</a></li>
+        <li><a href="index.php?mod=slat&men=user&id=18">Mis Facilitadores <span class="sr-only">(current)</span></a></li>
+
         <!--<li><a href="index.php?mod=slat&men=admin&id=5">Asignar Mis Escuelas</a></li>-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
@@ -34,7 +35,7 @@
                   <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?>Cambiar Contraseña</a></li>
           </ul>
         </li>
-<li class=""><a href="index.php?mod=slat&men=doc&id=4">Documentos<span class="sr-only">(current)</span></a></li>
+<li class=""><a href="index.php?mod=slat&men=doc&id=1">Documentos<span class="sr-only">(current)</span></a></li>
         </li>
         <li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
   <li><a href="">Hola,<?php echo $_SESSION["nombre"]?></a></li>

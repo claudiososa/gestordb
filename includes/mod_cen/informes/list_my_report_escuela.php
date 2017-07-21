@@ -9,7 +9,7 @@ require_once("includes/mod_cen/clases/leido.php");
 if(isset($_GET['prioridad'])){
 	$informe = new Informe(null,null,$_GET["referenteId"],$_GET["prioridad"]);
 }else{
-	$informe = new Informe(null,null,$_GET["referenteId"]);
+	$informe = new Informe(null,$_GET["escuelaId"],$_GET["referenteId"]);
 }
 
 

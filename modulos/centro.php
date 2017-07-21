@@ -363,6 +363,12 @@
 				case 17:
 				include("includes/mod_cen/escuelas/escuela_facilitador.php");
 				break;
+				case 18:
+						include("includes/mod_cen/referentes/referente_facilitador.php");
+						break;
+				case 19:
+								include("includes/mod_cen/escuelas/escuela_facilitador_coordinador.php");
+								break;
 }
 
 
@@ -383,6 +389,9 @@
 					case 5:
 									include("includes/mod_cen/documentos/coordinador-conectar.php");
 									break;
+					case 6:
+													include("includes/mod_cen/documentos/coordinadorfacilitador.php");
+													break;
 					}
 					break;
 					case "estadistica":
@@ -460,6 +469,9 @@
 					 	case 21:
 					    	include("includes/mod_cen/documentos/modificarDocumento.php");
 					 		break;
+						case 22:
+								include("includes/mod_cen/informes/list_my_report_escuela.php");
+								break;
 
 					}
 					break;

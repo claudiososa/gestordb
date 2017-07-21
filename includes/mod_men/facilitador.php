@@ -24,15 +24,7 @@
                 <li ><a href="index.php?mod=slat&men=referentes&id=10">RTI</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Encuentros <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-                 <li><a href="index.php?mod=slat&men=encuentros&id=1">Nuevo Primaria</a></li>
-                 <li><a href="index.php?mod=slat&men=encuentros&id=1&secu=1">Nuevo Secundaria</a></li>
-                 <li><a href="index.php?mod=slat&men=encuentros&id=2">Ver Mis Encuentros</a></li>
-                 <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
-          </ul>
-        </li>
+  
 
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Perfil <span class="caret"></span></a>
