@@ -33,15 +33,24 @@ session_start();
     			   <header>
 
           	 </header>
+						 <article>
+							 <?php
+						 if (file_exists($path_modulo6))
+								 include ($path_modulo6);
+						 else
+								 die ('error al cargar el modulo');
+						 ?>
+					 </article>
              <nav class="navbar navbar-inverse" >
-                    <?php
+							 			<?php
+
                     if (file_exists($path_modulo2))
     		       		     include ($path_modulo2);
                     else
     		       		     die ('error al cargar el modulosssss');
           			   ?>
              </nav>
-						
+
              <div class="row">
                  	<article>
                  		<?php
