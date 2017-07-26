@@ -7,7 +7,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php">DBMS 2017</a>
     </div>
 
 
@@ -60,54 +59,8 @@
                  <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
           </ul>
         </li>
-
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Perfil <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-                  <li><?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."'>";?>Actualizar</a></li>
-                  <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?>Cambiar Contraseña</a></li>
-          </ul>
-        </li>
-
-
-
-        <li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
-  <li><a href="">Hola,<?php echo $_SESSION["nombre"]?></a></li>
       </ul>
 
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
-
-<?php /*
-
-<ul class="nav">
-	<li ><a href="index.php">Inicio</a></li>
-	<li><a href="index.php?mod=slat&men=user&id=2">Mis ETT</a></li>
-	<li ><a href="index.php?mod=slat&men=user&id=3">Mis Escuelas</a></li>
-	<li ><a href="index.php?mod=slat&men=user&id=4">Mis RTI</a></li>
-	<li><a href="index.php?mod=slat&men=admin&id=5">Asignar Mis Escuelas</a></li>
-	<li><a href="">Buscar</a>
-        <ul>
-				<li><a href="index.php?mod=slat&men=referentes&id=1">Referentes</a></li>
-				<li ><a href="index.php?mod=slat&men=escuelas&id=18">Escuelas</a></li>
-         </ul>
-    </li>
-	<li><a href="index.php?mod=slat&men=escuelas&id=12">ADM</a></li>
-	<li><a href="">Encuentros</a>
-        <ul>
-            <li><a href="index.php?mod=slat&men=encuentros&id=1">Nuevo Primaria</a></li>
-            <li><a href="index.php?mod=slat&men=encuentros&id=2">Mis Encuentros</a></li>
-            <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
-         </ul>
-   </li>
-	 <li><a href="">Mi Perfil</a>
-        <ul>
-            <li><?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."'>";?>Actualizar</a></li>
-            <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?>Cambiar Contraseña</a></li>
-         </ul>
-    </li>
-	<li ><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
-	<li><a href="">Hola,<?php echo $_SESSION["nombre"]?></a></li>
-</ul>*/
-?>

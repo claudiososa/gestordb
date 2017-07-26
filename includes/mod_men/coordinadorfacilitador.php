@@ -35,8 +35,14 @@
                   <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?>Cambiar Contraseña</a></li>
           </ul>
         </li>
-<li class=""><a href="index.php?mod=slat&men=doc&id=1">Documentos<span class="sr-only">(current)</span></a></li>
-        </li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentos<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+                <li class=""><a href="index.php?mod=slat&men=doc&id=1">Ver Documentación<span class="sr-only">(current)</span></a></li>
+                <li class=""><a href="index.php?mod=slat&men=informe&id=17">Subir Documento Nuevo<span class="sr-only">(current)</span></a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=20">Listar Documentos</a></li>
+        </ul>
+      </li>
         <li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
   <li><a href="">Hola,<?php echo $_SESSION["nombre"]?></a></li>
       </ul>

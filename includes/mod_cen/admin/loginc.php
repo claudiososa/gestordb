@@ -45,8 +45,12 @@
 		$c_persona= new Persona($d_referente->personaId);
 		$b_persona=$c_persona->buscar();
 		$d_persona=mysqli_fetch_object($b_persona);
+    
 
 		$_SESSION["username"]=$d_persona->dni;
+		$_SESSION["nombre"]=$d_persona->nombre;
+		$_SESSION["personaId"]=$d_persona->personaId;
+
 		$_SESSION["referenteId"]=$d_referente->referenteId;
 		//$referente= new Referente($elemento->referenteId);
 
@@ -55,8 +59,7 @@
 		//$persona="SELECT referentes.referenteId,personas.nombre,personas.apellido,personas.personaId FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE referenteId=".$elemento->referenteId."";
 		//$result=$conexion->query($persona);
 		//$dato=mysqli_fetch_object($result);
-		$_SESSION["nombre"]=$d_persona->nombre;
-		$_SESSION["personaId"]=$d_persona->personaId;
+
 
 
 		echo '<script type="text/javascript">';
