@@ -7,7 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php">DBMS 2017</a>
+      <a class="navbar-brand" href="index.php"><div class="glyphicon glyphicon glyphicon-home">
+      </div></a>
     </div>
 
 
@@ -36,17 +37,9 @@
         </li>
 
 
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Perfil <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-                  <li><?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."'>";?>Actualizar</a></li>
-                  <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?>Cambiar Contraseña</a></li>
-          </ul>
-        </li>
 <li class=""><a href="index.php?mod=slat&men=doc&id=1">Documentos<span class="sr-only">(current)</span></a></li>
         </li>
-        <li><a href="index.php?men=user&id=1">Cerrar Sesión</a></li>
-  <li><a href="">Hola,<?php echo $_SESSION["nombre"]?></a></li>
+
       </ul>
 
 

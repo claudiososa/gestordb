@@ -7,7 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-
+      <a class="navbar-brand" href="index.php"><div class="glyphicon glyphicon glyphicon-home">
+      </div></a>
     </div>
 
 
@@ -35,7 +36,7 @@
           </ul>
         </li>
 
-          
+
         <li class=""><a href="index.php?mod=slat&men=doc&id=1">Documentos<span class="sr-only">(current)</span></a></li>
 
 
