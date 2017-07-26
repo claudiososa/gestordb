@@ -55,6 +55,23 @@
 
 				}
 				break;
+				case "mensajes":
+					switch ($id) {
+						case 1:
+							include("includes/mod_cen/mensajes/nuevoMensaje.php");
+							break;
+						case 2:
+							include("includes/mod_cen/referentes/referente_vermas.php");
+							break;
+						case 3:
+							include("includes/mod_cen/admin/referente_editar_admin.php");
+							break;
+						case 4:
+							include("includes/mod_cen/admin/referente_editado.php");
+							break;
+
+					}
+					break;
 			case "referentes":
 				switch ($id) {
 					case 1:

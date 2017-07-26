@@ -2,18 +2,15 @@
 <div class="container-fluid">
   <!-- Brand and toggle get grouped for better mobile display -->
 <div class="row">
-<div class="col-xs-6">
-  <img src="img/iconos/logodbms.png" alt="DBMS Conectar" style="margin-top:10px;margin-bottom:10px">
+<div class="col-xs-6" style="margin-top:10px;margin-bottom:10px">
+  <img src="img/iconos/logodbms.png" alt="DBMS Conectar" >
 
 </div>
 
-<div class=" pull-right">
-
-
-
+<div class=" pull-right" style="margin-top:10px;margin-bottom:10px">
     <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><?php
+        <li class="dropdown" style="margin-right:14px">
+          <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style='color:#068587'><?php
           if(strpos($_SESSION["nombre"],' ')==0){
           echo ucwords(strtolower($_SESSION["nombre"]));
         }else{
