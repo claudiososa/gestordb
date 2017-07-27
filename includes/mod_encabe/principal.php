@@ -2,13 +2,14 @@
 <div class="container-fluid">
   <!-- Brand and toggle get grouped for better mobile display -->
 <div class="row">
+  <?php
+  if ($_SESSION["nombre"]) {
+    ?>
 <div class="col-xs-6" style="margin-top:10px;margin-bottom:10px">
   <img src="img/iconos/logodbms.png" alt="DBMS Conectar" >
 
 </div>
-<?php
-if ($_SESSION["nombre"]) {
-  ?>
+
   <div class=" pull-right" style="margin-top:10px;margin-bottom:10px">
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown" style="margin-right:14px">
@@ -35,6 +36,7 @@ if ($_SESSION["nombre"]) {
 }else{
   ?>
   <div class="col-xs-6" style="margin-top:10px;margin-bottom:10px">
+    <img src="img/iconos/logodbms.png" alt="DBMS Conectar" >
 
   </div>
   <?php
