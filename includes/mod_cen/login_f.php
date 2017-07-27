@@ -139,7 +139,7 @@ if(isset($_POST["username"]))
 
 
 				default:
-					include_once('includes/mod_cen/portada.php');
+					include_once('includes/mod_cen/portada/portadaAdmin.php');
 					break;
 			}
 		}
