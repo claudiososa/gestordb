@@ -38,32 +38,41 @@ if(isset($_POST["username"]))
 		}
 
 		?>
+
+
 		<!--<script type="text/javascript" src="includes/mod_cen/formularios/js/form_login.js"></script>-->
+		<br>
 		<div class="container" >
+
 	    <div class="row">
-	    <div class="Absolute-Center is-Responsive">
+
+
+
 	    <div class="col-md-4 col-md-offset-4">
+			<div class="well well-sm">
 	<form action="" name="iniciosesion"method="POST">
-		<label class="">Inicio de Sesión</label>
+		<legend class="text-center header">Inicio de Sesión</legend>
 
 			<div class="form-group input-group">
-	      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-			<input class="form-control" type="text" name="username" autofocus=""placeholder="Ingrese Usuario" id="formulario-login"  size="50" required>
+	      <span class="input-group-addon"><i class="glyphicon glyphicon-user" style="color:#068587"></i></span>
+			<input class="form-control" type="text" name="username" autofocus=""placeholder="Ingrese Usuario" style="border-color:rgba(6, 133, 135, 0.55)" id="formulario-login"  size="50" required>
 			</div>
 
 			<div id="alerta" style="display:none;"></div>
-					<div class="form-group input-group">
-	        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	        <input class="form-control" type="password" name="password" placeholder="Ingrese Contraseña" size="50" required>
+					<div class="form-group input-group" >
+	        <span class="input-group-addon"><i class="glyphicon glyphicon-lock" style="color:#068587"></i></span>
+	        <input class="form-control" type="password" name="password" placeholder="Ingrese Contraseña" style="border-color:rgba(6, 133, 135, 0.55)"size="50" required >
 	    </div>
 
-	    <div class="form-group" "input-group">
-	        <button class="btn btn-lg btn-primary btn-block" type="submit" id="btnvalidar" value="Ingresar">Ingresar</button>
+	    <div class="form-group" "input-group" >
+	        <button class="btn btn-lg btn-primary btn-block" type="submit" id="btnvalidar" value="Ingresar" style="background-color:#068587;border-color: #068587;">Ingresar</button>
 		  </div>
 	</form>
+</div>
+</div>
+
 	    </div>
-	    </div>
-	    </div>
+
 	</div>
 	<?php
 	}

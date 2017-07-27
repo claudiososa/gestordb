@@ -34,7 +34,7 @@ if ($_SESSION["nombre"]) {
   <?php
 }else{
   ?>
-  <div class="col-xs-6" style="margin-top:10px;margin-bottom:10px">   
+  <div class="col-xs-6" style="margin-top:10px;margin-bottom:10px">
 
   </div>
   <?php
