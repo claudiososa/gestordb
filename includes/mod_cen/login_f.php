@@ -50,7 +50,7 @@ if(isset($_POST["username"]))
 	    <div class="col-md-4 col-md-offset-4">
 			<div class="well well-sm">
 	<form action="" name="iniciosesion"method="POST">
-		<legend class="text-center header">Inicio de Sesión</legend>
+		<legend class="text-center header" style="color: #068587">Inicio de Sesión</legend>
 
 			<div class="form-group input-group">
 	      <span class="input-group-addon"><i class="glyphicon glyphicon-user" style="color:#068587"></i></span>
