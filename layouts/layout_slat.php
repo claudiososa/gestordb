@@ -14,7 +14,35 @@ session_start();
 			 <script src="js/bootstrap.min.js"></script>
 
 				<script type="text/javascript" src="jquery/jquery.tablesorter.js"></script>
+				<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+				<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+				<script>
+  $( function() {
+    function log( message ) {
+      $( "<div>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
 
+    $( "#birds" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax( {
+          url: "search.php",
+          dataType: "jsonp",
+          data: {
+            term: request.term
+          },
+          success: function( data ) {
+            response( data );
+          }
+        } );
+      },
+      minLength: 2,
+      select: function( event, ui ) {
+        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+      }
+    } );
+  } );
+  </script>
         <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
        	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
        	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>

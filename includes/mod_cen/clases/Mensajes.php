@@ -148,3 +148,27 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 	}
 
 }
+
+if(isset($_POST["referentes"])){
+	$objReferentes=new Referente(null,null,null,null,null,null,null,'Activo');
+	//$objReferentes->estado='Activo';
+
+	$buscarReferentes=$objReferentes->buscar();
+	//$lista=array();
+	$indiceFila=0;
+	$indiceColumna=0;
+	$resultado= [];
+	if(mysqli_num_rows($buscarReferentes)>0) {
+		while($fila = mysqli_fetch_object($buscarReferentes))
+		{
+			//$resultado.=$fila->referenteId;
+			array_push($resultado[$fila->referenteId],$fila->nombre);
+			//array_push($data['pussy'], 'wagon');
+			//$resultado.="<option value='".$fila->referenteId."'>".$fila->nombre."</option>";
+		}
+		echo json_encode($resultado);
+
+	}
+
+	echo $resultado;
+}
