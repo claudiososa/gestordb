@@ -35,10 +35,11 @@ $b_mis_informe = $mis_informes->buscar(10);
 
 echo '<div class="container">';
 ?>
+<!--
 <div class="alert alert-info" role="alert">
 	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
 </div>
-
+-->
 
 
 <?php
