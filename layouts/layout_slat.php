@@ -43,7 +43,7 @@ session_start();
 					 </article>
 					 <?php
 					 if ($_SESSION["nombre"]) {
-             echo '<nav class="navbar navbar-inverse" >';
+             echo '<nav class="navbar navbar-default" >';
                     if (file_exists($path_modulo2))
     		       		     include ($path_modulo2);
                     else
