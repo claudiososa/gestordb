@@ -24,6 +24,10 @@ $acceso=0;
     }
   }
 
+  if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
+    $acceso++;
+  }
+
   if ($acceso==0) {
     echo 'Acceso Denegado';
   }else{

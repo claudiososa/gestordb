@@ -2,8 +2,17 @@
 <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
 
     <input type="hidden" id="destino" name="referentes" value="">
+      <?php
+      if ($_GET['id']==3){
+        echo '<label class="control-label" for=""><h3>Mensaje</h3><a class="btn btn-success" href="index.php?men=mensajes&id=2">Ver Mis Mensajes</a></label>';
+      }elseif ($_GET['id']==1) {
+        echo '<label class="control-label" for=""><h3>Nuevo Mensaje</h3></label>';      
+      }
+      ?>
 
-      <label class="control-label" for=""><h3>Nuevo Mensaje</h3></label>
+
+
+
       <?php
       if ($_GET['id']==1) {
         ?>
@@ -34,6 +43,7 @@ if ($_GET['id']==3) {
     </div>
     <div class="col-md-12">
       <p>
+
         <?php
         //var_dump($datoValidado->destinatario);
         $arrayDestino = split(',',$datoValidado->destinatario);
@@ -43,7 +53,25 @@ if ($_GET['id']==3) {
           $referente = new Referente($arrayDestino[$key]);
           $buscarReferente = $referente->buscar();
           $datoReferente = mysqli_fetch_object($buscarReferente);
-          echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';          
+
+          $leido = new MensajesLeidos(null,$_GET['mensajeId'],$datoReferente->referenteId);
+          $buscarLeido = $leido->buscar();
+          if (mysqli_num_rows($buscarLeido)>0) {
+            if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
+              echo '<b>'.ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'</b> <img src="img/iconos/leido.jpg" width="18" height="12" alt="leido"> - ';
+            }else{
+              echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
+            }
+
+          }else{
+            if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
+              echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'<img src="img/iconos/noleido.jpg" width="18" height="12" alt="leido"> - ';
+            }else{
+              echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
+            }
+          }
+
+
         }
         $datoValidado->destinatario
         ?>

@@ -24,6 +24,6 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
 }
 //$cantidadMensajes=mysqli_num_rows($misMensajes);
 if ($cantidadMensajes>0) {
-  echo '<p class="alert alert-danger">Tienes '.$cantidadMensajes.' mensajes sin leer</p>';
+  echo '<p class="alert alert-danger"> <a href="index.php?men=mensajes&id=2"> Tienes '.$cantidadMensajes.' mensajes sin leer </a></p>';
 }
 ?>
