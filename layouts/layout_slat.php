@@ -9,7 +9,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
        	<meta name="description" content="Sistema de administración de base de datos de Conectar Salta">
        	<meta name="keywords" content="conectar,dbms,salta">
-       	<link rel="shortcut icon" href="img/iconos/favicon.ico">
+       	<link rel="shortcut icon" href="img/iconos/logo_icono.png">
 				<script src="js/jquery-3.1.0.min.js"></script>
 			 <script src="js/bootstrap.min.js"></script>
 
