@@ -49,17 +49,16 @@ session_start();
     		       		     include ($path_modulo2);
                     else
     		       		     die ('error al cargar el modulosssss');
-												echo '</nav>';
+							echo '</nav>';
+							echo '<article>';
 
-												echo '<article>';
+							 if (file_exists($path_modulo1))
+		 								 include ($path_modulo1);
+	 						 else
+		 								 die ('error al cargar el modulo');
 
-					 						 if (file_exists($path_modulo1))
-					 								 include ($path_modulo1);
-					 						 else
-					 								 die ('error al cargar el modulo');
-					 						 
-					 					 echo '</article>';
-											}
+		 					 echo '</article>';
+									}
 
 	   		 		?>
              <div class="row">

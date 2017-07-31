@@ -6,7 +6,7 @@
       if ($_GET['id']==3){
         echo '<label class="control-label" for=""><h3>Mensaje</h3><a class="btn btn-success" href="index.php?men=mensajes&id=2">Ver Mis Mensajes</a></label>';
       }elseif ($_GET['id']==1) {
-        echo '<label class="control-label" for=""><h3>Nuevo Mensaje</h3></label>';      
+        echo '<label class="control-label" for=""><h3>Nuevo Mensaje</h3></label>';
       }
       ?>
 
@@ -46,7 +46,7 @@ if ($_GET['id']==3) {
 
         <?php
         //var_dump($datoValidado->destinatario);
-        $arrayDestino = split(',',$datoValidado->destinatario);
+        $arrayDestino = explode(",",$datoValidado->destinatario);
         //var_dump($arrayDestino);
         foreach ($arrayDestino as $key => $value) {
           //echo $arrayDestino[$key].'<br>';
