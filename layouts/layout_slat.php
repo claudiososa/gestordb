@@ -43,13 +43,10 @@ session_start();
 						 ?>
 					 </article>
 					 <?php
-<<<<<<< HEAD
-					 if ($_SESSION["nombre"]) {
-             echo '<nav class="navbar navbar-default" >';
-=======
+
 					 if (isset($_SESSION["nombre"])) {
              echo '<nav class="navbar navbar-inverse" >';
->>>>>>> upstream/master
+
                     if (file_exists($path_modulo2))
     		       		     include ($path_modulo2);
                     else
@@ -62,7 +59,7 @@ session_start();
 					 								 include ($path_modulo1);
 					 						 else
 					 								 die ('error al cargar el modulo');
-					 						 
+
 					 					 echo '</article>';
 											}
 
