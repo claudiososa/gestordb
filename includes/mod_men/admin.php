@@ -26,6 +26,7 @@
 
 		<li><a href="index.php?mod=slat&men=escuelas&id=9">Informe Escuelas</a></li>
 		<li><a href="index.php?mod=slat&men=escuelas&id=12">ADM</a></li>
+    <li><a href="index.php?mod=slat&men=mensajes&id=1">Mensajes Nuevo</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -66,7 +67,7 @@
 		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>
 
 
-          
+
 
         </li>
 

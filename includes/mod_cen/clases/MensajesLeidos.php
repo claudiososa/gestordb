@@ -3,28 +3,22 @@ include_once('conexion.php');
 include_once("referente.php");
 include_once("maestro.php");
 
-class Mensajes
+class MensajesLeidos
 {
+	private $mensajesLeidosId;
 	private $mensajeId;
  	private $referenteId;
- 	private $asunto;
- 	private $contenido;
-	private $destinatario;
  	private $fechaHora;
 
-function __construct($mensajeId=NULL,
+function __construct(	$mensajesLeidosId=NULL,
+											$mensajeId=NULL,
                       $referenteId=NULL,
-                      $asunto=NULL,
-                      $contenido=NULL,
-                      $destinatario=NULL,
 	                    $fechaHora=NULL
                       )
 	{
+		$this->mensajesLeidosId = $mensajesLeidosId;
 		$this->mensajeId = $mensajeId;
  		$this->referenteId = $referenteId;
- 		$this->asunto =$asunto;
- 		$this->contenido =$contenido;
-		$this->destinatario = $destinatario;
  		$this->fechaHora = $fechaHora;
 	}
 
@@ -34,12 +28,10 @@ function __construct($mensajeId=NULL,
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO mensajes (mensajeId,referenteId,asunto,contenido,destinatario,fechaHora)
+		$sentencia="INSERT INTO mensajesLeidos (mensajesLeidosid,mensajeId,referenteId,fechaHora)
 		            VALUES (NULL,
+												'". $this->mensajeId."',
                         '". $this->referenteId."',
-                        '".$this->asunto."',
-                        '". $this->contenido."',
-                        '". $this->destinatario."',
                         '". $this->fechaHora."');
                         ";
 
@@ -58,11 +50,10 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
     $sinParam=0;
-		$sentencia="SELECT mensajes.mensajeId,mensajes.referenteId,mensajes.asunto,mensajes.contenido
-									,mensajes.destinatario,mensajes.fechaHora,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
-									FROM mensajes
+		$sentencia="SELECT mensajesLeidos.mensajeId,mensajesLeidos.referenteId,mensajesLeidos.fechaHora,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
+									FROM mensajesLeidos
 									INNER JOIN referentes
-									ON referentes.referenteId=mensajes.referenteId
+									ON referentes.referenteId=mensajesLeidos.referenteId
 									INNER JOIN personas
 									ON personas.personaId=referentes.personaId ";
 									$sentencia.=" WHERE 1";
@@ -92,32 +83,17 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 			$sentencia.=" AND ";
   		if($this->mensajeId!=NULL)
   		{
-  			$sentencia.=" mensajes.mensajeId = $this->mensajeId && ";
+  			$sentencia.=" mensajesLeidos.mensajeId = $this->mensajeId && ";
   		}
 
   		if($this->referenteId!=NULL)
   		{
-  			$sentencia.=" mensajes.referenteId = $this->referenteId && ";
-  		}
-
-  		if($this->asunto!=NULL)
-  		{
-  			$sentencia.=" mensajes.asunto LIKE '%$this->asunto%' && ";
-  		}
-
-      if($this->contenido!=NULL)
-      {
-        $sentencia.=" mensajes.contenido LIKE '%$this->contenido%' && ";
-      }
-
-  		if($this->destinatario!=NULL)
-  		{
-  			$sentencia.=" mensajes.destinatario=$this->destinatario && ";
+  			$sentencia.=" mensajesLeidos.referenteId = $this->referenteId && ";
   		}
 
   		if($this->fechaHora!=NULL)
   		{
-  			$sentencia.=" mensajes.fechaHora='$this->fechaHora' && ";
+  			$sentencia.=" mensajesLeidos.fechaHora='$this->fechaHora' && ";
   		}
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 		}
@@ -125,11 +101,11 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		  // fin else
 
 
-		$sentencia.="  ORDER BY mensajes.mensajeId DESC";
+		$sentencia.="  ORDER BY mensajesLeidos.mensajesLeidosId DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-	//	echo $sentencia.'<br><br>';
+		//echo $sentencia.'<br><br>';
 		return $conexion->query($sentencia);
 	}
 
@@ -147,30 +123,4 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		$this->$var=$valor;
 	}
 
-}
-
-if(isset($_POST["term"])){
-
-	$objReferentes=new Referente(null,null,null,null,null,null,null,'Activo');
-	//$objReferentes->estado='Activo';
-
-	$buscarReferentes=$objReferentes->buscar();
-	//$lista=array();
-	$indiceFila=0;
-	$indiceColumna=0;
-	$resultado= [];
-	if(mysqli_num_rows($buscarReferentes)>0) {
-		while($fila = mysqli_fetch_object($buscarReferentes))
-		{
-			$resultado[]=$fila->nombre;
-			//$resultado.=$fila->referenteId;
-		//	array_push($resultado[$fila->referenteId],$fila->nombre);
-			//array_push($data['pussy'], 'wagon');
-			//$resultado.="<option value='".$fila->referenteId."'>".$fila->nombre."</option>";
-		}
-		echo json_encode($resultado);
-
-	}
-
-	echo $resultado;
 }

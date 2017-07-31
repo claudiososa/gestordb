@@ -1,71 +1,34 @@
-<script src="includes/mod_cen/js/s_ajax_mensajeNuevo.js"></script>
-<script>
 
-function serialize(arr)
-{
-var res = 'a:'+arr.length+':{';
-for(i=0; i<arr.length; i++)
-{
-res += 'i:'+i+';s:'+arr[i].length+':"'+arr[i]+'";';
-}
-res += '}';
-
-$('#destino').val(res);
-//return res;
-}
-
-$(document).ready(function() {
-  let arrayDestinatario = [];
-   function log( message ) {
-     $( "<div>" ).text( message ).prependTo( "#log" );
-     $( "#log" ).scrollTop( 0 );
-   }
-
-   $( "#birds" ).autocomplete({
-     source: function( request, response ) {
-       $.ajax( {
-         url: "includes/mod_cen/clases/MensajesAjax.php",
-         dataType: "json",
-         data: {
-           term: request.term
-         },
-         success: function( data ) {
-           //console.log(data);
-           response( data );
-         }
-       } );
-     },
-     minLength: 2,
-     select: function( event, ui ) {
-
-      if (arrayDestinatario.indexOf(ui.item.id) == -1) {
-        console.log(arrayDestinatario.indexOf(ui.item.id));
-        $('#destinatario').append(`<p id='${ui.item.id}'> - ${ui.item.value} - ${ui.item.email} - <img src="img/iconos/delete.jpg" alt="Eliminar">  </p>`);
-        arrayDestinatario.push(ui.item.id);
-        //$('#asunto').attr.value('mesa');
-        serialize(arrayDestinatario);
-        console.log($('#birds').val('seleccinodo'));
-        $('#birds').val('');
-        return false;
-      }else{
-        $('#birds').val('');
-        return false;
-      }
-
-      // alert('Selecciono' + ui.item.value);
-
-
-      console.log(arrayDestinatario);
-
-    //   log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-     }
-   } );
- } );
- </script>
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
+include_once("includes/mod_cen/clases/MensajesLeidos.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/img.php");
+
+$encontrado = 0;
+$mensaje = new Mensajes($_GET['mensajeId']);
+$buscarMensaje = $mensaje->buscar();
+
+if (mysqli_num_rows($buscarMensaje)==0) {
+  echo 'Acceso Denegado';
+}else{
+
+$datoMensaje = mysqli_fetch_object($buscarMensaje);
+$acceso=0;
+  //echo $fila->destinatario.'<br>';
+  $arrayDestino = split(',',$datoMensaje->destinatario);
+  foreach ($arrayDestino as $key => $value) {
+    //echo $arrayDestino[$key].'<br>';
+    if ($arrayDestino[$key]==$_SESSION['referenteId']) {
+      $acceso++;
+    }
+  }
+
+  if ($acceso==0) {
+    echo 'Acceso Denegado';
+  }else{
+
+
 
 $nuevo=0;
 if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de mensaje nuevo ingresa aqui
@@ -160,8 +123,18 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
 
 
 }else{
-	$mensaje = new Mensajes();
+  $fecha=date("Y-m-d H:i:s");
+  $leer = new MensajesLeidos(null,$_GET['mensajeId'],$_SESSION['referenteId'],$fecha);
+  $agregarLeido = $leer->agregar();
+
+
+	$mensajeValidado = new Mensajes($_GET['mensajeId']);
+
+  $buscarMensaje=$mensajeValidado->buscar();
+  $datoValidado=mysqli_fetch_object($buscarMensaje);
   $nuevo=1;
 	include_once("includes/mod_cen/formularios/f_mensaje.php");
 
+}
+}
 }

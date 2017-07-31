@@ -3,7 +3,7 @@
   <!-- Brand and toggle get grouped for better mobile display -->
 <div class="row">
   <?php
-  if ($_SESSION["nombre"]) {
+  if (isset($_SESSION["nombre"])) {
     ?>
 <div class="nav navbar-header col-xs-5" style="margin-top:15px;margin-bottom:10px">
   <img class="img-responsive"src="img/iconos/logodbms.png" alt="DBMS Conectar" >
