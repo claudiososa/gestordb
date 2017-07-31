@@ -16,7 +16,7 @@ if (mysqli_num_rows($buscarMensaje)==0) {
 $datoMensaje = mysqli_fetch_object($buscarMensaje);
 $acceso=0;
   //echo $fila->destinatario.'<br>';
-  $arrayDestino = split(',',$datoMensaje->destinatario);
+  $arrayDestino = explode(',',$datoMensaje->destinatario);
   foreach ($arrayDestino as $key => $value) {
     //echo $arrayDestino[$key].'<br>';
     if ($arrayDestino[$key]==$_SESSION['referenteId']) {

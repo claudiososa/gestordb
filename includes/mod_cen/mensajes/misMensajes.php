@@ -1,7 +1,7 @@
 <div class="container">
   <?php
   if (isset($_GET['enviados'])) {
-    echo '<p><h3>Mis Mensajes Enviados</h3> <a class="btn btn-success" href="index.php?men=mensajes&id=1">Mensaje Nuevo</a>';  
+    echo '<p><h3>Mis Mensajes Enviados</h3> <a class="btn btn-success" href="index.php?men=mensajes&id=1">Mensaje Nuevo</a>';
   }else{
     echo '<p><h3>Mis Mensajes Recibidos</h3> <a class="btn btn-success" href="index.php?men=mensajes&id=1">Mensaje Nuevo</a>';
   }
@@ -53,7 +53,8 @@ $misMensajes = $objMensaje->buscar();
 
 while ($fila = mysqli_fetch_object($misMensajes)) {
   //echo $fila->destinatario.'<br>';
-  $arrayDestino = split(',',$fila->destinatario);
+  $arrayDestino = explode(',',$fila->destinatario);
+  //var_dump($arrayDestino);
   foreach ($arrayDestino as $key => $value) {
     //echo $arrayDestino[$key].'<br>';
     if ($arrayDestino[$key]==$_SESSION['referenteId']) {

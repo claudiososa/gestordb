@@ -1,6 +1,7 @@
 <?php
-include_once ('includes/mod_cen/clases/Mensajes.php');
-include_once ('includes/mod_cen/clases/MensajesLeidos.php');
+
+include_once('includes/mod_cen/clases/Mensajes.php');
+include_once('includes/mod_cen/clases/MensajesLeidos.php');
 $cantidadMensajes=0;
 //creo un objeto nuevo del tipo Mensajes, con el atributo referenteId seteado. Ademas busco si el referente actual tiene mensajes recibidos
 $objMensaje = new Mensajes();
@@ -8,7 +9,7 @@ $misMensajes = $objMensaje->buscar();
 
 while ($fila = mysqli_fetch_object($misMensajes)) {
   //echo $fila->destinatario.'<br>';
-  $arrayDestino = split(',',$fila->destinatario);
+  $arrayDestino = explode(',',$fila->destinatario);
   foreach ($arrayDestino as $key => $value) {
     //echo $arrayDestino[$key].'<br>';
     if ($arrayDestino[$key]==$_SESSION['referenteId']) {
@@ -26,4 +27,5 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
 if ($cantidadMensajes>0) {
   echo '<p class="alert alert-danger"> <a href="index.php?men=mensajes&id=2"> Tienes '.$cantidadMensajes.' mensajes sin leer </a></p>';
 }
+
 ?>
