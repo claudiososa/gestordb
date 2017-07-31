@@ -67,7 +67,7 @@
 							include("includes/mod_cen/mensajes/leerMensaje.php");
 							break;
 						case 4:
-						
+
 							break;
 
 					}
@@ -104,6 +104,9 @@
 					case 10:
 							include("includes/mod_cen/referentes/rti_ver.php");
 							break;
+					case 11:
+								include("includes/mod_cen/facilitador/verxEscuelas.php");
+								break;
 				}
 				break;
 			case "escuelas":

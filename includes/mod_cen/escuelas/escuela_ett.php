@@ -5,6 +5,7 @@ include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/informe.php");
+include_once("includes/mod_cen/clases/FacilEscuelas.php");
 include_once('includes/mod_cen/clases/director.php');//Agregada Arredes
 include_once('includes/mod_cen/clases/supervisor.php');//Agregada Arredes
 include_once('includes/mod_cen/clases/rti.php');//Agregada Arredes
@@ -226,6 +227,7 @@ $con_ubicacion=0;
 					echo "<th>Autoridad</th>";
 					echo "<th>Supervisor</th>";
 					echo "<th>RTI</th>";
+					echo "<th>Facilitador</th>";
 				echo "</tr>";
 			echo "</thead>";
 			echo "<tbody>";
@@ -300,7 +302,20 @@ while ($fila = mysqli_fetch_object($resultado))
 	{
 		echo "<a class='btn btn-danger' role='button' href='index.php?mod=slat&men=referentes&id=8&escuelaId=".$fila->escuelaId."' font-weight:bold' >0</a>";
 	}
-	echo "</td>";
+echo "</td>";
+	$facilitador = new FacilEscuelas(null,$fila->escuelaId);
+	$buscarFacil= $facilitador->buscar();
+	$datoFacilitador =  mysqli_fetch_object($buscarFacil);
+	$cantFaciliador = mysqli_num_rows($buscarFacil);
+	echo '<td>';
+	if ($cantFaciliador>0) {
+		echo '<a class="btn btn-success" href="index.php">'.$cantFaciliador.'</a>';
+	}else{
+		echo '<span class="btn btn-danger disabled">'.$cantFaciliador.'</span>';
+	}
+	echo	'</td>';
+
+
 	echo "</tr>";
 	echo "\n";
 
