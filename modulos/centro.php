@@ -61,13 +61,13 @@
 							include("includes/mod_cen/mensajes/nuevoMensaje.php");
 							break;
 						case 2:
-							include("includes/mod_cen/referentes/referente_vermas.php");
+							include("includes/mod_cen/mensajes/misMensajes.php");
 							break;
 						case 3:
-							include("includes/mod_cen/admin/referente_editar_admin.php");
+							include("includes/mod_cen/mensajes/leerMensaje.php");
 							break;
 						case 4:
-							include("includes/mod_cen/admin/referente_editado.php");
+						
 							break;
 
 					}

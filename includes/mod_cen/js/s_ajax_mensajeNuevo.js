@@ -1,27 +1,5 @@
 $(document).ready(function () {
 
-  let referentes = 'si'
-  $.ajax({
-    url: 'includes/mod_cen/clases/Mensajes.php',
-    type: 'post',
-    dataType: 'html',
-    data: {referentes:referentes},
-    success: function(data, textStatus, xhr) {
-      alert(data)
-      //$("#divsubtipo").html(data);
-    }
-
-  })
-  .done(function() {
-    console.log("success");
-  })
-  .fail(function() {
-    console.log("error");
-  })
-  .always(function() {
-    console.log("complete");
-  });
-
 
   $("#input-img").fileinput({
       browseClass: "btn btn-success btn-block",

@@ -169,20 +169,32 @@ class Referente
 		return $conexion->query($sentencia);
 	}
 
-	public function buscar()
+	public function buscar($nombrePersona=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
+		if(isset($nombrePersona))
+		{
+			$sentencia="SELECT referentes.referenteId,personas.email, CONCAT(LOWER(personas.apellido),' ',LOWER(personas.nombre)) AS nombre ";
+			//$$sentencia="SELECT referentes.referenteId, personas.nombre) ";
+		}else{
+			$sentencia="SELECT
+												referentes.referenteId,referentes.personaId ,referentes.tipo ,referentes.rol ,referentes.etjcargo,
+												referentes.fechaIngreso,referentes.titulo,referentes.estado,referentes.etjcargo2,personas.nombre,personas.apellido,personas.telefonoM,personas.telefonoC,personas.email	";
+		}
 
-		$sentencia="SELECT
-											referentes.referenteId,referentes.personaId ,referentes.tipo ,referentes.rol ,referentes.etjcargo,
-											referentes.fechaIngreso,referentes.titulo,referentes.estado,referentes.etjcargo2,personas.nombre,personas.apellido,personas.telefonoM,personas.telefonoC,personas.email
-							 FROM referentes
+	 $sentencia.=" FROM referentes
 							 JOIN personas
 							 ON referentes.personaId=personas.personaId";
 		if($this->referenteId!=NULL ||$this->personaId!=NULL ||$this->personaId!=NULL || $this->tipo!=NULL || $this->rol!=NULL || $this->etjcargo!=NULL || $this->fechaIngreso!=NULL || $this->titulo!=NULL || $this->estado!=NULL || $this->etjcargo2!=NULL )
 		{
 			$sentencia.=" WHERE ";
+
+			if(isset($nombrePersona))
+			{
+				$sentencia.=" (personas.nombre LIKE '%$nombrePersona%' || personas.apellido LIKE '%$nombrePersona%') && ";
+				//$sentencia.=" personas.nombre LIKE '%$nombrePersona%' && ";
+			}
 
 		if($this->referenteId!=NULL)
 		{
@@ -221,7 +233,7 @@ class Referente
 
 		if($this->estado!=NULL)
 		{
-			$sentencia.=" estado = '$this->estado' && ";
+			$sentencia.=" referentes.estado = '$this->estado' && ";
 		}
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
