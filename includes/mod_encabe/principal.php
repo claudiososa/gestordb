@@ -27,7 +27,7 @@
                 <li><?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."'>";?><span class="glyphicon glyphicon glyphicon-pencil pull-left" style="color:#068587"></span>&nbsp&nbsp Actualizar Perfil</a></li>
                 <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?><span class="glyphicon glyphicon glyphicon-lock pull-left" style="color:#068587"></span>&nbsp&nbspCambiar Contraseña</a></li>
                 <li class="divider"></li>
-                <li><a href="index.php?men=user&id=1">&nbsp&nbspCerrar Sesión <span class="glyphicon glyphicon glyphicon-off pull-left" style="color:#068587"></span></a></li>
+                <li><a href="index.php?men=user&id=1"><span class="glyphicon glyphicon glyphicon-off pull-left" style="color:#068587"></span>&nbsp&nbspCerrar Sesión </a></li>
           </ul>
           </li>
           </ul>
