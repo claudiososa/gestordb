@@ -309,7 +309,7 @@ echo "</td>";
 	$cantFaciliador = mysqli_num_rows($buscarFacil);
 	echo '<td>';
 	if ($cantFaciliador>0) {
-		echo '<a class="btn btn-success" href="index.php">'.$cantFaciliador.'</a>';
+		echo '<a class="btn btn-success" href="index.php?mod=slat&men=referentes&id=11&escuelaId='.$fila->escuelaId.'">'.$cantFaciliador.'</a>';
 	}else{
 		echo '<span class="btn btn-danger disabled">'.$cantFaciliador.'</span>';
 	}

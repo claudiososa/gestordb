@@ -73,7 +73,14 @@ function __construct($facilEscuelasId=NULL,
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-	  $sentencia="SELECT * FROM facilEscuelas";
+	  $sentencia="SELECT facilEscuelas.escuelaId,facilEscuelas.referenteId,
+												personas.nombre,personas.apellido,personas.telefonoM,
+												personas.telefonoC,personas.email
+								FROM facilEscuelas
+								INNER JOIN referentes
+								ON referentes.referenteId=facilEscuelas.referenteId
+								INNER JOIN personas
+								ON personas.personaId=referentes.personaId ";
 
 
 		if($this->facilEscuelasId!=NULL || $this->escuelaId!=NULL || $this->referenteId!=NULL)
