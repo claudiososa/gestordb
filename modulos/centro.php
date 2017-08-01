@@ -420,6 +420,9 @@
 						case 1:
 								include("includes/mod_cen/estadisticas/estadisPermer.php");
 								break;
+						case 2:
+								include("includes/mod_cen/estadisticas/estadisticaDispositivo1.php");
+								break;
 						}
 						break;
 				case "informe":

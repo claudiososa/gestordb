@@ -47,6 +47,10 @@ public function iniciarSesion()
 			$dato=mysqli_fetch_object($result);
 			$_SESSION["nombre"]=$dato->nombre;
 			$_SESSION["personaId"]=$dato->personaId;
+		
+		// llamamos al script que determina que dispositivo esta usando
+			include_once("includes/mod_cen/dispositivoAcceso.php");
+
 		}else{
         echo "error";
 		}
