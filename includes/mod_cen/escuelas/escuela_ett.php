@@ -216,7 +216,7 @@ $con_ubicacion=0;
 		echo '<div class="table-responsive">';
 		echo "<table id='tableEscuelas' class='table table-hover table-striped table-condensed tablesorter'>";
 		  echo "<thead>";
-				echo "<tr class='info' ><th>CUE</th>";
+				echo "<tr class='info' >";
 					echo "<th>Nº</th>";
 					echo "<th>Nombre</th>";
 					echo "<th>Nivel</th>";
@@ -234,7 +234,7 @@ $con_ubicacion=0;
 while ($fila = mysqli_fetch_object($resultado))
 {
 	echo "<tr>";
-	echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=3&escuelaId=".$fila->escuelaId."'>".$fila->cue."</a></td>";
+	//echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=3&escuelaId=".$fila->escuelaId."'>".$fila->cue."</a></td>";
 	echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=3&escuelaId=".$fila->escuelaId."'>".$fila->numero."</a></td>";
 	echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=3&escuelaId=".$fila->escuelaId."'>".$fila->nombre."</a></td>";
 	echo "<td>".$fila->nivel."</td>";

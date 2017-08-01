@@ -20,7 +20,7 @@ session_start();
        	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
        	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
        	<link rel="stylesheet" href="css/style.css"/>
-        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/bootstrap.css?1"/>
 
 				<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 				<script src="js/fileinput.min.js"></script>

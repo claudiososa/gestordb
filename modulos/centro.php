@@ -151,6 +151,7 @@
 								$escuela = new FacilEscuelas(null,null,$_SESSION["referenteId"]);
 								$b_escuela = $escuela->buscar();
 								$dato_escuela=mysqli_num_rows($b_escuela);
+
 							}
 
 								if($dato_escuela>0 || $_SESSION['tipo']=='admin') {

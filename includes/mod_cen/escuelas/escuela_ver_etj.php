@@ -315,6 +315,27 @@ if(($_POST))
 								 echo "<div>".$datoEtt->email."</div>";
 								 echo "<br></div>";
 
+								 	$facilitador = new FacilEscuelas(null,$fila->escuelaId);
+								 	$buscarFacil= $facilitador->buscar();
+
+									if (mysqli_num_rows($buscarFacil)>0) {
+										echo '<div class="col-md-6">';
+										echo '<div class="alert alert-success" role="alert">Facilitador Escuela del Futuro</div>';
+										while ($filaEscuela = mysqli_fetch_object($buscarFacil))
+										{
+											echo"<div><b>Apellido y Nombre</b></div>";
+											echo "<div>".$filaEscuela->apellido.", ".$filaEscuela->nombre."</div>";
+											echo"<div><b>Teléfono</b></div>";
+											echo "<div>".$filaEscuela->telefonoM." / ".$filaEscuela->telefonoC."</div>";
+											echo"<div><b>Correo Electrónico</b></div>";
+											echo "<div>".$filaEscuela->email."</div>";
+											echo "<br>";
+										}
+										echo "</div>";
+									}
+
+
+
 								 echo '<div class="col-md-6">';
 								 echo '<div class="alert alert-success" role="alert">Referente ETJ Conectar Igualdad</div>';
 								 echo"<div><b>Apellido y Nombre</b></div>";

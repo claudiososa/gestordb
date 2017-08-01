@@ -42,37 +42,7 @@ $dato_persona=mysqli_fetch_object($buscandopersona);
 
 
 $cantidad = mysqli_num_rows($resultado);
-$escuela->nivel="Secundaria Común";
-$sc_nivel=$escuela->buscar();
-$csc_nivel= mysqli_num_rows($sc_nivel);
 
-$escuela->nivel="Secundaria Técnica";
-$st_nivel=$escuela->buscar();
-$cst_nivel= mysqli_num_rows($st_nivel);
-
-$escuela->nivel="Secundaria Rural";
-$sr_nivel=$escuela->buscar();
-$csr_nivel= mysqli_num_rows($sr_nivel);
-
-$escuela->nivel="Primaria Común";
-$pc_nivel=$escuela->buscar();
-$cpc_nivel= mysqli_num_rows($pc_nivel);
-
-$escuela->nivel="Primaria Especial";
-$pe_nivel=$escuela->buscar();
-$cpe_nivel= mysqli_num_rows($pe_nivel);
-
-
-$escuela->nivel="ISFD";
-$t_nivel=$escuela->buscar();
-$ct_nivel= mysqli_num_rows($t_nivel);
-
-$escuela->nivel="Sin registrar";
-$registrar_nivel=$escuela->buscar();
-$sin_nivel= mysqli_num_rows($registrar_nivel);
-$cantidad=0;
-$primero=0;
-$con_ubicacion=0;
 ?>
 				<script type="text/javascript">
 				var map;

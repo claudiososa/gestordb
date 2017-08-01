@@ -15,7 +15,6 @@ class Escuela
 	private $localidadId;
  	private $turnos;
  	private $telefono;
-	private $email;
 	private $supervisorid;//Agregado por arredes en todos los metodos
 	private $ubicacion;
 	private $sitio;
@@ -27,6 +26,7 @@ class Escuela
 	private $referenteIdSuperSup;
 	private $referenteIdSuperAdultos;
 	private $referenteIdFacilitador;
+	private $email;
 
  	function __construct($escuelaId=NULL,
 											$referenteId=NULL,
@@ -38,7 +38,6 @@ class Escuela
 											$localidadId=NULL,
 											$turnos=NULL,
 											$telefono=NULL,
-											$email=NULL,
 											$supervisorid=NULL,
 											$ubicacion=NULL,
 											$sitio=NULL,
@@ -49,7 +48,8 @@ class Escuela
 											$referenteIdSuperSec=NULL,
 											$referenteIdSuperSup=NULL,
 											$referenteIdSuperAdultos=NULL,
-											$referenteIdFacilitador=NULL)
+											$referenteIdFacilitador=NULL,
+											$email=NULL)
 	{
 			 //seteo los atributos
 		 	$this->escuelaId = $escuelaId;
@@ -287,6 +287,7 @@ class Escuela
 			  $this->referenteIdSuperSec!=NULL || $this->referenteIdSuperSup!=NULL || $this->referenteIdSuperAdultos!=NULL || $this->referenteIdFacilitador!=NULL)
 		{
 			$sentencia.=" WHERE ";
+
 
 
 		if($this->referenteId!=NULL)

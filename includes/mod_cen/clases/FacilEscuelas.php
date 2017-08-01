@@ -74,7 +74,7 @@ function __construct($facilEscuelasId=NULL,
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 	  $sentencia="SELECT facilEscuelas.escuelaId,facilEscuelas.referenteId,
-												personas.nombre,personas.apellido,personas.telefonoM,
+												personas.nombre,personas.apellido,personas.telefonoM,personas.dni,
 												personas.telefonoC,personas.email
 								FROM facilEscuelas
 								INNER JOIN referentes
@@ -100,7 +100,7 @@ function __construct($facilEscuelasId=NULL,
 
 		if($this->referenteId!=NULL)
 		{
-			$sentencia.=" referenteId=$this->referenteId && ";
+			$sentencia.=" facilEscuelas.referenteId=$this->referenteId && ";
 		}
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);

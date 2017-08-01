@@ -14,6 +14,7 @@ $referenteId=$_SESSION['referenteId'];
 $escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
 $escuelas_ett= $escuela->buscar();
 $resultado = $escuela->Cargo($_SESSION["tipo"]);
+//var_dump($resultado);
 $referente= new Referente($referenteId);
 $buscandoreferente=$referente->buscar();
 $dato=mysqli_fetch_object($buscandoreferente);
@@ -183,15 +184,16 @@ $con_ubicacion=0;
 		echo '<div class="table-responsive">';
 		echo "<table id='tableEscuelas' class='table table-hover table-striped table-condensed tablesorter'>";
 		  echo "<thead>";
-				echo "<tr class='info' ><th>CUE</th>";
+				echo "<tr class='info'>";
 					echo "<th>Nº</th>";
 					echo "<th>Nombre</th>";
-					echo "<th>Nivel</th>";
+					//echo "<th>Nivel</th>";
 					echo "<th>Localidad</th>";
 					echo "<th>Crear Inf.</th>";
 					echo "<th>Supervisión</th>";
 					echo "<th>Conectar</th>";
 					echo "<th>PMI</th>";
+					echo "<th>Esc.Futuro</th>";
 					echo "<th>Autoridad</th>";
 					echo "<th>Supervisor</th>";
 					echo "<th>RTI</th>";
@@ -201,10 +203,10 @@ $con_ubicacion=0;
 while ($fila = mysqli_fetch_object($resultado))
 {
 	echo "<tr>";
-	echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=3&escuelaId=".$fila->escuelaId."'>".$fila->cue."</a></td>";
+	//echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=3&escuelaId=".$fila->escuelaId."'>".$fila->cue."</a></td>";
 	echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=escuelas&id=3&escuelaId=".$fila->escuelaId."'>".$fila->numero."</a></td>";
 	echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=3&escuelaId=".$fila->escuelaId."'>".$fila->nombre."</a></td>";
-	echo "<td>".$fila->nivel."</td>";
+	//echo "<td>".$fila->nivel."</td>";
 	$obj_local= new Localidad($fila->localidadId,null,null);
 	$dato_local=$obj_local->buscar();
 	$localidad=mysqli_fetch_object($dato_local);
@@ -226,6 +228,11 @@ while ($fila = mysqli_fetch_object($resultado))
   $buscarInformePmi=$informe->buscar(null,null,$arrayTipoReferente);
 	$cantPmi = mysqli_num_rows($buscarInformePmi);
 
+	$arrayTipoReferente = array('Facilitador','CoordinadorFacilitador');
+	$buscarInformePmi=$informe->buscar(null,null,$arrayTipoReferente);
+	$cantFacil = mysqli_num_rows($buscarInformePmi);
+
+
 	if($cant==0){
 
 		echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&tipo=supervisor-secundaria&escuelaId=".$fila->escuelaId."'>
@@ -245,6 +252,12 @@ while ($fila = mysqli_fetch_object($resultado))
 		echo "<td><a class='btn btn-danger' href='#'>0</a></td>";
 	}else{
 	 	echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&tipo=pmi&id=2&escuelaId=".$fila->escuelaId."'>$cantPmi</a></td>";
+	}
+
+	if($cantFacil==0){//sino existe informes creados por equipo conectar para este colegio
+		echo "<td><a class='btn btn-danger' href='#'>0</a></td>";
+	}else{
+	 	echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&tipo=facilitador&id=2&escuelaId=".$fila->escuelaId."'>$cantFacil</a></td>";
 	}
 
 

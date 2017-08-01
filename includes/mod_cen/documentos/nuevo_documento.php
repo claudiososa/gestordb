@@ -115,12 +115,12 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
 
           $enviado=$doc_guardado->enviarMail($value,$remitente,$_POST["tituloDoc"]);
           //echo "\n".$destino."\n";
-        
+
         }
 
       }
     }
-  
+
     echo $guardar." ".$enviado;
     echo "Se Guardo con Éxito";
   }

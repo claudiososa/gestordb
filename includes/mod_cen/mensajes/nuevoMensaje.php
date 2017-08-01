@@ -1,71 +1,8 @@
 <script src="includes/mod_cen/js/s_ajax_mensajeNuevo.js"></script>
-<script>
-
-function serialize(arr)
-{
-var res = 'a:'+arr.length+':{';
-for(i=0; i<arr.length; i++)
-{
-res += 'i:'+i+';s:'+arr[i].length+':"'+arr[i]+'";';
-}
-res += '}';
-
-$('#destino').val(res);
-//return res;
-}
-
-$(document).ready(function() {
-  let arrayDestinatario = [];
-   function log( message ) {
-     $( "<div>" ).text( message ).prependTo( "#log" );
-     $( "#log" ).scrollTop( 0 );
-   }
-
-   $( "#birds" ).autocomplete({
-     source: function( request, response ) {
-       $.ajax( {
-         url: "includes/mod_cen/clases/MensajesAjax.php",
-         dataType: "json",
-         data: {
-           term: request.term
-         },
-         success: function( data ) {
-           //console.log(data);
-           response( data );
-         }
-       } );
-     },
-     minLength: 2,
-     select: function( event, ui ) {
-
-      if (arrayDestinatario.indexOf(ui.item.id) == -1) {
-        console.log(arrayDestinatario.indexOf(ui.item.id));
-        $('#destinatario').append(`<p id='${ui.item.id}'> - ${ui.item.value} - ${ui.item.email} - <img src="img/iconos/delete.jpg" alt="Eliminar">  </p>`);
-        arrayDestinatario.push(ui.item.id);
-        //$('#asunto').attr.value('mesa');
-        serialize(arrayDestinatario);
-        console.log($('#birds').val('seleccinodo'));
-        $('#birds').val('');
-        return false;
-      }else{
-        $('#birds').val('');
-        return false;
-      }
-
-      // alert('Selecciono' + ui.item.value);
-
-
-      console.log(arrayDestinatario);
-
-    //   log( "Selected: " + ui.item.value + " aka " + ui.item.id );
-     }
-   } );
- } );
- </script>
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
 include_once("includes/mod_cen/clases/referente.php");
-include_once("includes/mod_cen/clases/img.php");
+include_once("includes/mod_cen/clases/MensajesAdjunto.php");
 
 $nuevo=0;
 if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de mensaje nuevo ingresa aqui
@@ -88,7 +25,9 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
                             $fecha
                           );
     $guardar_mensaje=$mensaje->agregar(); // hasta aqui guarda el mensaje nuevo
-/*
+
+///////////////////  guardar archivo adjunto ////////////////
+
     foreach ($_FILES['input-img'] as $key)
     {
 
@@ -99,33 +38,33 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
         $img1 = $_FILES['input-img']['tmp_name'][$i];
         $img1 = $_FILES['input-img']['name'][$i];
 
-        $dir_subida = './documentacion/';
+        $dir_subida = './img/mensajes/';
         //echo $_FILES['input-img']['type'][$i];
 
         switch ($_FILES['input-img']['type'][$i]) {
           case 'application/pdf':
-            $nombreArchivo=$_POST["tituloDoc"].'.pdf';
+            $nombreArchivo=$img1;
             break;
           case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-              $nombreArchivo=$_POST["tituloDoc"].'.xlsx';
+              $nombreArchivo=$img1;
               break;
           case 'application/vnd.ms-excel':
-                  $nombreArchivo=$_POST["tituloDoc"].'.xls';
+                  $nombreArchivo=$img1;
                   break;
          case 'application/msword':
-                  $nombreArchivo=$_POST["tituloDoc"].'.doc';
+                  $nombreArchivo=$img1;
                   break;
          case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-                 $nombreArchivo=$_POST["tituloDoc"].'.docx';
+                 $nombreArchivo=$img1;
                  break;
          case 'image/jpeg':
-                  $nombreArchivo=$_POST["tituloDoc"].'.jpg';
+                  $nombreArchivo=$img1;
                   break;
          case 'image/png':
-                 $nombreArchivo=$_POST["tituloDoc"].'.png';
+                 $nombreArchivo=$img1;
                  break;
          case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-                 $nombreArchivo=$_POST["tituloDoc"].'.pptx';
+                 $nombreArchivo=$img1;
                  break;
 
 
@@ -136,8 +75,9 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
 
         $fichero_subido = $dir_subida . $nombreArchivo;
 
-*/
-    //    if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
+
+
+        if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
           /*if($_FILES['input-img']['type'][$i]=='image/jpeg'){
             $nuevoArchivo = $dir_subida.$nombreArchivoMediano;
             copy($fichero_subido,$nuevoArchivo);
@@ -145,18 +85,24 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
           //$imagen = new Img(null,$guardar_informe,$nombreArchivo,$tipoArchivo);
           //$agregarImg = $imagen->agregar();
       //    echo "El fichero es válido y se subió con éxito.\n";
-    //    }	 else {
+
+      $adjunto = new MensajesAdjunto(null,$guardar_mensaje,$nombreArchivo,'pdf');
+      $agregarAdjunto = $adjunto->agregar();
+
+        }	 else {
   // echo "¡Posible ataque de subida de ficheros!\n";
-    //    }
+        }
 
-  //    }
-  //    break;
-//    }
+      }
+      break;
+    }
 
-  //    if($guardar_mensaje>0){
-
+      if($guardar_mensaje>0){
+          echo 'imagen guardada';
     //      include_once("includes/mod_cen/mensajes/email_script.php");
-      //    }
+  }else{
+    echo 'imagen NO GUARDAD';
+  }
 
 
 }else{
