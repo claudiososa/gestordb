@@ -28,4 +28,8 @@ if ($cantidadMensajes>0) {
   echo '<p class="alert alert-danger"> <a href="index.php?men=mensajes&id=2"> Tienes '.$cantidadMensajes.' mensajes sin leer </a></p>';
 }
 
+if (isset($_GET['saved']) AND $_GET['id']==2) {
+  echo '<p class="alert alert-success">El mensaje fue enviado...</p>';
+}
+
 ?>

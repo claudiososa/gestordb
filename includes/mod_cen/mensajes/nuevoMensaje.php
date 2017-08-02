@@ -4,18 +4,17 @@ include_once("includes/mod_cen/clases/Mensajes.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/MensajesAdjunto.php");
 
+echo '<div class="container">';
+  echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
+  echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
+  echo '<p><h3>Mensajes Nuevo</h3></p>';
+echo '</div">';
+
 $nuevo=0;
 if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de mensaje nuevo ingresa aqui
   {
-  //var_dump($_POST);
   $arrayDestino=unserialize($_POST['referentes']);
   $destinatarios = implode(',',$arrayDestino);
-  //var_dump($arrayDestino);
-  //foreach ($arrayDestino as $key => $value) {
-  //  echo $arrayDestino[$key].'<br>';
-  //}
-  //echo $destinatarios;
-  //creo objeto mensaje
   $fecha=date("Y-m-d H:i:s");
   $mensaje= new Mensajes(null,
                             $_SESSION["referenteId"],
@@ -75,22 +74,11 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
 
         $fichero_subido = $dir_subida . $nombreArchivo;
 
-
-
         if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
-          /*if($_FILES['input-img']['type'][$i]=='image/jpeg'){
-            $nuevoArchivo = $dir_subida.$nombreArchivoMediano;
-            copy($fichero_subido,$nuevoArchivo);
-          }*/
-          //$imagen = new Img(null,$guardar_informe,$nombreArchivo,$tipoArchivo);
-          //$agregarImg = $imagen->agregar();
-      //    echo "El fichero es válido y se subió con éxito.\n";
-
-      $adjunto = new MensajesAdjunto(null,$guardar_mensaje,$nombreArchivo,'pdf');
-      $agregarAdjunto = $adjunto->agregar();
-
+          $adjunto = new MensajesAdjunto(null,$guardar_mensaje,$nombreArchivo,'pdf');
+          $agregarAdjunto = $adjunto->agregar();
         }	 else {
-  // echo "¡Posible ataque de subida de ficheros!\n";
+          // echo "¡Posible ataque de subida de ficheros!\n";
         }
 
       }
@@ -103,6 +91,15 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   }else{
     echo 'imagen NO GUARDAD';
   }
+
+  $variablephp = "index.php?men=mensajes&id=2&saved";
+
+  ?>  <script type="text/javascript">
+        var variablejs = "<?php echo $variablephp; ?>" ;
+        function redireccion(){window.location=variablejs;}
+        setTimeout ("redireccion()",0);
+      </script>
+  <?php
 
 
 }else{

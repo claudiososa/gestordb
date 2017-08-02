@@ -45,7 +45,7 @@ echo '<div class="container">';
   echo "<tbody>";
 	while ($fila=mysqli_fetch_object($listado_disp)){
 
-	
+
 		echo "<tr>";
 		echo "<td>".$fila->estadisAccesoId."</td>";
         echo "<td>".$fila->apellido.", ".$fila->nombre."</td>";
@@ -80,7 +80,7 @@ echo "<div class='col-md-6'>";
 			$listado_disp2=$dispositivo2->buscar(null,null,null,"SMARTPHONE");
 			$cant=mysqli_num_rows($listado_disp2);
 
-	
+
 	echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
 	echo "<thead>";
 	echo "<tr>";
@@ -90,7 +90,7 @@ echo "<div class='col-md-6'>";
 	echo "</tr>";
 	echo "</thead>";
     echo "<tbody>";
-	
+
 	$lista= array("COMPUTADORA","SMARTPHONE","TABLET");
 
 	foreach ($lista as $value) {
@@ -148,7 +148,7 @@ $(document).ready(function()
 
 
 
-  $B=mysqli_num_rows($b_mis_informe); // inicio de informes
+  //$B=mysqli_num_rows($b_mis_informe); // inicio de informes
 	?>
 	<div class="panel panel-primary">
 		<div class="panel-heading" id="panel1">
@@ -163,7 +163,7 @@ $(document).ready(function()
 			$listado_disp2=$dispositivo2->buscar(null,null,null,"SMARTPHONE");
 			$cant=mysqli_num_rows($listado_disp2);
 
-	
+
 	echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
 	echo "<thead>";
 	echo "<tr>";
@@ -173,7 +173,7 @@ $(document).ready(function()
 	echo "</tr>";
 	echo "</thead>";
     echo "<tbody>";
-	
+
 	$lista= array("COMPUTADORA","SMARTPHONE","TABLET");
 
 	foreach ($lista as $value) {
@@ -205,7 +205,7 @@ echo "</div>";
 echo "<div class='col-md-6'>";
 
 
-$d=mysqli_num_rows($b_informe);
+//$d=mysqli_num_rows($b_informe);
 	?>
 	<div class="panel panel-primary">
 		<div class="panel-heading" id="panel2"><span class="panel-title clickable">
@@ -225,7 +225,7 @@ $d=mysqli_num_rows($b_informe);
 	echo "</tr>";
 	echo "</thead>";
 	echo "<tbody>";
-	while ($fila=mysqli_fetch_object($b_informe)){
+	/*while ($fila=mysqli_fetch_object($b_informe)){
 
 		$escuela= new Escuela($fila->escuelaId);
 		$buscar_escuela= $escuela->buscar();
@@ -250,7 +250,7 @@ $d=mysqli_num_rows($b_informe);
 		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
 		echo "<td>".$fila->prioridad."</td>";
 		echo "</td>";
-	}
+	}*/
 	echo "</tbody>";
 	echo "</table>";
 	?>

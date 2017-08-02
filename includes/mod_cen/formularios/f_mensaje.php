@@ -2,16 +2,6 @@
 <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
 
     <input type="hidden" id="destino" name="referentes" value="">
-      <?php
-      if ($_GET['id']==3){
-        echo '<label class="control-label" for=""><h3>Mensaje</h3><a class="btn btn-success" href="index.php?men=mensajes&id=2">Ver Mis Mensajes</a></label>';
-      }elseif ($_GET['id']==1) {
-        echo '<label class="control-label" for=""><h3>Nuevo Mensaje</h3></label>';
-      }
-      ?>
-
-
-
 
       <?php
       if ($_GET['id']==1) {
@@ -21,7 +11,7 @@
             <label for="birds">Agregar destinatario: </label>
           </div>
           <div class="col-md-12">
-            <input id="birds" value='' size="40">
+            <input id="birds" value='' size="40" autofocus="">
           </div>
           </div>
         <?php
@@ -105,31 +95,37 @@ if ($_GET['id']==3) {
         if(isset($datoValidado->asunto) AND $datoValidado->asunto<>""){
           echo $datoValidado->asunto  ;
         }
-        ?>">
-      </div>
-    </div>
-       <?php
-
-        //if($dato_escuela->referenteId==$_SESSION['referenteId'])
-          //{
-
-              echo '<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">';
-      //<![CDATA[
-              echo 'bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });';
-              //echo 'nicEditors.findEditor("TextArea").attr("contentEditable","false");';
-
-              echo "jQuery('.nicEdit-main').attr('contenteditable','false');";
-        //]]>
-              echo '</script>';
-        //}
+        ?>"
+        <?php
+        if(isset($_GET['id']) AND $_GET['id']==3)
+        {
+          echo 'disabled';
+        }
         ?>
 
+        >
+      </div>
+    </div>
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+
+
+      <?php
+      if ($_GET['id']==1) {
+        ?>
+        <script type="text/javascript">
+        //<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+        jQuery('.nicEdit-main').attr('contenteditable','false');
+        //]]>
+        </script>
+        
         <div class="form-group">
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
           </div>
           <div class="col-md-12">
-            <textarea  readonly  rows='20' name="contenido" class="form-control" >
+
+            <textarea readonly  rows='20' name="contenido" class="form-control" >
               <?php
               if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
                 echo $datoValidado->contenido  ;
@@ -138,9 +134,64 @@ if ($_GET['id']==3) {
             </textarea>
           </div>
         </div>
+        <?php
+      }else{
+        ?>
+        <div class="form-group">
+          <div class="col-md-12">
+            <label class="control-label">Contenido</label>
+          </div>
+          <div class="col-md-12" id="myArea1">
+            <?php
+            if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
+              echo $datoValidado->contenido  ;
+            }
+            ?>
+            </div>
+        </div>
+
+
+              <script type="text/javascript">
+            //<![CDATA[
+            var area1, area2;
+
+            function toggleArea1() {
+              if(!area1) {
+                      area1 = new nicEditor({fullPanel : true}).panelInstance('myArea1',{hasPanel : true});
+              } else {
+                      area1.removeInstance('myArea1');
+                      area1 = null;
+              }
+            }
+
+            function addArea2() {
+              area2 = new nicEditor({fullPanel : true}).panelInstance('myArea2');
+            }
+            function removeArea2() {
+              area2.removeInstance('myArea2');
+            }
+
+            bkLib.onDomLoaded(function() { toggleArea1(); });
+            //]]>
+            </script>
+  <?php
+  if ($_GET['id']==3) {
+    ?>
+    <script type="text/javascript">
+      toggleArea1();
+    </script>
+    <?php
+  }
+      }
+       ?>
+
+
+    </script>
+
+
         <p>&nbsp;</p>
         <?php
-        if($_GET['id']==13){
+        if($_GET['id']==3){
           ?>
           <div class="form-group">
             <div class="col-md-12">
@@ -148,8 +199,8 @@ if ($_GET['id']==3) {
             </div>
             <div class="col-md-12">
               <?php
-              while ($fila = mysqli_fetch_object($buscar_img)) {
-                echo "<a href='img/informes/".$fila->nombre."'>".$fila->nombre."</a><br>";
+              while ($fila = mysqli_fetch_object($buscar_adjunto)) {
+                echo "<a href='img/mensajes/".$fila->archivo."'>".$fila->archivo."</a><br>";
               }
               ?>
             </div>
@@ -175,11 +226,7 @@ if ($_GET['id']==3) {
           echo "<p>&nbsp;</p>";
           echo "</div>";
         }
-
-
-        ?>
-        <?php
-          echo "</div>";
+          //echo "</div>";
         ?>
       </form>
 </div>
