@@ -111,13 +111,14 @@ if ($_GET['id']==3) {
 
       <?php
       if ($_GET['id']==1) {
-        echo '<script type="text/javascript">';
-        echo '//<![CDATA[';
-        echo 'bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });';
-        echo "jQuery('.nicEdit-main').attr('contenteditable','false');";
-          echo '//]]>';
-        echo '</script>';
         ?>
+        <script type="text/javascript">
+        //<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+        jQuery('.nicEdit-main').attr('contenteditable','false');
+        //]]>
+        </script>
+        
         <div class="form-group">
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
@@ -184,7 +185,8 @@ if ($_GET['id']==3) {
       }
        ?>
 
-    
+
+    </script>
 
 
         <p>&nbsp;</p>
