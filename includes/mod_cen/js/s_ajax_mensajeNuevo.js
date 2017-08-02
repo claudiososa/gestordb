@@ -37,8 +37,13 @@ $(document).ready(function () {
      select: function( event, ui ) {
 
       if (arrayDestinatario.indexOf(ui.item.id) == -1) {
+        console.log(ui.item.id);
         console.log(arrayDestinatario.indexOf(ui.item.id));
-        $('#destinatario').append(`<p id='${ui.item.id}'> - ${ui.item.value} - ${ui.item.email} - <img src="img/iconos/delete.jpg" alt="Eliminar">  </p>`);
+        $('#destinatario').append(`<p id='${ui.item.id}'> - ${ui.item.value} - ${ui.item.email} -  <img id="email${ui.item.id}" src="img/iconos/delete.png" alt="Eliminar"> </p>`);
+        $('#email'+ui.item.id).click(function () {
+          console.log(ui.item.value);
+        });
+
         arrayDestinatario.push(ui.item.id);
         //$('#asunto').attr.value('mesa');
         serialize(arrayDestinatario);
@@ -93,59 +98,25 @@ $(document).ready(function () {
        });
 
 
-
-   $("#formInforme").submit(function(event){
-     var fecha = $("#fechaVisita").val();
-     var tipo = $("#tipo").val();
-     var subtipo = $("#subtipo").val();
-     if(tipo=="0"){
-       alert("Debe seleccionar una categoría");
-       event.preventDefault();
-     }
+       //$('a').on('click', function(e){
+               //alert('click');
+        //   });
 
 
-     if(subtipo=="0"){
-       alert("Debe seleccionar una subcategoría");
-       event.preventDefault();
-     }
-
-
-     if(tipo=="1" && fecha==""){
-         alert("Debe ingresar Fecha de Visita");
-       event.preventDefault();
- }
-
-   });
-
-
-     $("#tipo").change(function (ev){
-       //ev.preventDefault();
-       var opcion = $(this).val();
-       if (opcion==2) {
-         $("#fechaVisita").attr("disabled","disabled");
-         $("#fechaVisita").val("");
-       }else if (opcion==1) {
-         $("#fechaVisita").removeAttr("disabled");
-
-       }
-
-       if(opcion!=0){
-       $.ajax({
-         url:"includes/mod_cen/clases/SubTipoInforme.php",
-         method:  'post',
-         data:  {opcion:opcion},
-         success: function(data, textStatus, xhr) {
-         //  alert(data);
-           $("#divsubtipo").html(data);
-         }
+       //$('[id^=ema]').on('click', function () {
+       $('#0037').click(function () {
+         console.log('casa');
+       //$('#0037').click(function () {
+           //console.log($(this).val());
+           //alert('hola');
+           /*var detalle = $(this).val();
+           $.post("includes/mod_cen/clases/c_productos.php", { detalle: detalle, venta: venta }, function(data){
+             var resultado = JSON.parse(data);
+             var dato = resultado['estado'];
+             var total = resultado['total'];
+             $('#'+dato).remove();
+             $('#total').text("Total:    "+total);
+           });*/
        });
-     }else{
-       var divAnterior ='<div class="col-md-12" id="divsubtipo">'+
-          '<select  class="form-control" id="subtipo" name="subtipo">'+
-                '<option selected value="0">Seleccione</option>'+
-          '</select></div>';
-       $("#divsubtipo").html(divAnterior);
-     }
-     });
 
 });
