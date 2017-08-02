@@ -1,9 +1,15 @@
-
+<!--<script src="includes/mod_cen/js/s_ajax_mensajeNuevoDesactivar.js"></script>-->
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
 include_once("includes/mod_cen/clases/MensajesLeidos.php");
 include_once("includes/mod_cen/clases/referente.php");
-include_once("includes/mod_cen/clases/img.php");
+include_once("includes/mod_cen/clases/MensajesAdjunto.php");
+
+echo '<div class="container">';
+  echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
+  echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
+  //echo '<p><h3>Mensajes Nuevo</h3></p>';
+echo '</div">';
 
 $encontrado = 0;
 $mensaje = new Mensajes($_GET['mensajeId']);
@@ -14,6 +20,12 @@ if (mysqli_num_rows($buscarMensaje)==0) {
 }else{
 
 $datoMensaje = mysqli_fetch_object($buscarMensaje);
+
+$adjunto = new MensajesAdjunto(null,$datoMensaje->mensajeId);
+$buscar_adjunto = $adjunto->buscar();
+
+
+
 $acceso=0;
   //echo $fila->destinatario.'<br>';
   $arrayDestino = explode(',',$datoMensaje->destinatario);

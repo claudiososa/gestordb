@@ -1,21 +1,40 @@
 <div class="container">
+
   <?php
-  if (isset($_GET['enviados'])) {
-    echo '<p><h3>Mis Mensajes Enviados</h3> <a class="btn btn-success" href="index.php?men=mensajes&id=1">Mensaje Nuevo</a>';
-  }else{
-    echo '<p><h3>Mis Mensajes Recibidos</h3> <a class="btn btn-success" href="index.php?men=mensajes&id=1">Mensaje Nuevo</a>';
-  }
+  /*  if (isset($_GET['enviados'])) {
+      echo '<p><h3>Mis Mensajes Enviados</h3> <a class="btn btn-success" href="index.php?men=mensajes&id=1">Mensaje Nuevo</a></p>';
+    }else{
+      echo '<p><h3>Mis Mensajes Recibidos</h3> <a class="btn btn-success" href="index.php?men=mensajes&id=1">Mensaje Nuevo</a></p>';
+    }*/
+    if (isset($_GET['enviados']))
+    {
+      echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=1">Nuevo Mensaje</a></label>';
+      echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
+    }else{
+      echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=1">Nuevo Mensaje</a></label>';
+      echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
+    }
 
-   ?>
+    /*if ($_GET['id']==3){
+      echo '<label class="control-label" for=""><h3>Mensaje</h3><a class="btn btn-success" href="index.php?men=mensajes&id=2">Ver Mis Mensajes</a></label>';
+    }elseif ($_GET['id']==1) {
+      echo '<label class="control-label" for=""><h3>Nuevo Mensaje</h3></label>';
+    }*/
 
-  <a class='btn btn-warning' href="index.php?men=mensajes&id=2&enviados">Mis Mensajes Enviados</a></p>
+
+    if (isset($_GET['enviados'])) {
+      echo '<p><h3>Mis Mensajes Enviados</h3></p>';
+    }else{
+      echo '<p><h3>Mis Mensajes Recibidos</h3></p>';
+    }
+    ?>
+
+
 
 
 <table class="table">
   <thead>
     <tr>
-
-
     <th>De</th>
     <th>Asunto</th>
     <th>Fecha</th>
@@ -27,6 +46,7 @@
 
 <?php
 include_once ('includes/mod_cen/clases/Mensajes.php');
+include_once ('includes/mod_cen/clases/MensajesAdjunto.php');
 $cantidadMensajes=0;
 //creo un objeto nuevo del tipo Mensajes, con el atributo referenteId seteado. Ademas busco si el referente actual tiene mensajes recibidos
 if (isset($_GET['enviados'])) {
@@ -58,9 +78,18 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
   foreach ($arrayDestino as $key => $value) {
     //echo $arrayDestino[$key].'<br>';
     if ($arrayDestino[$key]==$_SESSION['referenteId']) {
+      $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
+      $buscar_adjunto = $adjunto->buscar();
+      $cantAdjunto = mysqli_num_rows($buscar_adjunto);
       echo '<tr>';
       echo '<td>'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</td>';
-      echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
+
+      if ($cantAdjunto==0) {
+        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
+      }else{
+        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<img src="img/iconos/adjunto.png" alt="Archivo Adjunto"></td>';
+      }
+
 
       echo '<td>'.date("d-m-Y H:i:s", strtotime($fila->fechaHora)).'</td>';
       echo '</tr>';
