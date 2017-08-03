@@ -142,6 +142,8 @@ function __construct($estadisAccesoId=NULL,$referenteId=NULL,$fechaHoraAcceso=NU
 			$sentencia.=" && referentes.tipo = '".$perfil."'";
 
 		}
+
+
 		
 		if($this->estadisAccesoId!=NULL || $this->referenteId!=NULL || $this->fechaHoraAcceso!=NULL || $this->dispositivo!=NULL)
 		{
@@ -181,6 +183,11 @@ function __construct($estadisAccesoId=NULL,$referenteId=NULL,$fechaHoraAcceso=NU
 		return $conexion->query($sentencia);
 
 	}
+
+
+
+	
+
 
 /*
 	public function __get($var)

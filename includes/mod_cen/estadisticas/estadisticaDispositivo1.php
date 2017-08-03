@@ -159,9 +159,9 @@ $(document).ready(function()
 			<?php
 
 
-			$dispositivo2=new Dispositivo();
-			$listado_disp2=$dispositivo2->buscar(null,null,null,"SMARTPHONE");
-			$cant=mysqli_num_rows($listado_disp2);
+			//$dispositivo2=new Dispositivo();
+			//$listado_disp2=$dispositivo2->buscar(null,null,null,"SMARTPHONE");
+			//$cant=mysqli_num_rows($listado_disp2);
 
 
 	echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
@@ -171,6 +171,7 @@ $(document).ready(function()
 	echo "<th colspan=2>COMPUTADORA</th>";
 	echo "<th colspan=2>SMARTPHONE</th>";
 	echo "<th colspan=2>TABLET</th>";
+	echo "<th> TOTAL MES</th>";
 	echo "</tr>";
 	echo "<tr>";
 	echo "<td></td>";
@@ -204,8 +205,13 @@ $(document).ready(function()
 			// cantidad x mes de compu
 			
 			$compu2=new Dispositivo();
-			$listado_compu2=$compu2->buscar(null,$inicioMes,$hoy,$value);
+			$listado_compu2=$compu2->buscar(null,$inicioMes,$hoy,"COMPUTADORA",$value);
 			$cant_compu2=mysqli_num_rows($listado_compu2);
+
+			// TOTAL DISTINTOS X MES
+			//$compu3=new Dispositivo();
+			//$listado_compu3=$compu3->buscar2(null,$inicioMes,$hoy,"COMPUTADORA",$value);
+			//$cant_compu3=mysqli_num_rows($listado_compu3);
 
 
 			// cantidad gral de smartphone
@@ -215,7 +221,7 @@ $(document).ready(function()
 
 			// cantidad x mes de smartphone
 			$smart2=new Dispositivo();
-			$listado_smart2=$smart2->buscar(null,$inicioMes,$hoy,$value);
+			$listado_smart2=$smart2->buscar(null,$inicioMes,$hoy,"SMARTPHONE",$value);
 			$cant_smart2=mysqli_num_rows($listado_smart2);
 
 
@@ -227,9 +233,10 @@ $(document).ready(function()
 			// cantidad x mes de tablet
 
 			$tablet2=new Dispositivo();
-			$listado_tablet2=$tablet2->buscar(null,$inicioMes,$hoy,$value);
+			$listado_tablet2=$tablet2->buscar(null,$inicioMes,$hoy,"TABLET",$value);
 			$cant_tablet2=mysqli_num_rows($listado_tablet2);
 
+			$total=$cant_compu2+$cant_smart2+$cant_tablet2;
 			echo "<tr>";
 			echo "<td>".$value."</td>";
 	        echo "<td>".$cant_compu."</td>";
@@ -238,6 +245,7 @@ $(document).ready(function()
 	        echo "<td>".$cant_smart2."</td>";
 	        echo "<td>".$cant_tablet."</td>";
 	        echo "<td>".$cant_tablet2."</td>";
+	        echo "<td>".$total."</td>";
 			echo "</td>";
 	}
 	echo "</tbody>";
