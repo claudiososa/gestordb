@@ -77,6 +77,7 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
         if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
           $adjunto = new MensajesAdjunto(null,$guardar_mensaje,$nombreArchivo,'pdf');
           $agregarAdjunto = $adjunto->agregar();
+          echo $agregarAdjunto;
         }	 else {
           // echo "¡Posible ataque de subida de ficheros!\n";
         }

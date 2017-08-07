@@ -54,9 +54,19 @@ if (isset($_GET['enviados'])) {
   $misMensajes = $objMensaje->buscar();
 
   while ($fila = mysqli_fetch_object($misMensajes)) {
+        $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
+        $buscar_adjunto = $adjunto->buscar();
+        $cantAdjunto = mysqli_num_rows($buscar_adjunto);
+
         echo '<tr>';
         echo '<td>'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</td>';
-        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
+        if ($cantAdjunto==0) {
+          echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
+        }else{
+          echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<img src="img/iconos/adjunto.png" alt="Archivo Adjunto"></td>';
+        }
+
+        //echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
 
         echo '<td>'.date("d-m-Y H:i:s", strtotime($fila->fechaHora)).'</td>';
         echo '</tr>';
