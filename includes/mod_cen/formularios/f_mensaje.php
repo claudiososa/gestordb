@@ -48,14 +48,14 @@ if ($_GET['id']==3) {
           $buscarLeido = $leido->buscar();
           if (mysqli_num_rows($buscarLeido)>0) {
             if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
-              echo '<b>'.ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'</b> <img src="img/iconos/leido.jpg" width="18" height="12" alt="leido"> - ';
+              echo '<b>'.ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'</b> <img src="img/iconos/leido.png" width="18" height="12" alt="leido"> - ';
             }else{
               echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
             }
 
           }else{
             if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
-              echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'<img src="img/iconos/noleido.jpg" width="18" height="12" alt="leido"> - ';
+              echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'<img src="img/iconos/noleido.png" width="18" height="12" alt="leido"> - ';
             }else{
               echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
             }
@@ -118,7 +118,7 @@ if ($_GET['id']==3) {
         jQuery('.nicEdit-main').attr('contenteditable','false');
         //]]>
         </script>
-        
+
         <div class="form-group">
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
