@@ -22,7 +22,7 @@
 
             ?>&nbsp&nbsp<span class="glyphicon glyphicon glyphicon-user"></span><span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li class="disabled"><a href="index.php?men=mensajes&id=2"><span class="glyphicon glyphicon glyphicon-envelope pull-left" style="color:#068587"></span>&nbsp&nbspMis mensajes</a></li>
+                <li><a href="index.php?men=mensajes&id=2"><span class="glyphicon glyphicon glyphicon-envelope pull-left" style="color:#068587"></span>&nbsp&nbspMis mensajes</a></li>
                 <li class="divider"></li>
                 <li><?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."'>";?><span class="glyphicon glyphicon glyphicon-pencil pull-left" style="color:#068587"></span>&nbsp&nbsp Actualizar Perfil</a></li>
                 <li><?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."'>";?><span class="glyphicon glyphicon glyphicon-lock pull-left" style="color:#068587"></span>&nbsp&nbspCambiar Contraseña</a></li>
