@@ -1,3 +1,20 @@
+<style type="text/css">
+.btn-default {
+  color: #ffffff;
+  background-color: #529e8b;
+  border-color: #529e8b;
+}.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #068587;
+    color: #068587;
+    background-color: #f5f5f5;
+
+}.table > tbody > tr > td {
+
+  border-top: 1px solid #068587;
+}
+
+</style>
 <div class="container">
 
   <?php
@@ -8,12 +25,24 @@
     }*/
     if (isset($_GET['enviados']))
     {
-      echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=1">Nuevo Mensaje</a></label>';
-      echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
+      echo '<div class="panel panel-default">';
+      echo '<div class="panel-heading">';
+      echo '<label class="control-label" for=""><a class="btn btn-default" align="" href="index.php?men=mensajes&id=1"><span class="glyphicon glyphicon glyphicon-edit"></span>&nbspNuevo Mensaje</a></label>';
+      echo "&nbsp";
+      echo '<label class="control-label" for=""><a class="btn btn-default" href="index.php?men=mensajes&id=2"><span class="glyphicon glyphicon glyphicon-bell"></span>&nbspMensajes Recibidos</a></label>';
+      echo '</div>';
+      echo '<div class="panel-body">';
+      echo '</div>';
     }else{
-      echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=1">Nuevo Mensaje</a></label>';
-      echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
-    }
+      echo '<div class="panel panel-default">';
+      echo '<div class="panel-heading">';
+      echo '<label class="control-label" for=""><a class="btn btn-default" href="index.php?men=mensajes&id=1"><span class="glyphicon glyphicon glyphicon-edit"></span>&nbspNuevo Mensaje</a></label>';
+      echo "&nbsp";
+      echo '<a class="btn btn-default" href="index.php?men=mensajes&id=2&enviados"><span class="glyphicon glyphicon glyphicon-send"></span>&nbspMensajes Enviados</a>';
+      echo '</div>';
+      echo '<div class="panel-body">';
+      echo '</div>';
+}
 
     /*if ($_GET['id']==3){
       echo '<label class="control-label" for=""><h3>Mensaje</h3><a class="btn btn-success" href="index.php?men=mensajes&id=2">Ver Mis Mensajes</a></label>';
@@ -23,9 +52,10 @@
 
 
     if (isset($_GET['enviados'])) {
-      echo '<p><h3>Mis Mensajes Enviados</h3></p>';
+      echo '<p><h4><font color="#068587"><span class="glyphicon glyphicon glyphicon-send"></span>&nbspMensajes Enviados</font></h4></p>';
     }else{
-      echo '<p><h3>Mis Mensajes Recibidos</h3></p>';
+      echo '<p><h4><font color="#068587"><span class="glyphicon glyphicon glyphicon-bell"></span>&nbspMensajes Recibidos</font></h4></p>';
+
     }
     ?>
 
@@ -63,7 +93,7 @@ if (isset($_GET['enviados'])) {
         if ($cantAdjunto==0) {
           echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
         }else{
-          echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<img src="img/iconos/adjunto.png" alt="Archivo Adjunto"></td>';
+          echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></td>';
         }
 
         //echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
@@ -97,7 +127,7 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
       if ($cantAdjunto==0) {
         echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
       }else{
-        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<img src="img/iconos/adjunto.png" alt="Archivo Adjunto"></td>';
+        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></td>';
       }
 
 
@@ -110,6 +140,7 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
 }
 }
 //$cantidadMensajes=mysqli_num_rows($misMensajes);
+echo '</div>';
 ?>
 </tbody>
 </table>
