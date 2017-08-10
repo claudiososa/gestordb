@@ -52,9 +52,9 @@
 
 
     if (isset($_GET['enviados'])) {
-      echo '<p><h4><font color="#068587"><span class="glyphicon glyphicon glyphicon-send"></span>&nbspMensajes Enviados</font></h4></p>';
+      echo '<p><h4><font color="#068587">&nbspMensajes Enviados</font></h4></p>';
     }else{
-      echo '<p><h4><font color="#068587"><span class="glyphicon glyphicon glyphicon-bell"></span>&nbspMensajes Recibidos</font></h4></p>';
+      echo '<p><h4><font color="#068587">&nbspMensajes Recibidos</font></h4></p>';
 
     }
     ?>
