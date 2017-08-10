@@ -45,10 +45,11 @@
 		$c_persona= new Persona($d_referente->personaId);
 		$b_persona=$c_persona->buscar();
 		$d_persona=mysqli_fetch_object($b_persona);
-    
+
 
 		$_SESSION["username"]=$d_persona->dni;
 		$_SESSION["nombre"]=$d_persona->nombre;
+		$_SESSION["apellido"]=$d_persona->apellido;
 		$_SESSION["personaId"]=$d_persona->personaId;
 
 		$_SESSION["referenteId"]=$d_referente->referenteId;

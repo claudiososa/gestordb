@@ -67,7 +67,8 @@
 							include("includes/mod_cen/mensajes/leerMensaje.php");
 							break;
 						case 4:
-
+						include("includes/mod_cen/mensajes/responderMensaje.php");
+						
 							break;
 
 					}

@@ -8,6 +8,7 @@ include_once("includes/mod_cen/clases/MensajesAdjunto.php");
 echo '<div class="container">';
   echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
   echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
+  echo "<a class='btn btn-success' href='index.php?men=mensajes&id=4&mensajeId=".$_GET['mensajeId']."'>Responder</a>";
   //echo '<p><h3>Mensajes Nuevo</h3></p>';
 echo '</div">';
 
@@ -20,7 +21,7 @@ if (mysqli_num_rows($buscarMensaje)==0) {
 }else{
 
 $datoMensaje = mysqli_fetch_object($buscarMensaje);
-
+//var_dump($datoMensaje);
 $adjunto = new MensajesAdjunto(null,$datoMensaje->mensajeId);
 $buscar_adjunto = $adjunto->buscar();
 

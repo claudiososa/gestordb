@@ -29,14 +29,6 @@ if ($_GET['id']==3) {
   ?>
   <div class="form-group">
     <div class="col-md-12">
-       <label class="control-label">De</label>
-    </div>
-    <div class="col-md-12">
-      <p id='destinatario'><?php echo ucwords(strtolower($datoMensaje->apellido)).','.ucwords(strtolower($datoMensaje->nombre)) ?></p>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-md-12">
        <label class="control-label">Para</label>
     </div>
     <div class="col-md-12">
@@ -82,10 +74,23 @@ if ($_GET['id']==3) {
   ?>
   <div class="form-group">
     <div class="col-md-12">
+       <label class="control-label">De</label>
+    </div>
+    <div class="col-md-12">
+      <p id='destinatario'><?php echo ucwords(strtolower($_SESSION['apellido'])).', '.ucwords(strtolower($_SESSION['nombre'])) ?></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12">
        <label class="control-label">Para</label>
     </div>
     <div class="col-md-12">
-      <p id='destinatario'></p>
+      <p id='destinatario'><?php
+                            $remitente = new Referente($datoValidado->referenteId);
+                            $buscarRemitente = $remitente->buscar();
+                            $datoRemitente = mysqli_fetch_object($buscarRemitente);
+
+       echo ucwords(strtolower($datoRemitente->apellido)).', '.ucwords(strtolower($datoRemitente->nombre)) ?></p>
     </div>
   </div>
   <?php
@@ -101,7 +106,7 @@ if ($_GET['id']==3) {
       <div class="col-md-12">
         <input required type='text' id='asunto' name="asunto" class="form-control" placeholder="Titulo corto para tu informe" value="<?php
         if(isset($datoValidado->asunto) AND $datoValidado->asunto<>""){
-          echo $datoValidado->asunto  ;
+          echo 'Re: '.$datoValidado->asunto;
         }
         ?>"
         <?php
