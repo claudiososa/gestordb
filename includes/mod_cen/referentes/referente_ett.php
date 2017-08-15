@@ -20,6 +20,7 @@
 	echo "<tr class='info'><td>Apellidos, Nombre</td>";
 	echo "<td>RTI Cargo</td>";
 	echo "<td>Escuelas</td>";
+	echo "<td>Directores</td>";
 	echo "<td>Informes</td>";
 	echo "<td>Localidad, Departamento</td>";
 	echo "<td>Teléfono</td>";
@@ -70,6 +71,8 @@
 		//echo "<td>".$fila->tipo."</td>";
 		echo "<td>"."<a href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>Ver <b>(".$cant_rti. ")</b></a></td>";
 		echo "<td>"."<a href='index.php?mod=slat&men=user&id=5&referenteId=".$fila->referenteId."'>Escuelas <b>(".$cantidad_escuela.")</b></a></td>";
+		//echo "<td>"."<a href='index.php?mod=slat&men=user&id=20&referenteId=".$fila->referenteId."'>Directores<b>(".$cantidad_escuela.")</b></a></td>";
+		echo "<td> directores</td>";
 		echo '<td><a class="btn btn-primary" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a></td>';
 		echo "<td>".$dato_localidad->nombre.", <b>".$dato_depa->descripcion."</b></td>";
 

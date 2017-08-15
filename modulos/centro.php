@@ -391,6 +391,9 @@
 				case 19:
 								include("includes/mod_cen/escuelas/escuela_facilitador_coordinador.php");
 								break;
+				case 20:
+								include("includes/mod_cen/escuelas/escuelaDatosDirectivo.php");
+								break;
 }
 
 
