@@ -1,7 +1,7 @@
 $(document).ready(function () {
   let arrayDestinatario = [];
 
-  var row = '<?php echo $datoRemitente->nombre;?>'
+  //var row = '<?php echo $datoRemitente->nombre;?>'
   alert(row)
   function serialize(arr)
   {

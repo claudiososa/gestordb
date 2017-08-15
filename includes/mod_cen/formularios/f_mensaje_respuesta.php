@@ -1,10 +1,8 @@
 <div class="container">
 <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
-
-    <input type="hidden" id="destino" name="referentes" value="">
-
+    <input type="hidden" id="mensajeId" name="mensajeId" value="<?php echo $datoValidado->mensajeId ?>">
       <?php
-      if ($_GET['id']==1) {
+      /*if ($_GET['id']==1) {
         ?>
         <div class="form-group">
           <div class="col-md-12">
@@ -15,7 +13,7 @@
           </div>
           </div>
         <?php
-      }
+      }*/
        ?>
 
 
@@ -77,6 +75,7 @@ if ($_GET['id']==3) {
        <label class="control-label">De</label>
     </div>
     <div class="col-md-12">
+      <input type="hidden" name="remitente" value="<?php echo $_SESSION['referenteId'] ?>">
       <p id='destinatario'><?php echo ucwords(strtolower($_SESSION['apellido'])).', '.ucwords(strtolower($_SESSION['nombre'])) ?></p>
     </div>
   </div>
@@ -91,6 +90,7 @@ if ($_GET['id']==3) {
                             $datoRemitente = mysqli_fetch_object($buscarRemitente);
 
        echo ucwords(strtolower($datoRemitente->apellido)).', '.ucwords(strtolower($datoRemitente->nombre)) ?></p>
+       <input type="hidden" name="destinatario" value="<?php echo $datoValidado->referenteId ?>">
     </div>
   </div>
   <?php
@@ -219,7 +219,7 @@ if ($_GET['id']==3) {
             </div>
           </div>
           <?php
-        }elseif($_GET['id']==1){
+        }elseif($_GET['id']==4){
           ?>
           <div class="form-group">
             <div class="col-md-12">

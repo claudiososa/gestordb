@@ -14,15 +14,15 @@ echo '</div">';
 $nuevo=0;
 if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de mensaje nuevo ingresa aqui
   {
-  $arrayDestino=unserialize($_POST['referentes']);
-  $destinatarios = implode(',',$arrayDestino);
+  //$arrayDestino=unserialize($_POST['referentes']);
+  //$destinatarios = implode(',',$arrayDestino);
   $fecha=date("Y-m-d H:i:s");
   $mensaje= new MensajesResp(null,
                             $_POST["mensajeId"],
                             $_SESSION["referenteId"],
                             $_POST["asunto"],
                             $_POST["contenido"],
-                            $destinatarios,
+                            $_POST["destinatario"],
                             $fecha
                           );
     $guardar_mensaje=$mensaje->agregar(); // hasta aqui guarda el mensaje nuevo

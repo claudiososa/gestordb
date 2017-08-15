@@ -37,17 +37,17 @@ $(document).ready(function () {
      select: function( event, ui ) {
 
       if (arrayDestinatario.indexOf(ui.item.id) == -1) {
-        console.log(ui.item.id);
-        console.log(arrayDestinatario.indexOf(ui.item.id));
+        //console.log(ui.item.id);
+        //console.log(arrayDestinatario.indexOf(ui.item.id));
         $('#destinatario').append(`<p id='${ui.item.id}'> - ${ui.item.value} - ${ui.item.email} -  <img id="email${ui.item.id}" src="img/iconos/delete.png" alt="Eliminar"> </p>`);
         $('#email'+ui.item.id).click(function () {
-          console.log(ui.item.value);
+        //  console.log(ui.item.value);
         });
 
         arrayDestinatario.push(ui.item.id);
         //$('#asunto').attr.value('mesa');
         serialize(arrayDestinatario);
-        console.log($('#birds').val('seleccinodo'));
+        //console.log($('#birds').val('seleccinodo'));
         $('#birds').val('');
         return false;
       }else{
