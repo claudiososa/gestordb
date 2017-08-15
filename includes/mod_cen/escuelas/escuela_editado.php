@@ -1,7 +1,7 @@
 <?php
-	include_once("clases/persona.php");
-	include_once("clases/escuela.php");
-	include_once("clases/piso.php");
+	include_once("includes/mod_cen/clases/persona.php");
+	include_once("includes/mod_cen/clases/escuela.php");
+	include_once("includes/mod_cen/clases/piso.php");
 	//var_dump($_POST);
 	$escuelaId=$_POST["escuelaId"];
 	$referenteId=$_POST["referenteId"];
@@ -12,12 +12,12 @@
 	$nivel=$_POST["nivel"];
 	$localidadId=$_POST["localidadId"];
 	$telefono=$_POST['telefono'];
-	$email=$_POST['email'];
 	$ubicacion=$_POST['ubicacion'];
 	$sitio=$_POST['sitio'];
 	$facebook=$_POST['facebook'];
 	$twitter=$_POST['twitter'];
 	$youtube=$_POST['youtube'];
+	$email=$_POST['email'];
 
 
 	//echo strlen($_POST['turnoactual']);
@@ -55,9 +55,25 @@
 	}
 
 	$turnos= implode('',$turnos);
-	echo $turnos;
+	//echo $turnos;
 
-	$escuela=new Escuela($escuelaId,$referenteId,$cue,$numero,$nombre,$domicilio,$nivel,$localidadId,$turnos,$telefono,$email,null,$ubicacion,$sitio,$facebook,$twitter,$youtube);
+	$escuela=new Escuela($escuelaId,
+											$referenteId,
+											$cue,
+											$numero,
+											$nombre,
+											$domicilio,
+											$nivel,
+											$localidadId,
+											$turnos,
+											$telefono,
+											null,
+											$ubicacion,
+											$sitio,
+											$facebook,
+											$twitter,
+											$youtube,null,null,null,null,null,
+											$email);
 	$salida= $escuela->editar();
 
 	if ($salida == 1){

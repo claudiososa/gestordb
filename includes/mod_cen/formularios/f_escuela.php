@@ -97,7 +97,7 @@
 
 					</div>
 					<div class="col-md-12">
-				<input class="form-control" size="30" type="text" id="email_escuela"name="email" value="<?php echo $datos->getEmail()?>"/>
+				<input class="form-control" size="30" type="text" id="email_escuela" name="email" value="<?php echo $datos->getEmail()?>"/>
 
 							</div>
 				</div>

@@ -1,4 +1,4 @@
-<!--<script src="includes/mod_cen/js/s_ajax_mensajeNuevo.js"></script>-->
+<script src="includes/mod_cen/js/s_ajax_mensajeResponder.js"></script>
 <?php
 include_once("includes/mod_cen/clases/MensajesResp.php");
 include_once("includes/mod_cen/clases/Mensajes.php");
