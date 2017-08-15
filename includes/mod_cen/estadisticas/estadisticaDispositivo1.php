@@ -187,7 +187,7 @@ $(document).ready(function()
 	echo "</thead>";
     echo "<tbody>";
 
-	$lista= array("ETT","ETJ","Coordinador","Facilitador","CoordinadorFacilitador","ATT","CoordinadorPmi","Supervisor-Secundario","Supervisor-General-Secundario","DirectorNivelSecundario","Supervisor-Nivel-Superior","SupervisorGeneralSuperior","DirectorNivelSuperior","SupervisorAdultos","SupervisorGeneralAdultos","DirectorNivelAdultos");
+	$lista= array("ETT","ETJ","Coordinador","Facilitador","CoordinadorFacilitador","ATT","CoordinadorPmi","Supervisor-Secundaria","Supervisor-General-Secundaria","DirectorNivelSecundario","Supervisor-Nivel-Superior","SupervisorGeneralSuperior","DirectorNivelSuperior","SupervisorAdultos","SupervisorGeneralAdultos","DirectorNivelAdultos");
 
 	foreach ($lista as $value) {
 
