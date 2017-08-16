@@ -3,16 +3,6 @@
   color: #ffffff;
   background-color: #529e8b;
   border-color: #529e8b;
-}.table > thead > tr > th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #068587;
-    color: #068587;
-    background-color: #f5f5f5;
-
-}.table > tbody > tr > td {
-
-  border-top: 1px solid #068587;
-
 }.estilo  {
 
     padding: 10px;
