@@ -1,10 +1,8 @@
 <div class="container">
 <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
-
-    <input type="hidden" id="destino" name="referentes" value="">
-
+    <input type="hidden" id="mensajeId" name="mensajeId" value="<?php echo $datoValidado->mensajeId ?>">
       <?php
-      if ($_GET['id']==1) {
+      /*if ($_GET['id']==1) {
         ?>
         <div class="form-group">
           <div class="col-md-12">
@@ -15,7 +13,7 @@
           </div>
           </div>
         <?php
-      }
+      }*/
        ?>
 
 
@@ -77,6 +75,7 @@ if ($_GET['id']==3) {
        <label class="control-label">De</label>
     </div>
     <div class="col-md-12">
+      <input type="hidden" name="remitente" value="<?php echo $_SESSION['referenteId'] ?>">
       <p id='destinatario'><?php echo ucwords(strtolower($_SESSION['apellido'])).', '.ucwords(strtolower($_SESSION['nombre'])) ?></p>
     </div>
   </div>
@@ -91,6 +90,7 @@ if ($_GET['id']==3) {
                             $datoRemitente = mysqli_fetch_object($buscarRemitente);
 
        echo ucwords(strtolower($datoRemitente->apellido)).', '.ucwords(strtolower($datoRemitente->nombre)) ?></p>
+       <input type="hidden" name="destinatario" value="<?php echo $datoValidado->referenteId ?>">
     </div>
   </div>
   <?php
@@ -132,6 +132,7 @@ if ($_GET['id']==3) {
         //]]>
         </script>
 
+
         <div class="form-group">
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
@@ -150,56 +151,49 @@ if ($_GET['id']==3) {
         <?php
       }else{
         ?>
+
         <div class="form-group">
           <div class="col-md-12">
-            <label class="control-label">Contenido</label>
+            <label class="control-label">Mensaje</label>
           </div>
           <div class="col-md-12" id="myArea1">
             <?php
             if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
-              echo $datoValidado->contenido  ;
+              echo $datoValidado->contenido;
             }
             ?>
             </div>
         </div>
+        <script src="includes/mod_cen/formularios/js/nicEditor.js"></script>
+        <script type="text/javascript">
+          toggleArea1();
+        </script>
+        <script type="text/javascript">
+        //<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+        jQuery('.nicEdit-main').attr('contenteditable','false');
+        //]]>
+        </script>
+        <div class="form-group">
+          <div class="col-md-12">
+            <label class="control-label">Contenido</label>
+          </div>
+          <div class="col-md-12">
+
+            <textarea  rows='20' name="contenido" class="form-control" >
+              <?php
+              //if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
+              //  echo $datoValidado->contenido  ;
+              //}
+              ?>
+            </textarea>
+          </div>
+        </div>
 
 
-              <script type="text/javascript">
-            //<![CDATA[
-            var area1, area2;
-
-            function toggleArea1() {
-              if(!area1) {
-                      area1 = new nicEditor({fullPanel : true}).panelInstance('myArea1',{hasPanel : true});
-              } else {
-                      area1.removeInstance('myArea1');
-                      area1 = null;
-              }
-            }
-
-            function addArea2() {
-              area2 = new nicEditor({fullPanel : true}).panelInstance('myArea2');
-            }
-            function removeArea2() {
-              area2.removeInstance('myArea2');
-            }
-
-            bkLib.onDomLoaded(function() { toggleArea1(); });
-            //]]>
-            </script>
   <?php
-  if ($_GET['id']==3) {
-    ?>
-    <script type="text/javascript">
-      toggleArea1();
-    </script>
-    <?php
-  }
       }
        ?>
-
-
-    </script>
 
 
         <p>&nbsp;</p>
@@ -219,7 +213,7 @@ if ($_GET['id']==3) {
             </div>
           </div>
           <?php
-        }elseif($_GET['id']==1){
+        }elseif($_GET['id']==4){
           ?>
           <div class="form-group">
             <div class="col-md-12">

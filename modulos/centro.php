@@ -68,7 +68,7 @@
 							break;
 						case 4:
 						include("includes/mod_cen/mensajes/responderMensaje.php");
-						
+
 							break;
 
 					}
@@ -164,7 +164,7 @@
 
 						break;
 					case 4:
-						include("includes/mod_cen/escuela_editado.php");
+						include("includes/mod_cen/escuelas/escuela_editado.php");
 						break;
 					case 5:
 						include("includes/mod_cen/escuela_eliminar.php");
@@ -390,6 +390,9 @@
 						break;
 				case 19:
 								include("includes/mod_cen/escuelas/escuela_facilitador_coordinador.php");
+								break;
+				case 20:
+								include("includes/mod_cen/escuelas/escuelaDatosDirectivo.php");
 								break;
 }
 

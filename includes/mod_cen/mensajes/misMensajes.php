@@ -143,6 +143,11 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
   foreach ($arrayDestino as $key => $value) {
     //echo $arrayDestino[$key].'<br>';
     if ($arrayDestino[$key]==$_SESSION['referenteId']) {
+
+      $mensaje1 = new Mensajes($fila->mensajeId);
+      $buscarMensaje = $mensaje1->buscarRespuesta();
+
+
       $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
       $buscar_adjunto = $adjunto->buscar();
       $cantAdjunto = mysqli_num_rows($buscar_adjunto);
@@ -151,9 +156,11 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
       echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
 echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
       if ($cantAdjunto==0) {
-        echo '<div class="col-md-4 col-xs-12"><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></div>';
+
+        echo '<div class="col-md-4 col-xs-12"><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'--'.$buscarMensaje.'</a></div>';
       }else{
-        echo '<div class="col-md-4 col-xs-12"<a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+        echo '<div class="col-md-4 col-xs-12"<a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'--'.$buscarMensaje.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+
       }
 echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
 

@@ -11,13 +11,15 @@ class Mensajes
  	private $contenido;
 	private $destinatario;
  	private $fechaHora;
+	private $respuesta;
 
 function __construct($mensajeId=NULL,
                       $referenteId=NULL,
                       $asunto=NULL,
                       $contenido=NULL,
                       $destinatario=NULL,
-	                    $fechaHora=NULL
+	                    $fechaHora=NULL,
+											$respuesta=NULL
                       )
 	{
 		$this->mensajeId = $mensajeId;
@@ -26,6 +28,7 @@ function __construct($mensajeId=NULL,
  		$this->contenido =$contenido;
 		$this->destinatario = $destinatario;
  		$this->fechaHora = $fechaHora;
+		$this->respuesta = $respuesta;
 	}
 
 
@@ -34,13 +37,14 @@ function __construct($mensajeId=NULL,
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="INSERT INTO mensajes (mensajeId,referenteId,asunto,contenido,destinatario,fechaHora)
+		$sentencia="INSERT INTO mensajes (mensajeId,referenteId,asunto,contenido,destinatario,fechaHora,respuesta)
 		            VALUES (NULL,
                         '". $this->referenteId."',
                         '".$this->asunto."',
                         '". $this->contenido."',
                         '". $this->destinatario."',
-                        '". $this->fechaHora."');
+                        '". $this->fechaHora."',
+												'". $this->respuesta."');
                         ";
 
 		if ($conexion->query($sentencia)) {
@@ -51,6 +55,34 @@ function __construct($mensajeId=NULL,
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
 	}
+
+public function buscarRespuesta(){
+	$cantidad=1;
+	$nuevaConexion=new Conexion();
+	$conexion=$nuevaConexion->getConexion();
+
+	$sentencia = "SELECT * FROM mensajes WHERE mensajeId=".$this->mensajeId;
+	//echo $sentencia;
+	$buscarMensaje=$conexion->query($sentencia);
+	$datoMensaje = mysqli_fetch_object($buscarMensaje);
+	//var_dump($datoMensaje);
+
+	if($datoMensaje->respuesta <> 0){
+		$estado = 0;
+		do {
+			$cantidad++;
+			$nuevaConexion=new Conexion();
+			$conexion=$nuevaConexion->getConexion();
+			$sentencia = "SELECT * FROM mensajes WHERE mensajeId=".$datoMensaje->respuesta;
+			$buscarMensaje=$conexion->query($sentencia);
+			$datoMensaje = mysqli_fetch_object($buscarMensaje);
+			if($datoMensaje->respuesta == 0){
+				$estado = 2;
+			}
+		} while ($estado < 1);
+	}
+	return $cantidad;
+}
 
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
@@ -118,6 +150,11 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
   		if($this->fechaHora!=NULL)
   		{
   			$sentencia.=" mensajes.fechaHora='$this->fechaHora' && ";
+  		}
+
+			if($this->respuesta!=NULL)
+  		{
+  			$sentencia.=" mensajes.respuesta='$this->respuesta' && ";
   		}
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 		}

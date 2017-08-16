@@ -144,7 +144,22 @@ class Escuela
 										WHERE escuelaId = '$this->escuelaId'";
 
 		}else{
-			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId',cue = '$this->cue', numero = '$this->numero', nombre = '$this->nombre',domicilio = '$this->domicilio', nivel = '$this->nivel', localidadId = '$this->localidadId', turnos = '$this->turnos', telefono = '$this->telefono' ,email = '$this->email' , ubicacion = '$this->ubicacion', sitio = '$this->sitio', facebook = '$this->facebook', twitter = '$this->twitter', youtube = '$this->youtube' WHERE escuelaId = '$this->escuelaId'";
+			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId',
+																										cue = '$this->cue',
+																										numero = '$this->numero',
+																										nombre = '$this->nombre',
+																										domicilio = '$this->domicilio',
+																										nivel = '$this->nivel',
+																										localidadId = '$this->localidadId',
+																										turnos = '$this->turnos',
+																										telefono = '$this->telefono',
+																										ubicacion = '$this->ubicacion',
+																										sitio = '$this->sitio',
+																										facebook = '$this->facebook',
+																										twitter = '$this->twitter',
+																										youtube = '$this->youtube',
+																										email = '$this->email'
+																										WHERE escuelaId = '$this->escuelaId'";
 		}
 
 		if ($conexion->query($sentencia)) {
