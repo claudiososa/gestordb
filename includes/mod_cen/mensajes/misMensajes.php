@@ -12,7 +12,23 @@
 }.table > tbody > tr > td {
 
   border-top: 1px solid #068587;
-}
+
+}.estilo  {
+
+    padding: 10px;
+    outline: 1px solid #529e8b;
+    color: #ffffff;
+background-color: #529e8b;
+
+
+ }.estilo1  {
+
+     padding: 10px;
+     outline: 1px solid #529e8b;
+
+
+  }
+
 
 </style>
 <div class="container">
@@ -52,25 +68,33 @@
 
 
     if (isset($_GET['enviados'])) {
-      echo '<p><h4><font color="#068587">&nbspMensajes Enviados</font></h4></p>';
+      echo '<div class="container"><p><h4><font color="#068587">&nbspMensajes Enviados</font></h4></p></div>';
     }else{
-      echo '<p><h4><font color="#068587">&nbspMensajes Recibidos</font></h4></p>';
+      echo '<div class="container"><p><h4><font color="#068587">&nbspMensajes Recibidos</font></h4></p></div>';
 
     }
     ?>
 
 
+<div class="container-fluid">
+<div class="estilo hidden-sm hidden-xs">
 
 
-<table class="table">
+<div class="row hidden-sm hidden-xs">
+  <!--
   <thead>
     <tr>
     <th>De</th>
     <th>Asunto</th>
     <th>Fecha</th>
     </tr>
-  </thead>
-<tbody>
+  </thead>-->
+  <div class="col-md-4">De</div>
+  <div class="col-md-4">Asunto</div>
+  <div class="col-md-4">Fecha</div>
+
+</div>
+</div>
 
 
 
@@ -87,19 +111,20 @@ if (isset($_GET['enviados'])) {
         $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
         $buscar_adjunto = $adjunto->buscar();
         $cantAdjunto = mysqli_num_rows($buscar_adjunto);
+  echo '<div class="estilo1">';
+        echo '<div class="row">';
 
-        echo '<tr>';
-        echo '<td>'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</td>';
+        echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
+          echo '<div class="col-md-4 col-xs-6-pull-right">'.date("d-m-Y H:i",  strtotime($fila->fechaHora)).'</div>';
         if ($cantAdjunto==0) {
-          echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
+          echo '<div class="col-md-4 col-xs-12"><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></div>';
         }else{
-          echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></td>';
+          echo '<div class="col-md-4 col-xs-12"><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
         }
 
         //echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
-
-        echo '<td>'.date("d-m-Y H:i:s", strtotime($fila->fechaHora)).'</td>';
-        echo '</tr>';
+echo '</div>';
+        echo '</div>';
         $cantidadMensajes++;
 
 
@@ -121,18 +146,19 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
       $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
       $buscar_adjunto = $adjunto->buscar();
       $cantAdjunto = mysqli_num_rows($buscar_adjunto);
-      echo '<tr>';
-      echo '<td>'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</td>';
-
+      echo '<div class="estilo1">';
+      echo '<div class="row">';
+      echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
+echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
       if ($cantAdjunto==0) {
-        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
+        echo '<div class="col-md-4 col-xs-12"><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></div>';
       }else{
-        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></td>';
+        echo '<div class="col-md-4 col-xs-12"<a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
       }
+echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
 
-
-      echo '<td>'.date("d-m-Y H:i:s", strtotime($fila->fechaHora)).'</td>';
-      echo '</tr>';
+      echo '</div>';
+      echo '</div>';
       $cantidadMensajes++;
 
     }
@@ -140,8 +166,9 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
 }
 }
 //$cantidadMensajes=mysqli_num_rows($misMensajes);
-echo '</div>';
+
 ?>
-</tbody>
-</table>
+
+
+</div> <!--cierre de row-->
 </div>
