@@ -132,6 +132,7 @@ if ($_GET['id']==3) {
         //]]>
         </script>
 
+
         <div class="form-group">
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
@@ -150,56 +151,49 @@ if ($_GET['id']==3) {
         <?php
       }else{
         ?>
+
         <div class="form-group">
           <div class="col-md-12">
-            <label class="control-label">Contenido</label>
+            <label class="control-label">Mensaje</label>
           </div>
           <div class="col-md-12" id="myArea1">
             <?php
             if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
-              echo $datoValidado->contenido  ;
+              echo $datoValidado->contenido;
             }
             ?>
             </div>
         </div>
+        <script src="includes/mod_cen/formularios/js/nicEditor.js"></script>
+        <script type="text/javascript">
+          toggleArea1();
+        </script>
+        <script type="text/javascript">
+        //<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+        jQuery('.nicEdit-main').attr('contenteditable','false');
+        //]]>
+        </script>
+        <div class="form-group">
+          <div class="col-md-12">
+            <label class="control-label">Contenido</label>
+          </div>
+          <div class="col-md-12">
+
+            <textarea  rows='20' name="contenido" class="form-control" >
+              <?php
+              //if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
+              //  echo $datoValidado->contenido  ;
+              //}
+              ?>
+            </textarea>
+          </div>
+        </div>
 
 
-              <script type="text/javascript">
-            //<![CDATA[
-            var area1, area2;
-
-            function toggleArea1() {
-              if(!area1) {
-                      area1 = new nicEditor({fullPanel : true}).panelInstance('myArea1',{hasPanel : true});
-              } else {
-                      area1.removeInstance('myArea1');
-                      area1 = null;
-              }
-            }
-
-            function addArea2() {
-              area2 = new nicEditor({fullPanel : true}).panelInstance('myArea2');
-            }
-            function removeArea2() {
-              area2.removeInstance('myArea2');
-            }
-
-            bkLib.onDomLoaded(function() { toggleArea1(); });
-            //]]>
-            </script>
   <?php
-  if ($_GET['id']==3) {
-    ?>
-    <script type="text/javascript">
-      toggleArea1();
-    </script>
-    <?php
-  }
       }
        ?>
-
-
-    </script>
 
 
         <p>&nbsp;</p>

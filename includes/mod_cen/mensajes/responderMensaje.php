@@ -1,7 +1,7 @@
 <script src="includes/mod_cen/js/s_ajax_mensajeResponder.js"></script>
 <?php
-include_once("includes/mod_cen/clases/MensajesResp.php");
 include_once("includes/mod_cen/clases/Mensajes.php");
+//include_once("includes/mod_cen/clases/Mensajes.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/MensajesAdjunto.php");
 
@@ -17,13 +17,13 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   //$arrayDestino=unserialize($_POST['referentes']);
   //$destinatarios = implode(',',$arrayDestino);
   $fecha=date("Y-m-d H:i:s");
-  $mensaje= new MensajesResp(null,
-                            $_POST["mensajeId"],
+  $mensaje= new Mensajes(null,
                             $_SESSION["referenteId"],
                             $_POST["asunto"],
                             $_POST["contenido"],
                             $_POST["destinatario"],
-                            $fecha
+                            $fecha,
+                            $_POST["mensajeId"]
                           );
     $guardar_mensaje=$mensaje->agregar(); // hasta aqui guarda el mensaje nuevo
 

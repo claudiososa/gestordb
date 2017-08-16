@@ -118,6 +118,11 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
   foreach ($arrayDestino as $key => $value) {
     //echo $arrayDestino[$key].'<br>';
     if ($arrayDestino[$key]==$_SESSION['referenteId']) {
+
+      $mensaje1 = new Mensajes($fila->mensajeId);
+      $buscarMensaje = $mensaje1->buscarRespuesta();
+
+
       $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
       $buscar_adjunto = $adjunto->buscar();
       $cantAdjunto = mysqli_num_rows($buscar_adjunto);
@@ -125,9 +130,9 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
       echo '<td>'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</td>';
 
       if ($cantAdjunto==0) {
-        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a></td>';
+        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'--'.$buscarMensaje.'</a></td>';
       }else{
-        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></td>';
+        echo '<td><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'--'.$buscarMensaje.'</a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></td>';
       }
 
 
