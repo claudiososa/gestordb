@@ -19,8 +19,8 @@ session_start();
 
 
 
-				<script src="tabla/js-xlsx-master/dist/xlsx.core.min.js"></script>
-        <script src="tabla/FileSaver.js-master/FileSaver.min.js"></script>
+				<script src="tablas/xlsx.core.min.js"></script>
+        <script src="tablas/FileSaver.min.js"></script>
         <script src="tabla/TableExport-master/dist/js/tableexport.min.js"></script>
 
 
