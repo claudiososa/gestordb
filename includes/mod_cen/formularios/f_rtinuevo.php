@@ -119,23 +119,6 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		<div class="col-md-12">
-			<label for="" class="control-label">Código Postal</label>
-		</div>
-		<div class="col-md-12">
-		 <input class="form-control" type="text" name="txtcp" id="txtcp" class="hades" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<div class="col-md-12">
-			<label for="" class="control-label">Teléfono 1</label>
-		</div>
-		<div class="col-md-12">
-			<input class="form-control" type="text" name="txttelefono1" id="txttelefono1" class="hades" />
-		</div>
-	</div>
 
 	<div class="form-group">
 		<div class="col-md-12">
@@ -154,14 +137,7 @@
 			<input class="form-control" type="text" name="txtemail1" id="txtemail1" class="hades" />
 		</div>
 	</div>
-	<div class="form-group">
-		<div class="col-md-12">
-			<label for="" class="control-label">Email 2</label>
-		</div>
-		<div class="col-md-12">
-			<input class="form-control" type="text" name="txtemail2" id="txtemail2" class="hades" />
-		</div>
-	</div>
+
 
 	<div class="form-group">
 		<div class="col-md-12">

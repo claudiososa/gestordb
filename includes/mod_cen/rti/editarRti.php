@@ -12,7 +12,18 @@ if($_POST){
 		$grabarrti="UPDATE rtixescuela SET  estado='".$_POST['estado']."', turno='".$_POST['cbestado']."' WHERE rtiId=".$_POST['idrti'];
 		//echo $grabarrti;
 		$resultado=$bd->ejecutar($grabarrti);
-		$sentencia="UPDATE personas SET apellido ='".strtoupper($_POST['txtapellido'])."', nombre ='".strtoupper($_POST['txtnombre'])."', dni= ".$_POST['txtdni'].", cuil=".$_POST['txtcuit'].", telefonoC = '".$_POST['txttelefono1']."', telefonoM = '".$_POST['txttelefono2']."', direccion= '".strtoupper($_POST['txtdomicilio'])."', email = '".$_POST['txtemail1']."', email2 = '".$_POST['txtemail2']."', facebook = '".$_POST['txtfacebook']."', twitter = '".$_POST['txttwitter']."', localidadId = ".round($_POST['cblocalidad'],0).", cpostal = '".$_POST['txtcp']."' WHERE personaId =".$_POST['txtidpersona'];
+		$sentencia="UPDATE personas SET apellido ='".strtoupper($_POST['txtapellido'])."',
+																				nombre ='".strtoupper($_POST['txtnombre'])."',
+																				dni= ".$_POST['txtdni'].",
+																				cuil=".$_POST['txtcuit'].",
+																				telefonoM = '".$_POST['txttelefono2']."',
+																				direccion= '".strtoupper($_POST['txtdomicilio'])."',
+																				email = '".$_POST['txtemail1']."',
+																				facebook = '".$_POST['txtfacebook']."',
+																				twitter = '".$_POST['txttwitter']."',
+																				localidadId = ".round($_POST['cblocalidad'],0).",
+																				cpostal = '".$_POST['txtcp']."'
+																				WHERE personaId =".$_POST['txtidpersona'];
 		$resultado=$bd->ejecutar($sentencia);
 		//var_dump($resultado);
 	}

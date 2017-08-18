@@ -6,7 +6,18 @@ if($_POST){
 	/*Creamos la instancia del objeto. Ya estamos conectados*/
 	$bd=Conexion2::getInstance();
 	if(trim($_POST['txtidpersona'])!=""){//Si existe la persona en la base
-		$sentencia="UPDATE personas SET apellido ='".strtoupper($_POST['txtapellido'])."', nombre ='".strtoupper($_POST['txtnombre'])."', dni= ".$_POST['txtdni'].", cuil=".$_POST['txtcuit'].", telefonoC = '".$_POST['txttelefono1']."', telefonoM = '".$_POST['txttelefono2']."', direccion= '".strtoupper($_POST['txtdomicilio'])."', email = '".$_POST['txtemail1']."', email2 = '".$_POST['txtemail2']."', facebook = '".$_POST['txtfacebook']."', twitter = '".$_POST['txttwitter']."', localidadId = ".round($_POST['cblocalidad'],0).", cpostal = '".$_POST['txtcp']."' WHERE personaId =".$_POST['txtidpersona'];
+		$sentencia="UPDATE personas SET apellido ='".strtoupper($_POST['txtapellido'])."',
+																					nombre ='".strtoupper($_POST['txtnombre'])."',
+																					dni= ".$_POST['txtdni'].",
+																					cuil=".$_POST['txtcuit'].",
+																					telefonoM = '".$_POST['txttelefono2']."',
+																					direccion= '".strtoupper($_POST['txtdomicilio'])."',
+																					email = '".$_POST['txtemail1']."',
+																					facebook = '".$_POST['txtfacebook']."',
+																					twitter = '".$_POST['txttwitter']."',
+																					localidadId = ".round($_POST['cblocalidad'],0).",
+																					cpostal = '".$_POST['txtcp']."'
+																					WHERE personaId =".$_POST['txtidpersona'];
 		$resultado=$bd->ejecutar($sentencia);
     $idPersona=$_POST['txtidpersona'];
     $rti = new Rti (null,$idPersona,null,null,null);
@@ -81,7 +92,20 @@ if($_POST){
 	}
 	else//No existe la persona en la base de datos
 	{
-		$grabarpersona="INSERT INTO personas (personaId,apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal) VALUES (NULL,'". strtoupper($_POST['txtapellido'])."','". strtoupper($_POST['txtnombre'])."',". $_POST['txtdni'].",".$_POST['txtcuit'].",'". $_POST['txttelefono1']."','". $_POST['txttelefono2']."','". strtoupper($_POST['txtdomicilio'])."','". $_POST['txtemail1']."','". $_POST['txtemail2']."','".$_POST['txtfacebook']."','". $_POST['txttwitter']."',".round($_POST['cblocalidad'],0).",'". $_POST['txtcp']."')";
+		$grabarpersona="INSERT INTO personas (personaId,apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal)
+		VALUES (NULL,'". strtoupper($_POST['txtapellido'])."',
+									'". strtoupper($_POST['txtnombre'])."',
+									". $_POST['txtdni'].",
+									".$_POST['txtcuit'].",
+									'0',
+									'". $_POST['txttelefono2']."',
+									'". strtoupper($_POST['txtdomicilio'])."',
+									'". $_POST['txtemail1']."',
+									'',
+									'".$_POST['txtfacebook']."',
+									'". $_POST['txttwitter']."',
+									".round($_POST['cblocalidad'],0).",
+									'". $_POST['txtcp']."')";
 		$resultado=$bd->ejecutar($grabarpersona);
 		$idpersona=$bd->lastID();
     $rti = new Rti (null,$idpersona);
