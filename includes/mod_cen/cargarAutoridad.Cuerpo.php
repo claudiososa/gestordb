@@ -107,15 +107,17 @@ $(document).ready(function(){
 						//$idtipoautoridad="option[value="+$resultado['tipoautoridad_id']+"]";
 						//alert($idtipoautoridad);
 						$('#cblocalidad').find($idlocalidad).attr('selected',true);
-						//$('#cbtipoautoridad').find($idtipoautoridad).attr('selected',true);
+						$('#cbtipoautoridad').find($idtipoautoridad).attr('selected',true);
 						$('#txttipodecargo').focus();
 					}
 					else
 					{
+						//$('#txtapellido').val('');
 						alert('No existe ninguna persona registrada con el Nro. de Documento: '+$('#txtdni').val()+'.Por favor cargue los datos correspondientes' );
-						$(".hades").val("");
+						//$(".hades").val("");
 						$('#txtidpersona').val('');
-						//$('#txtdni').focus();
+						$('#txtnombre,#txtapellido,#txtdomicilio,#txtcuit,#txttelefono1,#txttelfono2,#txtemail1,#txtemail2,#txtfacebook,#txttwitter,#txtcp,#txtidpersona').val('');
+						$('#txtdni').attr('disabled','disabled');
 						$('#txtapellido').focus();
 					}
 
@@ -272,7 +274,7 @@ $(document).ready(function(){
 			<input class="form-control" type="text" name="txtemail1" id="txtemail1" class="hades" />
 		</div>
 	</div>
-	
+
 	<div class="form-group">
 		<div class="col-md-12">
 			<label for="" class="control-label">Facebook</label>
@@ -348,7 +350,7 @@ if($dni.trim()!=""){
 			else
 			{
 				alert('No existe ninguna persona registrada con el Nro. de Documento: '+$('#txtdni').val()+'.Por favor cargue los datos correspondientes' );
-				$(".hades").val("");
+				//$(".hades").val("");
 				$('#txtidpersona').val('');
 				//$('#txtdni').focus();
 				$('#txtapellido').focus();

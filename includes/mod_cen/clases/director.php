@@ -92,7 +92,10 @@ class Director
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		$sentencia="SELECT directorId,escuelaId,personaId,directores.tipoautoridad_id,tipoautoridad FROM directores left join tipoautoridad on directores.tipoautoridad_id=tipoautoridad.tipoautoridad_id where escuelaId=".$escuelaId;
+		$sentencia="SELECT directorId,escuelaId,personaId,directores.tipoautoridad_id,tipoautoridad
+		FROM directores
+		left join tipoautoridad on directores.tipoautoridad_id=tipoautoridad.tipoautoridad_id
+		where escuelaId=".$escuelaId." ORDER BY directorId DESC LIMIT 1";
 		return $conexion->query($sentencia);
 
 	}
