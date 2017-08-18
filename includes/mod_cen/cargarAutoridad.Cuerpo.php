@@ -40,11 +40,7 @@ function validacion()
 		$('#txtdni').focus();
 		return false;
 	}
-		if( $cuil == null || $cuil.length == 0 || /^\s+$/.test($cuil) || isNaN($cuil) || $cuil<=0 ) 		{
-		alert('[ATENCIÓN] El campo CUIL debe ser un número positivo mayor que cero.');
-		$('#txtcuit').focus();
-		return false;
-	}
+
 	if($('#txtapellido').val()==""){
 		alert('[ATENCIÓN] El campo APELLIDO es obligatorio');
 		$('#txtapellido').focus();
@@ -55,6 +51,12 @@ function validacion()
 		$('#txtnombre').focus();
 		return false;
 	}
+
+	if( $cuil == null || $cuil.length == 0 || /^\s+$/.test($cuil) || isNaN($cuil) || $cuil<=0 ) 		{
+	alert('[ATENCIÓN] El campo CUIL debe ser un número positivo mayor que cero.');
+	$('#txtcuit').focus();
+	return false;
+}
 	if($('#txttipodecargo').val()==""){
 		alert('[ATENCIÓN] El campo CARGO es obligatorio');
 		$('#txttipodecargo').focus();
@@ -117,7 +119,7 @@ $(document).ready(function(){
 						//$(".hades").val("");
 						$('#txtidpersona').val('');
 						$('#txtnombre,#txtapellido,#txtdomicilio,#txtcuit,#txttelefono1,#txttelfono2,#txtemail1,#txtemail2,#txtfacebook,#txttwitter,#txtcp,#txtidpersona').val('');
-						$('#txtdni').attr('disabled','disabled');
+						$('#txtdni').attr('readonly','readonly');
 						$('#txtapellido').focus();
 					}
 

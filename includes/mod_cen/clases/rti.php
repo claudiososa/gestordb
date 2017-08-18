@@ -82,15 +82,15 @@ class Rti
 	}
 	public function agregar()
 	{
-
-		$nuevaConexion=new Conexion2();
-		$conexion=$nuevaConexion->getConexion();
+		$bd=Conexion2::getInstance();
+		//$nuevaConexion=new Conexion2();
+		//$conexion=$nuevaConexion->getConexion();
 		$objpersona= new Persona();
 		$sentencia="INSERT INTO rti (rtiId,personaId,titulo,capacitacionTec,capacitacionPed)
 		VALUES (NULL,'". $this->personaId."','". $this->titulo."','". $this->capacitacionTec."','".$this->capacitacionPed."');";
-
-		if ($conexion->query($sentencia)) {
-			$idRti=$conexion->lastID();
+		//$resultado=;
+		if ($bd->ejecutar($sentencia)) {
+			$idRti=$bd->lastID();
 			return $idRti;
 		}else
 		{
@@ -116,6 +116,19 @@ class Rti
 		}
 	}
 
+	public static function quitarRti($rtiId,$escuelaId)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$eliminarrti="DELETE from rtixescuela where rtiId=".$rtiId." AND escuelaid=".$escuelaId;
+		//echo eliminarrti;
+		if ($conexion->query($eliminarrti)) {
+					return 1;
+		}else
+		{
+				echo "<br>"."Error al ejecutar la sentencia";
+		}
+	}
 	public function eliminar()
 	{
 		$nuevaConexion=new Conexion();

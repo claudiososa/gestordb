@@ -27,7 +27,7 @@ echo '</div>
 	echo "<tr ><th>Apellido</th>";
 	echo "<th>Nombre</th>";
 	echo "<th>DNI</th>";
-	echo "<th>Turno</th>";
+	//echo "<th>Turno</th>";
 	echo "<th>Teléfono</th>";
 	echo "<th>Teléfono 2</th>";
 	echo "<th>Email</th>";
@@ -40,7 +40,7 @@ echo '</div>
 		echo "<td>".$fila->apellido."</td>";
 		echo "<td>".$fila->nombre."</td>";
 		echo "<td>".$fila->dni."</td>";
-		echo "<td>".$fila->turno."</td>";
+		//echo "<td>".$fila->turno."</td>";
 		echo "<td>".$fila->telefonoC."</td>";
 		echo "<td>".$fila->telefonoM."</td>";
 		echo "<td>".$fila->email."</td>";

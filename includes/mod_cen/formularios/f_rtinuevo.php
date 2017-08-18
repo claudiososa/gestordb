@@ -122,7 +122,7 @@
 
 	<div class="form-group">
 		<div class="col-md-12">
-			<label for="" class="control-label">Teléfono 2</label>
+			<label for="" class="control-label">Teléfono</label>
 		</div>
 		<div class="col-md-12">
 			<input class="form-control" type="text" name="txttelefono2" id="txttelefono2" class="hades" />

@@ -286,6 +286,18 @@ class Escuela
 
 	}
 
+	public function buscarUnico(){
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$smt="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId";
+		if($conexion->query($smt)){
+			//return 'encontrado';
+			return mysqli_fetch_object($conexion->query($smt));
+		}else{
+			return 'error';
+		}
+	}
+
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();

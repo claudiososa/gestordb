@@ -1,5 +1,27 @@
 <?php
 include_once('includes/mod_cen/clases/conexionv2.php');
+
+	if(isset($_GET['quitar'])){
+		include_once('includes/mod_cen/clases/rti.php');
+
+		$quitar_rti=Rti::quitarRti($_GET['rtiId'],$_GET['escuelaId']);//Tómo datos de la escuela
+
+		if ($quitar_rti==1) {
+			$variablephp="index.php?mod=slat&men=referentes&id=8&escuelaId=".$_GET['escuelaId'];
+			?>
+
+			<script type="text/javascript">
+					var variablejs = "<?php echo $variablephp; ?>" ;
+					function redireccion(){window.location=variablejs;}
+					setTimeout ("redireccion()",0);
+							</script>
+			<?php
+		}
+	}else{
+
+
+
+
 //	echo '<p> <strong>Autoridad:</strong></p>';
 if($_POST){
 
@@ -119,5 +141,7 @@ if(isset($_GET['personaId'])){
 ?>
 <script type="text/javascript" src="includes/mod_cen/rti/js/ajaxEditarRti.js"></script>
 <?php
+}
+
 }
 ?>

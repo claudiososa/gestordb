@@ -5,6 +5,20 @@
 	include_once('includes/mod_cen/clases/persona.php');
 	include_once('includes/mod_cen/clases/rti.php');
 
+	$esReferente=0;
+	/**
+	 * Verificacion si la escuela esta a cargo del usuario logeado solamente si es ETT o ETJ
+	 * @var [type]
+	 */
+
+	 $objEscuela = new Escuela($_GET['escuelaId']);
+	 $buscarEscuela = $objEscuela->buscarUnico();
+	 if($buscarEscuela->referenteId==$_SESSION['referenteId']){
+		 $esReferente=1;
+	 }
+	 //var_dump($buscarEscuela);
+
+
 	$datoestado= Maestro::estructura('estado','rtixescuela');//Cargo los estados posibles de un RTI x institución
 
 	$objlocalidad= new Localidad(null,null,null);//Cargo Localidades
@@ -33,22 +47,26 @@
 	echo "RTI Escuela Número ".$escuela->numero." - ".$escuela->nombre;
 echo '</div>
 <div class="panel-body">';
-?>
-<a href='index.php?mod=slat&men=rtis&id=14&escuelaId=<?php echo $escuela->escuelaId?>' class="btn btn-primary">Nuevo RTI</a>
 
-<?php
+if ($esReferente==1){
+		echo "<a href='index.php?mod=slat&men=rtis&id=14&escuelaId=".$escuela->escuelaId."' class='btn btn-primary'>Nuevo RTI</a>";
+}
+
 	//Tabla con RTI
 	echo "<table class='table'>";
 	echo "<tr><th colspan='4'><h4>Referentes TIC Institucional</h4></th></tr>";
 	echo "<tr ><th>Apellido</th>";
 	echo "<th>Nombre</th>";
+	echo "<th>DNI</th>";
 	echo "<th>Turno</th>";
 	echo "<th>Teléfono</th>";
 	echo "<th>Teléfono 2</th>";
 	echo "<th>Email</th>";
 	echo "<th>Estado</th>";
-	echo "<th>Acción</th>";
-	echo "<th>Acción</th>";
+	if($esReferente==1){
+		echo "<th>Acción</th>";
+		echo "<th>Acción</th>";
+	}
 	echo "</tr>";
 	while ($fila = mysqli_fetch_object($dato_rti))
 	{
@@ -57,13 +75,17 @@ echo '</div>
 		echo "<tr  class='editarrtidc'>";
 		echo "<td>".$fila->apellido."</td>";
 		echo "<td>".$fila->nombre."</td>";
+		echo "<td>".$fila->dni."</td>";
 		echo "<td>".$fila->turno."</td>";
 		echo "<td>".$fila->telefonoC."</td>";
 		echo "<td>".$fila->telefonoM."</td>";
 		echo "<td>".$fila->email."</td>";
 		echo "<td>".$fila->estado."</td>";
-		echo "<td><a href='index.php?mod=slat&men=rtis&id=12&rtiId=".$fila->rtiId."&personaId=".$fila->personaId."&escuelaId=".$fila->escuelaId."'><buttom class='btn btn-primary'>Editar</buttom></a></td>";
-	  //echo "<td><input class='btn btn-primary' type='submit' name='submit' value='Eliminar'></a></td>";
+		if($esReferente==1){
+			echo "<td><a href='index.php?mod=slat&men=rtis&id=12&rtiId=".$fila->rtiId."&personaId=".$fila->personaId."&escuelaId=".$fila->escuelaId."'><buttom class='btn btn-primary'>Editar</buttom></a></td>";
+			echo "<td><a href='index.php?mod=slat&men=rtis&id=12&rtiId=".$fila->rtiId."&personaId=".$fila->personaId."&escuelaId=".$fila->escuelaId."&quitar'><buttom class='btn btn-primary'>Eliminar</buttom></a></td>";
+		}
+		//echo "<td><input class='btn btn-primary' type='submit' name='submit' value='Eliminar'></a></td>";
 
 
 		//echo "<td><input type='button' name='cmddetalle".$fila->rtiId."' class='btn btn-primary' id='".$fila->rtiId."' 	value='Editar' /></td>";

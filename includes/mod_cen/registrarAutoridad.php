@@ -1,4 +1,10 @@
 <?php
+/*function error($numero,$texto){
+$ddf = fopen('error.log','a');
+fwrite($ddf,"[".date("r")."] Error $numero: $texto\r\n");
+fclose($ddf);
+}*/
+
 include('clases/conexionv2.php');
 /*Creamos la instancia del objeto. Ya estamos conectados*/
 $bd=Conexion2::getInstance();
@@ -20,7 +26,22 @@ if(trim($_POST['txtidpersona'])!=""){//Si existe la persona en la base
 }
 else//No existe la persona en la base de datos
 {
-	$grabarpersona=$sentencia="INSERT INTO personas (apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal) VALUES ('". strtoupper($_POST['txtapellido'])."','". strtoupper($_POST['txtnombre'])."',". $_POST['txtdni'].",".$_POST['txtcuit'].",'". $_POST['txttelefono1']."','". $_POST['txttelefono2']."','". strtoupper($_POST['txtdomicilio'])."','". $_POST['txtemail1']."','". $_POST['txtemail2']."','".$_POST['txtfacebook']."','". $_POST['txttwitter']."',".round($_POST['cblocalidad'],0).",'". $_POST['txtcp']."')";
+
+	$grabarpersona="INSERT INTO personas (apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal)
+															VALUES ('". strtoupper($_POST['txtapellido'])."',
+															'". strtoupper($_POST['txtnombre'])."',
+															". $_POST['txtdni'].",
+															".$_POST['txtcuit'].",
+															'0',
+															'". $_POST['txttelefono2']."',
+															'". strtoupper($_POST['txtdomicilio'])."',
+															'". $_POST['txtemail1']."',
+															'',
+															'".$_POST['txtfacebook']."',
+															'". $_POST['txttwitter']."',
+															".round($_POST['cblocalidad'],0).",
+															'". $_POST['txtcp']."')";
+	//error('010',$grabarpersona);
 	$resultado=$bd->ejecutar($grabarpersona);
 	$idpersona=$bd->lastID();
 	$grabardirector="INSERT INTO directores (escuelaId,personaId,tipoautoridad_id)

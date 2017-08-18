@@ -6,3 +6,60 @@
 		VALUES (1092,0,1)
 [Wed, 16 Aug 2017 15:23:26 -0300] Error 001: INSERT INTO directores (escuelaId,personaId,tipoautoridad_id)
 		VALUES (1092,1997,1)
+[Fri, 18 Aug 2017 05:39:56 -0300] Error 010: hola mundo222
+[Fri, 18 Aug 2017 05:40:53 -0300] Error 010: INSERT INTO personas (apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal)
+															VALUES ('JUA',
+															'JUA',
+															,
+															26899906,
+															'0',
+															'',
+															'JUA',
+															'',
+															'',
+															'',
+															'',
+															31,
+															'4400')
+[Fri, 18 Aug 2017 05:45:45 -0300] Error 010: INSERT INTO personas (apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal)
+															VALUES ('JUA',
+															'JUA',
+															26899906,
+															26899906,
+															'0',
+															'',
+															'KDKD',
+															'',
+															'',
+															'',
+															'',
+															31,
+															'44')
+[Fri, 18 Aug 2017 05:46:44 -0300] Error 010: INSERT INTO personas (apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal)
+															VALUES ('CAR',
+															'CAR',
+															26899910,
+															26899910,
+															'0',
+															'',
+															'SN',
+															'',
+															'',
+															'',
+															'',
+															31,
+															'4400')
+[Fri, 18 Aug 2017 05:48:03 -0300] Error 010: INSERT INTO personas (apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal)
+															VALUES ('JUL',
+															'JUL',
+															26899911,
+															26899911,
+															'0',
+															'',
+															'SN',
+															'profe@yahoo.com.ar',
+															'',
+															'fa',
+															'tw',
+															31,
+															'4400')
