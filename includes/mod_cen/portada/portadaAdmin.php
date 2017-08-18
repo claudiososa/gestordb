@@ -1,13 +1,39 @@
-<div class="container">
-	<p>Portada Administrador</p>
-</div>
+<table class="table">
+<thead>
+	<tr>
+		<th>1</th>
+	<th>2</th><th>2</th>
+</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>12</td>
+		<td>1345</td>
+		<td>12</td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>1345</td>
+		<td>12</td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>1345</td>
+		<td>12</td>
+	</tr>
+</tbody></table>
 
-<div class="ui-widget">
-  <label for="birds">Birds: </label>
-  <input id="birds">
-</div>
 
-<div class="ui-widget" style="margin-top:2em; font-family:Arial">
-  Result:
-  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
-</div>
+
+<script type="text/javascript">
+  new TableExport(document.getElementsByTagName("table"), {
+                               // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
+    formats: ['xlsx'],             // (String[]), filetype(s) for the export, (default: ['xls', 'csv', 'txt'])
+
+	});
+
+
+
+
+
+</script>
