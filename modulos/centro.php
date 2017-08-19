@@ -500,6 +500,12 @@
 						case 22:
 								include("includes/mod_cen/informes/list_my_report_escuela.php");
 								break;
+						case 23:
+										include("includes/mod_cen/informes/permer.php");
+										break;
+						case 24:
+									 include("includes/mod_cen/informes/permerAulas.php");
+									 break;
 
 					}
 					break;

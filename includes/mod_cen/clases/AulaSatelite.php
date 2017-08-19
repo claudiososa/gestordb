@@ -170,12 +170,45 @@ class AulaSatelite
 		}
 	}
 
-	public function buscar()
+	public function buscar($parametro=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT * FROM aulaSatelite";
+
+		if ($parametro=='todos') {
+			$sentencia="SELECT  aulaSatelite.nombre,
+													aulaSatelite.domicilio,
+													aulaSatelite.telefono,
+													aulaSatelite.otroCue,
+													aulaSatelite.internado,
+													aulaSatelite.totalCargos,
+													aulaSatelite.matricula,
+													aulaSatelite.energia,
+													aulaSatelite.tipoInstalacion,
+													aulaSatelite.comoFunciona,
+													aulaSatelite.cantidadAulas,
+													aulaSatelite.cantidadPcInstaladas,
+													aulaSatelite.heladera,
+													aulaSatelite.otros,
+													aulaSatelite.suficienteEnergia,
+													aulaSatelite.calefon,
+													aulaSatelite.necesitaCalefonSolar,
+													aulaSatelite.necesitaBombeoAgua,
+													aulaSatelite.conectividad,
+													aulaSatelite.tipoConectividad,
+													aulaSatelite.comentario,
+													aulaSatelite.escuelaId,
+													escuelas.referenteId,escuelas.cue,
+													escuelas.numero,
+													localidades.nombre AS localidad
+			 FROM aulaSatelite";
+			$sentencia.=" INNER JOIN escuelas ON aulaSatelite.escuelaId=escuelas.escuelaId
+										INNER JOIN localidades ON aulaSatelite.localidadId=localidades.localidadId";	# code...
+		}else{
+			$sentencia="SELECT *
+			 FROM aulaSatelite";
+		}
 		$carga=0;
 		$cargalocali=0;
 		if($this->otroCue!=NULL || $this->internado!=NULL || $this->aulaSateliteId!=NULL

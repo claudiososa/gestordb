@@ -119,7 +119,38 @@ class RelevamientoElectrico extends Maestro
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT * FROM relevamientoElectrico";
+
+		if ($parametro=='todos') {
+			$sentencia="SELECT relevamientoElectrico.otroCue,
+													relevamientoElectrico.internado,
+													relevamientoElectrico.totalCargos,
+													relevamientoElectrico.matricula,
+													relevamientoElectrico.energia,
+													relevamientoElectrico.tipoInstalacion,
+													relevamientoElectrico.comoFunciona,
+													relevamientoElectrico.cantidadAulas,
+													relevamientoElectrico.cantidadPcInstaladas,
+													relevamientoElectrico.heladera,
+													relevamientoElectrico.otros,
+													relevamientoElectrico.suficienteEnergia,
+													relevamientoElectrico.calefon,
+													relevamientoElectrico.necesitaCalefonSolar,
+													relevamientoElectrico.necesitaBombeoAgua,
+													relevamientoElectrico.conectividad,
+													relevamientoElectrico.tipoConectividad,
+													relevamientoElectrico.comentario,
+													relevamientoElectrico.escuelaId,
+													escuelas.referenteId,escuelas.cue,escuelas.nombre,escuelas.numero,escuelas.domicilio,
+													escuelas.telefono,
+													localidades.nombre AS localidad
+			 FROM relevamientoElectrico";
+			$sentencia.=" INNER JOIN escuelas ON relevamientoElectrico.escuelaId=escuelas.escuelaId
+			 							INNER JOIN localidades ON localidades.localidadId=escuelas.localidadId";	# code...
+		}else{
+			$sentencia="SELECT *
+			 FROM relevamientoElectrico";
+		}
+
 		$carga=0;
 		$cargalocali=0;
 		if($this->otroCue!=NULL || $this->internado!=NULL || $this->escuelaId!=NULL || $this->heladera!=NULL
@@ -128,7 +159,7 @@ class RelevamientoElectrico extends Maestro
 			 || $this->cantidadAulas!=NULL || $this->cantidadPcInstaladas!=NULL
 			 || $this->escuelaId!=NULL || $this->otroCue!=NULL  || $this->conectividad!=NULL )
 		{
-			$sentencia.=" WHERE ";
+			$sentencia.="  WHERE ";
 
 
 		if($this->otroCue!=NULL)
@@ -228,7 +259,7 @@ class RelevamientoElectrico extends Maestro
 
 		}
 
-		$sentencia.="  ORDER BY escuelaId";
+		$sentencia.="  ORDER BY relevamientoElectrico.escuelaId";
 
 	//echo $sentencia."<br>";
 	//

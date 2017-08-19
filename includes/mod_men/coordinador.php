@@ -30,6 +30,8 @@
                 <li ><a href="index.php?mod=slat&men=informe&id=8">Estadisticas</a></li>
                 <li ><a href="index.php?mod=slat&men=estadistica&id=2">Estadistica Accesos por Dispositivo</a></li>
                 <li ><a href="index.php?mod=slat&men=informe&id=9&ref=coordinador">Visitas Mesuales</a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=23">PERMER Escuelas Sedes</a></li>
+                <li ><a href="index.php?mod=slat&men=informe&id=24">PERMER Aulas Satelites</a></li>
           </ul>
         </li>
         <li class="dropdown">
