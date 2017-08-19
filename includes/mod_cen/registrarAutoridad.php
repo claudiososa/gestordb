@@ -48,8 +48,24 @@ else//No existe la persona en la base de datos
 		VALUES (".$_POST['txtidesacuela'].",".$idpersona.",".$_POST['cbtipoautoridad'].")";
 	$resultado=$bd->ejecutar($grabardirector);
 }
+
+if(isset($_POST['dirUpdate'])){
+
+	?>
+<!--Redirecciono por javascrit a mis ett-->
+
+		<script type="text/javascript">
+	
+			window.location='../../index.php?mod=slat&men=user&id=2';
+		</script>
+
+<?php 
+		} 
 ?>
-<!--Redirecciono por javascrit-->
-<script type="text/javascript">
-	window.location='../../index.php?mod=slat&men=user&id=3';
-</script>
+
+<!--Redirecciono por javascrit a mis escuelas-->
+
+		<script type="text/javascript">
+	
+			window.location='../../index.php?mod=slat&men=user&id=3';
+		</script>
