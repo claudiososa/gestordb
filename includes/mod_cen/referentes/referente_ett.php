@@ -72,7 +72,8 @@
 		echo "<td>"."<a href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>Ver <b>(".$cant_rti. ")</b></a></td>";
 		echo "<td>"."<a href='index.php?mod=slat&men=user&id=5&referenteId=".$fila->referenteId."'>Escuelas <b>(".$cantidad_escuela.")</b></a></td>";
 		//echo "<td>"."<a href='index.php?mod=slat&men=user&id=20&referenteId=".$fila->referenteId."'>Directores<b>(".$cantidad_escuela.")</b></a></td>";
-		echo "<td> directores</td>";
+		echo "<td>"."<a href='index.php?mod=slat&men=user&id=20&referenteId=".$fila->referenteId."'>Directores</a></td>";
+		//echo "<td> directores</td>";
 		echo '<td><a class="btn btn-primary" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a></td>';
 		echo "<td>".$dato_localidad->nombre.", <b>".$dato_depa->descripcion."</b></td>";
 
