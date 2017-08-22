@@ -16,7 +16,7 @@
 
 //	echo '<p> <strong>Autoridad:</strong></p>';
 
-	
+
 
 	if(isset($_GET['personaId'])){
 		include_once('clases/persona.php');
@@ -178,15 +178,15 @@ $(document).ready(function(){
 	      <input name="txtidpersona" type="hidden" id="txtidpersona" value="" />
 	      <input name="txtidesacuela" type="hidden" id="txtidesacuela" value="<?php echo $_GET['escuelaId'] ?>"/>
 	      <input type="hidden" name="iddirector" id="iddirector" value="<?php if(isset($_GET['personaId'])){ echo round($_GET['directorId'],0);}?>" />
-		 
+
 		  <?php if(isset($_GET['dirUpdate'])) // dirUpdate es una bandera que usamos para saber si la modificacion y/o carga del directivo es realizada desde el menu Mis ETT en la sesion de un Etj o Coordinador
 		                                      // esta bandera se la envia al script registrarAutoridad.php de manera que al terminar el script redireccione al menu Mis ETT y no a Mis Escuelas
 		  {
-		 			
+
 		 			echo "<input type='hidden' name='dirUpdate' id='dirUpdate' value='1' />";
 		  }
 		  ?>
-		
+
 		</div>
 	</div>
 	<div class="form-group">
@@ -287,6 +287,15 @@ $(document).ready(function(){
 		</div>
 		<div class="col-md-12">
 			<input class="form-control" type="text" name="txtemail1" id="txtemail1" class="hades" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-12">
+			<label for="" class="control-label">Email 2</label>
+		</div>
+		<div class="col-md-12">
+			<input class="form-control" type="text" name="txtemail2" id="txtemail2" class="hades" />
 		</div>
 	</div>
 
