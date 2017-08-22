@@ -11,7 +11,7 @@
     <?php echo '<p class="alert alert-success">Cantidad de Instituciones : '.$cantidad.'</p>'; ?>
 
   <div class="table-responsive">
-  <table class='table table-striped table-bordered  table-condensed'>
+  <table id="Relevamiento Escuelas Sedes" class='table table-striped table-bordered  table-condensed'>
     <thead>
       <tr>
         <th>Provincia</th>
@@ -165,3 +165,13 @@
 </table>
 </div>
 </div>
+
+<script type="text/javascript">
+  new TableExport(document.getElementsByTagName("table"), {
+                               // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
+    formats: ['xlsx'],             // (String[]), filetype(s) for the export, (default: ['xls', 'csv', 'txt'])
+
+	});
+
+
+</script>

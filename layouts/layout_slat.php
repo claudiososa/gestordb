@@ -21,7 +21,7 @@ session_start();
 
 				<script src="tablas/xlsx.core.min.js"></script>
         <script src="tablas/FileSaver.min.js"></script>
-        <script src="tabla/TableExport-master/dist/js/tableexport.min.js"></script>
+        <script src="tablas/tableexport.min.js"></script>
 
 
 
