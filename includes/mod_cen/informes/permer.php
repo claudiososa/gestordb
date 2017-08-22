@@ -62,8 +62,25 @@
     echo '<td>'.$row->localidad.'</td>';
     echo '<td>'.$row->cue.'</td>';
     echo '<td>'.$row->numero.'</td>';
-    echo '<td>'.$row->nombre.'</td>';
-    echo '<td>'.$row->domicilio.'</td>';
+
+    $esNumero = substr(trim($row->nombre),strlen(trim($row->nombre))-1,1);
+    if(ctype_digit($esNumero)){
+      $nombre = $row->nombre.' Salta';
+    }else if(!ctype_alpha($esNumero)){
+      $nombre = $row->nombre.' Salta';
+    }else{
+      $nombre = $row->nombre;
+    }
+    echo '<td>'.$nombre.'</td>';
+    $esNumero = substr(trim($row->domicilio),strlen(trim($row->domicilio))-1,1);
+    if(ctype_digit($esNumero)){
+      $domicilio = $row->domicilio.' Salta';
+    }else if(!ctype_alpha($esNumero)){
+      $domicilio = $row->domicilio.' Salta';
+    }else{
+      $domicilio = $row->domicilio;
+    }
+    echo '<td>'.$domicilio.'</td>';
     echo '<td>'.$row->telefono.'</td>';
     echo '<td>'.$row->otroCue.'</td>';
     echo '<td>'.$row->internado.'</td>';
