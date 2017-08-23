@@ -31,6 +31,87 @@ function __construct($mensajeId=NULL,
 		$this->respuesta = $respuesta;
 	}
 
+	/**
+	 * Metodo para devolver ultimo registro segun respuesta y destinatario
+	 */
+/*
+	public function ultimoMensajeRespuesta($mensajeId,$referenteId){
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$sentencia = "SELECT *
+								 FROM mensajes
+								 WHERE respuesta = $mensajeId AND destinatario = $referenteId
+								 ORDER BY mensajeId ASC LIMIT 1";
+
+								 $arrayDestino = explode(',',$fila->destinatario);
+							   //var_dump($arrayDestino);
+							   foreach ($arrayDestino as $key => $value) {
+							     //echo $arrayDestino[$key].'<br>';
+							     if ($arrayDestino[$key]==$_SESSION['referenteId']) {
+
+							       $mensaje1 = new Mensajes();
+
+							       $mensajeOriginal=$mensaje1->mensajeIdOriginal($fila->mensajeId,$fila->mensajeId);
+
+
+							       $intervenciones = $mensaje1->buscarIntervenciones($mensajeOriginal[0]);
+							       $intervenciones++;
+
+							       $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
+							       $buscar_adjunto = $adjunto->buscar();
+							       $cantAdjunto = mysqli_num_rows($buscar_adjunto);
+							       echo '<div class="estilo1">';
+							       echo '<div class="row">';
+							       echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
+							 echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
+							       if ($cantAdjunto==0) {
+
+							         echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$intervenciones.')</a></h4></div>';
+							       }else{
+							         echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$intervenciones.')</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+
+							       }
+							 echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
+
+							       echo '</div>';
+							       echo '</div>';
+							       $cantidadMensajes++;
+
+							     }
+							   }
+
+
+	}
+	*/
+	public function  mensajeIdOriginal($mensajeId,$mensajeIdRespuesta=NULL){
+		$arrayIdMensaje = array();
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia = "SELECT respuesta
+								 FROM mensajes
+								 WHERE mensajeId = $mensajeId";
+		$cantidadMensajes = mysqli_num_rows($conexion->query($sentencia));
+		$valorRespuesta = mysqli_fetch_object($conexion->query($sentencia));
+		if ($cantidadMensajes==1 AND $valorRespuesta==0) {
+			array_push($arrayIdMensaje,$mensajeId);
+			array_push($arrayIdMensaje,$mensajeIdRespuesta);
+		}else{
+		$valorRespuesta = mysqli_fetch_object($conexion->query($sentencia));
+
+		$sentenciaFinal = "SELECT mensajeId
+											FROM mensajes
+											WHERE mensajeId=".$valorRespuesta->respuesta."
+											AND respuesta=0";
+		$mensajeObjeto = mysqli_fetch_object($conexion->query($sentenciaFinal));
+		$mensaje=$mensajeObjeto->mensajeId;
+		array_push($arrayIdMensaje,$mensaje);
+		array_push($arrayIdMensaje,$mensajeIdRespuesta);
+		}
+
+
+		return $arrayIdMensaje;
+	}
 
 	public function agregar()
 	{
@@ -56,28 +137,52 @@ function __construct($mensajeId=NULL,
 		}
 	}
 
-public function buscarRespuesta(){
+public function buscarIntervenciones($mensajeId){
+	$nuevaConexion=new Conexion();
+	$conexion=$nuevaConexion->getConexion();
+	$sentencia = "SELECT mensajeId FROM mensajes
+								WHERE respuesta=$mensajeId";
+	$cantidadMensajes = mysqli_num_rows($conexion->query($sentencia));
+	return $cantidadMensajes;
+}
+
+
+public function buscarRespuesta($referenteId=NULL){
 	$arrayCantidad=array();
 	$arrayMensajeId=array();
 	$cantidad=1;
 	$nuevaConexion=new Conexion();
 	$conexion=$nuevaConexion->getConexion();
 
-	$sentencia = "SELECT * FROM mensajes WHERE mensajeId=".$this->mensajeId;
+	$sentencia = "SELECT * FROM mensajes WHERE respuesta=".$this->mensajeId;
+	if (isset($referenteId)) {
+		$sentencia .= " AND destinatario=$referenteId ORDER BY mensajeId DESC LIMIT 1";
+	}
 	//echo $sentencia;
 	$buscarMensaje=$conexion->query($sentencia);
-	$datoMensaje = mysqli_fetch_object($buscarMensaje);
-	//var_dump($datoMensaje);
+
+	if (isset($referenteId)) {
+			$datoMensaje = mysqli_fetch_object($buscarMensaje);
+			//var_dump($datoMensaje);
+		array_push($arrayMensajeId,$datoMensaje->respuesta);
+		$arrayRespuesta=array_merge($arrayCantidad,$arrayMensajeId);
+	}else{
 	array_push($arrayMensajeId,$this->mensajeId);
-	if($datoMensaje->respuesta <> 0){
-		$estado = 0;
+	if(mysqli_num_rows($buscarMensaje) > 0){
+
+		while ($fila = mysqli_fetch_object($buscarMensaje)) {
+			array_push($arrayMensajeId,$fila->mensajeId);
+			$cantidad++;
+		}
+
+		/*$estado = 0;
 		//$cantidad++;
 		do {
 			$cantidad++;
 			$nuevaConexion=new Conexion();
 			$conexion=$nuevaConexion->getConexion();
 
-			$sentencia = "SELECT * FROM mensajes WHERE mensajeId=".$datoMensaje->respuesta;
+			$sentencia = "SELECT * FROM mensajes WHERE respuesta=".$datoMensaje->respuesta;
 			$buscarMensaje=$conexion->query($sentencia);
 
 			$datoMensaje = mysqli_fetch_object($buscarMensaje);
@@ -85,11 +190,12 @@ public function buscarRespuesta(){
 			if($datoMensaje->respuesta == 0){
 				$estado = 2;
 			}
-		} while ($estado < 1);
+		} while ($estado < 1); */
 	}
 	array_push($arrayCantidad,$cantidad);
 	asort($arrayMensajeId);
 	$arrayRespuesta=array_merge($arrayCantidad,$arrayMensajeId);
+	}
 	return $arrayRespuesta;//$cantidad;
 }
 
@@ -130,7 +236,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 
 		if($this->mensajeId!=NULL || $this->referenteId!=NULL ||
 			$this->destinatario!=NULL || $this->fechaHora!=NULL ||
-			$this->contenido!=NULL || $this->asunto!=NULL || $this->respuesta!=NULL)
+			$this->contenido!=NULL || $this->asunto!=NULL || $this->respuesta==NULL)
 		{
 			$sentencia.=" AND ";
   		if($this->mensajeId!=NULL)
@@ -163,7 +269,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
   			$sentencia.=" mensajes.fechaHora='$this->fechaHora' && ";
   		}
 
-			if($this->respuesta!=NULL)
+			if($this->respuesta==0 AND $tipoConsulta=='originales')
   		{
   			$sentencia.=" mensajes.respuesta=$this->respuesta && ";
   		}

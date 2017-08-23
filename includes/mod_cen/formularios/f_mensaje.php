@@ -144,7 +144,7 @@ if ($_GET['id']==3) {
         </div>
         <?php
       }else{
-        var_dump($buscarMensajeRespuesta);
+        //var_dump($buscarMensajeRespuesta);
         ?>
         <div class="form-group">
           <div class="col-md-12">

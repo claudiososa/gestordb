@@ -106,7 +106,7 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
 
 
 }else{
-  $mensajeValidado = new Mensajes($_GET['mensajeId']);
+  $mensajeValidado = new Mensajes($_GET['mensajeIdRespuesta']);
 
   $buscarMensaje=$mensajeValidado->buscar();
   $datoValidado=mysqli_fetch_object($buscarMensaje);

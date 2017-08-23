@@ -5,10 +5,14 @@ include_once("includes/mod_cen/clases/MensajesLeidos.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/MensajesAdjunto.php");
 
+$mensajeActual = new Mensajes();
+$mensajeOriginal = $mensajeActual->mensajeIdOriginal($_GET['mensajeId'],$_GET['mensajeId']);
+var_dump($mensajeOriginal);
+
 echo '<div class="container">';
   echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
   echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
-  echo "<a class='btn btn-success' href='index.php?men=mensajes&id=4&mensajeId=".$_GET['mensajeId']."'>Responder</a>";
+  echo "<a class='btn btn-success' href='index.php?men=mensajes&id=4&mensajeId=".$_GET['mensajeId']."&mensajeIdRespuesta=".$mensajeOriginal[1]."'>Responder</a>";
   //echo '<p><h3>Mensajes Nuevo</h3></p>';
 echo '</div">';
 

@@ -1,6 +1,6 @@
 <div class="container">
 <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
-    <input type="hidden" id="mensajeId" name="mensajeId" value="<?php echo $datoValidado->mensajeId ?>">
+    <input type="hidden" id="mensajeId" name="mensajeId" value="<?php echo $_GET['mensajeId']?>">
       <?php
       /*if ($_GET['id']==1) {
         ?>

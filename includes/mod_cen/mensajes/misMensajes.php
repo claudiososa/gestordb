@@ -101,7 +101,7 @@ if (isset($_GET['enviados'])) {
         $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
         $buscar_adjunto = $adjunto->buscar();
         $cantAdjunto = mysqli_num_rows($buscar_adjunto);
-  echo '<div class="estilo1">';
+        echo '<div class="estilo1">';
         echo '<div class="row">';
 
         echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
@@ -124,44 +124,83 @@ echo '</div>';
 
 
 $objMensaje = new Mensajes(null,null,null,null,null,null,0);
-var_dump($objMensaje);
-$misMensajes = $objMensaje->buscar();
+//var_dump($objMensaje);
+$misMensajes = $objMensaje->buscar(null,null,null,'originales');
 
 while ($fila = mysqli_fetch_object($misMensajes)) {
-  //echo $fila->destinatario.'<br>';
-  $arrayDestino = explode(',',$fila->destinatario);
-  //var_dump($arrayDestino);
-  foreach ($arrayDestino as $key => $value) {
-    //echo $arrayDestino[$key].'<br>';
-    if ($arrayDestino[$key]==$_SESSION['referenteId']) {
+  //var_dump($fila);
+  //var_dump($_SESSION['referenteId']);
+  //$ref=$_SESSION['referenteId'];
+  //var_dump((int)$fila->referenteId);
+  //$mensajeCreadoPorMi=0;
+  if ((int)$fila->referenteId==(int)$_SESSION['referenteId']) {
+  //var_dump( (int)$_SESSION['referenteId']);
+    //echo $fila->destinatario.'<br>';
+    $arrayDestino = explode(',',$fila->destinatario);
+    //var_dump($arrayDestino);
+    foreach ($arrayDestino as $key => $value) {
+      //echo $arrayDestino[$key].'<br>';
+      if ($arrayDestino[$key]==$_SESSION['referenteId']) {
 
-      $mensaje1 = new Mensajes($fila->mensajeId);
-      $buscarMensaje = $mensaje1->buscarRespuesta();
+        $mensaje1 = new Mensajes();
+
+        //$mensajeOriginal=$mensaje1->mensajeIdOriginal($fila->mensajeId,$fila->mensajeId);
 
 
-      $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
-      $buscar_adjunto = $adjunto->buscar();
-      $cantAdjunto = mysqli_num_rows($buscar_adjunto);
-      echo '<div class="estilo1">';
-      echo '<div class="row">';
-      echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
-echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
-      if ($cantAdjunto==0) {
+        //$intervenciones = $mensaje1->buscarIntervenciones($mensajeOriginal[0]);
+        $intervenciones = $mensaje1->buscarIntervenciones($fila->mensajeId);
+        $intervenciones++;
 
-        echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$buscarMensaje[0].')</a></h4></div>';
-      }else{
-        echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$buscarMensaje[0].')</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+        $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
+        $buscar_adjunto = $adjunto->buscar();
+        $cantAdjunto = mysqli_num_rows($buscar_adjunto);
+        echo '<div class="estilo1">';
+        echo '<div class="row">';
+        echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
+  echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
+        if ($cantAdjunto==0) {
+
+          echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$intervenciones.')</a></h4></div>';
+        }else{
+          echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$intervenciones.')</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+
+        }
+  echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
+
+        echo '</div>';
+        echo '</div>';
+        $cantidadMensajes++;
 
       }
-echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
+    }
+  }else{
+    $mensajeRespuesta = new Mensajes($fila->mensajeId);
+    $datoRespuesta=$mensajeRespuesta->buscarRespuesta($_SESSION['referenteId']);
+    //var_dump($datoRespuesta);
+    $mensajeRespuesta->mensajeId=$datoRespuesta[0];
+    $intervenciones=$mensajeRespuesta->buscarIntervenciones($datoRespuesta[0]);
+    $intervenciones++;
+    //var_dump($intervenciones);
+    echo '<div class="estilo1">';
+    echo '<div class="row">';
+    echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
+    echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
+    if ($cantAdjunto==0) {
 
-      echo '</div>';
-      echo '</div>';
-      $cantidadMensajes++;
+      echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$intervenciones.')</a></h4></div>';
+    }else{
+      echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$intervenciones.')</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
 
     }
+  echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
+
+    echo '</div>';
+    echo '</div>';
+
+
+    //var_dump($datoRespuesta);
   }
-}
+}//Cierra While de Mensajes Originales
 }
 //$cantidadMensajes=mysqli_num_rows($misMensajes);
 
