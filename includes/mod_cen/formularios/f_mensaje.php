@@ -149,17 +149,19 @@ if ($_GET['id']==3) {
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
           </div>
+        
+
           <div class="col-md-12" id="myArea1">
             <?php
             if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
-              echo $datoValidado->contenido  ;
+              echo $datoValidado->contenido;
             }
             ?>
             </div>
         </div>
 
         <script src="includes/mod_cen/formularios/js/nicEditor.js"></script>
-        
+
   <?php
   if ($_GET['id']==3) {
     ?>

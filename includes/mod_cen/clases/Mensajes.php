@@ -57,6 +57,8 @@ function __construct($mensajeId=NULL,
 	}
 
 public function buscarRespuesta(){
+	$arrayCantidad=array();
+	$arrayMensajeId=array();
 	$cantidad=1;
 	$nuevaConexion=new Conexion();
 	$conexion=$nuevaConexion->getConexion();
@@ -76,12 +78,15 @@ public function buscarRespuesta(){
 			$sentencia = "SELECT * FROM mensajes WHERE mensajeId=".$datoMensaje->respuesta;
 			$buscarMensaje=$conexion->query($sentencia);
 			$datoMensaje = mysqli_fetch_object($buscarMensaje);
+			array_push($arrayMensajeId,$datoMensaje->mensajeId);
 			if($datoMensaje->respuesta == 0){
 				$estado = 2;
 			}
 		} while ($estado < 1);
 	}
-	return $cantidad;
+	array_push($arrayCantidad,$cantidad);
+	$arrayRespuesta=array_merge($arrayCantidad,$arrayMensajeId);
+	return $arrayRespuesta;//$cantidad;
 }
 
 

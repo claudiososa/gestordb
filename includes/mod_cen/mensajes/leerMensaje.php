@@ -16,6 +16,8 @@ $encontrado = 0;
 $mensaje = new Mensajes($_GET['mensajeId']);
 $buscarMensaje = $mensaje->buscar();
 
+$buscarMensajeRespuesta = $mensaje->buscarRespuesta();
+
 if (mysqli_num_rows($buscarMensaje)==0) {
   echo 'Acceso Denegado';
 }else{

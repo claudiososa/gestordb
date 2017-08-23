@@ -147,9 +147,9 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
 echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
       if ($cantAdjunto==0) {
 
-        echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'--'.$buscarMensaje.'</a></h4></div>';
+        echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$buscarMensaje[0].')</a></h4></div>';
       }else{
-        echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'--'.$buscarMensaje.'</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+        echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.'-('.$buscarMensaje[0].')</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
 
       }
 echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
