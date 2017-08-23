@@ -68,15 +68,18 @@ public function buscarRespuesta(){
 	$buscarMensaje=$conexion->query($sentencia);
 	$datoMensaje = mysqli_fetch_object($buscarMensaje);
 	//var_dump($datoMensaje);
-
+	array_push($arrayMensajeId,$this->mensajeId);
 	if($datoMensaje->respuesta <> 0){
 		$estado = 0;
+		//$cantidad++;
 		do {
 			$cantidad++;
 			$nuevaConexion=new Conexion();
 			$conexion=$nuevaConexion->getConexion();
+
 			$sentencia = "SELECT * FROM mensajes WHERE mensajeId=".$datoMensaje->respuesta;
 			$buscarMensaje=$conexion->query($sentencia);
+
 			$datoMensaje = mysqli_fetch_object($buscarMensaje);
 			array_push($arrayMensajeId,$datoMensaje->mensajeId);
 			if($datoMensaje->respuesta == 0){
@@ -85,6 +88,7 @@ public function buscarRespuesta(){
 		} while ($estado < 1);
 	}
 	array_push($arrayCantidad,$cantidad);
+	asort($arrayMensajeId);
 	$arrayRespuesta=array_merge($arrayCantidad,$arrayMensajeId);
 	return $arrayRespuesta;//$cantidad;
 }
@@ -124,7 +128,9 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		}
 
 
-		if($this->mensajeId!=NULL || $this->referenteId!=NULL || $this->destinatario!=NULL || $this->fechaHora!=NULL || $this->contenido!=NULL || $this->asunto!=NULL)
+		if($this->mensajeId!=NULL || $this->referenteId!=NULL ||
+			$this->destinatario!=NULL || $this->fechaHora!=NULL ||
+			$this->contenido!=NULL || $this->asunto!=NULL || $this->respuesta!=NULL)
 		{
 			$sentencia.=" AND ";
   		if($this->mensajeId!=NULL)
@@ -159,7 +165,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 
 			if($this->respuesta!=NULL)
   		{
-  			$sentencia.=" mensajes.respuesta='$this->respuesta' && ";
+  			$sentencia.=" mensajes.respuesta=$this->respuesta && ";
   		}
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 		}
@@ -171,7 +177,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-	//	echo $sentencia.'<br><br>';
+		echo $sentencia.'<br><br>';
 		return $conexion->query($sentencia);
 	}
 

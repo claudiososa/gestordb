@@ -144,18 +144,34 @@ if ($_GET['id']==3) {
         </div>
         <?php
       }else{
+        var_dump($buscarMensajeRespuesta);
         ?>
         <div class="form-group">
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
           </div>
-        
+
 
           <div class="col-md-12" id="myArea1">
             <?php
-            if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
-              echo $datoValidado->contenido;
+            $primer=0;
+            foreach ($buscarMensajeRespuesta as $key => $value) {
+
+              if ($primer>0) {
+                # code...
+
+                $mensajeValidado = new Mensajes($buscarMensajeRespuesta[$key]);
+
+                $buscarMensaje=$mensajeValidado->buscar();
+                $datoValidado=mysqli_fetch_object($buscarMensaje);
+
+                if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
+                  echo $datoValidado->contenido.'<br>';
+                }
+              }
+              $primer++;
             }
+
             ?>
             </div>
         </div>

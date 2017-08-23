@@ -123,7 +123,8 @@ echo '</div>';
 }else{
 
 
-$objMensaje = new Mensajes();
+$objMensaje = new Mensajes(null,null,null,null,null,null,0);
+var_dump($objMensaje);
 $misMensajes = $objMensaje->buscar();
 
 while ($fila = mysqli_fetch_object($misMensajes)) {

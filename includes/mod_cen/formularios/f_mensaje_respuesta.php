@@ -106,7 +106,8 @@ if ($_GET['id']==3) {
       <div class="col-md-12">
         <input required type='text' id='asunto' name="asunto" class="form-control" placeholder="Titulo corto para tu informe" value="<?php
         if(isset($datoValidado->asunto) AND $datoValidado->asunto<>""){
-          echo 'Re: '.$datoValidado->asunto;
+          //echo 'Re: '.$datoValidado->asunto;
+          echo $datoValidado->asunto;
         }
         ?>"
         <?php
