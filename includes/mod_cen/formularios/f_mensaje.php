@@ -150,12 +150,27 @@ if ($_GET['id']==3) {
           <div class="col-md-12">
             <label class="control-label">Contenido</label>
           </div>
-
-
           <div class="col-md-12" id="myArea1">
             <?php
+            $objMensaje = new Mensajes($_GET['mensajeId']);
+            $buscar=$objMensaje->buscar();
+            $datoMensaje=mysqli_fetch_object($buscar);
+            echo $datoMensaje->contenido.'<br>';
+            $mensajeResp = new MensajesResp(null,$datoMensaje->mensajeId,null,null,null,$datoMensaje->referenteId);
+            $buscarResp=$mensajeResp->buscarRespMensajeActual($_SESSION['referenteId']);
+            while ($fila = mysqli_fetch_object($buscarResp)) {
+              echo $fila->contenido.'<br>';
+            }
+
+
+            //$cantidad=$mensajeResp->buscar(null,null,null,'cantidad');
+            //$mensajeResp->destinatario=$_SESSION['referenteId'];
+            //$mensajeResp->mensajeId=NULL;
+
+            $intervenciones=mysqli_num_rows($buscarResp);
+
             $primer=0;
-            foreach ($buscarMensajeRespuesta as $key => $value) {
+          /*  foreach ($buscarMensajeRespuesta as $key => $value) {
 
               if ($primer>0) {
                 # code...
@@ -170,7 +185,7 @@ if ($_GET['id']==3) {
                 }
               }
               $primer++;
-            }
+            }*/
 
             ?>
             </div>

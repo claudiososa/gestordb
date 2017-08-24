@@ -1,13 +1,13 @@
 <script src="includes/mod_cen/js/s_ajax_mensajeResponder.js"></script>
 <?php
-include_once("includes/mod_cen/clases/Mensajes.php");
-//include_once("includes/mod_cen/clases/Mensajes.php");
+include_once("includes/mod_cen/clases/MensajesResp.php");
+//include_once("includes/mod_cen/clases/MensajesResp.php");
 include_once("includes/mod_cen/clases/referente.php");
-include_once("includes/mod_cen/clases/MensajesAdjunto.php");
+//include_once("includes/mod_cen/clases/MensajesRespAdjunto.php");
 
 echo '<div class="container">';
-  echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
-  echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
+  echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">MensajesResp Recibidos</a></label>';
+  echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis MensajesResp Enviados</a>";
   echo '<p><h3>Responder Mensaje</h3></p>';
 echo '</div">';
 
@@ -17,13 +17,13 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   //$arrayDestino=unserialize($_POST['referentes']);
   //$destinatarios = implode(',',$arrayDestino);
   $fecha=date("Y-m-d H:i:s");
-  $mensaje= new Mensajes(null,
+  $mensaje= new MensajesResp(null,
+                            $_POST["mensajeId"],
                             $_SESSION["referenteId"],
                             $_POST["asunto"],
                             $_POST["contenido"],
                             $_POST["destinatario"],
-                            $fecha,
-                            $_POST["mensajeId"]
+                            $fecha
                           );
     $guardar_mensaje=$mensaje->agregar(); // hasta aqui guarda el mensaje nuevo
 
@@ -77,7 +77,7 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
         $fichero_subido = $dir_subida . $nombreArchivo;
 
         if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
-          $adjunto = new MensajesAdjunto(null,$guardar_mensaje,$nombreArchivo,'pdf');
+          $adjunto = new MensajesRespAdjunto(null,$guardar_mensaje,$nombreArchivo,'pdf');
           $agregarAdjunto = $adjunto->agregar();
           echo $agregarAdjunto;
         }	 else {
@@ -106,7 +106,7 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
 
 
 }else{
-  $mensajeValidado = new Mensajes($_GET['mensajeIdRespuesta']);
+  $mensajeValidado = new Mensajes($_GET['mensajeId']);
 
   $buscarMensaje=$mensajeValidado->buscar();
   $datoValidado=mysqli_fetch_object($buscarMensaje);

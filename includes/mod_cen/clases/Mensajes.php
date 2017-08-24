@@ -93,13 +93,13 @@ function __construct($mensajeId=NULL,
 								 WHERE mensajeId = $mensajeId";
 		$cantidadMensajes = mysqli_num_rows($conexion->query($sentencia));
 		$valorRespuesta = mysqli_fetch_object($conexion->query($sentencia));
-		if ($cantidadMensajes==1 AND $valorRespuesta==0) {
+
+		if ($cantidadMensajes==1 AND $valorRespuesta->respuesta==0) {
 			array_push($arrayIdMensaje,$mensajeId);
 			array_push($arrayIdMensaje,$mensajeIdRespuesta);
 		}else{
-		$valorRespuesta = mysqli_fetch_object($conexion->query($sentencia));
-
-		$sentenciaFinal = "SELECT mensajeId
+			$valorRespuesta = mysqli_fetch_object($conexion->query($sentencia));
+			$sentenciaFinal = "SELECT mensajeId
 											FROM mensajes
 											WHERE mensajeId=".$valorRespuesta->respuesta."
 											AND respuesta=0";
@@ -146,7 +146,11 @@ public function buscarIntervenciones($mensajeId){
 	return $cantidadMensajes;
 }
 
-
+/**
+ * [buscarRespuesta Busco si el mensajeId Actual tiene respuestas
+ * @param  [type] $referenteId [description]
+ * @return [array]              [description]
+ */
 public function buscarRespuesta($referenteId=NULL){
 	$arrayCantidad=array();
 	$arrayMensajeId=array();
@@ -205,7 +209,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
     $sinParam=0;
-		$sentencia="SELECT mensajes.mensajeId,mensajes.referenteId,mensajes.asunto,mensajes.contenido
+		$sentencia="SELECT mensajes.mensajeId,mensajes.referenteId,mensajes.respuesta,mensajes.asunto,mensajes.contenido
 									,mensajes.destinatario,mensajes.fechaHora,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
 									FROM mensajes
 									INNER JOIN referentes
@@ -236,7 +240,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 
 		if($this->mensajeId!=NULL || $this->referenteId!=NULL ||
 			$this->destinatario!=NULL || $this->fechaHora!=NULL ||
-			$this->contenido!=NULL || $this->asunto!=NULL || $this->respuesta==NULL)
+			$this->contenido!=NULL || $this->asunto!=NULL || $this->respuesta!=NULL)
 		{
 			$sentencia.=" AND ";
   		if($this->mensajeId!=NULL)
@@ -279,11 +283,11 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		  // fin else
 
 
-		$sentencia.="  ORDER BY mensajes.mensajeId DESC";
+		$sentencia.="  ORDER BY mensajes.mensajeId ASC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-		echo $sentencia.'<br><br>';
+		//echo $sentencia.'<br><br>';
 		return $conexion->query($sentencia);
 	}
 

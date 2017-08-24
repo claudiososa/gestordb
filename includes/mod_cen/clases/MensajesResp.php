@@ -56,6 +56,24 @@ function __construct(	$mensajeRespId=NULL,
 		}
 	}
 
+	public function buscarIntervenciones($mensajeId){
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$sentencia = "SELECT mensajeId FROM mensajesResp
+									WHERE mensajeId = $mensajeId";
+		$cantidadMensajes = mysqli_num_rows($conexion->query($sentencia));
+		return $cantidadMensajes;
+	}
+
+	public function buscarRespMensajeActual($referenteId){
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$sentencia = "SELECT * FROM mensajesResp
+									WHERE destinatario = $referenteId OR destinatario = $this->destinatario";
+
+		return $conexion->query($sentencia);
+	}
+
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
@@ -96,7 +114,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 			$sentencia.=" AND ";
   		if($this->mensajeId!=NULL)
   		{
-  			$sentencia.=" mensajesResp.mensajeRespId = $this->mensajeRespId && ";
+  			$sentencia.=" mensajesResp.mensajeId = $this->mensajeId && ";
   		}
 
 			if($this->mensajeRespId!=NULL)
@@ -138,8 +156,14 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-	//	echo $sentencia.'<br><br>';
-		return $conexion->query($sentencia);
+		//echo $sentencia.'<br><br>';
+		if ($tipoConsulta=='cantidad') {
+			$cantidad = mysqli_num_rows($conexion->query($sentencia));
+			return $cantidad;
+		}else{
+			return $conexion->query($sentencia);
+		}
+
 	}
 
 
