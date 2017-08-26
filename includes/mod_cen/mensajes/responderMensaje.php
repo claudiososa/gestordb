@@ -109,7 +109,9 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   $mensajeValidado = new Mensajes($_GET['mensajeId']);
 
   $buscarMensaje=$mensajeValidado->buscar();
+
   $datoValidado=mysqli_fetch_object($buscarMensaje);
+  //var_dump($datoValidado);
   $nuevo=1;
 	include_once("includes/mod_cen/formularios/f_mensaje_respuesta.php");
 
