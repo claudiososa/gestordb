@@ -12,8 +12,10 @@ class Mensajes
  	private $contenido;
 	private $destinatario;
  	private $fechaHora;
+	private $fechaUltimaResp;
 
-function __construct($mensajeId=NULL,$referenteId=NULL,$asunto=NULL,$contenido=NULL,$destinatario=NULL,$fechaHora=NULL)
+function __construct($mensajeId=NULL,$referenteId=NULL,$asunto=NULL,
+											$contenido=NULL,$destinatario=NULL,$fechaHora=NULL,$fechaUltimaResp=NULL)
 	{
 		$this->mensajeId = $mensajeId;
  		$this->referenteId = $referenteId;
@@ -21,6 +23,7 @@ function __construct($mensajeId=NULL,$referenteId=NULL,$asunto=NULL,$contenido=N
  		$this->contenido =$contenido;
 		$this->destinatario = $destinatario;
  		$this->fechaHora = $fechaHora;
+		$this->fechaUltimaResp = $fechaUltimaResp;
 	}
 	public function  mensajeIdOriginal($mensajeId,$mensajeIdRespuesta=NULL){
 		$arrayIdMensaje = array();
@@ -55,48 +58,33 @@ function __construct($mensajeId=NULL,$referenteId=NULL,$asunto=NULL,$contenido=N
 	public function agregar()
 	{
 		$bd=Conexion2::getInstance();
-		$sentencia="INSERT INTO mensajes (mensajeId,referenteId,asunto,contenido,destinatario,fechaHora)
+		$sentencia="INSERT INTO mensajes (mensajeId,referenteId,asunto,contenido,destinatario,fechaHora,fechaUltimaResp)
 		            VALUES (NULL,
                         '". $this->referenteId."',
                         '".$this->asunto."',
                         '". $this->contenido."',
                         '". $this->destinatario."',
-                        '". $this->fechaHora."');
+												'". $this->fechaHora."',
+                        '". $this->fechaUltimaResp."');
                         ";
 
 		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
 				return $ultimoMensajeId=$bd->lastID();
-				/*private $mensajeHiloId;
-				private $mensajeId;
-				private $mensajeTipo;
-				private $referenteIdResp;
-				private $fechaHilo;-*/
-				//$this->destinatario
-			/*	$arrayDestino = explode(',',$this->destinatario);
-				if (count($arrayDestino)>2) {
-					$referenteIdResp=$this->destinatario;
-					$hilo = new MensajeHilo(null,$ultimoMensajeId,'1',$referenteIdResp,$this->fechaHora);
-					$agregarHilo=$hilo->agregar();
-				}else{
-					$referenteIdResp=$this->destinatario;
-					$hilo = new MensajeHilo(null,$ultimoMensajeId,'2',$referenteIdResp,$this->fechaHora);
-					$agregarHilo=$hilo->agregar();
-				}*/
-
-				/*$referenteIdResp=$this->destinatario;
-				$hilo = new MensajeHilo(null,$ultimoMensajeId,'1',$referenteIdResp,$this->fechaHora);
-				$agregarHilo=$hilo->agregar();
-		  	//return $agregarHilo;*/
 		 }else{
 					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		 }
-		/*if ($conexion->query($sentencia)) {
-			$mensajeId=$conexion->insert_id;
-			return $mensajeId;
-		}else
-		{
-			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
-		}*/
+	}
+
+	public function editar()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia = "UPDATE mensajes SET fechaUltimaResp='".$this->fechaUltimaResp."' WHERE mensajeId=$this->mensajeId";
+		echo $sentencia;
+		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+				return $ultimoMensajeId=$bd->lastID();
+		 }else{
+					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		 }
 	}
 
 public function buscarIntervenciones($mensajeId){
@@ -108,47 +96,6 @@ public function buscarIntervenciones($mensajeId){
 	return $cantidadMensajes;
 }
 
-/*
- * [buscarRespuesta Busco si el mensajeId Actual tiene respuestas
- * @param  [type] $referenteId [description]
- * @return [array]              [description]
-
-public function buscarRespuesta($referenteId=NULL){
-	$arrayCantidad=array();
-	$arrayMensajeId=array();
-	$cantidad=1;
-	$nuevaConexion=new Conexion();
-	$conexion=$nuevaConexion->getConexion();
-
-	$sentencia = "SELECT * FROM mensajes WHERE respuesta=".$this->mensajeId;
-	if (isset($referenteId)) {
-		$sentencia .= " AND destinatario=$referenteId ORDER BY mensajeId DESC LIMIT 1";
-	}
-	//echo $sentencia;
-	$buscarMensaje=$conexion->query($sentencia);
-
-	if (isset($referenteId)) {
-			$datoMensaje = mysqli_fetch_object($buscarMensaje);
-			//var_dump($datoMensaje);
-		array_push($arrayMensajeId,$datoMensaje->respuesta);
-		$arrayRespuesta=array_merge($arrayCantidad,$arrayMensajeId);
-	}else{
-	array_push($arrayMensajeId,$this->mensajeId);
-	if(mysqli_num_rows($buscarMensaje) > 0){
-
-		while ($fila = mysqli_fetch_object($buscarMensaje)) {
-			array_push($arrayMensajeId,$fila->mensajeId);
-			$cantidad++;
-		}
-
-	}
-	array_push($arrayCantidad,$cantidad);
-	asort($arrayMensajeId);
-	$arrayRespuesta=array_merge($arrayCantidad,$arrayMensajeId);
-	}
-	return $arrayRespuesta;//$cantidad;
-}
-*/
 public function buscarRespuesta2()
 	{
 		$bd=Conexion2::getInstance();
@@ -158,7 +105,7 @@ public function buscarRespuesta2()
 					INNER JOIN personas
 					ON personas.personaId=referentes.personaId
 					WHERE 1";
-					$stmt.="  ORDER BY mensajes.fechaHora DESC";
+					$stmt.="  ORDER BY mensajes.fechaUltimaResp DESC";
 					//echo $stm.'<br><br>';
 					return $bd->ejecutar($stmt);
 	}
@@ -183,7 +130,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		$bd=Conexion2::getInstance();
     $sinParam=0;
 		$sentencia="SELECT mensajes.mensajeId,referentes.referenteId,mensajes.asunto,mensajes.contenido
-									,mensajes.destinatario,mensajes.fechaHora,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
+									,mensajes.destinatario,mensajes.fechaHora,mensajes.fechaUltimaResp,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
 									FROM mensajes
 									INNER JOIN referentes
 									ON referentes.referenteId=mensajes.referenteId
@@ -253,7 +200,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		  // fin else
 
 
-		$sentencia.="  ORDER BY mensajes.mensajeId ASC";
+		$sentencia.="  ORDER BY mensajes.fechaUltimaResp DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
