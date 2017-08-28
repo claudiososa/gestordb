@@ -2,32 +2,44 @@
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
 include_once("includes/mod_cen/clases/MensajesResp.php");
+include_once("includes/mod_cen/clases/MensajeHilo.php");
 include_once("includes/mod_cen/clases/MensajesLeidos.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/MensajesAdjunto.php");
 
 $mensajeActual = new Mensajes();
-$mensajeOriginal = $mensajeActual->mensajeIdOriginal($_GET['mensajeId'],$_GET['mensajeId']);
-var_dump($mensajeOriginal);
-
-echo '<div class="container">';
-  echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
-  echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
-  echo "<a class='btn btn-success' href='index.php?men=mensajes&id=4&mensajeId=".$mensajeOriginal[0]."&mensajeIdRespuesta=".$mensajeOriginal[1]."'>Responder</a>";
-  //echo '<p><h3>Mensajes Nuevo</h3></p>';
-echo '</div">';
-
+//$mensajeOriginal = $mensajeActual->mensajeIdOriginal($_GET['mensajeId'],$_GET['mensajeId']);
+//var_dump($mensajeOriginal);
 $encontrado = 0;
 $mensaje = new Mensajes($_GET['mensajeId']);
 $buscarMensaje = $mensaje->buscar();
+$datoMensaje = mysqli_fetch_object($buscarMensaje);
 
-$buscarMensajeRespuesta = $mensaje->buscarRespuesta();
+$arrayDestinatario = $arrayDestino = explode(',',$datoMensaje->destinatario);
+
+//$buscarMensajeRespuesta = $mensaje->buscarRespuesta();
+echo '<div class="container">';
+  echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">Mensajes Recibidos</a></label>';
+  echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis Mensajes Enviados</a>";
+
+
+  if (count($arrayDestinatario)>2) {
+    echo "<a class='btn btn-success' href='index.php?men=mensajes&solo&id=4&mensajeId=".$_GET['mensajeId']."'>Responder</a>";
+    echo "<a class='btn btn-success' href='index.php?men=mensajes&todos&id=4&mensajeId=".$_GET['mensajeId']."'>Responder a Todos</a>";
+  }else{
+    echo "<a class='btn btn-success' href='index.php?men=mensajes&id=4&mensajeId=".$_GET['mensajeId']."'>Responder</a>";
+}
+  //echo "<a class='btn btn-success' href='index.php?men=mensajes&id=4&mensajeId=".$mensajeOriginal[0]."&mensajeIdRespuesta=".$mensajeOriginal[1]."'>Responder</a>";
+  //echo '<p><h3>Mensajes Nuevo</h3></p>';
+echo '</div">';
+
+
 
 if (mysqli_num_rows($buscarMensaje)==0) {
   echo 'Acceso Denegado';
 }else{
 
-$datoMensaje = mysqli_fetch_object($buscarMensaje);
+
 //var_dump($datoMensaje);
 $adjunto = new MensajesAdjunto(null,$datoMensaje->mensajeId);
 $buscar_adjunto = $adjunto->buscar();

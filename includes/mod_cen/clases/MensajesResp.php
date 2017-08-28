@@ -1,75 +1,167 @@
 <?php
-include_once('conexion.php');
+include_once('conexionv2.php');
 include_once("referente.php");
+include_once("MensajeHilo.php");
+
 include_once("maestro.php");
 
 class MensajesResp
 {
 	private $mensajeRespId;
-	private $mensajeId;
- 	private $referenteId;
+	private $mensajeHilo;
  	private $asunto;
  	private $contenido;
-	private $destinatario;
+	private $respuestaReferenteId;
  	private $fechaHora;
 
 function __construct(	$mensajeRespId=NULL,
-											$mensajeId=NULL,
-                      $referenteId=NULL,
+											$mensajeHilo=NULL,
                       $asunto=NULL,
                       $contenido=NULL,
-                      $destinatario=NULL,
+                      $respuestaReferenteId=NULL,
 	                    $fechaHora=NULL
                       )
 	{
 		$this->mensajeRespId = $mensajeRespId;
-		$this->mensajeId = $mensajeId;
- 		$this->referenteId = $referenteId;
+		$this->mensajeHilo = $mensajeHilo;
  		$this->asunto =$asunto;
  		$this->contenido =$contenido;
-		$this->destinatario = $destinatario;
+		$this->respuestaReferenteId = $respuestaReferenteId;
  		$this->fechaHora = $fechaHora;
 	}
+
+	public function buscarHilo($mensajeId,$referenteId,$tipo){
+		$bd=Conexion2::getInstance();
+		$sentencia="SELECT * FROM mensajesHilo
+								WHERE mensajeId=$mensajeId
+								AND referenteId=$referenteId
+								AND mensajeTipo=$mensajeTipo";
+	}
+
+	public function respuestasParaMensaje($mensajeId,$tipo=NULL){
+		$bd=Conexion2::getInstance();
+		if ($tipo!='arrayRespuestas') {
+			# code...
+
+		$stmt = "SELECT * FROM mensajesHilo
+							INNER JOIN mensajesResp
+							ON mensajesHilo.mensajeHiloId=mensajesResp.mensajeHilo
+							WHERE mensajeId=$mensajeId ORDER BY fechaHora ASC";
+
+		if ($tipo=='cantidad') {
+			//echo $stmt;
+			$total = mysqli_num_rows($bd->ejecutar($stmt));
+			return $total;
+		}elseif ($tipo=='resultados') {
+			return $bd->ejecutar($stmt);
+		}
+	}else{
+		$arrayHilos = array();
+		$elemento=0;
+		$hilo = new MensajeHilo(null,$mensajeId);
+		$buscarHilo = $hilo->buscarSoloHilos($mensajeId);
+		while ($fila = mysqli_fetch_object($buscarHilo)) {
+			$arrayDestino = explode(',',$fila->referenteIdResp);
+			//var_dump($arrayDestino);
+			foreach ($arrayDestino as $key => $value)
+			{
+
+					if ($arrayDestino[$key]==$_SESSION['referenteId'])
+					{
+							array_push($arrayHilos,$fila->mensajeHiloId);
+					}
+			}
+		}
+	}
+	if (count($arrayHilos)>0) {
+		$bd=Conexion2::getInstance();
+		switch (count($arrayHilos)) {
+			case '1':
+					$stmt ="SELECT * FROM mensajesResp WHERE mensajeHilo=$arrayHilos[0] ORDER BY fechaHora ASC";
+				break;
+			case '2':
+					$stmt ="SELECT * FROM mensajesResp WHERE mensajeHilo=$arrayHilos[0] OR mensajeHilo=$arrayHilos[1] ORDER BY fechaHora ASC";
+					# code...
+					break;
+			default:
+				# code...
+				break;
+		}
+		return $bd->ejecutar($stmt);
+	}else{
+		return 'sinRespuestas';
+	}
+
+	}
+
 
 
 	public function agregar()
 	{
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
+		$bd=Conexion2::getInstance();
 
-		$sentencia="INSERT INTO mensajesResp (mensajeRespId,mensajeId,referenteId,asunto,contenido,destinatario,fechaHora)
+		$sentencia="INSERT INTO mensajesResp (mensajeRespId,mensajeHilo,asunto,contenido,respuestaReferenteId,fechaHora)
 		            VALUES (NULL,
-												'". $this->mensajeId."',
-                        '". $this->referenteId."',
+												'". $this->mensajeHilo."',
                         '".$this->asunto."',
                         '". $this->contenido."',
-                        '". $this->destinatario."',
+                        '". $this->respuestaReferenteId."',
                         '". $this->fechaHora."');
                         ";
-
-		if ($conexion->query($sentencia)) {
-			$mensajeId=$conexion->insert_id;
-			return $mensajeId;
+												//echo $sentencia;
+		if ($bd->ejecutar($sentencia)) {
+			$respuestaId=$bd->lastID();
+			return $respuestaId;
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
 	}
 
-	public function buscarIntervenciones($mensajeId){
+	public function buscarIntervenciones($mensajeHilo){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		$sentencia = "SELECT mensajeId FROM mensajesResp
-									WHERE mensajeId = $mensajeId";
+		$sentencia = "SELECT mensajeHilo FROM mensajesResp
+									WHERE mensajeHilo = $mensajeHilo";
 		$cantidadMensajes = mysqli_num_rows($conexion->query($sentencia));
 		return $cantidadMensajes;
 	}
 
-	public function buscarRespMensajeActual($referenteId){
+	public function buscarRespuestas($arrayBuscarHilo){
+		$bd=Conexion2::getInstance();
+		$recorrido=0;
+		if ($arrayBuscarHilo[0]=='0' && $arrayBuscarHilo[1]=='0') {
+			$sentencia = "SELECT * FROM mensajesResp
+										WHERE mensajesResp.mensajeHilo=-1 ";
+		}else{
+
+		$sentencia = "SELECT * FROM mensajesResp
+									WHERE ";
+		if ($arrayBuscarHilo[0]<>'0') {
+				$sentencia .=" mensajesResp.mensajeHilo=$arrayBuscarHilo[0]  OR";
+				$recorrido++;
+		}
+
+		if ($arrayBuscarHilo[1]<>'0') {
+				$sentencia .=" mensajesResp.mensajeHilo=$arrayBuscarHilo[1] ";
+				$recorrido++;
+				$recorrido++;
+		}
+									 //mensajesResp.mensajeHilo=";
+
+		}
+		if ($recorrido==1) {
+			$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+		}
+		//echo $sentencia;
+		return $bd->ejecutar($sentencia);
+	}
+
+	public function buscarRespMensajeActual($mensajeId,$referenteId){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		$sentencia = "SELECT * FROM mensajesResp
-									WHERE destinatario = $referenteId OR destinatario = $this->destinatario";
+									WHERE respuestaReferenteId = $referenteId OR respuestaReferenteId = $this->respuestaReferenteId";
 
 		return $conexion->query($sentencia);
 	}
@@ -80,11 +172,11 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
     $sinParam=0;
-		$sentencia="SELECT mensajesResp.mensajeRespId,mensajesResp.referenteId,mensajesResp.asunto,mensajesResp.contenido
-									,mensajesResp.destinatario,mensajesResp.fechaHora,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
+		$sentencia="SELECT mensajesResp.mensajeRespId,mensajesResp.respuestaReferenteId,mensajesResp.asunto,mensajesResp.contenido
+									,mensajesResp.respuestaReferenteId,mensajesResp.fechaHora,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
 									FROM mensajesResp
 									INNER JOIN referentes
-									ON referentes.referenteId=mensajesResp.referenteId
+									ON referentes.referenteId=mensajesResp.respuestaReferenteId
 									INNER JOIN personas
 									ON personas.personaId=referentes.personaId ";
 									$sentencia.=" WHERE 1";
@@ -109,12 +201,12 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		}
 
 
-		if($this->mensajeId!=NULL || $this->referenteId!=NULL || $this->destinatario!=NULL || $this->fechaHora!=NULL || $this->contenido!=NULL || $this->asunto!=NULL)
+		if($this->mensajeHilo!=NULL ||  $this->respuestaReferenteId!=NULL || $this->fechaHora!=NULL || $this->contenido!=NULL || $this->asunto!=NULL)
 		{
 			$sentencia.=" AND ";
-  		if($this->mensajeId!=NULL)
+  		if($this->mensajeHilo!=NULL)
   		{
-  			$sentencia.=" mensajesResp.mensajeId = $this->mensajeId && ";
+  			$sentencia.=" mensajesResp.mensajeHilo = $this->mensajeHilo && ";
   		}
 
 			if($this->mensajeRespId!=NULL)
@@ -122,9 +214,9 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
   			$sentencia.=" mensajesResp.mensajeRespId = $this->mensajeRespId && ";
   		}
 
-  		if($this->referenteId!=NULL)
+  		if($this->respuestaReferenteId!=NULL)
   		{
-  			$sentencia.=" mensajesResp.referenteId = $this->referenteId && ";
+  			$sentencia.=" mensajesResp.respuestaReferenteId = $this->respuestaReferenteId && ";
   		}
 
   		if($this->asunto!=NULL)
@@ -137,9 +229,9 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
         $sentencia.=" mensajesResp.contenido LIKE '%$this->contenido%' && ";
       }
 
-  		if($this->destinatario!=NULL)
+  		if($this->respuestaReferenteId!=NULL)
   		{
-  			$sentencia.=" mensajesResp.destinatario=$this->destinatario && ";
+  			$sentencia.=" mensajesResp.respuestaReferenteId=$this->respuestaReferenteId && ";
   		}
 
   		if($this->fechaHora!=NULL)
@@ -152,7 +244,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		  // fin else
 
 
-		$sentencia.="  ORDER BY mensajesResp.mensajeId DESC";
+		$sentencia.="  ORDER BY mensajesResp.mensajeHilo DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

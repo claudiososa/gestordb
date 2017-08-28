@@ -48,6 +48,9 @@ if ($_GET['id']==3) {
         //var_dump($arrayDestino);
         foreach ($arrayDestino as $key => $value) {
           //echo $arrayDestino[$key].'<br>';
+          if ($arrayDestino[$key]<>$datoValidado->referenteId) {
+            # code...
+
           $referente = new Referente($arrayDestino[$key]);
           $buscarReferente = $referente->buscar();
           $datoReferente = mysqli_fetch_object($buscarReferente);
@@ -68,7 +71,7 @@ if ($_GET['id']==3) {
               echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
             }
           }
-
+        }
 
         }
         $datoValidado->destinatario
@@ -156,18 +159,27 @@ if ($_GET['id']==3) {
             $buscar=$objMensaje->buscar();
             $datoMensaje=mysqli_fetch_object($buscar);
             echo $datoMensaje->contenido.'<br>';
-            $mensajeResp = new MensajesResp(null,$datoMensaje->mensajeId,null,null,null,$datoMensaje->referenteId);
-            $buscarResp=$mensajeResp->buscarRespMensajeActual($_SESSION['referenteId']);
-            while ($fila = mysqli_fetch_object($buscarResp)) {
-              echo $fila->contenido.'<br>';
+
+            if ($datoMensaje->referenteId==(int)$_SESSION['referenteId']) {//si el usuario logueado es creador del mensaje original
+              $mensajeResp = new MensajesResp();
+              $respuestas=$mensajeResp->respuestasParaMensaje($_GET['mensajeId'],'resultados');
+            }else{
+              $mensajeResp = new MensajesResp();
+              $respuestas=$mensajeResp->respuestasParaMensaje($_GET['mensajeId'],'arrayRespuestas');
             }
+            if ($respuestas<>'sinRespuestas') {
+              while ($fila = mysqli_fetch_object($respuestas)) {
+                echo $fila->contenido.'<br>';
+              }
+            }
+
 
 
             //$cantidad=$mensajeResp->buscar(null,null,null,'cantidad');
             //$mensajeResp->destinatario=$_SESSION['referenteId'];
             //$mensajeResp->mensajeId=NULL;
 
-            $intervenciones=mysqli_num_rows($buscarResp);
+            //$intervenciones=mysqli_num_rows($buscarResp);
 
             $primer=0;
           /*  foreach ($buscarMensajeRespuesta as $key => $value) {

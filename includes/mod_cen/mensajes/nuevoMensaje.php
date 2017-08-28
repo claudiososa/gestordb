@@ -1,6 +1,7 @@
 <script src="includes/mod_cen/js/s_ajax_mensajeNuevo.js"></script>
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
+include_once("includes/mod_cen/clases/MensajeHilo.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/MensajesAdjunto.php");
 
@@ -15,6 +16,7 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   {
   $arrayDestino=unserialize($_POST['referentes']);
   $destinatarios = implode(',',$arrayDestino);
+  $destinatarios .=','.$_SESSION["referenteId"];
   $fecha=date("Y-m-d H:i:s");
   $mensaje= new Mensajes(null,
                             $_SESSION["referenteId"],
@@ -24,7 +26,27 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
                             $fecha
                           );
     $guardar_mensaje=$mensaje->agregar(); // hasta aqui guarda el mensaje nuevo
+    
+    $objMensaje =new Mensajes($guardar_mensaje);
+    $buscarMensaje = $objMensaje->buscar();
+    $datoMensaje=mysqli_fetch_object($buscarMensaje);
+    $arrayDestino = explode(',',$datoMensaje->destinatario);
+    $hilo = new MensajeHilo();
 
+    if (count($arrayDestino)>2) {
+        $hilo->mensajeId=$guardar_mensaje;
+        $hilo->mensajeTipo=1;
+        $hilo->referenteIdResp=$datoMensaje->destinatario;
+        $hilo->fechaHilo=date("Y-m-d H:i:s");
+        $nuevoHilo=$hilo->agregar();
+    }else{
+        //creamos un hilo nuevo de tipo grupo para este mensaje
+        $hilo->mensajeId=$guardar_mensaje;
+        $hilo->mensajeTipo=2;
+        $hilo->referenteIdResp=$datoMensaje->destinatario;
+        $hilo->fechaHilo=date("Y-m-d H:i:s");
+        $nuevoHilo=$hilo->agregar();
+    }
 ///////////////////  guardar archivo adjunto ////////////////
 
     foreach ($_FILES['input-img'] as $key)
