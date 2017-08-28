@@ -20,7 +20,7 @@ if($_SESSION['tipo']=='ETJ' || $_SESSION['tipo']=='Coordinador' ){
 	$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
   //$escuela= new Escuela();
   //$escuela->referenteIdSuperSec=$referenteId;
-	$resultado = $escuela->Cargo('Supervisor-Secundaria');	
+	$resultado = $escuela->Cargo('Supervisor-Secundaria');
 }
 
 
@@ -35,7 +35,7 @@ if($_SESSION['tipo']=='ETJ' || $_SESSION['tipo']=='Coordinador' ){
 		</div>
 		<div class="panel-body">
 			<?php
-	
+
 	echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
 	echo "<thead>";
 	echo "<tr>";
@@ -61,7 +61,7 @@ while ($fila = mysqli_fetch_object($resultado))
 
 	echo "<tr>";
 
-	
+
 	if(isset($director2->directorId)>0)//Si existe director
 	{
 		$dire=new Persona($director2->personaId);
@@ -69,7 +69,7 @@ while ($fila = mysqli_fetch_object($resultado))
 		$resultadoDire=mysqli_fetch_object($buscarDire);
 
 		// en el siguiente boton enviamos la variable  "dirUpdate" el proposito es indicar que los cambios se estan realizando desde el menu de un etj o coordinador y que cuando el script termine liste nuevamente el menu de mis ett y no mis escuelas
-	
+
 		echo "<td><a class='btn btn-primary' role='button' href='index.php?mod=slat&men=escuelas&id=13&personaId=".$director2->personaId."&directorId=".$director2->directorId."&escuelaId=".$fila->escuelaId."&dirUpdate=1'>"."Editar"."</a></td>";
 		echo "<td>".$fila->numero."</td>";
 		echo "<td>".$director2->tipoautoridad."</td>";
@@ -78,7 +78,7 @@ while ($fila = mysqli_fetch_object($resultado))
 		echo "<td>".$resultadoDire->cuil."</td>";
 		echo "<td>".$resultadoDire->telefonoC." ".$resultadoDire->telefonoM."</td>";
 		echo "<td>".$resultadoDire->email." ".$resultadoDire->email2."</td>";
-    	
+
 
 		}
 	else
@@ -92,8 +92,8 @@ while ($fila = mysqli_fetch_object($resultado))
 		echo "<td>N/A</td>";
 		echo "<td>N/A</td>";
 		echo "<td>N/A</td>";
-		
-		
+
+
 	}
 
 	echo "</tr>";
@@ -115,4 +115,16 @@ $(document).ready(function()
 				$("#myTable1").tablesorter( {sortList: [[0,1]]} );
 		}
 );
+</script>
+<script type="text/javascript">
+$("table").tableExport( {
+
+    formats: ['xlsx'],
+
+	});
+
+
+
+
+
 </script>
