@@ -20,7 +20,7 @@ while ($fila = mysqli_fetch_object($misMensajes)) {
   $arrayDestino = explode(',',$fila->destinatario);
   foreach ($arrayDestino as $key => $value) {
     //echo $arrayDestino[$key].'<br>';
-    if ($arrayDestino[$key]==$_SESSION['referenteId']) {
+    if ($arrayDestino[$key]==$_SESSION['referenteId'] AND $fila->referenteId<>(int)$_SESSION['referenteId']) {
       $leer = new MensajesLeidos(null,$fila->mensajeId,$_SESSION['referenteId']);
       $buscarLeido = $leer->buscar();
 
