@@ -88,9 +88,26 @@ if ($_GET['id']==3) {
                             $remitente = new Referente($datoValidado->referenteId);
                             $buscarRemitente = $remitente->buscar();
                             $datoRemitente = mysqli_fetch_object($buscarRemitente);
+                              //var_dump($datoValidado);
+                            //echo '<br>'.$datoValidado->referenteId.'<br>';
+                            if ($datoValidado->referenteId==(int)$_SESSION['referenteId']) {
+                            //  echo 'llego aqui';
+                              $remitente2 = new Referente($datoValidado->destinatario);
+                              $buscarRemitente = $remitente2->buscar();
+                              //$remitente->setReferenteId($datoValidado->destinatario);
+                              //var_dump($remitente);
+                              $buscarRemitente = $remitente2->buscar();
+                              $datoRemitente = mysqli_fetch_object($buscarRemitente);
+                              echo ucwords(strtolower($datoRemitente->apellido)).', '.ucwords(strtolower($datoRemitente->nombre)) ?>
+                              <input type="hidden" name="destinatario" value="<?php echo $datoRemitente->referenteId ?>">
+                              <?php
+                            }else{
+                              echo ucwords(strtolower($datoRemitente->apellido)).', '.ucwords(strtolower($datoRemitente->nombre)) ?></p>
+                              <input type="hidden" name="destinatario" value="<?php echo $datoValidado->referenteId ?>">
+                            <?php
+                            }
 
-       echo ucwords(strtolower($datoRemitente->apellido)).', '.ucwords(strtolower($datoRemitente->nombre)) ?></p>
-       <input type="hidden" name="destinatario" value="<?php echo $datoValidado->referenteId ?>">
+?>
     </div>
   </div>
   <?php

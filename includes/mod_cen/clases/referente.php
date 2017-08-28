@@ -330,7 +330,10 @@ class Referente
 	{
 		return $this->personaId;
 	}
-
+	public function setReferenteId($referenteId)
+	{
+		$referenteId=$this->referenteId;
+	}
 	public function getReferenteId()
 	{
 		return $this->referenteId;
