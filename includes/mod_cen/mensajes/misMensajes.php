@@ -68,9 +68,9 @@ background-color: #529e8b;
 
 <?php
 include_once ('includes/mod_cen/clases/Mensajes.php');
-include_once ('includes/mod_cen/clases/MensajesResp.php');
-include_once ('includes/mod_cen/clases/MensajeHilo.php');
-include_once ('includes/mod_cen/clases/MensajesAdjunto.php');
+//include_once ('includes/mod_cen/clases/MensajesResp.php');
+//include_once ('includes/mod_cen/clases/MensajeHilo.php');
+//include_once ('includes/mod_cen/clases/MensajesAdjunto.php');
 $cantidadMensajes=0;
 //creo un objeto nuevo del tipo Mensajes, con el atributo referenteId seteado. Ademas busco si el referente actual tiene mensajes recibidos
 if (isset($_GET['enviados'])) {
@@ -103,25 +103,33 @@ echo '</div>';
 }else{
 
   /*************************************************************************************
-   * Mostrar todos los mensajes en Bandeja de entrada
+   * Mostrar todos los mensajes en Bandeja de entrada para el usuario Logueado
    * @var Mensajes
    */
   $objMensaje = new Mensajes();
-  $misMensajes = $objMensaje->buscarRespuesta2();
+  //var_dump($objMensaje);
+  $misMensajes = $objMensaje->buscarHilo();
+  while ($fila =mysqli_fetch_object($misMensajes)) {
 
+    if ($fila->referenteId<>(int)$_SESSION['referenteId'])
+    {
+      
+      echo 'no es dueno';
+    }else{
+      echo 'si es dueno';
+    }
+  }
+/*
   while ($fila = mysqli_fetch_object($misMensajes))
-  {
-      $paraLogueado=0;
-      $arrayDestino = explode(',',$fila->destinatario);
+  {    //$paraLogueado=0;
+      //$arrayDestino = explode(',',$fila->destinatario);
       //var_dump($arrayDestino);
-      foreach ($arrayDestino as $key => $value)
-      {
-          if ($arrayDestino[$key]==$_SESSION['referenteId'])
-          {
-            if ($fila->referenteId<>$_SESSION['referenteId'])
+      echo 'llego aqui como no dueno del mensaje'
+        if ($fila->referenteId<>(int)$_SESSION['referenteId'])
             {//se encuentra en Destinatario PERO NO es el creado del MENSAJE
+
               //echo 'es destinatario pero no es dueno';
-              $paraLogueado=1;
+              /*$paraLogueado=1;
               $propio=1;
               $hilo = new MensajeHilo(null,$fila->mensajeId);
               $buscarHilo = $hilo->buscar();
@@ -155,6 +163,7 @@ echo '</div>';
           }else{//se encuentra en Destinatario Y ADEMAS es el creado del MENSAJE
               $mensajeResp = new MensajesResp();
               $intervenciones=$mensajeResp->respuestasParaMensaje($fila->mensajeId,'cantidad');
+
               if ($intervenciones>0) //si existe por lo menos una respuesta ingresa aqui
               {
                 $intervenciones++;
@@ -177,9 +186,9 @@ echo '</div>';
             }
           //}
           }
-      }
-    }
-  }//Cierra While de Mensajes Originales
+
+    //}
+  }//Cierra While de Mensajes Originales*/
 }
 ?>
 </div> <!--cierre de row-->

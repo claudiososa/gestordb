@@ -7,7 +7,7 @@
 }
 </style>
 <?php
-
+/*
 include_once('includes/mod_cen/clases/Mensajes.php');
 include_once('includes/mod_cen/clases/MensajesLeidos.php');
 $cantidadMensajes=0;
@@ -39,5 +39,5 @@ if ($cantidadMensajes>0) {
 if (isset($_GET['saved']) AND $_GET['id']==2) {
   echo '<p class="alert alert-success">El mensaje fue enviado...</p>';
 }
-
+*/
 ?>
