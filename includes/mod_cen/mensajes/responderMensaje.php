@@ -7,6 +7,8 @@ include_once("includes/mod_cen/clases/Mensajes.php");
 include_once("includes/mod_cen/clases/referente.php");
 //include_once("includes/mod_cen/clases/MensajesRespAdjunto.php");
 
+
+
 echo '<div class="container">';
   echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">MensajesResp Recibidos</a></label>';
   echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis MensajesResp Enviados</a>";
@@ -44,12 +46,6 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
     }
   }
 
-
-
-
-
-  //$arrayDestino=unserialize($_POST['referentes']);
-  //$destinatarios = implode(',',$arrayDestino);
   $fecha=date("Y-m-d H:i:s");
   $mensaje= new MensajesResp(null,
                             $nuevoHilo,
@@ -60,6 +56,9 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
                           );
     $guardar_mensaje=$mensaje->agregar(); // hasta aqui guarda el mensaje nuevo
 
+    $objMensaje = new Mensajes($_POST["mensajeId"],null,null,null,null,null,$fecha);
+    $editarMensaje = $objMensaje->editar();
+    var_dump($editarMensaje);
 ///////////////////  guardar archivo adjunto ////////////////
 
     foreach ($_FILES['input-img'] as $key)
