@@ -1,3 +1,5 @@
+
+
 <?php
 	include_once("includes/mod_cen/clases/persona.php");
 	include_once("includes/mod_cen/clases/localidades.php");
@@ -86,10 +88,14 @@
 	echo "</div>";
 	echo "</div>";
 ?>
+
 <script type="text/javascript">
   new TableExport(document.getElementsByTagName("table"), {
-                               // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
-    formats: ['xlsx'],             // (String[]), filetype(s) for the export, (default: ['xls', 'csv', 'txt'])
+
+    formats: ['xls',],
+		ignoreCols: 3,
+		filename: 'MisEtt',
+		bootstrap: true,
 
 	});
 

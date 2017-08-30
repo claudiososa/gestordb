@@ -119,8 +119,9 @@ $(document).ready(function()
 <script type="text/javascript">
 $("table").tableExport( {
 
-    formats: ['xlsx'],
-
+  formats: ['xls',],
+	ignoreCols: 0,
+	bootstrap: true,
 	});
 
 
