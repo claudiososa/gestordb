@@ -2,6 +2,7 @@
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
 include_once("includes/mod_cen/clases/MensajeHilo.php");
+include_once("includes/mod_cen/clases/ContenidoRespuestas.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/MensajesAdjunto.php");
 
@@ -21,31 +22,35 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   $mensaje= new Mensajes(null,
                             $_SESSION["referenteId"],
                             $_POST["asunto"],
-                            $_POST["contenido"],
                             $destinatarios,
                             $fecha
                           );
     $guardar_mensaje=$mensaje->agregar(); // hasta aqui guarda el mensaje nuevo
-    
-    $objMensaje =new Mensajes($guardar_mensaje);
-    $buscarMensaje = $objMensaje->buscar();
-    $datoMensaje=mysqli_fetch_object($buscarMensaje);
-    $arrayDestino = explode(',',$datoMensaje->destinatario);
-    $hilo = new MensajeHilo();
 
-    if (count($arrayDestino)>2) {
-        $hilo->mensajeId=$guardar_mensaje;
-        $hilo->mensajeTipo=1;
-        $hilo->referenteIdResp=$datoMensaje->destinatario;
-        $hilo->fechaHilo=date("Y-m-d H:i:s");
-        $nuevoHilo=$hilo->agregar();
-    }else{
-        //creamos un hilo nuevo de tipo grupo para este mensaje
-        $hilo->mensajeId=$guardar_mensaje;
-        $hilo->mensajeTipo=2;
-        $hilo->referenteIdResp=$datoMensaje->destinatario;
-        $hilo->fechaHilo=date("Y-m-d H:i:s");
-        $nuevoHilo=$hilo->agregar();
+    $arrayDestino = explode(',',$destinatarios);
+
+    $hilo = new MensajeHilo();
+    foreach ($arrayDestino as $key => $value) {
+      $hilo->mensajeId=$guardar_mensaje;
+      $hilo->referenteIdResp=$arrayDestino[$key];
+      $hilo->fechaHilo=$fecha;
+      $hilo->agregar();
+    }
+
+    $contenido = new ContenidoRespuestas(null,$_POST["contenido"]);
+    $agregarContenido=$contenido->agregar();
+
+    //buscamos los hilos correspondientes al mensaje actual guardado
+    $hiloNuevo= new MensajeHilo();
+    $hilos = $hiloNuevo->buscarHilo($guardar_mensaje);
+    $respuesta = new MensajesResp();
+
+    while ($fila = mysqli_fetch_object($hilos)) {
+      $respuesta->mensajeHilo=$fila->mensajeHiloId;
+      $respuesta->contenidoId=$agregarContenido;
+      $respuesta->respuestaReferenteId=$_SESSION["referenteId"];
+      $respuesta->fechaHora=$fecha;
+      $respuesta->agregar();
     }
 ///////////////////  guardar archivo adjunto ////////////////
 

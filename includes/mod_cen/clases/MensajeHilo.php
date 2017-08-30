@@ -1,26 +1,22 @@
 <?php
 include_once('conexionv2.php');
 include_once("referente.php");
-include_once("maestro.php");
 
 class MensajeHilo
 {
 	private $mensajeHiloId;
 	private $mensajeId;
- 	private $mensajeTipo;
 	private $referenteIdResp;
  	private $fechaHilo;
 
 function __construct(	$mensajeHiloId=NULL,
 											$mensajeId=NULL,
-                      $mensajeTipo=NULL,
                       $referenteIdResp=NULL,
 	                    $fechaHilo=NULL
                       )
 	{
 		$this->mensajeHiloId = $mensajeHiloId;
 		$this->mensajeId = $mensajeId;
- 		$this->mensajeTipo = $mensajeTipo;
 		$this->referenteIdResp = $referenteIdResp;
  		$this->fechaHilo = $fechaHilo;
 
@@ -34,42 +30,23 @@ function __construct(	$mensajeHiloId=NULL,
 	 * @param  [type] $referenteId [de quien se esta buscando el mensaje]
 	 * @return [array]              $arrayHilos (2 elementos)/ si no encuentra nada devuelve en sus dos elementos 0
 	 */
-	public function buscarHilo($mensajeId=NULL,$referenteId){
-		$arrayHilos = array('0','0');
-		if (isset($mensajeId)) {
-			$hilo = new mensajeHilo(null,$mensajeId);
-			$bd=Conexion2::getInstance();
-			$sentencia="SELECT *
-										FROM mensajesHilo
-										WHERE mensajeId=$mensajeId";
-			$buscarHilo=$bd->ejecutar($sentencia);
-		}else{
-			$hilo = new mensajeHilo();
-			$buscarHilo = $hilo->buscar();
+	public function buscarHilo($mensajeId=NULL,$referenteId=NULL){
+		$bd=Conexion2::getInstance();
+		$sentencia="SELECT *
+									FROM mensajesHilo
+									WHERE mensajeId=$mensajeId";
+		if (isset($referenteId)) {
+			$sentencia .=" AND referenteId=$referenteId ";
 		}
-
-		while ($fila = mysqli_fetch_object($buscarHilo)) {
-		      $arrayDestino = explode(',',$fila->referenteIdResp);
-		      foreach ($arrayDestino as $key => $value) {
-		          if ($arrayDestino[$key]==$referenteId) {
-								if ($fila->mensajeTipo=='1') {
-										$arrayHilos[0]=$fila->mensajeHiloId;
-								}elseif ($fila->mensajeTipo=='2') {
-									$arrayHilos[1]=$fila->mensajeHiloId;
-								}
-		        }
-		    }
-			}
-		return $arrayHilos;
+		return $bd->ejecutar($sentencia);
 	}
 
 	public function agregar()
 	{
 		$bd=Conexion2::getInstance();
-		$sentencia="INSERT INTO mensajesHilo (mensajeHiloId,mensajeId,mensajeTipo,referenteIdResp,fechaHilo)
+		$sentencia="INSERT INTO mensajesHilo (mensajeHiloId,mensajeId,referenteIdResp,fechaHilo)
 		            VALUES (NULL,
                         '". $this->mensajeId."',
-                        '".$this->mensajeTipo."',
                         '". $this->referenteIdResp."',
                         '". $this->fechaHilo."');
                         ";
@@ -82,30 +59,17 @@ function __construct(	$mensajeHiloId=NULL,
 			}
 	}
 
-	public function buscarSoloHilos($mensajeId)
-		{
-			$bd=Conexion2::getInstance();
-			$sentencia="SELECT *
-										FROM mensajesHilo
-										WHERE mensajeId=$mensajeId";
-		  return $bd->ejecutar($sentencia);
-	  }
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
 		$bd=Conexion2::getInstance();
 		$sentencia="SELECT *
-									FROM mensajesHilo";
-									if (!isset($tipoConsulta)) {
-										$sentencia .= " INNER JOIN mensajesResp
-										ON mensajesResp.mensajeHilo=mensajesHilo.mensajeHiloId ";
-									}
-
-									$sentencia .= " WHERE 1 ";
+								FROM mensajesHilo
+  							 WHERE 1 ";
 
 
 		if($this->mensajeHiloId!=NULL || $this->mensajeId!=NULL ||
-			$this->mensajeTipo!=NULL || $this->fechaHilo!=NULL ||
+			$this->fechaHilo!=NULL ||
 			$this->referenteIdResp!=NULL)
 		{
 			$sentencia.=" AND ";
@@ -136,13 +100,9 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 			$sentencia.=" LIMIT ".$limit;
 		}
 			//echo $sentencia.'<br><br>';
-		if (!isset($tipoConsulta))
-		{
-			return $bd->ejecutar($sentencia);
-		}else{
-			$objHilo=mysqli_fetch_object($bd->ejecutar($sentencia));
-			return $objHilo;
-		}
+
+		return $bd->ejecutar($sentencia);
+
 	}
 
 
