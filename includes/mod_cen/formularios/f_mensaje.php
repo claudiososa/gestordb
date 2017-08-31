@@ -15,13 +15,7 @@
         <?php
       }
        ?>
-
-
 <hr>
-<!--<div class="ui-widget" style="margin-top:2em; font-family:Arial">
-  Result:
-  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
-</div>-->
 <?php
 if ($_GET['id']==3) {
   ?>
@@ -39,37 +33,32 @@ if ($_GET['id']==3) {
     </div>
     <div class="col-md-12">
       <p>
-
         <?php
-        //var_dump($datoValidado->destinatario);
+
         $arrayDestino = explode(",",$datoValidado->destinatario);
-        //var_dump($arrayDestino);
         foreach ($arrayDestino as $key => $value) {
-          //echo $arrayDestino[$key].'<br>';
-          if ($arrayDestino[$key]<>$datoValidado->referenteId) {
-            # code...
+          if ($arrayDestino[$key]<>$datoValidado->referenteId)
+          {//cuando el destinatario es distinto al usuario logueado
+            $referente = new Referente($arrayDestino[$key]);
+            $buscarReferente = $referente->buscar();
+            $datoReferente = mysqli_fetch_object($buscarReferente);
 
-          $referente = new Referente($arrayDestino[$key]);
-          $buscarReferente = $referente->buscar();
-          $datoReferente = mysqli_fetch_object($buscarReferente);
-
-          $leido = new MensajesLeidos(null,$_GET['mensajeId'],$datoReferente->referenteId);
-          $buscarLeido = $leido->buscar();
-          if (mysqli_num_rows($buscarLeido)>0) {
-            if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
-              echo '<b>'.ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'</b> <img src="img/iconos/leido.png" width="18" height="12" alt="leido"> - ';
+            $leido = new MensajesLeidos(null,$_GET['mensajeId'],$datoReferente->referenteId);
+            $buscarLeido = $leido->buscar();
+            if (mysqli_num_rows($buscarLeido)>0) {
+              if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
+                echo '<b>'.ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'</b> <img src="img/iconos/leido.png" width="18" height="12" alt="leido"> - ';
+              }else{
+                echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
+              }
             }else{
-              echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
-            }
-
-          }else{
-            if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
-              echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'<img src="img/iconos/noleido.png" width="18" height="12" alt="leido"> - ';
-            }else{
-              echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
+              if ($datoMensaje->referenteId==$_SESSION['referenteId']) {
+                echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).'<img src="img/iconos/noleido.png" width="18" height="12" alt="leido"> - ';
+              }else{
+                echo ucwords(strtolower($datoReferente->apellido)).','.ucwords(strtolower($datoReferente->nombre)).' - ';
+              }
             }
           }
-        }
         }
 
         ?>
@@ -143,8 +132,7 @@ if ($_GET['id']==3) {
           </div>
         </div>
         <?php
-      }else{
-        //var_dump($buscarMensajeRespuesta);
+      }elseif($_GET['id']==3){//Si esta en la ventana de Leer Mensaje
         ?>
         <div class="form-group">
           <div class="col-md-12">
@@ -161,58 +149,35 @@ if ($_GET['id']==3) {
                 $contenido->contenidoId=$fila->contenidoId;
                 $buscarContenido = $contenido->buscar();
                 $datoContenido=mysqli_fetch_object($buscarContenido);
-                echo $datoContenido->contenido.'<br>';
-                $mensajeRespId=$fila->mensajeRespId;
-            }
+                echo '<br>'.$datoContenido->contenido.'<br>';
+                if ($fila->respuestaReferenteId<>$_SESSION['referenteId']) {
+              //    $nuevoHilo=new MensajeHilo($respuestas->mensajeRespId);
+                  //$buscarHilo = $nuevoHilo->buscar();
+                  //$datoHilo=mysqli_fetch_object($buscarHilo);
 
-            echo "<a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a>";
-            //$datoMensaje=mysqli_fetch_object($buscar);
-            //echo $datoMensaje->contenido.'<br>';
-/*
-            if ($datoMensaje->referenteId==(int)$_SESSION['referenteId']) {//si el usuario logueado es creador del mensaje original
-              $mensajeResp = new MensajesResp();
-              $respuestas=$mensajeResp->respuestasParaMensaje($_GET['mensajeId'],'resultados');
-            }else{
-              $mensajeResp = new MensajesResp();
-              $respuestas=$mensajeResp->respuestasParaMensaje($_GET['mensajeId'],'arrayRespuestas');
-            }
-            if ($respuestas<>'sinRespuestas') {
-              while ($fila = mysqli_fetch_object($respuestas)) {
-                echo $fila->contenido.'<br>';
-              }
-            }*/
+                  //$mensajesResp = new MensajesResp(null,null,$respuestas->contenidoId);
+                  //$buscarResp = $mensajesResp->buscar();
 
 
 
-            //$cantidad=$mensajeResp->buscar(null,null,null,'cantidad');
-            //$mensajeResp->destinatario=$_SESSION['referenteId'];
-            //$mensajeResp->mensajeId=NULL;
-
-            //$intervenciones=mysqli_num_rows($buscarResp);
-
-            $primer=0;
-          /*  foreach ($buscarMensajeRespuesta as $key => $value) {
-
-              if ($primer>0) {
-                # code...
-
-                $mensajeValidado = new Mensajes($buscarMensajeRespuesta[$key]);
-
-                $buscarMensaje=$mensajeValidado->buscar();
-                $datoValidado=mysqli_fetch_object($buscarMensaje);
-
-                if(isset($datoValidado->contenido) AND $datoValidado->contenido<>""){
-                  echo $datoValidado->contenido.'<br>';
+                  //echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$fila->mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
                 }
-              }
-              $primer++;
-            }*/
+                $mensajeRespId=$fila->mensajeRespId;
+                if ($datoValidado->referenteId<>$_SESSION['referenteId']) {
+                    echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
+                }
 
+            }
+            if ($datoValidado->referenteId<>$_SESSION['referenteId']) {
+                echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
+            }
+
+            //echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
             ?>
             </div>
         </div>
 
-        <script src="includes/mod_cen/formularios/js/nicEditor.js"></script>
+<script src="includes/mod_cen/formularios/js/nicEditor.js"></script>
 
   <?php
   if ($_GET['id']==3) {

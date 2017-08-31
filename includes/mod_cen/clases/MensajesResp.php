@@ -105,7 +105,7 @@ function __construct(	$mensajeRespId=NULL,
 						INNER JOIN personas
 						ON referentes.personaId=personas.personaId
 						WHERE mensajeHilo=$mensajeHiloId";
-						//echo $stmt;
+						echo $stmt;
 		return $bd->ejecutar($stmt);
 	}
 public function buscarRespuesta(){
