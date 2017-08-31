@@ -3,7 +3,7 @@
 include_once("includes/mod_cen/clases/MensajesResp.php");
 include_once("includes/mod_cen/clases/MensajeHilo.php");
 include_once("includes/mod_cen/clases/Mensajes.php");
-//include_once("includes/mod_cen/clases/MensajesResp.php");
+include_once("includes/mod_cen/clases/ContenidoRespuestas.php");
 include_once("includes/mod_cen/clases/referente.php");
 //include_once("includes/mod_cen/clases/MensajesRespAdjunto.php");
 
@@ -18,10 +18,30 @@ echo '</div">';
 $nuevo=0;
 if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de mensaje nuevo ingresa aqui
   {
-  $hilo = new MensajeHilo();
-  $buscarHilo = $hilo->buscarHilo($_POST["mensajeId"],$_SESSION["referenteId"]);
 
-  $arrayDestino = explode(',',$_POST["destinatario"]);
+    $contenido = new ContenidoRespuestas(null,$_POST["contenido"]);
+    $agregarContenido=$contenido->agregar();
+
+    $arrayDestino = explode(',',$_POST["destinatario"]);
+
+    foreach ($arrayDestino as $key => $value) {
+
+      $hilo = new MensajeHilo();
+      $buscarHilo = $hilo->buscarHilo($_POST["mensajeId"],$arrayDestino[$key]);
+      $fecha=date("Y-m-d H:i:s");
+      $respuesta = new MensajesResp(null,
+                                    $buscarHilo->mensajeHiloId,
+                                    $agregarContenido,
+                                    $_SESSION["referenteId"],
+                                    $fecha
+                                  );
+      $respuesta->agregar();
+    }
+
+
+  //$arrayDestino = explode(',',$_POST["destinatario"]);
+
+  /*
   if (count($arrayDestino)>2) {
     if ($buscarHilo[0]==0)
       {    //creamos un hilo nuevo de tipo grupo para este mensaje
@@ -58,7 +78,7 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
 
     $objMensaje = new Mensajes($_POST["mensajeId"],null,null,null,null,null,$fecha);
     $editarMensaje = $objMensaje->editar();
-    var_dump($editarMensaje);
+    var_dump($editarMensaje);*/
 ///////////////////  guardar archivo adjunto ////////////////
 
     foreach ($_FILES['input-img'] as $key)
@@ -137,11 +157,12 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   <?php
 
 
-}else{
-  $mensajeValidado = new Mensajes($_GET['mensajeId']);
+}else{ // Sino viene por POST///
 
-  $buscarMensaje=$mensajeValidado->buscar();
+  $mensajeValidado = new Mensajes();
 
+  //$buscarMensaje=$mensajeValidado->buscar();
+  $buscarMensaje=$mensajeValidado->buscarHilo($_GET['mensajeId']);
   $datoValidado=mysqli_fetch_object($buscarMensaje);
   //var_dump($datoValidado);
   $nuevo=1;

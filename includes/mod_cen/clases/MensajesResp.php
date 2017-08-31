@@ -56,15 +56,69 @@ function __construct(	$mensajeRespId=NULL,
 								AND mensajeTipo=$mensajeTipo";
 	}
 
-	public function buscarIntervenciones($mensajeHilo){
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
-		$sentencia = "SELECT mensajeHilo FROM mensajesResp
-									WHERE mensajeHilo = $mensajeHilo";
-		$cantidadMensajes = mysqli_num_rows($conexion->query($sentencia));
-		return $cantidadMensajes;
+	public function buscarIntervenciones($mensajeId,$tipo,$mensajeHiloId=NULL){
+		$bd=Conexion2::getInstance();
+		/* $sentencia = "SELECT mensajeRespId
+									FROM mensajesResp
+									WHERE mensajeHilo = $mensajeHilo";*/
+
+		if ($tipo=='cantidad') {
+			$sentencia = "SELECT *
+										FROM mensajesResp
+										WHERE mensajesResp.mensajeHilo=$mensajeHiloId ";
+
+										//if (isset($referenteId)) {
+										//	$sentencia .=" AND mensajesResp.respuestaReferenteId=$referenteId ";
+										//}
+									echo $sentencia;
+			$cantidadMensajes = mysqli_num_rows($bd->ejecutar($sentencia));
+			return $cantidadMensajes;
+		}
+
+		if ($tipo=='resultados') {
+			$sentencia = "SELECT *
+										FROM mensajes
+										INNER JOIN mensajesHilo
+										ON mensajesHilo.mensajeId=mensajes.mensajeId
+										INNER JOIN mensajesResp
+										ON mensajesResp.mensajeHilo=mensajesHilo.mensajeHiloId
+										INNER JOIN contenidoRespuestas
+										ON mensajesResp.contenidoId=contenidoRespuestas.contenidoId
+										WHERE mensajes.mensajeId=$mensajeId";
+										//echo $sentencia;
+			/*$sentencia = "SELECT mensajesResp.mensajeRespId,contenidoRespuestas.contenido
+										FROM mensajesResp
+										INNER JOIN contenidoRespuestas
+										ON mensajesResp.contenidoId=contenidoRespuestas.contenidoId
+										WHERE mensajeHilo = $mensajeHilo";
+									//	echo $sentencia;*/
+			return $bd->ejecutar($sentencia);
+		}
 	}
 
+	public function verRespuestas($mensajeHiloId)
+	{
+		$bd=Conexion2::getInstance();
+		$stmt ="SELECT * FROM mensajesResp
+						INNER JOIN referentes
+						ON mensajesResp.respuestaReferenteId=referentes.referenteId
+						INNER JOIN personas
+						ON referentes.personaId=personas.personaId
+						WHERE mensajeHilo=$mensajeHiloId";
+						//echo $stmt;
+		return $bd->ejecutar($stmt);
+	}
+public function buscarRespuesta(){
+		$bd=Conexion2::getInstance();
+		$stmt ="SELECT * FROM mensajesResp
+						INNER JOIN referentes
+						ON mensajesResp.respuestaReferenteId=referentes.referenteId
+						INNER JOIN personas
+						ON referentes.personaId=personas.personaId
+						WHERE mensajeRespId=$this->mensajeRespId";
+						$dato=mysqli_fetch_object($bd->ejecutar($stmt));
+		return $dato;
+}
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{

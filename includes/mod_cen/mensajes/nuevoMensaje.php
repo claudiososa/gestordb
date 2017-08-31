@@ -1,6 +1,7 @@
 <script src="includes/mod_cen/js/s_ajax_mensajeNuevo.js"></script>
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
+include_once("includes/mod_cen/clases/MensajesResp.php");
 include_once("includes/mod_cen/clases/MensajeHilo.php");
 include_once("includes/mod_cen/clases/ContenidoRespuestas.php");
 include_once("includes/mod_cen/clases/referente.php");

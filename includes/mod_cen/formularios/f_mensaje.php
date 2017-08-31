@@ -1,8 +1,6 @@
 <div class="container">
 <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
-
     <input type="hidden" id="destino" name="referentes" value="">
-
       <?php
       if ($_GET['id']==1) {
         ?>
@@ -72,9 +70,8 @@ if ($_GET['id']==3) {
             }
           }
         }
-
         }
-        $datoValidado->destinatario
+
         ?>
       </p>
     </div>
@@ -155,11 +152,23 @@ if ($_GET['id']==3) {
           </div>
           <div class="col-md-12" id="myArea1">
             <?php
-            $objMensaje = new Mensajes($_GET['mensajeId']);
-            $buscar=$objMensaje->buscar();
-            $datoMensaje=mysqli_fetch_object($buscar);
-            echo $datoMensaje->contenido.'<br>';
+            $mensajes = new MensajesResp();
+            $respuestas=$mensajes->verRespuestas($datoValidado->mensajeHiloId);
 
+            $contenido = new ContenidoRespuestas();
+
+            while ($fila = mysqli_fetch_object($respuestas)) {
+                $contenido->contenidoId=$fila->contenidoId;
+                $buscarContenido = $contenido->buscar();
+                $datoContenido=mysqli_fetch_object($buscarContenido);
+                echo $datoContenido->contenido.'<br>';
+                $mensajeRespId=$fila->mensajeRespId;
+            }
+
+            echo "<a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a>";
+            //$datoMensaje=mysqli_fetch_object($buscar);
+            //echo $datoMensaje->contenido.'<br>';
+/*
             if ($datoMensaje->referenteId==(int)$_SESSION['referenteId']) {//si el usuario logueado es creador del mensaje original
               $mensajeResp = new MensajesResp();
               $respuestas=$mensajeResp->respuestasParaMensaje($_GET['mensajeId'],'resultados');
@@ -171,7 +180,7 @@ if ($_GET['id']==3) {
               while ($fila = mysqli_fetch_object($respuestas)) {
                 echo $fila->contenido.'<br>';
               }
-            }
+            }*/
 
 
 

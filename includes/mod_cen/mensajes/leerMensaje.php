@@ -2,6 +2,7 @@
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
 include_once("includes/mod_cen/clases/MensajesResp.php");
+include_once("includes/mod_cen/clases/ContenidoRespuestas.php");
 include_once("includes/mod_cen/clases/MensajeHilo.php");
 include_once("includes/mod_cen/clases/MensajesLeidos.php");
 include_once("includes/mod_cen/clases/referente.php");
@@ -164,9 +165,10 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   $agregarLeido = $leer->agregar();
 
 
-	$mensajeValidado = new Mensajes($_GET['mensajeId']);
+	$mensajeValidado = new Mensajes();
 
-  $buscarMensaje=$mensajeValidado->buscar();
+  //$buscarMensaje=$mensajeValidado->buscar();
+  $buscarMensaje=$mensajeValidado->buscarHilo($_GET['mensajeId']);
   $datoValidado=mysqli_fetch_object($buscarMensaje);
   $nuevo=1;
 	include_once("includes/mod_cen/formularios/f_mensaje.php");

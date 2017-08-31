@@ -68,9 +68,9 @@ background-color: #529e8b;
 
 <?php
 include_once ('includes/mod_cen/clases/Mensajes.php');
-//include_once ('includes/mod_cen/clases/MensajesResp.php');
+include_once ('includes/mod_cen/clases/MensajesResp.php');
 //include_once ('includes/mod_cen/clases/MensajeHilo.php');
-//include_once ('includes/mod_cen/clases/MensajesAdjunto.php');
+include_once ('includes/mod_cen/clases/MensajesAdjunto.php');
 $cantidadMensajes=0;
 //creo un objeto nuevo del tipo Mensajes, con el atributo referenteId seteado. Ademas busco si el referente actual tiene mensajes recibidos
 if (isset($_GET['enviados'])) {
@@ -110,13 +110,57 @@ echo '</div>';
   //var_dump($objMensaje);
   $misMensajes = $objMensaje->buscarHilo();
   while ($fila =mysqli_fetch_object($misMensajes)) {
-
+    $cantAdjunto=0;
     if ($fila->referenteId<>(int)$_SESSION['referenteId'])
     {
-      
+      $respuestas = new MensajesResp();
+
+            //$cantidadRespuestas = $respuestas->buscarIntervenciones($fila->mensajeHiloId,'cantidad');
+      $cantidadRespuestas = $respuestas->buscarIntervenciones(null,'cantidad',$fila->mensajeHiloId);
+
+      //var_dump($cantidadRespPropias);
+      $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
+      $buscar_adjunto = $adjunto->buscar();
+      echo '<div class="estilo1">';
+      echo '<div class="row">';
+      echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
+      echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
+      if ($cantAdjunto==0) {
+        echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.' ('.$cantidadRespuestas.')</a></h4></div>';
+      }else{
+        echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.' ('.$cantidadRespuestas.')</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+      }
+      echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
+      echo '</div>';
+      echo '</div>';
       echo 'no es dueno';
+      echo '<br>'.$cantidadRespuestas;
+
     }else{
       echo 'si es dueno';
+      $respuestas = new MensajesResp();
+      //$cantidadRespuestas = $respuestas->buscarIntervenciones($fila->mensajeId,'cantidad');
+
+      $cantidadRespPropias = $respuestas->buscarIntervenciones($fila->mensajeId,'cantidad',$fila->mensajeHiloId);
+      var_dump($cantidadRespPropias);
+      if ($cantidadRespPropias > 1) {
+        $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
+        $buscar_adjunto = $adjunto->buscar();
+        echo '<div class="estilo1">';
+        echo '<div class="row">';
+        echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
+        echo '<div class="visible-xs">'.date("d-m-y H:i", strtotime($fila->fechaHora)).'</div>';
+        if ($cantAdjunto==0) {
+          echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.' ('.$cantidadRespPropias.')</a></h4></div>';
+        }else{
+          echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.' ('.$cantidadRespPropias.')</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+        }
+        echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
+        echo '</div>';
+        echo '</div>';
+        echo 'no es dueno';
+        echo '<br>'.$cantidadRespuestas;
+      }
     }
   }
 /*

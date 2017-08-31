@@ -36,8 +36,11 @@ function __construct(	$mensajeHiloId=NULL,
 									FROM mensajesHilo
 									WHERE mensajeId=$mensajeId";
 		if (isset($referenteId)) {
-			$sentencia .=" AND referenteId=$referenteId ";
+			$sentencia .=" AND referenteIdResp=$referenteId ";
+			$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
+			return $dato;
 		}
+
 		return $bd->ejecutar($sentencia);
 	}
 
