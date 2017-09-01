@@ -133,16 +133,16 @@ echo '</div>';
       echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
       echo '</div>';
       echo '</div>';
-      echo 'no es dueno';
-      echo '<br>'.$cantidadRespuestas;
+      //echo 'no es dueno';
+      //echo '<br>'.$cantidadRespuestas;
 
     }else{
-      echo 'si es dueno';
+      //echo 'si es dueno';
       $respuestas = new MensajesResp();
       //$cantidadRespuestas = $respuestas->buscarIntervenciones($fila->mensajeId,'cantidad');
 
       $cantidadRespPropias = $respuestas->buscarIntervenciones($fila->mensajeId,'cantidad',$fila->mensajeHiloId);
-      var_dump($cantidadRespPropias);
+      //var_dump($cantidadRespPropias);
       if ($cantidadRespPropias > 1) {
         $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
         $buscar_adjunto = $adjunto->buscar();
@@ -158,7 +158,7 @@ echo '</div>';
         echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
         echo '</div>';
         echo '</div>';
-        echo 'no es dueno';
+        //echo 'no es dueno';
         echo '<br>'.$cantidadRespuestas;
       }
     }

@@ -23,7 +23,18 @@
           $buscarMensaje = $mensaje->buscar();
           $datoMensa= mysqli_fetch_object($buscarMensaje);
           $arrayDestino = explode(',',$datoMensa->destinatario);
-            if (!isset($_GET['todos'])) {
+            if (!isset($_GET['todos'])) {//si el boton presionado fue Responder
+                if (isset($_GET['solo'])) {
+                  $destino = $_SESSION['referenteId'].','.$_GET['des'];
+                  $referente = new Referente($_GET['des']);
+                  $buscarRef = $referente->buscar();
+                  $datoRef = mysqli_fetch_object($buscarRef);
+                  echo ucwords(strtolower($datoRef->apellido)).', '.ucwords(strtolower($datoRef->nombre));
+
+                  ?>
+                  <input type="hidden" name="destinatario" value="<?php echo $destino ?>">
+                  <?php
+                }else{
                 if (count($arrayDestino)<3) {
                     ?><input type="hidden" name="destinatario" value="<?php echo $datoMensa->destinatario ?>">
                     <?php
@@ -37,12 +48,14 @@
                       }
                 }
                 }else{
-                    ?><input type="hidden" name="destinatario" value="<?php echo $datoMensa->referenteId ?>">
+                    $destino=$datoMensa->referenteId.','.$_SESSION['referenteId'];
+                    ?><input type="hidden" name="destinatario" value="<?php echo $destino ?>">
                     <?php
                     $referente = new Referente($datoMensa->referenteId);
                     $buscarRef = $referente->buscar();
                     $datoRef = mysqli_fetch_object($buscarRef);
                     echo ucwords(strtolower($datoRef->apellido)).', '.ucwords(strtolower($datoRef->nombre));
+                }
                 }
             }elseif(isset($_GET['todos']))
               {

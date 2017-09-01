@@ -70,7 +70,7 @@ function __construct(	$mensajeRespId=NULL,
 										//if (isset($referenteId)) {
 										//	$sentencia .=" AND mensajesResp.respuestaReferenteId=$referenteId ";
 										//}
-									echo $sentencia;
+									//echo $sentencia;
 			$cantidadMensajes = mysqli_num_rows($bd->ejecutar($sentencia));
 			return $cantidadMensajes;
 		}
@@ -105,7 +105,7 @@ function __construct(	$mensajeRespId=NULL,
 						INNER JOIN personas
 						ON referentes.personaId=personas.personaId
 						WHERE mensajeHilo=$mensajeHiloId";
-						echo $stmt;
+						//echo $stmt;
 		return $bd->ejecutar($stmt);
 	}
 public function buscarRespuesta(){

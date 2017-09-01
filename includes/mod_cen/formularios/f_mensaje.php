@@ -140,6 +140,7 @@ if ($_GET['id']==3) {
           </div>
           <div class="col-md-12" id="myArea1">
             <?php
+
             $mensajes = new MensajesResp();
             $respuestas=$mensajes->verRespuestas($datoValidado->mensajeHiloId);
 
@@ -149,6 +150,11 @@ if ($_GET['id']==3) {
                 $contenido->contenidoId=$fila->contenidoId;
                 $buscarContenido = $contenido->buscar();
                 $datoContenido=mysqli_fetch_object($buscarContenido);
+                echo 'De ';
+                $ref = new Referente($fila->respuestaReferenteId);
+                $buscarRef= $ref->buscar();
+                $datoRef = mysqli_fetch_object($buscarRef);
+                echo ucwords(strtolower($datoRef->apellido)).','.ucwords(strtolower($datoRef->nombre));
                 echo '<br>'.$datoContenido->contenido.'<br>';
                 if ($fila->respuestaReferenteId<>$_SESSION['referenteId']) {
               //    $nuevoHilo=new MensajeHilo($respuestas->mensajeRespId);
@@ -157,22 +163,22 @@ if ($_GET['id']==3) {
 
                   //$mensajesResp = new MensajesResp(null,null,$respuestas->contenidoId);
                   //$buscarResp = $mensajesResp->buscar();
+                  $arrayDestinatario = $arrayDestino = explode(',',$datoMensaje->destinatario);
 
-
-
-                  //echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$fila->mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
-                }
+                  if ($datoMensaje->referenteId==$_SESSION['referenteId'] AND count($arrayDestinatario) > 2) {
+                    echo "<a class='btn btn-success' href='index.php?men=mensajes&solo&id=4&des=".$fila->respuestaReferenteId."&r=".$fila->mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";                  }
+                  }
                 $mensajeRespId=$fila->mensajeRespId;
                 if ($datoValidado->referenteId<>$_SESSION['referenteId']) {
-                    echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
+                //  echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
                 }
 
             }
             if ($datoValidado->referenteId<>$_SESSION['referenteId']) {
-                echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
+                //echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
             }
 
-            //echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
+            echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
             ?>
             </div>
         </div>
