@@ -184,7 +184,7 @@
 <script type="text/javascript">
   new TableExport(document.getElementsByTagName("table"), {
                                // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
-    formats: ['xlsx'],             // (String[]), filetype(s) for the export, (default: ['xls', 'csv', 'txt'])
+    formats: ['xls'],             // (String[]), filetype(s) for the export, (default: ['xls', 'csv', 'txt'])
 
 	});
 
