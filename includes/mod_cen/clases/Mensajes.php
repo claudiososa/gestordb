@@ -1,7 +1,8 @@
 <?php
 include_once('conexionv2.php');
+include_once("includes/mod_cen/clases/MensajesResp.php");
+include_once("includes/mod_cen/clases/MensajeHilo.php");
 include_once("referente.php");
-//include_once("MensajeHilo.php");
 include_once("maestro.php");
 
 class Mensajes
@@ -56,7 +57,7 @@ function __construct($mensajeId=NULL,
 	}
 */
 
-public function buscarHilo()
+public function buscarHilo($mensajeId=NULL)
 	{
 		$referenteActual=$_SESSION ['referenteId'];
 		$bd=Conexion2::getInstance();
@@ -69,8 +70,11 @@ public function buscarHilo()
 					INNER JOIN personas
 					ON personas.personaId=referentes.personaId
 					WHERE 1";
+					if (isset($mensajeId)) {
+						$stmt .=" AND mensajes.mensajeId=$mensajeId ";
+					}
 					$stmt.="  ORDER BY mensajes.mensajeId DESC";
-					echo $stmt.'<br><br>';
+				//echo $stmt.'<br><br>';
 					return $bd->ejecutar($stmt);
 	}
 
@@ -87,6 +91,19 @@ public function propio($mensajeId){
 			return 'si';
 		}
 			return 'no';
+}
+
+
+
+public function mostrarRespuestas($mensajeId,$referenteId)
+{
+	$objHilo = new MensajeHilo(null,$mensajeId,$referenteId);
+	$buscarHilo = $objHilo->buscar();
+	$datoHilo = mysqli_fetch_object($buscarHilo);
+
+	$respuestas = new MensajesResp();
+	$cantidadRespuestas = $respuestas->buscarIntervenciones($datoHilo->mensajeHiloId,'resultados');
+	return $cantidadRespuestas;
 }
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
