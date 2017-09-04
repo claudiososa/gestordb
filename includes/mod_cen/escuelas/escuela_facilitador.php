@@ -286,3 +286,14 @@ $(document).ready(function()
 		}
 );
 </script>
+<script type="text/javascript">
+
+$("#tableEscuelas").tableExport({
+		formats: ['xls'],
+		bootstrap: true,
+		ignoreCols: [5,7],
+
+	});
+
+
+</script>
