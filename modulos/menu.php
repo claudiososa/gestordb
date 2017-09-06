@@ -65,6 +65,12 @@
 			case 'SupervisorAdultos':
 						include_once('includes/mod_men/supervisorAdultos.php');
 						break;
+			case 'CoordinadorEducacionFisica':
+						include_once('includes/mod_men/coordinadorEducacionFisica.php');
+						break;
+			case 'ReferenteEducacionFisica':
+                        include_once('includes/mod_men/referenteEducacionFisica.php');
+						break;
 			}
 		}
 			else {
