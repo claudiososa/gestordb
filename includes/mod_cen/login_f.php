@@ -135,6 +135,12 @@ if(isset($_POST["username"]))
 				case 'CoordinadorFacilitador':
 						    include_once('includes/mod_cen/portada/coordinadorfacilitador.php');
 						    break;
+				case 'CoordinadorEducacionFisica':
+				    include_once('includes/mod_cen/portada/coordinadorEducacionFisica.php');
+				    break;
+				case 'ReferenteEducacionFisica':
+						    include_once('includes/mod_cen/portada/referenteEducacionFisica.php');
+						    break;
 
 
 				default:
