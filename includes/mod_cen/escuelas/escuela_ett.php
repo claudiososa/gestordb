@@ -331,6 +331,7 @@ echo "<div id='map'></div>";
 echo "</div>";
 ?>
 
+
 <script type="text/javascript">
 $(document).ready(function()
 		{
@@ -340,4 +341,16 @@ $(document).ready(function()
 				//$("#myTable1").tablesorter( {sortList: [[0,1]]} );
 		}
 );
+
+</script>
+<script type="text/javascript">
+
+$("#tableEscuelas").tableExport({
+		formats: ['xls'],
+		bootstrap: true,
+		ignoreCols: [4,6],
+
+	});
+
+
 </script>

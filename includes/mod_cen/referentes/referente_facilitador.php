@@ -17,7 +17,7 @@
 	echo '<div class="table-responsive">';
 	echo '<div class="container">';
 	//$fila=mysqli_fetch_object($resultado);
-	echo "<table class='table table-hover table-striped table-condensed '>";
+	echo "<table id='MisFacilitadores' class='table table-hover table-striped table-condensed '>";
 	echo "<tr><td colspan='6'><h3>Mis Facilitadores</h3></td></tr>";
 	echo "<tr class='info'><td>Apellidos, Nombre</td>";
 	echo "<td>RTI Cargo</td>";
@@ -84,3 +84,14 @@
 	echo "</div>";
 	echo "</div>";
 ?>
+<script type="text/javascript">
+new TableExport(document.getElementsByTagName("table"), {
+
+		formats: ['xls'],
+		bootstrap: true,
+
+
+	});
+
+
+</script>
