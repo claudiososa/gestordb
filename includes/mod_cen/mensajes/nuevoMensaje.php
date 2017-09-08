@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  var usuarioActual = " <?php echo trim($_SESSION['referenteId']) ?>";
+</script>
 <script src="includes/mod_cen/js/s_ajax_mensajeNuevo.js"></script>
 <?php
 include_once("includes/mod_cen/clases/Mensajes.php");
@@ -32,6 +35,7 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
 
     $hilo = new MensajeHilo();
     foreach ($arrayDestino as $key => $value) {
+
       $hilo->mensajeId=$guardar_mensaje;
       $hilo->referenteIdResp=$arrayDestino[$key];
       $hilo->fechaHilo=$fecha;

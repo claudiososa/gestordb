@@ -114,6 +114,21 @@ class Referente
 		return $conexion->query($sentencia);
 	}
 
+	public function buscarTipoReferente($tipo)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		if(isset($tipo)){
+					$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido,personas.personaId,personas.email
+											FROM referentes
+											inner join personas
+											on referentes.personaId=personas.personaId
+											WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY personas.apellido ASC";
+		return $conexion->query($sentencia);
+		}
+	}
+
 	public function buscarRef2($tipo=NULL){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -159,6 +174,13 @@ class Referente
 															WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
 
 															break;
+							case 'ETT':
+															$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido,personas.personaId
+																					FROM referentes
+																					inner join personas
+																					on referentes.personaId=personas.personaId
+																					WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
+				 																	break;
 
 				default:
 					# code...

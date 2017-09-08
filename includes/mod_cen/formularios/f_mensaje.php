@@ -6,6 +6,37 @@
         ?>
         <div class="form-group">
           <div class="col-md-12">
+            <label>Agregar Grupo: </label>
+            <select class="form-control" id="grupo" name="grupo">
+              <option value="no">Seleccionar grupo</option>
+              <?php
+                switch ($_SESSION['tipo']) {
+                  case 'admin':
+                    echo '<option value="ETT">ETT</option>';
+                    echo '<option value="ETJ">ETJ</option>';
+                    echo '<option value="Facilitador">Facilitadores</option>';
+                    echo '<option value="coordinadorFacilitador">Coordinadores de Facilitadores</option>';
+                    break;
+                  case 'ETT':
+                  echo '<option value="ETT">ETT</option>';
+                  echo '<option value="ETJ">ETJ</option>';
+                    break;
+                  case 'ETJ':
+                      echo '<option value="ETT">ETT</option>';
+                      echo '<option value="ETJ">ETJ</option>';
+                      echo '<option value="Facilitador">Facilitadores</option>';
+                      echo '<option value="coordinadorFacilitador">Coordinadores de Facilitadores</option>';
+                      break;
+                  default:
+                    # code...
+                    break;
+                }
+               ?>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
             <label for="birds">Agregar destinatario: </label>
           </div>
           <div class="col-md-12">
@@ -73,8 +104,9 @@ if ($_GET['id']==3) {
     <div class="col-md-12">
        <label class="control-label">Para</label>
     </div>
-    <div class="col-md-12">
+    <div id='para' class="col-md-12">
       <p id='destinatario'></p>
+      <p id='grupoCompleto'></p>
     </div>
   </div>
   <?php
