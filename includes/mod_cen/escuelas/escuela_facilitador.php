@@ -173,6 +173,7 @@ $cantidad = mysqli_num_rows($resultado);
 					echo "<th>Nombre</th>";
 					echo "<th>Nivel</th>";
 					echo "<th>Localidad</th>";
+					echo "<th>Horario</th>";
 					echo "<th>Informe</th>";
 					echo "<th>Cant</th>";
 					echo "<th>Piso</th>";
@@ -206,7 +207,7 @@ while ($fila = mysqli_fetch_object($resultado))
 			$cant +=1;
 		}
 	}
-
+	echo '<td> <a class="btn btn-success" href="index.php?mod=slat&men=user&id=21">Cargar Horario</a> </td>';
 	if($cant==0){
 
 		echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
