@@ -1,5 +1,4 @@
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript" src="gmap/gmaps.js"></script>
+
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <?php
@@ -34,79 +33,11 @@ if(($_POST))
 				?>
 				</script>
 
-				<script type="text/javascript">
-				var map;
-				$(document).ready(function(){
-					map = new GMaps({
-
-					<?php
-					while ($fila = mysqli_fetch_object($resultado))
-							{
-							$cantidad++;
-							if($fila->ubicacion<>""){
-								if($primero==0){
-									$lat= substr($fila->ubicacion,0,10);
-									$lng= substr($fila->ubicacion,12,10);
-					   				 ?>
-									el: '#map',
-									lat: <?php echo $lat;?>,
-									lng:  <?php echo $lng;?>,
-									zoomControl : true,
-									zoomControlOpt: {
-										style : 'SMALL',
-										position: 'TOP_LEFT'
-									},
-									panControl : false,
-									streetViewControl : false,
-									mapTypeControl: true,
-									overviewMapControl: false
-									});
-
-									map.drawOverlay({
-									lat: <?php echo $lat;?>,
-								    lng:  <?php echo $lng;?>,
-									  content: '<div class="overlay"><?php echo $fila->numero;?></div>'
-									});
-									map.addMarker({
-										  lat: <?php echo $lat;?>,
-										  lng:  <?php echo $lng;?>,
-										  title: '<?php echo $fila->nombre."- Nº ".$fila->numero;?>',
-										  infoWindow: {
-											  content: '<p><?php echo "<b>Nº</b> ".$fila->numero;?></p>'
-									        }
-										});
-					       		<?php
-								$primero++;
-								}else{
-					       			$lat= substr($fila->ubicacion,0,10);
-					       			$lng= substr($fila->ubicacion,12,10);
-					       	?>
-				       				map.drawOverlay({
-		   							lat: <?php echo $lat;?>,
-		   						    lng:  <?php echo $lng;?>,
-		      							  content: '<div class="overlay"><?php echo $fila->numero;?></div>'
-		   							});
-		   							map.addMarker({
-		    								  lat: <?php echo $lat;?>,
-		      								  lng:  <?php echo $lng;?>,
-		       								  title: '<?php echo $fila->nombre."- Nº ".$fila->numero;?>',
-			       								  infoWindow: {
-			       									content: '<p><?php echo "<b>Nº</b> ".$fila->numero;?></p>'
-		        							        }
-									});
-
-					       <?php }
-							}
-						}
-					       ?>
-
-						});
-
-						</script>
+			
 
 			<?php
 
-			echo "<div class='row' style='margin: 5px;padding: 3px;'>Cantidad de escuelas encontradas : <b>".$cantidadEscuela."</b></div>";
+			echo "<div class='row' style='margin: 5px;padding: 3px;'>Cantidad de escuelas encontradas E.F.: <b>".$cantidadEscuela."</b></div>";
 
 				$arreglo[]=array();
 				$arreglo["0"]="0";
@@ -365,9 +296,9 @@ if(($_POST))
 				<?php
 
 			}
-			  	echo "<div class='span11'>";
-	      	echo "<div id='map'></div>";
-	      	echo "</div>";
+			  //	echo "<div class='span11'>";
+	      	//echo "<div id='map'></div>";
+	      	//echo "</div>";
 
 
 			//}
