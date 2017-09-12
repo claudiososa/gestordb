@@ -1,50 +1,102 @@
 
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <?php
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
 include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/referente.php");
-include_once("includes/mod_cen/clases/rti.php");
-include_once("includes/mod_cen/clases/informe.php");
-include_once("includes/mod_cen/clases/director.php");
+?>
+<div class="container">
 
-/**
- * Inclusión de formulario para la busqueda de Escuelas
- */
-include_once("includes/mod_cen/formularios/f_buscar_escuela.php");
+
+<table>
+	<form action='' method='POST'>
+	<tr><td>Número</td>
+		 <td>Cue</td>
+		 <td>Nombre</td>
+		 <td>Departamento</td>
+		 <td>
+			Nivel
+		 </td>
+	</tr>
+	<tr>
+		<th><input type='text' name='numero' size="4"></th>
+		<th><input type='text' name='cue'size="7"></th>
+		<th><input type='text' name='nombre'></th>
+		<th>
+		<?php
+		$departamento= new Departamentos();
+				$total=$departamento->getTotal();
+				echo "<select name='localidadId'>";
+					echo	"<option value='NULL'>Todos</option>";
+				for($val=2;$val<=$total;$val++) {
+					$departamento= new Departamentos($val);
+					$dato=$departamento->getDepartamento();
+					echo	"<option value='".$dato->getDepartamentoId()."' >".$dato->getDescripcion()."</option>";
+					}
+				echo "</select>";?>
+		</th>
+		<th>
+		 <select name="nivel">
+		 					<option value="0" label="todos">Todos</option>
+		 					<option value="Sin registrar" label="Sin registrar">Sin registrar</option>
+								<option value="Primaria Común" label="Primaria Común">Primaria Común</option>
+								<option value="Primaria Especial" label="Primaria Especial">Primaria Especial</option>
+								<option value="Secundaria Común" label="Secundaria Común">Secundaria Común</option>
+								<option value="Secundaria Técnica" label="Secundaria Técnica"  >Secundaria Técnica</option>
+								<option value="Secundaria Rural" label="Secundaria Rural">Secundaria Rural</option>
+								<option value="ISFD" label="ISFD">ISFD</option>
+								<option value="IEM" label="IEM">IEM</option>
+								<option value="Capacitación" label="Capacitación">Capacitación</option>
+
+					</select>
+			</th>
+		<th colspan='3'><input type='submit' value='Buscar'></th></tr>
+		</form>
+</table>
+</div>
+<div class="container">
+
+
+		<?php
 
 if(($_POST))
 	{
+				//var_dump($_POST);
 				$cue=$_POST["cue"];
 				$numero=$_POST["numero"];
 				$nombre=$_POST["nombre"];
 				$localidadId=$_POST["localidadId"];
+				$nivel=$_POST["nivel"];
 
-				$escuela=new Escuela(NULL,null,$cue,$numero,$nombre,null,null,$localidadId,null);
+				/*if($localidadId=="0"){
+					$locadlidadId="NULL";
+				}
+				*/
+				if($nivel=="0"){
+				$nivel=NULL;
+				}
+
+				$escuela=new Escuela(NULL,null,$cue,$numero,$nombre,null,$nivel,$localidadId,null);
+
+
 
 				$resultado = $escuela->buscar();
-				$resultado2= $escuela->buscar();
-				$cantidadEscuela=mysqli_num_rows($resultado2);
-				$primero=0;
-				$cantidad=0;
-				?>
-				</script>
-
-			
-
-			<?php
-
-			echo "<div class='row' style='margin: 5px;padding: 3px;'>Cantidad de escuelas encontradas E.F.: <b>".$cantidadEscuela."</b></div>";
-
+				echo "<table>";
+				echo "<tr>";
+			  	echo "<th>Nº</th>";
+			  	echo "<th>CUE</th>";
+			  	echo "<th>Nombre de Escuela</th>";
+			  	echo "<th>Localidad</th>";
+			  	echo "<th>Referente a Cargo</th>";
+			  	echo "<th></th>";
+			  	echo "<th>Ver</th>";
+				echo "</tr>";
 				$arreglo[]=array();
 				$arreglo["0"]="0";
 				$i=0;
 
-
-				while ($fila = mysqli_fetch_object($resultado2))
+				while ($fila = mysqli_fetch_object($resultado))
 				{
 					$repite=0;
 					$encontrado=0;
@@ -62,257 +114,183 @@ if(($_POST))
 					$i++;
 
 
-					/**
-					 * Verificar cantidad de rti de la institución
-					 * el dato se guarda en la variable cantidadRti
-					 */
-					$dato_rti=Rti::existeRtixinstitucion($fila->escuelaId);
-					$cantidadRti=mysqli_num_rows($dato_rti);
-
-					/**
-					 * Busqueda de informes de la institución actual
-					 * Cantidad encontradas en variable $cantInformes
-					 * Ultimos 3 informes almacenados en $ultimosInformes
-					 */
-						$informe = new Informe(null,$fila->escuelaId);
-						$buscar_informe = $informe->buscar();
-						$cantInformes = mysqli_num_rows($buscar_informe);
-						$ultimosInformes = $informe->buscar("3");
 
 
-						/**
-						 * Buscar referente de conectar igualdad de la de la escuela actual
-						 * guarda el dato en $datoEtt - incluye el nombre y apellido del referente
-						 */
-						$referente=new Referente($fila->referenteId);
-						$buscar_referente=$referente->buscar();
-						$datoEtt=mysqli_fetch_object($buscar_referente);
+					$crearreferente=new Referente($fila->referenteId);
+			  		$traerreferente= $crearreferente->getContacto();
+			  		$r_personaId=$traerreferente->getPersonaId();
 
-						/**
-						 * Buscar referente de PMI de la de la escuela actual
-						 * guarda el dato en $datoEtt - incluye el nombre y apellido del referente
-						 */
+			  		$crearPersona=new Persona($r_personaId);
+			  		$traerPersona=$crearPersona->getContacto();
+			  		$nombrePersona= $traerPersona->getNombre();
+			  		$apellidoPersona= $traerPersona->getApellido();
+			  		$persona=$traerPersona->getPersonaId();
 
-						if ($fila->referenteIdPmi==0){
-							$referente=new Referente("1");
-						}else{
-							$referente=new Referente($fila->referenteIdPmi);
-						}
+			  		echo "<td>".$fila->numero."</td>";
+			  		echo "<td>".$fila->cue."</td>";
+			  		echo "<td>"."<a href='index.php?mod=slat&men=admin&id=7&escuelaId=".$fila->escuelaId."'>".$fila->nombre."</a></td>";
 
-						$buscar_referente=$referente->buscar();
-						$datoAtt=mysqli_fetch_object($buscar_referente);
+			  		//echo "<td>".substr($fila->nombre,0, 40)."</td>";
 
-						/**
-						 * Buscar dato de persona de referente ETJ de la escuela actual
-						 * guarda el dato en $datoEtj
-						 */
-						$persona= new Referente($datoEtt->etjcargo);
-						$buscar_referente=$persona->buscar();
-						$datoEtj=mysqli_fetch_object($buscar_referente);
+			  		$locali=new Localidad($fila->localidadId,null);
+			  		$busca_loc= $locali->buscar();
+			  		$fila1=mysqli_fetch_object($busca_loc);
+			  		echo "<td>".$fila1->nombre."</td>";
+			  		echo "<td>";
+			  		/*if($encontrado==0){
 
-						/**
-						 * Buscar director de la institución
-						 * se guarda el objeto con datso en $datoDirector
-						 */
-						 $director = new Director(null,$fila->escuelaId);
-						 $buscar_director= $director->buscar();
-						 $datoDirector =mysqli_fetch_object($buscar_director);
+			  				echo "<div class='divSimple' id='sel_".$fila->referenteId."'>";
+			  				$ett= new Referente(null,null,"ETT");
+							$buscar_ett=$ett->buscar();
 
-						 if($datoDirector==NULL){
-							  $personaDirector= new Persona("1");
-								$buscarPersona = $personaDirector->buscar();
-								$datoDirector =mysqli_fetch_object($buscarPersona);
-						 }
+							echo "<select name='referentes' disabled>";
+							//echo	"<option value=0>Todos</option>";
+									while ($fila1 = mysqli_fetch_object($buscar_ett))
+									{
+										$persona = new Persona($fila1->personaId);
+										$persona->getContacto();
+										$nombre=$persona->getNombre();
+										$apellido=$persona->getApellido();
+										if($fila1->referenteId==$_SESSION["referenteId"])
+											echo	"<option value='$fila1->referenteId' selected >$apellido".",&nbsp;".$nombre."</option>";
+										else
+											echo	"<option value='$fila1->referenteId' >$apellido".",&nbsp;".$nombre."</option>";
+
+									}
+
+							echo "</select></div>";
+			  		}else{
+
+			  			echo "<div class='divSimple' id='sel_".$fila->referenteId.$encontrado."'>";
+
+			  			$ett= new Referente(null,null,"ETT");
+			  			$buscar_ett=$ett->buscar();
+
+			  			echo "<select name='referentes' disabled>";
+			  			//echo	"<option value=0>Todos</option>";
+			  			while ($fila1 = mysqli_fetch_object($buscar_ett))
+			  			{
+			  				$persona = new Persona($fila1->personaId);
+			  				$persona->getContacto();
+			  				$nombre=$persona->getNombre();
+			  				$apellido=$persona->getApellido();
+			  				if($fila1->referenteId==$_SESSION["referenteId"])
+			  					echo	"<option value='$fila1->referenteId' selected >$apellido".",&nbsp;".$nombre."</option>";
+			  					else
+			  					echo	"<option value='$fila1->referenteId' >$apellido".",&nbsp;".$nombre."</option>";
+
+			  			}
+
+			  			echo "</select></div>";
 
 
-						 /**
-							* [$locali description]
-							* @var Localidad
+			  		}
+
+			  		//*/
+
+
+
+			  				if($encontrado==0)
+			  					echo "<div class='divSimple' id='ref_".$fila->referenteId."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".$nombrePersona.", ".$apellidoPersona.
+					  			"</a></div>";
+					  		else
+					  			echo "<div class='divSimple' id='ref_".$fila->referenteId.$encontrado."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".$nombrePersona.", ".$apellidoPersona.
+					  			"</a></div>";
+
+					  		echo "<div class='divSimple1'>&nbsp;&nbsp;&nbsp;";
+					  		/*
+					  		if($encontrado==0)
+
+					  			echo "<input type='image' src='img/iconos/modificar_p.png'  height='22' width='22' value='".$fila->referenteId."' id='b_".$fila->referenteId."'/>
+					  	  		<input type='image' src='img/iconos/guardar.png'  height='22' width='22' value='".$fila->referenteId."' id='g_".$fila->referenteId."'/>
+					  	  	</div>";
+					  	  	else
+					  	  		echo "<input type='image' src='img/iconos/modificar_p.png'  height='22' width='22' value='".$fila->referenteId.$encontrado."' id='b_".$fila->referenteId.$encontrado."'/>
+					  	  		<input type='image' src='img/iconos/guardar.png'  height='22' width='22' value='".$fila->referenteId.$encontrado."' id='g_".$fila->referenteId.$encontrado."'/>
+					  	  		</div>";
 							*/
-						  //var_dump($fila->supervisor_id);
-							if($fila->supervisor_id==NULL){
-								$personaSupervisor= new Persona("1");
-							}else{
-								$personaSupervisor= new Persona($fila->supervisor_id);
-							}
-
-							$buscar_supervisor=$personaSupervisor->buscar();
-							$datoSupervisor=mysqli_fetch_object($buscar_supervisor);
-
-						$locali=new Localidad($fila->localidadId,null);
-						$busca_loc= $locali->buscar();
-						$fila1=mysqli_fetch_object($busca_loc);
-					echo "<div class='row' style='margin: 5px;padding: 3px;'>";
-					echo '<div class="panel-group">';
-					echo '<div class="panel panel-default">';
-					//echo '<div class="panel-heading">';
-					?>
-						<h1 class="panel-title">
-						 <a data-toggle="collapse" href="#collapse1<?php echo $fila->escuelaId ?>">
-						 	<div class="alert alert-info" role="alert" >
-								<b>
-						 		<?php
-						 		echo $fila->numero." - ".$fila->cue." - ".substr($fila->nombre,0,40);
-						 		?>
-						 		</b>
-							</div>
-						</a>
-					 </h1>
 
 
 
-				 <div id="collapse1<?php echo $fila->escuelaId ?>" class="panel-collapse collapse">
-
- 				<div class="col-md-6">
-					 <div class="alert alert-success" role="alert">Datos de la Institución</div>
-					 <?php
-					 echo "<div><b>Nº Colegio</b></div>";
-					 echo "<div>".$fila->numero."</div>";
-					 echo "<div><b>CUE</b></div>";
-					 echo "<div>".$fila->cue."</div>";
-					 echo "<div><b>Nombre</b></div>";
-					 echo "<div>".$fila->nombre."</div>";
-					 echo"<div><b>Localidad</b></div>";
-					 echo "<div>".$fila1->nombre."</div>";
-					 echo"<div><b>Dirección</b></div>";
-					 echo "<div>".$fila->domicilio."</div>";
-					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$fila->telefono."</div>";
-					 echo"<div><b>Email</b></div>";
-					 echo "<div>".$fila->email."</div>";
-					 echo "<br></div>";
-
-					 echo '<div class="col-md-6">';
-					 echo '<div class="alert alert-success" role="alert">Informes Creados</div>';
-					 echo"<div><b>Cantidad Total</b></div>";
-					 echo "<div><a href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>Ver todos los informes &nbsp(".$cantInformes.")</a></div>";
-					 echo"<div><b>Últimos Informes creados</b></div>";
-					 echo "<div>";
-					 echo "<ul class='list-group'>";
-
-					 while($ultimos = mysqli_fetch_object($ultimosInformes))
-					 {
-
-						 $date = date_create($ultimos->fechaCarga);
-						 $fecha=date_format($date, 'd-m-Y');
-						 echo "<li class='list-group-item list-group-item-success'>
-						 <div><a href='index.php?mod=slat&men=informe&id=3&informeId=".$ultimos->informeId."'>".substr($ultimos->titulo,0, 45)."...</a></div>
-						 <div>Fecha Creación: ".$fecha."</div>
-						 <div>Creado por: ".$ultimos->apellido." ".$ultimos->nombre."</div>
-						 </li>";
-						 //echo "<div><a href='index.php?mod=slat&men=informe&id=3&informeId=".$ultimos->informeId."'>".substr($ultimos->titulo,0, 30)."... -> ".$fecha."</a></div>";
-					 }
-					 echo "</ul>";
-					 echo "</div>";
-					 echo "<br>";
-					 echo"<div><b><a class='btn btn-primary' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Nuevo Informe</a></b></div>";
-					 echo "<br></div>";
-
-					 echo '<div class="col-md-6">';
-					 echo '<div class="alert alert-success" role="alert">Referente ETT Conectar Igualdad</div>';
-					 echo"<div><b>Apellido y Nombre</b></div>";
-					 echo "<div>".$datoEtt->apellido.", ".$datoEtt->nombre."</div>";
-					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoEtt->telefonoM." / ".$datoEtt->telefonoC."</div>";
-					 echo"<div><b>Correo Electrónico</b></div>";
-					 echo "<div>".$datoEtt->email."</div>";
-					 echo "<br></div>";
-
-					 $facilitador = new FacilEscuelas(null,$fila->escuelaId);
-						$buscarFacil= $facilitador->buscar();
-
-						if (mysqli_num_rows($buscarFacil)>0) {
-							echo '<div class="col-md-6">';
-							echo '<div class="alert alert-success" role="alert">Facilitador Escuela del Futuro</div>';
-							while ($filaEscuela = mysqli_fetch_object($buscarFacil))
-							{
-								echo"<div><b>Apellido y Nombre</b></div>";
-								echo "<div>".$filaEscuela->apellido.", ".$filaEscuela->nombre."</div>";
-								echo"<div><b>Teléfono</b></div>";
-								echo "<div>".$filaEscuela->telefonoM." / ".$filaEscuela->telefonoC."</div>";
-								echo"<div><b>Correo Electrónico</b></div>";
-								echo "<div>".$filaEscuela->email."</div>";
-								echo "<br>";
-							}
-							echo "</div>";
-						}
+					echo "</td>";
 
 
-					 echo '<div class="col-md-6">';
-					 echo '<div class="alert alert-success" role="alert">Referente ETJ Conectar Igualdad</div>';
-					 echo"<div><b>Apellido y Nombre</b></div>";
-					 echo "<div>".$datoEtj->apellido.", ".$datoEtj->nombre."</div>";
-					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoEtj->telefonoM." / ".$datoEtj->telefonoC."</div>";
-					 echo"<div><b>Correo Electrónico</b></div>";
-					 echo "<div>".$datoEtj->email."</div>";
-					 echo "<br></div>";
+			  		/*echo "<td>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>"."<img src='img/iconos/modificar_p.png' alt='modificar' longdesc='Modificar Datos de Persona'></a></td>";
+			  		*			  		<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".
+			  				"<img  src='img/iconos/modificar_p.png' alt='modificar' longdesc='Modificar Datos de Persona'></a></div></td>";
+			  		**/
+			  		echo "<td>"."<a href='index.php?men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>Ver más</a>"."</td>";
+			  		echo "</tr>";
+		  	  		echo "\n";
 
-					 echo '<div class="col-md-6">';
-					 echo '<div class="alert alert-success" role="alert">Referente ATT PMI (Plan Mejora Institucional)</div>';
-					 echo"<div><b>Apellido y Nombre</b></div>";
-					 echo "<div>".$datoAtt->apellido.", ".$datoAtt->nombre."</div>";
-					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoAtt->telefonoM." / ".$datoAtt->telefonoC."</div>";
-					 echo"<div><b>Correo Electrónico</b></div>";
-					 echo "<div>".$datoAtt->email."</div>";
-					 echo "<br></div>";
-
-					 echo '<div class="col-md-6">';
-					 echo '<div class="alert alert-success" role="alert">Datos de Directivo</div>';
-					 echo"<div><b>Apellido y Nombre</b></div>";
-					 echo "<div>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
-					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";
-					 echo"<div><b>Correo Electrónico</b></div>";
-					 echo "<div>".$datoDirector->email."</div>";
-					 echo "<br></div>";
-
-					 echo '<div class="col-md-6">';
-					 echo '<div class="alert alert-success" role="alert">Datos de Supervisor</div>';
-					 echo"<div><b>Apellido y Nombre</b></div>";
-					 echo "<div>".$datoSupervisor->apellido.", ".$datoSupervisor->nombre."</div>";
-					 echo"<div><b>Teléfono</b></div>";
-					 echo "<div>".$datoSupervisor->telefonoM." / ".$datoSupervisor->telefonoC."</div>";
-					 echo"<div><b>Correo Electrónico</b></div>";
-					 echo "<div>".$datoSupervisor->email."</div>";
-					 echo "<br></div>";
-
-					 echo '<div class="col-md-6">';
-					echo '<div class="alert alert-success" role="alert">Datos de RTI</div>';
-
-					echo"<div><b>Cantidad de RTI</b></div>";
-					echo "<div><a href='index.php?mod=slat&men=escuelas&id=17&escuelaId=".$fila->escuelaId."'>".$cantidadRti."</a></div>";
-					echo "<br></div>";
-
-					?>
-
-					</div>
-
-					</div>
-					</div>
-
-				 </div>
-				<?php
-
-			}
-			  //	echo "<div class='span11'>";
-	      	//echo "<div id='map'></div>";
-	      	//echo "</div>";
-
-
+	      	}
+	      	echo "</table>";
 			//}
 		}else{
 			$escuela=new Escuela(NULL);
 		}
+		//var venta= "<?php echo $_GET['registro']  ";
 ?>
+</div>
+<script type="text/javascript" src="jquery/jquery113.jsp"></script>
+			<script language="javascript">
+			$(document).ready(function(){
+				//alert("llego hasta aqui");
+				$('[id^=sel_]').hide();
+				$('[id^=g_]').hide();
+				//alert(boton);
+				 $('[id^=b_]').click(function () {
+					 $('#ref_'+$(this).val()).hide()
+
+					 $('#sel_'+$(this).val()).show();
+
+					 $('#b_'+$(this).val()).hide()
+					 $('#g_'+$(this).val()).show()
+
+					 	//var valor =$(this).val();
+						//alert(valor);
+				//		var detalle = $(this).val();
+				//		$.post("includes/mod_cen/clases/c_productos.php", { detalle: detalle, venta: venta }, function(data){
+				//			var resultado = JSON.parse(data);
+				//			var dato = resultado['estado'];
+				//			var total = resultado['total'];
+				//			$('#'+dato).remove();
+				//			$('#total').text("Total:    "+total);
+         			});
+				//});
+
+				 $('[id^=g_]').click(function () {
+					 $('#ref_'+$(this).val()).show()
+
+					 $('#sel_'+$(this).val()).hide();
+
+					 $('#b_'+$(this).val()).show()
+					 $('#g_'+$(this).val()).hide()
+
+					 	//var valor =$(this).val();
+						//alert(valor);
+				//		var detalle = $(this).val();
+				//		$.post("includes/mod_cen/clases/c_productos.php", { detalle: detalle, venta: venta }, function(data){
+				//			var resultado = JSON.parse(data);
+				//			var dato = resultado['estado'];
+				//			var total = resultado['total'];
+				//			$('#'+dato).remove();
+				//			$('#total').text("Total:    "+total);
+         			});
+
+			});
+</script>
+
 <script type="text/javascript">
-$(document).ready(function() {
-	$('#example').DataTable( {
-         "language": {
-             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-         },
-				"order": [[ 0, "asc" ]],
-     } );
-} );
+  new TableExport(document.getElementsByTagName("table"), {
+                               // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
+    formats: ['xlsx'],
+		bootstrap: true             // (String[]), filetype(s) for the export, (default: ['xls', 'csv', 'txt'])
+
+	});
+
+
+
+
+
 </script>

@@ -244,6 +244,7 @@
 									include("includes/mod_cen/escuelas/agregarEscuelas.php");
 								  break;
 						case 25:
+														
 									include("includes/mod_cen/escuelas/escuela_ver_EF.php");
 								  break;
 				}
