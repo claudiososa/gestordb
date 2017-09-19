@@ -106,7 +106,7 @@ if(($_POST))
 
 			<?php
 
-			echo "<div class='row' style='margin: 5px;padding: 3px;'>Cantidad de escuelas encontradas: <b>".$cantidadEscuela."</b></div>";
+			echo "<div class='row' style='margin: 5px;padding: 3px;'>Cantidad de escuelas encontradas : <b>".$cantidadEscuela."</b></div>";
 
 				$arreglo[]=array();
 				$arreglo["0"]="0";

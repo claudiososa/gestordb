@@ -19,7 +19,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>
           <ul class="dropdown-menu">
 
-                 <li ><a href="index.php?mod=slat&men=escuelas&id=1">Escuelas</a></li>
+                 <li ><a href="index.php?mod=slat&men=escuelas&id=25">Escuelas</a></li>
           </ul>
           
 

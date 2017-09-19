@@ -1,4 +1,4 @@
-<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+	<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -8,7 +8,7 @@ require_once("includes/mod_cen/clases/leido.php");
 // create object informe and search of last 20 informe
 $informes= new informe();
 
-$b_informe = $informes->buscar(20,'Supervisor-Nivel-Superior');
+$b_informe = $informes->buscar(20,'ReferenteEducacionFisica');
 
 ////////////////////////////////////////////////
 
