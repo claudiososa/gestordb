@@ -130,7 +130,7 @@ public function buscar($tipo=null,$limit=null)
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-		echo $sentencia.'<br><br>';
+		//echo $sentencia.'<br><br>';
 		if (isset($tipo)) {
 			switch ($tipo) {
 				case 'unico':
@@ -176,19 +176,21 @@ if (isset($_POST['escuelaIdAjaxId'])) {
 
 	$total = $curso->buscar('cantidad');
 
-	//$listaCursos = $curso->buscar('total');
+	$listaCursos = $curso->buscar('total');
 
-	/*while ($fila = mysqli_fetch_object($listaCursos)) {
-		$cur=$fila->curso;
-		$temporal=array('curso'=>'dato');
+	while ($fila = mysqli_fetch_assoc($listaCursos)) {
+		$data['data'][]=$fila;
+		//$cur=$fila->curso;
+		//$temporal=array('curso'=>'dato');
 		//,'division'=>$fila->division,
 		//								'turno'=>'tarde');
-		array_push($estado,$temporal);
-	}*/
-$temporal=array('curso'=>'dato');
+		//array_push($estado,$temporal);
+	}
+
 	//$temporal=array('curso'=>'dato');
-	array_push($estado,$temporal);
-	$json = json_encode($estado);
+	//$temporal=array('curso'=>'dato');
+	//array_push($estado,$temporal);
+	$json = json_encode($data);
 	Maestro::debbugPHP($json);
 	echo $json;	# code...
 

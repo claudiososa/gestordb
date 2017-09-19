@@ -44,14 +44,18 @@ $(document).ready(function() {
             $.ajax({
               url: 'includes/mod_cen/clases/Cursos.php',
               type: 'POST',
-              dataType: 'json',
+              dataType: 'html',
               data: {escuelaIdAjaxId:escuelaId}
             })
-          .done(function(data) {
-              console.log(data)
-              //for (let item of data) {
-                //console.log(item.curso)
-              //}
+          .done(function(lista) {
+             //alert(lista)
+              //console.log(data)
+              $('#courses').remove()
+              
+              var listado = JSON.parse(lista)
+              for (let item in listado.data) {
+                console.log(listado.data[item].curso)
+              }
             })
             .fail(function() {
               console.log("error");

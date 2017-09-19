@@ -147,12 +147,14 @@ echo "<div class='col-md-4'>";
 	</div>
 	<div class="panel-body">
 		<div class=class="col-md-12" id="courses">
+
 			<?php echo 'Total de curso:'.$cantidadCursos;
 				while ($fila = mysqli_fetch_object($cursosActuales)) {
 					echo '<br>'.$fila->curso.' '.$fila->division.
 					' Turno <b>'.Cursos::turno($fila->turno).'</b>';
 				}
 			?>
+			
 		</div>
 		<hr />
 		<button id="newCourse" class="btn btn-success" type="button" name="button">Nuevo Curso</button>
