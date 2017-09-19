@@ -1,6 +1,7 @@
 <?php
 include_once("conexion.php");
 include_once("referente.php");
+include_once("maestro.php");
 
 	$objReferentes=new Referente();
 
@@ -13,9 +14,12 @@ include_once("referente.php");
 			$referente=$fila->referenteId;
 			$nombre=$fila->nombre;
 			$email=$fila->email;
-			$nuevoElemento=array('value'=>ucwords($nombre),'id'=>$referente,'email'=>$email);
+			$nuevoElemento=array('value'=>ucwords($nombre),
+														'id'=>$referente,
+														'email'=>$email);
 			array_push($resultado,$nuevoElemento);
 		}
 		//$resultado= [];
 		$json = json_encode($resultado);
+		Maestro::debbugPHP($json);
 		echo $json;

@@ -395,7 +395,7 @@
 								include("includes/mod_cen/escuelas/escuelaDatosDirectivo.php");
 								break;
 				case 21:
-								include("includes/mod_cen/escuelas/escuelaDatosDirectivo.php");
+								include("includes/mod_cen/escuelas/escuelaHorario.php");
 								break;
 }
 

@@ -207,7 +207,7 @@ while ($fila = mysqli_fetch_object($resultado))
 			$cant +=1;
 		}
 	}
-	echo '<td> <a class="btn btn-success" href="index.php?mod=slat&men=user&id=21">Cargar Horario</a> </td>';
+	echo '<td> <a class="btn btn-success" href="index.php?mod=slat&men=user&id=21&escuelaId='.$fila->escuelaId.'">Cargar Horario</a> </td>';
 	if($cant==0){
 
 		echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>

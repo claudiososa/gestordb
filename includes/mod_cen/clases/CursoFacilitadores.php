@@ -6,46 +6,34 @@ include_once("maestro.php");
 class CursoFacilitadores
 {
 	private $cursoFacilitadoresId;
- 	private $curso;
- 	private $division;
-	private $turno;
+ 	private $cursoId;
  	private $asignaturaId;
-	private $personaId;
+	private $profesorId;
 	private $referenteId;
-	private $escuelaId;
 
 function __construct($cursoFacilitadoresId=NULL,
-										 $curso=NULL,
-										 $division=NULL,
-										 $turno=NULL,
+										 $cursoId=NULL,
 										 $asignaturaId=NULL,
-										 $personaId=NULL,
-										 $referenteId=NULL,
-										 $escuelaId=NULL
+										 $profesorId=NULL,
+										 $referenteId=NULL
 										 )
 	{
 		$this->cursoFacilitadoresId = $cursoFacilitadoresId;
- 		$this->curso = $curso;
- 		$this->division =$division;
-		$this->turno = $turno;
+ 		$this->cursoId = $cursoId;
  		$this->asignaturaId = $asignaturaId;
-		$this->personaId = $personaId;
+		$this->profesorId = $profesorId;
 		$this->referenteId = $referenteId;
-		$this->escuelaId = $escuelaId;
 	}
 
 	public function agregar()
 	{
 		$bd=Conexion2::getInstance();
-		$sentencia="INSERT INTO cursoFacilitadores (cursoFacilitadoresId,curso,division,turno,asignaturaId,personaId,referenteId,escuelaId)
+		$sentencia="INSERT INTO cursoFacilitadores (cursoFacilitadoresId,cursoId,asignaturaId,profesorId,referenteId)
 		            VALUES (NULL,
-                        '". $this->curso."',
-                        '".$this->division."',
-                        '". $this->turno."',
+                        '". $this->cursoId."',
 												'". $this->asignaturaId."',
-												'". $this->personaId."',
-												'". $this->referenteId."',
-											  '". $this->escuelaId."');
+												'". $this->profesorId."',
+												'". $this->referenteId."');
                         ";
 
 		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
@@ -72,17 +60,15 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		$bd=Conexion2::getInstance();
     $sinParam=0;
 		$sentencia="SELECT cursoFacilitadores.cursoFacilitadoresId,
-											 referentes.curso,
-											 cursoFacilitadores.division,
-											 cursoFacilitadores.turno,
+											 referentes.cursoId,
 											 cursoFacilitadores.asignaturaId,
-											 referentes.personaId,
+											 referentes.profesorId,
 											 referentes.tipo,
 											 personas.nombre,
 											 personas.apellido
 									FROM cursoFacilitadores
 									INNER JOIN referentes
-									ON referentes.curso=cursoFacilitadores.curso
+									ON referentes.cursoId=cursoFacilitadores.cursoId
 									INNER JOIN personas
 									ON personas.personaId=referentes.personaId ";
 									$sentencia.=" WHERE 1";
@@ -107,9 +93,8 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		}
 
 
-		if($this->cursoFacilitadoresId!=NULL || $this->curso!=NULL ||
-			$this->turno!=NULL || $this->asignaturaId!=NULL || $this->escuelaId!=NULL || $this->referenteId!=NULL ||
-			$this->division!=NULL)
+		if($this->cursoFacilitadoresId!=NULL || $this->cursoId!=NULL ||
+			$this->asignaturaId!=NULL || $this->referenteId!=NULL)
 		{
 			$sentencia.=" AND ";
   		if($this->cursoFacilitadoresId!=NULL)
@@ -117,19 +102,9 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
   			$sentencia.=" cursoFacilitadores.cursoFacilitadoresId = $this->cursoFacilitadoresId && ";
   		}
 
-  		if($this->curso!=NULL)
+  		if($this->cursoId!=NULL)
   		{
-  			$sentencia.=" cursoFacilitadores.curso = '$this->curso' && ";
-  		}
-
-  		if($this->division!=NULL)
-  		{
-  			$sentencia.=" cursoFacilitadores.division = '$this->division' && ";
-  		}
-
-  		if($this->turno!=NULL)
-  		{
-  			$sentencia.=" cursoFacilitadores.turno='$this->turno' && ";
+  			$sentencia.=" cursoFacilitadores.cursoId = '$this->cursoId' && ";
   		}
 
   		if($this->asignaturaId!=NULL)

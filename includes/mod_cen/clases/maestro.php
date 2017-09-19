@@ -1,5 +1,20 @@
 <?php
 class Maestro{
+
+	public static function debbugPHP($variable)
+	{
+		ob_start();
+		var_dump($variable);
+
+		$tab_debug=ob_get_contents();
+		ob_end_clean();
+
+		$fichero=fopen('test.log','w');
+		fwrite($fichero,$tab_debug);
+		fclose($fichero);
+	}
+
+
 	public function grafico($tipo,$dato,$canvasId){
 		$graficoDibujado = '<script type="text/javascript">
 		var ctx = document.getElementById("'.$canvasId.'").getContext("2d");';
