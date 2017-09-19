@@ -436,6 +436,20 @@
 								break;
 						}
 						break;
+//				 nueva entrada para prof de educacion fisica
+
+						case "edFisica":
+						switch ($id) {
+						case 1:
+								//include("includes/mod_cen/estadisticas/estadisPermer.php");
+								include("includes/mod_cen/edFisica/nuevoProfe.php");
+								break;
+						
+						}
+						break;
+
+
+
 				case "informe":
 					switch ($id) {
 						case 1:
