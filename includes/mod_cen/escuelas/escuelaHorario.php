@@ -3,16 +3,27 @@
 
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/Cursos.php");
+include_once("includes/mod_cen/clases/Profesores.php");
 include_once("includes/mod_cen/clases/referente.php");
 
 $escuela = new Escuela($_GET['escuelaId']);
 $datoEscuela = $escuela->buscarUnico();
+
+//Definicion de variables con cantidad y lista de cursos actuales para la escuela
 
 $curso = new Cursos();
 $curso->escuelaId=$_GET['escuelaId'];
 
 $cantidadCursos= $curso->buscar('cantidad');
 $cursosActuales= $curso->buscar('total');
+
+//Definicion de variables con cantidad y lista de Profesores actuales para la escuela
+
+$profesor = new Profesores();
+$profesor->escuelaId=$_GET['escuelaId'];
+
+$cantidadProfesores= $profesor->buscar('cantidad');
+$profesoresActuales= $profesor->buscar('total');
 
 
 	echo '<div class="table-responsive">';
@@ -160,70 +171,39 @@ echo "<div class='col-md-4'>";
 		<button id="newCourse" class="btn btn-success" type="button" name="button">Nuevo Curso</button>
 		<div id="formNewCourse" class="col-md-12">
 			<hr />
-			<form class="" action="" method="post">
-				<div class="form-group">
-					<label  for="courseName">Curso</label>
-					<select class="form-control" name="courseName" id="courseName">
-							<option value="0">Seleccione</option>
-							<option value="1">1°</option>
-							<option value="2">2°</option>
-							<option value="3">3°</option>
-							<option value="4">4°</option>
-							<option value="5">5°</option>
-							<option value="6">6°</option>
-							<option value="7">7°</option>
-					</select>
-				</div>
-
-				<div class="form-group">
-					<label  for="divisionName">Division</label>
-					<select class="form-control" name="divisionName" id="divisionName">
-							<option value="0">Seleccione</option>
-							<option value="1ra">1ra</option>
-							<option value="2da">2da</option>
-							<option value="3ra">3ra</option>
-							<option value="4ta">4ta</option>
-							<option value="5ta">5ta</option>
-							<option value="6ta">6ta</option>
-							<option value="7ma">7ma</option>
-							<option value="A">A</option>
-							<option value="B">B</option>
-							<option value="C">C</option>
-							<option value="D">D</option>
-							<option value="E">E</option>
-							<option value="F">F</option>
-							<option value="G">G</option>
-					</select>
-				</div>
-
-				<div class="form-group">
-					<label  for="turn">Turno</label>
-					<select class="form-control" name="turn" id="turn">
-						  <option value="0">Seleccione</option>
-							<option value="M">Mañana</option>
-							<option value="I">Intermedio</option>
-							<option value="T">Tarde</option>
-							<option value="V">Vespertino</option>
-							<option value="N">Noche</option>
-					</select>
-				</div>
-
-				<div class="form-group">
-					<label  for="quantityStudents">Cantidad Alumnos</label>
-					<br>
-					<input type="number" name="quantityStudents" min="1" max="50" value="1" id="quantityStudents">
-				</div>
-				<input type="hidden" name="escuelaId" id="escuelaId" value="<?php echo $_GET['escuelaId'] ?>">
-			 <button type="button" id="saveCourse" class="btn btn-warning" name="button">Guardar Curso</button>
-			</form>
+			<?php include('includes/mod_cen/formularios/f_HorarioNuevoCurso.php') ?>
 		</div>
-<?php
-echo "</div>";
-echo "</div>";
-echo "</div>";
-echo "</div>";
-//echo "</div>";
-?>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<?php echo "<h4>Profesores</h4>" ?>
+	</div>
+	<div class="panel-body">
+		<div class=class="col-md-12" id="teachers">
+
+			<?php echo 'Total de Profesores:'.$cantidadProfesores;
+				while ($fila = mysqli_fetch_object($cursosActuales)) {
+					echo '<p>'.$fila->curso.' '.$fila->division.
+					' Turno <b>'.Cursos::turno($fila->turno).'</b><img class="curso" id="curso'.$fila->cursoId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+				}
+			?>
+
+		</div>
+		<hr />
+		<button id="newTeacher" class="btn btn-success" type="button" name="button">Nuevo Profesor</button>
+		<div id="formNewTeacher" class="col-md-12">
+			<hr />
+			<?php include('includes/mod_cen/formularios/f_HorarioNuevoProfesor.php') ?>
+		</div>
+	</div>
+</div>
+
+
+</div>
+</div>
+
+
 <script type="text/javascript">
 $(document).ready(function()
 		{

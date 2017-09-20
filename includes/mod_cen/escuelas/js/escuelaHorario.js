@@ -2,13 +2,52 @@ $(document).ready(function() {
   let escuelaIdBorrar = $("#escuelaId").val()
 
   $('#formNewCourse').hide()
+  $('#formNewTeacher').hide()
+
   $('#newCourse').click(function (){
     $('#formNewCourse').toggle()
   })
 
+  $('#newTeacher').click(function (){
+    $('#formNewTeacher').toggle()
+  })
 
+  $('#searchTeacher').click(function (){
+    let dni = $('#teacherDni').val()
+    //alert($('#teacherDni').val())
+    $.ajax({
+      url: 'includes/mod_cen/clases/Profesores.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {dni: dni}
+    })
+    .done(function(lista) {
+      console.log("success");
+      //$('#courses').empty()
+
+      for (let item of lista) {
+
+        if (item.dni=='error') {
+          alert('NO EXISTE')
+        }else{
+          alert(item.dni+item.nombre+item.apellido)
+        }
+          console.log(item.cursoId)
+          //$('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+      }
+
+        //alert('Borrado correctamente')
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+  })
 
   $('#courses').on('click', '.curso', function(){
+
     let cursoId =$(this).attr("id").substring(5)
     $.ajax({
       url: 'includes/mod_cen/clases/Cursos.php',
@@ -19,14 +58,11 @@ $(document).ready(function() {
     .done(function(lista) {
       console.log("success");
       $('#courses').empty()
-
       for (let item of lista) {
-
           console.log(item.cursoId)
           $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
-        }
+      }
         alert('Borrado correctamente')
-
     })
     .fail(function() {
       console.log("error");
@@ -68,22 +104,14 @@ $(document).ready(function() {
               data: {escuelaIdAjaxId:escuelaId}
             })
           .done(function(lista) {
-             //alert(lista)
-              //console.log(data)
               $('#courses').empty()
-
-
-              //var listado = JSON.parse(lista)
               for (let item of lista) {
-
                 if (id==item.cursoId) {
                       console.log(item.cursoId)
                   $('#courses').prepend('<p class="alert alert-success">'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
                 }else{
                   $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
                 }
-
-                //console.log(item.curso)
               }
             })
             .fail(function() {
