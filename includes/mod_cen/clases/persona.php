@@ -1,6 +1,8 @@
 <?php
 
 include_once('conexion.php');
+include_once('conexionV2.php');
+include_once('maestro.php');
 
 class Persona
 {
@@ -40,12 +42,67 @@ class Persona
 		 	$this->ubicacion = $ubicacion;
 	}
 
+	public function update()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia="UPDATE personas SET
+		 									apellido = '$this->apellido',
+											nombre = '$this->nombre',
+											dni = '$this->dni',
+											cuil = '$this->cuil',
+											telefonoC = '$this->telefonoC',
+											telefonoM = '$this->telefonoM',
+											direccion = '$this->direccion',
+											email = '$this->email',
+											email2 = '$this->email2',
+											facebook = '$this->facebook',
+											twitter = '$this->twitter',
+											localidadId = '$this->localidadId',
+											cpostal = '$this->cpostal',
+											ubicacion = '$this->ubicacion'
+											WHERE personaId = '$this->personaId'";
+			//Maestro::debbugPHP($sentencia);								
+		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+				return $ultimoRegistroId=$bd->lastID();
+		 }else{
+					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		 }
+
+	}
+
 	public function agregar()
 	{
+		$bd=Conexion2::getInstance();
+		$sentencia="INSERT INTO personas (personaId,apellido,nombre,dni,cuil,telefonoC,
+																							telefonoM,direccion,
+																							email,email2,facebook,twitter,localidadId,cpostal,ubicacion)
+		            VALUES (NULL,
+                        '". $this->apellido."',
+												'". $this->nombre."',
+												'". $this->dni."',
+												'". $this->cuil."',
+												'". $this->telefonoC."',
+												'". $this->telefonoM."',
+												'". $this->direccion."',
+												'". $this->email."',
+												'". $this->email2."',
+												'". $this->facebook."',
+												'". $this->twitter."',
+												'". $this->localidadId."',
+												'". $this->cpostal."',
+												'". $this->ubicacion."');";
+
+		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+				return $ultimoRegistroId=$bd->lastID();
+		 }else{
+					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		 }
+
+		/*
 		$stmt = ConexionPdo::getConexion()->prepare("INSERT INTO personas (personaId,apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,
 																							email,email2,facebook,twitter,localidadId,cpostal,ubicacion)
 		VALUES (null,:apellido,:nombre,:dni,:cuil,:telefonoC,:telefonoM,:direccion,:email,:email2,:facebook,:twitter,:localidadId,:cpostal,:ubicacion)");
-
+		Maestro::debbugPHP($stmt);
 		$stmt->bindParam(":apellido",$this->apellido,PDO::PARAM_STR);
 		$stmt->bindParam(":nombre",$this->nombre,PDO::PARAM_STR);
 		$stmt->bindParam(":dni",$this->dni,PDO::PARAM_INT);
@@ -73,14 +130,15 @@ class Persona
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
-		}*/
+		}
 
 		if($stmt->execute()){
-			return "Persona se guardo con éxito";
+			//return $stmt->lastInsertId();
+			return "guardado";
 		} else{
 			return "Error al guardar";
 		}
-
+  */
 	}
 
 	public function editar()
@@ -160,7 +218,7 @@ class Persona
 
 		if($this->dni!=NULL)
 		{
-			$sentencia.=" dni LIKE '%$this->dni%' && ";
+			$sentencia.=" dni = '$this->dni' && ";
 		}
 
 		if($this->cuil!=NULL)

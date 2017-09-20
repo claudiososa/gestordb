@@ -97,7 +97,7 @@ class Escuela
 		$sentencia="INSERT INTO escuelas (escuelaId,referenteId,cue,numero,nombre,domicilio,nivel,localidadId,turnos,telefono,email,supervisor_id,ubicacion,sitio,facebook,twitter,youtube,referenteIdPmi,referenteIdSuperSec,referenteIdSuperSup,referenteIdSuperAdultos,referenteIdFacilitador)
 		VALUES (NULL,'". $this->referenteId."','". $this->cue."','". $this->numero."','".$this->nombre."','". $this->domicilio."','". $this->nivel."','". $this->localidadId."','". $this->turnos."','".$this->telefono."','".$this->email."','".$this->supervisor."','".$this->ubicacion."','".$this->sitio."','".$this->facebook."','".$this->twitter."','".$this->youtube."','".$this->referenteIdPmi."','".$this->referenteIdSuperSec."','".$this->referenteIdSuperSup."','".$this->referenteIdSuperAdultos."','".$this->referenteIdFacilitador."');";
 
-		echo $sentencia;
+		//echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			//header("Location:index.php?id=1");
 			return 1;

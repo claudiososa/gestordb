@@ -1,6 +1,7 @@
 $(document).ready(function() {
   let escuelaIdBorrar = $("#escuelaId").val()
 
+
   $('#formNewCourse').hide()
   $('#formNewTeacher').hide()
 
@@ -29,10 +30,19 @@ $(document).ready(function() {
 
         if (item.dni=='error') {
           alert('NO EXISTE')
+          $("#statusTeacher").val('create');
+          
         }else{
-          alert(item.dni+item.nombre+item.apellido)
+          $("#statusTeacher").val('update');
+          //alert(item.personaId+item.dni+item.nombre+item.apellido)
+          $('#personaId').val(item.personaId)
+          $('#nameTeacher').val(item.nombre)
+          $('#surnameTeacher').val(item.apellido)
+          $('#phoneTeacher').val(item.telefono)
+          $('#emailTeacher').val(item.email)
+          $('#cuilTeacher').val(item.cuil)
+
         }
-          console.log(item.cursoId)
           //$('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
       }
 
@@ -72,6 +82,54 @@ $(document).ready(function() {
     });
 
   })
+
+  $('#saveTeacher').click(function (){
+      alert('hola saveTeacher')
+      let boton = $("#saveTeacher").attr("id")
+
+      let action = $("#statusTeacher").val()
+      //alert(action)
+      let personaId= $("#personaId").val()
+      let cuilTeacher= $("#cuilTeacher").val()
+      let dniTeacher = $("#teacherDni").val()
+      let nameTeacher = $("#nameTeacher").val()
+      let surnameTeacher = $("#surnameTeacher").val()
+      let phoneTeacher = $("#phoneTeacher").val()
+      let emailTeacher = $("#emailTeacher").val()
+      let escuelaId = $("#escuelaId").val()
+      //alert(dni+nameTeacher+surnameTeacher+phoneTeacher+emailTeacher)
+      $.ajax({
+        url: 'includes/mod_cen/clases/Profesores.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { dniTeacher: dniTeacher,
+                nameTeacher: nameTeacher,
+                surnameTeacher:surnameTeacher,
+                phoneTeacher:phoneTeacher,
+                emailTeacher:emailTeacher,
+                escuelaId:escuelaId,
+                botonSaveTeacher:boton,
+                statusTeacher:action,
+                personaId:personaId,
+                cuilTeacher:cuilTeacher
+                }
+      })
+    .done(function(persona) {
+      //console.log("okok")
+        for (let item of persona) {
+          console.log(item.estado)
+        }
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+
+
+  })
+
 
   $('#saveCourse').click(function (){
       let guardado = 'no'

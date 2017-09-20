@@ -195,6 +195,56 @@ if (isset($_POST['escuelaIdAjaxId'])) {
 }
 */
 
+if (isset($_POST['botonSaveTeacher'])) {
+	//Maestro::debbugPHP($_POST);
+		$estado= [];
+	//if ($_POST['botonSaveTeacher']=='saveTeacher') {
+		include_once('persona.php');
+		if ($_POST['statusTeacher']=='create') {
+			$persona= new Persona(null,$_POST['surnameTeacher'],
+																$_POST['nameTeacher'],
+																$_POST['dniTeacher'],
+																$_POST['dniTeacher'],
+																$_POST['phoneTeacher'],
+																$_POST['phoneTeacher'],
+																'nada',
+																$_POST['emailTeacher'],
+																$_POST['emailTeacher'],
+																'nada',
+																'nada',
+																'0001',
+																'4400',
+																'nada'
+															);
+			$datoPersona = $persona->agregar();
+		}else{
+			$persona= new Persona($_POST['personaId'],
+																$_POST['surnameTeacher'],
+																$_POST['nameTeacher'],
+																$_POST['dniTeacher'],
+																$_POST['cuilTeacher'],
+																null,
+																$_POST['phoneTeacher'],
+																null,
+																$_POST['emailTeacher'],
+																null,
+																null,
+																null,
+																'0001',
+																'4400',
+																null
+															);
+					$datoPersona = $persona->update();
+		}
+
+		$temporal=array('estado'=>$datoPersona);
+		array_push($estado,$temporal);
+		$json = json_encode($estado);
+		//Maestro::debbugPHP($json);
+		echo $json;
+}
+
+
 if (isset($_POST['dni'])) {
 	include_once('persona.php');
 	$persona= new Persona(null,null,null,$_POST['dni']);
@@ -205,11 +255,13 @@ if (isset($_POST['dni'])) {
 		$estado= [];
 	if ($cantidadPersona > 0) {
 		$dato = mysqli_fetch_object($datoPersona);
-		$temporal=array('dni'=>$dato->dni,
+		$temporal=array('personaId'=>$dato->personaId,
+										'dni'=>$dato->dni,
 										'nombre'=>$dato->nombre,
 										'apellido'=>$dato->apellido,
 										'telefono'=>$dato->telefonoM,
-										'email'=>$dato->email
+										'email'=>$dato->email,
+										'cuil'=>$dato->cuil
 										);
 		array_push($estado,$temporal);
 	}else{
