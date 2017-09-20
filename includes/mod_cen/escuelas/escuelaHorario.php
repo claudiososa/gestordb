@@ -150,11 +150,11 @@ echo "<div class='col-md-4'>";
 
 			<?php echo 'Total de curso:'.$cantidadCursos;
 				while ($fila = mysqli_fetch_object($cursosActuales)) {
-					echo '<br>'.$fila->curso.' '.$fila->division.
-					' Turno <b>'.Cursos::turno($fila->turno).'</b>';
+					echo '<p>'.$fila->curso.' '.$fila->division.
+					' Turno <b>'.Cursos::turno($fila->turno).'</b><img id="curso'.$fila->cursoId.'" src="img/iconos/delete.png" alt="borrar"></p>';
 				}
 			?>
-			
+
 		</div>
 		<hr />
 		<button id="newCourse" class="btn btn-success" type="button" name="button">Nuevo Curso</button>

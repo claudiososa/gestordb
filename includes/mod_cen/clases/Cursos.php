@@ -48,6 +48,18 @@ function __construct($cursoId=NULL,
 		 }
 	}
 
+	public function borrar()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia = "DELETE FROM cursos WHERE cursoId=$this->cursoId";
+		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+			 	$ultimoRegistro=$bd->lastID();
+				return $ultimoRegistro;
+		 }else{
+					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		 }
+	}
+
 	/*public function editar()
 	{
 		$bd=Conexion2::getInstance();
@@ -84,7 +96,7 @@ public static function turno($valor)
 	}
 	return $turno;
 }
-public function buscar($tipo=null,$limit=null)
+public function buscar($tipo=null,$limit=null,$order=null)
 	{
 		$bd=Conexion2::getInstance();
 		$sentencia="SELECT *
@@ -125,8 +137,12 @@ public function buscar($tipo=null,$limit=null)
 
 		  // fin else
 
+		if (!isset($order)) {
+			$sentencia.="  ORDER BY cursos.curso ASC";
+		}else{
+			$sentencia.="  ORDER BY cursos.curso ".$order;
+		}
 
-		$sentencia.="  ORDER BY cursos.cursoId DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
@@ -169,6 +185,32 @@ public function buscar($tipo=null,$limit=null)
 	}
 
 }
+
+if (isset($_POST['cursoId'])) {
+	$estado= [];
+	$curso= new Cursos($_POST['cursoId']);
+	$borrar = $curso->borrar();
+
+	$curso2= new Cursos();
+	$curso2->escuelaId=$_POST['escuelaIdBorrar'];
+
+	$total = $curso2->buscar('cantidad');
+
+	$listaCursos = $curso2->buscar('total',null,'DESC');
+
+	while ($fila = mysqli_fetch_object($listaCursos)) {
+		$temporal=array('cursoId'=>$fila->cursoId,
+										'curso'=>$fila->curso,
+										'division'=>$fila->division,
+										'turno'=>Cursos::turno($fila->turno));
+		array_push($estado,$temporal);
+	}
+	$json = json_encode($estado);
+	//Maestro::debbugPHP($json);
+	echo $json;
+
+}
+
 if (isset($_POST['escuelaIdAjaxId'])) {
 	$estado= [];
 	$curso= new Cursos();
@@ -176,21 +218,24 @@ if (isset($_POST['escuelaIdAjaxId'])) {
 
 	$total = $curso->buscar('cantidad');
 
-	$listaCursos = $curso->buscar('total');
+	$listaCursos = $curso->buscar('total',null,'DESC');
 
-	while ($fila = mysqli_fetch_assoc($listaCursos)) {
-		$data['data'][]=$fila;
+	//while ($fila = mysqli_fetch_assoc($listaCursos)) {
+	while ($fila = mysqli_fetch_object($listaCursos)) {
+		//$data['data'][]=$fila;
 		//$cur=$fila->curso;
-		//$temporal=array('curso'=>'dato');
-		//,'division'=>$fila->division,
-		//								'turno'=>'tarde');
-		//array_push($estado,$temporal);
+		$temporal=array('cursoId'=>$fila->cursoId,
+										'curso'=>$fila->curso,
+										'division'=>$fila->division,
+										'turno'=>Cursos::turno($fila->turno));
+		array_push($estado,$temporal);
 	}
 
 	//$temporal=array('curso'=>'dato');
 	//$temporal=array('curso'=>'dato');
 	//array_push($estado,$temporal);
-	$json = json_encode($data);
+	//asort($estado);
+	$json = json_encode($estado);
 	Maestro::debbugPHP($json);
 	echo $json;	# code...
 
@@ -210,11 +255,13 @@ if (isset($_POST['courseName'])) {
 	//$datoCurso=2;
 		$estado= [];
 	if ($datoCurso > 0) {
-		$temporal=array('guardado'=>'ok');
+		$temporal=array('guardado'=>'ok',
+											'id'=>$datoCurso);
 		array_push($estado,$temporal);
 
 	}else{
-		$temporal=array('guardado'=>'error');
+		$temporal=array('guardado'=>'error',
+										'id'=>$datoCurso);
 		array_push($estado,$temporal);
 	}
 	$json = json_encode($estado);
