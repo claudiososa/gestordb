@@ -7,8 +7,8 @@ $(document).ready(function() {
   })
 
 
-  $('img[id ^= curso]').on('click', function(){
 
+  $('#courses').on('click', '.curso', function(){
     let cursoId =$(this).attr("id").substring(5)
     $.ajax({
       url: 'includes/mod_cen/clases/Cursos.php',
@@ -23,44 +23,9 @@ $(document).ready(function() {
       for (let item of lista) {
 
           console.log(item.cursoId)
-          $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+          $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
         }
         alert('Borrado correctamente')
-        ////////////////////////////////////
-        ////////////////////////////////////
-        $('img[id ^= curso]').click(function(){
-
-          let cursoId =$(this).attr("id").substring(5)
-          $.ajax({
-            url: 'includes/mod_cen/clases/Cursos.php',
-            type: 'POST',
-            dataType: 'json',
-            data: {cursoId: cursoId,escuelaIdBorrar:escuelaIdBorrar}
-          })
-          .done(function(lista) {
-
-            console.log("success");
-            $('#courses').empty()
-
-            for (let item of lista) {
-
-                console.log(item.cursoId)
-                $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
-              }
-              alert('Borrado correctamente')
-          })
-          .fail(function() {
-            console.log("error");
-          })
-          .always(function() {
-            console.log("complete");
-          });
-
-        })
-
-        ///////////////////////////////////
-        //////////////////////////////////
-
 
     })
     .fail(function() {
@@ -113,9 +78,9 @@ $(document).ready(function() {
 
                 if (id==item.cursoId) {
                       console.log(item.cursoId)
-                  $('#courses').prepend('<p class="alert alert-success">'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+                  $('#courses').prepend('<p class="alert alert-success">'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
                 }else{
-                  $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+                  $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
                 }
 
                 //console.log(item.curso)
