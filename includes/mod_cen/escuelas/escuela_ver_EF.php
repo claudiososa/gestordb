@@ -101,35 +101,6 @@ include_once("includes/mod_cen/clases/informe.php");
 
 </div>
 
-<!--estructura basica-->
-
-
-
-<div class="container">
-	<div class="panel panel-primary">
-		<div class="panel-heading">escuelas</div>
-		<div class="panel-body">
-	<div class="table-responsive">
-		<table class="table table-hover table-striped table-condensed">
-<?php 		echo "<tr>";
-		echo "<th>Nº</th>";
-		echo "<th>CUE</th>";
-		echo "<th>Nombre de Escuela</th>";
-		echo "<th>Localidad</th>";
-	//	echo "<th>Referente a Cargo</th>";
-		//echo "<th></th>";
-	//	echo "<th>Ver</th>";
-	echo "</tr>";
- ?>
-		</table>
-
-	</div>
-		</div>
-
-	</div>
-
-</div>
-<!------------------------------------------------------>
 <div class="container">
 
 
@@ -157,14 +128,22 @@ if(($_POST))
 
 
 				$resultado = $escuela->buscar();
-				echo "<div class='panel panel-primary'>";
-				echo "<div class='panel-heading'></div>";
-				echo "<table>";
-				echo "<tr>";
+
+					echo "<div class='panel panel-primary'>";
+					echo "<div class ='panel-heading'>Informacion Escuelas</div>";
+					echo "<div class='panel-body'>";
+					echo "<div class='table-responsive'>";
+					echo	"<table class='table table-hover table-striped table-condensed'>";
+				  echo "<tr class='info'>";
 			  	echo "<th>Nº</th>";
 			  	echo "<th>CUE</th>";
 			  	echo "<th>Nombre de Escuela</th>";
+					echo "<th>Nivel</th>";
 			  	echo "<th>Localidad</th>";
+					echo "<th>Informe</th>";
+					echo "<th>Cant</th>";
+					echo "<th>ProfeE.F</th>";
+					echo "</th>";
 			  //	echo "<th>Referente a Cargo</th>";
 			  	//echo "<th></th>";
 			  //	echo "<th>Ver</th>";
@@ -209,11 +188,32 @@ if(($_POST))
 			  		echo "<td>"."<a href='index.php?mod=slat&men=admin&id=7&escuelaId=".$fila->escuelaId."'>".$fila->nombre."</a></td>";
 
 			  		//echo "<td>".substr($fila->nombre,0, 40)."</td>";
-
+            echo "<td>".$fila->nivel."</td>";
 			  		$locali=new Localidad($fila->localidadId,null);
 			  		$busca_loc= $locali->buscar();
 			  		$fila1=mysqli_fetch_object($busca_loc);
 			  		echo "<td>".$fila1->nombre."</td>";
+
+
+						$informe = new Informe(null,$fila->escuelaId);
+
+						$buscar_informe = $informe->buscar();
+
+						$cant = mysqli_num_rows($buscar_informe);
+
+						if($cant==0){
+
+							echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
+										 Crear</a>&nbsp&nbsp</td><td><a class='btn btn-danger' href='#'>0</a></td>";
+
+						}else{
+						 	echo "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
+										 Crear</a></td>";
+							echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>$cant</a></td>";
+						}
+
+
+						echo "<td><a class='btn btn-primary' role='button' href='index.php?mod=slat&men=edFisica&id=1&escuelaId=".$fila->escuelaId."'>5</a></td>";
 			  	/*	echo "<td>";
 			  				if($encontrado==0)
 			  					echo "<div class='divSimple' id='ref_".$fila->referenteId."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".$nombrePersona.", ".$apellidoPersona.
@@ -233,7 +233,10 @@ if(($_POST))
 		  	  		echo "\n";
 
 	      	}
+
 	      	echo "</table>";
+					echo "</div>";
+					echo "</div>";
 					echo "</div>";
 			//}
 		}else{

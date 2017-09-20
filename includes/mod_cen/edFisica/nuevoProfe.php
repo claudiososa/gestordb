@@ -1,7 +1,22 @@
+<script type="text/javascript">
+var person = prompt("Please enter your name", "Harry Potter");
+
+if (person == null || person == "") {
+    txt = "User cancelled the prompt.";
+} else {
+    txt = "Hello " + person + "! How are you today?";
+}
+
+
+</script>
 <?php
 include_once('includes/mod_cen/clases/conexionv2.php');
 include_once('includes/mod_cen/clases/rti.php');
 include_once('includes/mod_cen/clases/rtixescuela.php');
+
+$variablePHP = "<script> document.write(person) </script>";
+echo "variablePHP = ".$variablePHP;
+
 if($_POST){
 	/*Creamos la instancia del objeto. Ya estamos conectados*/
 	$bd=Conexion2::getInstance();
