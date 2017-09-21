@@ -72,17 +72,17 @@ public function buscar($tipo=null,$limit=null,$order=null)
 			$sentencia.=" AND ";
   		if($this->profesorId!=NULL)
   		{
-  			$sentencia.=" personaIds.profesorId = $this->profesorId && ";
+  			$sentencia.=" profesores.profesorId = $this->profesorId && ";
   		}
 
   		if($this->personaId!=NULL)
   		{
-  			$sentencia.=" personaId = '$this->personaId' && ";
+  			$sentencia.=" profesores.personaId = $this->personaId && ";
   		}
 
   		if($this->escuelaId!=NULL)
   		{
-  			$sentencia.=" escuelaId='$this->escuelaId' && ";
+  			$sentencia.=" profesores.escuelaId=$this->escuelaId && ";
   		}
 
 			$sentencia=substr($sentencia,0,strlen($sentencia)-3);
@@ -100,6 +100,9 @@ public function buscar($tipo=null,$limit=null,$order=null)
 			$sentencia.=" LIMIT ".$limit;
 		}
 		//echo $sentencia.'<br><br>';
+		//Maestro::debbugPHP($sentencia);
+
+		//Maestro::debbugPHP($sentencia);
 		if (isset($tipo)) {
 			switch ($tipo) {
 				case 'unico':
@@ -138,24 +141,27 @@ public function buscar($tipo=null,$limit=null,$order=null)
 	}
 
 }
-/*
+
+/**
+ * AL SELECCIONAR EL BOTON X DE UN PROFESOR DETERMINADO
+ */
 if (isset($_POST['profesorId'])) {
 	$estado= [];
-	$personaId= new Cursos($_POST['profesorId']);
-	$borrar = $personaId->borrar();
+	$profesor= new Profesores($_POST['profesorId']);
+	$borrar = $profesor->borrar();
 
-	$personaId2= new Cursos();
-	$personaId2->escuelaId=$_POST['escuelaIdBorrar'];
+	$profesor2= new Profesores();
+	$profesor2->escuelaId=$_POST['escuelaIdBorrar'];
 
-	$total = $personaId2->buscar('cantidad');
+	$total = $profesor2->buscar('cantidad');
 
-	$listaCursos = $personaId2->buscar('total',null,'DESC');
+	$listaProfesores = $profesor2->buscar('total',null,'DESC');
 
-	while ($fila = mysqli_fetch_object($listaCursos)) {
+	while ($fila = mysqli_fetch_object($listaProfesores)) {
 		$temporal=array('profesorId'=>$fila->profesorId,
-										'personaId'=>$fila->personaId,
-										'escuelaId'=>$fila->escuelaId,
-										'turno'=>Cursos::turno($fila->turno));
+										'nombre'=>$fila->nombre,
+										'apellido'=>$fila->apellido);
+										//'turno'=>Cursos::turno($fila->turno));
 		array_push($estado,$temporal);
 	}
 	$json = json_encode($estado);
@@ -164,37 +170,10 @@ if (isset($_POST['profesorId'])) {
 
 }
 
-if (isset($_POST['escuelaIdAjaxId'])) {
-	$estado= [];
-	$personaId= new Cursos();
-	$personaId->escuelaId=$_POST['escuelaIdAjaxId'];
 
-	$total = $personaId->buscar('cantidad');
-
-	$listaCursos = $personaId->buscar('total',null,'DESC');
-
-	//while ($fila = mysqli_fetch_assoc($listaCursos)) {
-	while ($fila = mysqli_fetch_object($listaCursos)) {
-		//$data['data'][]=$fila;
-		//$cur=$fila->personaId;
-		$temporal=array('profesorId'=>$fila->profesorId,
-										'personaId'=>$fila->personaId,
-										'escuelaId'=>$fila->escuelaId,
-										'turno'=>Cursos::turno($fila->turno));
-		array_push($estado,$temporal);
-	}
-
-	//$temporal=array('personaId'=>'dato');
-	//$temporal=array('personaId'=>'dato');
-	//array_push($estado,$temporal);
-	//asort($estado);
-	$json = json_encode($estado);
-	Maestro::debbugPHP($json);
-	echo $json;	# code...
-
-}
-*/
-
+/**
+ *
+ */
 if (isset($_POST['botonSaveTeacher'])) {
 	//Maestro::debbugPHP($_POST);
 		$estado= [];
@@ -217,6 +196,20 @@ if (isset($_POST['botonSaveTeacher'])) {
 																'nada'
 															);
 			$datoPersona = $persona->agregar();
+			$profesor = new Profesores(null,$datoPersona,$_POST['escuelaId']);
+			$datoProfesor = $profesor->agregar();
+
+			$profesor2 = new Profesores(null,null,$_POST['escuelaId']);
+
+			$buscarProfesor=$profesor2->buscar();
+
+			while ($fila = mysqli_fetch_object($buscarProfesor)) {
+				$temporal=array('profesorId'=>$fila->profesorId,
+												'nombre'=>$fila->nombre,
+												'apellido'=>$fila->apellido);
+				array_push($estado,$temporal);
+			}
+
 		}else{
 			$persona= new Persona($_POST['personaId'],
 																$_POST['surnameTeacher'],
@@ -235,15 +228,31 @@ if (isset($_POST['botonSaveTeacher'])) {
 																null
 															);
 					$datoPersona = $persona->update();
+
+					$profesor = new Profesores(null,$_POST['personaId'],$_POST['escuelaId']);
+					$datoProfesor = $profesor->agregar();
+
+					$profesor2 = new Profesores(null,null,$_POST['escuelaId']);
+
+					$buscarProfesor=$profesor2->buscar();
+
+					while ($fila = mysqli_fetch_object($buscarProfesor)) {
+						$temporal=array('profesorId'=>$fila->profesorId,
+														'nombre'=>$fila->nombre,
+														'apellido'=>$fila->apellido);
+						array_push($estado,$temporal);
+					}
+
 		}
 
-		$temporal=array('estado'=>$datoPersona);
-		array_push($estado,$temporal);
 		$json = json_encode($estado);
 		//Maestro::debbugPHP($json);
 		echo $json;
 }
 
+/**
+ * AL PRESIONAR BUSCAR PROFESOR
+ */
 
 if (isset($_POST['dni'])) {
 	include_once('persona.php');
@@ -251,19 +260,33 @@ if (isset($_POST['dni'])) {
 	$datoPersona = $persona->buscar();
 	$cantidadPersona=mysqli_num_rows($datoPersona);
 
+
 	//$datoCurso=2;
 		$estado= [];
 	if ($cantidadPersona > 0) {
+
 		$dato = mysqli_fetch_object($datoPersona);
-		$temporal=array('personaId'=>$dato->personaId,
-										'dni'=>$dato->dni,
-										'nombre'=>$dato->nombre,
-										'apellido'=>$dato->apellido,
-										'telefono'=>$dato->telefonoM,
-										'email'=>$dato->email,
-										'cuil'=>$dato->cuil
-										);
-		array_push($estado,$temporal);
+
+		$profesor = new Profesores(null,$dato->personaId,$_POST['escuelaId']);
+
+		$datoProfesor = $profesor->buscar('cantidad');
+		//Maestro::debbugPHP($datoProfesor);
+		if ($datoProfesor == 0 ) {
+			$temporal=array('personaId'=>$dato->personaId,
+											'dni'=>$dato->dni,
+											'nombre'=>$dato->nombre,
+											'apellido'=>$dato->apellido,
+											'telefono'=>$dato->telefonoM,
+											'email'=>$dato->email,
+											'cuil'=>$dato->cuil
+											);
+			array_push($estado,$temporal);
+		}else{
+			$temporal=array('dni'=>'existe');
+			array_push($estado,$temporal);
+		}
+
+
 	}else{
 		$temporal=array('dni'=>'error');
 		array_push($estado,$temporal);

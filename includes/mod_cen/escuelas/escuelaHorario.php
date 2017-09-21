@@ -181,21 +181,18 @@ echo "<div class='col-md-4'>";
 	</div>
 	<div class="panel-body">
 		<div class=class="col-md-12" id="teachers">
-
 			<?php echo 'Total de Profesores:'.$cantidadProfesores;
-				while ($fila = mysqli_fetch_object($cursosActuales)) {
-					echo '<p>'.$fila->curso.' '.$fila->division.
-					' Turno <b>'.Cursos::turno($fila->turno).'</b><img class="curso" id="curso'.$fila->cursoId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+				while ($fila = mysqli_fetch_object($profesoresActuales)) {
+					echo '<p>'.$fila->nombre.' '.$fila->apellido.'<img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
 				}
 			?>
 
 		</div>
 		<hr />
 		<button id="newTeacher" class="btn btn-success" type="button" name="button">Nuevo Profesor</button>
-		<div id="formNewTeacher" class="col-md-12">
-			<hr />
+
 			<?php include('includes/mod_cen/formularios/f_HorarioNuevoProfesor.php') ?>
-		</div>
+
 	</div>
 </div>
 

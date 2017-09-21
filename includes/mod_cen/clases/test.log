@@ -1,1 +1,1 @@
-string(160) "[{"personaId":"0022","dni":"26899902","nombre":"CLAUDIO ARIEL","apellido":"SOSAaa","telefono":"4444444","email":"vicomser.claudio@gmail.com","cuil":"26899902"}]"
+string(326) "[{"cursoId":"37","curso":"6","division":"7ma","turno":"Intermedio"},{"cursoId":"36","curso":"5","division":"2da","turno":"Intermedio"},{"cursoId":"33","curso":"3","division":"2da","turno":"Intermedio"},{"cursoId":"34","curso":"3","division":"2da","turno":"Tarde"},{"cursoId":"35","curso":"2","division":"2da","turno":"Tarde"}]"
