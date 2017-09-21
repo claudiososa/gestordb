@@ -1,5 +1,6 @@
 <script src="includes/mod_cen/escuelas/js/escuelaHorario.js" type="text/javascript"></script>
 <script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <?php
 
 include_once("includes/mod_cen/clases/escuela.php");
@@ -17,6 +18,7 @@ $curso->escuelaId=$_GET['escuelaId'];
 
 $cantidadCursos= $curso->buscar('cantidad');
 $cursosActuales= $curso->buscar('total');
+$cursosActuales2= $curso->buscar('total');
 
 //Definicion de variables con cantidad y lista de Profesores actuales para la escuela
 
@@ -25,7 +27,7 @@ $profesor->escuelaId=$_GET['escuelaId'];
 
 $cantidadProfesores= $profesor->buscar('cantidad');
 $profesoresActuales= $profesor->buscar('total');
-
+$profesoresActuales2= $profesor->buscar('total');
 
 	echo '<div class="table-responsive">';
 	//echo '<div class="container">';
@@ -43,8 +45,8 @@ $profesoresActuales= $profesor->buscar('total');
 				<div class="panel-heading">
 					<?php echo "<h4>Lunes</h4>" ?>
 				</div>
-				<div class="panel-body">
-					<button class="btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
+				<div class="panel-body" id='formHorarioLunes'>
+					<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
 				</div>
 				</div>
 				<div class="panel panel-primary">
@@ -53,6 +55,9 @@ $profesoresActuales= $profesor->buscar('total');
 					</div>
 					<div class="panel-body">
 						<button class="btn btn-success" type="agregarHora" name="button" id="horaMartes">Agregar Hora</button>
+						<div class="formHorarioNuevaHora" id='formHorarioMartes'>
+							<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
+						</div>
 					</div>
 					</div>
 					<div class="panel panel-primary">
@@ -61,6 +66,9 @@ $profesoresActuales= $profesor->buscar('total');
 						</div>
 						<div class="panel-body">
 							<button class="btn btn-success" type="agregarHora" name="button" id="horaMiercoles">Agregar Hora</button>
+							<div class="formHorarioNuevaHora" id='formHorarioMiercoles'>
+								<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
+							</div>
 						</div>
 						</div>
 						<div class="panel panel-primary">
@@ -69,6 +77,9 @@ $profesoresActuales= $profesor->buscar('total');
 							</div>
 							<div class="panel-body">
 								<button class="btn btn-success" type="agregarHora" name="button" id="horaJueves">Agregar Hora</button>
+								<div class="formHorarioNuevaHora" id='formHorarioJueves'>
+									<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
+								</div>
 							</div>
 							</div>
 							<div class="panel panel-primary">
@@ -77,6 +88,9 @@ $profesoresActuales= $profesor->buscar('total');
 								</div>
 								<div class="panel-body">
 									<button class="btn btn-success" type="agregarHora" name="button" id="horaViernes">Agregar Hora</button>
+									<div class="formHorarioNuevaHora" id='formHorarioViernes'>
+										<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
+									</div>
 								</div>
 								</div>
 
@@ -125,37 +139,10 @@ $profesoresActuales= $profesor->buscar('total');
 		</div>
 		<hr />
 		<button id="newTeacher" class="btn btn-success" type="button" name="button">Nuevo Profesor</button>
-
-			<?php include('includes/mod_cen/formularios/f_HorarioNuevoProfesor.php') ?>
+					<?php include('includes/mod_cen/formularios/f_HorarioNuevoProfesor.php') ?>
 
 	</div>
 </div>
-
-
 </div>
 </div>
-
-
-<script type="text/javascript">
-$(document).ready(function()
-		{
-				//$("#myTable").tablesorter();
-				$("#myTable").tablesorter( {sortList: [[0,1]]} );
-				//$("#myTable1").tablesorter();
-				$("#myTable1").tablesorter( {sortList: [[0,1]]} );
-		}
-);
-</script>
-<script type="text/javascript">
-$("table").tableExport( {
-
-  formats: ['xls',],
-	ignoreCols: 0,
-	bootstrap: true,
-	});
-
-
-
-
-
-</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
