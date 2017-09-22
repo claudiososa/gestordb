@@ -45,8 +45,13 @@ $profesoresActuales2= $profesor->buscar('total');
 				<div class="panel-heading">
 					<?php echo "<h4>Lunes</h4>" ?>
 				</div>
-				<div class="panel-body" id='formHorarioLunes'>
-					<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
+				<div class="panel-body">
+					<div class="formHorarioNuevaHora" id='divHorarioLunes'>
+						<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
+						<form class="divHorarioLunes" action="" method="post">
+							
+						</form>
+					</div>
 				</div>
 				</div>
 				<div class="panel panel-primary">
@@ -54,8 +59,11 @@ $profesoresActuales2= $profesor->buscar('total');
 						<?php echo "<h4>Martes</h4>" ?>
 					</div>
 					<div class="panel-body">
-						<button class="btn btn-success" type="agregarHora" name="button" id="horaMartes">Agregar Hora</button>
-						<div class="formHorarioNuevaHora" id='formHorarioMartes'>
+						<div class="formHorarioNuevaHora" id='divHorarioMartes'>
+							<button class="btn btn-success" type="agregarHora" name="button" id="horaMartes">Agregar Hora</button>
+							<form class="formHorarioMartes" action="" method="post">
+
+							</form>
 							<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
 						</div>
 					</div>
@@ -65,9 +73,12 @@ $profesoresActuales2= $profesor->buscar('total');
 							<?php echo "<h4>Miercoles</h4>" ?>
 						</div>
 						<div class="panel-body">
+							<div class="formHorarioNuevaHora" id='divHorarioMiercoles'>
 							<button class="btn btn-success" type="agregarHora" name="button" id="horaMiercoles">Agregar Hora</button>
-							<div class="formHorarioNuevaHora" id='formHorarioMiercoles'>
-								<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
+
+								<form class="formHorarioMiercoles" action="" method="post">
+
+								</form>
 							</div>
 						</div>
 						</div>
@@ -76,9 +87,11 @@ $profesoresActuales2= $profesor->buscar('total');
 								<?php echo "<h4>Jueves</h4>" ?>
 							</div>
 							<div class="panel-body">
-								<button class="btn btn-success" type="agregarHora" name="button" id="horaJueves">Agregar Hora</button>
-								<div class="formHorarioNuevaHora" id='formHorarioJueves'>
-									<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
+								<div class="formHorarioNuevaHora" id='divHorarioJueves'>
+									<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaJueves">Agregar Hora</button>
+									<form class="formHorarioJueves" action="" method="post">
+
+									</form>
 								</div>
 							</div>
 							</div>
@@ -87,9 +100,11 @@ $profesoresActuales2= $profesor->buscar('total');
 									<?php echo "<h4>Viernes</h4>" ?>
 								</div>
 								<div class="panel-body">
-									<button class="btn btn-success" type="agregarHora" name="button" id="horaViernes">Agregar Hora</button>
-									<div class="formHorarioNuevaHora" id='formHorarioViernes'>
-										<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
+									<div class="formHorarioNuevaHora" id='divHorarioViernes'>
+										<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaViernes">Agregar Hora</button>
+										<form class="formHorarioViernes" action="" method="post">
+
+										</form>
 									</div>
 								</div>
 								</div>

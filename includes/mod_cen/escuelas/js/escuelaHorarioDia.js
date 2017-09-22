@@ -1,7 +1,9 @@
 $(document).ready(function() {
 
   $('.agregarHora').click(function(){
-    $($(this).parent()).append('aaaa')
+    //$($(this).parent().siblings('form')).append('aaaa')
+    $($(this).parent().siblings('form')).html('<input type="text" name="" value="holaa">')
+    //$($(this).parent().siblings('form')).append('aaa')
   })
 
   $('.timepicker').timepicker({
