@@ -1,5 +1,5 @@
 <script type="text/javascript">
-var person = prompt("Please enter your name", "Harry Potter");
+var person = prompt("Please enter your name", "");
 
 if (person == null || person == "") {
     txt = "User cancelled the prompt.";
@@ -9,184 +9,425 @@ if (person == null || person == "") {
 
 
 </script>
+
 <?php
-include_once('includes/mod_cen/clases/conexionv2.php');
-include_once('includes/mod_cen/clases/rti.php');
-include_once('includes/mod_cen/clases/rtixescuela.php');
+ //include_once('clases/persona.php');
+ //include_once('includes/mod_cen/clases/escuela.php');
 
-$variablePHP = "<script> document.write(person) </script>";
-echo "variablePHP = ".$variablePHP;
+    $script_dni = "<script>document.write(person)</script>";
+    $numDni=echo $script_dni;
+    //$script_dni = (int)$script_dni;
+    var_dump($numDni);
+    //echo $numDni+1;
+   // $numDni=$numDni+1;
+    //echo $numDni;
+   //$prueb=27631704;
 
-if($_POST){
-	/*Creamos la instancia del objeto. Ya estamos conectados*/
-	$bd=Conexion2::getInstance();
-	if(trim($_POST['txtidpersona'])!=""){//Si existe la persona en la base
-		$sentencia="UPDATE personas SET apellido ='".strtoupper($_POST['txtapellido'])."',
-																					nombre ='".strtoupper($_POST['txtnombre'])."',
-																					dni= ".$_POST['txtdni'].",
-																					cuil=".$_POST['txtcuit'].",
-																					telefonoM = '".$_POST['txttelefono2']."',
-																					direccion= '".strtoupper($_POST['txtdomicilio'])."',
-																					email = '".$_POST['txtemail1']."',
-																					facebook = '".$_POST['txtfacebook']."',
-																					twitter = '".$_POST['txttwitter']."',
-																					localidadId = ".round($_POST['cblocalidad'],0).",
-																					cpostal = '".$_POST['txtcp']."'
-																					WHERE personaId =".$_POST['txtidpersona'];
-		$resultado=$bd->ejecutar($sentencia);
-    $idPersona=$_POST['txtidpersona'];
-    $rti = new Rti (null,$idPersona,null,null,null);
-    $encontrarRti=$rti->buscar();
-    if(mysqli_num_rows($encontrarRti)>0){
-      $datoRti= mysqli_fetch_object($encontrarRti);
-      //echo $datoRti->rtiId;
-      $rtixescuela = new rtixescuela ($_POST['txtidesacuela'],$datoRti->rtiId,null,null,null);
-      $encontrarRtixescuela=$rtixescuela->buscar();
-      if(mysqli_num_rows($encontrarRtixescuela)>0){
-        $datoRtixescuela= mysqli_fetch_object($encontrarRtixescuela);
-        //echo $datoRtixescuela->rtiId;
+   // $objpersona1= new Persona(NULL,NULL,NULL,$prueb);
+   // $dato_persona1=$objpersona1->buscar();
+    //$persona1=mysqli_fetch_object($dato_persona1);
 
-        $variablephp="index.php?mod=slat&men=referentes&id=8&escuelaId=".$_POST['txtidesacuela'];
-        ?>
-        <!--Redirecciono por javascrit-->
-        <script type="text/javascript">
-            alert('Este rti ya existe cargado para esta escuela, imposible crear nuevamente');
-            var variablejs = "<?php echo $variablephp; ?>" ;
-            function redireccion(){window.location=variablejs;}
-            setTimeout ("redireccion()",0);
-                </script>
-        <?php
-       //  $rtixescuela = new rtixescuela ($_POST['txtidesacuela'],$datoRti->rtiId,$_POST['cbestado'],null,$_POST['estado']);
-      //  $editarDato = $rtixescuela->editar();
-      //  echo $editarDato;
-      }else{
-        $rtixescuela = new rtixescuela ($_POST['txtidesacuela'],$datoRti->rtiId,$_POST['cbestado'],null,$_POST['estado']);
-        $editarDato = $rtixescuela->agregar();
-        if($editarDato==1){
-        $variablephp="index.php?mod=slat&men=referentes&id=8&escuelaId=".$_POST['txtidesacuela'];
-        ?>
-        <!--Redirecciono por javascrit-->
-        <script type="text/javascript">
-            alert('Se Agrego el nuevo RTI');
-            var variablejs = "<?php echo $variablephp; ?>" ;
-            function redireccion(){window.location=variablejs;}
-            setTimeout ("redireccion()",0);
-                </script>
-        <?php
-        }
-      //  echo $editarDato;
-
-        //echo 'no se encuentra rtiId en rtixescuela';
-      }
-    }else{
-      $rti = new Rti (null,$idPersona);
-      $agregarRti=$rti->agregar();
-
-      $rtixescuela = new rtixescuela ($_POST['txtidesacuela'],$agregarRti,$_POST['cbestado'],null,$_POST['estado']);
-      $editarDato = $rtixescuela->agregar();
-      if($editarDato==1){
-      $variablephp="index.php?mod=slat&men=referentes&id=8&escuelaId=".$_POST['txtidesacuela'];
-      ?>
-      <!--Redirecciono por javascrit-->
-      <script type="text/javascript">
-          alert('Se Agrego el nuevo RTI');
-          var variablejs = "<?php echo $variablephp; ?>" ;
-          function redireccion(){window.location=variablejs;}
-          setTimeout ("redireccion()",0);
-              </script>
-      <?php
-
-
-    }
-}
+    //var_dump($persona1);
 
 
 
-
-		//var_dump($resultado);
-	}
-	else//No existe la persona en la base de datos
-	{
-		$grabarpersona="INSERT INTO personas (personaId,apellido,nombre,dni,cuil,telefonoC,telefonoM,direccion,email,email2,facebook,twitter,localidadId,cpostal)
-		VALUES (NULL,'". strtoupper($_POST['txtapellido'])."',
-									'". strtoupper($_POST['txtnombre'])."',
-									". $_POST['txtdni'].",
-									".$_POST['txtcuit'].",
-									'0',
-									'". $_POST['txttelefono2']."',
-									'". strtoupper($_POST['txtdomicilio'])."',
-									'". $_POST['txtemail1']."',
-									'',
-									'".$_POST['txtfacebook']."',
-									'". $_POST['txttwitter']."',
-									".round($_POST['cblocalidad'],0).",
-									'". $_POST['txtcp']."')";
-		$resultado=$bd->ejecutar($grabarpersona);
-		$idpersona=$bd->lastID();
-    $rti = new Rti (null,$idpersona);
-    $agregarRti=$rti->agregar();
-
-    $rtixescuela = new rtixescuela ($_POST['txtidesacuela'],$agregarRti,$_POST['cbestado'],null,$_POST['estado']);
-    $editarDato = $rtixescuela->agregar();
-    if($editarDato==1){
-    $variablephp="index.php?mod=slat&men=referentes&id=8&escuelaId=".$_POST['txtidesacuela'];
-    ?>
-    <!--Redirecciono por javascrit-->
-    <script type="text/javascript">
-        alert('Se Agrego el nuevo RTI');
-        var variablejs = "<?php echo $variablephp; ?>" ;
-        function redireccion(){window.location=variablejs;}
-        setTimeout ("redireccion()",0);
-            </script>
-    <?php
-	}
-
-}
-}
-	include_once('includes/mod_cen/clases/escuela.php');
-  include_once('includes/mod_cen/clases/localidades.php');
-  include_once('includes/mod_cen/clases/maestro.php');
-  include_once('includes/mod_cen/clases/rti.php');
-
-	$nuevaConexion=new Conexion();
-	$conexion=$nuevaConexion->getConexion();
-
-	$datoestado= Maestro::estructura('estado','rtixescuela');//Cargo los estados posibles de un RTI x institución
-  $datoturno= Maestro::estructura('turno','rtixescuela');//Cargo los turnos posibles de un RTI x institución
-
-  //$dato_rti=Rti::existeRtixinstitucion($_GET['escuelaId'],$_GET['rtiId'],$_GET['personaId']);//Tómo datos de la escuela
-  //$info_rti = mysqli_fetch_object($dato_rti);
-  //$cantidad_rti = mysqli_num_rows($dato_rti);
-
+  include_once('clases/escuela.php');
+  $nuevaConexion=new Conexion();
+  $conexion=$nuevaConexion->getConexion();
+  //Cargo tipo de autoridades
+  $sql_Autoridades="Select tipoautoridad_id,tipoautoridad from tipoautoridad order by tipoautoridad asc";
+  $dato_autoridades=$conexion->query($sql_Autoridades);
+  $autoridades = mysqli_fetch_object($dato_autoridades);
 
   $objlocalidad= new Localidad(null,null,null);
-	$objescuela= new Escuela($_GET['escuelaId']);
-	$dato_escuela=$objescuela->buscar();
-	$dato_localidad=$objlocalidad->buscar();
-	$row_rscondicioniva = mysqli_fetch_object($dato_localidad);
-	$escuela=mysqli_fetch_object($dato_escuela);
+  $objescuela= new Escuela($_GET['escuelaId']);
+  $dato_escuela=$objescuela->buscar();
+  $dato_localidad=$objlocalidad->buscar();
+  $row_rscondicioniva = mysqli_fetch_object($dato_localidad);
+  $escuela=mysqli_fetch_object($dato_escuela);
+
+//  echo '<p> <strong>Autoridad:</strong></p>';
+
+
+
+  if(isset($_GET['personaId'])){
+    include_once('clases/persona.php');
+    $idpersona=round($_GET['personaId'],0);
+    $objpersona= new Persona($idpersona);
+    $dato_persona=$objpersona->buscar();
+    $persona=mysqli_fetch_object($dato_persona);
+    include_once('clases/director.php');
+    $iddirector=round($_GET['directorId'],0);
+    $objdirector= new Director($iddirector);
+    $dato_director=$objdirector->buscar();
+    $director=mysqli_fetch_object($dato_director);
+    }
 ?>
 
-<script type="text/javascript" src="includes/mod_cen/rti/js/validacionrti.js"></script>
+
+<script type="text/javascript" src="jquery/jquery113.jsp"></script>
+<script>
+function validacion()
+{
+  var $dni = $('#txtdni').val();
+  var $cuil= $('#txtcuit').val();
+  if( $dni == null || $dni.length == 0 || /^\s+$/.test($dni) || isNaN($dni) || $dni<0 )     {
+    alert('[ATENCIÓN] El campo NRO DOCUMENTO debe ser un número positivo o cero.');
+    $('#txtdni').focus();
+    return false;
+  }
+
+  if($('#txtapellido').val()==""){
+    alert('[ATENCIÓN] El campo APELLIDO es obligatorio');
+    $('#txtapellido').focus();
+    return false;
+  }
+  if($('#txtnombre').val()==""){
+    alert('[ATENCIÓN] El campo NOMBRE es obligatorio');
+    $('#txtnombre').focus();
+    return false;
+  }
+
+  if( $cuil == null || $cuil.length == 0 || /^\s+$/.test($cuil) || isNaN($cuil) || $cuil<=0 )     {
+  alert('[ATENCIÓN] El campo CUIL debe ser un número positivo mayor que cero.');
+  $('#txtcuit').focus();
+  return false;
+}
+  if($('#txttipodecargo').val()==""){
+    alert('[ATENCIÓN] El campo CARGO es obligatorio');
+    $('#txttipodecargo').focus();
+    return false;
+  }
+  if($('#txtdomicilio').val()==""){
+    alert('[ATENCIÓN] El campo DOMICILIO es obligatorio');
+    $('#txtdomicilio').focus();
+    return false;
+  }
+  $('#form1').submit();
+
+}
+$(document).ready(function(){
+    $("#txtdni").keypress(function(e){
+      if (e.which == '13') {
+        $("#txtdni").blur();
+      }
+  });
+  $("#cmdlimpiar").click(function(){
+     $('#form1')[0].reset();
+     $('#txtdni').focus();
+  });
+  $("#cmdregistrar").click(function(){
+     validacion();
+  });
+    $("#txtdni").blur(function(){
+    var $dni=$('#txtdni').val();
+    if($dni.trim()!=""){//si se cargo algo en el campo nro de documento busca la persona y si existe la carga
+      $.post( "includes/mod_cen/clases/director.php",{opcion:'buscarpordni',dni:$dni}, function(data)       {
+          if(data!=0){//Si existe una persona con el dni ingresado
+            var $resultado= JSON.parse(data);
+            //alert($resultado['personaId']);
+            $autoridad=$resultado['apellido']+', '+$resultado['nombre'];
+            $('#autoridad').html($autoridad);
+            //$(".hades").attr("disabled","disabled");
+            $('#txtdomicilio').val($resultado['direccion']);
+            $('#txtcuit').val($resultado['cuil']);
+            $('#txttelefono1').val($resultado['telefonoC']);
+            $('#txttelefono2').val($resultado['telefonoM']);
+            $('#txtemail1').val($resultado['email']);
+            $('#txtemail2').val($resultado['email2']);
+            $('#txtfacebook').val($resultado['facebook']);
+            $('#txttwitter').val($resultado['twitter']);
+            $('#txtcp').val($resultado['cpostal']);
+            $('#txtapellido').val($resultado['apellido']);
+            $('#txtnombre').val($resultado['nombre']);
+            $('#txtidpersona').val($resultado['personaId']);
+            $idlocalidad="option[value="+$resultado['localidadId']+"]";
+            //$idtipoautoridad="option[value="+$resultado['tipoautoridad_id']+"]";
+            //alert($idtipoautoridad);
+            $('#cblocalidad').find($idlocalidad).attr('selected',true);
+            $('#cbtipoautoridad').find($idtipoautoridad).attr('selected',true);
+            $('#txttipodecargo').focus();
+          }
+          else
+          {
+            //$('#txtapellido').val('');
+            alert('No existe ninguna persona registrada con el Nro. de Documento: '+$('#txtdni').val()+'.Por favor cargue los datos correspondientes' );
+            //$(".hades").val("");
+            $('#txtidpersona').val('');
+            $('#txtnombre,#txtapellido,#txtdomicilio,#txtcuit,#txttelefono1,#txttelfono2,#txtemail1,#txtemail2,#txtfacebook,#txttwitter,#txtcp,#txtidpersona').val('');
+            $('#txtdni').attr('readonly','readonly');
+            $('#txtapellido').focus();
+          }
 
 
+      });
+      /*.done(function() {
+      alert( "second success" );
+      })
+      .fail(function() {
+      alert( "error" );
+      })
+      .always(function() {
+      alert( "finished" );
+      });*/
+    }
+       });
 
+});
+</script>
+<style type="text/css">
+#cmdbuscar {
+  text-align: left;
+}
+/*input[type="text"] {
+     /*width: 100%;
+     box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     -moz-box-sizing: border-box;
+
+}*/
+#form1 {
+  font-weight: bold;
+}
+</style>
 <div class="container">
+
+
 <div class="panel panel-primary">
-	<div class="panel-heading">
-		<?php echo 'Escuela Número '.$escuela->numero.' - '.$escuela->nombre;?>
-	</div>
-	<div class="panel-body">
-<?php
-	include_once 'includes/mod_cen/formularios/f_rtinuevo.php';
- ?>
+  <div class="panel-heading">
+    <?php echo 'Escuela Número '.$escuela->numero.' - '.$escuela->nombre;?>
+  </div>
+  <div class="panel-body">
+
+
+<form action="includes/mod_cen/registrarAutoridad.php" method="post" id="form1">
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Nro. de Documento</label>
+    </div>
+    <div class="col-md-12">
+      <input  class="form-control" name="txtdni" type="text" id="txtdni" value="<?php if(isset($_GET['personaId'])){ echo $persona->dni;}?>" <?php //if(isset($_GET['personaId'])){?> <?php ?>autofocus="autofocus" />
+        <input name="txtidpersona" type="hidden" id="txtidpersona" value="" />
+        <input name="txtidesacuela" type="hidden" id="txtidesacuela" value="<?php echo $_GET['escuelaId'] ?>"/>
+        <input type="hidden" name="iddirector" id="iddirector" value="<?php if(isset($_GET['personaId'])){ echo round($_GET['directorId'],0);}?>" />
+
+      <?php if(isset($_GET['dirUpdate'])) // dirUpdate es una bandera que usamos para saber si la modificacion y/o carga del directivo es realizada desde el menu Mis ETT en la sesion de un Etj o Coordinador
+                                          // esta bandera se la envia al script registrarAutoridad.php de manera que al terminar el script redireccione al menu Mis ETT y no a Mis Escuelas
+      {
+
+          echo "<input type='hidden' name='dirUpdate' id='dirUpdate' value='1' />";
+      }
+      ?>
+
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Apellido</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txtapellido" id="txtapellido" class="hades" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Nombre</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txtnombre" id="txtnombre" class="hades" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Cargo</label>
+    </div>
+    <div class="col-md-12">
+      <select class="form-control" name="cbtipoautoridad" id="cbtipoautoridad">
+              <?php
+              while ($row_autoridades = mysqli_fetch_object($dato_autoridades)) {
+                ?>
+                  <option value="<?php echo $row_autoridades->tipoautoridad_id?>" <?php if($row_autoridades->tipoautoridad_id==$director->tipoautoridad_id) echo 'selected';?> ><?php echo $row_autoridades->tipoautoridad;?></option>
+                  <?php
+              };
+              ?>
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">CUIL</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txtcuit" id="txtcuit" class="hades" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Domicilio</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txtdomicilio" id="txtdomicilio" class="hades" />
+
+    </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Localidad</label>
+    </div>
+    <div class="col-md-12">
+      <select class="form-control" name="cblocalidad" id="cblocalidad">
+            <?php
+    do {
+    ?>
+            <option value="<?php echo $row_rscondicioniva->localidadId?>"><?php echo $row_rscondicioniva->nombre?></option>
+            <?php
+    } while ($row_rscondicioniva = mysqli_fetch_object($dato_localidad));
+
+    ?>
+          </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Código Postal</label>
+    </div>
+    <div class="col-md-12">
+     <input class="form-control" type="text" name="txtcp" id="txtcp" class="hades" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Teléfono 1</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txttelefono1" id="txttelefono1" class="hades" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Email 1</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txtemail1" id="txtemail1" class="hades" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Email 2</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txtemail2" id="txtemail2" class="hades" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Facebook</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txtfacebook" id="txtfacebook" class="hades"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label">Twitter</label>
+    </div>
+    <div class="col-md-12">
+      <input class="form-control" type="text" name="txttwitter" id="txttwitter" class="hades" />
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12">
+      <label for="" class="control-label"></label>
+    </div>
+    <div class="col-md-12">
+      <?php if(!isset($_GET['personaId'])){?>
+      <input class="btn btn-primary" type="button" name="cmdlimpiar" id="cmdlimpiar" value="Limpiar" />
+      <?php }?>
+      <input class="btn btn-primary" type="button" name="cmdregistrar" id="cmdregistrar" value="Registrar" />
+    </div>
+  </div>
+
+
+
+
+</form>
 </div>
 </div>
 </div>
 <?php
 if(isset($_GET['personaId'])){
 ?>
-<script type="text/javascript" src="includes/mod_cen/rti/js/ajaxEditarRti.js"></script>
+<script type="text/javascript">
+//$('#txtdni').attr("disabled","disabled");
+$('#cmdregistrar').attr("value","Modificar");
+var $dni=$('#txtdni').val();
+if($dni.trim()!=""){
+  $.post( "includes/mod_cen/clases/director.php",{opcion:'buscarpordni',dni:$dni}, function(data)       {
+      if(data!=0){
+        var $resultado= JSON.parse(data);
+        //alert($resultado['personaId']);
+        $autoridad=$resultado['apellido']+', '+$resultado['nombre'];
+        $('#autoridad').html($autoridad);
+        //$(".hades").attr("disabled","disabled");
+        $('#txtdomicilio').val($resultado['direccion']);
+        $('#txtcuit').val($resultado['cuil']);
+        $('#txttelefono1').val($resultado['telefonoC']);
+        $('#txttelefono2').val($resultado['telefonoM']);
+        $('#txtemail1').val($resultado['email']);
+        $('#txtemail2').val($resultado['email2']);
+        $('#txtfacebook').val($resultado['facebook']);
+        $('#txttwitter').val($resultado['twitter']);
+        $('#txtcp').val($resultado['cpostal']);
+        $('#txtapellido').val($resultado['apellido']);
+        $('#txtnombre').val($resultado['nombre']);
+        $('#txtidpersona').val($resultado['personaId']);
+        $idlocalidad="option[value="+$resultado['localidadId']+"]";
+        //$idtipoautoridad="option[value="+$('#idautoridad').val()+"]";
+        //alert($idtipoautoridad);
+        $('#cblocalidad').find($idlocalidad).attr('selected',true);
+        //$('#cbtipoautoridad').find($idtipoautoridad).attr('selected',true);
+        $('#txtapellido').focus();
+      }
+      else
+      {
+        alert('No existe ninguna persona registrada con el Nro. de Documento: '+$('#txtdni').val()+'.Por favor cargue los datos correspondientes' );
+        //$(".hades").val("");
+        $('#txtidpersona').val('');
+        //$('#txtdni').focus();
+        $('#txtapellido').focus();
+      }
+
+
+  });
+  /*.done(function() {
+  alert( "second success" );
+  })
+  .fail(function() {
+  alert( "error" );
+  })
+  .always(function() {
+  alert( "finished" );
+  });*/
+}
+$('#txtidpersona').val($resultado['personaId']);
+//$('#txtdni').attr("enabled","enabled");
+</script>
 <?php
+
 }
 ?>
