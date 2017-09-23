@@ -6,6 +6,7 @@ include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/informe.php");
+include_once("includes/mod_cen/clases/director.php");
 ?>
 <div class="container">
 
@@ -129,6 +130,8 @@ if(($_POST))
 
 				$resultado = $escuela->buscar();
 
+
+
 					echo "<div class='panel panel-primary'>";
 					echo "<div class ='panel-heading'>Informacion Escuelas</div>";
 					echo "<div class='panel-body'>";
@@ -142,7 +145,7 @@ if(($_POST))
 			  	echo "<th>Localidad</th>";
 					echo "<th>Informe</th>";
 					echo "<th>Cant</th>";
-					echo "<th>ProfeE.F</th>";
+					echo "<th>ver ProfeE.F</th>";
 					echo "</th>";
 			  //	echo "<th>Referente a Cargo</th>";
 			  	//echo "<th></th>";
@@ -182,6 +185,37 @@ if(($_POST))
 			  		$apellidoPersona= $traerPersona->getApellido();
 			  		$persona=$traerPersona->getPersonaId();
 
+						/**
+						 * Buscar director de la institución
+						 * se guarda el objeto con datso en $datoDirector
+						 */
+						 $director = new Director(null,$fila->escuelaId);
+						 $buscar_director= $director->buscar();
+						 $datoDirector =mysqli_fetch_object($buscar_director);
+
+						 if($datoDirector==NULL){
+								$personaDirector= new Persona("1");
+								$buscarPersona = $personaDirector->buscar();
+								$datoDirector =mysqli_fetch_object($buscarPersona);
+						 }
+
+
+						 /**
+							* [$locali description]
+							* @var Localidad
+							*/
+							//var_dump($fila->supervisor_id);
+							if($fila->supervisor_id==NULL){
+								$personaSupervisor= new Persona("1");
+							}else{
+								$personaSupervisor= new Persona($fila->supervisor_id);
+							}
+
+							$buscar_supervisor=$personaSupervisor->buscar();
+							$datoSupervisor=mysqli_fetch_object($buscar_supervisor);
+
+
+
 
 			  		echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
@@ -213,25 +247,96 @@ if(($_POST))
 						}
 
 
-						echo "<td><a class='btn btn-primary' role='button' href='index.php?mod=slat&men=edFisica&id=1&escuelaId=".$fila->escuelaId."'>5</a></td>";
-			  	/*	echo "<td>";
-			  				if($encontrado==0)
-			  					echo "<div class='divSimple' id='ref_".$fila->referenteId."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".$nombrePersona.", ".$apellidoPersona.
-					  			"</a></div>";
-					  		else
-					  			echo "<div class='divSimple' id='ref_".$fila->referenteId.$encontrado."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".$nombrePersona.", ".$apellidoPersona.
-					  			"</a></div>";
-
-					  		echo "<div class='divSimple1'>&nbsp;&nbsp;&nbsp;";
+//boton para ver profesores ed fisica
+						echo "<td><a class='btn btn-primary' id=".$fila->escuelaId." role='button'>6</a></td>";
 
 
 
-					echo "</td>";
 
-			  		echo "<td>"."<a href='index.php?men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>Ver más</a>"."</td>";*/
+
+
 			  		echo "</tr>";
 		  	  		echo "\n";
 
+							echo "<tr class='ocultartr' id='fila".$fila->escuelaId."'>";
+							echo "<td colspan=9>";
+							echo "<div class='panel panel-primary' id='ocultar'>";
+							echo "<div class='panel-heading'>Profesores Escuela: ".$fila->nombre."</div>";
+							echo "<div class='panel-body'>";
+
+
+echo "<br>";
+              echo "<a class='btn btn-primary' role='button' href=''>Datos Escuela</a>&nbsp&nbsp&nbsp";
+							echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=edFisica&id=1&escuelaId=".$fila->escuelaId."'>Nuevo Profesor</a>&nbsp&nbsp&nbsp";
+							echo "<a class='btn btn-success' role='button' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Informe Escuela</a>&nbsp&nbsp&nbsp";
+							echo "<a class='btn btn-success' role='button' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>Ver Informes Escuela</a>";
+							echo "<br>";
+							echo "<br>";
+
+							//subpanel de profesores
+							echo "<div class='panel panel-primary' id ='subpanelprofesores'>";
+							echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor Juan Perez<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
+							echo "<div class='panel-body bodyprof'>";
+/*
+							// columnas: 3/12
+             //inico 1/12
+							echo "<div class='col-md-12'>";
+							echo "<div class='panel panel-primary'>";
+							echo "<div class='panel-heading'> Datos personales Prof juan perez</div>";
+							echo "<div class='panel-body'>NOmbre apellido direccion";
+              echo"</div>";
+							echo"</div>";
+							echo"</div>";//cierre de 1/12
+
+
+
+							//inicio 2/12
+							echo "<div class='col-md-12'>";
+
+							echo "<div class='panel panel-primary'>";
+							echo "<div class='panel-heading'>Cursos a cargo</div>";
+							echo "<div class='panel-body'>1 1 2 3s";
+              echo"</div>";
+							echo"</div>";
+							echo"</div>";//cierre 2/12
+
+
+							//inicio 3/12
+							echo "<div class='col-md-12'>";
+
+							echo "<div class='panel panel-primary'>";
+							echo "<div class='panel-heading'>Carga horaria total</div>";
+							echo "<div class='panel-body'>456";
+							echo"</div>";
+							echo"</div>";
+							echo"</div>";//cierre 3/12
+
+*/
+echo "<h4><b>Datos personales profesor juan:</b></h4>";
+echo "<p>holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>";
+echo "<hr>";
+echo "<h4><b>Cursos a cargo prof juan:</b></h4>";
+echo "<p>3°1°   2°4°</p>";
+echo "<hr>";
+echo "<h4><b>Carga horaria total:</b></h4>";
+echo "<p>20 horas semanales</p>";
+
+               echo"</div>";//panel-body subpanel profesores
+
+
+							echo"</div>";// panel-primary subpanel profesores
+
+
+
+
+							echo "</div>";
+							echo "</div>";
+
+
+							echo "</div>";
+							echo "</div>";
+							echo "</td>";
+							echo "</tr>";
 	      	}
 
 	      	echo "</table>";
@@ -245,6 +350,7 @@ if(($_POST))
 		//var venta= "<?php echo $_GET['registro']  ";
 ?>
 </div>
+<script type="text/javascript" src="includes/mod_cen/edFisica/js/botonesEF.js"></script>
 
 <script type="text/javascript" src="jquery/jquery113.jsp"></script>
 			<script language="javascript">
