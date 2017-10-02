@@ -295,3 +295,34 @@ if (isset($_POST['dni'])) {
 	//Maestro::debbugPHP($json);
 	echo $json;
 }
+
+
+/**
+ * BUSCAR TODOS LOS PROFESORES DE UNA ESCUELA EN PARTICULAR
+ *
+ */
+
+if (isset($_POST['buscarProfesores'])) {
+	$estado= [];
+	include_once('persona.php');
+	$profesor = new Profesores(null,null,$_POST['buscarProfesores']);
+	$datoProfesor = $profesor->buscar('total');
+	if (mysqli_num_rows($datoProfesor)>0) {
+		while ($fila = mysqli_fetch_object($datoProfesor)) {
+			$persona= new Persona($fila->personaId);
+			$buscarPersona = $persona->buscar();
+			$datoPersona = mysqli_fetch_object($buscarPersona);
+			$temporal=array('personaId'=>$datoPersona->personaId,
+											'nombre'=>$datoPersona->nombre,
+											'apellido'=>$datoPersona->apellido
+											);
+			array_push($estado,$temporal);
+		}
+	}else{
+		$temporal=array('personaId'=>'no existe profesroes para este Colegio');
+		array_push($estado,$temporal);
+	}
+	$json = json_encode($estado);
+	//Maestro::debbugPHP($json);
+	echo $json;
+}

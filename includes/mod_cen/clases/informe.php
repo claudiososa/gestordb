@@ -163,7 +163,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 				break;
 
 			case 'mesAñoReferente':
-				$sentencia="SELECT ".$filtro." *, DAY(fechaVisita) AS dia FROM informes WHERE MONTH(fechaVisita) = ".$mes1." AND YEAR(fechaVisita) =".$año1." AND referenteId=".$referenteId." ORDER BY escuelaId";
+				$sentencia="SELECT ".$filtro." *, DAY(fechaVisita) AS dia FROM informes WHERE MONTH(fechaVisita) = '".$mes1."' AND YEAR(fechaVisita) ='".$año1."' AND referenteId=".$referenteId." ORDER BY escuelaId";
 				break;
 
 			case 'mesAño':
@@ -397,7 +397,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 
 
-	
+
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
@@ -425,7 +425,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 									      $sentencia.="ON (informes.escuelaId=escuelas.escuelaId AND escuelas.referenteId = '".$_SESSION["referenteId"]."')";
 									}
 									else{
-										
+
 										$sentencia.="ON (informes.escuelaId=escuelas.escuelaId)";
 
 									    }
@@ -580,7 +580,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		return $conexion->query($sentencia);
 	}
 
-	
+
 
 	public function __get($var)
 	{

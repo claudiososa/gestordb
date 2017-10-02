@@ -270,3 +270,31 @@ if (isset($_POST['courseName'])) {
 
 	//Maestro::debbugPHP($datoCurso);
 }
+
+
+/**
+ * BUSCAR TODOS LOS CURSOS DE UNA ESCUELA EN PARTICULAR
+ *
+ */
+
+if (isset($_POST['buscarCursos'])) {
+	$estado= [];
+	$curso = new Cursos(null,null,null,null,null,$_POST['buscarCursos']);
+	$datoCurso = $curso->buscar('total');
+	if (mysqli_num_rows($datoCurso)>0) {
+		while ($fila = mysqli_fetch_object($datoCurso)) {
+			$temporal=array('cursoId'=>$fila->cursoId,
+											'curso'=>$fila->curso,
+											'division'=>$fila->division,
+											'turno'=>Cursos::turno($fila->turno)
+											);
+			array_push($estado,$temporal);
+		}
+	}else{
+		$temporal=array('cursoId'=>'no existen cursos para este Colegio');
+		array_push($estado,$temporal);
+	}
+	$json = json_encode($estado);
+	Maestro::debbugPHP($json);
+	echo $json;
+}

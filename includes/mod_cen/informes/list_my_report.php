@@ -8,13 +8,19 @@ require_once("includes/mod_cen/clases/leido.php");
 
 if(isset($_GET['prioridad'])){
 	$informe = new Informe(null,null,$_GET["referenteId"],$_GET["prioridad"]);
+	$buscar_informe = $informe->buscar();
+}elseif(isset($_GET['date'])){
+		$mesAc=date("m");
+		$informe = new Informe();
+	  $buscar_informe=$informe->summary('mesAñoReferente',null,null,null,$mesAc,'2017',null,$_GET["referenteId"]);
 }else{
 	$informe = new Informe(null,null,$_GET["referenteId"]);
+	$buscar_informe = $informe->buscar();
 }
 
 
 
-$buscar_informe = $informe->buscar();
+
 
 
 $referente= new Referente($_GET["referenteId"]);

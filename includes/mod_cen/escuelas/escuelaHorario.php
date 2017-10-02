@@ -1,5 +1,7 @@
+
 <script src="includes/mod_cen/escuelas/js/escuelaHorario.js" type="text/javascript"></script>
 <script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <?php
 
@@ -48,9 +50,6 @@ $profesoresActuales2= $profesor->buscar('total');
 				<div class="panel-body">
 					<div class="formHorarioNuevaHora" id='divHorarioLunes'>
 						<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
-						<form class="divHorarioLunes" action="" method="post">
-							
-						</form>
 					</div>
 				</div>
 				</div>
@@ -60,11 +59,7 @@ $profesoresActuales2= $profesor->buscar('total');
 					</div>
 					<div class="panel-body">
 						<div class="formHorarioNuevaHora" id='divHorarioMartes'>
-							<button class="btn btn-success" type="agregarHora" name="button" id="horaMartes">Agregar Hora</button>
-							<form class="formHorarioMartes" action="" method="post">
-
-							</form>
-							<?php //include_once('includes/mod_cen/formularios/f_HorarioNuevaHora.php');?>
+							<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaMartes">Agregar Hora</button>
 						</div>
 					</div>
 					</div>
@@ -74,11 +69,7 @@ $profesoresActuales2= $profesor->buscar('total');
 						</div>
 						<div class="panel-body">
 							<div class="formHorarioNuevaHora" id='divHorarioMiercoles'>
-							<button class="btn btn-success" type="agregarHora" name="button" id="horaMiercoles">Agregar Hora</button>
-
-								<form class="formHorarioMiercoles" action="" method="post">
-
-								</form>
+							<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaMiercoles">Agregar Hora</button>
 							</div>
 						</div>
 						</div>
@@ -89,9 +80,6 @@ $profesoresActuales2= $profesor->buscar('total');
 							<div class="panel-body">
 								<div class="formHorarioNuevaHora" id='divHorarioJueves'>
 									<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaJueves">Agregar Hora</button>
-									<form class="formHorarioJueves" action="" method="post">
-
-									</form>
 								</div>
 							</div>
 							</div>
@@ -102,9 +90,6 @@ $profesoresActuales2= $profesor->buscar('total');
 								<div class="panel-body">
 									<div class="formHorarioNuevaHora" id='divHorarioViernes'>
 										<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaViernes">Agregar Hora</button>
-										<form class="formHorarioViernes" action="" method="post">
-
-										</form>
 									</div>
 								</div>
 								</div>
@@ -160,4 +145,4 @@ $profesoresActuales2= $profesor->buscar('total');
 </div>
 </div>
 </div>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>

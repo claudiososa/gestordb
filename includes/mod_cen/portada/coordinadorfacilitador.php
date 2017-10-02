@@ -311,7 +311,8 @@ echo "</table>";
   echo "<thead>";
   echo "<tr>";
   echo "<th>Apellido y Nombre</th>";
-  echo "<th>Cantidad</th>";
+  echo "<th>Total</th>";
+  echo "<th>Mes Actual</th>";
   echo "</tr>";
   echo "</thead>";
 
@@ -324,9 +325,16 @@ echo "</table>";
     $informe_ett= new informe(null,null,$fila->referenteId);
     $buscar_informe=$informe_ett->buscar();
     $cantidad=mysqli_num_rows($buscar_informe);
+
+    $mesAc=date("m");
+    $buscarMesActualInforme=$informe_ett->summary('mesAñoReferente',null,null,null,$mesAc,'2017',null,$fila->referenteId);
+    $totalMes=mysqli_num_rows($buscarMesActualInforme);
+
     //echo $cantidad;
     echo '<a class="btn btn-success" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a>';
-
+    echo "</td>";
+    echo "<td>";
+    echo '<a class="btn btn-success" href="?mod=slat&men=informe&date&id=6&referenteId='.$fila->referenteId.'">'.$totalMes.'</a>';
     echo "</td>";
     echo "</tr>";
   }
