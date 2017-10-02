@@ -441,8 +441,8 @@
 						case "edFisica":
 						switch ($id) {
 						case 1:
-								//include("includes/mod_cen/estadisticas/estadisPermer.php");
-								include("includes/mod_cen/edFisica/nuevoProfe.php");
+								include("includes/mod_cen/escuelas/escuelaEdFisica.php");
+								//include("includes/mod_cen/edFisica/nuevoProfe.php");
 								break;
 						
 						}
