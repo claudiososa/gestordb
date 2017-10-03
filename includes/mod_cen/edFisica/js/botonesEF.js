@@ -1,13 +1,35 @@
 
 $(document).ready(function() {
+
   $(".bodyprof").hide()
   $(".ocultartr").hide()
+  //ocultar datos Institucion
+  $(".datosInst").hide()
+    //nuevo curso
+
+  $('#formNewCourseProf').hide()
+
+///////// boton ver profesores ed. fisica
+ $(".botondesplegable").click(function(event) {
+   //alert($(this).attr("id"))
+
+   $("#panel" + $(this).attr('id')).toggle()
+
+	});
+
+ /////// datos institucion:
+ $(".btnDatosInst").click(function(event) {
+  // alert($(this).attr("id"))
+    $(".datosInst#datosInst" + $(this).attr('id')).toggle()
+	});
 
 
-  $("#0078").click(function(event) {
-    $(".ocultartr").toggle()
-    	});
+//nuevo curso
 
+
+$('#newCourseProf').click(function (){
+  $('#formNewCourseProf').toggle()
+})
 
 
   $(document).on('click', ".panelprof", function(){
@@ -23,4 +45,7 @@ $(document).ready(function() {
     		$this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
     	}
   })
+
+
+
 });

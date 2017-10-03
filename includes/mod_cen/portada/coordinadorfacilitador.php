@@ -1,4 +1,5 @@
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+<script src="includes/mod_cen/portada/js/portadaCoordinadorFacilitador.js"></script>
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -306,6 +307,72 @@ echo "</table>";
 </div>
 <div class="panel-body">
   <?php
+$mes= date('m');
+$año= date('Y');
+  echo "<form class='form-inline'>";
+  echo "<div class='form-group'>";
+
+  echo "<label  for='year'>Año:</label>";
+
+  echo "<select class='form-control' name='year' id='year'>";
+  /*if ($año ){
+   echo '<option value="'.$año.'" selected>'.$año.'</option>';
+
+ }*/
+  echo "<option value='2017' ";
+  echo ($año==2017) ?  ' selected ':'';
+  echo ">2017</option>";
+
+  echo "<option value='2018' ";
+  echo ($año==2018) ?  ' selected ':'';
+  echo ">2018</option>";
+
+  echo "</select>";
+
+  echo "</div>";
+  echo "<div class='form-group'>";
+
+  echo "<label  for='month'>Mes:</label>";
+  echo "<select class='form-control' name='month' id='month'>";
+
+  $meses = Maestro::meses();
+
+  foreach ($meses as $key => $value) {
+    if ($mes==$key) {
+      echo '<option selected value="'.$key.'">'.$value.'</option>';
+    }else{
+      echo '<option value="'.$key.'">'.$value.'</option>';
+    }
+
+  }
+/*
+for ($i=1; $i<=12; $i++) {
+      if ($i == date('m'))
+      echo '<option value="'.$i.'" selected>'.$i.'</option>';
+      else
+      echo '<option value="'.$i.'">'.$i.'</option>';
+    }
+  echo "<option value='01'>Enero</option>";
+  echo "<option value='02'>Febrero</option>";
+  echo "<option value='03'>Marzo</option>";
+  echo "<option value='04'>Abril</option>";
+  echo "<option value='05'>Mayo</option>";
+  echo "<option value='06'>Junio</option>";
+  echo "<option value='07'>Julio</option>";
+  echo "<option value='08'>Agosto</option>";
+  echo "<option value='09'>Septiembre</option>";
+  echo "<option value='10'>Octubre</option>";
+  echo "<option value='11'>Noviembre</option>";
+  echo "<option value='12'>Diciembre</option>";
+*/
+
+  echo "</select>";
+  echo "</div>";
+  echo"<button type='button' id='buttomSearchDate' class='btn btn-warning' name='button'>buscar</button>";
+  //var_dump($meses);
+  echo "</form>";
+
+
 
   echo "<table id='informe_etj' class='table table-hover table-striped table-condensed tablesorter'>";
   echo "<thead>";

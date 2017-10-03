@@ -133,7 +133,7 @@ if(($_POST))
 
 
 					echo "<div class='panel panel-primary'>";
-					echo "<div class ='panel-heading'>Informacion Escuelas</div>";
+					echo "<div class ='panel-heading'>Búsqueda de Escuelas</div>";
 					echo "<div class='panel-body'>";
 					echo "<div class='table-responsive'>";
 					echo	"<table class='table table-hover table-striped table-condensed'>";
@@ -145,7 +145,7 @@ if(($_POST))
 			  	echo "<th>Localidad</th>";
 					echo "<th>Informe</th>";
 					echo "<th>Cant</th>";
-					echo "<th>ver ProfeE.F</th>";
+					echo "<th>Ver Profesores</th>";
 					echo "</th>";
 			  //	echo "<th>Referente a Cargo</th>";
 			  	//echo "<th></th>";
@@ -239,96 +239,123 @@ if(($_POST))
 
 							echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
 										 Crear</a>&nbsp&nbsp</td><td><a class='btn btn-danger' href='#'>0</a></td>";
-
+	            echo "<td><a class='btn btn-primary botondesplegable' id=".$fila->escuelaId." role='button'>6</a></td>";
 						}else{
 						 	echo "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
 										 Crear</a></td>";
 							echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>$cant</a></td>";
+							echo "<td><a class='btn btn-primary botondesplegable' id=".$fila->escuelaId." role='button'>6</a></td>";
 						}
 
 
 //boton para ver profesores ed fisica
-						echo "<td><a class='btn btn-primary' id=".$fila->escuelaId." role='button'>6</a></td>";
 
-
-
-
-
-
-			  		echo "</tr>";
+			  	   	echo "</tr>";
 		  	  		echo "\n";
 
-							echo "<tr class='ocultartr' id='fila".$fila->escuelaId."'>";
+							echo "<tr class='ocultartr' id='panel".$fila->escuelaId."'>";
 							echo "<td colspan=9>";
 							echo "<div class='panel panel-primary' id='ocultar'>";
 							echo "<div class='panel-heading'>Profesores Escuela: ".$fila->nombre."</div>";
 							echo "<div class='panel-body'>";
 
 
-echo "<br>";
-              echo "<a class='btn btn-primary' role='button' href=''>Datos Escuela</a>&nbsp&nbsp&nbsp";
+              echo "<br>";
+              echo "<a class='btn btn-primary btnDatosInst' role='button' id='btnDatosInst".$fila->escuelaId."'>Datos Escuela</a>&nbsp&nbsp&nbsp";
 							echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=edFisica&id=1&escuelaId=".$fila->escuelaId."'>Nuevo Profesor</a>&nbsp&nbsp&nbsp";
 							echo "<a class='btn btn-success' role='button' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Informe Escuela</a>&nbsp&nbsp&nbsp";
 							echo "<a class='btn btn-success' role='button' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>Ver Informes Escuela</a>";
 							echo "<br>";
 							echo "<br>";
+							echo "<br>";
+
+
+
+//contenido boton datos escuela
+							echo "<div class='panel panel-default datosInst' id='datosInst".$fila->escuelaId."'>";
+							echo "<div class='panel-body'>";
+
+	 					  echo "<div><h4><b>".$fila->numero."&nbsp-&nbsp".$fila->cue."&nbsp-&nbsp".$fila->nombre."</b></h4></div>";
+
+							echo "<div class='row'>";
+							echo "<div class='col-md-6'><br>";
+	            echo "<div><b>Datos de la Institución</b></div>";
+						  echo "<hr>";
+	 					  echo"<div><b>Localidad:&nbsp</b>".$fila1->nombre."</div>";
+
+	 					  echo"<div><b>Dirección:&nbsp</b>".$fila->domicilio."</div>";
+
+	 					  echo"<div><b>Teléfono:&nbsp</b>".$fila->telefono."</div>";
+
+	 					  echo"<div><b>Email:&nbsp</b>".$fila->email."</div>";
+	 					  echo "<br></div>";
+
+
+
+
+						 echo "<div class='col-md-6'><br>";
+						 echo "<div><b>Datos Directivo</b></div>";
+						 echo "<hr>";
+
+						 echo"<div><b>Apellido y Nombre:&nbsp</b>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
+						 echo"<div><b>Teléfono:&nbsp</b>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";
+						 echo"<div><b>Correo Electrónico:&nbsp</b>".$datoDirector->email."</div>";
+
+						 echo "<br></div>";
+						 echo "</div>";//cierre row
+
+
+						 // Salto
+						 echo "<div class='row'>";
+						 echo "<div class='col-md-6'><br>";
+						 echo "<div><b>Datos Supervisor</b></div>";
+						 echo "<hr>";
+						 echo"<div><b>Apellido y Nombre:&nbsp</b>".$datoSupervisor->apellido.", ".$datoSupervisor->nombre."</div>";
+	           echo"<div><b>Teléfono:&nbsp</b>".$datoSupervisor->telefonoM." / ".$datoSupervisor->telefonoC."</div>";
+						 echo"<div><b>Correo Electrónico:&nbsp</b>".$datoSupervisor->email."</div>";
+						 echo "<br></div>";
+
+
+
+/*
+						 echo "<div class='col-md-6'><br>";
+						 echo "<div><b>Datos Directivo</b></div>";
+						 echo "<hr>";
+
+						 echo"<div><b>Apellido y Nombre:&nbsp</b>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
+						 echo"<div><b>Teléfono:&nbsp</b>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";
+						 echo"<div><b>Correo Electrónico:&nbsp</b>".$datoDirector->email."</div>";
+
+						 echo "<br></div>";*/
+  					  echo "</div>";//cierre row
+
+							echo "</div>";
+
+							echo "</div>";	//final boton datos escuelas
 
 							//subpanel de profesores
+
 							echo "<div class='panel panel-primary' id ='subpanelprofesores'>";
 							echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor Juan Perez<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
 							echo "<div class='panel-body bodyprof'>";
-/*
-							// columnas: 3/12
-             //inico 1/12
-							echo "<div class='col-md-12'>";
-							echo "<div class='panel panel-primary'>";
-							echo "<div class='panel-heading'> Datos personales Prof juan perez</div>";
-							echo "<div class='panel-body'>NOmbre apellido direccion";
-              echo"</div>";
-							echo"</div>";
-							echo"</div>";//cierre de 1/12
 
-
-
-							//inicio 2/12
-							echo "<div class='col-md-12'>";
-
-							echo "<div class='panel panel-primary'>";
-							echo "<div class='panel-heading'>Cursos a cargo</div>";
-							echo "<div class='panel-body'>1 1 2 3s";
-              echo"</div>";
-							echo"</div>";
-							echo"</div>";//cierre 2/12
-
-
-							//inicio 3/12
-							echo "<div class='col-md-12'>";
-
-							echo "<div class='panel panel-primary'>";
-							echo "<div class='panel-heading'>Carga horaria total</div>";
-							echo "<div class='panel-body'>456";
-							echo"</div>";
-							echo"</div>";
-							echo"</div>";//cierre 3/12
-
-*/
-echo "<h4><b>Datos personales profesor juan:</b></h4>";
-echo "<p>holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>";
-echo "<hr>";
-echo "<h4><b>Cursos a cargo prof juan:</b></h4>";
-echo "<p>3°1°   2°4°</p>";
-echo "<hr>";
-echo "<h4><b>Carga horaria total:</b></h4>";
-echo "<p>20 horas semanales</p>";
+              echo "<h4><b>Datos personales profesor juan:</b></h4>";
+              echo "<p>holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>";
+              echo "<hr>";
+              echo "<h4><b>Cursos a cargo prof juan:</b></h4>";
+              echo "<p>3°1°   2°4°</p>";
+              echo "<hr>";
+              echo "<h4><b>Carga horaria total:</b></h4>";
+              echo "<p>20 horas semanales</p>";
+							echo "<button class='btn btn-primary' id='newCourse".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
+							echo "<div id='formNewCourse".$fila->escuelaId."' class='col-md-12'>";
+							 include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
+							 echo"</div>";
 
                echo"</div>";//panel-body subpanel profesores
 
 
 							echo"</div>";// panel-primary subpanel profesores
-
-
-
-
 							echo "</div>";
 							echo "</div>";
 
@@ -410,7 +437,4 @@ echo "<p>20 horas semanales</p>";
 	});
 
 
-
-
-
-</script>
+-->
