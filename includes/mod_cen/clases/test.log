@@ -1,0 +1,30 @@
+object(informe)#35 (14) {
+  ["informeId":"informe":private]=>
+  NULL
+  ["escuelaId":"informe":private]=>
+  NULL
+  ["referenteId":"informe":private]=>
+  string(4) "0191"
+  ["prioridad":"informe":private]=>
+  NULL
+  ["tipo":"informe":private]=>
+  NULL
+  ["titulo":"informe":private]=>
+  NULL
+  ["contenido":"informe":private]=>
+  NULL
+  ["leido":"informe":private]=>
+  NULL
+  ["estado":"informe":private]=>
+  NULL
+  ["fechaVisita":"informe":private]=>
+  NULL
+  ["fechaCarga":"informe":private]=>
+  NULL
+  ["fechaModificado":"informe":private]=>
+  NULL
+  ["nuevoTipo":"informe":private]=>
+  NULL
+  ["subTipo":"informe":private]=>
+  NULL
+}

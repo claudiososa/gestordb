@@ -280,12 +280,24 @@ class Referente
 
 	}
 
+	public function Cargo2($estado=null,$referenteId)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="SELECT * FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE etjcargo=".$referenteId." AND estado='".$estado."'" ;
+		$sentencia.=" ORDER BY personas.apellido DESC";
+		return $conexion->query($sentencia);
+		}
+
+
 	public function Cargo($estado=null)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="SELECT * FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE etjcargo=".$this->referenteId." AND estado='".$estado."'" ;
+		$sentencia.=" ORDER BY personas.apellido ASC";
 		//echo $sentencia;
 		return $conexion->query($sentencia);
     }

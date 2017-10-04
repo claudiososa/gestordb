@@ -34,12 +34,14 @@
 
 		//session_start();
 		//cargamos valores session
+		//var_dump($_POST['referenteId']);
 
 		$c_referente= new Referente($_POST['referenteId'],null,null,null,null,null,null,null);
 		//$c_referente= new Referente($_POST['referenteId']);
 
 
 		$b_referente= $c_referente->buscar();
+
 		$d_referente=mysqli_fetch_object($b_referente);
 
 		$c_persona= new Persona($d_referente->personaId);
@@ -52,7 +54,8 @@
 		$_SESSION["apellido"]=$d_persona->apellido;
 		$_SESSION["personaId"]=$d_persona->personaId;
 
-		$_SESSION["referenteId"]=$d_referente->referenteId;
+		$_SESSION["referenteId"]=$_POST['referenteId'];
+		//var_dump($_SESSION['referenteId']);
 		//$referente= new Referente($elemento->referenteId);
 
 		$referente = $c_referente->getContacto();
@@ -68,6 +71,8 @@
 		echo 'window.location="index.php"};';
 		echo 'setTimeout ("redireccion()", 0); //el tiempo expresado en milisegundos';
 		echo '</script>';
+
+		
 
 	}else {
 	include_once('includes/mod_cen/formularios/f_loginc.php');

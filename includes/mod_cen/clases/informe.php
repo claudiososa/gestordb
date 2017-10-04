@@ -45,6 +45,22 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 	}
 
 
+	public function search ($referenteId)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="SELECT * FROM informes
+								INNER JOIN referentes
+								ON referentes.referenteId=informes.referenteId
+								INNER JOIN personas
+								ON personas.personaId=referentes.personaId
+								WHERE informes.referenteId=".$referenteId;
+	   $sentencia.="  ORDER BY informes.informeId DESC";
+			//echo $sentencia.'<br><br>';
+			return $conexion->query($sentencia);
+	}
+
 	public function agregar()
 	{
 		$nuevaConexion=new Conexion();
@@ -147,6 +163,53 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
     	$result = explode("','",$result);
     	return $result;
     }
+
+
+		public function summary2($condicion=NULL,$filtro=NULL,$fecha1=NULL,$fecha2=NULL,$mes1=NULL,$año1=NULL,$prioridad=NULL,$referenteId=NULL,$tipo=NULL){
+			$nuevaConexion=new Conexion();
+			$conexion=$nuevaConexion->getConexion();
+
+			switch ($condicion) {
+
+				case 'entreFechas':
+					if(isset($fecha1)<>NULL && isset($fecha2)<>NULL){
+						$sentencia="SELECT ".$filtro." * "."FROM informes WHERE fechaCarga "." BETWEEN '".$fecha1."' AND '".$fecha2."'";
+					}else{
+						$sentencia="SELECT ".$filtro." * "."FROM informes";
+					}
+					break;
+
+				case 'mesAñoReferente':
+					$sentencia="SELECT ".$filtro." *, DAY(fechaVisita) AS dia FROM informes WHERE MONTH(fechaVisita) = '".$mes1."' AND YEAR(fechaVisita) ='".$año1."' AND referenteId=".$referenteId." ORDER BY escuelaId";
+					break;
+
+				case 'mesAño':
+					$sentencia="SELECT ".$filtro." * "."FROM informes WHERE MONTH(fechaCarga) = ".$mes1." AND YEAR(fechaCarga) =".$año1;
+					break;
+
+				case 'añoPrioridad':
+						$sentencia="SELECT ".$filtro." * "."FROM informes WHERE YEAR(fechaCarga) =".$año1." AND prioridad='".$prioridad."'";
+						break;
+
+
+				case 'mesAñoPrioridad':
+					$sentencia="SELECT ".$filtro." * "."FROM informes WHERE MONTH(fechaCarga) = ".$mes1." AND YEAR(fechaCarga) =".$año1." AND prioridad='".$prioridad."'";
+						break;
+
+				case 'año':
+						$sentencia="SELECT ".$filtro." * "."FROM informes WHERE  YEAR(fechaCarga) =".$año1;
+						break;
+
+				default:
+					# code...
+					break;
+			}
+
+	//echo $sentencia."<br>";
+			return  $conexion->query($sentencia);
+		}
+
+
 
 	public function summary($condicion=NULL,$filtro=NULL,$fecha1=NULL,$fecha2=NULL,$mes1=NULL,$año1=NULL,$prioridad=NULL,$referenteId=NULL,$tipo=NULL){
 		$nuevaConexion=new Conexion();

@@ -1,79 +1,45 @@
 <?php
-  include_once('../maestro.php');
   include_once('../informe.php');
   include_once('../referente.php');
-  //Maestro::debbugPHP($referenteId);
-/*  $list=array(
-    'cantidad'=>'2',
-    'totalMes'=>'33',
-    'nombre'=>'juan',
-    'apellido'=>'perez'
-  );
-  $json = json_encode($list);
 
-  echo $json;
-
-*/
-
-  if (isset($_POST['year']) && isset($_POST['month'])){
-
-  	//include_once("includes/mod_cen/clases/maestro.php");
+  //verifica que venga desde pedido post desde ajax determinado
+  if (isset($_POST['year']) && isset($_POST['month']))
+  {
   	$list=array();
-  	//$informe = new informe();
-  	//Maestro::debbugPHP($informe);
+  	$informe = new informe();
+
+    // busqueda de los referentes a cargo del perfil Coordinador
   	$referenteId=$_POST['referenteId'];
+    //Maestro::debbugPHP($referenteId);
+  	//$referente= new Referente($referenteId);
+    $referente= new Referente();
+  	$resultado_facilitador_acargo = $referente->Cargo2("Activo",$referenteId);
 
-  	$referente= new Referente($referenteId);
-    Maestro::debbugPHP($referente);
+    // recorrido por cada referente a cargo
+    while ($fila = mysqli_fetch_object($resultado_facilitador_acargo))
+    {
 
-  	$resultado_facilitador_acargo = $referente->Cargo("Activo");
+  		$buscar_informe=$informe->search($fila->referenteId);
+  		$cantidad=mysqli_num_rows($buscar_informe);
 
-
-  	while ($fila = mysqli_fetch_object($resultado_facilitador_acargo)) {
-
-  		$informeFacil= new informe(null,null,$fila->referenteId);
-      //Maestro::debbugPHP($informeFacil);
-  		//$buscar_informe=$informeFacil->buscar();
-  		//$cantidad=mysqli_num_rows($buscar_informe);
-
-  		//$buscarMesActualInforme=$informe->summary('mesAñoReferente',null,null,null,$_POST['month'],$_POST['year'],null,$fila->referenteId);
-  		//$totalMes=mysqli_num_rows($buscarMesActualInforme);
-
+  		$cantidadMes=$informe->summary('mesAñoReferente',null,null,null,$_POST['month'],$_POST['year'],null,$fila->referenteId);
+      //Maestro::debbugPHP($buscarMesActualInforme);
+  		$totalMes=mysqli_num_rows($cantidadMes);
 
   		$temporal=array(
-  			'cantidad'=>'2',
-  			'totalMes'=>'33',
-  			'nombre'=>'juan',
-  			'apellido'=>'perez'
-  		);
-  		/*
-  		$temporal=array(
+        'personaId'=>$fila->personaId,
+        'referenteId'=>$fila->referenteId,
   			'cantidad'=>$cantidad,
   			'totalMes'=>$totalMes,
   			'nombre'=>$fila->nombre,
   			'apellido'=>$fila->apellido
   		);
 
-
   		array_push($list,$temporal);
-
   	}
 
-
-  //	array_push($list,$temporal);
-    /*
-    $list=array(
-      'cantidad'=>'2',
-      'totalMes'=>'33',
-      'nombre'=>'juan',
-      'apellido'=>'perez'
-    );
-
     $json = json_encode($list);
-
+//    Maestro::debbugPHP($json);
   	echo $json;
-  }
-  */
-
   }
   ?>

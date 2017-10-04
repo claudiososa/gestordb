@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  let referenteId =<?php echo $_SESSION['referenteId'];?>
+  var referenteId = " <?php echo trim($_SESSION['referenteId']) ?>";
 </script>
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <script src="includes/mod_cen/portada/js/portadaCoordinadorFacilitador.js"></script>
@@ -7,6 +7,7 @@
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
+
 
 $informes= new informe();
 //create object referenteId and filter of status active
@@ -348,26 +349,6 @@ $año= date('Y');
     }
 
   }
-/*
-for ($i=1; $i<=12; $i++) {
-      if ($i == date('m'))
-      echo '<option value="'.$i.'" selected>'.$i.'</option>';
-      else
-      echo '<option value="'.$i.'">'.$i.'</option>';
-    }
-  echo "<option value='01'>Enero</option>";
-  echo "<option value='02'>Febrero</option>";
-  echo "<option value='03'>Marzo</option>";
-  echo "<option value='04'>Abril</option>";
-  echo "<option value='05'>Mayo</option>";
-  echo "<option value='06'>Junio</option>";
-  echo "<option value='07'>Julio</option>";
-  echo "<option value='08'>Agosto</option>";
-  echo "<option value='09'>Septiembre</option>";
-  echo "<option value='10'>Octubre</option>";
-  echo "<option value='11'>Noviembre</option>";
-  echo "<option value='12'>Diciembre</option>";
-*/
 
   echo "</select>";
   echo "</div>";
@@ -377,7 +358,7 @@ for ($i=1; $i<=12; $i++) {
 
 
 
-  echo "<table id='informe_etj' class='table table-hover table-striped table-condensed tablesorter'>";
+  echo "<table class='table table-hover table-striped table-condensed tablesorter'>";
   echo "<thead>";
   echo "<tr>";
   echo "<th>Apellido y Nombre</th>";
@@ -386,7 +367,7 @@ for ($i=1; $i<=12; $i++) {
   echo "</tr>";
   echo "</thead>";
 
-  echo "<tbody>";
+  echo "<tbody id='bodyTablaCargo'>";
 
   while ($fila=mysqli_fetch_object($resultado_ett_acargo)){
     echo "<tr>";
