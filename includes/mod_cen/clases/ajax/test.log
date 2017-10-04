@@ -1,0 +1,20 @@
+object(Referente)#1 (9) {
+  ["referenteId":"Referente":private]=>
+  string(3) "119"
+  ["personaId":"Referente":private]=>
+  NULL
+  ["tipo":"Referente":private]=>
+  NULL
+  ["rol":"Referente":private]=>
+  NULL
+  ["etjcargo":"Referente":private]=>
+  NULL
+  ["fechaIngreso":"Referente":private]=>
+  NULL
+  ["titulo":"Referente":private]=>
+  NULL
+  ["estado":"Referente":private]=>
+  NULL
+  ["etjcargo2":"Referente":private]=>
+  NULL
+}

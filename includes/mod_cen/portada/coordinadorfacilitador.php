@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  let referenteId =<?php echo $_SESSION['referenteId'];?>
+</script>
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <script src="includes/mod_cen/portada/js/portadaCoordinadorFacilitador.js"></script>
 <?php

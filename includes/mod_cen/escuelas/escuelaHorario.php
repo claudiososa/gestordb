@@ -3,6 +3,7 @@
 <script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <?php
 
 include_once("includes/mod_cen/clases/escuela.php");
@@ -145,4 +146,65 @@ $profesoresActuales2= $profesor->buscar('total');
 </div>
 </div>
 </div>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Nueva Hora Catedra</h4>
+      </div>
+      <div class="modal-body" id="modal-body">
+
+      <form class="" action="" method="post">
+
+        <div class="form-group">
+          <label  for="horaDia">Dia</label>
+          <input type="text" name="horaDia" value="" readonly="">
+        </div>
+
+        <div class="form-group">
+          <label  for="HoracourseName">Curso</label>
+          <select class="form-control" name="HoracourseName" id="HoracourseName">
+            <option value="0">Seleccione</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label  for="horaTeacherName">Profesor/a</label>
+          <select class="form-control" name="horaTeacherName" id="horaTeacherName">
+              <option value="0">Seleccione</option>
+          </select>
+          </div>
+        <div class="form-group">
+          <label  for="asignatura">Asignatura</label>
+          <select class="form-control" name="asignatura" id="asignatura">
+              <option value="0">Seleccione</option>
+              <option value="1">Matematica</option>
+              <option value="2">Lengua</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label  for="horaInicio">Hora Inicio</label><br>
+          <input type="text" name="" id="horaInicio" class="timepicker" value="">
+        </div>
+
+        <div class="form-group">
+          <label  for="horaFinal">Hora Final</label><br>
+          <input type="text" name="" id="horaFinal" class="timepicker" value="">
+        </div>
+
+       <button type="button" id="saveHour" class="btn btn-warning" name="button">Guardar Hora</button>
+      </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

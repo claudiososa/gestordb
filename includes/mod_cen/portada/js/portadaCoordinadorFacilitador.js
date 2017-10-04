@@ -4,10 +4,10 @@ $(document).ready(function() {
     let month =$('#month option:selected').val()
 //    alert(month)
     $.ajax({
-      url: 'includes/mod_cen/clases/informe.php',
+      url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
       type: 'POST',
       dataType: 'json',
-      data: {year:year}
+      data: {year:year,month:month,referenteId:referenteId}
     })
     .done(function() {
       console.log("success");

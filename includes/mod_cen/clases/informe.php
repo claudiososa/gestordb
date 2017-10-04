@@ -3,7 +3,7 @@ include_once('includes/mod_cen/clases/conexion.php');
 include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/maestro.php");
-
+//include_once("referente.php");
 class informe
 {
 	private $informeId;
@@ -595,17 +595,3 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 	}
 
 }
-
-if ($_POST){
-
-	$estado=[];
-
-	$temporal=array('cursoId'=>'no existen cursos para este Colegio');
-	array_push($estado,$temporal);
-
-	$json = json_encode($estado);
-	Maestro::debbugPHP($json);
-	echo $json;
-}
-
-//$buscarMesActualInforme=$informe_ett->summary('mesAñoReferente',null,null,null,$mesAc,'2017',null,$fila->referenteId);
