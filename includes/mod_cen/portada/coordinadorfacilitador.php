@@ -9,6 +9,7 @@ require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
 
 
+
 $informes= new informe();
 //create object referenteId and filter of status active
 $referenteId=$_SESSION['referenteId'];
@@ -385,7 +386,7 @@ $año= date('Y');
     echo '<a class="btn btn-success" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a>';
     echo "</td>";
     echo "<td>";
-    echo '<a class="btn btn-success" href="?mod=slat&men=informe&date&id=6&referenteId='.$fila->referenteId.'">'.$totalMes.'</a>';
+    echo '<a class="btn btn-success" href="?mod=slat&men=informe&date&id=6&year='.$año.'&month='.$mes.'&referenteId='.$fila->referenteId.'">'.$totalMes.'</a>';
     echo "</td>";
     echo "</tr>";
   }

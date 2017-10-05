@@ -32,7 +32,9 @@
   			'cantidad'=>$cantidad,
   			'totalMes'=>$totalMes,
   			'nombre'=>$fila->nombre,
-  			'apellido'=>$fila->apellido
+  			'apellido'=>$fila->apellido,
+        'year'=>$_POST['year'],
+        'month'=>$_POST['month']
   		);
 
   		array_push($list,$temporal);

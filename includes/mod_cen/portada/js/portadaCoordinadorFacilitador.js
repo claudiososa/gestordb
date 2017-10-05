@@ -14,7 +14,7 @@ $(document).ready(function() {
       $('#bodyTablaCargo').empty()
 
       for (let item of list) {
-        $('#bodyTablaCargo').prepend(`<tr><td><a href='index.php?mod=slat&men=referentes&id=2&personaId=${item.personaId}&referenteId=${item.referenteId}'>${item.apellido},${item.nombre}</a></td><td><a class="btn btn-success" href="?mod=slat&men=informe&id=6&referenteId=${item.referenteId}">${item.cantidad}</a></td><td><a class="btn btn-success" href="?mod=slat&men=informe&date&id=6&referenteId=${item.referenteId}">${item.totalMes}</a></td>`)
+        $('#bodyTablaCargo').prepend(`<tr><td><a href='index.php?mod=slat&men=referentes&id=2&personaId=${item.personaId}&referenteId=${item.referenteId}'>${item.apellido},${item.nombre}</a></td><td><a class="btn btn-success" href="?mod=slat&men=informe&id=6&referenteId=${item.referenteId}">${item.cantidad}</a></td><td><a class="btn btn-success" href="?mod=slat&men=informe&date&id=6&referenteId=${item.referenteId}&year=${item.year}&month=${item.month}">${item.totalMes}</a></td>`)
       }
       $("#informe_etj").tablesorter();
 
