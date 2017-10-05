@@ -347,8 +347,8 @@ if(($_POST))
               echo "<hr>";
               echo "<h4><b>Carga horaria total:</b></h4>";
               echo "<p>20 horas semanales</p>";
-							echo "<button class='btn btn-primary' id='newCourse".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
-							echo "<div id='formNewCourse".$fila->escuelaId."' class='col-md-12'>";
+							echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
+							echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$fila->escuelaId."'>";
 							 include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
 							 echo"</div>";
 

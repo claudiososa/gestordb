@@ -3,34 +3,34 @@ $(document).ready(function() {
 
   $(".bodyprof").hide()
   $(".ocultartr").hide()
-  //ocultar datos Institucion
   $(".datosInst").hide()
-    //nuevo curso
+  $('.formNewCourse').hide()
 
-  $('#formNewCourseProf').hide()
-
-///////// boton ver profesores ed. fisica
+///////// boton ver profesores ed. fisica/////
  $(".botondesplegable").click(function(event) {
-   //alert($(this).attr("id"))
+  //let numero=$(this).attr("id").substr(16)
 
-   $("#panel" + $(this).attr('id')).toggle()
+    $("#panel" + $(this).attr('id')).toggle()
 
 	});
 
- /////// datos institucion:
- $(".btnDatosInst").click(function(event) {
-  // alert($(this).attr("id"))
-    $(".datosInst#datosInst" + $(this).attr('id')).toggle()
-	});
+ /////// panel datos institucion:////
+
+  $(".btnDatosInst").click(function(event) {
+       let numIdDatosInst=$(this).attr("id").substr(12)
+       $("#datosInst" + numIdDatosInst).toggle()
+  });
+
+/////formulario Nuevo curso////
+
+  $(".btnNuevoCurso").click(function(event) {
+        let numeroIdCurso= $(this).attr("id").substr(13)
+        $("#formNewCourse" + numeroIdCurso).toggle()
+  });
 
 
-//nuevo curso
 
-
-$('#newCourseProf').click(function (){
-  $('#formNewCourseProf').toggle()
-})
-
+//////////panel general/////
 
   $(document).on('click', ".panelprof", function(){
     var $this = $(this);
@@ -45,7 +45,5 @@ $('#newCourseProf').click(function (){
     		$this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
     	}
   })
-
-
 
 });
