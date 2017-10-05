@@ -1,7 +1,7 @@
 <?php
 
-include_once('includes/mod_cen/clases/conexion.php');
-include_once("includes/mod_cen/clases/maestro.php");
+include_once('conexion.php');
+include_once("maestro.php");
 
 class TipoInforme
 {

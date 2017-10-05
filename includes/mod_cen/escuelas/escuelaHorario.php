@@ -1,9 +1,8 @@
 
 <script src="includes/mod_cen/escuelas/js/escuelaHorario.js" type="text/javascript"></script>
 <script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="css/material-timepicker.css">
+
 <?php
 
 include_once("includes/mod_cen/clases/escuela.php");
@@ -51,6 +50,13 @@ $profesoresActuales2= $profesor->buscar('total');
 				<div class="panel-body">
 					<div class="formHorarioNuevaHora" id='divHorarioLunes'>
 						<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
+
+						<button id="btnHoraCatedra" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+						Hora Catedra
+						</button>
+
+
+
 					</div>
 				</div>
 				</div>
@@ -156,48 +162,50 @@ $profesoresActuales2= $profesor->buscar('total');
       </div>
       <div class="modal-body" id="modal-body">
 
-      <form class="" action="" method="post">
+				<form class="" action="" method="post">
 
-        <div class="form-group">
-          <label  for="horaDia">Dia</label>
-          <input type="text" name="horaDia" value="" readonly="">
-        </div>
+					<div class="form-group">
+						<label  for="horaDia">Dia</label>
+						<input type="text" name="horaDia" value="" readonly="">
+					</div>
 
-        <div class="form-group">
-          <label  for="HoracourseName">Curso</label>
-          <select class="form-control" name="HoracourseName" id="HoracourseName">
-            <option value="0">Seleccione</option>
-          </select>
-        </div>
+					<div class="form-group">
+						<label  for="HoracourseName">Curso</label>
+						<select class="form-control" name="HoracourseName" id="HoracourseName">
+							<option value="0">Seleccione</option>
+						</select>
+					</div>
 
-        <div class="form-group">
-          <label  for="horaTeacherName">Profesor/a</label>
-          <select class="form-control" name="horaTeacherName" id="horaTeacherName">
-              <option value="0">Seleccione</option>
-          </select>
-          </div>
-        <div class="form-group">
-          <label  for="asignatura">Asignatura</label>
-          <select class="form-control" name="asignatura" id="asignatura">
-              <option value="0">Seleccione</option>
-              <option value="1">Matematica</option>
-              <option value="2">Lengua</option>
+					<div class="form-group">
+						<label  for="horaTeacherName">Profesor/a</label>
+						<select class="form-control" name="horaTeacherName" id="horaTeacherName">
+								<option value="0">Seleccione</option>
+						</select>
+						</div>
+					<div class="form-group">
+						<label  for="asignatura">Asignatura</label>
+						<select class="form-control" name="asignatura" id="asignatura">
+								<option value="0">Seleccione</option>
+								<option value="1">Matematica</option>
+								<option value="2">Lengua</option>
 
-          </select>
-        </div>
+						</select>
+					</div>
 
-        <div class="form-group">
-          <label  for="horaInicio">Hora Inicio</label><br>
-          <input type="text" name="" id="horaInicio" class="timepicker" value="">
-        </div>
+					<div class="form-group">
+						<label  for="horaFinal">Hora Final</label><br>
+						<input type="text" name="" id="horaFinal" class="timepicker" value="">
+					</div>
 
-        <div class="form-group">
-          <label  for="horaFinal">Hora Final</label><br>
-          <input type="text" name="" id="horaFinal" class="timepicker" value="">
-        </div>
+					<div class="form-group">
+						<label  for="horaFinal">Hora Final</label><br>
+						<input type="mat-timepicker" maxlength="5">
+						<input type="mat-timepicker" value="15:42" placeholder="00:00" maxlength="5">
+					</div>
 
-       <button type="button" id="saveHour" class="btn btn-warning" name="button">Guardar Hora</button>
-      </form>
+				 <button type="button" id="saveHour" class="btn btn-warning" name="button">Guardar Hora</button>
+				</form>
+
 
 
       </div>
@@ -208,3 +216,7 @@ $profesoresActuales2= $profesor->buscar('total');
     </div>
   </div>
 </div>
+
+
+
+<script src="js/material-timepicker.js"></script>

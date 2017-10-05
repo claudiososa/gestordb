@@ -1,8 +1,8 @@
 <?php
-include_once('includes/mod_cen/clases/conexion.php');
-include_once("includes/mod_cen/clases/TipoInforme.php");
-include_once("includes/mod_cen/clases/TipoPermisos.php");
-include_once("includes/mod_cen/clases/maestro.php");
+include_once('conexion.php');
+include_once("TipoInforme.php");
+include_once("TipoPermisos.php");
+include_once("maestro.php");
 //include_once("referente.php");
 class informe
 {
