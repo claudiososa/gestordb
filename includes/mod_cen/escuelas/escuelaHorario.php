@@ -1,7 +1,8 @@
 
 <script src="includes/mod_cen/escuelas/js/escuelaHorario.js" type="text/javascript"></script>
 <script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
-<link rel="stylesheet" href="css/material-timepicker.css">
+<link rel="stylesheet" href="css/bootstrap-clockpicker.min.css">
+<link rel="stylesheet" type="text/css" href="includes/mod_cen/escuelas/assets/css/github.min.css">
 
 <?php
 
@@ -50,10 +51,7 @@ $profesoresActuales2= $profesor->buscar('total');
 				<div class="panel-body">
 					<div class="formHorarioNuevaHora" id='divHorarioLunes'>
 						<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
-
-						<button id="btnHoraCatedra" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-						Hora Catedra
-						</button>
+	
 
 
 
@@ -153,70 +151,10 @@ $profesoresActuales2= $profesor->buscar('total');
 </div>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Nueva Hora Catedra</h4>
-      </div>
-      <div class="modal-body" id="modal-body">
 
-				<form class="" action="" method="post">
-
-					<div class="form-group">
-						<label  for="horaDia">Dia</label>
-						<input type="text" name="horaDia" value="" readonly="">
-					</div>
-
-					<div class="form-group">
-						<label  for="HoracourseName">Curso</label>
-						<select class="form-control" name="HoracourseName" id="HoracourseName">
-							<option value="0">Seleccione</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label  for="horaTeacherName">Profesor/a</label>
-						<select class="form-control" name="horaTeacherName" id="horaTeacherName">
-								<option value="0">Seleccione</option>
-						</select>
-						</div>
-					<div class="form-group">
-						<label  for="asignatura">Asignatura</label>
-						<select class="form-control" name="asignatura" id="asignatura">
-								<option value="0">Seleccione</option>
-								<option value="1">Matematica</option>
-								<option value="2">Lengua</option>
-
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label  for="horaFinal">Hora Final</label><br>
-						<input type="text" name="" id="horaFinal" class="timepicker" value="">
-					</div>
-
-					<div class="form-group">
-						<label  for="horaFinal">Hora Final</label><br>
-						<input type="mat-timepicker" maxlength="5">
-						<input type="mat-timepicker" value="15:42" placeholder="00:00" maxlength="5">
-					</div>
-
-				 <button type="button" id="saveHour" class="btn btn-warning" name="button">Guardar Hora</button>
-				</form>
-
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script src="js/material-timepicker.js"></script>
+<script src="js/bootstrap-clockpicker.min.js"></script>
+<script src="js/highlight.min.js"></script>
+<script type="text/javascript">
+hljs.configure({tabReplace: '    '});
+hljs.initHighlightingOnLoad();
+</script>
