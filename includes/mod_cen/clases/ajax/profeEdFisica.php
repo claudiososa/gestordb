@@ -1,7 +1,7 @@
 <?php
- 
-  include_once('../persona.php');
-  include_once('../ProfeEdFisicaxEscuela.php');
+
+  include_once('includes/mod_cen/clases/persona.php');
+  include_once('includes/mod_cen/clases/ProfeEdFisicaxEscuela.php');
 
 
 
@@ -10,7 +10,7 @@
  * AL PRESIONAR BUSCAR PROFESOR
  */
 
-if (isset($_POST['dni'])) 
+if (isset($_POST['dni']))
 {
 
 
@@ -20,18 +20,18 @@ if (isset($_POST['dni']))
 
 
 	$estado= [];
-		
 
-	if ($cantidadPersona > 0) 
+
+	if ($cantidadPersona > 0)
 	{   // encuentra a una persona
-					
+
 
 		$dato = mysqli_fetch_object($datoPersona);
 
 		$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$dato->personaId,$_POST['escuelaId']); // new
 		$datoProfesorEdFisica = $profesorEdFisica->buscar();// busca para saber si el profesor ya esta cargado en la escuela
 		$cantidadProfeEF=mysqli_num_rows($datoProfesorEdFisica); // new
-				    			
+
 			if ($cantidadProfeEF > 0)
 			{
 
@@ -71,8 +71,8 @@ if (isset($_POST['botonSaveTeacher'])) {
 	//if ($_POST['botonSaveTeacher']=='saveTeacher') {
 		include_once('persona.php');
 		if ($_POST['statusTeacher']=='create') {
-			
-			
+
+
 			$persona= new Persona(null,$_POST['surnameTeacher'],
 																$_POST['nameTeacher'],
 																$_POST['dniTeacher'],
@@ -91,13 +91,13 @@ if (isset($_POST['botonSaveTeacher'])) {
 
 			$datoPersona = $persona->agregar();
 
-			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId']); 
+			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId']);
 			$datoProfeEF=$profesorEdFisica->agregar();
-			
+
 			//$profesor = new Profesores(null,$datoPersona,$_POST['escuelaId']);
 			//$datoProfesor = $profesor->agregar();
 
-			$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_POST['escuelaId']); 
+			$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_POST['escuelaId']);
 
 			$buscarProfesor=$profesor2->buscar();
 
@@ -135,15 +135,15 @@ if (isset($_POST['botonSaveTeacher'])) {
 
 					//$profePrueba = new ProfeEdFisicaxEscuela(null,'999',$_POST['escuelaId']);
 		            //$proEF=$profePrueba->agregar();
-					$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$_POST['personaId'],$_POST['escuelaId']); 
+					$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$_POST['personaId'],$_POST['escuelaId']);
 					$datoProfeEF=$profesorEdFisica->agregar();
 
-					
+
 					//$profesor = new Profesores(null,$_POST['personaId'],$_POST['escuelaId']);
 					//$datoProfesor = $profesor->agregar();
 
 					//$profesor2 = new Profesores(null,null,$_POST['escuelaId']);
-					$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_POST['escuelaId']); 
+					$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_POST['escuelaId']);
 
 					$buscarProfesor=$profesor2->buscar();
 
