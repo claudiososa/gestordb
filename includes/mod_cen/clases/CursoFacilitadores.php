@@ -1,6 +1,5 @@
 <?php
 include_once('conexionv2.php');
-include_once("referente.php");
 include_once("maestro.php");
 
 class CursoFacilitadores
@@ -53,82 +52,69 @@ function __construct($cursoFacilitadoresId=NULL,
 					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		 }
 	}
+
 */
 
-public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
+public function borrar($id)
+{
+	$bd=Conexion2::getInstance();
+	$sentencia ='DELETE FROM cursoFacilitadores WHERE cursoFacilitadoresId='.$id;
+	//return $sentencia;
+
+	if($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+		 return $filaAfectada=$bd->lastID();
+	}else{
+			 return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+	}
+}
+
+public function buscarId($id)
+{
+		$bd=Conexion2::getInstance();
+		$sentencia ='SELECT * FROM cursoFacilitadores WHERE cursoFacilitadoresId='.$id;
+		$fila = mysqli_fetch_object($bd->ejecutar($sentencia));
+		$cantidad =  mysqli_num_rows($bd->ejecutar($sentencia));
+
+		if ($dato > 1) {
+			$arrayDatoEncontrado=[
+				'cantidad' =>$cantidad,
+				'id' => $fila->cursoFacilitadoresId
+			];
+			return $arrayDatoEncontrado;
+		}else {
+			return 0;
+		}
+}
+
+
+
+public function buscar($tipo=null,$cursoId=null,$asignaturaId=null,$profesorId=null,$referenteId=null)
 	{
 		$bd=Conexion2::getInstance();
-    $sinParam=0;
+
 		$sentencia="SELECT cursoFacilitadores.cursoFacilitadoresId,
-											 referentes.cursoId,
+											 cursoFacilitadores.cursoId,
 											 cursoFacilitadores.asignaturaId,
-											 referentes.profesorId,
-											 referentes.tipo,
+											 cursoFacilitadores.profesorId,
 											 personas.nombre,
 											 personas.apellido
 									FROM cursoFacilitadores
 									INNER JOIN referentes
-									ON referentes.cursoId=cursoFacilitadores.cursoId
+									ON referentes.referenteId=cursoFacilitadores.referenteId
 									INNER JOIN personas
 									ON personas.personaId=referentes.personaId ";
-									$sentencia.=" WHERE 1";
+									$sentencia.=" WHERE cursoId=".$cursoId." AND asignaturaId=".$asignaturaId." AND profesorId=".$profesorId." AND cursoFacilitadores.referenteId=".$referenteId;
 
 
-		if($tiporeferente<>NULL){
-      	$sinParam=1;
-				$sentencia.= " AND ( referentes.tipo='".$tiporeferente."'";
-		}
-
-		if ($listaRefer <> NULL){
-				$sinParam=1;
-				$sentencia.="  AND ( ";
-				foreach ($listaRefer as $value) {
-					$sentencia.=" referentes.tipo='".$value."' || ";
-				}
-				$sentencia=substr($sentencia,0,strlen($sentencia)-3);
-		}
-
-		if ($sinParam==1) {
-			$sentencia.=' ) ';
-		}
-
-
-		if($this->cursoFacilitadoresId!=NULL || $this->cursoId!=NULL ||
-			$this->asignaturaId!=NULL || $this->referenteId!=NULL)
-		{
-			$sentencia.=" AND ";
-  		if($this->cursoFacilitadoresId!=NULL)
-  		{
-  			$sentencia.=" cursoFacilitadores.cursoFacilitadoresId = $this->cursoFacilitadoresId && ";
-  		}
-
-  		if($this->cursoId!=NULL)
-  		{
-  			$sentencia.=" cursoFacilitadores.cursoId = '$this->cursoId' && ";
-  		}
-
-  		if($this->asignaturaId!=NULL)
-  		{
-  			$sentencia.=" cursoFacilitadores.asignaturaId=$this->asignaturaId && ";
-  		}
-
-			if($this->referenteId!=NULL)
-			{
-				$sentencia.=" cursoFacilitadores.referenteId = $this->referenteId && ";
-			}
-
-		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
-		}
-
-		  // fin else
-
-
-		$sentencia.="  ORDER BY cursoFacilitadores.cursoFacilitadoresId DESC";
-		if(isset($limit)){
-			$sentencia.=" LIMIT ".$limit;
-		}
 		//echo $sentencia.'<br><br>';
-		return $bd->ejecutar($sentencia);
+		if ($tipo=="cantidad") {
+			$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));
+			return $cantidad;
+		}elseif ($tipo=="id") {
+			$id = mysqli_fetch_object($bd->ejecutar($sentencia));
+			return $id->cursoFacilitadoresId;
+		}
+
 	}
 
 

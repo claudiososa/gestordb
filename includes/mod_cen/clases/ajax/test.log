@@ -1,1 +1,6 @@
-string(4) "0119"
+array(2) {
+  ["cantidad"]=>
+  int(3)
+  ["id"]=>
+  string(2) "26"
+}

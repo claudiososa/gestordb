@@ -1,6 +1,5 @@
 <?php
 include_once('conexionv2.php');
-include_once("referente.php");
 include_once("maestro.php");
 
 class HorarioFacilitadores
@@ -11,13 +10,15 @@ class HorarioFacilitadores
 	private $horaIngreso;
  	private $horaSalida;
 	private $cursoFacilitadoresId;
+	private $escuelaId;
 
 function __construct($horarioFacilitadoresId=NULL,
 										 $referenteId=NULL,
 										 $dia=NULL,
 										 $horaIngreso=NULL,
 										 $horaSalida=NULL,
-										 $cursoFacilitadoresId=NULL
+										 $cursoFacilitadoresId=NULL,
+										 $escuelaId=NULL
 										 )
 	{
 		$this->horarioFacilitadoresId = $horarioFacilitadoresId;
@@ -26,18 +27,20 @@ function __construct($horarioFacilitadoresId=NULL,
 		$this->horaIngreso = $horaIngreso;
  		$this->horaSalida = $horaSalida;
 		$this->cursoFacilitadoresId = $cursoFacilitadoresId;
+		$this->escuelaId = $escuelaId;
 	}
 
 	public function agregar()
 	{
 		$bd=Conexion2::getInstance();
-		$sentencia="INSERT INTO HorarioFacilitadores (horarioFacilitadoresId,referenteId,dia,horaIngreso,horaSalida,cursoFacilitadoresId)
+		$sentencia="INSERT INTO horarioFacilitadores (horarioFacilitadoresId,referenteId,dia,horaIngreso,horaSalida,cursoFacilitadoresId,escuelaId)
 		            VALUES (NULL,
                         '". $this->referenteId."',
                         '".$this->dia."',
                         '". $this->horaIngreso."',
 												'". $this->horaSalida."',
-											  '". $this->cursoFacilitadoresId."');
+											  '". $this->cursoFacilitadoresId."',
+												'". $this->escuelaId."');
                         ";
 
 		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
@@ -45,6 +48,7 @@ function __construct($horarioFacilitadoresId=NULL,
 		 }else{
 					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		 }
+
 	}
 
 	/*public function editar()
@@ -59,19 +63,86 @@ function __construct($horarioFacilitadoresId=NULL,
 	}
 */
 
+public function borrar($id)
+{
+	$bd=Conexion2::getInstance();
+	$sentencia ='DELETE FROM horarioFacilitadores WHERE horarioFacilitadoresId='.$id;
+	//return $sentencia;
+
+	if($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+		 return $filaAfectada=$bd->lastID();
+	}else{
+			 return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+	}
+}
+
+public function buscarCursoId($id)
+{
+		$bd=Conexion2::getInstance();
+		$sentencia ='SELECT * FROM horarioFacilitadores WHERE cursoFacilitadoresId='.$id;
+		$fila = mysqli_fetch_object($bd->ejecutar($sentencia));
+		$cantidad =  mysqli_num_rows($bd->ejecutar($sentencia));
+
+		//if ($cantidad > 1) {
+			$arrayDatoEncontrado=[
+				'cantidad' =>$cantidad,
+				'id' => $fila->cursoFacilitadoresId
+			];
+			return $arrayDatoEncontrado;
+		//}else {
+		//	return 0;
+		//}
+}
+
+
+public function buscarId($id)
+{
+		$bd=Conexion2::getInstance();
+		$sentencia ='SELECT * FROM horarioFacilitadores WHERE horarioFacilitadoresId='.$id;
+		$dato = $bd->ejecutar($sentencia);
+		if ($dato) {
+			$fila = mysqli_fetch_object($dato);
+			$datoEncontrado = mysqli_num_rows($dato);
+			$arrayDatoEncontrado=[
+				'cantidad' =>$datoEncontrado,
+				'id' => $fila->cursoFacilitadoresId
+			];
+
+			return $arrayDatoEncontrado;
+			//return $datoEncontrado->cursoFacilitadoresId;
+		}else {
+			return 0;
+		}
+}
+
+
+
+
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
 		$bd=Conexion2::getInstance();
     $sinParam=0;
-		$sentencia="SELECT HorarioFacilitadores.cursoFacilitadoresId,HorarioFacilitadores.horarioFacilitadoresId,referentes.referenteId,HorarioFacilitadores.dia
-									,HorarioFacilitadores.horaIngreso,HorarioFacilitadores.horaSalida,referentes.personaId,referentes.tipo,personas.nombre,personas.apellido
-									FROM HorarioFacilitadores
-									INNER JOIN referentes
-									ON referentes.referenteId=HorarioFacilitadores.referenteId
+		$sentencia="SELECT horarioFacilitadores.cursoFacilitadoresId,horarioFacilitadores.horarioFacilitadoresId,
+											horarioFacilitadores.dia,
+											horarioFacilitadores.horaIngreso,horarioFacilitadores.horaSalida,
+											cursos.curso,cursos.division,cursos.turno,cursos.cantidadAlumnos,
+											CONCAT(personas.apellido,', ',personas.nombre) AS nombre,
+											asignaturas.nombre AS 'asignatura'
+									FROM horarioFacilitadores
+									INNER JOIN cursoFacilitadores
+									ON cursoFacilitadores.cursoFacilitadoresId=horarioFacilitadores.cursoFacilitadoresId
+									INNER JOIN cursos
+									ON cursos.cursoId=cursoFacilitadores.cursoId
+									INNER JOIN asignaturas
+									ON asignaturas.asignaturaId=cursoFacilitadores.asignaturaId
 									INNER JOIN personas
-									ON personas.personaId=referentes.personaId ";
-									$sentencia.=" WHERE 1";
+									ON personas.personaId=cursoFacilitadores.profesorId";
 
+									$sentencia.=" WHERE 1";
+									//INNER JOIN referentes
+									//ON referentes.referenteId=horarioFacilitadores.referenteId
+									//INNER JOIN personas
+									//ON personas.personaId=referentes.personaId
 
 		if($tiporeferente<>NULL){
       	$sinParam=1;
@@ -92,39 +163,44 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		}
 
 
-		if($this->horarioFacilitadoresId!=NULL || $this->referenteId!=NULL ||
+		if($this->horarioFacilitadoresId!=NULL || $this->referenteId!=NULL || $this->escuelaId!=NULL ||
 			$this->horaIngreso!=NULL || $this->horaSalida!=NULL || $this->cursoFacilitadoresId!=NULL ||
 			$this->dia!=NULL)
 		{
 			$sentencia.=" AND ";
   		if($this->horarioFacilitadoresId!=NULL)
   		{
-  			$sentencia.=" HorarioFacilitadores.horarioFacilitadoresId = $this->horarioFacilitadoresId && ";
+  			$sentencia.=" horarioFacilitadores.horarioFacilitadoresId = $this->horarioFacilitadoresId && ";
   		}
 
   		if($this->referenteId!=NULL)
   		{
-  			$sentencia.=" HorarioFacilitadores.referenteId = $this->referenteId && ";
+  			$sentencia.=" horarioFacilitadores.referenteId = $this->referenteId && ";
   		}
 
   		if($this->dia!=NULL)
   		{
-  			$sentencia.=" HorarioFacilitadores.dia LIKE '%$this->dia%' && ";
+  			$sentencia.=" horarioFacilitadores.dia LIKE '%$this->dia%' && ";
   		}
 
   		if($this->horaIngreso!=NULL)
   		{
-  			$sentencia.=" HorarioFacilitadores.horaIngreso=$this->horaIngreso && ";
+  			$sentencia.=" horarioFacilitadores.horaIngreso=$this->horaIngreso && ";
   		}
 
   		if($this->horaSalida!=NULL)
   		{
-  			$sentencia.=" HorarioFacilitadores.horaSalida='$this->horaSalida' && ";
+  			$sentencia.=" horarioFacilitadores.horaSalida='$this->horaSalida' && ";
   		}
 
 			if($this->cursoFacilitadoresId!=NULL)
 			{
-				$sentencia.=" HorarioFacilitadores.cursoFacilitadoresId = $this->cursoFacilitadoresId && ";
+				$sentencia.=" horarioFacilitadores.cursoFacilitadoresId = $this->cursoFacilitadoresId && ";
+			}
+
+			if($this->escuelaId!=NULL)
+			{
+				$sentencia.=" horarioFacilitadores.escuelaId = $this->escuelaId && ";
 			}
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
@@ -133,7 +209,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		  // fin else
 
 
-		$sentencia.="  ORDER BY HorarioFacilitadores.horarioFacilitadoresId DESC";
+		$sentencia.="  ORDER BY horarioFacilitadores.horarioFacilitadoresId DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

@@ -1,18 +1,27 @@
-
+<script type="text/javascript">
+  var referenteId = " <?php echo trim($_SESSION['referenteId']) ?>";
+	var escuelaId = " <?php echo trim($_GET['escuelaId']) ?>";
+</script>
 <script src="includes/mod_cen/escuelas/js/escuelaHorario.js" type="text/javascript"></script>
 <script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/bootstrap-clockpicker.min.css">
 <link rel="stylesheet" type="text/css" href="includes/mod_cen/escuelas/assets/css/github.min.css">
 
 <?php
-
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/Cursos.php");
 include_once("includes/mod_cen/clases/Profesores.php");
 include_once("includes/mod_cen/clases/referente.php");
+include_once("includes/mod_cen/clases/HorarioFacilitadores.php");
 
 $escuela = new Escuela($_GET['escuelaId']);
 $datoEscuela = $escuela->buscarUnico();
+
+//Buscar horario cargados para escuela actuales
+$horario = new HorarioFacilitadores(null,$_SESSION['referenteId'],null,null,null,null,$_GET['escuelaId']);
+
+
+//var_dump($buscarHorario);
 
 //Definicion de variables con cantidad y lista de cursos actuales para la escuela
 
@@ -41,60 +50,212 @@ $profesoresActuales2= $profesor->buscar('total');
 
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<?php echo "<h4>Horario para Escuela : ".$datoEscuela->nombre.", ".$datoEscuela->cue."</h4>" ?>
+			<?php echo "<strong>Horario para Escuela : ".$datoEscuela->nombre.", ".$datoEscuela->cue."</strong>" ?>
 		</div>
 		<div class="panel-body">
 			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<?php echo "<h4>Lunes</h4>" ?>
-				</div>
+				<div class="panel-heading">Lunes</div>
 				<div class="panel-body">
-					<div class="formHorarioNuevaHora" id='divHorarioLunes'>
+					<div class="formHorarioNuevaHora" id='divHorarioLUNES'>
 						<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Dia</th>
+									<th>Hora Inicio</th>
+									<th>Hora Final</th>
+									<th>Asignatura</th>
+									<th>Curso</th>
+									<th>Turno</th>
+									<th>Profesor</th>
+                  <th>Accion</th>
+								</tr>
+							</thead>
+							<tbody id='LUNES'>
 
 
+						<?php
+							$horario->dia='LUNES';
+							$buscarHorario = $horario->buscar();
 
+								while ($fila = mysqli_fetch_object($buscarHorario)) {
+									echo "<tr>";
+									echo "<td>".$fila->dia."</td>";
+									echo "<td>".$fila->horaIngreso."</td>";
+									echo "<td>".$fila->horaSalida."</td>";
+									echo "<td>".$fila->asignatura."</td>";
+									echo "<td>".$fila->curso."° ".$fila->division."</td>";
+									echo "<td>".Cursos::turno($fila->turno)."</td>";
+									echo "<td>".$fila->nombre."</td>";
+                  echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+									echo '</tr>';
+								}
+						 ?>
 
+					 </tbody>
+				 </table>
 					</div>
 				</div>
 				</div>
 				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<?php echo "<h4>Martes</h4>" ?>
-					</div>
+					<div class="panel-heading">Martes</div>
 					<div class="panel-body">
-						<div class="formHorarioNuevaHora" id='divHorarioMartes'>
+						<div class="formHorarioNuevaHora" id='divHorarioMARTES'>
 							<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaMartes">Agregar Hora</button>
+
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Dia</th>
+										<th>Hora Inicio</th>
+										<th>Hora Final</th>
+										<th>Asignatura</th>
+										<th>Curso</th>
+										<th>Turno</th>
+										<th>Profesor</th>
+									</tr>
+								</thead>
+								<tbody id='MARTES'>
+							<?php
+								$horario->dia='MARTES';
+								$buscarHorario = $horario->buscar();
+
+									while ($fila = mysqli_fetch_object($buscarHorario)) {
+										echo "<tr>";
+										echo "<td>".$fila->dia."</td>";
+										echo "<td>".$fila->horaIngreso."</td>";
+										echo "<td>".$fila->horaSalida."</td>";
+										echo "<td>".$fila->asignatura."</td>";
+										echo "<td>".$fila->curso."° ".$fila->division."</td>";
+										echo "<td>".Cursos::turno($fila->turno)."</td>";
+										echo "<td>".$fila->nombre."</td>";
+                    echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+										echo '</tr>';
+									}
+							 ?>
+						 </tbody>
+					 </table>
+
 						</div>
 					</div>
 					</div>
 					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<?php echo "<h4>Miercoles</h4>" ?>
-						</div>
+						<div class="panel-heading">Miércoles</div>
 						<div class="panel-body">
-							<div class="formHorarioNuevaHora" id='divHorarioMiercoles'>
-							<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaMiercoles">Agregar Hora</button>
+							<div class="formHorarioNuevaHora" id='divHorarioMIERCOLES'>
+								<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaMiercoles">Agregar Hora</button>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Dia</th>
+											<th>Hora Inicio</th>
+											<th>Hora Final</th>
+											<th>Asignatura</th>
+											<th>Curso</th>
+											<th>Turno</th>
+											<th>Profesor</th>
+										</tr>
+									</thead>
+									<tbody id='MIERCOLES'>
+								<?php
+									$horario->dia='MIERCOLES';
+									$buscarHorario = $horario->buscar();
+
+										while ($fila = mysqli_fetch_object($buscarHorario)) {
+											echo "<tr>";
+											echo "<td>".$fila->dia."</td>";
+											echo "<td>".$fila->horaIngreso."</td>";
+											echo "<td>".$fila->horaSalida."</td>";
+											echo "<td>".$fila->asignatura."</td>";
+											echo "<td>".$fila->curso."° ".$fila->division."</td>";
+											echo "<td>".Cursos::turno($fila->turno)."</td>";
+											echo "<td>".$fila->nombre."</td>";
+                      echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+											echo '</tr>';
+										}
+								 ?>
+							 </tbody>
+						 </table>
 							</div>
 						</div>
 						</div>
 						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<?php echo "<h4>Jueves</h4>" ?>
-							</div>
+							<div class="panel-heading">Jueves</div>
 							<div class="panel-body">
-								<div class="formHorarioNuevaHora" id='divHorarioJueves'>
+								<div class="formHorarioNuevaHora" id='divHorarioJUEVES'>
 									<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaJueves">Agregar Hora</button>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Dia</th>
+												<th>Hora Inicio</th>
+												<th>Hora Final</th>
+												<th>Asignatura</th>
+												<th>Curso</th>
+												<th>Turno</th>
+												<th>Profesor</th>
+											</tr>
+										</thead>
+										<tbody id='JUEVES'>
+									<?php
+										$horario->dia='JUEVES';
+										$buscarHorario = $horario->buscar();
+
+											while ($fila = mysqli_fetch_object($buscarHorario)) {
+												echo "<tr>";
+												echo "<td>".$fila->dia."</td>";
+												echo "<td>".$fila->horaIngreso."</td>";
+												echo "<td>".$fila->horaSalida."</td>";
+												echo "<td>".$fila->asignatura."</td>";
+												echo "<td>".$fila->curso."° ".$fila->division."</td>";
+												echo "<td>".Cursos::turno($fila->turno)."</td>";
+												echo "<td>".$fila->nombre."</td>";
+                        echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+												echo '</tr>';
+											}
+									 ?>
+								 </tbody>
+							 </table>
 								</div>
 							</div>
 							</div>
 							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<?php echo "<h4>Viernes</h4>" ?>
-								</div>
+								<div class="panel-heading">Viernes</div>
 								<div class="panel-body">
-									<div class="formHorarioNuevaHora" id='divHorarioViernes'>
+									<div class="formHorarioNuevaHora" id='divHorarioVIERNES'>
 										<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaViernes">Agregar Hora</button>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Dia</th>
+													<th>Hora Inicio</th>
+													<th>Hora Final</th>
+													<th>Asignatura</th>
+													<th>Curso</th>
+													<th>Turno</th>
+													<th>Profesor</th>
+												</tr>
+											</thead>
+											<tbody id='VIERNES'>
+										<?php
+											$horario->dia='VIERNES';
+											$buscarHorario = $horario->buscar();
+
+												while ($fila = mysqli_fetch_object($buscarHorario)) {
+													echo "<tr>";
+													echo "<td>".$fila->dia."</td>";
+													echo "<td>".$fila->horaIngreso."</td>";
+													echo "<td>".$fila->horaSalida."</td>";
+													echo "<td>".$fila->asignatura."</td>";
+													echo "<td>".$fila->curso."° ".$fila->division."</td>";
+													echo "<td>".Cursos::turno($fila->turno)."</td>";
+													echo "<td>".$fila->nombre."</td>";
+                          echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+													echo '</tr>';
+												}
+										 ?>
+									 </tbody>
+								 </table>
 									</div>
 								</div>
 								</div>
@@ -108,7 +269,7 @@ $profesoresActuales2= $profesor->buscar('total');
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<?php echo "<h4>Cursos</h4>" ?>
+		<?php echo "Cursos" ?>
 	</div>
 	<div class="panel-body">
 		<div class=class="col-md-12" id="courses">
@@ -131,7 +292,7 @@ $profesoresActuales2= $profesor->buscar('total');
 </div>
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<?php echo "<h4>Profesores</h4>" ?>
+		<?php echo "Profesores" ?>
 	</div>
 	<div class="panel-body">
 		<div class=class="col-md-12" id="teachers">
@@ -151,134 +312,11 @@ $profesoresActuales2= $profesor->buscar('total');
 </div>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Nueva Hora Catedra</h4>
-      </div>
-      <div class="modal-body" id="modal-body">
-
-				<form class="" action="" method="post">
-
-					<div class="form-group">
-						<label  for="horaDia">Dia</label>
-						<input type="text" name="horaDia" value="" readonly="">
-					</div>
-
-					<div class="form-group">
-						<label  for="HoracourseName">Curso</label>
-						<select class="form-control" name="HoracourseName" id="HoracourseName">
-							<option value="0">Seleccione</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label  for="horaTeacherName">Profesor/a</label>
-						<select class="form-control" name="horaTeacherName" id="horaTeacherName">
-								<option value="0">Seleccione</option>
-						</select>
-						</div>
-					<div class="form-group">
-						<label  for="asignatura">Asignatura</label>
-						<select class="form-control" name="asignatura" id="asignatura">
-								<option value="0">Seleccione</option>
-								<option value="1">Matematica</option>
-								<option value="2">Lengua</option>
-
-						</select>
-					</div>
-
-					<div class="input-group clockpicker">
-						<input type="text" class="form-control" value="09:30">
-						<span class="input-group-addon">
-						<span class="glyphicon glyphicon-time"></span>
-						</span>
-					</div>
-
-					<div class="form-group">
-						<label  for="horaFinal">Hora Final</label><br>
-						<input type="text" name="" id="horaFinal" class="timepicker" value="">
-					</div>
-
-				 <button type="button" id="saveHour" class="btn btn-warning" name="button">Guardar Hora</button>
-				</form>
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script src="js/bootstrap-clockpicker.min.js"></script>
 
-	<script type="text/javascript">
-$('.clockpicker').clockpicker()
-					.find('input').change(function(){
-						console.log(this.value);
-					});
-				var input = $('#single-input').clockpicker({
-					placement: 'bottom',
-					align: 'left',
-					autoclose: true,
-					'default': 'now'
-				});
-
-				$('.clockpicker-with-callbacks').clockpicker({
-						donetext: 'Done',
-						init: function() {
-							console.log("colorpicker initiated");
-						},
-						beforeShow: function() {
-							console.log("before show");
-						},
-						afterShow: function() {
-							console.log("after show");
-						},
-						beforeHide: function() {
-							console.log("before hide");
-						},
-						afterHide: function() {
-							console.log("after hide");
-						},
-						beforeHourSelect: function() {
-							console.log("before hour selected");
-						},
-						afterHourSelect: function() {
-							console.log("after hour selected");
-						},
-						beforeDone: function() {
-							console.log("before done");
-						},
-						afterDone: function() {
-							console.log("after done");
-						}
-					})
-					.find('input').change(function(){
-						console.log(this.value);
-					});
-
-				// Manually toggle to the minutes view
-				$('#check-minutes').click(function(e){
-					// Have to stop propagation here
-					e.stopPropagation();
-					input.clockpicker('show')
-							.clockpicker('toggleView', 'minutes');
-				});
-				if (/mobile/i.test(navigator.userAgent)) {
-					$('input').prop('readOnly', true);
-				}
-
-
-
-	</script>
-
-
+<script type="text/javascript">
+	$('.clockpicker').clockpicker()
+</script>
 
 
 <script src="js/highlight.min.js"></script>
