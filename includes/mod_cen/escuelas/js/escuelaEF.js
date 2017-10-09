@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function(){
+
   let escuelaIdBorrar = $("#escuelaId").val()
 
 
@@ -20,6 +21,7 @@ $(document).ready(function() {
     let profesorId =$(this).attr("id").substring(8)
     $.ajax({
       url: 'includes/mod_cen/clases/ProfesoresEF.php',
+      //url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
       type: 'POST',
       dataType: 'json',
       data: {profesorId: profesorId,escuelaIdBorrar:escuelaIdBorrar}
@@ -171,10 +173,13 @@ $(document).ready(function() {
    */
   $('#searchTeacher').click(function (){
     let dni = $('#teacherDni').val()
-    let escuelaIdDato = $("#escuelaId").val()
+    let escuelaIdDato = $("#escuelaId2").val()
     //alert($('#teacherDni').val())
+
     $.ajax({
-      url: 'includes/mod_cen/clases/ProfesoresEF.php',
+      
+       url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',   
+       // url: 'includes/mod_cen/clases/ProfesoresEF.php',
       type: 'POST',
       dataType: 'json',
       data: {dni: dni,escuelaId:escuelaIdDato}
@@ -182,6 +187,7 @@ $(document).ready(function() {
     .done(function(lista) {
       console.log("success");
       //$('#courses').empty()
+
 
       for (let item of lista) {
         if (item.dni=='error') {
@@ -196,7 +202,8 @@ $(document).ready(function() {
         }else if(item.dni=='existe'){
           alert('ya existe')
 
-        }else{
+        }else{ 
+
           $('#searchTeacher').attr('disabled',true)
           $('#teacherDni').attr('disabled',true)
 
@@ -242,7 +249,8 @@ $(document).ready(function() {
       let escuelaId = $("#escuelaId").val()
       //alert(dni+nameTeacher+surnameTeacher+phoneTeacher+emailTeacher)
       $.ajax({
-        url: 'includes/mod_cen/clases/ProfesoresEF.php',
+          url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
+        //url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
         type: 'POST',
         dataType: 'json',
         data: { dniTeacher: dniTeacher,
