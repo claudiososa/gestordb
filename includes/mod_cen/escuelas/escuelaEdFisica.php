@@ -1,13 +1,17 @@
 <script src="includes/mod_cen/escuelas/js/escuelaEF.js" type="text/javascript"></script>
-<script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
-<?php
 
+<?php
+//<script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/Cursos.php");
 //include_once("includes/mod_cen/clases/Profesores.php");
-include_once("includes/mod_cen/clases/ProfesoresEF.php");
+//include_once("includes/mod_cen/clases/ProfesoresEF.php");
+include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
 include_once("includes/mod_cen/clases/referente.php");
 
+
+
+//echo $_GET['escuelaId'];
 $escuela = new Escuela($_GET['escuelaId']);
 $datoEscuela = $escuela->buscarUnico();
 
@@ -21,11 +25,11 @@ $cursosActuales= $curso->buscar('total');
 
 //Definicion de variables con cantidad y lista de Profesores actuales para la escuela
 
-$profesor = new Profesores();
-$profesor->escuelaId=$_GET['escuelaId'];
+//$profesor = new Profesores();
+//$profesor->escuelaId=$_GET['escuelaId'];
 
-$cantidadProfesores= $profesor->buscar('cantidad');
-$profesoresActuales= $profesor->buscar('total');
+//$cantidadProfesores= $profesor->buscar('cantidad');
+//$profesoresActuales= $profesor->buscar('total');
 
 
 	echo '<div class="table-responsive">';
@@ -35,7 +39,7 @@ $profesoresActuales= $profesor->buscar('total');
 	
   <div class='col-md-8'>
 
-
+<!-- DESDE AQUI -->
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<?php echo "<h4>Cursos</h4>" ?>
@@ -59,17 +63,18 @@ $profesoresActuales= $profesor->buscar('total');
 		</div>
 	</div>
 </div>
+<!-- HASTA AQUI -->
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<?php echo "<h4>Profesores</h4>" ?>
 	</div>
 	<div class="panel-body">
 		<div class=class="col-md-12" id="teachers">
-			<?php echo 'Total de Profesores:'.$cantidadProfesores;
+			<?php /* echo 'Total de Profesores:'.$cantidadProfesores;
 				while ($fila = mysqli_fetch_object($profesoresActuales)) {
 					echo '<p>'.$fila->nombre.' '.$fila->apellido.'<img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
 				}
-			?>
+			*/?>
 
 		</div>
 		<hr />

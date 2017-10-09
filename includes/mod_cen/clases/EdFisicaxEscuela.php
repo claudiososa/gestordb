@@ -48,6 +48,82 @@ class EdFisicaxEscuela
 
 	}
 
+
+   // buscar
+
+public function buscar()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="SELECT * FROM Ed_Fisica_Escuela";
+		if($this->id_Ed_Fisica!=NULL || $this->personaId!=NULL || $this->escuelaId!=NULL || $this->turno!=NULL || $this->nivel!=NULL || $this->cant_horas_semanal!=NULL || $this->tipoCargo!=NULL || $this->grado_año!=NULL || $this->seccion_division!=NULL || $this->titulo!=NULL)
+		{
+			$sentencia.=" WHERE ";
+
+
+		if($this->id_Ed_Fisica!=NULL)
+		{
+			$sentencia.=" id_Ed_Fisica=$this->id_Ed_Fisica && ";		}
+
+
+		if($this->personaId!=NULL)
+		{
+			$sentencia.=" personaId=$this->personaId && ";		}	
+		
+		if($this->escuelaId!=NULL)
+		{
+			$sentencia.=" escuelaId=$this->escuelaId && ";		}
+
+		if($this->turno!=NULL)
+		{
+			$sentencia.=" turno=$this->turno && ";
+		}
+
+		if($this->nivel!=NULL)
+		{
+			$sentencia.=" nivel=$this->nivel && ";
+		}
+
+		if($this->cant_horas_semanal!=NULL )
+		{
+			$sentencia.=" cant_horas_semanal=$this->cant_horas_semanal && ";
+		}
+
+
+		if($this->tipoCargo!=NULL)
+		{
+			$sentencia.=" tipoCargo=$this->tipoCargo && ";
+		}
+
+
+		if($this->grado_año!=NULL)
+		{
+			$sentencia.=" grado_año=$this->grado_año && ";
+		}
+		if($this->seccion_division!=NULL)
+		{
+			$sentencia.=" seccion_division=$this->seccion_division && ";
+		}
+
+		if($this->titulo!=NULL)
+		{
+			$sentencia.=" titulo=$this->titulo && ";
+		}
+
+
+		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+		}
+
+		$sentencia.="  ORDER BY id_Ed_Fisica";
+
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
+
  /*	public function editar()
 	{ 
 
@@ -66,63 +142,9 @@ class EdFisicaxEscuela
 		}
 	}
 
-	public function buscar()
-	{
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
-
-		$sentencia="SELECT * FROM rtixescuela";
-		if($this->escuelaId!=NULL || $this->rtiId!=NULL || $this->turno!=NULL || $this->ingreso!=NULL || $this->estado!=NULL)
-		{
-			$sentencia.=" WHERE ";
+	
 
 
-		if($this->escuelaId!=NULL)
-		{
-			$sentencia.=" escuelaId=$this->escuelaId && ";		}
-
-		if($this->rtiId!=NULL)
-		{
-			$sentencia.=" rtiId =$this->rtiId && ";
-		}
-
-		if($this->turno!=NULL)
-		{
-			$sentencia.=" turno LIKE '%$this->turno%' && ";
-		}
-
-		if($this->ingreso!=NULL)
-		{
-			$sentencia.=" ingreso LIKE '%$this->ingreso%' && ";
-		}
-
-		if($this->estado!=NULL)
-		{
-			$sentencia.=" estado LIKE '%$this->estado%' && ";
-		}
-
-
-		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
-
-		}
-
-		$sentencia.="  ORDER BY escuelaId";
-
-		//echo $sentencia;
-		return $conexion->query($sentencia);
-
-	}
-
-	public function Cargo()
-	{
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
-		//$sentencia="SELECT * FROM rti WHERE referenteId=".$this->referenteId;
-		$sentencia="SELECT cargos.escuelaId,cargos.turno,rti.rtiId,rti.personaId,personas.nombre,personas.apellido,personas.telefonoM FROM cargos inner join rti on cargos.rtiId=rti.rtiId inner join personas on rti.personaId=personas.personaId WHERE escuelaId=".$this->escuelaId;
-		//echo $sentencia;
-		//echo $this->referenteId;
-		return $conexion->query($sentencia);
-    }
 
 
 
@@ -163,5 +185,52 @@ class EdFisicaxEscuela
 		return $this->estado;
 	}
 */
+} // fin de la CLASE
+
+/**
+ * AL PRESIONAR BUSCAR PROFESOR
+ */
+/*
+if (isset($_POST['dni'])) {
+	include_once('persona.php');
+	$persona= new Persona(null,null,null,$_POST['dni']);
+	$datoPersona = $persona->buscar();
+	$cantidadPersona=mysqli_num_rows($datoPersona);
+
+
+	//$datoCurso=2;
+		$estado= [];
+	if ($cantidadPersona > 0) {
+
+		$dato = mysqli_fetch_object($datoPersona);
+
+		$profesor = new Profesores(null,$dato->personaId,$_POST['escuelaId']);
+
+		$datoProfesor = $profesor->buscar('cantidad');
+		//Maestro::debbugPHP($datoProfesor);
+		if ($datoProfesor == 0 ) {
+			$temporal=array('personaId'=>$dato->personaId,
+											'dni'=>$dato->dni,
+											'nombre'=>$dato->nombre,
+											'apellido'=>$dato->apellido,
+											'telefono'=>$dato->telefonoM,
+											'email'=>$dato->email,
+											'cuil'=>$dato->cuil
+											);
+			array_push($estado,$temporal);
+		}else{
+			$temporal=array('dni'=>'existe');
+			array_push($estado,$temporal);
+		}
+
+
+	}else{
+		$temporal=array('dni'=>'error');
+		array_push($estado,$temporal);
+	}
+	$json = json_encode($estado);
+	//Maestro::debbugPHP($json);
+	echo $json;
 }
+*/
 ?>

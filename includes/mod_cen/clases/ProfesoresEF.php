@@ -1,15 +1,17 @@
 <?php
+
+
 include_once('conexionv2.php');
 include_once("referente.php");
 include_once("maestro.php");
 
-class Profesores
-{
+ class Profesores
+ {
 	private $profesorId;
  	private $personaId;
  	private $escuelaId;
 
-function __construct($profesorId=NULL,
+ function __construct($profesorId=NULL,
 										 $personaId=NULL,
 										 $escuelaId=NULL
 										 )
@@ -18,7 +20,7 @@ function __construct($profesorId=NULL,
  		$this->personaId = $personaId;
  		$this->escuelaId = $escuelaId;
 	}
-
+ 
 	public function agregar()
 	{
 		$bd=Conexion2::getInstance();
@@ -56,8 +58,8 @@ function __construct($profesorId=NULL,
 					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		 }
 	}
-*/
-public function buscar($tipo=null,$limit=null,$order=null)
+ */
+ public function buscar($tipo=null,$limit=null,$order=null)
 	{
 		$bd=Conexion2::getInstance();
 		$sentencia="SELECT *
@@ -140,9 +142,9 @@ public function buscar($tipo=null,$limit=null,$order=null)
 		$this->$var=$valor;
 	}
 
-}
+ }
 
-/**
+ /**
  * AL SELECCIONAR EL BOTON X DE UN PROFESOR DETERMINADO
  */
 if (isset($_POST['profesorId'])) {
@@ -168,11 +170,11 @@ if (isset($_POST['profesorId'])) {
 	//Maestro::debbugPHP($json);
 	echo $json;
 
-}
+ }
 
 
-/**
- *
+ /**
+ * Al presionar el boton guardar profesor
  */
 if (isset($_POST['botonSaveTeacher'])) {
 	//Maestro::debbugPHP($_POST);
@@ -255,6 +257,9 @@ if (isset($_POST['botonSaveTeacher'])) {
  */
 
 if (isset($_POST['dni'])) {
+
+
+	include_once('EdFisicaxEscuela.php'); // new
 	include_once('persona.php');
 	$persona= new Persona(null,null,null,$_POST['dni']);
 	$datoPersona = $persona->buscar();
@@ -263,18 +268,37 @@ if (isset($_POST['dni'])) {
 
 	//$datoCurso=2;
 		$estado= [];
-	if ($cantidadPersona > 0) {
+	if ($cantidadPersona > 0) {   // encuentra a una persona
+
+			//$temporal=array('dni'=>'existe');
+			//array_push($estado,$temporal);
+				
 
 		$dato = mysqli_fetch_object($datoPersona);
 
-		$profesor = new Profesores(null,$dato->personaId,$_POST['escuelaId']);
+		$profesorEdFisica = new EdFisicaxEscuela(null,$dato->personaId,$_POST['escuelaId']); // new
+		$datoProfesorEdFisica = $profesorEdFisica->buscar();//new
+		$cantidadProfeEF=mysqli_num_rows($datoProfesorEdFisica); // new
+			
+			if ($cantidadProfeEF > 0){
 
-		$datoProfesor = $profesor->buscar('cantidad');
-		//Maestro::debbugPHP($datoProfesor);
-		if ($datoProfesor == 0 ) {
+		$temporal=array('dni'=>'existe');
+		array_push($estado,$temporal); }
+
+
+		/*
+
+		//var_dump($cantidadProfeEF);
+
+		//$profesor = new Profesores(null,$dato->personaId,$_POST['escuelaId']);
+
+		//$datoProfesor = $profesor->buscar('cantidad');
+		
+		//if ($datoProfesor == 0 ) {
+			if ($cantidadProfeEF == 0) {
 			$temporal=array('personaId'=>$dato->personaId,
 											'dni'=>$dato->dni,
-											'nombre'=>$dato->nombre,
+						 					'nombre'=>$dato->nombre,
 											'apellido'=>$dato->apellido,
 											'telefono'=>$dato->telefonoM,
 											'email'=>$dato->email,
@@ -284,7 +308,7 @@ if (isset($_POST['dni'])) {
 		}else{
 			$temporal=array('dni'=>'existe');
 			array_push($estado,$temporal);
-		}
+		} */
 
 
 	}else{
@@ -294,4 +318,6 @@ if (isset($_POST['dni'])) {
 	$json = json_encode($estado);
 	//Maestro::debbugPHP($json);
 	echo $json;
+
+	
 }
