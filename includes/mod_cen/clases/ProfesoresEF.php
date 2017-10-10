@@ -1,6 +1,6 @@
 <?php
 
-
+/* aqui 1
 include_once('conexionv2.php');
 include_once("referente.php");
 include_once("maestro.php");
@@ -58,7 +58,7 @@ include_once("maestro.php");
 					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		 }
 	}
- */
+ */ /* aqui 2
  public function buscar($tipo=null,$limit=null,$order=null)
 	{
 		$bd=Conexion2::getInstance();
@@ -147,6 +147,7 @@ include_once("maestro.php");
  /**
  * AL SELECCIONAR EL BOTON X DE UN PROFESOR DETERMINADO
  */
+ /* aqui 3
 if (isset($_POST['profesorId'])) {
 	$estado= [];
 	$profesor= new Profesores($_POST['profesorId']);
@@ -176,6 +177,7 @@ if (isset($_POST['profesorId'])) {
  /**
  * Al presionar el boton guardar profesor
  */
+ /* aqui 4
 if (isset($_POST['botonSaveTeacher'])) {
 	//Maestro::debbugPHP($_POST);
 		$estado= [];
@@ -255,7 +257,7 @@ if (isset($_POST['botonSaveTeacher'])) {
 /**
  * AL PRESIONAR BUSCAR PROFESOR
  */
-
+/*
 if (isset($_POST['dni'])) {
 
 
@@ -309,7 +311,7 @@ if (isset($_POST['dni'])) {
 			$temporal=array('dni'=>'existe');
 			array_push($estado,$temporal);
 		} */
-
+/*aqui 6
 
 	}else{
 		$temporal=array('dni'=>'error');
@@ -318,6 +320,6 @@ if (isset($_POST['dni'])) {
 	$json = json_encode($estado);
 	//Maestro::debbugPHP($json);
 	echo $json;
-
+*/ //aqui 7
 	
-}
+ ?>

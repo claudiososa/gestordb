@@ -17,6 +17,7 @@ $(document).ready(function(){
    * AL PRESIONAR EL BOTON X (eliminar) DE PROFESOR
    */
 
+/*
   $('#teachers').on('click', '.profesor', function(){
     let profesorId =$(this).attr("id").substring(8)
     $.ajax({
@@ -45,14 +46,15 @@ $(document).ready(function(){
       console.log("complete");
     });
 
-  })
+  }) */
 
 
 
   /**
    * //AL PRESIONAR EL BOTON X PARA ELIMINAR CURSO
    */
-
+/*
+ 
   $('#courses').on('click', '.curso', function(){
 
     let cursoId =$(this).attr("id").substring(5)
@@ -82,11 +84,13 @@ $(document).ready(function(){
       console.log("complete");
     });
 
-  })
+  }) */
 
   /**
    * AL PRESIONAR EL BOTON GUARDAR CURSO
    */
+
+/*
     $('#saveCourse').click(function (){
         let guardado = 'no'
         let courseName = $("#courseName option:selected").val()
@@ -159,7 +163,7 @@ $(document).ready(function(){
         });
 
 
-    })
+    }) */
 
     /**
      * AL PRESIONAR BOTON NUEVO PROFESOR
@@ -246,7 +250,7 @@ $(document).ready(function(){
       let surnameTeacher = $("#surnameTeacher").val()
       let phoneTeacher = $("#phoneTeacher").val()
       let emailTeacher = $("#emailTeacher").val()
-      let escuelaId = $("#escuelaId").val()
+      let escuelaId = $("#escuelaId2").val()
       //alert(dni+nameTeacher+surnameTeacher+phoneTeacher+emailTeacher)
       $.ajax({
           url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',

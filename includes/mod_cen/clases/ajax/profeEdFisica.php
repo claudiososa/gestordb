@@ -1,7 +1,11 @@
 <?php
  
   include_once('../persona.php');
+  include_once('../conexion.php');
   include_once('../ProfeEdFisicaxEscuela.php');
+  include_once('../conexionv2.php');
+  //include_once("referente.php");
+   include_once('../maestro.php');
 
 
 
@@ -11,8 +15,8 @@
  */
 
 if (isset($_POST['dni'])) 
-{
-
+{  // include_once('../persona.php');
+	//include_once("includes/mod_cen/clases/persona.php");
 
 	$persona = new Persona(null,null,null,$_POST['dni']);
 	$datoPersona = $persona->buscar();
@@ -66,30 +70,41 @@ if (isset($_POST['dni']))
  * Al presionar el boton guardar profesor
  */
 if (isset($_POST['botonSaveTeacher'])) {
+
+	//include_once("includes/mod_cen/clases/persona.php");
 	//Maestro::debbugPHP($_POST);
 		$estado= [];
 	//if ($_POST['botonSaveTeacher']=='saveTeacher') {
-		include_once('persona.php');
+		//include_once('persona.php');
 		if ($_POST['statusTeacher']=='create') {
 			
-			
+			//$profesorEdFisica = new ProfeEdFisicaxEscuela(null,'555',$_POST['escuelaId']); 
+			//$datoProfeEF=$profesorEdFisica->agregar();
+
+
 			$persona= new Persona(null,$_POST['surnameTeacher'],
 																$_POST['nameTeacher'],
 																$_POST['dniTeacher'],
 																$_POST['dniTeacher'],
 																$_POST['phoneTeacher'],
 																$_POST['phoneTeacher'],
-																null,
+																'nada',
 																$_POST['emailTeacher'],
 																$_POST['emailTeacher'],
-																null,
-																null,
+																'nada',
+																'nada',
 																'0001',
 																'4400',
-																null
+																'nada'
 															);
-
 			$datoPersona = $persona->agregar();
+
+
+		//$persona1= new Persona(NULL, 'santos', 'valeria', '33970638', '33970638 ', '38711111', '38711111', 'san luis', 'correo1@gmail.com', 'correo1@gmail.com', 'valeria', 'valeria', '0001', '4400', '');
+			//Maestro::debbugPHP($persona1);
+
+		//	$datoPersona = $persona1->agregar();
+			//Maestro::debbugPHP($datoPersona); 
 
 			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId']); 
 			$datoProfeEF=$profesorEdFisica->agregar();
