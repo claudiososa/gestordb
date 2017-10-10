@@ -1,3 +1,4 @@
+
 object(Persona)#1 (15) {
   ["personaId":"Persona":private]=>
   NULL
@@ -29,4 +30,5 @@ object(Persona)#1 (15) {
   string(4) "4400"
   ["ubicacion":"Persona":private]=>
   string(0) ""
+
 }

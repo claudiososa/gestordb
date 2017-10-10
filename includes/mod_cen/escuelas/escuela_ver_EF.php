@@ -7,99 +7,12 @@ include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/director.php");
+include_once("includes/mod_cen/clases/ProfesoresEF.php");
 ?>
 <div class="container">
-
-	<form class="form-horizontal" action='' method='POST'>
-		<div class="form-group">
-			<label class="col-md-3 col-md-offset-2"><h3>Busqueda de Escuelas</h3></label>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-md-2">Número</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-							<input type="text" size="4" class="form-control"  name="numero" placeholder="Ingrese número" autofocus>
-					 </div>
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label class="control-label col-md-2">CUE</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-							<input type="text" size="4" class="form-control"  name="cue" placeholder="Ingrese CUE" autofocus>
-					 </div>
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label class="control-label col-md-2">Nombre</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-							<input type="text" size="4" class="form-control"  name="nombre" placeholder="Ingrese nombre" autofocus>
-					 </div>
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label class="control-label col-md-2">Departamento</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-						 <?php
-						 $departamento= new Departamentos();
-								 $total=$departamento->getTotal();
-								 echo "<select class='form-control' name='localidadId'>";
-									 echo	"<option value='NULL'>Todos</option>";
-								 for($val=2;$val<=$total;$val++) {
-									 $departamento= new Departamentos($val);
-									 $dato=$departamento->getDepartamento();
-									 echo	"<option value='".$dato->getDepartamentoId()."' >".$dato->getDescripcion()."</option>";
-									 }
-								 echo "</select>";?>
-
-					 </div>
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label class="control-label col-md-2">Nivel</label>
-			<div class="col-md-10">
-				<div class="row">
-					 <div class="col-sm-5">
-		       <select class='form-control' name="nivel">
-						 <option value="0" label="Todos">Todos</option>
-						 <option value="Sin registrar" label="Sin registrar">Sin registrar</option>
-							 <option value="Primaria Común" label="Primaria Común">Primaria Común</option>
-							 <option value="Primaria Especial" label="Primaria Especial">Primaria Especial</option>
-							 <option value="Secundaria Común" label="Secundaria Común">Secundaria Común</option>
-							 <option value="Secundaria Técnica" label="Secundaria Técnica"  >Secundaria Técnica</option>
-							 <option value="Secundaria Rural" label="Secundaria Rural">Secundaria Rural</option>
-							 <option value="ISFD" label="ISFD">ISFD</option>
-							 <option value="IEM" label="IEM">IEM</option>
-							 <option value="Capacitación" label="Capacitación">Capacitación</option>
-
-				   </select>
-			     </div>
-		     </div>
-	    </div>
-    </div>
-
-		<div class="form-group">
-			<div class="col-md-2 col-md-offset-2">
-				<input type='submit' class="btn btn-primary" value='Buscar'>
-			</div>
-		</div>
-
-	</form>
-
+<?php
+	 include('includes/mod_cen/formularios/buscadorEdFisica.php');
+ ?>
 </div>
 
 <div class="container">
@@ -215,7 +128,23 @@ if(($_POST))
 							$datoSupervisor=mysqli_fetch_object($buscar_supervisor);
 
 
+							/**
+							 * Buscar profesor
+							 * se guarda el objeto con datso en $datoProfesor
+							 */
 
+							 /***********
+							 $profesor = new Profesores(null,$fila->escuelaId);
+							 $buscarProfesor= $profesor->buscar();
+							 $datoProfesor =mysqli_fetch_object($buscarProfesor);
+              /////var_dump($datoProfesor);
+							 if($datoProfesor==NULL){
+									$personaProfesor= new Persona("1");
+									$buscarProfesor = $personaProfesor->buscar();
+									$datoProfesor =mysqli_fetch_object($buscarProfesor);
+							 }
+
+           **************/
 
 			  		echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
@@ -292,7 +221,6 @@ if(($_POST))
 
 
 
-
 						 echo "<div class='col-md-6'><br>";
 						 echo "<div><b>Datos Directivo</b></div>";
 						 echo "<hr>";
@@ -302,6 +230,8 @@ if(($_POST))
 						 echo"<div><b>Correo Electrónico:&nbsp</b>".$datoDirector->email."</div>";
 
 						 echo "<br></div>";
+
+
 						 echo "</div>";//cierre row
 
 
@@ -316,46 +246,47 @@ if(($_POST))
 						 echo "<br></div>";
 
 
-
-/*
-						 echo "<div class='col-md-6'><br>";
-						 echo "<div><b>Datos Directivo</b></div>";
-						 echo "<hr>";
-
-						 echo"<div><b>Apellido y Nombre:&nbsp</b>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
-						 echo"<div><b>Teléfono:&nbsp</b>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";
-						 echo"<div><b>Correo Electrónico:&nbsp</b>".$datoDirector->email."</div>";
-
-						 echo "<br></div>";*/
   					  echo "</div>";//cierre row
 
 							echo "</div>";
 
 							echo "</div>";	//final boton datos escuelas
 
-							//subpanel de profesores
 
-							echo "<div class='panel panel-primary' id ='subpanelprofesores'>";
-							echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor Juan Perez<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
-							echo "<div class='panel-body bodyprof'>";
+							/***busqueda de profesores***/
+							$profesor = new Profesores(null,$fila->escuelaId);
+							$buscarProfesor= $profesor->buscar();
 
-              echo "<h4><b>Datos personales profesor juan:</b></h4>";
-              echo "<p>holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>";
-              echo "<hr>";
-              echo "<h4><b>Cursos a cargo prof juan:</b></h4>";
-              echo "<p>3°1°   2°4°</p>";
-              echo "<hr>";
-              echo "<h4><b>Carga horaria total:</b></h4>";
-              echo "<p>20 horas semanales</p>";
-							echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
-							echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$fila->escuelaId."'>";
-							 include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
-							 echo"</div>";
+					    while ($fila =mysqli_fetch_object($buscarProfesor)) {
 
-               echo"</div>";//panel-body subpanel profesores
+						echo "<div class='panel panel-primary' id ='subpanelprofesores'>";
+						echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor: ".$fila->apellido.", ".$fila->nombre."<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
+						echo "<div class='panel-body bodyprof'>";
+
+						echo "<h4><b>Datos personales profesor ".$fila->apellido.", ".$fila->nombre.":</b></h4>";
+						echo"<div><b>Teléfono:&nbsp</b>".$fila->telefonoM." / ".$fila->telefonoC."</div>";
+						echo"<div><b>Correo Electrónico:&nbsp</b>".$fila->email."</div>";
+
+						echo "<hr>";
+						echo "<h4><b>Cursos a cargo prof juan:</b></h4>";
+						echo "<p>3°1°   2°4°</p>";
+						echo "<hr>";
+						echo "<h4><b>Carga horaria total:</b></h4>";
+						echo "<p>20 horas semanales</p>";
+						echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
+						echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$fila->escuelaId."'>";
+						 include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
+						 echo"</div>";
+
+						 echo"</div>";//panel-body subpanel profesores
 
 
-							echo"</div>";// panel-primary subpanel profesores
+						echo"</div>";// panel-primary subpanel profesores
+
+					}/*
+
+*/
+
 							echo "</div>";
 							echo "</div>";
 

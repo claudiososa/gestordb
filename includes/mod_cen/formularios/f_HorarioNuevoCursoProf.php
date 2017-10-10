@@ -39,20 +39,51 @@
   <div class="form-group">
     <label  for="turn">Turno</label>
     <select class="form-control" name="turn" id="turn">
-        <option value="0">Seleccione</option>
-        <option value="M">Mañana</option>
-        <option value="I">Intermedio</option>
-        <option value="T">Tarde</option>
-        <option value="V">Vespertino</option>
-        <option value="N">Noche</option>
+      <option value="0">Seleccione</option>
+      <option value="M">Mañana</option>
+      <option value="I">Intermedio</option>
+      <option value="T">Tarde</option>
+      <option value="V">Vespertino</option>
+      <option value="N">Noche</option>
+      <option value="A">Alternacia </option>
+      <option value="C">Completo</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label  for="quantityStudents">Cantidad Alumnos</label>
-    <br>
-    <input type="number" name="quantityStudents" min="1" max="50" value="1" id="quantityStudents">
+    <label  for="turn">Nivel</label>
+    <select class="form-control" name="turn" id="turn">
+      <option value="0">Seleccione</option>
+      <option value="CB">Ciclo Básico</option>
+      <option value="CBC">Ciclo Básico Común</option>
+      <option value="CBT">Ciclo Básico Técnico</option>
+      <option value="CO">Ciclo Orientado</option>
+      <option value="CS">Ciclo Superior</option>
+      <option value="EGB">EGB</option>
+      <option value="I">Inicial</option>
+      <option value="P">Polimodal</option>
+      <option value="S">Secundario</option>
+      <option value="SP">Superior</option>
+    </select>
   </div>
+
+  <div class="form-group">
+    <label  for="quantityStudents">Cantidad Horas Semanal</label>
+    <br>
+    <input type="number" name="quantityStudents" min="1" max="20" value="1" id="quantityStudents">
+  </div>
+
+
+    <div class="form-group">
+      <label  for="turn">Tipo de Cargo</label>
+      <select class="form-control" name="turn" id="turn">
+        <option value="0">Seleccione</option>
+        <option value="T">Titular</option>
+        <option value="I">Interino</option>
+        <option value="S">Suplente</option>
+        <option value="O">Otro</option>
+      </select>
+    </div>
   <input type="hidden" name="escuelaId" id="escuelaId" value="<?php echo $_GET['escuelaId'] ?>">
  <button type="button" id="saveCourse" class="btn btn-warning" name="button">Guardar Curso</button>
    </div>
