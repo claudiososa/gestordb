@@ -1,6 +1,7 @@
 <?php
 
 include_once('conexion.php');
+include_once('persona.php');
 
 class ProfeEdFisicaxEscuela
    {
@@ -28,6 +29,7 @@ class ProfeEdFisicaxEscuela
 		VALUES (NULL,'". $this->personaId."','". $this->escuelaId."','".$this->titulo."');";
     //echo $sentencia;
 		if ($conexion->query($sentencia)) {
+
 			return 1;
 		}else
 		{
