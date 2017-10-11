@@ -22,7 +22,7 @@ include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 		<?php
 
 if(($_POST) || isset($_GET['retorno']))
-	{			
+	{
 
 					if (isset($_GET['retorno'])) {
 
@@ -274,18 +274,18 @@ if(($_POST) || isset($_GET['retorno']))
 
 
 							/***busqueda de profesores***/
-							$profesor = new Profesores(null,$fila->escuelaId);
+					/*		$profesor = new Profesores(null,$fila->escuelaId);
 							$buscarProfesor= $profesor->buscar();
 
 					   while ($fila =mysqli_fetch_object($buscarProfesor)) {
-
+*/
 						echo "<div class='panel panel-primary' id ='subpanelprofesores'>";
-						echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor: ".$fila->apellido.", ".$fila->nombre."<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
+						echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor: <span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
 						echo "<div class='panel-body bodyprof'>";
 
-						echo "<h4><b>Datos personales profesor ".$fila->apellido.", ".$fila->nombre.":</b></h4>";
-						echo"<div><b>Teléfono:&nbsp</b>".$fila->telefonoM." / ".$fila->telefonoC."</div>";
-						echo"<div><b>Correo Electrónico:&nbsp</b>".$fila->email."</div>";
+						echo "<h4><b>Datos personales profesor :</b></h4>";
+						echo"<div><b>Teléfono:&nbsp</b></div>";
+						echo"<div><b>Correo Electrónico:&nbsp</b></div>";
 
 						echo "<hr>";
 						echo "<h4><b>Cursos a cargo prof juan:</b></h4>";
@@ -303,7 +303,7 @@ if(($_POST) || isset($_GET['retorno']))
 
 						echo"</div>";// panel-primary subpanel profesores
 
-					}/*
+					/*}<
 
 */
 
@@ -328,7 +328,7 @@ if(($_POST) || isset($_GET['retorno']))
 		//var venta= "<?php echo $_GET['registro']  ";
 ?>
 </div>
-<!--<script type="text/javascript" src="includes/mod_cen/edFisica/js/botonesEF.js"></script> -->
+<script type="text/javascript" src="includes/mod_cen/edFisica/js/botonesEF.js"></script>
 
 <script type="text/javascript" src="jquery/jquery113.jsp"></script>
 			<script language="javascript">
