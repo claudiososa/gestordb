@@ -1,4 +1,4 @@
-<form class="form-horizontal" action='' method='POST'>
+<form class="form-horizontal" action="index.php?mod=slat&men=escuelas&id=25" method='POST'>
   <div class="form-group">
     <label class="col-md-3 col-md-offset-2"><h3>Busqueda de Escuelas</h3></label>
   </div>
