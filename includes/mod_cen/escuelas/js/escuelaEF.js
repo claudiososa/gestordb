@@ -277,7 +277,7 @@ $(document).ready(function(){
         clearPersonaAndDni()
         for (let item of persona) {
           cantidad++
-          $('#teachers').prepend('<p>'+item.nombre+' '+item.apellido+'</b><img class="profesor" id="profesor'+item.profesorId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+          $('#teachers').prepend('<p>'+item.apellido+' '+item.nombre+'</b><img class="profesor" id="profesor'+item.profesorId+'" src="img/iconos/delete.png" alt="borrar"></p>')
           console.log(item.nombre)
         }
         $('#teachers').prepend(`Total de Profesores: ${cantidad}`)

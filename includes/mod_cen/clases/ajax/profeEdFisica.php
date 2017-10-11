@@ -123,13 +123,12 @@ if (isset($_POST['botonSaveTeacher'])) {
 
 			$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_POST['escuelaId']);
 
-			$buscarProfesor=$profesor2->buscar();
+					$buscarProfesor=$profesor2->buscarProfesores();
 
-			while ($fila = mysqli_fetch_object($buscarProfesor))
-			 {
-						$temporal=array('profesorId'=>$fila->id_Ed_FisicaxEscuela,
-														'nombre'=>$fila->personaId,
-														'apellido'=>$fila->escuelaId);
+					while ($fila = mysqli_fetch_object($buscarProfesor)) {
+						$temporal=array('profesorId'=>$fila->numero,
+														'nombre'=>$fila->nombre,
+														'apellido'=>$fila->apellido);
 						array_push($estado,$temporal);
 					}
 
@@ -169,12 +168,12 @@ if (isset($_POST['botonSaveTeacher'])) {
 					//$profesor2 = new Profesores(null,null,$_POST['escuelaId']);
 					$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_POST['escuelaId']);
 
-					$buscarProfesor=$profesor2->buscar();
+					$buscarProfesor=$profesor2->buscarProfesores();
 
 					while ($fila = mysqli_fetch_object($buscarProfesor)) {
-						$temporal=array('profesorId'=>$fila->id_Ed_FisicaxEscuela,
-														'nombre'=>$fila->personaId,
-														'apellido'=>$fila->escuelaId);
+						$temporal=array('profesorId'=>$fila->numero,
+														'nombre'=>$fila->nombre,
+														'apellido'=>$fila->apellido);
 						array_push($estado,$temporal);
 					}
 

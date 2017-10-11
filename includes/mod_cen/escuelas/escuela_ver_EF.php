@@ -8,6 +8,7 @@ include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/director.php");
 include_once("includes/mod_cen/clases/ProfesoresEF.php");
+include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 ?>
 <div class="container">
 <?php
@@ -20,14 +21,27 @@ include_once("includes/mod_cen/clases/ProfesoresEF.php");
 
 		<?php
 
-if(($_POST))
-	{
-				//var_dump($_POST);
+if(($_POST) || isset($_GET['retorno']))
+	{			
+
+					if (isset($_GET['retorno'])) {
+
+					$cue=NULL;
+					$numero=$_GET['retorno'];
+					$nombre=NULL;
+					$localidadId=NULL;
+					$nivel=0;
+					//$_GET['retorno'];
+
+
+						# code...
+					}else{
+					//var_dump($_POST);
 				$cue=$_POST["cue"];
 				$numero=$_POST["numero"];
 				$nombre=$_POST["nombre"];
 				$localidadId=$_POST["localidadId"];
-				$nivel=$_POST["nivel"];
+				$nivel=$_POST["nivel"]; }
 
 				/*if($localidadId=="0"){
 					$locadlidadId="NULL";
@@ -164,16 +178,22 @@ if(($_POST))
 
 						$cant = mysqli_num_rows($buscar_informe);
 
+						// nuevo
+							$profesor2 = new ProfeEdFisicaxEscuela(null,null,$fila->escuelaId);
+							$buscarProfesor=$profesor2->buscarProfesores();
+							$cantidadProfeEF=mysqli_num_rows($buscarProfesor);
+
+
 						if($cant==0){
 
 							echo "<td><a class='btn btn-danger' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
 										 Crear</a>&nbsp&nbsp</td><td><a class='btn btn-danger' href='#'>0</a></td>";
-	            echo "<td><a class='btn btn-primary botondesplegable' id=".$fila->escuelaId." role='button'>6</a></td>";
+	            echo "<td><a class='btn btn-primary botondesplegable' id=".$fila->escuelaId." role='button'>$cantidadProfeEF</a></td>";
 						}else{
 						 	echo "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>
 										 Crear</a></td>";
 							echo  "<td><a class='btn btn-success' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>$cant</a></td>";
-							echo "<td><a class='btn btn-primary botondesplegable' id=".$fila->escuelaId." role='button'>6</a></td>";
+							echo "<td><a class='btn btn-primary botondesplegable' id=".$fila->escuelaId." role='button'>$cantidadProfeEF</a></td>";
 						}
 
 
@@ -257,7 +277,7 @@ if(($_POST))
 							$profesor = new Profesores(null,$fila->escuelaId);
 							$buscarProfesor= $profesor->buscar();
 
-					    while ($fila =mysqli_fetch_object($buscarProfesor)) {
+					   while ($fila =mysqli_fetch_object($buscarProfesor)) {
 
 						echo "<div class='panel panel-primary' id ='subpanelprofesores'>";
 						echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor: ".$fila->apellido.", ".$fila->nombre."<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
@@ -308,7 +328,7 @@ if(($_POST))
 		//var venta= "<?php echo $_GET['registro']  ";
 ?>
 </div>
-<script type="text/javascript" src="includes/mod_cen/edFisica/js/botonesEF.js"></script>
+<!--<script type="text/javascript" src="includes/mod_cen/edFisica/js/botonesEF.js"></script> -->
 
 <script type="text/javascript" src="jquery/jquery113.jsp"></script>
 			<script language="javascript">

@@ -4,7 +4,7 @@
 //<script src="includes/mod_cen/escuelas/js/escuelaHorarioDia.js" type="text/javascript"></script>
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/Cursos.php");
-//include_once("includes/mod_cen/clases/Profesores.php");
+include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 //include_once("includes/mod_cen/clases/ProfesoresEF.php");
 include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
 include_once("includes/mod_cen/clases/referente.php");
@@ -27,6 +27,9 @@ $cursosActuales= $curso->buscar('total');
 
 //$profesor = new Profesores();
 //$profesor->escuelaId=$_GET['escuelaId'];
+$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_GET['escuelaId']);
+$buscarProfesor=$profesor2->buscarProfesores();
+$cantidadProfeEF=mysqli_num_rows($buscarProfesor);
 
 //$cantidadProfesores= $profesor->buscar('cantidad');
 //$profesoresActuales= $profesor->buscar('total');
@@ -70,18 +73,21 @@ $cursosActuales= $curso->buscar('total');
 	</div>
 	<div class="panel-body">
 		<div class=class="col-md-12" id="teachers">
-			<?php /* echo 'Total de Profesores:'.$cantidadProfesores;
-				while ($fila = mysqli_fetch_object($profesoresActuales)) {
-					echo '<p>'.$fila->nombre.' '.$fila->apellido.'<img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+			<?php  echo 'Total de Profesores:'.$cantidadProfeEF;
+				while ($fila = mysqli_fetch_object($buscarProfesor)) {
+					echo '<p>'.$fila->apellido.' '.$fila->nombre.'<img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+				$numeroEsc=$fila->numero;
 				}
-			*/?>
+			?>
 
 		</div>
 		<hr />
 		<button id="newTeacher" class="btn btn-success" type="button" name="button">Nuevo Profesor</button>
 
 			<?php include('includes/mod_cen/formularios/f_HorarioNuevoProfesorEF.php') ?>
-
+		<?php echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=escuelas&id=25&retorno=".$numeroEsc."'>Volver</a>&nbsp&nbsp&nbsp"; ?>  
+							
+																	
 	</div>
 </div>
 

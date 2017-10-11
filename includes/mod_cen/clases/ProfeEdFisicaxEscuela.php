@@ -83,6 +83,44 @@ public function buscar()
 
 	}
 
+// Buscador de profesores de una escuela
+
+	public function buscarProfesores()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		//$sentencia="SELECT * FROM ProfeEdFisicaxEscuela";
+
+		$sentencia= "SELECT escuelas.numero, personas.nombre, personas.apellido
+			FROM ProfeEdFisicaxEscuela
+				JOIN personas ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )
+					JOIN escuelas ON ( escuelas.escuelaId = ProfeEdFisicaxEscuela.escuelaId )";
+					//	WHERE ProfeEdFisicaxEscuela.escuelaId = '".$EscId."'";
+
+
+
+
+		if( $this->escuelaId!=NULL )
+		{
+			$sentencia.=" WHERE ProfeEdFisicaxEscuela.escuelaId = '".$this->escuelaId."'";
+
+
+		
+
+
+		//$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+		}
+
+		$sentencia.="  ORDER BY apellido ASC";
+
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
+
 
  } // fin de la CLASE
 
