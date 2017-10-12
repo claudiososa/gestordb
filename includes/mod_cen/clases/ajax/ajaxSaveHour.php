@@ -30,9 +30,12 @@
 
     $list=array();
     //$new = $curso->agregar();
-    $horario = new HorarioFacilitadores(null,$_POST['referenteId'],$_POST['dia'],null,null,null,$_GET['escuelaId']);
+    //$horario = new HorarioFacilitadores(null,$_POST['referenteId'],$_POST['dia'],null,null,null,$_GET['escuelaId']);
+    $horario = new HorarioFacilitadores($crearHora);
+    //Maestro::debbugPHP($horario);
     $buscarHorario = $horario->buscar();
-    while ($fila = mysqli_fetch_object($buscarHorario)) {
+    $fila = mysqli_fetch_object($buscarHorario);
+    //while ($fila = mysqli_fetch_object($buscarHorario)) {
 //      Dia	Hora Inicio	Hora Final	Asignatura	Curso	Turno	Profesor
 
       $temporal=[
@@ -47,7 +50,7 @@
         ];
 
       array_push($list,$temporal);
-    }
+    //}
 
     $json = json_encode($list);
     //Maestro::debbugPHP($json);

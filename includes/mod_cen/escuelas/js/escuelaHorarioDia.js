@@ -1,8 +1,10 @@
 $(document).ready(function() {
 
   //$('#teachers').on('click', '.profesor', function(){
+//boton elmininar Hora  (X)
 
-  $('.horaId').on('click', function(){
+
+  $('#dias').on('click','.dia', function(){
     //id guardar el cursoFacilitadoresId para buscar en tabla cursoFacilitadores
     let id = $(this).attr('id').substr(6)
 
@@ -17,6 +19,7 @@ $(document).ready(function() {
     //  for (let item of lista) {
       //  $('#horaCourseName').append(`<option value="${item.cursoId}">${item.curso} ${item.division} ${item.turno}</option>`)
     //  }
+      $(`#hora${id}`).remove()
       console.log("success");
     })
     .fail(function() {
@@ -188,19 +191,19 @@ $(document).ready(function() {
           for (let item of lista) {
               let dia = item.dia
             }
-          $(`#${dia}`).empty()
+          //$(`#${dia}`).empty()
           for (let item of lista) {
-            $(`#${dia}`).append('<tr>')
-            $(`#${dia}`).append(`<td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td>${item.asignatura}</td>
+            //$(`#${dia}`).append(``)
+            $(`#${dia}`).append(`<tr id="hora${item.id}"><td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td>${item.asignatura}</td>
               <td>${item.curso}</td><td>${item.turno}</td><td>${item.profesor}</td>
-              <td><a href='#'><img class='horaId' id='horaId${item.id}' src='img/iconos/delete.jpg' alt='borrar item'></a></td>`)
-            $(`#${dia}`).append('</tr>')
-            console.log(item.dia)
+              <td><a href='#'><img class='dia' id='horaId${item.id}' src='img/iconos/delete.jpg' alt='borrar item'></a></td></tr>`)
+            //$(`#${dia}`).append('')
+            //console.log(item.dia)
             //$('#horaTeacherName').append(`<option value="${item.personaId}">${item.nombre}</option>`)
           }
 
           $(`#${dia}`).show(500)
-          //console.log("successdddddddddddddddd");
+          console.log("successdddddddddddddddd");
           $("#myModal").modal("hide");
         })
         .fail(function() {

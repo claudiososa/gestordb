@@ -48,7 +48,7 @@ $profesoresActuales2= $profesor->buscar('total');
 	<div class="col-md-8">
 
 
-	<div class="panel panel-primary">
+	<div class="panel panel-primary" id="dias">
 		<div class="panel-heading">
 			<?php echo "<strong>Horario para Escuela : ".$datoEscuela->nombre.", ".$datoEscuela->cue."</strong>" ?>
 		</div>
@@ -79,7 +79,7 @@ $profesoresActuales2= $profesor->buscar('total');
 							$buscarHorario = $horario->buscar();
 
 								while ($fila = mysqli_fetch_object($buscarHorario)) {
-									echo "<tr>";
+									echo "<tr id='hora".$fila->horarioFacilitadoresId."'>";
 									echo "<td>".$fila->dia."</td>";
 									echo "<td>".$fila->horaIngreso."</td>";
 									echo "<td>".$fila->horaSalida."</td>";
@@ -87,7 +87,7 @@ $profesoresActuales2= $profesor->buscar('total');
 									echo "<td>".$fila->curso."° ".$fila->division."</td>";
 									echo "<td>".Cursos::turno($fila->turno)."</td>";
 									echo "<td>".$fila->nombre."</td>";
-                  echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+                  echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
 									echo '</tr>';
 								}
 						 ?>
