@@ -214,7 +214,9 @@ class Rti
 
 
 
-			$sentencia="SELECT  personas.apellido, personas.nombre, personas.dni, escuelas.numero, escuelas.cue, rtixescuela.turno, rtixescuela.estado, personas.telefonoC, personas.telefonoM, personas.email
+			$sentencia="SELECT  personas.apellido, personas.nombre,
+													personas.dni, escuelas.numero,
+													escuelas.escuelaId,escuelas.cue, rtixescuela.turno, rtixescuela.estado, personas.telefonoC, personas.telefonoM, personas.email
 								 FROM rtixescuela
 								JOIN rti
 									ON (rtixescuela.rtiId=rti.rtiId)

@@ -39,6 +39,10 @@ $(document).ready(function() {
 
     $('.agregarHora').attr('disabled',true)
     $($(this).parent()).append(`
+      <button id="btnHoraSandwich" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalSandwich">
+      Hora Sandwich
+      </button>
+
       <button id="btnHoraCatedra" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
       Hora Catedra
       </button>
@@ -161,6 +165,16 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="myModalSandwich" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header"></div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
       `)
       $('#saveHour').click(function(){
         let horaCourseName = $("#horaCourseName option:selected").val()
@@ -221,6 +235,12 @@ $(document).ready(function() {
     })
 
     $('#myModal').on('show.bs.modal', function (e) {
+      $('.clockpicker').clockpicker()
+      $("#btnHoraCatedra").remove()
+
+    })
+
+    $('#myModalSandwich').on('show.bs.modal', function (e) {
       $('.clockpicker').clockpicker()
       $("#btnHoraCatedra").remove()
 
