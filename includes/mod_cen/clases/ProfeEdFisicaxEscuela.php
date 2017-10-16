@@ -45,8 +45,37 @@ public function buscar()
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
+    $sentencia= "SELECT escuelas.numero, personas.nombre, personas.apellido, personas.email, personas.telefonoC, personas.telefonoM, ProfeEdFisicaxEscuela.titulo
+			FROM ProfeEdFisicaxEscuela
+				JOIN personas ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )
+					JOIN escuelas ON ( escuelas.escuelaId = ProfeEdFisicaxEscuela.escuelaId )";
+					//WHERE ProfeEdFisicaxEscuela.escuelaId = '".$EscId."'";
 
+
+
+
+		if( $this->escuelaId!=NULL )
+		{
+			$sentencia.=" WHERE ProfeEdFisicaxEscuela.escuelaId = '".$this->escuelaId."'";
+
+
+
+
+
+		//$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+		}
+
+		$sentencia.="  ORDER BY apellido ASC";
+
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
+/*
 		$sentencia="SELECT * FROM ProfeEdFisicaxEscuela";
+
 		if($this->id_Ed_FisicaxEscuela!=NULL || $this->personaId!=NULL || $this->escuelaId!=NULL || $this->titulo!=NULL)
 		{
 			$sentencia.=" WHERE ";
@@ -59,13 +88,13 @@ public function buscar()
 
 		if($this->personaId!=NULL)
 		{
-			$sentencia.=" personaId=$this->personaId && ";		}	
-		
+			$sentencia.=" personaId=$this->personaId && ";		}
+
 		if($this->escuelaId!=NULL)
 		{
 			$sentencia.=" escuelaId=$this->escuelaId && ";		}
 
-		
+
 		if($this->titulo!=NULL)
 		{
 			$sentencia.=" titulo=$this->titulo && ";
@@ -82,6 +111,8 @@ public function buscar()
 		return $conexion->query($sentencia);
 
 	}
+*/
+
 
 // Buscador de profesores de una escuela
 
@@ -96,7 +127,7 @@ public function buscar()
 			FROM ProfeEdFisicaxEscuela
 				JOIN personas ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )
 					JOIN escuelas ON ( escuelas.escuelaId = ProfeEdFisicaxEscuela.escuelaId )";
-					//	WHERE ProfeEdFisicaxEscuela.escuelaId = '".$EscId."'";
+					//WHERE ProfeEdFisicaxEscuela.escuelaId = '".$EscId."'";
 
 
 
@@ -106,7 +137,7 @@ public function buscar()
 			$sentencia.=" WHERE ProfeEdFisicaxEscuela.escuelaId = '".$this->escuelaId."'";
 
 
-		
+
 
 
 		//$sentencia=substr($sentencia,0,strlen($sentencia)-3);
