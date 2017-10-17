@@ -21,7 +21,7 @@ $(document).ready(function() {
        $("#datosInst" + numIdDatosInst).toggle()
   });
 
-/////formulario Nuevo curso////
+/////formulario Nuevo curso: Seleccionado por id= personaId////
 
   $(".btnNuevoCurso").click(function(event) {
         let numeroIdCurso= $(this).attr("id").substr(13)

@@ -1,6 +1,7 @@
 <?php
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
+include_once('includes/mod_cen/clases/director.php');//Agregada Arredes
 include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/referente.php");
@@ -88,6 +89,7 @@ if(($_POST))
 			  	echo "<th>Nombre de Escuela</th>";
 			  	echo "<th>Localidad</th>";
 			  	echo "<th>Referente a Cargo</th>";
+					echo "<th>Director</th>";
 			  	echo "<th></th>";
 			  	echo "<th>Ver</th>";
 				echo "</tr>";
@@ -218,6 +220,13 @@ if(($_POST))
 			  		*			  		<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".
 			  				"<img  src='img/iconos/modificar_p.png' alt='modificar' longdesc='Modificar Datos de Persona'></a></div></td>";
 			  		**/
+						$director= director::existeAutoridad($fila->escuelaId);
+
+						$director2 = mysqli_fetch_object($director);
+						$personaDire =  new Persona($director2->personaId);
+						$buscarDirector = $personaDire->buscar();
+						$datoDirector=mysqli_fetch_object($buscarDirector);
+						echo "<td>".$datoDirector->apellido.",".$datoDirector->nombre."</td>";
 			  		echo "<td>"."<a href='index.php?men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>Ver más</a>"."</td>";
 			  		echo "</tr>";
 		  	  		echo "\n";

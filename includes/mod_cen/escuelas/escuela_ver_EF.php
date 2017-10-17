@@ -272,29 +272,49 @@ if(($_POST) || isset($_GET['retorno']))
 
 							echo "</div>";	//final boton datos escuelas
 
-
-							/***busqueda de profesores***/
-					/*		$profesor = new Profesores(null,$fila->escuelaId);
+										/***busqueda de profesores***/
+					$profesor = new ProfeEdFisicaxEscuela(null,null,$fila->escuelaId);
 							$buscarProfesor= $profesor->buscar();
 
-					   while ($fila =mysqli_fetch_object($buscarProfesor)) {
-*/
+					   while ($filaProf =mysqli_fetch_object($buscarProfesor)) {
+
 						echo "<div class='panel panel-primary' id ='subpanelprofesores'>";
-						echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor: <span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
+						echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
 						echo "<div class='panel-body bodyprof'>";
 
-						echo "<h4><b>Datos personales profesor :</b></h4>";
-						echo"<div><b>Teléfono:&nbsp</b></div>";
-						echo"<div><b>Correo Electrónico:&nbsp</b></div>";
+						echo "<h4><b>Datos personales Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."</b></h4>";
+						echo "<div><b>Titulo:&nbsp</b>".$filaProf->titulo."</div>";
+						echo"<div><b>Teléfono:&nbsp</b>".$filaProf->telefonoM." / ".$filaProf->telefonoC."</div>";
+						echo"<div><b>Correo Electrónico:&nbsp</b>".$filaProf->email."&nbsp</div>";
 
 						echo "<hr>";
-						echo "<h4><b>Cursos a cargo prof juan:</b></h4>";
-						echo "<p>3°1°   2°4°</p>";
+						echo "<h4><b>Cursos a cargo:</b></h4>";
+						echo "<table class='table table-bordered'>";
+						echo"<tr>";
+						echo"<th>Grado</th>";
+						echo"<th>Turno</th>";
+						echo"<th>Nivel</th>";
+						echo"<th>Horas Semanales</th>";
+						echo"<th>Tipo de Cargo</th>";
+						echo"</tr>";
+            echo"<tr>";
+						echo"<td>3°4°</td>";
+						echo"<td>Mañana</td>";
+						echo"<td>Primaria</td>";
+						echo"<td>20horas</td>";
+						echo"<td>Titular</td>";
+						echo"</tr>";
+						echo"</table>";
 						echo "<hr>";
 						echo "<h4><b>Carga horaria total:</b></h4>";
 						echo "<p>20 horas semanales</p>";
-						echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
-						echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$fila->escuelaId."'>";
+
+
+						///////////////
+
+						
+						echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."'>Asignar Nuevo Curso</button>";
+						echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$filaProf->personaId."'>";
 						 include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
 						 echo"</div>";
 
@@ -303,9 +323,7 @@ if(($_POST) || isset($_GET['retorno']))
 
 						echo"</div>";// panel-primary subpanel profesores
 
-					/*}<
-
-*/
+					}
 
 							echo "</div>";
 							echo "</div>";

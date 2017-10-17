@@ -1,5 +1,6 @@
 <?php
 include_once("includes/mod_cen/clases/persona.php");
+include_once('includes/mod_cen/clases/director.php');//Agregada Arredes
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/departamentos.php");
 include_once("includes/mod_cen/clases/localidades.php");
@@ -30,7 +31,7 @@ include_once("includes/mod_cen/clases/rti.php");
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="control-label col-md-2">D.N.I.</label>
 			<div class="col-md-10">
@@ -64,7 +65,7 @@ include_once("includes/mod_cen/clases/rti.php");
 			</div>
 		</div>
 
-		
+
       <div class="form-group">
 		<label class="control-label col-md-2">Estado</label>
 		<div class="col-md-10">
@@ -127,29 +128,38 @@ if(($_POST))
 			}
 
 
-		
+
 			echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
 			echo "<thead>";
 			echo "<tr><th>Apellido</th>";
 			echo "<th>Nombre</th>";
-			echo "<th>Dni</th>"; 
+			echo "<th>Dni</th>";
 			echo "<th>Escuela</th>";
 			echo "<th>  Cue</th>";
 			echo "<th>Turno</th>";
 			echo "<th>Estado</th>";
 			echo "<th>Telefono</th>";
 			echo "<th>E-mail</th>";
+			echo "<th>Director</th>";
 			echo "</tr>";
     		echo "</thead>";
 			echo "<tbody>";
 
 
 			$rti_buscado=new rti(NULL,NULL,NULL,NULL,NULL);
-			
+
 			$resultado_rti=$rti_buscado->buscarfull($apellido,$nombre,$dni,$num_escuela,$cue_escuela,$estado_rti);
 
 			while ($fila = mysqli_fetch_object($resultado_rti))
 			{
+
+			$director= director::existeAutoridad($fila->escuelaId);
+
+			$director2 = mysqli_fetch_object($director);
+			$personaDire =  new Persona($director2->personaId);
+			$buscarDirector = $personaDire->buscar();
+			$datoDirector=mysqli_fetch_object($buscarDirector);
+			//var_dump($pdatodirector);
 			echo "<tr>";
 			echo "<td>".$fila->apellido."</td>";
 			echo "<td>".$fila->nombre."</td>";
@@ -160,16 +170,15 @@ if(($_POST))
 			echo "<td>".$fila->estado."</td>";
 			echo "<td>".$fila->telefonoC." ".$fila->telefonoM."</td>";
 			echo "<td>".$fila->email."</td>";
-			
-
+			echo "<td>".$datoDirector->apellido.",".$datoDirector->nombre."</td>";
 
 			//va al final
 			echo "</tr>";
 			echo "\n";
-					
+
 			}
 
-		
+
 
 		}
 		else
