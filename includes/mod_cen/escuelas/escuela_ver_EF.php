@@ -9,6 +9,7 @@ include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/director.php");
 include_once("includes/mod_cen/clases/ProfesoresEF.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
+include_once("includes/mod_cen/clases/ProfeEdFisicaxCurso.php");
 ?>
 <div class="container">
 <?php
@@ -287,6 +288,12 @@ if(($_POST) || isset($_GET['retorno']))
 						echo"<div><b>Teléfono:&nbsp</b>".$filaProf->telefonoM." / ".$filaProf->telefonoC."</div>";
 						echo"<div><b>Correo Electrónico:&nbsp</b>".$filaProf->email."&nbsp</div>";
 
+
+////////////////////////////////////////
+            $curso = new ProfeEdFisicaxCurso();
+						$Cursos= $curso->buscarCursos($filaProf->escuelaId, $filaProf->personaId);
+
+
 						echo "<hr>";
 						echo "<h4><b>Cursos a cargo:</b></h4>";
 						echo "<table class='table table-bordered'>";
@@ -297,17 +304,30 @@ if(($_POST) || isset($_GET['retorno']))
 						echo"<th>Horas Semanales</th>";
 						echo"<th>Tipo de Cargo</th>";
 						echo"</tr>";
-            echo"<tr>";
-						echo"<td>3°4°</td>";
-						echo"<td>Mañana</td>";
-						echo"<td>Primaria</td>";
-						echo"<td>20horas</td>";
-						echo"<td>Titular</td>";
-						echo"</tr>";
-						echo"</table>";
-						echo "<hr>";
-						echo "<h4><b>Carga horaria total:</b></h4>";
-						echo "<p>20 horas semanales</p>";
+
+while ($filaCurso = mysqli_fetch_object($Cursos)) {
+
+
+
+	echo"<tr>";
+	echo"<td>".$filaCurso->gradoAño."".$filaCurso->seccionDivision."</td>";
+	echo"<td>".$filaCurso->turno."</td>";
+	echo"<td>".$filaCurso->nivel."</td>";
+	echo"<td>".$filaCurso->horasSemanales."</td>";
+	echo"<td>".$filaCurso->tipoCargo."</td>";
+	echo"</tr>";
+	}
+	echo"</table>";
+
+
+	echo "<hr>";
+
+
+
+	echo "<h4><b>Carga horaria total:</b></h4>";
+	echo "<p>20 horas semanales</p>";
+
+
 
 
 						///////////////
