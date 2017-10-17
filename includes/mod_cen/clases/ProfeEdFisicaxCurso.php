@@ -1,18 +1,22 @@
 <?php
 
 include_once('conexion.php');
+//include_once('persona.php');
+//include_once('ProfeEdFisicaxEscuela')
+//include_once('conexionv2.php');
+//include_once('maestro.php');
 
-class ProfeEdFisicaxCurso  
+class ProfeEdFisicaxCurso
    {
 	private $id_Ed_FisicaxCurso;
 	private $id_Ed_FisicaxEscuela;
-	private $turno;	
+	private $turno;
 	private $nivel;
 	private $horasSemanales;
  	private $tipoCargo;
  	private $gradoAño;
  	private $seccionDivision;
- 	
+
 
  	function __construct($id_Ed_FisicaxCurso=NULL,$id_Ed_FisicaxEscuela=NULL,$turno=NULL,$nivel=NULL,$horasSemanales=NULL,$tipoCargo=NULL,$gradoAño=NULL,$seccionDivision=NULL)
 	{
@@ -61,15 +65,15 @@ public function buscar()
 
 		if($this->id_Ed_FisicaxCurso!=NULL)
 		{
-			$sentencia.=" id_Ed_FisicaxCurso=$this->id_Ed_FisicaxCurso && ";	
+			$sentencia.=" id_Ed_FisicaxCurso=$this->id_Ed_FisicaxCurso && ";
 		}
 
 		if($this->id_Ed_FisicaxEscuela!=NULL)
 		{
-			$sentencia.=" id_Ed_FisicaxEscuela=$this->id_Ed_FisicaxEscuela && ";	
+			$sentencia.=" id_Ed_FisicaxEscuela=$this->id_Ed_FisicaxEscuela && ";
 		}
 
-		
+
 		if($this->turno!=NULL)
 		{
 			$sentencia.=" turno=$this->turno && ";
@@ -101,7 +105,7 @@ public function buscar()
 			$sentencia.=" seccionDivision=$this->seccionDivision && ";
 		}
 
-		
+
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 
 		}
@@ -112,6 +116,47 @@ public function buscar()
 		return $conexion->query($sentencia);
 
 	}
+
+
+public function buscarCursos($escuelaID,$personaID)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+
+
+		$sentencia= "SELECT ProfeEdFisicaxCurso.gradoAño, ProfeEdFisicaxCurso.seccionDivision, ProfeEdFisicaxCurso.turno, ProfeEdFisicaxCurso.nivel, ProfeEdFisicaxCurso.tipoCargo, ProfeEdFisicaxCurso.horasSemanales
+                     FROM ProfeEdFisicaxCurso
+                      JOIN ProfeEdFisicaxEscuela
+                     	ON ( ProfeEdFisicaxCurso.id_Ed_FisicaxEscuela = ProfeEdFisicaxEscuela.id_Ed_FisicaxEscuela )
+                         JOIN personas
+                             ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )";
+
+
+
+
+
+           if( $escuelaID!=NULL && $personaID!=NULL)
+           {
+
+
+					$sentencia.=" WHERE ProfeEdFisicaxEscuela.escuelaId = '".$escuelaID."'";
+					$sentencia.=" AND personas.personaId = '".$personaID."'";
+
+				//$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+
+
+
+			}
+
+		$sentencia.="  ORDER BY gradoAño ASC";
+
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
 
 
 } // fin de la CLASE
