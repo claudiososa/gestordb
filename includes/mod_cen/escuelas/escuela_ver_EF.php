@@ -308,8 +308,13 @@ if(($_POST) || isset($_GET['retorno']))
 						echo "<hr>";
 						echo "<h4><b>Carga horaria total:</b></h4>";
 						echo "<p>20 horas semanales</p>";
-						echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
-						echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$fila->escuelaId."'>";
+
+
+						///////////////
+
+						
+						echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."'>Asignar Nuevo Curso</button>";
+						echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$filaProf->personaId."'>";
 						 include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
 						 echo"</div>";
 
