@@ -8,6 +8,7 @@ include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 //include_once("includes/mod_cen/clases/ProfesoresEF.php");
 include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
 include_once("includes/mod_cen/clases/referente.php");
+include_once("includes/mod_cen/clases/ProfeEdFisicaxCurso.php");
 
 
 
@@ -17,11 +18,13 @@ $datoEscuela = $escuela->buscarUnico();
 
 //Definicion de variables con cantidad y lista de cursos actuales para la escuela
 
-$curso = new Cursos();
-$curso->escuelaId=$_GET['escuelaId'];
+$curso = new ProfeEdFisicaxCurso();
+//$curso->escuelaId=$_GET['escuelaId'];
 
-$cantidadCursos= $curso->buscar('cantidad');
-$cursosActuales= $curso->buscar('total');
+$Cursos= $curso->buscarCursos('141','1639');
+$cantidadCurso=mysqli_num_rows($Cursos);
+//$cantidadCurso=2;
+//$cursosActuales= $curso->buscar('total');
 
 //Definicion de variables con cantidad y lista de Profesores actuales para la escuela
 
@@ -30,6 +33,7 @@ $cursosActuales= $curso->buscar('total');
 $profesor2 = new ProfeEdFisicaxEscuela(null,null,$_GET['escuelaId']);
 $buscarProfesor=$profesor2->buscarProfesores();
 $cantidadProfeEF=mysqli_num_rows($buscarProfesor);
+
 
 //$cantidadProfesores= $profesor->buscar('cantidad');
 //$profesoresActuales= $profesor->buscar('total');
@@ -50,10 +54,10 @@ $cantidadProfeEF=mysqli_num_rows($buscarProfesor);
 	<div class="panel-body">
 		<div class=class="col-md-12" id="courses">
 
-			<?php echo 'Total de curso:'.$cantidadCursos;
-				while ($fila = mysqli_fetch_object($cursosActuales)) {
-					echo '<p>'.$fila->curso.' '.$fila->division.
-					' Turno <b>'.Cursos::turno($fila->turno).'</b><img class="curso" id="curso'.$fila->cursoId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+			<?php echo 'Total de curso:'.$cantidadCurso;
+				while ($fila = mysqli_fetch_object($Cursos)) {
+					echo '<p>'.$fila->gradoAño.' '.$fila->seccionDivision.'  '.$fila->turno;
+				//	' Turno <b>'.Cursos::turno($fila->turno).'</b><img class="curso" id="curso'.$fila->cursoId.'" src="img/iconos/delete.png" alt="borrar"></p>';
 				}
 			?>
 
@@ -62,7 +66,7 @@ $cantidadProfeEF=mysqli_num_rows($buscarProfesor);
 		<button id="newCourse" class="btn btn-success" type="button" name="button">Nuevo Curso</button>
 		<div id="formNewCourse" class="col-md-12">
 			<hr />
-			<?php include('includes/mod_cen/formularios/f_HorarioNuevoCurso.php') ?>
+			<?php include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php') ?>
 		</div>
 	</div>
 </div>
@@ -75,7 +79,7 @@ $cantidadProfeEF=mysqli_num_rows($buscarProfesor);
 		<div class=class="col-md-12" id="teachers">
 			<?php  echo 'Total de Profesores:'.$cantidadProfeEF;
 				while ($fila = mysqli_fetch_object($buscarProfesor)) {
-					echo '<p>'.$fila->apellido.' '.$fila->nombre.'<img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+					echo '<p>'.$fila->apellido.' '.$fila->nombre.'  [ '.$fila->id_Ed_FisicaxEscuela .'] <img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
 				$numeroEsc=$fila->numero;
 				}
 			?>

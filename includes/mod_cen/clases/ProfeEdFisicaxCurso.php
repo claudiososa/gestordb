@@ -1,6 +1,10 @@
 <?php
 
 include_once('conexion.php');
+//include_once('persona.php');	
+//include_once('ProfeEdFisicaxEscuela')
+//include_once('conexionv2.php');
+//include_once('maestro.php');
 
 class ProfeEdFisicaxCurso  
    {
@@ -112,6 +116,47 @@ public function buscar()
 		return $conexion->query($sentencia);
 
 	}
+
+
+public function buscarCursos($escuelaID,$personaID)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		
+
+		$sentencia= "SELECT ProfeEdFisicaxCurso.gradoAño, ProfeEdFisicaxCurso.seccionDivision, ProfeEdFisicaxCurso.turno
+                     FROM ProfeEdFisicaxCurso
+                      JOIN ProfeEdFisicaxEscuela 
+                     	ON ( ProfeEdFisicaxCurso.id_Ed_FisicaxEscuela = ProfeEdFisicaxEscuela.id_Ed_FisicaxEscuela )
+                         JOIN personas 
+                             ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )";
+                                   
+                                  
+					
+
+
+           if( $escuelaID!=NULL && $personaID!=NULL)
+           {
+
+            				
+					$sentencia.=" WHERE ProfeEdFisicaxEscuela.escuelaId = '".$escuelaID."'";
+					$sentencia.=" AND personas.personaId = '".$personaID."'";
+
+				//$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+					
+
+			
+			}
+		
+		$sentencia.="  ORDER BY gradoAño ASC";
+
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
 
 
 } // fin de la CLASE

@@ -90,7 +90,7 @@ $(document).ready(function(){
    * AL PRESIONAR EL BOTON GUARDAR CURSO
    */
 
-/*
+
     $('#saveCourse').click(function (){
         let guardado = 'no'
         let courseName = $("#courseName option:selected").val()
@@ -99,7 +99,7 @@ $(document).ready(function(){
         let quantityStudents = $("#quantityStudents").val()
         let escuelaId = $("#escuelaId").val()
         $.ajax({
-          url: 'includes/mod_cen/clases/Cursos.php',
+          url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
           type: 'POST',
           dataType: 'json',
           data: {courseName: courseName,divisionName: divisionName, turn:turn, quantityStudents:quantityStudents,escuelaId:escuelaId}
@@ -116,7 +116,7 @@ $(document).ready(function(){
               //console.log(item.id)
                 //let escuelaId = $("#escuelaId").val()
               $.ajax({
-                url: 'includes/mod_cen/clases/Cursos.php',
+                url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
                 type: 'POST',
                 dataType: 'json',
                 data: {escuelaIdAjaxId:escuelaId}
@@ -163,7 +163,7 @@ $(document).ready(function(){
         });
 
 
-    }) */
+    }) 
 
     /**
      * AL PRESIONAR BOTON NUEVO PROFESOR

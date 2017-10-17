@@ -123,7 +123,7 @@ public function buscar()
 
 		//$sentencia="SELECT * FROM ProfeEdFisicaxEscuela";
 
-		$sentencia= "SELECT escuelas.numero, personas.nombre, personas.apellido
+		$sentencia= "SELECT escuelas.numero, personas.nombre, personas.apellido, ProfeEdFisicaxEscuela.id_Ed_FisicaxEscuela
 			FROM ProfeEdFisicaxEscuela
 				JOIN personas ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )
 					JOIN escuelas ON ( escuelas.escuelaId = ProfeEdFisicaxEscuela.escuelaId )";

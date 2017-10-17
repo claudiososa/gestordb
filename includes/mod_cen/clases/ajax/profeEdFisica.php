@@ -5,10 +5,9 @@
   include_once('../conexion.php');
   include_once('../ProfeEdFisicaxEscuela.php');
   include_once('../conexionv2.php');
-  //include_once("referente.php");
-   include_once('../maestro.php');
-
-
+  include_once('../maestro.php');
+  include_once('../ProfeEdFisicaxCurso.php');
+  
 
 
 
@@ -184,5 +183,38 @@ if (isset($_POST['botonSaveTeacher'])) {
 		echo $json;
 }
 
+
+
+//****** AGREGAR UN NUEVO CURSO ****/////
+
+if (isset($_POST['courseName'])) {
+
+	//$tab=array(1=>'test',
+	//	2=>'test2');
+
+
+	//,divisionName: divisionName, turn:turn, quantityStudents:quantityStudents,escuelaId:escuelaId
+	//$curso= new Cursos(NULL,$_POST['courseName'],$_POST['divisionName'],$_POST['turn'],$_POST['quantityStudents'],$_POST['escuelaId']);
+	//$curso= new Cursos(null,$_POST['courseName'],$_POST['divisionName'],$_POST['turn'],$_POST['quantityStudents'],$_POST['escuelaId']);
+	$nuevoCurso= new ProfeEdFisicaxCurso(null,'1',$_POST['turn'],'Secundario',$_POST['quantityStudents'],'Titular',$_POST['courseName'],$_POST['divisionName']);
+	$datoCurso = $nuevoCurso->agregar();
+	//$datoCurso=2;
+		$estado= [];
+	if ($datoCurso > 0) {
+		$temporal=array('guardado'=>'ok',
+											'id'=>$datoCurso);
+		array_push($estado,$temporal);
+
+	}else{
+		$temporal=array('guardado'=>'error',
+										'id'=>$datoCurso);
+		array_push($estado,$temporal);
+	}
+	$json = json_encode($estado);
+	//Maestro::debbugPHP($json);
+	echo $json;	# code...
+
+	//Maestro::debbugPHP($datoCurso);
+}  // FIN DE AGREGAR NUEVO CURSO
 
 ?>
