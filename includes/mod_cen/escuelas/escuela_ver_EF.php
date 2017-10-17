@@ -312,9 +312,9 @@ if(($_POST) || isset($_GET['retorno']))
 
 						///////////////
 
-						
-						echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."'>Asignar Nuevo Curso</button>";
-						echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$filaProf->personaId."'>";
+
+						echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
+						echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$filaProf->personaId."".$fila->escuelaId."'>";
 						 include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
 						 echo"</div>";
 
