@@ -77,18 +77,30 @@ $profesoresActuales2= $profesor->buscar('total');
 						<?php
 							$horario->dia='LUNES';
 							$buscarHorario = $horario->buscar();
-
+              //var_dump($buscarHorario);
 								while ($fila = mysqli_fetch_object($buscarHorario)) {
-									echo "<tr id='hora".$fila->horarioFacilitadoresId."'>";
-									echo "<td>".$fila->dia."</td>";
-									echo "<td>".$fila->horaIngreso."</td>";
-									echo "<td>".$fila->horaSalida."</td>";
-									echo "<td>".$fila->asignatura."</td>";
-									echo "<td>".$fila->curso."° ".$fila->division."</td>";
-									echo "<td>".Cursos::turno($fila->turno)."</td>";
-									echo "<td>".$fila->nombre."</td>";
-                  echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
-									echo '</tr>';
+
+                  if ($fila->cursoFacilitadoresId<>'1') {
+                    echo "<tr id='hora".$fila->horarioFacilitadoresId."'>";
+  									echo "<td>".$fila->dia."</td>";
+  									echo "<td>".$fila->horaIngreso."</td>";
+  									echo "<td>".$fila->horaSalida."</td>";
+  									echo "<td>".$fila->asignatura."</td>";
+  									echo "<td>".$fila->curso."° ".$fila->division."</td>";
+  									echo "<td>".Cursos::turno($fila->turno)."</td>";
+  									echo "<td>".$fila->nombre."</td>";
+                    echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+  									echo '</tr>';
+                  }else{
+                    echo "<tr class='alert alert-success' id='hora".$fila->horarioFacilitadoresId."'>";
+                    echo "<td>".$fila->dia."</td>";
+  									echo "<td>".$fila->horaIngreso."</td>";
+  									echo "<td>".$fila->horaSalida."</td>";
+                    echo "<td colspan='4'>Hora Sandwich</td>";
+                    echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+                    echo '</tr>';
+                  }
+
 								}
 						 ?>
 
@@ -113,6 +125,7 @@ $profesoresActuales2= $profesor->buscar('total');
 										<th>Curso</th>
 										<th>Turno</th>
 										<th>Profesor</th>
+                    <th>Accion</th>
 									</tr>
 								</thead>
 								<tbody id='MARTES'>
@@ -120,18 +133,29 @@ $profesoresActuales2= $profesor->buscar('total');
 								$horario->dia='MARTES';
 								$buscarHorario = $horario->buscar();
 
-									while ($fila = mysqli_fetch_object($buscarHorario)) {
-										echo "<tr>";
-										echo "<td>".$fila->dia."</td>";
-										echo "<td>".$fila->horaIngreso."</td>";
-										echo "<td>".$fila->horaSalida."</td>";
-										echo "<td>".$fila->asignatura."</td>";
-										echo "<td>".$fila->curso."° ".$fila->division."</td>";
-										echo "<td>".Cursos::turno($fila->turno)."</td>";
-										echo "<td>".$fila->nombre."</td>";
-                    echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
-										echo '</tr>';
-									}
+                while ($fila = mysqli_fetch_object($buscarHorario)) {
+                  if ($fila->cursoFacilitadoresId<>"1") {
+                    echo "<tr id='hora".$fila->horarioFacilitadoresId."'>";
+                    echo "<td>".$fila->dia."</td>";
+                    echo "<td>".$fila->horaIngreso."</td>";
+                    echo "<td>".$fila->horaSalida."</td>";
+                    echo "<td>".$fila->asignatura."</td>";
+                    echo "<td>".$fila->curso."° ".$fila->division."</td>";
+                    echo "<td>".Cursos::turno($fila->turno)."</td>";
+                    echo "<td>".$fila->nombre."</td>";
+                    echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+                    echo '</tr>';
+                  }else{
+                    echo "<tr class='alert alert-success' id='hora".$fila->horarioFacilitadoresId."'>";
+                    echo "<td>".$fila->dia."</td>";
+                    echo "<td>".$fila->horaIngreso."</td>";
+                    echo "<td>".$fila->horaSalida."</td>";
+                    echo "<td colspan='4'>Hora Sandwich</td>";
+                    echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+                    echo '</tr>';
+                  }
+
+                }
 							 ?>
 						 </tbody>
 					 </table>
@@ -154,6 +178,7 @@ $profesoresActuales2= $profesor->buscar('total');
 											<th>Curso</th>
 											<th>Turno</th>
 											<th>Profesor</th>
+                      <th>Accion</th>
 										</tr>
 									</thead>
 									<tbody id='MIERCOLES'>
@@ -161,18 +186,29 @@ $profesoresActuales2= $profesor->buscar('total');
 									$horario->dia='MIERCOLES';
 									$buscarHorario = $horario->buscar();
 
-										while ($fila = mysqli_fetch_object($buscarHorario)) {
-											echo "<tr>";
-											echo "<td>".$fila->dia."</td>";
-											echo "<td>".$fila->horaIngreso."</td>";
-											echo "<td>".$fila->horaSalida."</td>";
-											echo "<td>".$fila->asignatura."</td>";
-											echo "<td>".$fila->curso."° ".$fila->division."</td>";
-											echo "<td>".Cursos::turno($fila->turno)."</td>";
-											echo "<td>".$fila->nombre."</td>";
-                      echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
-											echo '</tr>';
-										}
+                  while ($fila = mysqli_fetch_object($buscarHorario)) {
+                    if ($fila->cursoFacilitadoresId<>"1") {
+                      echo "<tr id='hora".$fila->horarioFacilitadoresId."'>";
+    									echo "<td>".$fila->dia."</td>";
+    									echo "<td>".$fila->horaIngreso."</td>";
+    									echo "<td>".$fila->horaSalida."</td>";
+    									echo "<td>".$fila->asignatura."</td>";
+    									echo "<td>".$fila->curso."° ".$fila->division."</td>";
+    									echo "<td>".Cursos::turno($fila->turno)."</td>";
+    									echo "<td>".$fila->nombre."</td>";
+                      echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+    									echo '</tr>';
+                    }else{
+                      echo "<tr class='alert alert-success' id='hora".$fila->horarioFacilitadoresId."'>";
+                      echo "<td>".$fila->dia."</td>";
+    									echo "<td>".$fila->horaIngreso."</td>";
+    									echo "<td>".$fila->horaSalida."</td>";
+                      echo "<td colspan='4'>Hora Sandwich</td>";
+                      echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+                      echo '</tr>';
+                    }
+
+  								}
 								 ?>
 							 </tbody>
 						 </table>
@@ -194,6 +230,7 @@ $profesoresActuales2= $profesor->buscar('total');
 												<th>Curso</th>
 												<th>Turno</th>
 												<th>Profesor</th>
+                        <th>Accion</th>
 											</tr>
 										</thead>
 										<tbody id='JUEVES'>
@@ -201,18 +238,29 @@ $profesoresActuales2= $profesor->buscar('total');
 										$horario->dia='JUEVES';
 										$buscarHorario = $horario->buscar();
 
-											while ($fila = mysqli_fetch_object($buscarHorario)) {
-												echo "<tr>";
-												echo "<td>".$fila->dia."</td>";
-												echo "<td>".$fila->horaIngreso."</td>";
-												echo "<td>".$fila->horaSalida."</td>";
-												echo "<td>".$fila->asignatura."</td>";
-												echo "<td>".$fila->curso."° ".$fila->division."</td>";
-												echo "<td>".Cursos::turno($fila->turno)."</td>";
-												echo "<td>".$fila->nombre."</td>";
-                        echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
-												echo '</tr>';
-											}
+                    while ($fila = mysqli_fetch_object($buscarHorario)) {
+                      if ($fila->cursoFacilitadoresId<>"1") {
+                        echo "<tr id='hora".$fila->horarioFacilitadoresId."'>";
+                        echo "<td>".$fila->dia."</td>";
+                        echo "<td>".$fila->horaIngreso."</td>";
+                        echo "<td>".$fila->horaSalida."</td>";
+                        echo "<td>".$fila->asignatura."</td>";
+                        echo "<td>".$fila->curso."° ".$fila->division."</td>";
+                        echo "<td>".Cursos::turno($fila->turno)."</td>";
+                        echo "<td>".$fila->nombre."</td>";
+                        echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+                        echo '</tr>';
+                      }else{
+                        echo "<tr class='alert alert-success' id='hora".$fila->horarioFacilitadoresId."'>";
+                        echo "<td>".$fila->dia."</td>";
+                        echo "<td>".$fila->horaIngreso."</td>";
+                        echo "<td>".$fila->horaSalida."</td>";
+                        echo "<td colspan='4'>Hora Sandwich</td>";
+                        echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+                        echo '</tr>';
+                      }
+
+                    }
 									 ?>
 								 </tbody>
 							 </table>
@@ -234,6 +282,7 @@ $profesoresActuales2= $profesor->buscar('total');
 													<th>Curso</th>
 													<th>Turno</th>
 													<th>Profesor</th>
+                          <th>Accion</th>
 												</tr>
 											</thead>
 											<tbody id='VIERNES'>
@@ -241,18 +290,29 @@ $profesoresActuales2= $profesor->buscar('total');
 											$horario->dia='VIERNES';
 											$buscarHorario = $horario->buscar();
 
-												while ($fila = mysqli_fetch_object($buscarHorario)) {
-													echo "<tr>";
-													echo "<td>".$fila->dia."</td>";
-													echo "<td>".$fila->horaIngreso."</td>";
-													echo "<td>".$fila->horaSalida."</td>";
-													echo "<td>".$fila->asignatura."</td>";
-													echo "<td>".$fila->curso."° ".$fila->division."</td>";
-													echo "<td>".Cursos::turno($fila->turno)."</td>";
-													echo "<td>".$fila->nombre."</td>";
-                          echo "<td><a href='#'><img class='horaId' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
-													echo '</tr>';
-												}
+                      while ($fila = mysqli_fetch_object($buscarHorario)) {
+                        if ($fila->cursoFacilitadoresId<>"1") {
+                          echo "<tr id='hora".$fila->horarioFacilitadoresId."'>";
+        									echo "<td>".$fila->dia."</td>";
+        									echo "<td>".$fila->horaIngreso."</td>";
+        									echo "<td>".$fila->horaSalida."</td>";
+        									echo "<td>".$fila->asignatura."</td>";
+        									echo "<td>".$fila->curso."° ".$fila->division."</td>";
+        									echo "<td>".Cursos::turno($fila->turno)."</td>";
+        									echo "<td>".$fila->nombre."</td>";
+                          echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+        									echo '</tr>';
+                        }else{
+                          echo "<tr class='alert alert-success' id='hora".$fila->horarioFacilitadoresId."'>";
+                          echo "<td>".$fila->dia."</td>";
+        									echo "<td>".$fila->horaIngreso."</td>";
+        									echo "<td>".$fila->horaSalida."</td>";
+                          echo "<td colspan='4'>Hora Sandwich</td>";
+                          echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
+                          echo '</tr>';
+                        }
+
+      								}
 										 ?>
 									 </tbody>
 								 </table>

@@ -16,17 +16,23 @@
 
     $buscarCurso= $curso2->buscar('cantidad',$_POST['horaCourseName'],$_POST['asignatura'],$_POST['horaTeacherName'],$_POST['referenteId']);
     //$dato=mysqli_fetch_object($buscarCurso);
-    if ($buscarCurso) {
-      $id= $curso2->buscar('id',$_POST['horaCourseName'],$_POST['asignatura'],$_POST['horaTeacherName'],$_POST['referenteId']);
-      $hora = new HorarioFacilitadores(null,$_POST['referenteId'],$_POST['dia'],$_POST['horaInicio'],$_POST['horaFinal'],$id,$_POST['escuelaId']);
-      $crearHora=$hora->agregar();
-      //Maestro::debbugPHP($hora);
+    if (!isset($_POST['horaSandiwch'])) {
+      if ($buscarCurso) {
+        $id= $curso2->buscar('id',$_POST['horaCourseName'],$_POST['asignatura'],$_POST['horaTeacherName'],$_POST['referenteId']);
+        $hora = new HorarioFacilitadores(null,$_POST['referenteId'],$_POST['dia'],$_POST['horaInicio'],$_POST['horaFinal'],$id,$_POST['escuelaId']);
+        $crearHora=$hora->agregar();
+        //Maestro::debbugPHP($hora);
+      }else{
+        $new = $curso->agregar();# code...
+        $hora = new HorarioFacilitadores(null,$_POST['referenteId'],$_POST['dia'],$_POST['horaInicio'],$_POST['horaFinal'],$new,$_POST['escuelaId']);
+        $crearHora=$hora->agregar();
+        //Maestro::debbugPHP($crearHora);
+      }# code...
     }else{
-      $new = $curso->agregar();# code...
-      $hora = new HorarioFacilitadores(null,$_POST['referenteId'],$_POST['dia'],$_POST['horaInicio'],$_POST['horaFinal'],$new,$_POST['escuelaId']);
+      $hora = new HorarioFacilitadores(null,$_POST['referenteId'],$_POST['dia'],$_POST['horaInicio'],$_POST['horaFinal'],'1',$_POST['escuelaId']);
       $crearHora=$hora->agregar();
-      //Maestro::debbugPHP($crearHora);
     }
+
 
     $list=array();
     //$new = $curso->agregar();
@@ -35,11 +41,17 @@
     //Maestro::debbugPHP($horario);
     $buscarHorario = $horario->buscar();
     $fila = mysqli_fetch_object($buscarHorario);
+    if (isset($_POST['horaSandiwch'])) {
+      $id=1;
+    }else {
+      $id=$fila->horarioFacilitadoresId;
+    }
+
     //while ($fila = mysqli_fetch_object($buscarHorario)) {
 //      Dia	Hora Inicio	Hora Final	Asignatura	Curso	Turno	Profesor
 
       $temporal=[
-        'id' => $fila->horarioFacilitadoresId,
+        'id' => $id,
         'dia' => $fila->dia,
         'horaInicio' => $fila->horaIngreso,
         'horaFinal' => $fila->horaSalida,
