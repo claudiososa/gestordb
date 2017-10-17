@@ -45,7 +45,7 @@ public function buscar()
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-    $sentencia= "SELECT escuelas.numero, personas.personaId, personas.nombre, personas.apellido, personas.email, personas.telefonoC, personas.telefonoM, ProfeEdFisicaxEscuela.titulo
+    $sentencia= "SELECT escuelas.numero, personas.personaId, personas.nombre, personas.apellido, personas.email, personas.telefonoC, personas.telefonoM, ProfeEdFisicaxEscuela.titulo, escuelas.escuelaId
 			FROM ProfeEdFisicaxEscuela
 				JOIN personas ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )
 					JOIN escuelas ON ( escuelas.escuelaId = ProfeEdFisicaxEscuela.escuelaId )";
