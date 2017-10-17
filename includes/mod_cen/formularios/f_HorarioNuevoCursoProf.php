@@ -52,7 +52,7 @@
 
   <div class="form-group">
     <label  for="turn">Nivel</label>
-    <select class="form-control" name="turn" id="turn">
+    <select class="form-control" name="turn1" id="turn1">
       <option value="0">Seleccione</option>
       <option value="CB">Ciclo Básico</option>
       <option value="CBC">Ciclo Básico Común</option>
@@ -76,7 +76,7 @@
 
     <div class="form-group">
       <label  for="turn">Tipo de Cargo</label>
-      <select class="form-control" name="turn" id="turn">
+      <select class="form-control" name="turn2" id="turn2">
         <option value="0">Seleccione</option>
         <option value="T">Titular</option>
         <option value="I">Interino</option>
