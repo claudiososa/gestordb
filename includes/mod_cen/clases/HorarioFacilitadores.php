@@ -153,7 +153,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		$bd=Conexion2::getInstance();
     $sinParam=0;
 		$sentencia="SELECT horarioFacilitadores.cursoFacilitadoresId,horarioFacilitadores.horarioFacilitadoresId,
-											horarioFacilitadores.dia,
+											horarioFacilitadores.dia,horarioFacilitadores.escuelaId,
 											horarioFacilitadores.horaIngreso,horarioFacilitadores.horaSalida,
 											cursos.curso,cursos.division,cursos.turno,cursos.cantidadAlumnos,
 											CONCAT(personas.apellido,', ',personas.nombre) AS nombre,

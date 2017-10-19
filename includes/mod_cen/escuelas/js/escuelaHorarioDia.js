@@ -206,7 +206,7 @@ Hora Sandwich
                  referenteId:referenteId}
         })
         .done(function(lista) {
-
+          $("#myModal").modal("hide");
           //$('#LUNES').hide(500)
 
           for (let item of lista) {
@@ -216,7 +216,7 @@ Hora Sandwich
           for (let item of lista) {
             //$(`#${dia}`).append(``)
             $(`#${dia}`).append(`<tr id="hora${item.id}"><td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td>${item.asignatura}</td>
-              <td>${item.curso}</td><td>${item.turno}</td><td>${item.profesor}</td>
+              <td>${item.curso}</td><td>${item.turno}</td><td>${item.cantidad}</td><td>${item.profesor}</td>
               <td><a href='#'><img class='dia' id='horaId${item.id}' src='img/iconos/delete.jpg' alt='borrar item'></a></td></tr>`)
             //$(`#${dia}`).append('')
             //console.log(item.dia)
@@ -225,7 +225,7 @@ Hora Sandwich
 
           $(`#${dia}`).show(500)
           console.log("successdddddddddddddddd");
-          $("#myModal").modal("hide");
+
         })
         .fail(function() {
           console.log("error");
@@ -264,7 +264,7 @@ Hora Sandwich
         })
         .done(function(lista) {
 
-          //$('#LUNES').hide(500)
+          $("#myModal2").modal("hide");
 
           for (let item of lista) {
               let dia = item.dia
@@ -275,11 +275,11 @@ Hora Sandwich
             console.log('id creado')
             //console.log(item.id)
             if (item.id=='1') {//dibuja hora Sandwich
-              $(`#${dia}`).append(`<tr class="alert alert-success" id="hora${item.idHora}"><td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td colspan='4'>Hora Sandwich</td>
+              $(`#${dia}`).append(`<tr class="alert alert-success" id="hora${item.idHora}"><td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td colspan='5'>Hora Sandwich</td>
                 <td><a href='#'><img class='dia' id='horaId${item.idHora}' src='img/iconos/delete.jpg' alt='borrar item'></a></td></tr>`)
             }else{
               $(`#${dia}`).append(`<tr id="hora${item.id}"><td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td>${item.asignatura}</td>
-                <td>${item.curso}</td><td>${item.turno}</td><td>${item.profesor}</td>
+                <td>${item.curso}</td><td>${item.turno}</td><td>${item.cantidad}</td><td>${item.profesor}</td>
                 <td><a href='#'><img class='dia' id='horaId${item.id}' src='img/iconos/delete.jpg' alt='borrar item'></a></td></tr>`)
             }
 
@@ -287,7 +287,7 @@ Hora Sandwich
 
           $(`#${dia}`).show(500)
           //console.log("successdddddddddddddddd");
-          $("#myModal2").modal("hide");
+
         })
         .fail(function() {
           console.log("error");

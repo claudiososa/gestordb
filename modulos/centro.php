@@ -108,6 +108,9 @@
 					case 11:
 								include("includes/mod_cen/facilitador/verxEscuelas.php");
 								break;
+					case 12:
+								include("includes/mod_cen/facilitador/verHorarioFacilitadores.php");
+								break;
 				}
 				break;
 			case "escuelas":
@@ -244,7 +247,7 @@
 									include("includes/mod_cen/escuelas/agregarEscuelas.php");
 								  break;
 						case 25:
-														
+
 									include("includes/mod_cen/escuelas/escuela_ver_EF.php");
 								  break;
 				}
@@ -444,7 +447,7 @@
 								include("includes/mod_cen/escuelas/escuelaEdFisica.php");
 								//include("includes/mod_cen/edFisica/nuevoProfe.php");
 								break;
-						
+
 						}
 						break;
 

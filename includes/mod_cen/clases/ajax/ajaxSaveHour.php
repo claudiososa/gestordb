@@ -6,9 +6,6 @@
   //verifica que venga desde pedido post desde ajax determinado
   if (isset($_POST['horaCourseName']) && isset($_POST['horaTeacherName']) && isset($_POST['asignatura']))
   {
-    //Maestro::debbugPHP(new CoursoFacilitadores());
-    //$curso = ;
-
     $curso = new CursoFacilitadores(null,$_POST['horaCourseName'],$_POST['asignatura'],$_POST['horaTeacherName'],$_POST['referenteId']);
 
     $curso2=new CursoFacilitadores();
@@ -32,10 +29,7 @@
       $crearHora=$hora->agregar();
     }
 
-
     $list=array();
-    //$new = $curso->agregar();
-    //$horario = new HorarioFacilitadores(null,$_POST['referenteId'],$_POST['dia'],null,null,null,$_GET['escuelaId']);
     $horario = new HorarioFacilitadores($crearHora);
     //Maestro::debbugPHP($horario);
     $buscarHorario = $horario->buscar();
@@ -47,9 +41,6 @@
       $id=$fila->horarioFacilitadoresId;
     }
 
-    //while ($fila = mysqli_fetch_object($buscarHorario)) {
-//      Dia	Hora Inicio	Hora Final	Asignatura	Curso	Turno	Profesor
-
       $temporal=[
         'id' => $id,
         'dia' => $fila->dia,
@@ -58,15 +49,14 @@
         'asignatura' => $fila->asignatura,
         'curso' => $fila->curso."° ".$fila->division,
         'turno' => Cursos::turno($fila->turno),
+        'cantidad' => $fila->cantidadAlumnos,
         'profesor' => $fila->nombre,
         'idHora' => $idHora
         ];
 
-      array_push($list,$temporal);
-    //}
-
+    array_push($list,$temporal);
     $json = json_encode($list);
-    //Maestro::debbugPHP($json);
-        echo $json;
+    Maestro::debbugPHP($json);
+    echo $json;
   }
   ?>

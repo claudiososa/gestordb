@@ -45,7 +45,64 @@ $profesoresActuales2= $profesor->buscar('total');
 	//echo '<div class="container">';
 
 	?>
-	<div class="col-md-8">
+  <div class='col-md-12'>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse6"><?php echo "Cursos" ?></a>
+      </h4>
+    </div>
+
+  <div id="collapse6" class="panel-collapse collapse">
+
+  <div class="panel-body">
+    <div class=class="col-md-12" id="courses">
+
+      <?php echo 'Total de curso:'.$cantidadCursos;
+        while ($fila = mysqli_fetch_object($cursosActuales)) {
+          echo '<p>'.$fila->curso.' '.$fila->division.
+          ' Turno <b>'.Cursos::turno($fila->turno).'</b><img class="curso" id="curso'.$fila->cursoId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+        }
+      ?>
+
+    </div>
+    <hr />
+    <button id="newCourse" class="btn btn-success" type="button" name="button">Nuevo Curso</button>
+    <div id="formNewCourse" class="col-md-12">
+      <hr />
+      <?php include('includes/mod_cen/formularios/f_HorarioNuevoCurso.php') ?>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a data-toggle="collapse" href="#collapse7"><?php echo "Profesores" ?></a>
+    </h4>
+  </div>
+
+  <div id="collapse7" class="panel-collapse collapse">
+  <div class="panel-body">
+    <div class=class="col-md-12" id="teachers">
+      <?php echo 'Total de Profesores:'.$cantidadProfesores;
+        while ($fila = mysqli_fetch_object($profesoresActuales)) {
+          echo '<p>'.$fila->nombre.' '.$fila->apellido.'<img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+        }
+      ?>
+
+    </div>
+    <hr />
+    <button id="newTeacher" class="btn btn-success" type="button" name="button">Nuevo Profesor</button>
+          <?php include('includes/mod_cen/formularios/f_HorarioNuevoProfesor.php') ?>
+
+  </div>
+</div>
+</div>
+</div>
+	<div class="col-md-12">
 
 
 	<div class="panel panel-primary" id="dias">
@@ -54,7 +111,13 @@ $profesoresActuales2= $profesor->buscar('total');
 		</div>
 		<div class="panel-body">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Lunes</div>
+				<div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse1">Lunes</a>
+          </h4>
+        </div>
+
+      <div id="collapse1" class="panel-collapse collapse">
 				<div class="panel-body">
 					<div class="formHorarioNuevaHora" id='divHorarioLUNES'>
 						<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaLunes">Agregar Hora</button>
@@ -67,6 +130,7 @@ $profesoresActuales2= $profesor->buscar('total');
 									<th>Asignatura</th>
 									<th>Curso</th>
 									<th>Turno</th>
+                  <th>Alumnos</th>
 									<th>Profesor</th>
                   <th>Accion</th>
 								</tr>
@@ -88,6 +152,7 @@ $profesoresActuales2= $profesor->buscar('total');
   									echo "<td>".$fila->asignatura."</td>";
   									echo "<td>".$fila->curso."° ".$fila->division."</td>";
   									echo "<td>".Cursos::turno($fila->turno)."</td>";
+                    echo "<td>".$fila->cantidadAlumnos."</td>";
   									echo "<td>".$fila->nombre."</td>";
                     echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
   									echo '</tr>';
@@ -96,7 +161,7 @@ $profesoresActuales2= $profesor->buscar('total');
                     echo "<td>".$fila->dia."</td>";
   									echo "<td>".$fila->horaIngreso."</td>";
   									echo "<td>".$fila->horaSalida."</td>";
-                    echo "<td colspan='4'>Hora Sandwich</td>";
+                    echo "<td colspan='5'>Hora Sandwich</td>";
                     echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
                     echo '</tr>';
                   }
@@ -108,9 +173,16 @@ $profesoresActuales2= $profesor->buscar('total');
 				 </table>
 					</div>
 				</div>
+      </div>
 				</div>
 				<div class="panel panel-primary">
-					<div class="panel-heading">Martes</div>
+					<div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapse2">Martes</a>
+            </h4>
+          </div>
+
+        <div id="collapse2" class="panel-collapse collapse">
 					<div class="panel-body">
 						<div class="formHorarioNuevaHora" id='divHorarioMARTES'>
 							<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaMartes">Agregar Hora</button>
@@ -124,6 +196,7 @@ $profesoresActuales2= $profesor->buscar('total');
 										<th>Asignatura</th>
 										<th>Curso</th>
 										<th>Turno</th>
+                    <th>Alumnos</th>
 										<th>Profesor</th>
                     <th>Accion</th>
 									</tr>
@@ -142,6 +215,7 @@ $profesoresActuales2= $profesor->buscar('total');
                     echo "<td>".$fila->asignatura."</td>";
                     echo "<td>".$fila->curso."° ".$fila->division."</td>";
                     echo "<td>".Cursos::turno($fila->turno)."</td>";
+                    echo "<td>".$fila->cantidadAlumnos."</td>";
                     echo "<td>".$fila->nombre."</td>";
                     echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
                     echo '</tr>';
@@ -150,7 +224,7 @@ $profesoresActuales2= $profesor->buscar('total');
                     echo "<td>".$fila->dia."</td>";
                     echo "<td>".$fila->horaIngreso."</td>";
                     echo "<td>".$fila->horaSalida."</td>";
-                    echo "<td colspan='4'>Hora Sandwich</td>";
+                    echo "<td colspan='5'>Hora Sandwich</td>";
                     echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
                     echo '</tr>';
                   }
@@ -162,9 +236,16 @@ $profesoresActuales2= $profesor->buscar('total');
 
 						</div>
 					</div>
+        </div>
+
 					</div>
 					<div class="panel panel-primary">
-						<div class="panel-heading">Miércoles</div>
+						<div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse3">Miércoles</a>
+              </h4>
+            </div>
+          <div id="collapse3" class="panel-collapse collapse">
 						<div class="panel-body">
 							<div class="formHorarioNuevaHora" id='divHorarioMIERCOLES'>
 								<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaMiercoles">Agregar Hora</button>
@@ -177,6 +258,7 @@ $profesoresActuales2= $profesor->buscar('total');
 											<th>Asignatura</th>
 											<th>Curso</th>
 											<th>Turno</th>
+                      <th>Alumnos</th>
 											<th>Profesor</th>
                       <th>Accion</th>
 										</tr>
@@ -195,6 +277,7 @@ $profesoresActuales2= $profesor->buscar('total');
     									echo "<td>".$fila->asignatura."</td>";
     									echo "<td>".$fila->curso."° ".$fila->division."</td>";
     									echo "<td>".Cursos::turno($fila->turno)."</td>";
+                      echo "<td>".$fila->cantidadAlumnos."</td>";
     									echo "<td>".$fila->nombre."</td>";
                       echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
     									echo '</tr>';
@@ -203,7 +286,7 @@ $profesoresActuales2= $profesor->buscar('total');
                       echo "<td>".$fila->dia."</td>";
     									echo "<td>".$fila->horaIngreso."</td>";
     									echo "<td>".$fila->horaSalida."</td>";
-                      echo "<td colspan='4'>Hora Sandwich</td>";
+                      echo "<td colspan='5'>Hora Sandwich</td>";
                       echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
                       echo '</tr>';
                     }
@@ -215,8 +298,14 @@ $profesoresActuales2= $profesor->buscar('total');
 							</div>
 						</div>
 						</div>
+          </div>
 						<div class="panel panel-primary">
-							<div class="panel-heading">Jueves</div>
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapse4">Jueves</a>
+                </h4>
+              </div>
+            <div id="collapse4" class="panel-collapse collapse">
 							<div class="panel-body">
 								<div class="formHorarioNuevaHora" id='divHorarioJUEVES'>
 									<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaJueves">Agregar Hora</button>
@@ -229,6 +318,7 @@ $profesoresActuales2= $profesor->buscar('total');
 												<th>Asignatura</th>
 												<th>Curso</th>
 												<th>Turno</th>
+                        <th>Alumnos</th>
 												<th>Profesor</th>
                         <th>Accion</th>
 											</tr>
@@ -247,6 +337,7 @@ $profesoresActuales2= $profesor->buscar('total');
                         echo "<td>".$fila->asignatura."</td>";
                         echo "<td>".$fila->curso."° ".$fila->division."</td>";
                         echo "<td>".Cursos::turno($fila->turno)."</td>";
+                        echo "<td>".$fila->cantidadAlumnos."</td>";
                         echo "<td>".$fila->nombre."</td>";
                         echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
                         echo '</tr>';
@@ -255,7 +346,7 @@ $profesoresActuales2= $profesor->buscar('total');
                         echo "<td>".$fila->dia."</td>";
                         echo "<td>".$fila->horaIngreso."</td>";
                         echo "<td>".$fila->horaSalida."</td>";
-                        echo "<td colspan='4'>Hora Sandwich</td>";
+                        echo "<td colspan='5'>Hora Sandwich</td>";
                         echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
                         echo '</tr>';
                       }
@@ -266,9 +357,15 @@ $profesoresActuales2= $profesor->buscar('total');
 							 </table>
 								</div>
 							</div>
+            </div>
 							</div>
 							<div class="panel panel-primary">
-								<div class="panel-heading">Viernes</div>
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse5">Viernes</a>
+                  </h4>
+                </div>
+              <div id="collapse5" class="panel-collapse collapse">
 								<div class="panel-body">
 									<div class="formHorarioNuevaHora" id='divHorarioVIERNES'>
 										<button class="agregarHora btn btn-success" type="agregarHora" name="button" id="horaViernes">Agregar Hora</button>
@@ -281,6 +378,7 @@ $profesoresActuales2= $profesor->buscar('total');
 													<th>Asignatura</th>
 													<th>Curso</th>
 													<th>Turno</th>
+                          <th>Alumnos</th>
 													<th>Profesor</th>
                           <th>Accion</th>
 												</tr>
@@ -299,6 +397,7 @@ $profesoresActuales2= $profesor->buscar('total');
         									echo "<td>".$fila->asignatura."</td>";
         									echo "<td>".$fila->curso."° ".$fila->division."</td>";
         									echo "<td>".Cursos::turno($fila->turno)."</td>";
+                          echo "<td>".$fila->cantidadAlumnos."</td>";
         									echo "<td>".$fila->nombre."</td>";
                           echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
         									echo '</tr>';
@@ -307,7 +406,7 @@ $profesoresActuales2= $profesor->buscar('total');
                           echo "<td>".$fila->dia."</td>";
         									echo "<td>".$fila->horaIngreso."</td>";
         									echo "<td>".$fila->horaSalida."</td>";
-                          echo "<td colspan='4'>Hora Sandwich</td>";
+                          echo "<td colspan='5'>Hora Sandwich</td>";
                           echo "<td><a href='#'><img class='dia' id='horaId".$fila->horarioFacilitadoresId."' src='img/iconos/delete.jpg' alt='borrar item'></a></td>";
                           echo '</tr>';
                         }
@@ -319,57 +418,11 @@ $profesoresActuales2= $profesor->buscar('total');
 									</div>
 								</div>
 								</div>
-
+              </div>
 
 					</div>
      </div>
     </div>
-  <div class='col-md-4'>
-
-
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<?php echo "Cursos" ?>
-	</div>
-	<div class="panel-body">
-		<div class=class="col-md-12" id="courses">
-
-			<?php echo 'Total de curso:'.$cantidadCursos;
-				while ($fila = mysqli_fetch_object($cursosActuales)) {
-					echo '<p>'.$fila->curso.' '.$fila->division.
-					' Turno <b>'.Cursos::turno($fila->turno).'</b><img class="curso" id="curso'.$fila->cursoId.'" src="img/iconos/delete.png" alt="borrar"></p>';
-				}
-			?>
-
-		</div>
-		<hr />
-		<button id="newCourse" class="btn btn-success" type="button" name="button">Nuevo Curso</button>
-		<div id="formNewCourse" class="col-md-12">
-			<hr />
-			<?php include('includes/mod_cen/formularios/f_HorarioNuevoCurso.php') ?>
-		</div>
-	</div>
-</div>
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<?php echo "Profesores" ?>
-	</div>
-	<div class="panel-body">
-		<div class=class="col-md-12" id="teachers">
-			<?php echo 'Total de Profesores:'.$cantidadProfesores;
-				while ($fila = mysqli_fetch_object($profesoresActuales)) {
-					echo '<p>'.$fila->nombre.' '.$fila->apellido.'<img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
-				}
-			?>
-
-		</div>
-		<hr />
-		<button id="newTeacher" class="btn btn-success" type="button" name="button">Nuevo Profesor</button>
-					<?php include('includes/mod_cen/formularios/f_HorarioNuevoProfesor.php') ?>
-
-	</div>
-</div>
-</div>
 </div>
 
 <script src="js/bootstrap-clockpicker.min.js"></script>
