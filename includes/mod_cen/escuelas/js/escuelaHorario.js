@@ -18,6 +18,8 @@ $(document).ready(function() {
 
   $('#teachers').on('click', '.profesor', function(){
     let profesorId =$(this).attr("id").substring(8)
+
+
     $.ajax({
       url: 'includes/mod_cen/clases/Profesores.php',
       type: 'POST',
@@ -27,14 +29,23 @@ $(document).ready(function() {
     .done(function(lista) {
       console.log("success");
       let cantidad = 0
-      $('#teachers').empty()
+      let estado ='borrado'
+
       for (let item of lista) {
-          console.log(item.profesorId)
-          cantidad++
-          $('#teachers').prepend('<p>'+item.nombre+' '+item.apellido+'</b><img class="profesor" id="profesor'+item.profesorId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+        estado = item.estado
       }
+      if (estado=='borrado') {
+        $('#teachers').empty()
+        for (let item of lista) {
+            console.log(item.profesorId)
+            cantidad++
+            $('#teachers').prepend('<p>'+item.nombre+' '+item.apellido+'</b><img class="profesor" id="profesor'+item.profesorId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+        }
         $('#teachers').prepend(`Total de Profesores: ${cantidad}`)
         alert('Borrado correctamente')
+      }else{
+        alert('Error: Existe horario asignado a este Profesor. Debe elminar primero los horarios relacionados a este profesor para poder Quitar el Profesor')
+      }
     })
     .fail(function() {
       console.log("error");
@@ -50,7 +61,6 @@ $(document).ready(function() {
   /**
    * //AL PRESIONAR EL BOTON X PARA ELIMINAR CURSO
    */
-
   $('#courses').on('click', '.curso', function(){
 
     let cursoId =$(this).attr("id").substring(5)
@@ -62,16 +72,24 @@ $(document).ready(function() {
     })
     .done(function(lista) {
       let cantidad = 0
-      console.log("success");
-      $('#courses').empty()
-      for (let item of lista) {
-          cantidad++
-          console.log(item.cursoId)
+      let estado ='borrado'
 
-          $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+      for (let item of lista) {
+        estado = item.estado
       }
-        $('#courses').prepend(`Total de curso: ${cantidad}`)
-        alert('Borrado correctamente')
+      if (estado=='borrado') {
+        $('#courses').empty()
+        for (let item of lista) {
+          cantidad++
+          //console.log(item.cursoId)
+          $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+        }
+      $('#courses').prepend(`Total de curso: ${cantidad}`)
+      alert('Borrado correctamente')
+    }else{
+      alert('Error: Existe horario asignado a este curso. Debe elminar primero los horarios relacionados a este curso para poder Quitar el Curso')
+    }
+
     })
     .fail(function() {
       console.log("error");
@@ -86,6 +104,14 @@ $(document).ready(function() {
    * AL PRESIONAR EL BOTON GUARDAR CURSO
    */
     $('#saveCourse').click(function (){
+        let curso = $('#courseName').val()
+        let division = $('#divisionName').val()
+        let turno = $('#turn').val()
+
+        if (curso =='0' || division =='0' || turno =='0' ) {
+          alert('Falta seleccionar opcion para guardar el curso')
+        }else{
+
         let guardado = 'no'
         let courseName = $("#courseName option:selected").val()
         let divisionName = $("#divisionName option:selected ").val()
@@ -96,16 +122,20 @@ $(document).ready(function() {
           url: 'includes/mod_cen/clases/Cursos.php',
           type: 'POST',
           dataType: 'json',
-          data: {courseName: courseName,divisionName: divisionName, turn:turn, quantityStudents:quantityStudents,escuelaId:escuelaId}
-
+          data: {courseName: courseName,
+                divisionName: divisionName,
+                turn:turn,
+                quantityStudents:quantityStudents,
+                escuelaId:escuelaId}
         })
       .done(function(data) {
+        console.log('success')
           //console.log(data)
           for (let item of data) {
-
-            if (item.guardado="ok") {
+            if (item.guardado=="ok") {
               let guardado = 'si'
               let id = item.id
+
               //console.log(item.guardado)
               //console.log(item.id)
                 //let escuelaId = $("#escuelaId").val()
@@ -145,7 +175,12 @@ $(document).ready(function() {
               $('#quantityStudents').val('1')
               alert('Se creo correctamente')
             }else{
-              alert('algo no esta bien')
+              if (item.guardado=='existe') {
+                alert('Error: Este curso ya existe')
+              }else{
+                alert('algo no esta bien')
+              }
+
             }
           }
         })
@@ -156,7 +191,7 @@ $(document).ready(function() {
           console.log("complete");
         });
 
-
+      }
     })
 
     /**

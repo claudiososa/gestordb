@@ -1,14 +1,8 @@
 $(document).ready(function() {
-
-  //$('#teachers').on('click', '.profesor', function(){
-//boton elmininar Hora  (X)
-
-
   $('#dias').on('click','.dia', function(){
     //id guardar el cursoFacilitadoresId para buscar en tabla cursoFacilitadores
     let id = $(this).attr('id').substr(6)
-
-
+    //alert(id)
     $.ajax({
       url: 'includes/mod_cen/clases/ajax/ajaxDeleteHour.php',
       type: 'POST',
@@ -16,9 +10,6 @@ $(document).ready(function() {
       data: {id: id}
     })
     .done(function(lista) {
-    //  for (let item of lista) {
-      //  $('#horaCourseName').append(`<option value="${item.cursoId}">${item.curso} ${item.division} ${item.turno}</option>`)
-    //  }
       $(`#hora${id}`).remove()
       console.log("success");
     })
@@ -34,7 +25,9 @@ $(document).ready(function() {
     let inputDia = $(this).parent().attr('id').substr(10);
     console.log(inputDia)
 
-    $('.agregarHora').attr('disabled',true)
+
+
+  $('.agregarHora').attr('disabled',true)
     $($(this).parent()).append(`
       <button id="btnHoraCatedra" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
       Hora Catedra
@@ -91,7 +84,7 @@ $("#modal-body").append(`
         })
         .done(function(lista) {
           for (let item of lista) {
-            $('#horaTeacherName').append(`<option value="${item.personaId}">${item.apellido},${item.nombre}</option>`)
+            $('#horaTeacherName').append(`<option value="${item.profesorId}">${item.apellido},${item.nombre}</option>`)
           }
           console.log("success");
         })
@@ -183,9 +176,17 @@ Hora Sandwich
   </div>
 </div>`)
       $('#saveHour').click(function(){
+
         let horaCourseName = $("#horaCourseName option:selected").val()
         let horaTeacherName = $("#horaTeacherName option:selected").val()
         let asignatura = $("#asignatura option:selected").val()
+
+
+        if (horaCourseName =='0' || horaTeacherName =='0' || asignatura =='0' ) {
+          alert('Falta seleccionar opcion para guardar este Horario')
+        }else{
+
+
         let dia = $("#horaDia").val()
         let horaInicio = $("#horaInicio").val()
         let horaFinal = $("#horaFinal").val()
@@ -232,6 +233,8 @@ Hora Sandwich
         .always(function() {
           console.log("complete");
         });
+
+        }
       });
 
       $('#saveHourSandwich').click(function(){
@@ -271,9 +274,9 @@ Hora Sandwich
             //$(`#${dia}`).append(``)
             console.log('id creado')
             //console.log(item.id)
-            if (item.id=='1') {
-              $(`#${dia}`).append(`<tr class="alert alert-success" id="hora${item.id}"><td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td colspan='4'>Hora Sandwich</td>
-                <td><a href='#'><img class='dia' id='horaId${item.id}' src='img/iconos/delete.jpg' alt='borrar item'></a></td></tr>`)
+            if (item.id=='1') {//dibuja hora Sandwich
+              $(`#${dia}`).append(`<tr class="alert alert-success" id="hora${item.idHora}"><td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td colspan='4'>Hora Sandwich</td>
+                <td><a href='#'><img class='dia' id='horaId${item.idHora}' src='img/iconos/delete.jpg' alt='borrar item'></a></td></tr>`)
             }else{
               $(`#${dia}`).append(`<tr id="hora${item.id}"><td>${item.dia}</td><td>${item.horaInicio}</td><td>${item.horaFinal}</td><td>${item.asignatura}</td>
                 <td>${item.curso}</td><td>${item.turno}</td><td>${item.profesor}</td>

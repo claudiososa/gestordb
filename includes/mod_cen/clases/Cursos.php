@@ -185,30 +185,46 @@ public function buscar($tipo=null,$limit=null,$order=null)
 	}
 
 }
-
+// Al presionar en el boton Eliminar curso (x)
 if (isset($_POST['cursoId'])) {
+	include_once("HorarioFacilitadores.php");
+	$buscarCurso=HorarioFacilitadores::buscarCurso($_POST['cursoId']);
+	//$buscarCurso='a';
+	//Maestro::debbugPHP($buscarCurso);
 	$estado= [];
-	$curso= new Cursos($_POST['cursoId']);
-	$borrar = $curso->borrar();
+	if ($buscarCurso == 0) {
+		$curso= new Cursos($_POST['cursoId']);
+		$borrar = $curso->borrar();
 
-	$curso2= new Cursos();
-	$curso2->escuelaId=$_POST['escuelaIdBorrar'];
+		$curso2= new Cursos();
+		$curso2->escuelaId=$_POST['escuelaIdBorrar'];
 
-	$total = $curso2->buscar('cantidad');
+		$total = $curso2->buscar('cantidad');
 
-	$listaCursos = $curso2->buscar('total',null,'DESC');
+		$listaCursos = $curso2->buscar('total',null,'DESC');
 
-	while ($fila = mysqli_fetch_object($listaCursos)) {
-		$temporal=array('cursoId'=>$fila->cursoId,
-										'curso'=>$fila->curso,
-										'division'=>$fila->division,
-										'turno'=>Cursos::turno($fila->turno));
+		while ($fila = mysqli_fetch_object($listaCursos)) {
+			$temporal=array('cursoId'=>$fila->cursoId,
+											'curso'=>$fila->curso,
+											'division'=>$fila->division,
+											'turno'=>Cursos::turno($fila->turno),
+											'estado'=>'borrado');
+			array_push($estado,$temporal);
+		}
+		$json = json_encode($estado);
+		//Maestro::debbugPHP($json);
+		echo $json;
+	}else{
+		$temporal=array('cursoId'=>'1',
+										'curso'=>'2',
+										'division'=>'2',
+										'turno'=>'2',
+										'estado'=>'error');
 		array_push($estado,$temporal);
+		$json = json_encode($estado);
+		Maestro::debbugPHP($json);
+		echo $json;
 	}
-	$json = json_encode($estado);
-	//Maestro::debbugPHP($json);
-	echo $json;
-
 }
 
 if (isset($_POST['escuelaIdAjaxId'])) {
@@ -236,39 +252,53 @@ if (isset($_POST['escuelaIdAjaxId'])) {
 	//array_push($estado,$temporal);
 	//asort($estado);
 	$json = json_encode($estado);
-	Maestro::debbugPHP($json);
+	//Maestro::debbugPHP($json);
 	echo $json;	# code...
 
 }
 
 
 if (isset($_POST['courseName'])) {
+	$estado= [];
+	$curso= new Cursos();
+	$curso->escuelaId=$_POST['escuelaId'];
+	$curso->curso=$_POST['courseName'];
+	$curso->division=$_POST['divisionName'];
+	$curso->turno=$_POST['turn'];
 
-	//$tab=array(1=>'test',
-	//	2=>'test2');
+
+	/*$curso= new Cursos(null,$_POST['courseName'],
+										 $_POST['divisionName'],$_POST['turn'],
+										 $_POST['quantityStudents'],$_POST['escuelaId']);
+										 */
+  $total = $curso->buscar('cantidad');
+
+	//Maestro::debbugPHP($total);
 
 
-	//,divisionName: divisionName, turn:turn, quantityStudents:quantityStudents,escuelaId:escuelaId
-	//$curso= new Cursos(NULL,$_POST['courseName'],$_POST['divisionName'],$_POST['turn'],$_POST['quantityStudents'],$_POST['escuelaId']);
-	$curso= new Cursos(null,$_POST['courseName'],$_POST['divisionName'],$_POST['turn'],$_POST['quantityStudents'],$_POST['escuelaId']);
-	$datoCurso = $curso->agregar();
-	//$datoCurso=2;
-		$estado= [];
-	if ($datoCurso > 0) {
-		$temporal=array('guardado'=>'ok',
-											'id'=>$datoCurso);
+	if ($total > 0) {
+		$temporal=array('guardado'=>'existe',
+											'id'=>'existe');
 		array_push($estado,$temporal);
-
+		$json = json_encode($estado);
+	  //Maestro::debbugPHP($json);
+		echo $json;	# code...
 	}else{
-		$temporal=array('guardado'=>'error',
-										'id'=>$datoCurso);
-		array_push($estado,$temporal);
+		$curso->cantidadAlumnos=$_POST['quantityStudents'];
+		$datoCurso = $curso->agregar();
+		if ($datoCurso > 0) {
+			$temporal=array('guardado'=>'ok',
+												'id'=>$datoCurso);
+			array_push($estado,$temporal);
+		}else{
+			$temporal=array('guardado'=>'error',
+											'id'=>$datoCurso);
+			array_push($estado,$temporal);
+		}
+		$json = json_encode($estado);
+		//Maestro::debbugPHP($json);
+		echo $json;	# code...
 	}
-	$json = json_encode($estado);
-	//Maestro::debbugPHP($json);
-	echo $json;	# code...
-
-	//Maestro::debbugPHP($datoCurso);
 }
 
 
@@ -295,6 +325,6 @@ if (isset($_POST['buscarCursos'])) {
 		array_push($estado,$temporal);
 	}
 	$json = json_encode($estado);
-	Maestro::debbugPHP($json);
+	//Maestro::debbugPHP($json);
 	echo $json;
 }

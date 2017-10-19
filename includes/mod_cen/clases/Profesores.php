@@ -143,31 +143,47 @@ public function buscar($tipo=null,$limit=null,$order=null)
 }
 
 /**
- * AL SELECCIONAR EL BOTON X DE UN PROFESOR DETERMINADO
+ * AL SELECCIONAR EL BOTON ELIMINAR (X) DE UN PROFESOR DETERMINADO
  */
+
 if (isset($_POST['profesorId'])) {
 	$estado= [];
-	$profesor= new Profesores($_POST['profesorId']);
-	$borrar = $profesor->borrar();
+	include_once("HorarioFacilitadores.php");
+	$buscarProfesor=HorarioFacilitadores::buscarProfesor($_POST['profesorId']);
+	//Maestro::debbugPHP($buscarProfesor);
+	if ($buscarProfesor == 0) {
+		$profesor= new Profesores($_POST['profesorId']);
+		$borrar = $profesor->borrar();
 
-	$profesor2= new Profesores();
-	$profesor2->escuelaId=$_POST['escuelaIdBorrar'];
+		$profesor2= new Profesores();
+		$profesor2->escuelaId=$_POST['escuelaIdBorrar'];
 
-	$total = $profesor2->buscar('cantidad');
+		$total = $profesor2->buscar('cantidad');
 
-	$listaProfesores = $profesor2->buscar('total',null,'DESC');
+		$listaProfesores = $profesor2->buscar('total',null,'DESC');
 
-	while ($fila = mysqli_fetch_object($listaProfesores)) {
+		while ($fila = mysqli_fetch_object($listaProfesores)) {
+			$temporal=array('profesorId'=>$fila->profesorId,
+											'nombre'=>$fila->nombre,
+											'apellido'=>$fila->apellido,
+											'estado'=>'borrado',
+											);
+											//'turno'=>Cursos::turno($fila->turno));
+			array_push($estado,$temporal);
+		}
+		$json = json_encode($estado);
+		//Maestro::debbugPHP($json);
+		echo $json;
+	}else{
 		$temporal=array('profesorId'=>$fila->profesorId,
 										'nombre'=>$fila->nombre,
-										'apellido'=>$fila->apellido);
-										//'turno'=>Cursos::turno($fila->turno));
+										'apellido'=>$fila->apellido,
+										'estado'=>'error',);
 		array_push($estado,$temporal);
+		$json = json_encode($estado);
+		//Maestro::debbugPHP($json);
+		echo $json;
 	}
-	$json = json_encode($estado);
-	//Maestro::debbugPHP($json);
-	echo $json;
-
 }
 
 
@@ -314,7 +330,8 @@ if (isset($_POST['buscarProfesores'])) {
 			$datoPersona = mysqli_fetch_object($buscarPersona);
 			$temporal=array('personaId'=>$datoPersona->personaId,
 											'nombre'=>$datoPersona->nombre,
-											'apellido'=>$datoPersona->apellido
+											'apellido'=>$datoPersona->apellido,
+											'profesorId'=>$fila->profesorId,
 											);
 			array_push($estado,$temporal);
 		}

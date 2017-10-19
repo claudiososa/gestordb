@@ -1,7 +1,7 @@
 <?php
 
 include_once('conexion.php');
-include_once('conexionV2.php');
+include_once('conexionv2.php');
 include_once('maestro.php');
 
 class Persona
@@ -61,7 +61,7 @@ class Persona
 											cpostal = '$this->cpostal',
 											ubicacion = '$this->ubicacion'
 											WHERE personaId = '$this->personaId'";
-			//Maestro::debbugPHP($sentencia);								
+			//Maestro::debbugPHP($sentencia);
 		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
 				return $ultimoRegistroId=$bd->lastID();
 		 }else{

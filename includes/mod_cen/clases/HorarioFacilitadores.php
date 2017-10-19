@@ -116,7 +116,37 @@ public function buscarId($id)
 }
 
 
+public static function buscarCurso($cursoId)
+{
+	$bd=Conexion2::getInstance();
+	$sinParam=0;
+	$sentencia="SELECT *
+								FROM horarioFacilitadores
+								INNER JOIN cursoFacilitadores
+								ON cursoFacilitadores.cursoFacilitadoresId=horarioFacilitadores.cursoFacilitadoresId
+								INNER JOIN cursos
+								ON cursos.cursoId=cursoFacilitadores.cursoId";
 
+	$sentencia.=" WHERE cursoFacilitadores.cursoId=".$cursoId;
+	$resultado = mysqli_num_rows($bd->ejecutar($sentencia));
+	return $resultado;
+}
+
+public static function buscarProfesor($profesorId)
+{
+	$bd=Conexion2::getInstance();
+	$sinParam=0;
+	$sentencia="SELECT *
+								FROM horarioFacilitadores
+								INNER JOIN cursoFacilitadores
+								ON cursoFacilitadores.cursoFacilitadoresId=horarioFacilitadores.cursoFacilitadoresId
+								INNER JOIN cursos
+								ON cursos.cursoId=cursoFacilitadores.cursoId";
+
+	$sentencia.=" WHERE cursoFacilitadores.profesorId=".$profesorId;
+	$resultado = mysqli_num_rows($bd->ejecutar($sentencia));
+	return $resultado;
+}
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
@@ -135,8 +165,10 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 									ON cursos.cursoId=cursoFacilitadores.cursoId
 									INNER JOIN asignaturas
 									ON asignaturas.asignaturaId=cursoFacilitadores.asignaturaId
+									INNER JOIN profesores
+									ON profesores.profesorId=cursoFacilitadores.profesorId
 									INNER JOIN personas
-									ON personas.personaId=cursoFacilitadores.profesorId";
+									ON personas.personaId=profesores.personaId";
 
 									$sentencia.=" WHERE 1";
 									//INNER JOIN referentes

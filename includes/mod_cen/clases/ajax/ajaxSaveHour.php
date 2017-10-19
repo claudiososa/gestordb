@@ -3,7 +3,6 @@
   include_once('../HorarioFacilitadores.php');
   include_once('../Cursos.php');
 
-
   //verifica que venga desde pedido post desde ajax determinado
   if (isset($_POST['horaCourseName']) && isset($_POST['horaTeacherName']) && isset($_POST['asignatura']))
   {
@@ -43,6 +42,7 @@
     $fila = mysqli_fetch_object($buscarHorario);
     if (isset($_POST['horaSandiwch'])) {
       $id=1;
+      $idHora=$fila->horarioFacilitadoresId;
     }else {
       $id=$fila->horarioFacilitadoresId;
     }
@@ -58,7 +58,8 @@
         'asignatura' => $fila->asignatura,
         'curso' => $fila->curso."° ".$fila->division,
         'turno' => Cursos::turno($fila->turno),
-        'profesor' => $fila->nombre
+        'profesor' => $fila->nombre,
+        'idHora' => $idHora
         ];
 
       array_push($list,$temporal);
