@@ -44,6 +44,18 @@ echo '<div class="container">';
 
 <?php
 	echo '<div class="row">';
+	?>
+	<div class="col-md-12 hidden-xs">
+		<p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
+		<iframe src="https://player.vimeo.com/video/239149998" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		 <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
+	</div>
+	<div class="col-md-12 visible-xs">
+	 <p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
+		<iframe src="https://player.vimeo.com/video/239149998" width="320" height="240" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		 <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
+	</div>
+	<?php
 		echo '<div class="col-md-6">';
 		//informes de prioridad alta ///
 	  if(mysqli_num_rows($buscar_alta)>0){

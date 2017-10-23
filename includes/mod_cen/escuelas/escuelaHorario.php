@@ -55,7 +55,7 @@ $profesoresActuales2= $profesor->buscar('total');
       </h4>
     </div>
 
-  <div id="collapse6" class="panel-collapse collapse">
+  <div id="collapse6" class="panel-collapse collapse in">
 
   <div class="panel-body">
     <div class=class="col-md-12" id="courses">
@@ -84,7 +84,7 @@ $profesoresActuales2= $profesor->buscar('total');
     </h4>
   </div>
 
-  <div id="collapse7" class="panel-collapse collapse">
+  <div id="collapse7" class="panel-collapse collapse in">
   <div class="panel-body">
     <div class=class="col-md-12" id="teachers">
       <?php echo 'Total de Profesores:'.$cantidadProfesores;

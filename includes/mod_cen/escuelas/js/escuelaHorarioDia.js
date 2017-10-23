@@ -100,10 +100,28 @@ $("#modal-body").append(`
   <div class="form-group">
     <label  for="asignatura">Asignatura</label>
     <select class="form-control" name="asignatura" id="asignatura">
-        <option value="0">Seleccione</option>
-        <option value="1">Matematica</option>
-        <option value="2">Lengua</option>
+        <option value="0">Seleccione</option>`)
+        let materias ='materias'
+        $.ajax({
+          url: 'includes/mod_cen/clases/Profesores.php',
+          type: 'POST',
+          dataType: 'json',
+          data: {materias: materias}
+        })
+        .done(function(lista) {
+          for (let item of lista) {
+            $('#asignatura').append(`<option value="${item.asignaturaId}">${item.nombre}</option>`)
+          }
+          console.log("success");
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
 
+        $("#modal-body").append(`
     </select>
   </div>
 
@@ -176,6 +194,24 @@ Hora Sandwich
   </div>
 </div>`)
       $('#saveHour').click(function(){
+          let horaInicio3 = $("#horaInicio").val()
+          let horaFinal3 = $("#horaFinal").val()
+          let horInicio = horaInicio3.substr(0,horaInicio3.indexOf(':'))
+          let minInicio = horaInicio3.substr(horaInicio3.indexOf(':')+1)
+          let horFinal = horaFinal3.substr(0,horaFinal3.indexOf(':'))
+          let minFinal = horaFinal3.substr(horaFinal3.indexOf(':')+1)
+
+          var year = '2013';
+          var month = '04';
+          var day = '18';
+
+          var entrada = new Date(year,month,day,horInicio,minInicio)
+          var salida = new Date(year,month,day,horFinal,minFinal)
+          console.log(entrada.getTime());
+          console.log(salida.getTime());
+
+
+        //reserv.getTime() - reserv2.getTime()
 
         let horaCourseName = $("#horaCourseName option:selected").val()
         let horaTeacherName = $("#horaTeacherName option:selected").val()
@@ -184,8 +220,10 @@ Hora Sandwich
 
         if (horaCourseName =='0' || horaTeacherName =='0' || asignatura =='0' ) {
           alert('Falta seleccionar opcion para guardar este Horario')
+        }else if(entrada.getTime() > salida.getTime()){
+            alert('Error: la hora de inicio es mayor a la hora de salida')
         }else{
-
+          $("#myModal").modal("hide");
 
         let dia = $("#horaDia").val()
         let horaInicio = $("#horaInicio").val()
@@ -206,7 +244,7 @@ Hora Sandwich
                  referenteId:referenteId}
         })
         .done(function(lista) {
-          $("#myModal").modal("hide");
+
           //$('#LUNES').hide(500)
 
           for (let item of lista) {
@@ -238,6 +276,7 @@ Hora Sandwich
       });
 
       $('#saveHourSandwich').click(function(){
+
         let horaSandiwch = 'si'
         let horaCourseName = '1'
         let horaTeacherName = '1'
@@ -245,6 +284,28 @@ Hora Sandwich
         let dia = $("#horaDiaS").val()
         let horaInicio = $("#horaInicio2").val()
         let horaFinal = $("#horaFinal2").val()
+
+
+        let horInicio = horaInicio.substr(0,horaInicio.indexOf(':'))
+        let minInicio = horaInicio.substr(horaInicio.indexOf(':')+1)
+        let horFinal = horaFinal.substr(0,horaFinal.indexOf(':'))
+        let minFinal = horaFinal.substr(horaFinal.indexOf(':')+1)
+
+        var year = '2013';
+        var month = '04';
+        var day = '18';
+
+        var entrada = new Date(year,month,day,horInicio,minInicio)
+        var salida = new Date(year,month,day,horFinal,minFinal)
+        console.log(entrada.getTime());
+        console.log(salida.getTime());
+
+        if (entrada.getTime() > salida.getTime()) {
+            alert('Error: la hora de inicio es mayor a la hora de salida')
+        }else{
+            $("#myModal2").modal("hide");
+
+
 
         console.log('presionaste boton guardar Hora  / saveHour')
         $.ajax({
@@ -264,7 +325,7 @@ Hora Sandwich
         })
         .done(function(lista) {
 
-          $("#myModal2").modal("hide");
+
 
           for (let item of lista) {
               let dia = item.dia
@@ -295,6 +356,8 @@ Hora Sandwich
         .always(function() {
           console.log("complete");
         });
+
+          }
       });
 
     $('#myModal').on('hidden.bs.modal', function (e) {

@@ -127,6 +127,38 @@ public function buscar($tipo=null,$limit=null,$order=null)
 	}
 
 
+	public function buscarAsignatura($tipo=null,$limit=null,$order=null)
+		{
+			$bd=Conexion2::getInstance();
+			$sentencia="SELECT *
+									FROM asignaturas
+									WHERE 1";
+
+				$sentencia.="  ORDER BY nombre ASC";
+
+			if (isset($tipo)) {
+				switch ($tipo) {
+					case 'unico':
+						$unico = mysqli_fetch_object($bd->ejecutar($sentencia));
+						return $unico;
+						break;
+					case 'total':
+								return $bd->ejecutar($sentencia);
+							break;
+					case 'cantidad':
+									$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));
+									return $cantidad;
+									break;
+					default:
+						# code...
+						break;
+				}
+			}else{
+				return $bd->ejecutar($sentencia);
+			}
+
+		}
+
 
 	public function __get($var)
 	{
@@ -141,6 +173,28 @@ public function buscar($tipo=null,$limit=null,$order=null)
 	}
 
 }
+
+/**
+ * AL SELECCIONAR EL BOTON ELIMINAR (X) DE UN PROFESOR DETERMINADO
+ */
+
+if (isset($_POST['materias'])) {
+	$estado= [];
+	$asignatura = new Profesores();
+	$buscarAsignatura = $asignatura->buscarAsignatura('total',null,'DESC');
+
+	while ($fila = mysqli_fetch_object($buscarAsignatura)) {
+			$temporal=array('asignaturaId'=>$fila->asignaturaId,
+											'nombre'=>$fila->nombre,
+											);
+											//'turno'=>Cursos::turno($fila->turno));
+			array_push($estado,$temporal);
+		}
+	$json = json_encode($estado);
+	//Maestro::debbugPHP($json);
+	echo $json;
+}
+
 
 /**
  * AL SELECCIONAR EL BOTON ELIMINAR (X) DE UN PROFESOR DETERMINADO
