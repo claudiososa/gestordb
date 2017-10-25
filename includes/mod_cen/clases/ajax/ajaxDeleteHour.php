@@ -13,14 +13,17 @@
 
 
     $buscarCurso = $hora->buscarCursoId($dato['id']);
-    Maestro::debbugPHP($buscarCurso);
+    //Maestro::debbugPHP($buscarCurso);
 
 
 //    $curso = new CursoFacilitadores();
     //$cantidadenCurso = $hora->buscarCursoId($dato);
 
     if ($buscarCurso['cantidad'] == 1) {
-      $eliminarCursoId = $curso->borrar($dato['id']);
+      if ($buscarCurso['id'] <> 1) {
+        $eliminarCursoId = $curso->borrar($dato['id']);
+      }
+
       $eliminarHora = $hora->borrar($_POST['id']);
       //Maestro::debbugPHP($eliminarCursoId);
     }else{

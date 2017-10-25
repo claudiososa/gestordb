@@ -63,6 +63,18 @@ echo '<div class="container">';
 //echo '</div>';
 
 echo '<div class="row">';
+?>
+<div class="col-md-12 hidden-xs">
+  <p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
+  <iframe src="https://player.vimeo.com/video/239149998" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+   <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
+</div>
+<div class="col-md-12 visible-xs">
+ <p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
+  <iframe src="https://player.vimeo.com/video/239149998" width="320" height="240" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+   <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
+</div>
+<?php
   echo '<div class="col-md-6">';
 
  //informes de prioridad alta ///
@@ -365,6 +377,7 @@ $año= date('Y');
   echo "<th>Apellido y Nombre</th>";
   echo "<th>Total</th>";
   echo "<th>Mes Actual</th>";
+  echo "<th>Horario</th>";
   echo "</tr>";
   echo "</thead>";
 
@@ -387,6 +400,9 @@ $año= date('Y');
     echo "</td>";
     echo "<td>";
     echo '<a class="btn btn-success" href="?mod=slat&men=informe&date&id=6&year='.$año.'&month='.$mes.'&referenteId='.$fila->referenteId.'">'.$totalMes.'</a>';
+    echo "</td>";
+    echo "<td>";
+    echo '<a class="btn btn-success" href="?mod=slat&men=referentes&id=12&referenteId='.$fila->referenteId.'">Ver Horario</a>';
     echo "</td>";
     echo "</tr>";
   }

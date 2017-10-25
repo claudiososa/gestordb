@@ -1,0 +1,17 @@
+#estilonav{
+	background: #89bfbd;
+}
+#footer {
+
+
+	background: #89bfbd;
+
+	position: static;
+
+}
+.text-muted {
+    color: #04515d;
+}
+.error{
+  color: red;
+}

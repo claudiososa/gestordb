@@ -290,6 +290,7 @@ class Escuela
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		$smt="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId";
+		echo $stm;
 		if($conexion->query($smt)){
 			//return 'encontrado';
 			return mysqli_fetch_object($conexion->query($smt));

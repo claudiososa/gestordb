@@ -1,0 +1,92 @@
+
+#map{
+  display: block;
+  width: 95%;
+  height: 350px;
+  margin: 0 auto;
+  -moz-box-shadow: 0px 5px 20px #ccc;
+  -webkit-box-shadow: 0px 5px 20px #ccc;
+  box-shadow: 0px 5px 20px #ccc;
+}
+#map.large{
+  height:500px;
+}
+
+.overlay{
+  display:block;
+  text-align:center;
+  color:#fff;
+  font-size:12px;
+  line-height:15px;
+  opacity:0.8;
+  background:#4477aa;
+  border:solid 3px #336699;
+  border-radius:4px;
+  box-shadow:2px 2px 10px #333;
+  text-shadow:1px 1px 1px #666;
+  padding:0 4px;
+}
+
+.overlay_arrow{
+  left:50%;
+  margin-left:-16px;
+  width:0;
+  height:0;
+  position:absolute;
+}
+.overlay_arrow.above{
+  bottom:-15px;
+  border-left:16px solid transparent;
+  border-right:16px solid transparent;
+  border-top:16px solid #336699;
+}
+.overlay_arrow.below{
+  top:-15px;
+  border-left:16px solid transparent;
+  border-right:16px solid transparent;
+  border-bottom:16px solid #336699;
+}
+
+
+/* tables */
+table.tablesorter {
+/*	font-family:arial;
+  font-size: 12pt;
+
+	/*background-color: #CDCDCD;
+	margin:10px 0pt 15px;*/
+
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+/*	background-color: #e6EEEE;*/
+	border: 1px solid #FFF;
+	font-size: 9pt;
+	padding: 4px;
+}
+
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	/*background-color: #FFF;*/
+	vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+}*/

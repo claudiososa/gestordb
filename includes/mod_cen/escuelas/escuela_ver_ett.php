@@ -183,15 +183,22 @@ if(($_POST))
 						 * Buscar director de la institución
 						 * se guarda el objeto con datso en $datoDirector
 						 */
-						 $director = new Director(null,$fila->escuelaId);
-						 $buscar_director= $director->buscar();
-						 $datoDirector =mysqli_fetch_object($buscar_director);
 
-						 if($datoDirector==NULL){
-							  $personaDirector= new Persona("1");
-								$buscarPersona = $personaDirector->buscar();
-								$datoDirector =mysqli_fetch_object($buscarPersona);
-						 }
+  				  $director2= director::existeAutoridad($fila->escuelaId);
+						$director = mysqli_fetch_object($director2);
+
+ 						$personaDire =  new Persona($director->personaId);
+ 						$buscarDirector = $personaDire->buscar();
+
+ 						$datoDirector=mysqli_fetch_object($buscarDirector);
+
+						if($datoDirector==NULL){
+							 $personaDirector= new Persona("1");
+							 $buscarPersona = $personaDirector->buscar();
+							 $datoDirector =mysqli_fetch_object($buscarPersona);
+						}
+
+
 
 
 						 /**
