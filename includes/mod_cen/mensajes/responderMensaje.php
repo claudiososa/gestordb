@@ -1,3 +1,4 @@
+<link href="includes/mod_cen/mensajes/estilos/botones-estilos.css" rel="stylesheet" type="text/css" />
 <script src="includes/mod_cen/js/s_ajax_mensajeResponder.js"></script>
 <?php
 include_once("includes/mod_cen/clases/MensajesResp.php");
@@ -10,10 +11,15 @@ include_once("includes/mod_cen/clases/referente.php");
 
 
 echo '<div class="container">';
-  echo '<label class="control-label" for=""><a class="btn btn-success" href="index.php?men=mensajes&id=2">MensajesResp Recibidos</a></label>';
-  echo "<a class='btn btn-warning' href='index.php?men=mensajes&id=2&enviados'>Mis MensajesResp Enviados</a>";
+echo '<div class="panel panel-default">';
+echo '<div class="panel-heading">';
+  echo '<label class="control-label" for=""><a class="btn btn-default" href="index.php?men=mensajes&id=2">MensajesResp Recibidos</a></label>';
+  echo'&nbsp';
+  echo "<a class='btn btn-default' href='index.php?men=mensajes&id=2&enviados'>Mis MensajesResp Enviados</a>";
+  echo '</div>';
+
   echo '<p><h3>Responder Mensaje</h3></p>';
-echo '</div">';
+
 
 $nuevo=0;
 if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de mensaje nuevo ingresa aqui
@@ -167,5 +173,5 @@ if(isset($_POST['save_report']))//Si presiona el boton enviar del formulario de 
   //var_dump($datoValidado);
   $nuevo=1;
 	include_once("includes/mod_cen/formularios/f_mensaje_respuesta.php");
-
+echo '</div>';
 }
