@@ -1,26 +1,4 @@
-<style type="text/css">
-.btn-default {
-  color: #ffffff;
-  background-color: #529e8b;
-  border-color: #529e8b;
-}.estilo  {
-
-    padding: 10px;
-    outline: 1px solid #529e8b;
-    color: #ffffff;
-background-color: #529e8b;
-
-
- }.estilo1  {
-
-     padding: 10px;
-     outline: 1px solid #529e8b;
-
-
-  }
-
-
-</style>
+<link href="includes/mod_cen/mensajes/estilos/botones-estilos.css" rel="stylesheet" type="text/css" />
 
 <div class="container">
 

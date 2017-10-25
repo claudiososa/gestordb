@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>Campus DBMS-Conectar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,9 +65,9 @@
 
           <h4 class="my-4"><img height="80" src="img/iconos/iconoCurso.png" alt="">Mis Cursos</h4>
           <div class="list-group">
-            <a href="#" class="list-group-item">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
+            <a href="#" class="list-group-item"><img class="img-fluid float-right" src="img/iconos/boton-de-reproduccion.png" ></img>Category 1</a>
+            <a href="#" class="list-group-item"><img class="img-fluid float-right" src="img/iconos/boton-de-reproduccion.png" ></img>Category 2</a>
+            <a href="#" class="list-group-item"><img class="img-fluid float-right" src="img/iconos/boton-de-reproduccion.png" ></img>Category 3</a>
           </div>
 
         </div>
@@ -83,13 +83,13 @@
             </ol>
             <div class="carousel-inner" role="listbox">
               <div class="carousel-item active">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+                <img class="d-block img-fluid" src="img/carrusel/scratch.png" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+                <img class="d-block img-fluid" src="img/carrusel/cabecera-informatica.jpg" alt="Second slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+                <img class="d-block img-fluid" src="img/carrusel/sd.jpg" alt="Third slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
