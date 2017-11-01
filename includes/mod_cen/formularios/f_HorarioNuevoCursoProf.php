@@ -19,20 +19,18 @@
     <label  for="divisionName">Division</label>
     <select class="form-control" name="divisionName" id="divisionName">
         <option value="0">Seleccione</option>
-        <option value="1ra">1ra</option>
-        <option value="2da">2da</option>
-        <option value="3ra">3ra</option>
-        <option value="4ta">4ta</option>
-        <option value="5ta">5ta</option>
-        <option value="6ta">6ta</option>
-        <option value="7ma">7ma</option>
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
-        <option value="E">E</option>
-        <option value="F">F</option>
-        <option value="G">G</option>
+        <option value="1">1ra</option>
+        <option value="2">2da</option>
+        <option value="3">3ra</option>
+        <option value="4">4ta</option>
+        <option value="5">5ta</option>
+        <option value="6">6ta</option>
+        <option value="7">7ma</option>
+        <option value="8">8va</option>
+        <option value="9">9na</option>
+        <option value="10">10ma</option>
+        <option value="11">11va</option>
+        <option value="Otro">Otro</option>
     </select>
   </div>
 
@@ -40,51 +38,51 @@
     <label  for="turn">Turno</label>
     <select class="form-control" name="turn" id="turn">
       <option value="0">Seleccione</option>
-      <option value="M">Mañana</option>
-      <option value="I">Intermedio</option>
-      <option value="T">Tarde</option>
-      <option value="V">Vespertino</option>
-      <option value="N">Noche</option>
-      <option value="A">Alternacia </option>
-      <option value="C">Completo</option>
+      <option value="Mañana">Mañana</option>
+      <option value="Intermedio">Intermedio</option>
+      <option value="Tarde">Tarde</option>
+      <option value="Vespertino">Vespertino</option>
+      <option value="Noche">Noche</option>
+      <option value="Alternancia">Alternacia </option>
+      <option value="Completo">Completo</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label  for="turn">Nivel</label>
-    <select class="form-control" name="turn1" id="turn1">
+    <label  for="nivel">Nivel</label>
+    <select class="form-control" name="nivel" id="nivel">
       <option value="0">Seleccione</option>
-      <option value="CB">Ciclo Básico</option>
-      <option value="CBC">Ciclo Básico Común</option>
-      <option value="CBT">Ciclo Básico Técnico</option>
-      <option value="CO">Ciclo Orientado</option>
-      <option value="CS">Ciclo Superior</option>
+      <option value="C. Basico">Ciclo Básico</option>
+      <option value="C. Basico Comun">Ciclo Básico Común</option>
+      <option value="C. Basico Tecnico">Ciclo Básico Técnico</option>
+      <option value="C. Orientado">Ciclo Orientado</option>
+      <option value="C. Superior">Ciclo Superior</option>
       <option value="EGB">EGB</option>
-      <option value="I">Inicial</option>
-      <option value="P">Polimodal</option>
-      <option value="S">Secundario</option>
-      <option value="SP">Superior</option>
+      <option value="Inicial">Inicial</option>
+      <option value="Polimodal">Polimodal</option>
+      <option value="Secundario">Secundario</option>
+      <option value="Superior">Superior</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label  for="quantityStudents">Cantidad Horas Semanal</label>
+    <label  for="cantidadHoras">Cantidad Horas Semanal</label>
     <br>
-    <input type="number" name="quantityStudents" min="1" max="20" value="1" id="quantityStudents">
+    <input type="number" name="cantidadHoras" min="1" max="20" value="1" id="cantidadHoras">
   </div>
 
 
     <div class="form-group">
-      <label  for="turn">Tipo de Cargo</label>
-      <select class="form-control" name="turn2" id="turn2">
+      <label  for="tipoCargo">Tipo de Cargo</label>
+      <select class="form-control" name="tipoCargo" id="tipoCargo">
         <option value="0">Seleccione</option>
-        <option value="T">Titular</option>
-        <option value="I">Interino</option>
-        <option value="S">Suplente</option>
-        <option value="O">Otro</option>
+        <option value="Titular">Titular</option>
+        <option value="Interino">Interino</option>
+        <option value="Suplente">Suplente</option>
+        <option value="Otro">Otro</option>
       </select>
     </div>
   <input type="hidden" name="escuelaId" id="escuelaId" value="<?php echo $_GET['escuelaId'] ?>">
- <button type="button" id="saveCourse" class="btn btn-warning" name="button">Guardar Curso</button>
+ <?php echo "<button type='button' id='saveCourse".$fila->escuelaId."".$filaProf->personaId."' class='btn btn-warning saveCourse' name='button'>Guardar Curso</button>" ;?>
    </div>
 </form>

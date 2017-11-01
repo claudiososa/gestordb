@@ -157,6 +157,28 @@ public function buscarCursos($escuelaID,$personaID)
 
 	}
 
+public function existeCurso()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+
+
+		$sentencia= "SELECT *
+                     FROM ProfeEdFisicaxCurso
+                     WHERE 
+        				id_Ed_FisicaxEscuela=$this->id_Ed_FisicaxEscuela && 
+        				turno=$this->turno &&
+        				nivel=$this->nivel &&
+        				gradoAño=$this->gradoAño &&
+        				seccionDivision=$this->seccionDivision";
+
+			//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
+
 
 
 } // fin de la CLASE

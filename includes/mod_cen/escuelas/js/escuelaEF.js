@@ -96,13 +96,15 @@ $(document).ready(function(){
         let courseName = $("#courseName option:selected").val()
         let divisionName = $("#divisionName option:selected ").val()
         let turn = $("#turn option:selected").val()
-        let quantityStudents = $("#quantityStudents").val()
+        let cantidadHoras = $("#cantidadHoras").val()
         let escuelaId = $("#escuelaId").val()
+        let nivel = $("#nivel option:selected").val()
+        let tipoCargo = $("tipoCargo option:selected").val()
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
           type: 'POST',
           dataType: 'json',
-          data: {courseName: courseName,divisionName: divisionName, turn:turn, quantityStudents:quantityStudents,escuelaId:escuelaId}
+          data: {courseName: courseName,divisionName: divisionName, turn:turn, cantidadHoras:cantidadHoras,escuelaId:escuelaId,nivel:nivel,tipoCargo:tipoCargo}
 
         })
       .done(function(data) {
@@ -148,7 +150,7 @@ $(document).ready(function(){
               $('#courseName > option[value="0"]').prop('selected','true')
               $('#divisionName > option[value="0"]').prop('selected','true')
               $('#turn > option[value="0"]').prop('selected','true')
-              $('#quantityStudents').val('1')
+              $('#cantidadHoras').val('1')
               alert('Se creo correctamente')
             }else{
               alert('algo no esta bien')
