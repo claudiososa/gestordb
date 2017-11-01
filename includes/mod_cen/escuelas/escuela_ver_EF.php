@@ -10,6 +10,7 @@ include_once("includes/mod_cen/clases/director.php");
 include_once("includes/mod_cen/clases/ProfesoresEF.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxCurso.php");
+include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");	
 ?>
 <div class="container">
 <?php
@@ -293,7 +294,7 @@ if(($_POST) || isset($_GET['retorno']))
             $curso = new ProfeEdFisicaxCurso();
 						$Cursos= $curso->buscarCursos($filaProf->escuelaId, $filaProf->personaId);
 
-
+						//var_dump($Cursos);
 						echo "<hr>";
 						echo "<h4><b>Cursos a cargo:</b></h4>";
 						echo "<table class='table table-bordered'>";

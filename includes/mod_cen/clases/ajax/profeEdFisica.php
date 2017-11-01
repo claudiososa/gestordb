@@ -196,10 +196,15 @@ if (isset($_POST['courseName'])) {
 	//,divisionName: divisionName, turn:turn, quantityStudents:quantityStudents,escuelaId:escuelaId
 	//$curso= new Cursos(NULL,$_POST['courseName'],$_POST['divisionName'],$_POST['turn'],$_POST['quantityStudents'],$_POST['escuelaId']);
 	//$curso= new Cursos(null,$_POST['courseName'],$_POST['divisionName'],$_POST['turn'],$_POST['quantityStudents'],$_POST['escuelaId']);
-	$nuevoCurso= new ProfeEdFisicaxCurso(null,'1',$_POST['turn'],'Secundario',$_POST['quantityStudents'],'Titular',$_POST['courseName'],$_POST['divisionName']);
+	$nuevoCurso= new ProfeEdFisicaxCurso(null,'1',$_POST['turn'],$_POST['nivel'],$_POST['cantidadHoras'],$_POST['tipoCargo'],$_POST['courseName'],$_POST['divisionName']);
+	
+	//$existe = $nuevoCurso->existeCurso(); // metodo para saber que no esta cargando el mismo curso
+	//$cantidad=mysqli_num_rows($existe);
+	
+	$estado= [];
 	$datoCurso = $nuevoCurso->agregar();
 	//$datoCurso=2;
-		$estado= [];
+		
 	if ($datoCurso > 0) {
 		$temporal=array('guardado'=>'ok',
 											'id'=>$datoCurso);
@@ -209,12 +214,12 @@ if (isset($_POST['courseName'])) {
 		$temporal=array('guardado'=>'error',
 										'id'=>$datoCurso);
 		array_push($estado,$temporal);
-	}
-	$json = json_encode($estado);
+	   }
+		$json = json_encode($estado);
 	//Maestro::debbugPHP($json);
 	echo $json;	# code...
-
+  }
 	//Maestro::debbugPHP($datoCurso);
-}  // FIN DE AGREGAR NUEVO CURSO
+  // FIN DE AGREGAR NUEVO CURSO
 
 ?>
