@@ -192,8 +192,8 @@ if(($_POST))
 
  						$datoDirector=mysqli_fetch_object($buscarDirector);
 
-						if($datoDirector==NULL){
-							 $personaDirector= new Persona("1");
+						if($director==NULL){
+							 $personaDirector= new Persona('1');
 							 $buscarPersona = $personaDirector->buscar();
 							 $datoDirector =mysqli_fetch_object($buscarPersona);
 						}
@@ -337,6 +337,7 @@ if(($_POST))
 					 echo '<div class="col-md-6">';
 					 echo '<div class="alert alert-success" role="alert">Datos de Directivo</div>';
 					 echo"<div><b>Apellido y Nombre</b></div>";
+
 					 echo "<div>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
 					 echo"<div><b>Teléfono</b></div>";
 					 echo "<div>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";

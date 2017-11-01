@@ -208,10 +208,10 @@ if ($_GET['id']==3) {
 
             }
             if ($datoValidado->referenteId<>$_SESSION['referenteId']) {
-                //echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
+                echo "<br><br><a class='btn btn-default' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'><span class='glyphicon glyphicon-share-alt'></span>&nbspResponder</a><br><br>";
             }
 
-            echo "<br><br><a class='btn btn-default' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'><span class='glyphicon glyphicon-share-alt'></span>&nbspResponder</a><br><br>";
+            //echo "<br><br><a class='btn btn-default' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'><span class='glyphicon glyphicon-share-alt'></span>&nbspResponder</a><br><br>";
             ?>
             </div>
         </div>

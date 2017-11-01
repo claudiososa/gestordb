@@ -549,7 +549,8 @@
 						    || $_SESSION['tipo']=='DirectorNivelSuperior'
 					      || $_SESSION['tipo']=='Supervisor-General-Secundaria'
 								|| $_SESSION['tipo']=='DirectorNivelSecundario'
-								|| $_SESSION['tipo']=='CoordinadorPmi')
+								|| $_SESSION['tipo']=='CoordinadorPmi'
+								|| $_SESSION['tipo']=='ETJ')
 							{
 							   include("includes/mod_cen/admin/loginc.php");
 							}else {

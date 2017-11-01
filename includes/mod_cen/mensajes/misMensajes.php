@@ -1,8 +1,9 @@
 <link href="includes/mod_cen/mensajes/estilos/botones-estilos.css" rel="stylesheet" type="text/css" />
-
 <div class="container">
-
   <?php
+    /**
+     * Botones de encabezados, Nuevo mensaje y enviados.
+     */
     if (isset($_GET['enviados']))
     {
       echo '<div class="panel panel-default">';
@@ -30,12 +31,11 @@
       echo '<div class="container"><p><h4><font color="#068587">&nbspMensajes Recibidos</font></h4></p></div>';
 
     }
+//**********************************
     ?>
-
 
 <div class="container-fluid">
 <div class="estilo hidden-sm hidden-xs">
-
 
 <div class="row hidden-sm hidden-xs">
   <div class="col-md-4">De</div>
@@ -85,20 +85,18 @@ echo '</div>';
    * @var Mensajes
    */
   $objMensaje = new Mensajes();
-  //var_dump($objMensaje);
   $misMensajes = $objMensaje->buscarHilo();
+
   while ($fila =mysqli_fetch_object($misMensajes)) {
     $cantAdjunto=0;
     if ($fila->referenteId<>(int)$_SESSION['referenteId'])
     {
       $respuestas = new MensajesResp();
-
-            //$cantidadRespuestas = $respuestas->buscarIntervenciones($fila->mensajeHiloId,'cantidad');
       $cantidadRespuestas = $respuestas->buscarIntervenciones(null,'cantidad',$fila->mensajeHiloId);
 
-      //var_dump($cantidadRespPropias);
       $adjunto = new MensajesAdjunto(null,$fila->mensajeId);
       $buscar_adjunto = $adjunto->buscar();
+      $cantAdjunto = mysqli_fetch_object($buscar_adjunto);
       echo '<div class="estilo1">';
       echo '<div class="row">';
       echo '<div class="col-md-4 col-xs-6">'.ucwords(strtolower($fila->apellido)).', '.ucwords(strtolower($fila->nombre)).'</div>';
@@ -106,7 +104,7 @@ echo '</div>';
       if ($cantAdjunto==0) {
         echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.' ('.$cantidadRespuestas.')</a></h4></div>';
       }else{
-        echo '<div class="col-md-4 col-xs-12"<h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.' ('.$cantidadRespuestas.')</h4></a>&nbsp;&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></div>';
+        echo '<div class="col-md-4 col-xs-12"><h4><a href="index.php?men=mensajes&id=3&mensajeId='.$fila->mensajeId.'">'.$fila->asunto.' ('.$cantidadRespuestas.')</a>&nbsp;<span class="glyphicon glyphicon glyphicon-paperclip"></span></h4></div>';
       }
       echo '<div class="col-md-4 hidden-xs">'.date("d-m-Y H:i", strtotime($fila->fechaHora)).'</div>';
       echo '</div>';

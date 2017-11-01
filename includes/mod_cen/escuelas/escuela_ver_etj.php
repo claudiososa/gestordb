@@ -219,7 +219,7 @@ if(($_POST))
 
 			  					 $datoDirector=mysqli_fetch_object($buscarDirector);
 
-									 if($datoDirector==NULL){
+									 if($director==NULL){
 										  $personaDirector= new Persona("1");
 											$buscarPersona = $personaDirector->buscar();
 											$datoDirector =mysqli_fetch_object($buscarPersona);

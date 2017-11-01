@@ -19,9 +19,6 @@
 		case 'Coordinador':
 			$c_referente= new Referente(null,null,null,null,null,null,null,'Activo');
 			break;
-		case 'ETJ':
-				$c_referente= new Referente(null,null,'ETT',null,null,null,null,'Activo');
-				break;
 		case 'admin':
 				$c_referente= new Referente(null,null,null,null,null,null,null,'Activo');
 				break;
@@ -75,7 +72,7 @@
 		echo 'setTimeout ("redireccion()", 0); //el tiempo expresado en milisegundos';
 		echo '</script>';
 
-
+		
 
 	}else {
 	include_once('includes/mod_cen/formularios/f_loginc.php');
