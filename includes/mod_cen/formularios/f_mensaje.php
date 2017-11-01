@@ -1,3 +1,4 @@
+<link href="includes/mod_cen/mensajes/estilos/botones-estilos.css" rel="stylesheet" type="text/css" />
 <div class="container">
 <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
     <input type="hidden" id="destino" name="referentes" value="">
@@ -198,7 +199,7 @@ if ($_GET['id']==3) {
                   $arrayDestinatario = $arrayDestino = explode(',',$datoMensaje->destinatario);
 
                   if ($datoMensaje->referenteId==$_SESSION['referenteId'] AND count($arrayDestinatario) > 2) {
-                    echo "<a class='btn btn-success' href='index.php?men=mensajes&solo&id=4&des=".$fila->respuestaReferenteId."&r=".$fila->mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";                  }
+                    echo "<a class='btn btn-default' href='index.php?men=mensajes&solo&id=4&des=".$fila->respuestaReferenteId."&r=".$fila->mensajeRespId."&mensajeId=".$_GET['mensajeId']."'><span class='glyphicon glyphicon-share-alt'></span>&nbspResponder</a><br><br>";                  }
                   }
                 $mensajeRespId=$fila->mensajeRespId;
                 if ($datoValidado->referenteId<>$_SESSION['referenteId']) {
@@ -210,7 +211,7 @@ if ($_GET['id']==3) {
                 //echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
             }
 
-            echo "<br><br><a class='btn btn-success' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'>Responder</a><br><br>";
+            echo "<br><br><a class='btn btn-default' href='index.php?men=mensajes&id=4&r=".$mensajeRespId."&mensajeId=".$_GET['mensajeId']."'><span class='glyphicon glyphicon-share-alt'></span>&nbspResponder</a><br><br>";
             ?>
             </div>
         </div>

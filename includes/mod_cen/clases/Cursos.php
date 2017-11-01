@@ -103,7 +103,7 @@ public function buscar($tipo=null,$limit=null,$order=null)
 								FROM cursos
 								WHERE 1";
 
-		if($this->cursoId!=NULL || $this->curso!=NULL ||
+		if($this->cursoId!=NULL || $this->curso!=NULL || $this->turno!=NULL ||
 			$this->division!=NULL || $this->cantidadAlumnos!=NULL || $this->escuelaId!=NULL)
 		{
 			$sentencia.=" AND ";
@@ -115,6 +115,11 @@ public function buscar($tipo=null,$limit=null,$order=null)
   		if($this->curso!=NULL)
   		{
   			$sentencia.=" curso = '$this->curso' && ";
+  		}
+
+			if($this->turno!=NULL)
+  		{
+  			$sentencia.=" turno = '$this->turno' && ";
   		}
 
   		if($this->division!=NULL)
@@ -266,15 +271,7 @@ if (isset($_POST['courseName'])) {
 	$curso->division=$_POST['divisionName'];
 	$curso->turno=$_POST['turn'];
 
-
-	/*$curso= new Cursos(null,$_POST['courseName'],
-										 $_POST['divisionName'],$_POST['turn'],
-										 $_POST['quantityStudents'],$_POST['escuelaId']);
-										 */
   $total = $curso->buscar('cantidad');
-
-	//Maestro::debbugPHP($total);
-
 
 	if ($total > 0) {
 		$temporal=array('guardado'=>'existe',
