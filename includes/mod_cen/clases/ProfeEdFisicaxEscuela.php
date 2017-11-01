@@ -45,7 +45,12 @@ public function buscar()
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-    $sentencia= "SELECT escuelas.numero, personas.personaId, personas.nombre, personas.apellido, personas.email, personas.telefonoC, personas.telefonoM, ProfeEdFisicaxEscuela.titulo, escuelas.escuelaId
+    $sentencia= "SELECT escuelas.numero, personas.personaId,
+                        personas.nombre, personas.apellido,
+                        personas.email, personas.telefonoC,
+                        personas.telefonoM, ProfeEdFisicaxEscuela.titulo, escuelas.escuelaId,
+                        ProfeEdFisicaxEscuela.id_Ed_FisicaxEscuela
+
 			FROM ProfeEdFisicaxEscuela
 				JOIN personas ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )
 					JOIN escuelas ON ( escuelas.escuelaId = ProfeEdFisicaxEscuela.escuelaId )";
@@ -58,11 +63,13 @@ public function buscar()
 		{
 			$sentencia.=" WHERE ProfeEdFisicaxEscuela.escuelaId = '".$this->escuelaId."'";
 
-
-
-
-
 		//$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+		}
+
+    if( $this->personaId!=NULL )
+		{
+			$sentencia.=" && ProfeEdFisicaxEscuela.personaId = '".$this->personaId."'";		
 
 		}
 

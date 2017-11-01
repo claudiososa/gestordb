@@ -83,6 +83,7 @@
       </select>
     </div>
   <input type="hidden" name="escuelaId" id="escuelaId" value="<?php echo $_GET['escuelaId'] ?>">
+  <input type="hidden" name="id_Ed_FisicaxEscuela" id="id_Ed_FisicaxEscuela" value="<?php echo $filaProf->id_Ed_FisicaxEscuela ?>">
  <?php echo "<button type='button' id='saveCourse".$fila->escuelaId."".$filaProf->personaId."' class='btn btn-warning saveCourse' name='button'>Guardar Curso</button>" ;?>
    </div>
 </form>

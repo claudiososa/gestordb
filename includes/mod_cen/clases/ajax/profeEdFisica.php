@@ -1,13 +1,13 @@
 <?php
 
- 
+
   include_once('../persona.php');
   include_once('../conexion.php');
   include_once('../ProfeEdFisicaxEscuela.php');
   include_once('../conexionv2.php');
   include_once('../maestro.php');
   include_once('../ProfeEdFisicaxCurso.php');
-  
+
 
 
 
@@ -16,7 +16,7 @@
  */
 
 
-if (isset($_POST['dni'])) 
+if (isset($_POST['dni']))
 {  // include_once('../persona.php');
 	//include_once("includes/mod_cen/clases/persona.php");
 
@@ -28,23 +28,23 @@ if (isset($_POST['dni']))
 
 	$estado= [];
 
-	if ($cantidadPersona > 0) 
+	if ($cantidadPersona > 0)
  	{   // encuentra a una persona
- 					
- 
+
+
  		$dato = mysqli_fetch_object($datoPersona);
- 
+
  		$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$dato->personaId,$_POST['escuelaId']); // new
  		$datoProfesorEdFisica = $profesorEdFisica->buscar();// busca para saber si el profesor ya esta cargado en la escuela
  		$cantidadProfeEF=mysqli_num_rows($datoProfesorEdFisica); // new
- 				    			
+
  			if ($cantidadProfeEF > 0)
  			{
- 
+
  				$temporal=array('dni'=>'existe');
  				array_push($estado,$temporal);
  		    }else {
- 
+
  		    		$temporal=array('personaId'=>$dato->personaId,
  											'dni'=>$dato->dni,
  						 					'nombre'=>$dato->nombre,
@@ -55,17 +55,17 @@ if (isset($_POST['dni']))
  											);
  			    	array_push($estado,$temporal);
                  }
- 
+
  	}else{
  	      $temporal=array('dni'=>'error');
  	      array_push($estado,$temporal);
  	     }
- 
+
  	$json = json_encode($estado);
  	echo $json;
- 
+
  }
- 
+
 
 
 
@@ -81,8 +81,8 @@ if (isset($_POST['botonSaveTeacher'])) {
 		//include_once('persona.php');
 		if ($_POST['statusTeacher']=='create') {
 
-			
-			//$profesorEdFisica = new ProfeEdFisicaxEscuela(null,'555',$_POST['escuelaId']); 
+
+			//$profesorEdFisica = new ProfeEdFisicaxEscuela(null,'555',$_POST['escuelaId']);
 			//$datoProfeEF=$profesorEdFisica->agregar();
 
 
@@ -110,9 +110,9 @@ if (isset($_POST['botonSaveTeacher'])) {
 			//Maestro::debbugPHP($persona1);
 
 		//	$datoPersona = $persona1->agregar();
-			//Maestro::debbugPHP($datoPersona); 
+			//Maestro::debbugPHP($datoPersona);
 
-			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId']); 
+			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId']);
 
 
 			$datoProfeEF=$profesorEdFisica->agregar();
@@ -196,15 +196,15 @@ if (isset($_POST['courseName'])) {
 	//,divisionName: divisionName, turn:turn, quantityStudents:quantityStudents,escuelaId:escuelaId
 	//$curso= new Cursos(NULL,$_POST['courseName'],$_POST['divisionName'],$_POST['turn'],$_POST['quantityStudents'],$_POST['escuelaId']);
 	//$curso= new Cursos(null,$_POST['courseName'],$_POST['divisionName'],$_POST['turn'],$_POST['quantityStudents'],$_POST['escuelaId']);
-	$nuevoCurso= new ProfeEdFisicaxCurso(null,'1',$_POST['turn'],$_POST['nivel'],$_POST['cantidadHoras'],$_POST['tipoCargo'],$_POST['courseName'],$_POST['divisionName']);
-	
+	$nuevoCurso= new ProfeEdFisicaxCurso(null,$_POST['id_Ed_FisicaxEscuela'],$_POST['turn'],$_POST['nivel'],$_POST['cantidadHoras'],$_POST['tipoCargo'],$_POST['courseName'],$_POST['divisionName']);
+
 	//$existe = $nuevoCurso->existeCurso(); // metodo para saber que no esta cargando el mismo curso
 	//$cantidad=mysqli_num_rows($existe);
-	
+
 	$estado= [];
 	$datoCurso = $nuevoCurso->agregar();
 	//$datoCurso=2;
-		
+
 	if ($datoCurso > 0) {
 		$temporal=array('guardado'=>'ok',
 											'id'=>$datoCurso);

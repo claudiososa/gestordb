@@ -1,4 +1,3 @@
-
 <?php
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
@@ -10,7 +9,7 @@ include_once("includes/mod_cen/clases/director.php");
 include_once("includes/mod_cen/clases/ProfesoresEF.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxCurso.php");
-include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");	
+include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
 ?>
 <div class="container">
 <?php
@@ -280,8 +279,8 @@ if(($_POST) || isset($_GET['retorno']))
 
 					   while ($filaProf =mysqli_fetch_object($buscarProfesor)) {
 
-						echo "<div class='panel panel-primary' id ='subpanelprofesores'>";
-						echo "<div class='panel-heading panelprof'><span class='panel-title clickable'><h5>Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
+						echo "<div class='panel panel-primary subpanelprofesores'  id ='subpanelprofesores".$filaProf->personaId."'>";
+						echo "<div class='panel-heading panelprof' id='".$filaProf->id_Ed_FisicaxEscuela."-".$fila->escuelaId."'><span class='panel-title clickable'><h5>Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
 						echo "<div class='panel-body bodyprof'>";
 
 						echo "<h4><b>Datos personales Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."</b></h4>";
@@ -327,18 +326,13 @@ while ($filaCurso = mysqli_fetch_object($Cursos)) {
 
 	echo "<h4><b>Carga horaria total:</b></h4>";
 	echo "<p>20 horas semanales</p>";
-
-
-
-
 						///////////////
-
-
-						echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
-						echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$filaProf->personaId."".$fila->escuelaId."'>";
-						 include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
-						 echo"</div>";
-
+  echo '<div class="asignarCurso">';
+						//echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
+						//echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$filaProf->personaId."".$fila->escuelaId."'>";
+						 //include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
+						 //echo"</div>";
+	echo '</div>';
 						 echo"</div>";//panel-body subpanel profesores
 
 
