@@ -15,22 +15,30 @@ $referente_ett= new Referente(null,null,"ETT");
 $buscar_ett=$referente_ett->Tipo("ETT","Activo");
 
 // todos los informes creados por referente Conectar Igualdad
-$arraySupervisorSecundaria = array ('Supervisor-Nivel-Superior','SupervisorGeneralSuperior','DirectorNivelSuperior');
-$informeEquipoSupevisorSecundaria = $informes->buscar(20,null,$arraySupervisorSecundaria);
+$arrayCoordinadorEducacionFisica = array ('CoordinadorEducacionFisica','ReferenteEducacionFisica');
+$informeEquipoEducacionFisica = $informes->buscar(20,null,$arrayCoordinadorEducacionFisica);
+
+// todos los informes creados por coordinadores edu fisica
+$arrayCoordinadorEducacionFisica1 = array ('CoordinadorEducacionFisica');
+$informeCoordinadorEducacionFisica = $informes->buscar(20,null,$arrayCoordinadorEducacionFisica1);
+
+// todos los informes creados por referented edu fisica
+$arrayCoordinadorEducacionFisica2 = array ('ReferenteEducacionFisica');
+$informeReferenteEducacionFisica = $informes->buscar(20,null,$arrayCoordinadorEducacionFisica2);
 
 //busqueda de informes de proiridad alta
 $informe_alta= new Informe(null,null,null,"Alta");
-$buscar_alta =$informe_alta->buscar(20,null,$arraySupervisorSecundaria);
+$buscar_alta =$informe_alta->buscar(20,null,$arrayCoordinadorEducacionFisica);
 $total = mysqli_num_rows($buscar_alta);
 
 //busqueda de informes de proiridad media
 $informe_media= new Informe(null,null,null,"Media");
-$buscar_media =$informe_media->buscar(20,null,$arraySupervisorSecundaria);
+$buscar_media =$informe_media->buscar(20,null,$arrayCoordinadorEducacionFisica);
 $media = mysqli_num_rows($buscar_media);
 
 //busqueda de informes de proiridad normal
 $informe_normal= new Informe(null,null,null,"Normal");
-$buscar_normal =$informe_normal->buscar(20,null,$arraySupervisorSecundaria);
+$buscar_normal =$informe_normal->buscar(20,null,$arrayCoordinadorEducacionFisica);
 $normal = mysqli_num_rows($buscar_normal);
 
 
@@ -268,7 +276,7 @@ echo "</tr>";
 echo "</thead>";
 echo "<tbody>";
 
-while ($fila=mysqli_fetch_object($informeEquipoSupevisorSecundaria)){
+while ($fila=mysqli_fetch_object($informeCoordinadorEducacionFisica)){
 
   $escuela= new Escuela($fila->escuelaId);
   $buscar_escuela= $escuela->buscar();
@@ -317,7 +325,7 @@ echo "</table>";
 
   echo "<tbody>";
 
-  while ($fila=mysqli_fetch_object($resultado_ett_acargo)){
+  while ($fila=mysqli_fetch_object($informeReferenteEducacionFisica)){
     echo "<tr>";
     echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
     echo "<td>";
