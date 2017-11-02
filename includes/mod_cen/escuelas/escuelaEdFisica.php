@@ -47,29 +47,7 @@ $cantidadProfeEF=mysqli_num_rows($buscarProfesor);
   <div class='col-md-8'>
 
 <!-- DESDE AQUI -->
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<?php echo "<h4>Cursos</h4>" ?>
-	</div>
-	<div class="panel-body">
-		<div class=class="col-md-12" id="courses">
 
-			<?php echo 'Total de curso:'.$cantidadCurso;
-				while ($fila = mysqli_fetch_object($Cursos)) {
-					echo '<p>'.$fila->gradoAño.' '.$fila->seccionDivision.'  '.$fila->turno;
-				//	' Turno <b>'.Cursos::turno($fila->turno).'</b><img class="curso" id="curso'.$fila->cursoId.'" src="img/iconos/delete.png" alt="borrar"></p>';
-				}
-			?>
-
-		</div>
-		<hr />
-		<button id="newCourse" class="btn btn-success" type="button" name="button">Nuevo Curso</button>
-		<div id="formNewCourse" class="col-md-12">
-			<hr />
-			<?php include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php') ?>
-		</div>
-	</div>
-</div>
 <!-- HASTA AQUI -->
 <div class="panel panel-primary">
 	<div class="panel-heading">

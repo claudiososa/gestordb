@@ -112,7 +112,7 @@ if (isset($_POST['botonSaveTeacher'])) {
 		//	$datoPersona = $persona1->agregar();
 			//Maestro::debbugPHP($datoPersona);
 
-			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId']);
+			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId'],$_POST['titulo']);
 
 
 			$datoProfeEF=$profesorEdFisica->agregar();
@@ -157,7 +157,7 @@ if (isset($_POST['botonSaveTeacher'])) {
 
 					//$profePrueba = new ProfeEdFisicaxEscuela(null,'999',$_POST['escuelaId']);
 		            //$proEF=$profePrueba->agregar();
-					$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$_POST['personaId'],$_POST['escuelaId']);
+					$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$_POST['personaId'],$_POST['escuelaId'],$_POST['titulo']);
 					$datoProfeEF=$profesorEdFisica->agregar();
 
 

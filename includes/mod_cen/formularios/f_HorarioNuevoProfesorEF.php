@@ -27,6 +27,10 @@
       <label  for="emailTeacher">Email</label><br>
       <input type="text" name="emailTeacher" id="emailTeacher" value="">
     </div>
+    <div class="form-group">
+      <label  for="titulo">Titulo</label><br>
+      <input type="text" name="titulo" id="titulo" value="">
+    </div>
     <input type="hidden" id="statusTeacher" name="statusTeacher" value="">
     <input type="hidden" id="personaId" name="personaId" value="">
     <input type="hidden" id="cuilTeacher" name="cuilTeacher" value="">
