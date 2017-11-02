@@ -63,13 +63,13 @@ $(document).ready(function() {
                   <label  for="courseName">Curso</label>
                   <select class="form-control" name="courseName" id="courseName">
                       <option value="0">Seleccione</option>
-                      <option value="1">1°</option>
-                      <option value="2">2°</option>
-                      <option value="3">3°</option>
-                      <option value="4">4°</option>
-                      <option value="5">5°</option>
-                      <option value="6">6°</option>
-                      <option value="7">7°</option>
+                      <option value="1°">1°</option>
+                      <option value="2°">2°</option>
+                      <option value="3°">3°</option>
+                      <option value="4°">4°</option>
+                      <option value="5°">5°</option>
+                      <option value="6°">6°</option>
+                      <option value="7°">7°</option>
                   </select>
                 </div>
 
@@ -77,17 +77,25 @@ $(document).ready(function() {
                   <label  for="divisionName">Division</label>
                   <select class="form-control" name="divisionName" id="divisionName">
                       <option value="0">Seleccione</option>
-                      <option value="1">1ra</option>
-                      <option value="2">2da</option>
-                      <option value="3">3ra</option>
-                      <option value="4">4ta</option>
-                      <option value="5">5ta</option>
-                      <option value="6">6ta</option>
-                      <option value="7">7ma</option>
-                      <option value="8">8va</option>
-                      <option value="9">9na</option>
-                      <option value="10">10ma</option>
-                      <option value="11">11va</option>
+
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                      <option value="E">E</option>
+                      <option value="F">F</option>
+                      <option value="G">G</option>
+                      <option value="1ra">1ra</option>
+                      <option value="2da">2da</option>
+                      <option value="3ra">3ra</option>
+                      <option value="4ta">4ta</option>
+                      <option value="5ta">5ta</option>
+                      <option value="6ta">6ta</option>
+                      <option value="7ma">7ma</option>
+                      <option value="8va">8va</option>
+                      <option value="9na">9na</option>
+                      <option value="10ma">10ma</option>
+                      <option value="11va">11va</option>
                       <option value="Otro">Otro</option>
                   </select>
                 </div>

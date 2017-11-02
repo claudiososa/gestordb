@@ -252,7 +252,7 @@ if(mysqli_num_rows($b_informe)>0){
 ?>
 <div class="panel panel-primary">
   <div class="panel-heading" id="panel4"><span class="panel-title clickable">
-    <h4>Ultimos informes creados por Supervisores<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
+    <h4>Ultimos informes creados por Coordinadores Ed.Fisica<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
   </div>
   <div class="panel-body">
     <?php
@@ -302,7 +302,7 @@ echo "</table>";
 
 <div class="panel panel-primary">
 <div class="panel-heading" id="panel5"><span class="panel-title clickable">
-  <h4>Informes de Supervisores a Cargo<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
+  <h4>Informes de Referentes Ed.Fisica<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 </div>
 <div class="panel-body">
   <?php
