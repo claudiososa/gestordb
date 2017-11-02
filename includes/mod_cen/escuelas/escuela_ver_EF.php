@@ -283,7 +283,7 @@ if(($_POST) || isset($_GET['retorno']))
 						echo "<div class='panel-heading panelprof' id='".$filaProf->id_Ed_FisicaxEscuela."-".$fila->escuelaId."'><span class='panel-title clickable'><h5>Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
 						echo "<div class='panel-body bodyprof'>";
 
-						echo "<h4><b>Datos personales Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."</b></h4>";
+						echo "<h4><b>Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."</b></h4>";
 						echo "<div><b>Titulo:&nbsp</b>".$filaProf->titulo."</div>";
 						echo"<div><b>Teléfono:&nbsp</b>".$filaProf->telefonoM." / ".$filaProf->telefonoC."</div>";
 						echo"<div><b>Correo Electrónico:&nbsp</b>".$filaProf->email."&nbsp</div>";

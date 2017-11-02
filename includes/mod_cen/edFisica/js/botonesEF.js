@@ -170,15 +170,14 @@ $(document).ready(function() {
               //let escuelaId = $("#escuelaId").val()
               //let id_Ed_FisicaxEscuela = $('#id_Ed_FisicaxEscuela').val()
               let nivel = $("#nivel option:selected").val()
-              let tipoCargo = $("tipoCargo option:selected").val()
+              let tipoCargo = $("#tipoCargo option:selected").val()
               $.ajax({
                 url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
                 type: 'POST',
                 dataType: 'json',
                 data: {courseName: courseName,divisionName: divisionName,
                        turn:turn, cantidadHoras:cantidadHoras,
-                       escuelaId:escuelaId,nivel:nivel,
-                       tipoCargo:tipoCargo,id_Ed_FisicaxEscuela:id_Ed_FisicaxEscuela
+                       nivel:nivel, tipoCargo:tipoCargo,id_Ed_FisicaxEscuela:id_Ed_FisicaxEscuela, escuelaId:escuelaId
                       }
               })
             .done(function(data) {

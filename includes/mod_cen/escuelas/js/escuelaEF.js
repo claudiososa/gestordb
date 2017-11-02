@@ -252,6 +252,7 @@ $(document).ready(function(){
       let surnameTeacher = $("#surnameTeacher").val()
       let phoneTeacher = $("#phoneTeacher").val()
       let emailTeacher = $("#emailTeacher").val()
+      let titulo = $("#titulo").val()
       let escuelaId = $("#escuelaId2").val()
       //alert(dni+nameTeacher+surnameTeacher+phoneTeacher+emailTeacher)
       $.ajax({
@@ -264,6 +265,7 @@ $(document).ready(function(){
                 surnameTeacher:surnameTeacher,
                 phoneTeacher:phoneTeacher,
                 emailTeacher:emailTeacher,
+                titulo:titulo,
                 escuelaId:escuelaId,
                 botonSaveTeacher:boton,
                 statusTeacher:action,
@@ -308,6 +310,7 @@ function clearPersonaAndDni(){
   $('#surnameTeacher').val("")
   $('#phoneTeacher').val("")
   $('#emailTeacher').val("")
+  $('#titulo').val("")
   $('#formNewTeacher').show()
   $('#formNewPerson').hide()
 }
