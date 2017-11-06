@@ -68,10 +68,14 @@ if(($_POST) || isset($_GET['retorno']))
 				  echo "<tr class='info'>";
 			  	echo "<th>Nº</th>";
 			  	echo "<th>CUE</th>";
-			  	echo "<th>Nombre de Escuela</th>";
-					echo "<th>Informe</th>";
-					echo "<th>Ver Informes</th>";
-					echo "<th>Ver Profesores</th>";
+			  	echo "<th class='hidden-xs'>Nombre de Escuela</th>";
+					echo"<th class='visible-xs'>Nombre</th>";
+					echo "<th class='hidden-xs'>Informe</th>";
+					echo "<th class='visible-xs'>Inf</th>";
+					echo "<th class='hidden-xs'>Ver Informes</th>";
+					echo "<th class='visible-xs'>Ver</th>";
+					echo "<th class='hidden-xs'>Ver Profesores</th>";
+					echo "<th class='visible-xs'>Prof</th>";
 					echo "</th>";
 			  //	echo "<th>Referente a Cargo</th>";
 			  	//echo "<th></th>";
