@@ -37,6 +37,25 @@ class ProfeEdFisicaxEscuela
 		}
 
 	}
+    
+    // borrar profe de la escuela
+
+
+public function borrar()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia = "DELETE FROM ProfeEdFisicaxEscuela WHERE id_Ed_FisicaxEscuela=$this->id_Ed_FisicaxEscuela";
+		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+			 	$ultimoRegistro=$bd->lastID();
+				return $ultimoRegistro;
+		 }else{
+					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		 }
+	}
+
+
+
+    // fin de borrar profe de la escuela
 
 
    // buscar
@@ -45,11 +64,11 @@ public function buscar()
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-    $sentencia= "SELECT escuelas.numero, personas.personaId,
+        $sentencia= "SELECT escuelas.numero, personas.personaId,
                         personas.nombre, personas.apellido,
                         personas.email, personas.telefonoC,
                         personas.telefonoM, ProfeEdFisicaxEscuela.titulo, escuelas.escuelaId,
-                        ProfeEdFisicaxEscuela.id_Ed_FisicaxEscuela
+                        ProfeEdFisicaxEscuela.id_Ed_FisicaxEscuela, escuelas.numero
 
 			FROM ProfeEdFisicaxEscuela
 				JOIN personas ON ( personas.personaId = ProfeEdFisicaxEscuela.personaId )
@@ -59,19 +78,28 @@ public function buscar()
 
 
 
-		if( $this->escuelaId!=NULL )
+		if( $this->escuelaId!=NULL || $this->personaId!=NULL )
 		{
-			$sentencia.=" WHERE ProfeEdFisicaxEscuela.escuelaId = '".$this->escuelaId."'";
+			$sentencia.="WHERE ";
 
-		//$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+			if( $this->escuelaId!=NULL)
+			{
 
+     		 $sentencia.=" ProfeEdFisicaxEscuela.escuelaId = '".$this->escuelaId."' &&";
+
+		
+		      }
+
+		    if( $this->personaId!=NULL )
+		   {
+			$sentencia.=" ProfeEdFisicaxEscuela.personaId = '".$this->personaId."' &&";		
+
+		   }
+
+		  $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 		}
 
-    if( $this->personaId!=NULL )
-		{
-			$sentencia.=" && ProfeEdFisicaxEscuela.personaId = '".$this->personaId."'";		
-
-		}
+   
 
 		$sentencia.="  ORDER BY apellido ASC";
 

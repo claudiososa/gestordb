@@ -21,8 +21,8 @@ $datoEscuela = $escuela->buscarUnico();
 $curso = new ProfeEdFisicaxCurso();
 //$curso->escuelaId=$_GET['escuelaId'];
 
-$Cursos= $curso->buscarCursos('141','1639');
-$cantidadCurso=mysqli_num_rows($Cursos);
+//$Cursos= $curso->buscarCursos('141','1639');
+//$cantidadCurso=mysqli_num_rows($Cursos);
 //$cantidadCurso=2;
 //$cursosActuales= $curso->buscar('total');
 
@@ -34,7 +34,7 @@ $profesor2 = new ProfeEdFisicaxEscuela(null,null,$_GET['escuelaId']);
 $buscarProfesor=$profesor2->buscarProfesores();
 $cantidadProfeEF=mysqli_num_rows($buscarProfesor);
 
-
+$numeroEsc=$_GET['escuelaId'];
 //$cantidadProfesores= $profesor->buscar('cantidad');
 //$profesoresActuales= $profesor->buscar('total');
 
@@ -57,7 +57,7 @@ $cantidadProfeEF=mysqli_num_rows($buscarProfesor);
 		<div class=class="col-md-12" id="teachers">
 			<?php  echo 'Total de Profesores:'.$cantidadProfeEF;
 				while ($fila = mysqli_fetch_object($buscarProfesor)) {
-					echo '<p>'.$fila->apellido.' '.$fila->nombre.'  [ '.$fila->id_Ed_FisicaxEscuela .'] <img class="profesor" id="profesor'.$fila->profesorId.'" src="img/iconos/delete.png" alt="borrar"></p>';
+					echo '<p>'.$fila->apellido.' '.$fila->nombre.'  [ '.$_GET['escuelaId'].'] <img class="profesor" id="profesor'.$_GET['escuelaId'].''.$fila->id_Ed_FisicaxEscuela.'" src="img/iconos/delete.png" alt="borrar"></p>';
 				$numeroEsc=$fila->numero;
 				}
 			?>

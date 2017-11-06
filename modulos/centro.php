@@ -111,6 +111,11 @@
 					case 12:
 								include("includes/mod_cen/facilitador/verHorarioFacilitadores.php");
 								break;
+					case 13:
+								include("includes/mod_cen/referentes/referente_verEF.php");
+						break;	
+				
+
 				}
 				break;
 			case "escuelas":

@@ -20,6 +20,7 @@
           <ul class="dropdown-menu">
 
                  <li ><a href="index.php?mod=slat&men=escuelas&id=25">Escuelas</a></li>
+                 <li><a href="index.php?mod=slat&men=referentes&id=13">Referentes E.F</a></li>
           </ul>
           
 
