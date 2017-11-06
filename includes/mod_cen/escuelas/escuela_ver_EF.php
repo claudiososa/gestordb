@@ -69,10 +69,8 @@ if(($_POST) || isset($_GET['retorno']))
 			  	echo "<th>Nº</th>";
 			  	echo "<th>CUE</th>";
 			  	echo "<th>Nombre de Escuela</th>";
-					echo "<th>Nivel</th>";
-			  	echo "<th>Localidad</th>";
 					echo "<th>Informe</th>";
-					echo "<th>Cant</th>";
+					echo "<th>Ver Informes</th>";
 					echo "<th>Ver Profesores</th>";
 					echo "</th>";
 			  //	echo "<th>Referente a Cargo</th>";
@@ -163,14 +161,14 @@ if(($_POST) || isset($_GET['retorno']))
 
 			  		echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
-			  		echo "<td>"."<a href='index.php?mod=slat&men=admin&id=7&escuelaId=".$fila->escuelaId."'>".$fila->nombre."</a></td>";
+			  		echo "<td>".$fila->nombre."</a></td>";
 
 			  		//echo "<td>".substr($fila->nombre,0, 40)."</td>";
-            echo "<td>".$fila->nivel."</td>";
+
 			  		$locali=new Localidad($fila->localidadId,null);
 			  		$busca_loc= $locali->buscar();
 			  		$fila1=mysqli_fetch_object($busca_loc);
-			  		echo "<td>".$fila1->nombre."</td>";
+
 
 
 						$informe = new Informe(null,$fila->escuelaId);
@@ -211,19 +209,83 @@ if(($_POST) || isset($_GET['retorno']))
 
 
               echo "<br>";
-              echo "<a class='btn btn-primary btnDatosInst' role='button' id='btnDatosInst".$fila->escuelaId."'>Datos Escuela</a>&nbsp&nbsp&nbsp";
+              echo "<a class='btn btn-primary btnDatosInst' role='button' id='btnDatosInst".$fila->escuelaId."' data-toggle='modal' data-target='#myModalDatosEsc".$fila->escuelaId."'>Datos Escuela </a>&nbsp&nbsp&nbsp";
 							echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=edFisica&id=1&escuelaId=".$fila->escuelaId."'>Nuevo Profesor</a>&nbsp&nbsp&nbsp";
-							echo "<a class='btn btn-success' role='button' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Informe Escuela</a>&nbsp&nbsp&nbsp";
-							echo "<a class='btn btn-success' role='button' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>Ver Informes Escuela</a>";
+
 							echo "<br>";
 							echo "<br>";
 							echo "<br>";
+							///modal
+							echo '<div class="modal fade" id="myModalDatosEsc'.$fila->escuelaId.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabelDatosEsc'.$fila->escuelaId.'">';
+							echo'<div class="modal-dialog" role="document">';
+							echo '<div class="modal-content">';
+							echo '<div class="modal-header">';
+							echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+							echo '<h4 class="modal-title" id="myModalLabelDatosEsc'.$fila->escuelaId.'"><b>'.$fila->numero.'&nbsp-&nbsp'.$fila->cue.'&nbsp-&nbsp'.$fila->nombre.'</b></h4>';
+							echo '</div>';
+							echo '<div class="modal-body">';
+							echo '<h4><b>Datos Institución</b></h4>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Dirección:&nbsp</b>'.$fila->domicilio.'</div>';
+							echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-5"><b>Localidad:&nbsp</b>'.$fila1->nombre.'</div>';
+
+							echo '</div>';
+							echo '<div class="row">';
+
+							echo '<div class="col-md-12"><b>Nivel:&nbsp</b>'.$fila->nivel.'</div>';
+							echo '</div>';
+
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Teléfono:&nbsp</b>'.$fila->telefono.'</div>';
+						  echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Email:&nbsp</b>'.$fila->email.'</div>';
+							echo '</div>';
+							echo '<br>';
+              echo '<hr>';
+							echo '<h4><b>Datos Directivo</b></h4>';
+
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Apellido y Nombre:&nbsp</b>'.$datoDirector->apellido.', '.$datoDirector->nombre.'</div>';
+							echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Teléfono:&nbsp</b>'.$datoDirector->telefonoM.' / '.$datoDirector->telefonoC.'</div>';
+							echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Correo Electrónico:&nbsp</b>'.$datoDirector->email.'</b></div>';
+							echo '</div>';
 
 
+							echo '<hr>';
 
+							echo '<h4><b>Datos Supervisor</b></h4>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Apellido y Nombre:&nbsp</b>'.$datoSupervisor->apellido.', '.$datoSupervisor->nombre.'</div>';
+							echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Teléfono:&nbsp</b>'.$datoSupervisor->telefonoM.' / '.$datoSupervisor->telefonoC.'</div>';
+
+							echo '</div>';
+							echo '<div class="row">';
+
+							echo '<div class="col-md-12"><b>Correo Electrónico:&nbsp</b>'.$datoSupervisor->email.'</div>';
+							echo '</div>';
+
+							echo '</div>';
+							echo '<div class="modal-footer">';
+							echo '<button type="button" class="btn btn-primary"  data-dismiss="modal">Cerrar</button>';
+							echo '</div>';
+							echo '</div>';
+							echo '</div>';
+							echo '</div>';
+
+/*
 //contenido boton datos escuela
 							echo "<div class='panel panel-default datosInst' id='datosInst".$fila->escuelaId."'>";
 							echo "<div class='panel-body'>";
+
 
 	 					  echo "<div><h4><b>".$fila->numero."&nbsp-&nbsp".$fila->cue."&nbsp-&nbsp".$fila->nombre."</b></h4></div>";
 
@@ -254,7 +316,7 @@ if(($_POST) || isset($_GET['retorno']))
 
 
 						 echo "</div>";//cierre row
-
+/////////////
 
 						 // Salto
 						 echo "<div class='row'>";
@@ -272,7 +334,7 @@ if(($_POST) || isset($_GET['retorno']))
 							echo "</div>";
 
 							echo "</div>";	//final boton datos escuelas
-
+*/
 										/***busqueda de profesores***/
 					$profesor = new ProfeEdFisicaxEscuela(null,null,$fila->escuelaId);
 							$buscarProfesor= $profesor->buscar();
@@ -361,6 +423,7 @@ while ($filaCurso = mysqli_fetch_object($Cursos)) {
 		//var venta= "<?php echo $_GET['registro']  ";
 ?>
 </div>
+
 <script type="text/javascript" src="includes/mod_cen/edFisica/js/botonesEF.js"></script>
 
 <script type="text/javascript" src="jquery/jquery113.jsp"></script>
