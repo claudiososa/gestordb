@@ -17,12 +17,13 @@ $(document).ready(function(){
    * AL PRESIONAR EL BOTON X (eliminar) DE PROFESOR
    */
 
-/*
+
   $('#teachers').on('click', '.profesor', function(){
-    let profesorId =$(this).attr("id").substring(8)
+    let profesorId =$(this).attr("id").substring(12)
+    let escuelaIdBorrar=$(this).attr("id").substring(8,4)
     $.ajax({
-      url: 'includes/mod_cen/clases/ProfesoresEF.php',
-      //url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
+      //url: 'includes/mod_cen/clases/ProfesoresEF.php',
+      url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
       type: 'POST',
       dataType: 'json',
       data: {profesorId: profesorId,escuelaIdBorrar:escuelaIdBorrar}
@@ -46,7 +47,7 @@ $(document).ready(function(){
       console.log("complete");
     });
 
-  }) */
+  }) 
 
 
 

@@ -184,6 +184,58 @@ if (isset($_POST['botonSaveTeacher'])) {
 }
 
 
+/////////////////////////////
+
+//  Eliminar profesor//
+
+
+/**
+ * AL SELECCIONAR EL BOTON X DE UN PROFESOR DETERMINADO
+ */
+ 
+if (isset($_POST['profesorId'])) {
+	$estado= [];
+	
+// borrar la entrada del profesor en la tabla profeEdFisicaxEscuela
+	$profesor= new ProfeEdFisicaxEscuela($_POST['profesorId']);
+	$borrar = $profesor->borrar();
+
+// borrar la entrada de los cursos a cargo del profesor en la tabla profeEd
+	$cursos= new ProfeEdFisicaxCurso(NULL,$_POST['profesorId']);
+	$borrar=$cursos->borrar(); 
+
+
+// nuevo
+
+$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_POST['escuelaIdBorrar']);
+$listaProfesores=$profesor2->buscarProfesores();
+
+
+//fin nuevo
+
+
+	//$profesor2= new Profesores();
+	//$profesor2->escuelaId=$_POST['escuelaIdBorrar'];
+
+	//$total = $profesor2->buscar('cantidad');
+
+	//$listaProfesores = $profesor2->buscar('total',null,'DESC');
+
+	while ($fila = mysqli_fetch_object($listaProfesores)) {
+		$temporal=array('profesorId'=>$_POST['profesorId'],
+										'nombre'=>$fila->nombre,
+										'apellido'=>$fila->apellido);
+										//'turno'=>Cursos::turno($fila->turno));
+		array_push($estado,$temporal);
+	}
+	$json = json_encode($estado);
+	//Maestro::debbugPHP($json);
+	echo $json;
+
+ }
+
+
+
 
 //****** AGREGAR UN NUEVO CURSO ****/////
 
