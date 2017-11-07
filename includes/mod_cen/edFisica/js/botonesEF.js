@@ -149,7 +149,7 @@ $(document).ready(function() {
                     </select>
                   </div>
 
-                <button type='button' id='saveCourse".$fila->escuelaId."".$filaProf->personaId."' class='btn btn-warning saveCourse' name='button'>Guardar Curso</button>
+                <button type='button' id='saveCourse".$fila->escuelaId."".$filaProf->personaId."' class='btn btn-warning saveCourse' name='button' data-dismiss="modal">Guardar Curso</button>
                  </div>
               </form>
             </div>
@@ -183,62 +183,16 @@ $(document).ready(function() {
                 url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
                 type: 'POST',
                 dataType: 'json',
-                data: {courseName: courseName,divisionName: divisionName,
+                data: {courseName:courseName, divisionName:divisionName,
                        turn:turn, cantidadHoras:cantidadHoras,
-                       nivel:nivel, tipoCargo:tipoCargo,id_Ed_FisicaxEscuela:id_Ed_FisicaxEscuela, escuelaId:escuelaId
+                       nivel:nivel, tipoCargo:tipoCargo, id_Ed_FisicaxEscuela:id_Ed_FisicaxEscuela, escuelaId:escuelaId
                       }
               })
             .done(function(data) {
                 console.log('success')
-                alert('Se creo correctamente')
-                /*
-                for (let item of data) {
 
-                  if (item.guardado="ok") {
-                    let guardado = 'si'
-                    let id = item.id
-                    //console.log(item.guardado)
-                    //console.log(item.id)
-                      //let escuelaId = $("#escuelaId").val()
-                    $.ajax({
-                      url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
-                      type: 'POST',
-                      dataType: 'json',
-                      data: {escuelaIdAjaxId:escuelaId}
-                    })
-                  .done(function(lista) {
-                      let cantidad = 0
-                      $('#courses').empty()
-
-                      for (let item of lista) {
-                        cantidad++
-                        if (id==item.cursoId) {
-
-                              console.log(item.cursoId)
-                              $('#courses').prepend('<p class="alert alert-success">'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
-                        }else{
-                          $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
-                        }
-                      }
-                      $('#courses').prepend(`Total de Cursos: ${cantidad}`)
-                    })
-                    .fail(function() {
-                      console.log("error");
-                    })
-                    .always(function() {
-                      console.log("complete");
-                    });
-
-                    $('#formNewCourse').toggle()
-                    $('#courseName > option[value="0"]').prop('selected','true')
-                    $('#divisionName > option[value="0"]').prop('selected','true')
-                    $('#turn > option[value="0"]').prop('selected','true')
-                    $('#cantidadHoras').val('1')
-                    alert('Se creo correctamente')
-                  }else{
-                    alert('algo no esta bien')
-                  }
-                }  */
+               $('#tablaCursos').prepend('<tr><td> '+item.curso+' '+item.division+' <td><td> '+item.turno+'</td><td>'+item.nivel+' </td><td>'+item.horas+'</td><td>'+item.tipoCargo+'</td></tr>')
+  //alert('Se creo correctamente')
               })
               .fail(function() {
                 console.log("error");

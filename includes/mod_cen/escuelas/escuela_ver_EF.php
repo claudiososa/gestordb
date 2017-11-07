@@ -362,7 +362,7 @@ if(($_POST) || isset($_GET['retorno']))
 						//var_dump($Cursos);
 						echo "<hr>";
 						echo "<h4><b>Cursos a cargo:</b></h4>";
-						echo "<table class='table table-bordered'>";
+						echo "<table class='table table-bordered' id='tablaCursos'>";
 						echo"<tr>";
 						echo"<th>Grado</th>";
 						echo"<th>Turno</th>";
