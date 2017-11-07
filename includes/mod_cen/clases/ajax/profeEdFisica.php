@@ -192,17 +192,17 @@ if (isset($_POST['botonSaveTeacher'])) {
 /**
  * AL SELECCIONAR EL BOTON X DE UN PROFESOR DETERMINADO
  */
- 
+
 if (isset($_POST['profesorId'])) {
 	$estado= [];
-	
+
 // borrar la entrada del profesor en la tabla profeEdFisicaxEscuela
 	$profesor= new ProfeEdFisicaxEscuela($_POST['profesorId']);
 	$borrar = $profesor->borrar();
 
 // borrar la entrada de los cursos a cargo del profesor en la tabla profeEd
 	$cursos= new ProfeEdFisicaxCurso(NULL,$_POST['profesorId']);
-	$borrar=$cursos->borrar(); 
+	$borrar=$cursos->borrar();
 
 
 // nuevo
@@ -259,7 +259,13 @@ if (isset($_POST['courseName'])) {
 
 	if ($datoCurso > 0) {
 		$temporal=array('guardado'=>'ok',
-											'id'=>$datoCurso);
+											'id'=>$datoCurso,
+                      'curso'=>$_POST['courseName'],
+                      'seccion'=>$_POST['divisionName'],
+                      'turno'=>$_POST['turn'],
+                      'nivel'=>$_POST['nivel'],
+                      'horas'=>$_POST['cantidadHoras'],
+                      'tipoCargo'=>$_POST['tipoCargo']);
 		array_push($estado,$temporal);
 
 	}else{
