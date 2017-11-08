@@ -149,7 +149,7 @@ $(document).ready(function() {
                     </select>
                   </div>
 
-                <button type='button' id='saveCourse".$fila->escuelaId."".$filaProf->personaId."' class='btn btn-warning saveCourse' name='button' data-dismiss="modal">Guardar Curso</button>
+                <button type='button'  class='btn btn-warning saveCourse' name='button' data-dismiss="modal">Guardar Curso</button>
                  </div>
               </form>
             </div>
@@ -170,6 +170,7 @@ $(document).ready(function() {
               //let numeroGuardarIdCurso= $(this).attr("id").substr(10)
 
               //$("#saveCourse" + numeroGuardarIdCurso).click(function (){
+
               let guardado = 'no'
               let courseName = $("#courseName option:selected").val()
               let divisionName = $("#divisionName option:selected ").val()
@@ -191,8 +192,8 @@ $(document).ready(function() {
             .done(function(data) {
                 console.log('success')
 
-               $('#tablaCursos').prepend('<tr><td> '+item.curso+' '+item.division+' <td><td> '+item.turno+'</td><td>'+item.nivel+' </td><td>'+item.horas+'</td><td>'+item.tipoCargo+'</td></tr>')
-  //alert('Se creo correctamente')
+               $('#tablaCursos'+id_Ed_FisicaxEscuela).prepend('<tr><td> '+item.curso+' '+item.seccion+' <td><td> '+item.turno+'</td><td>'+item.nivel+' </td><td>'+item.horas+'</td><td>'+item.tipoCargo+'</td></tr>')
+
               })
               .fail(function() {
                 console.log("error");

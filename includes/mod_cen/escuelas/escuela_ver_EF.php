@@ -362,7 +362,7 @@ if(($_POST) || isset($_GET['retorno']))
 						//var_dump($Cursos);
 						echo "<hr>";
 						echo "<h4><b>Cursos a cargo:</b></h4>";
-						echo "<table class='table table-bordered' id='tablaCursos'>";
+						echo "<table class='table table-bordered' id='tablaCursos".$filaProf->id_Ed_FisicaxEscuela."'>";
 						echo"<tr>";
 						echo"<th>Grado</th>";
 						echo"<th>Turno</th>";
@@ -375,7 +375,7 @@ while ($filaCurso = mysqli_fetch_object($Cursos)) {
 
 
 
-	echo"<tr>";
+	echo"<tr >";
 	echo"<td>".$filaCurso->gradoAño."  ".$filaCurso->seccionDivision."</td>";
 	echo"<td>".$filaCurso->turno."</td>";
 	echo"<td>".$filaCurso->nivel."</td>";
@@ -391,7 +391,7 @@ while ($filaCurso = mysqli_fetch_object($Cursos)) {
 
 
 	echo "<h4><b>Carga horaria total:</b></h4>";
-	echo "<p>20 horas semanales</p>";
+	echo "<p >20 horas semanales</p>";
 						///////////////
   echo '<div class="asignarCurso">';
 						//echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
