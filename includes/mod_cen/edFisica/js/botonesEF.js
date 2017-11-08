@@ -41,11 +41,12 @@ $(document).ready(function() {
     var $this = $(this);
     id_Ed_FisicaxEscuela = $(this).attr('id').substr(0,$(this).attr('id').indexOf('-'))
     escuelaId = $(this).attr('id').substr($(this).attr('id').indexOf('-')+1)
+    
     //alert(escuelaId)
 
     $(this).parent().children('.bodyprof').children('.asignarCurso').empty()
 
-
+   var numeroGuardarIdCurso= $(this).attr("id").substr(0,3)
     $(this).parent().children('.bodyprof').children('.asignarCurso').append(`
       <button id="btnHoraSandwich" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2">
       Asignar Curso
@@ -137,7 +138,7 @@ $(document).ready(function() {
                   <input type="number" name="cantidadHoras" min="1" max="20" value="1" id="cantidadHoras">
                 </div>
 
-
+<input type="hidden" id="prueba" name="prueba" value="25">
                   <div class="form-group">
                     <label  for="tipoCargo">Tipo de Cargo</label>
                     <select class="form-control" name="tipoCargo" id="tipoCargo">
@@ -149,7 +150,7 @@ $(document).ready(function() {
                     </select>
                   </div>
 
-                <button type='button'  class='btn btn-warning saveCourse' name='button' data-dismiss="modal">Guardar Curso</button>
+                <button type='button' class='btn btn-warning saveCourse' name='button' data-dismiss="modal">Guardar Curso</button>
                  </div>
               </form>
             </div>
@@ -167,7 +168,7 @@ $(document).ready(function() {
       /////////// guardar curso /////////////
 
       $(".saveCourse").click(function(event){
-              //let numeroGuardarIdCurso= $(this).attr("id").substr(10)
+              
 
               //$("#saveCourse" + numeroGuardarIdCurso).click(function (){
 
@@ -176,6 +177,7 @@ $(document).ready(function() {
               let divisionName = $("#divisionName option:selected ").val()
               let turn = $("#turn option:selected").val()
               let cantidadHoras = $("#cantidadHoras").val()
+              let prueba = $("#prueba").val()
               //let escuelaId = $("#escuelaId").val()
               //let id_Ed_FisicaxEscuela = $('#id_Ed_FisicaxEscuela').val()
               let nivel = $("#nivel option:selected").val()
@@ -191,9 +193,13 @@ $(document).ready(function() {
               })
             .done(function(data) {
                 console.log('success')
+                for (let item of data) {
+         // console.log(item.profesorId)
+          //cantidad++
 
-               $('#tablaCursos'+id_Ed_FisicaxEscuela).prepend('<tr><td> '+item.curso+' '+item.seccion+' <td><td> '+item.turno+'</td><td>'+item.nivel+' </td><td>'+item.horas+'</td><td>'+item.tipoCargo+'</td></tr>')
-
+               $('#tablaCursos'+numeroGuardarIdCurso).prepend('<tr class="alert alert-success"><td> '+item.curso+' '+item.seccion+' </td><td> '+item.turno+'</td><td>'+item.nivel+' </td><td>'+item.horas+'</td><td>'+item.tipoCargo+'</td></tr>')
+                 }
+                // alert(numeroGuardarIdCurso)
               })
               .fail(function() {
                 console.log("error");
@@ -205,7 +211,8 @@ $(document).ready(function() {
 
           //})
       })
-
+     
+  
       //// aqui ///
 
 
