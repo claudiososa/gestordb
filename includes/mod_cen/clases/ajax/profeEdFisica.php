@@ -135,7 +135,7 @@ if (isset($_POST['botonSaveTeacher'])) {
 
 		//$profePrueba = new ProfeEdFisicaxEscuela(null,'777',$_POST['escuelaId']);
 		//$proEF=$profePrueba->agregar();
-		/*	$persona= new Persona($_POST['personaId'],
+			$persona= new Persona($_POST['personaId'],
 																$_POST['surnameTeacher'],
 																$_POST['nameTeacher'],
 																$_POST['dniTeacher'],
@@ -151,7 +151,7 @@ if (isset($_POST['botonSaveTeacher'])) {
 																'4400',
 																null
 															);
-					$datoPersona = $persona->update();*/
+					$datoPersona = $persona->update();
 
 					// include_once('../ProfeEdFisicaxEscuela.php');
 

@@ -9,6 +9,8 @@ include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxCurso.php");
+include_once("includes/mod_cen/clases/departamentos.php");
+
 
 
 
@@ -57,7 +59,7 @@ $numeroEsc=$_GET['escuelaId'];
 		<div class=class="col-md-12" id="teachers">
 			<?php  echo 'Total de Profesores:'.$cantidadProfeEF;
 				while ($fila = mysqli_fetch_object($buscarProfesor)) {
-					echo '<p>'.$fila->apellido.' '.$fila->nombre.'  [ '.$_GET['escuelaId'].'] <img class="profesor" id="profesor'.$_GET['escuelaId'].''.$fila->id_Ed_FisicaxEscuela.'" src="img/iconos/delete.png" alt="borrar"></p>';
+					echo '<p>'.$fila->apellido.' '.$fila->nombre.' <img class="profesor" id="profesor'.$_GET['escuelaId'].''.$fila->id_Ed_FisicaxEscuela.'" src="img/iconos/delete.png" alt="borrar"></p>';
 				$numeroEsc=$fila->numero;
 				}
 			?>
