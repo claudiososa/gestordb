@@ -148,6 +148,108 @@ public static function buscarProfesor($profesorId)
 	return $resultado;
 }
 
+public function buscarSimple($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
+	{
+		$bd=Conexion2::getInstance();
+    $sinParam=0;
+		$sentencia="SELECT horarioFacilitadores.cursoFacilitadoresId,horarioFacilitadores.horarioFacilitadoresId,
+											horarioFacilitadores.dia,horarioFacilitadores.escuelaId,
+											horarioFacilitadores.horaIngreso,horarioFacilitadores.horaSalida,
+											cursos.curso,cursos.division,cursos.turno,cursos.cantidadAlumnos,
+											CONCAT(personas.apellido,', ',personas.nombre) AS nombre,
+											asignaturas.nombre AS 'asignatura'
+									FROM horarioFacilitadores
+									INNER JOIN cursoFacilitadores
+									ON cursoFacilitadores.cursoFacilitadoresId=horarioFacilitadores.cursoFacilitadoresId
+									INNER JOIN cursos
+									ON cursos.cursoId=cursoFacilitadores.cursoId
+									INNER JOIN asignaturas
+									ON asignaturas.asignaturaId=cursoFacilitadores.asignaturaId
+									INNER JOIN profesores
+									ON profesores.profesorId=cursoFacilitadores.profesorId
+									INNER JOIN personas
+									ON personas.personaId=profesores.personaId";
+
+									$sentencia.=" WHERE 1";
+									//INNER JOIN referentes
+									//ON referentes.referenteId=horarioFacilitadores.referenteId
+									//INNER JOIN personas
+									//ON personas.personaId=referentes.personaId
+
+		if($tiporeferente<>NULL){
+      	$sinParam=1;
+				$sentencia.= " AND ( referentes.tipo='".$tiporeferente."'";
+		}
+
+		if ($listaRefer <> NULL){
+				$sinParam=1;
+				$sentencia.="  AND ( ";
+				foreach ($listaRefer as $value) {
+					$sentencia.=" referentes.tipo='".$value."' || ";
+				}
+				$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+		}
+
+		if ($sinParam==1) {
+			$sentencia.=' ) ';
+		}
+
+
+		if($this->horarioFacilitadoresId!=NULL || $this->referenteId!=NULL || $this->escuelaId!=NULL ||
+			$this->horaIngreso!=NULL || $this->horaSalida!=NULL || $this->cursoFacilitadoresId!=NULL ||
+			$this->dia!=NULL)
+		{
+			$sentencia.=" AND ";
+  		if($this->horarioFacilitadoresId!=NULL)
+  		{
+  			$sentencia.=" horarioFacilitadores.horarioFacilitadoresId = $this->horarioFacilitadoresId && ";
+  		}
+
+  		if($this->referenteId!=NULL)
+  		{
+  			$sentencia.=" horarioFacilitadores.referenteId = $this->referenteId && ";
+  		}
+
+  		if($this->dia!=NULL)
+  		{
+  			$sentencia.=" horarioFacilitadores.dia LIKE '%$this->dia%' && ";
+  		}
+
+  		if($this->horaIngreso!=NULL)
+  		{
+  			$sentencia.=" horarioFacilitadores.horaIngreso=$this->horaIngreso && ";
+  		}
+
+  		if($this->horaSalida!=NULL)
+  		{
+  			$sentencia.=" horarioFacilitadores.horaSalida='$this->horaSalida' && ";
+  		}
+
+			if($this->cursoFacilitadoresId!=NULL)
+			{
+				$sentencia.=" horarioFacilitadores.cursoFacilitadoresId = $this->cursoFacilitadoresId && ";
+			}
+
+			if($this->escuelaId!=NULL)
+			{
+				$sentencia.=" horarioFacilitadores.escuelaId = $this->escuelaId && ";
+			}
+
+		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+		}
+
+		  // fin else
+
+
+		$sentencia.="  ORDER BY horarioFacilitadores.horarioFacilitadoresId DESC";
+		if(isset($limit)){
+			$sentencia.=" LIMIT ".$limit;
+		}
+		//echo $sentencia.'<br><br>';
+		return $bd->ejecutar($sentencia);
+	}
+
+
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
 		$bd=Conexion2::getInstance();

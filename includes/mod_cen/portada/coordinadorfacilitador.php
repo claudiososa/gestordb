@@ -7,6 +7,9 @@
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
+require_once("includes/mod_cen/clases/HorarioFacilitadores.php");
+require_once("includes/mod_cen/clases/SumarTiempos.class.php");
+require_once("includes/mod_cen/clases/CursoFacilitadores.php");
 
 
 
@@ -65,14 +68,10 @@ echo '<div class="container">';
 echo '<div class="row">';
 ?>
 <div class="col-md-12 hidden-xs">
-  <p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
-  <iframe src="https://player.vimeo.com/video/239149998" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-   <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
+
 </div>
 <div class="col-md-12 visible-xs">
- <p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
-  <iframe src="https://player.vimeo.com/video/239149998" width="320" height="240" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-   <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
+
 </div>
 <?php
   echo '<div class="col-md-6">';
@@ -318,102 +317,7 @@ echo "</table>";
 </div>
 
 
-<div class="panel panel-primary">
-<div class="panel-heading" id="panel5"><span class="panel-title clickable">
-  <h4>Informes de Facilitadores a Cargo<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-</div>
-<div class="panel-body">
-  <?php
-$mes= date('m');
-$año= date('Y');
-  echo "<form class='form-inline'>";
-  echo "<div class='form-group'>";
 
-  echo "<label  for='year'>Año:</label>";
-
-  echo "<select class='form-control' name='year' id='year'>";
-  /*if ($año ){
-   echo '<option value="'.$año.'" selected>'.$año.'</option>';
-
- }*/
-  echo "<option value='2017' ";
-  echo ($año==2017) ?  ' selected ':'';
-  echo ">2017</option>";
-
-  echo "<option value='2018' ";
-  echo ($año==2018) ?  ' selected ':'';
-  echo ">2018</option>";
-
-  echo "</select>";
-
-  echo "</div>";
-  echo "<div class='form-group'>";
-
-  echo "<label  for='month'>Mes:</label>";
-  echo "<select class='form-control' name='month' id='month'>";
-
-  $meses = Maestro::meses();
-
-  foreach ($meses as $key => $value) {
-    if ($mes==$key) {
-      echo '<option selected value="'.$key.'">'.$value.'</option>';
-    }else{
-      echo '<option value="'.$key.'">'.$value.'</option>';
-    }
-
-  }
-
-  echo "</select>";
-  echo "</div>";
-  echo"<button type='button' id='buttomSearchDate' class='btn btn-warning' name='button'>buscar</button>";
-  //var_dump($meses);
-  echo "</form>";
-
-
-
-  echo "<table class='table table-hover table-striped table-condensed tablesorter'>";
-  echo "<thead>";
-  echo "<tr>";
-  echo "<th>Apellido y Nombre</th>";
-  echo "<th>Total</th>";
-  echo "<th>Mes Actual</th>";
-  echo "<th>Horario</th>";
-  echo "</tr>";
-  echo "</thead>";
-
-  echo "<tbody id='bodyTablaCargo'>";
-
-  while ($fila=mysqli_fetch_object($resultado_ett_acargo)){
-    echo "<tr>";
-    echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
-    echo "<td>";
-    $informe_ett= new informe(null,null,$fila->referenteId);
-    $buscar_informe=$informe_ett->buscar();
-    $cantidad=mysqli_num_rows($buscar_informe);
-
-    $mesAc=date("m");
-    $buscarMesActualInforme=$informe_ett->summary('mesAñoReferente',null,null,null,$mesAc,'2017',null,$fila->referenteId);
-    $totalMes=mysqli_num_rows($buscarMesActualInforme);
-
-    //echo $cantidad;
-    echo '<a class="btn btn-success" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a>';
-    echo "</td>";
-    echo "<td>";
-    echo '<a class="btn btn-success" href="?mod=slat&men=informe&date&id=6&year='.$año.'&month='.$mes.'&referenteId='.$fila->referenteId.'">'.$totalMes.'</a>';
-    echo "</td>";
-    echo "<td>";
-    echo '<a class="btn btn-success" href="?mod=slat&men=referentes&id=12&referenteId='.$fila->referenteId.'">Ver Horario</a>';
-    echo "</td>";
-    echo "</tr>";
-  }
-
-  echo "</tbody>";
-  echo "</table>";
-}
-
-   ?>
-</div>
-</div>
 <?php
 
 
@@ -497,6 +401,293 @@ $(document).ready(function()
 );
 </script>
 <div class="row">
+
+  <div class="panel panel-primary">
+  <div class="panel-heading" id="panel5"><span class="panel-title clickable">
+    <h4>Informes de Facilitadores a Cargo<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
+  </div>
+  <div class="panel-body">
+    <?php
+  $mes= date('m');
+  $año= date('Y');
+    echo "<form class='form-inline'>";
+    echo "<div class='form-group'>";
+
+    echo "<label  for='year'>Año:</label>";
+
+    echo "<select class='form-control' name='year' id='year'>";
+    /*if ($año ){
+     echo '<option value="'.$año.'" selected>'.$año.'</option>';
+
+   }*/
+    echo "<option value='2017' ";
+    echo ($año==2017) ?  ' selected ':'';
+    echo ">2017</option>";
+
+    echo "<option value='2018' ";
+    echo ($año==2018) ?  ' selected ':'';
+    echo ">2018</option>";
+
+    echo "</select>";
+
+    echo "</div>";
+    echo "<div class='form-group'>";
+
+    echo "<label  for='month'>Mes:</label>";
+    echo "<select class='form-control' name='month' id='month'>";
+
+    $meses = Maestro::meses();
+
+    foreach ($meses as $key => $value) {
+      if ($mes==$key) {
+        echo '<option selected value="'.$key.'">'.$value.'</option>';
+      }else{
+        echo '<option value="'.$key.'">'.$value.'</option>';
+      }
+
+    }
+
+    echo "</select>";
+    echo "</div>";
+    echo"<button type='button' id='buttomSearchDate' class='btn btn-warning' name='button'>buscar</button>";
+    //var_dump($meses);
+    echo "</form>";
+
+
+
+    echo "<table class='table table-hover table-striped table-condensed tablesorter'>";
+    echo "<thead>";
+    echo "<tr>";
+    echo "<th>Apellido y Nombre</th>";
+    echo "<th>Total</th>";
+    echo "<th>Mes Actual</th>";
+    echo "<th>Horario</th>";
+    echo "<th>Alumnos</th>";
+    echo "<th>M</th>";
+    echo "<th>I</th>";
+    echo "<th>T</th>";
+    echo "<th>V</th>";
+    echo "<th>N</th>";
+    echo "<th>Cant Cursos</th>";
+    echo "<th>Cant Prof.</th>";
+    echo "<th>Total Horas</th>";
+    echo "<th>Hora Catedra</th>";
+    echo "<th>Hora Sandwich</th>";
+    echo "</tr>";
+    echo "</thead>";
+
+    $cursoFacil = new CursoFacilitadores();
+    $horario = new HorarioFacilitadores();
+
+    echo "<tbody id='bodyTablaCargo'>";
+
+    while ($fila=mysqli_fetch_object($resultado_ett_acargo)){
+
+      $horario->referenteId=$fila->referenteId;
+
+      $datoHorario= $horario->buscar();
+      $tiempos = array();
+      $horaCatedra = array();
+      $horaSandwich = array();
+      while ($filaR = mysqli_fetch_object($datoHorario)) {
+        //var_dump($filaR->horaSalida);
+        $horaI = $filaR->horaIngreso;
+        $horaS = $filaR->horaSalida;
+        //echo $horaI."--".$horaS.'<br>';
+        //var_dump($horaI);
+        //var_dump($horaS);
+        //echo '<br><br>';
+        $date1='2016-11-30 '.$horaI;
+        $date2='2016-11-30 '.$horaS;
+        //var_dump($date1);
+        //var_dump($date2);
+
+        $fecha1 = new DateTime($date1);//fecha inicial
+        $fecha2 = new DateTime($date2);//fecha de cierre
+
+        $intervalo = $fecha1->diff($fecha2);
+        //print $intervalo->format("%H:%I:%S");
+        $nuevaHora =$intervalo->format("%H:%I:%S").'.00';
+
+        //$sumaHora =$intervalo->format('%Y años %m meses %d days %H horas %i minutos
+        //%s segundos');//00 años 0 meses 0 días 08 horas 0 minutos 0 segundos
+
+        //var_dump($intervalo);
+        //echo $nuevaHora.'<br><br>';
+
+        if ($filaR->cursoFacilitadoresId==1) {
+          array_push($horaSandwich,$nuevaHora);
+        }else{
+          array_push($horaCatedra,$nuevaHora);
+        }
+
+        array_push($tiempos,$nuevaHora);
+        //var_dump($tiempos);
+
+        // Inicializamos el tiempo
+
+
+        //$horaIngreso = 'casa';
+        //$hora2 = $filaR->horaSalida;
+
+      }
+
+      $tiempoInicial = new SumaTiempos();
+      $tiempoCatedra = new SumaTiempos();
+      $tiempoSandwich = new SumaTiempos();
+      // Recorremos los tiempos y los vamos sumando
+      foreach ($tiempos as $parcial) {
+          $tiempoInicial->sumaTiempo(new SumaTiempos($parcial));
+      }
+
+      foreach ($horaCatedra as $parcial) {
+          $tiempoCatedra->sumaTiempo(new SumaTiempos($parcial));
+      }
+
+      foreach ($horaSandwich as $parcial) {
+          $tiempoSandwich->sumaTiempo(new SumaTiempos($parcial));
+      }
+
+      // Mostramos el tiempo final
+
+      $cantidadHoras = substr($tiempoInicial->verTiempoFinal(),0,8);
+      $cantidadCatedra = substr($tiempoCatedra->verTiempoFinal(),0,8);
+      $cantidadSandwich = substr($tiempoSandwich->verTiempoFinal(),0,8);
+
+
+      $cursoFacil->referenteId=$fila->referenteId;
+      $alumnos = $cursoFacil->cantidades(); //cantidad total de alumnos para este referente
+      $alumnosTotales = $alumnosTotales + $alumnos->alumnos;
+
+      $alumnosM = $cursoFacil->cantidades('M');
+      $alumnosMT= $alumnosMT+$alumnosM->alumnos;
+      $alumnosI = $cursoFacil->cantidades('I');
+      $alumnosIT= $alumnosIT+$alumnosI->alumnos;
+      $alumnosT = $cursoFacil->cantidades('T');
+      $alumnosTT= $alumnosTT+$alumnosT->alumnos;
+      $alumnosV = $cursoFacil->cantidades('V');
+      $alumnosVT= $alumnosVT+$alumnosV->alumnos;
+      $alumnosN = $cursoFacil->cantidades('N');
+      $alumnosNT= $alumnosNT+$alumnosN->alumnos;
+
+      $cantidadCursos = $cursoFacil->cantidadCursos();
+      $totalCursos = $totalCursos + $cantidadCursos;
+
+      $profesores = $cursoFacil->cantidadProfesores();
+      $totalProfesores = $totalProfesores + $profesores;
+      //var_dump($alumnos);
+
+      echo "<tr>";
+      echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
+      echo "<td>";
+      $informe_ett= new informe(null,null,$fila->referenteId);
+      $buscar_informe=$informe_ett->buscar();
+      $cantidad=mysqli_num_rows($buscar_informe);
+
+      $mesAc=date("m");
+      $buscarMesActualInforme=$informe_ett->summary('mesAñoReferente',null,null,null,$mesAc,'2017',null,$fila->referenteId);
+      $totalMes=mysqli_num_rows($buscarMesActualInforme);
+
+
+      //echo $cantidad;
+      echo '<a class="btn btn-success" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a>';
+      echo "</td>";
+      echo "<td>";
+      echo '<a class="btn btn-success" href="?mod=slat&men=informe&date&id=6&year='.$año.'&month='.$mes.'&referenteId='.$fila->referenteId.'">'.$totalMes.'</a>';
+      echo "</td>";
+      echo "<td>";
+      echo '<a class="btn btn-success" href="?mod=slat&men=referentes&id=12&referenteId='.$fila->referenteId.'">Ver Horario</a>';
+      echo "</td>";
+
+      echo "<td>";
+      if ($alumnos->alumnos<>null) {
+        echo '<a class="btn btn-success" href="?mod=slat&men=referentes&id=12&referenteId='.$fila->referenteId.'">'.$alumnos->alumnos.'</a>';
+      }else{
+        echo '<a class="btn btn-success" href="?mod=slat&men=referentes&id=12&referenteId='.$fila->referenteId.'">0</a>';
+      }
+      echo "</td>";
+
+      echo "<td>";
+      if ($alumnosM->alumnos==null) {
+        echo '0';
+      }else{
+        echo $alumnosM->alumnos;
+      }
+      echo "</td>";
+
+      echo "<td>";
+      if ($alumnosI->alumnos==null) {
+        echo '0';
+      }else{
+        echo $alumnosI->alumnos;
+      }
+
+      echo "</td>";
+      echo "<td>";
+      if ($alumnosT->alumnos==null) {
+        echo '0';
+      }else{
+        echo $alumnosT->alumnos;
+      }
+      echo "</td>";
+
+      echo "<td>";
+      if ($alumnosV->alumnos==null) {
+        echo '0';
+      }else{
+        echo $alumnosV->alumnos;
+      }
+      echo "</td>";
+
+      echo "<td>";
+      if ($alumnosN->alumnos==null) {
+        echo '0';
+      }else{
+        echo $alumnosN->alumnos;
+      }
+      echo "</td>";
+
+      echo "<td>";
+      if ($cantidadCursos==null) {
+        echo '0';
+      }else{
+        echo $cantidadCursos;
+      }
+      echo "</td>";
+
+      echo "<td>";
+      echo $profesores;
+      echo "</td>";
+
+      echo "<td>";
+        echo $cantidadHoras;
+      echo "</td>";
+      echo "<td>";
+        echo "<a href='#!' class='btn btn-info'>".$cantidadCatedra."<a>";
+      echo "</td>";
+      echo "<td>";
+        echo $cantidadSandwich;
+      echo "</td>";
+      echo "</tr>";
+    }
+    echo "<tr>";
+    echo "<td colspan='4'></td>";
+    echo "<td>$alumnosTotales</td>";
+    echo "<td>$alumnosMT</td>";
+    echo "<td>$alumnosIT</td>";
+    echo "<td>$alumnosTT</td>";
+    echo "<td>$alumnosVT</td>";
+    echo "<td>$alumnosNT</td>";
+    echo "<td>$totalCursos</td>";
+    echo "<td>$totalProfesores</td>";
+    echo "</tr>";
+    echo "</tbody>";
+    echo "</table>";
+  }
+
+     ?>
+  </div>
+  </div>
 
 
   <div class="panel panel-primary">

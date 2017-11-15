@@ -315,6 +315,7 @@ class Referente
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="SELECT * FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE tipo='".$tipo."' AND estado='".$estado."'";
+		//return $sentencia;
 		return $conexion->query($sentencia);
     }
 

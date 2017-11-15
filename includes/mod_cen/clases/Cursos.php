@@ -28,6 +28,7 @@ function __construct($cursoId=NULL,
 		$this->escuelaId = $escuelaId;
 	}
 
+	
 	public function agregar()
 	{
 		$bd=Conexion2::getInstance();

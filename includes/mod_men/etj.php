@@ -39,6 +39,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informes <span class="caret"></span></a>
               <ul class="dropdown-menu">
                     <li><a href="index.php?mod=slat&men=informe&id=9&ref=etj">Visitas de ETT Mesuales</a></li>
+                    <li ><a href="index.php?mod=slat&men=admin&id=14">Sobre Facilitadores</a></li>
               </ul>
             </li>
 

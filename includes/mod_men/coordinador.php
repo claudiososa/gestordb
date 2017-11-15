@@ -27,6 +27,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informes <span class="caret"></span></a>
           <ul class="dropdown-menu">
+                <li ><a href="index.php?mod=slat&men=admin&id=14">Sobre Facilitadores</a></li>
                 <li ><a href="index.php?mod=slat&men=informe&id=8">Estadisticas</a></li>
                 <li ><a href="index.php?mod=slat&men=estadistica&id=2">Estadistica Accesos por Dispositivo</a></li>
                 <li ><a href="index.php?mod=slat&men=informe&id=9&ref=coordinador">Visitas Mesuales</a></li>
@@ -47,10 +48,8 @@
         </li>
 		  <li><a href="index.php?mod=slat&men=escuelas&id=12">ADM</a></li>
 		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>
-
-        <li class=""><a href="index.php?mod=slat&men=estadistica&id=1">Estadisticas<span class="sr-only">(current)</span></a></li>
-
-        </li>
+      <li class=""><a href="index.php?mod=slat&men=estadistica&id=1">Estadisticas<span class="sr-only">(current)</span></a></li>
+      </li>
 
       </ul>
 

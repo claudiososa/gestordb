@@ -24,6 +24,62 @@ function __construct($cursoFacilitadoresId=NULL,
 		$this->referenteId = $referenteId;
 	}
 
+	public function cantidades($turno=null)
+	{
+		$bd=Conexion2::getInstance();
+		//$stmt = 'SELECT * FROM cursoFacilitadores
+		$stmt = 'SELECT SUM(cursos.cantidadAlumnos) AS alumnos FROM cursoFacilitadores
+						 INNER JOIN cursos
+						 ON cursos.cursoId=cursoFacilitadores.cursoId
+						 INNER JOIN asignaturas
+						 ON asignaturas.asignaturaId=cursoFacilitadores.asignaturaId
+						 WHERE referenteId='.$this->referenteId;
+		if (isset($turno)) {
+			$stmt.=' AND cursos.turno="'.$turno.'"';
+		}
+		//echo $stmt;
+		return mysqli_fetch_object($bd->ejecutar($stmt));
+		//return $stmt;
+	}
+
+	public function cantidadCursos($turno=null)
+	{
+		$bd=Conexion2::getInstance();
+		//$stmt = 'SELECT * FROM cursoFacilitadores
+		$stmt = 'SELECT * FROM cursoFacilitadores
+						 INNER JOIN cursos
+						 ON cursos.cursoId=cursoFacilitadores.cursoId
+						 INNER JOIN asignaturas
+						 ON asignaturas.asignaturaId=cursoFacilitadores.asignaturaId
+						 WHERE cursoFacilitadores.referenteId='.$this->referenteId;
+		if (isset($turno)) {
+			$stmt.=' AND cursos.turno="'.$turno.'"';
+		}
+		//echo $stmt;
+		return mysqli_num_rows($bd->ejecutar($stmt));
+		//return $stmt;
+	}
+
+	public function cantidadProfesores($turno=null)
+	{
+		$bd=Conexion2::getInstance();
+		//$stmt = 'SELECT * FROM cursoFacilitadores
+		$stmt = 'SELECT DISTINCT cursoFacilitadores.profesorId FROM cursoFacilitadores
+						 INNER JOIN cursos
+						 ON cursos.cursoId=cursoFacilitadores.cursoId
+						 INNER JOIN asignaturas
+						 ON asignaturas.asignaturaId=cursoFacilitadores.asignaturaId
+						 WHERE cursoFacilitadores.referenteId='.$this->referenteId;
+		if (isset($turno)) {
+			$stmt.=' AND cursos.turno="'.$turno.'"';
+		}
+		//echo $stmt;
+		//echo mysqli_num_rows($bd->ejecutar($stmt));
+		return mysqli_num_rows($bd->ejecutar($stmt));
+		//return $stmt;
+	}
+
+
 	public function agregar()
 	{
 		$bd=Conexion2::getInstance();
