@@ -41,11 +41,13 @@ $(document).ready(function() {
     var $this = $(this);
     id_Ed_FisicaxEscuela = $(this).attr('id').substr(0,$(this).attr('id').indexOf('-'))
     escuelaId = $(this).attr('id').substr($(this).attr('id').indexOf('-')+1)
+
     //alert(escuelaId)
 
     $(this).parent().children('.bodyprof').children('.asignarCurso').empty()
 
-
+   var numeroGuardarIdCurso= $(this).attr("id").substr(0,4)
+   //alert (numeroGuardarIdCurso)
     $(this).parent().children('.bodyprof').children('.asignarCurso').append(`
       <button id="btnHoraSandwich" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2">
       Asignar Curso
@@ -63,13 +65,13 @@ $(document).ready(function() {
                   <label  for="courseName">Curso</label>
                   <select class="form-control" name="courseName" id="courseName">
                       <option value="0">Seleccione</option>
-                      <option value="1">1°</option>
-                      <option value="2">2°</option>
-                      <option value="3">3°</option>
-                      <option value="4">4°</option>
-                      <option value="5">5°</option>
-                      <option value="6">6°</option>
-                      <option value="7">7°</option>
+                      <option value="1°">1°</option>
+                      <option value="2°">2°</option>
+                      <option value="3°">3°</option>
+                      <option value="4°">4°</option>
+                      <option value="5°">5°</option>
+                      <option value="6°">6°</option>
+                      <option value="7°">7°</option>
                   </select>
                 </div>
 
@@ -77,17 +79,25 @@ $(document).ready(function() {
                   <label  for="divisionName">Division</label>
                   <select class="form-control" name="divisionName" id="divisionName">
                       <option value="0">Seleccione</option>
-                      <option value="1">1ra</option>
-                      <option value="2">2da</option>
-                      <option value="3">3ra</option>
-                      <option value="4">4ta</option>
-                      <option value="5">5ta</option>
-                      <option value="6">6ta</option>
-                      <option value="7">7ma</option>
-                      <option value="8">8va</option>
-                      <option value="9">9na</option>
-                      <option value="10">10ma</option>
-                      <option value="11">11va</option>
+
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                      <option value="E">E</option>
+                      <option value="F">F</option>
+                      <option value="G">G</option>
+                      <option value="1ra">1ra</option>
+                      <option value="2da">2da</option>
+                      <option value="3ra">3ra</option>
+                      <option value="4ta">4ta</option>
+                      <option value="5ta">5ta</option>
+                      <option value="6ta">6ta</option>
+                      <option value="7ma">7ma</option>
+                      <option value="8va">8va</option>
+                      <option value="9na">9na</option>
+                      <option value="10ma">10ma</option>
+                      <option value="11va">11va</option>
                       <option value="Otro">Otro</option>
                   </select>
                 </div>
@@ -129,7 +139,7 @@ $(document).ready(function() {
                   <input type="number" name="cantidadHoras" min="1" max="20" value="1" id="cantidadHoras">
                 </div>
 
-
+<input type="hidden" id="prueba" name="prueba" value="25">
                   <div class="form-group">
                     <label  for="tipoCargo">Tipo de Cargo</label>
                     <select class="form-control" name="tipoCargo" id="tipoCargo">
@@ -141,7 +151,7 @@ $(document).ready(function() {
                     </select>
                   </div>
 
-                <button type='button' id='saveCourse".$fila->escuelaId."".$filaProf->personaId."' class='btn btn-warning saveCourse' name='button'>Guardar Curso</button>
+                <button type='button' class='btn btn-warning saveCourse' name='button' data-dismiss="modal">Guardar Curso</button>
                  </div>
               </form>
             </div>
@@ -159,79 +169,38 @@ $(document).ready(function() {
       /////////// guardar curso /////////////
 
       $(".saveCourse").click(function(event){
-              //let numeroGuardarIdCurso= $(this).attr("id").substr(10)
+
 
               //$("#saveCourse" + numeroGuardarIdCurso).click(function (){
+
               let guardado = 'no'
               let courseName = $("#courseName option:selected").val()
               let divisionName = $("#divisionName option:selected ").val()
               let turn = $("#turn option:selected").val()
               let cantidadHoras = $("#cantidadHoras").val()
+              let prueba = $("#prueba").val()
               //let escuelaId = $("#escuelaId").val()
               //let id_Ed_FisicaxEscuela = $('#id_Ed_FisicaxEscuela').val()
               let nivel = $("#nivel option:selected").val()
-              let tipoCargo = $("tipoCargo option:selected").val()
+              let tipoCargo = $("#tipoCargo option:selected").val()
               $.ajax({
                 url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
                 type: 'POST',
                 dataType: 'json',
-                data: {courseName: courseName,divisionName: divisionName,
+                data: {courseName:courseName, divisionName:divisionName,
                        turn:turn, cantidadHoras:cantidadHoras,
-                       escuelaId:escuelaId,nivel:nivel,
-                       tipoCargo:tipoCargo,id_Ed_FisicaxEscuela:id_Ed_FisicaxEscuela
+                       nivel:nivel, tipoCargo:tipoCargo, id_Ed_FisicaxEscuela:id_Ed_FisicaxEscuela, escuelaId:escuelaId
                       }
               })
             .done(function(data) {
                 console.log('success')
-                alert('Se creo correctamente')
-                /*
                 for (let item of data) {
+         // console.log(item.profesorId)
+          //cantidad++
 
-                  if (item.guardado="ok") {
-                    let guardado = 'si'
-                    let id = item.id
-                    //console.log(item.guardado)
-                    //console.log(item.id)
-                      //let escuelaId = $("#escuelaId").val()
-                    $.ajax({
-                      url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
-                      type: 'POST',
-                      dataType: 'json',
-                      data: {escuelaIdAjaxId:escuelaId}
-                    })
-                  .done(function(lista) {
-                      let cantidad = 0
-                      $('#courses').empty()
-
-                      for (let item of lista) {
-                        cantidad++
-                        if (id==item.cursoId) {
-
-                              console.log(item.cursoId)
-                              $('#courses').prepend('<p class="alert alert-success">'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
-                        }else{
-                          $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
-                        }
-                      }
-                      $('#courses').prepend(`Total de Cursos: ${cantidad}`)
-                    })
-                    .fail(function() {
-                      console.log("error");
-                    })
-                    .always(function() {
-                      console.log("complete");
-                    });
-
-                    $('#formNewCourse').toggle()
-                    $('#courseName > option[value="0"]').prop('selected','true')
-                    $('#divisionName > option[value="0"]').prop('selected','true')
-                    $('#turn > option[value="0"]').prop('selected','true')
-                    $('#cantidadHoras').val('1')
-                    alert('Se creo correctamente')
-                  }else{
-                    alert('algo no esta bien')
-                  }
-                }  */
+               $('#tablaCursos'+numeroGuardarIdCurso).append('<tbody><tr class="alert alert-success"><td>'+item.curso+' '+item.seccion+'</td><td> '+item.turno+'</td><td>'+item.nivel+' </td><td>'+item.horas+'</td><td>'+item.tipoCargo+'</td></tr></tbody>')
+                 }
+                // alert(numeroGuardarIdCurso)
               })
               .fail(function() {
                 console.log("error");
@@ -243,6 +212,7 @@ $(document).ready(function() {
 
           //})
       })
+
 
       //// aqui ///
 

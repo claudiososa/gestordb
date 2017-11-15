@@ -112,7 +112,7 @@ if (isset($_POST['botonSaveTeacher'])) {
 		//	$datoPersona = $persona1->agregar();
 			//Maestro::debbugPHP($datoPersona);
 
-			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId']);
+			$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$datoPersona,$_POST['escuelaId'],$_POST['titulo']);
 
 
 			$datoProfeEF=$profesorEdFisica->agregar();
@@ -135,7 +135,7 @@ if (isset($_POST['botonSaveTeacher'])) {
 
 		//$profePrueba = new ProfeEdFisicaxEscuela(null,'777',$_POST['escuelaId']);
 		//$proEF=$profePrueba->agregar();
-		/*	$persona= new Persona($_POST['personaId'],
+			$persona= new Persona($_POST['personaId'],
 																$_POST['surnameTeacher'],
 																$_POST['nameTeacher'],
 																$_POST['dniTeacher'],
@@ -151,13 +151,13 @@ if (isset($_POST['botonSaveTeacher'])) {
 																'4400',
 																null
 															);
-					$datoPersona = $persona->update();*/
+					$datoPersona = $persona->update();
 
 					// include_once('../ProfeEdFisicaxEscuela.php');
 
 					//$profePrueba = new ProfeEdFisicaxEscuela(null,'999',$_POST['escuelaId']);
 		            //$proEF=$profePrueba->agregar();
-					$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$_POST['personaId'],$_POST['escuelaId']);
+					$profesorEdFisica = new ProfeEdFisicaxEscuela(null,$_POST['personaId'],$_POST['escuelaId'],$_POST['titulo']);
 					$datoProfeEF=$profesorEdFisica->agregar();
 
 
@@ -184,6 +184,58 @@ if (isset($_POST['botonSaveTeacher'])) {
 }
 
 
+/////////////////////////////
+
+//  Eliminar profesor//
+
+
+/**
+ * AL SELECCIONAR EL BOTON X DE UN PROFESOR DETERMINADO
+ */
+
+if (isset($_POST['profesorId'])) {
+	$estado= [];
+
+// borrar la entrada del profesor en la tabla profeEdFisicaxEscuela
+	$profesor= new ProfeEdFisicaxEscuela($_POST['profesorId']);
+	$borrar = $profesor->borrar();
+
+// borrar la entrada de los cursos a cargo del profesor en la tabla profeEd
+	$cursos= new ProfeEdFisicaxCurso(NULL,$_POST['profesorId']);
+	$borrar=$cursos->borrar();
+
+
+// nuevo
+
+$profesor2 = new ProfeEdFisicaxEscuela(null,null,$_POST['escuelaIdBorrar']);
+$listaProfesores=$profesor2->buscarProfesores();
+
+
+//fin nuevo
+
+
+	//$profesor2= new Profesores();
+	//$profesor2->escuelaId=$_POST['escuelaIdBorrar'];
+
+	//$total = $profesor2->buscar('cantidad');
+
+	//$listaProfesores = $profesor2->buscar('total',null,'DESC');
+
+	while ($fila = mysqli_fetch_object($listaProfesores)) {
+		$temporal=array('profesorId'=>$_POST['profesorId'],
+										'nombre'=>$fila->nombre,
+										'apellido'=>$fila->apellido);
+										//'turno'=>Cursos::turno($fila->turno));
+		array_push($estado,$temporal);
+	}
+	$json = json_encode($estado);
+	//Maestro::debbugPHP($json);
+	echo $json;
+
+ }
+
+
+
 
 //****** AGREGAR UN NUEVO CURSO ****/////
 
@@ -207,7 +259,13 @@ if (isset($_POST['courseName'])) {
 
 	if ($datoCurso > 0) {
 		$temporal=array('guardado'=>'ok',
-											'id'=>$datoCurso);
+											'id'=>$datoCurso,
+                      'curso'=>$_POST['courseName'],
+                      'seccion'=>$_POST['divisionName'],
+                      'turno'=>$_POST['turn'],
+                      'nivel'=>$_POST['nivel'],
+                      'horas'=>$_POST['cantidadHoras'],
+                      'tipoCargo'=>$_POST['tipoCargo']);
 		array_push($estado,$temporal);
 
 	}else{

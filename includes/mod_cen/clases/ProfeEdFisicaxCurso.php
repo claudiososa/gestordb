@@ -48,6 +48,18 @@ class ProfeEdFisicaxCurso
 		}
 
 	}
+// borrar cursos de un profesor
+	public function borrar()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia = "DELETE FROM ProfeEdFisicaxCurso WHERE id_Ed_FisicaxEscuela=$this->id_Ed_FisicaxEscuela";
+		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+			 	$ultimoRegistro=$bd->lastID();
+				return $ultimoRegistro;
+		 }else{
+					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		 }
+	}
 
 
    // buscar

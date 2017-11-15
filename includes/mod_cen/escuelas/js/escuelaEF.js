@@ -17,12 +17,13 @@ $(document).ready(function(){
    * AL PRESIONAR EL BOTON X (eliminar) DE PROFESOR
    */
 
-/*
+
   $('#teachers').on('click', '.profesor', function(){
-    let profesorId =$(this).attr("id").substring(8)
+    let profesorId =$(this).attr("id").substring(12)
+    let escuelaIdBorrar=$(this).attr("id").substring(8,12)
     $.ajax({
-      url: 'includes/mod_cen/clases/ProfesoresEF.php',
-      //url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
+      //url: 'includes/mod_cen/clases/ProfesoresEF.php',
+      url: 'includes/mod_cen/clases/ajax/profeEdFisica.php',
       type: 'POST',
       dataType: 'json',
       data: {profesorId: profesorId,escuelaIdBorrar:escuelaIdBorrar}
@@ -34,7 +35,7 @@ $(document).ready(function(){
       for (let item of lista) {
           console.log(item.profesorId)
           cantidad++
-          $('#teachers').prepend('<p>'+item.nombre+' '+item.apellido+'</b><img class="profesor" id="profesor'+item.profesorId+'" src="img/iconos/delete.png" alt="borrar"></p>')
+          $('#teachers').prepend('<p>'+item.apellido+' '+item.nombre+'</b><img class="profesor" id="profesor'+item.profesorId+''+item.escuelaIdBorrar+'" src="img/iconos/delete.png" alt="borrar"></p>')
       }
         $('#teachers').prepend(`Total de Profesores: ${cantidad}`)
         alert('Borrado correctamente')
@@ -46,50 +47,11 @@ $(document).ready(function(){
       console.log("complete");
     });
 
-  }) */
+  }) 
 
 
 
-  /**
-   * //AL PRESIONAR EL BOTON X PARA ELIMINAR CURSO
-   */
-/*
- 
-  $('#courses').on('click', '.curso', function(){
-
-    let cursoId =$(this).attr("id").substring(5)
-    $.ajax({
-      url: 'includes/mod_cen/clases/Cursos.php',
-      type: 'POST',
-      dataType: 'json',
-      data: {cursoId: cursoId,escuelaIdBorrar:escuelaIdBorrar}
-    })
-    .done(function(lista) {
-      let cantidad = 0
-      console.log("success");
-      $('#courses').empty()
-      for (let item of lista) {
-          cantidad++
-          console.log(item.cursoId)
-
-          $('#courses').prepend('<p>'+item.curso+' '+item.division+' Turno <b>'+item.turno+'</b><img class="curso" id="curso'+item.cursoId+'" src="img/iconos/delete.png" alt="borrar"></p>')
-      }
-        $('#courses').prepend(`Total de curso: ${cantidad}`)
-        alert('Borrado correctamente')
-    })
-    .fail(function() {
-      console.log("error");
-    })
-    .always(function() {
-      console.log("complete");
-    });
-
-  }) */
-
-  /**
-   * AL PRESIONAR EL BOTON GUARDAR CURSO
-   */
-
+/**
 
     $('#saveCourse').click(function (){
         let guardado = 'no'
@@ -165,7 +127,7 @@ $(document).ready(function(){
         });
 
 
-    }) 
+    }) */
 
     /**
      * AL PRESIONAR BOTON NUEVO PROFESOR
@@ -252,6 +214,7 @@ $(document).ready(function(){
       let surnameTeacher = $("#surnameTeacher").val()
       let phoneTeacher = $("#phoneTeacher").val()
       let emailTeacher = $("#emailTeacher").val()
+      let titulo = $("#titulo").val()
       let escuelaId = $("#escuelaId2").val()
       //alert(dni+nameTeacher+surnameTeacher+phoneTeacher+emailTeacher)
       $.ajax({
@@ -264,6 +227,7 @@ $(document).ready(function(){
                 surnameTeacher:surnameTeacher,
                 phoneTeacher:phoneTeacher,
                 emailTeacher:emailTeacher,
+                titulo:titulo,
                 escuelaId:escuelaId,
                 botonSaveTeacher:boton,
                 statusTeacher:action,
@@ -308,6 +272,7 @@ function clearPersonaAndDni(){
   $('#surnameTeacher').val("")
   $('#phoneTeacher').val("")
   $('#emailTeacher').val("")
+  $('#titulo').val("")
   $('#formNewTeacher').show()
   $('#formNewPerson').hide()
 }

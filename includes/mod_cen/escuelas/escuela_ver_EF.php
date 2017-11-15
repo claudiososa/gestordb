@@ -68,12 +68,14 @@ if(($_POST) || isset($_GET['retorno']))
 				  echo "<tr class='info'>";
 			  	echo "<th>Nº</th>";
 			  	echo "<th>CUE</th>";
-			  	echo "<th>Nombre de Escuela</th>";
-					echo "<th>Nivel</th>";
-			  	echo "<th>Localidad</th>";
-					echo "<th>Informe</th>";
-					echo "<th>Cant</th>";
-					echo "<th>Ver Profesores</th>";
+			  	echo "<th class='hidden-xs'>Nombre de Escuela</th>";
+					echo"<th class='visible-xs'>Nombre</th>";
+					echo "<th class='hidden-xs'>Informe</th>";
+					echo "<th class='visible-xs'>Inf</th>";
+					echo "<th class='hidden-xs'>Ver Informes</th>";
+					echo "<th class='visible-xs'>Ver</th>";
+					echo "<th class='hidden-xs'>Ver Profesores</th>";
+					echo "<th class='visible-xs'>Prof</th>";
 					echo "</th>";
 			  //	echo "<th>Referente a Cargo</th>";
 			  	//echo "<th></th>";
@@ -163,14 +165,14 @@ if(($_POST) || isset($_GET['retorno']))
 
 			  		echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
-			  		echo "<td>"."<a href='index.php?mod=slat&men=admin&id=7&escuelaId=".$fila->escuelaId."'>".$fila->nombre."</a></td>";
+			  		echo "<td>".$fila->nombre."</a></td>";
 
 			  		//echo "<td>".substr($fila->nombre,0, 40)."</td>";
-            echo "<td>".$fila->nivel."</td>";
+
 			  		$locali=new Localidad($fila->localidadId,null);
 			  		$busca_loc= $locali->buscar();
 			  		$fila1=mysqli_fetch_object($busca_loc);
-			  		echo "<td>".$fila1->nombre."</td>";
+
 
 
 						$informe = new Informe(null,$fila->escuelaId);
@@ -211,19 +213,83 @@ if(($_POST) || isset($_GET['retorno']))
 
 
               echo "<br>";
-              echo "<a class='btn btn-primary btnDatosInst' role='button' id='btnDatosInst".$fila->escuelaId."'>Datos Escuela</a>&nbsp&nbsp&nbsp";
+              echo "<a class='btn btn-primary btnDatosInst' role='button' id='btnDatosInst".$fila->escuelaId."' data-toggle='modal' data-target='#myModalDatosEsc".$fila->escuelaId."'>Datos Escuela </a>&nbsp&nbsp&nbsp";
 							echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=edFisica&id=1&escuelaId=".$fila->escuelaId."'>Nuevo Profesor</a>&nbsp&nbsp&nbsp";
-							echo "<a class='btn btn-success' role='button' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Informe Escuela</a>&nbsp&nbsp&nbsp";
-							echo "<a class='btn btn-success' role='button' href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>Ver Informes Escuela</a>";
+
 							echo "<br>";
 							echo "<br>";
 							echo "<br>";
+							///modal
+							echo '<div class="modal fade" id="myModalDatosEsc'.$fila->escuelaId.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabelDatosEsc'.$fila->escuelaId.'">';
+							echo'<div class="modal-dialog" role="document">';
+							echo '<div class="modal-content">';
+							echo '<div class="modal-header">';
+							echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+							echo '<h4 class="modal-title" id="myModalLabelDatosEsc'.$fila->escuelaId.'"><b>'.$fila->numero.'&nbsp-&nbsp'.$fila->cue.'&nbsp-&nbsp'.$fila->nombre.'</b></h4>';
+							echo '</div>';
+							echo '<div class="modal-body">';
+							echo '<h4><b>Datos Institución</b></h4>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Dirección:&nbsp</b>'.$fila->domicilio.'</div>';
+							echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-5"><b>Localidad:&nbsp</b>'.$fila1->nombre.'</div>';
+
+							echo '</div>';
+							echo '<div class="row">';
+
+							echo '<div class="col-md-12"><b>Nivel:&nbsp</b>'.$fila->nivel.'</div>';
+							echo '</div>';
+
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Teléfono:&nbsp</b>'.$fila->telefono.'</div>';
+						  echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Email:&nbsp</b>'.$fila->email.'</div>';
+							echo '</div>';
+							echo '<br>';
+              echo '<hr>';
+							echo '<h4><b>Datos Directivo</b></h4>';
+
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Apellido y Nombre:&nbsp</b>'.$datoDirector->apellido.', '.$datoDirector->nombre.'</div>';
+							echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Teléfono:&nbsp</b>'.$datoDirector->telefonoM.' / '.$datoDirector->telefonoC.'</div>';
+							echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Correo Electrónico:&nbsp</b>'.$datoDirector->email.'</b></div>';
+							echo '</div>';
 
 
+							echo '<hr>';
 
+							echo '<h4><b>Datos Supervisor</b></h4>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Apellido y Nombre:&nbsp</b>'.$datoSupervisor->apellido.', '.$datoSupervisor->nombre.'</div>';
+							echo '</div>';
+							echo '<div class="row">';
+							echo '<div class="col-md-12"><b>Teléfono:&nbsp</b>'.$datoSupervisor->telefonoM.' / '.$datoSupervisor->telefonoC.'</div>';
+
+							echo '</div>';
+							echo '<div class="row">';
+
+							echo '<div class="col-md-12"><b>Correo Electrónico:&nbsp</b>'.$datoSupervisor->email.'</div>';
+							echo '</div>';
+
+							echo '</div>';
+							echo '<div class="modal-footer">';
+							echo '<button type="button" class="btn btn-primary"  data-dismiss="modal">Cerrar</button>';
+							echo '</div>';
+							echo '</div>';
+							echo '</div>';
+							echo '</div>';
+
+/*
 //contenido boton datos escuela
 							echo "<div class='panel panel-default datosInst' id='datosInst".$fila->escuelaId."'>";
 							echo "<div class='panel-body'>";
+
 
 	 					  echo "<div><h4><b>".$fila->numero."&nbsp-&nbsp".$fila->cue."&nbsp-&nbsp".$fila->nombre."</b></h4></div>";
 
@@ -254,7 +320,7 @@ if(($_POST) || isset($_GET['retorno']))
 
 
 						 echo "</div>";//cierre row
-
+/////////////
 
 						 // Salto
 						 echo "<div class='row'>";
@@ -272,7 +338,7 @@ if(($_POST) || isset($_GET['retorno']))
 							echo "</div>";
 
 							echo "</div>";	//final boton datos escuelas
-
+*/
 										/***busqueda de profesores***/
 					$profesor = new ProfeEdFisicaxEscuela(null,null,$fila->escuelaId);
 							$buscarProfesor= $profesor->buscar();
@@ -283,7 +349,7 @@ if(($_POST) || isset($_GET['retorno']))
 						echo "<div class='panel-heading panelprof' id='".$filaProf->id_Ed_FisicaxEscuela."-".$fila->escuelaId."'><span class='panel-title clickable'><h5>Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."<span class='pull-right clickable'><i class='glyphicon glyphicon-chevron-down'></i></span></h5></span></div>";
 						echo "<div class='panel-body bodyprof'>";
 
-						echo "<h4><b>Datos personales Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."</b></h4>";
+						echo "<h4><b>Profesor:&nbsp".$filaProf->apellido.",".$filaProf->nombre."</b></h4>";
 						echo "<div><b>Titulo:&nbsp</b>".$filaProf->titulo."</div>";
 						echo"<div><b>Teléfono:&nbsp</b>".$filaProf->telefonoM." / ".$filaProf->telefonoC."</div>";
 						echo"<div><b>Correo Electrónico:&nbsp</b>".$filaProf->email."&nbsp</div>";
@@ -296,7 +362,7 @@ if(($_POST) || isset($_GET['retorno']))
 						//var_dump($Cursos);
 						echo "<hr>";
 						echo "<h4><b>Cursos a cargo:</b></h4>";
-						echo "<table class='table table-bordered'>";
+						echo "<table class='table table-bordered' id='tablaCursos".$filaProf->id_Ed_FisicaxEscuela."'>";
 						echo"<tr>";
 						echo"<th>Grado</th>";
 						echo"<th>Turno</th>";
@@ -308,14 +374,15 @@ if(($_POST) || isset($_GET['retorno']))
 while ($filaCurso = mysqli_fetch_object($Cursos)) {
 
 
-
-	echo"<tr>";
-	echo"<td>".$filaCurso->gradoAño."".$filaCurso->seccionDivision."</td>";
+echo "<tbody >";
+	echo"<tr >";
+	echo"<td>".$filaCurso->gradoAño."  ".$filaCurso->seccionDivision."</td>";
 	echo"<td>".$filaCurso->turno."</td>";
 	echo"<td>".$filaCurso->nivel."</td>";
 	echo"<td>".$filaCurso->horasSemanales."</td>";
 	echo"<td>".$filaCurso->tipoCargo."</td>";
 	echo"</tr>";
+echo "</body>";
 	}
 	echo"</table>";
 
@@ -325,9 +392,9 @@ while ($filaCurso = mysqli_fetch_object($Cursos)) {
 
 
 	echo "<h4><b>Carga horaria total:</b></h4>";
-	echo "<p>20 horas semanales</p>";
+	echo "<p >20 horas semanales</p>";
 						///////////////
-  echo '<div class="asignarCurso">';
+  echo '<div class="asignarCurso" id='.$filaProf->id_Ed_FisicaxEscuela.'>';
 						//echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
 						//echo "<div class='col-md-12 formNewCourse'  id='formNewCourse".$filaProf->personaId."".$fila->escuelaId."'>";
 						 //include('includes/mod_cen/formularios/f_HorarioNuevoCursoProf.php');
@@ -361,6 +428,7 @@ while ($filaCurso = mysqli_fetch_object($Cursos)) {
 		//var venta= "<?php echo $_GET['registro']  ";
 ?>
 </div>
+
 <script type="text/javascript" src="includes/mod_cen/edFisica/js/botonesEF.js"></script>
 
 <script type="text/javascript" src="jquery/jquery113.jsp"></script>
