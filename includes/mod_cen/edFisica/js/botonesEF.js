@@ -41,12 +41,13 @@ $(document).ready(function() {
     var $this = $(this);
     id_Ed_FisicaxEscuela = $(this).attr('id').substr(0,$(this).attr('id').indexOf('-'))
     escuelaId = $(this).attr('id').substr($(this).attr('id').indexOf('-')+1)
-    
+
     //alert(escuelaId)
 
     $(this).parent().children('.bodyprof').children('.asignarCurso').empty()
 
-   var numeroGuardarIdCurso= $(this).attr("id").substr(0,3)
+   var numeroGuardarIdCurso= $(this).attr("id").substr(0,4)
+   //alert (numeroGuardarIdCurso)
     $(this).parent().children('.bodyprof').children('.asignarCurso').append(`
       <button id="btnHoraSandwich" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2">
       Asignar Curso
@@ -168,7 +169,7 @@ $(document).ready(function() {
       /////////// guardar curso /////////////
 
       $(".saveCourse").click(function(event){
-              
+
 
               //$("#saveCourse" + numeroGuardarIdCurso).click(function (){
 
@@ -197,7 +198,7 @@ $(document).ready(function() {
          // console.log(item.profesorId)
           //cantidad++
 
-               $('#tablaCursos'+numeroGuardarIdCurso).prepend('<tr class="alert alert-success"><td> '+item.curso+' '+item.seccion+' </td><td> '+item.turno+'</td><td>'+item.nivel+' </td><td>'+item.horas+'</td><td>'+item.tipoCargo+'</td></tr>')
+               $('#tablaCursos'+numeroGuardarIdCurso).append('<tbody><tr class="alert alert-success"><td>'+item.curso+' '+item.seccion+'</td><td> '+item.turno+'</td><td>'+item.nivel+' </td><td>'+item.horas+'</td><td>'+item.tipoCargo+'</td></tr></tbody>')
                  }
                 // alert(numeroGuardarIdCurso)
               })
@@ -211,8 +212,8 @@ $(document).ready(function() {
 
           //})
       })
-     
-  
+
+
       //// aqui ///
 
 
