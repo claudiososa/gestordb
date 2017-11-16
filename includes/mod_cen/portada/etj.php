@@ -1,4 +1,14 @@
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+
+<style type="text/css">
+
+.btn-default {
+		color: #333;
+		background-color: #E9ECEC;
+		border-color: #ccc;
+}
+</style>
+
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
@@ -42,9 +52,51 @@ echo '<div class="container">';
 -->
 
 
+
+<div class="row hidden-xs">
+	<div class="col-lg-3 col-md-6 col-sm-6"><a href="index.php?mod=slat&men=escuelas&id=18">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h4 align="center">Búsqueda escuelas</h4></a>
+	</div>
+
+	<div class="col-lg-3 col-md-6 col-sm-6"><a href="index.php?mod=slat&men=user&id=3">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h4 align="center">Mis escuelas</h4></a>
+	</div>
+	<div class="col-lg-3 col-md-6 col-sm-6">
+		<a href="index.php?mod=slat&men=user&id=2"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h4 align="center">Mis ETT</h4></a>
+	</div>
+<div class="col-lg-3 col-md-6 col-sm-6"><a href="index.php?mod=slat&men=user&id=4">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h4 align="center">Mis RTI</h4></a>
+</div>
+
+</div>
+
+
+<div class="row visible-xs">
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=18">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h4 align="center">Búsqueda escuelas</h4></a>
+	</div>
+
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=3">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h4 align="center">Mis escuelas</h4></a>
+	</div>
+</div>
+
+<div class="row visible-xs">
+	<div class="col-xs-6">
+		<a href="index.php?mod=slat&men=user&id=2"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h4 align="center">Mis ETT</h4></a>
+	</div>
+<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=4">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h4 align="center">Mis RTI</h4></a>
+</div>
+
+</div>
+
+
+<br><br><br>
 <?php
 	echo '<div class="row">';
 	?>
+	<!--
 	<div class="col-md-12 hidden-xs">
 		<p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
 		<iframe src="https://player.vimeo.com/video/239149998" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -54,7 +106,7 @@ echo '<div class="container">';
 	 <p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
 		<iframe src="https://player.vimeo.com/video/239149998" width="320" height="240" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 		 <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
-	</div>
+	</div> -->
 	<?php
 		echo '<div class="col-md-6">';
 		//informes de prioridad alta ///
