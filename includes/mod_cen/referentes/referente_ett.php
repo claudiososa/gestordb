@@ -1,4 +1,10 @@
 
+<style type="text/css">
+hr {
+    border-top: 2px solid #84DBFF;
+  }
+
+</style>
 
 <?php
 	include_once("includes/mod_cen/clases/persona.php");
@@ -13,13 +19,18 @@
 	$referente= new Referente($referenteId);
 	$resultado = $referente->Cargo("Activo");
 
+echo '<div class="container">';
+echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/equipo (1).png"></div><h4><b>Mis ETT</b></h4>';
+echo '<hr>';
+echo'<br>';
+
 
 	echo '<div class="table-responsive">';
-	echo '<div class="container">';
+
 	//$fila=mysqli_fetch_object($resultado);
-	echo "<table class='table table-hover table-striped table-condensed '>";
-	echo "<tr><td colspan='6'><h3>Mis ETT</h3></td></tr>";
-	echo "<tr class='info'><td>Apellidos, Nombre</td>";
+	echo "<table class='table table-bordered'>";
+
+	echo "<tr><td>Apellidos, Nombre</td>";
 	echo "<td>RTI Cargo</td>";
 	echo "<td>Escuelas</td>";
 	echo "<td>Directores</td>";
@@ -88,7 +99,12 @@
 	echo "</div>";
 	echo "</div>";
 ?>
+<br>
+<a><div class="col-md-3 col-md-offset-5" onclick="history.back()">
+  <img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda (2).png"></div><div class="col-md-3 col-md-offset-5 hidden-xs" onclick="history.back()">
+<p>Volver Atrás</p></div></a>
 
+<br>
 <script type="text/javascript">
   new TableExport(document.getElementsByTagName("table"), {
 
