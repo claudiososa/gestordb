@@ -1,4 +1,14 @@
-<?php
+
+
+<style type="text/css">
+hr {
+    border-top: 2px solid #F1543F;
+  }
+
+</style>
+
+
+    <?php
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/rtixescuela.php");
@@ -14,13 +24,18 @@ $escuela_acargo=$escuela->buscar();
 
 
 echo "<div class='container'>";
+echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/seo (5).png"></div><h4><b>Mis RTI</b></h4>';
+echo '<hr>';
+echo'<br>';
+/*
+
 echo '<div class="panel panel-primary">';
 echo '<div class="panel-heading"><h4>Mis RTI</h4></div>';
-  echo '<div class="panel-body">';
+  echo '<div class="panel-body">';*/
 echo "<div class='table-responsive'>";
-echo "<table id='tableRTI' class='table table-hover table-striped table-condensed tablesorter'>";
+echo "<table id='tableRTI' class='table table-bordered'>";
 
-echo "<thead>";
+//echo "<thead>";
   echo "<tr>";
     echo "<th>CUE</th>";
     echo "<th>Nº</th>";
@@ -32,7 +47,7 @@ echo "<thead>";
     echo "<th>Teléfono 2</th>";
     echo "<th>Turno</th>";
   echo "</tr>";
-echo "</thead>";
+//echo "</thead>";
 echo "<tbody>";
 //recorrido por las escuelas acargo del referente
 while($fila=mysqli_fetch_object($escuela_acargo)){
@@ -82,13 +97,19 @@ while($fila=mysqli_fetch_object($escuela_acargo)){
 
 }
 echo "</tbody>";
-echo "</table>";
+echo "</table>";/*
 echo '</div>';
 echo '</div>';
 echo "</div>";
-echo "</div>";
-?>
+echo "</div>";*/
 
+?>
+<br>
+<a><div class="col-md-3 col-md-offset-5" onclick="history.back()">
+  <img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda.png"></div><div class="col-md-3 col-md-offset-5 hidden-xs" onclick="history.back()">
+<p>Volver Atrás</p></div></a>
+
+<br>
 <script type="text/javascript">
 $(document).ready(function()
 		{
