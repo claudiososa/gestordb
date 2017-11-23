@@ -20,14 +20,58 @@ $mis_informes= new informe(null,null,$_SESSION["referenteId"]);
 $b_mis_informe = $mis_informes->buscar(10);
 
 echo '<div class="container">';
+
+
 ?>
+
+
+<div class="row hidden-xs">
+	<div class="col-lg-4 col-md-4 col-sm-6"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h4 align="left">Búsqueda escuelas</h4></a>
+	</div>
+
+	<div class="col-lg-4 col-md-4 col-sm-6"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspMis escuelas</h4></a>
+	</div>
+	<!--<div class="col-lg-3 col-md-6 col-sm-6">
+		<a href="index.php?mod=slat&men=user&id=2"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h4 align="center">Mis ETT</h4></a>
+	</div>-->
+<div class="col-lg-4 col-md-4 col-sm-6"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspMis RTI</h4></a>
+</div>
+
+</div>
+
+
+<div class="row visible-xs">
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=1">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h4 align="center">Búsqueda escuelas</h4></a>
+	</div>
+
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=3">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h4 align="center">Mis escuelas</h4></a>
+	</div>
+</div>
+
+<div class="row visible-xs">
+	<!--<div class="col-xs-6">
+		<a href="index.php?mod=slat&men=user&id=2"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h4 align="center">Mis ETT</h4></a>
+	</div>-->
+<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=4">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h4 align="center">Mis RTI</h4></a>
+</div>
+
+</div>
+
+
+<br><br><br>
 <!-- <div class="alert alert-info" role="alert">
 	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
 </div>-->
 <?php
 	echo '<div class="row">';
 	?>
-	<div class="col-md-12 hidden-xs">
+<!--	<div class="col-md-12 hidden-xs">
 		<p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
 		<iframe src="https://player.vimeo.com/video/239149998" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 		 <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
@@ -36,7 +80,7 @@ echo '<div class="container">';
 	 <p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
 		<iframe src="https://player.vimeo.com/video/239149998" width="320" height="240" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 		 <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
-	</div>
+	</div> -->
 	<?php
 		echo '<div class="col-md-6">';
 
