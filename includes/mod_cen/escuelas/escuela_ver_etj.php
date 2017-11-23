@@ -1,3 +1,10 @@
+
+<style type="text/css">
+hr {
+    border-top: 2px solid #FFC61B;
+  }
+
+</style>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript" src="gmap/gmaps.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
@@ -19,6 +26,28 @@ $b_referente= $c_referente->buscar();
 /**
  * Inclusión de formulario para la busqueda de Escuelas
  */
+ echo '<div class="container">';
+ echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (3).png"></div><h4><b>Búsqueda de Escuelas</b></h4>';
+
+ echo '<hr>';
+echo'</div>';
+ echo'<br>';
+
+ //echo'<a>';
+ //echo'<div class="col-md-3 col-md-offset-5 pull-right" onclick="history.back()">';
+ //echo'<img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda (4).png">';
+ //echo'</div>';
+ //echo'<div class="col-md-3 col-md-offset-5 pull-right hidden-xs" onclick="history.back()">';
+ //echo'<p>Volver Atrás</p>';
+ //echo'</div>';
+ //echo'</a>';
+
+
+ //echo'<br>';
+ //echo'<br>';
+ echo'<br>';
+ echo'<br>';
+
 include_once("includes/mod_cen/formularios/f_buscar_escuela_etj.php");
 
 if(($_POST))

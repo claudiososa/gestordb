@@ -27,6 +27,21 @@ echo "<div class='container'>";
 echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/seo (5).png"></div><h4><b>Mis RTI</b></h4>';
 echo '<hr>';
 echo'<br>';
+
+echo'<a>';
+echo'<div class="col-md-3 col-md-offset-5 pull-right" onclick="history.back()">';
+echo'<img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda.png">';
+echo'</div>';
+echo'<div class="col-md-3 col-md-offset-5 pull-right hidden-xs" onclick="history.back()">';
+echo'<p>Volver Atrás</p>';
+echo'</div>';
+echo'</a>';
+
+
+echo'<br>';
+echo'<br>';
+echo'<br>';
+echo'<br>';
 /*
 
 echo '<div class="panel panel-primary">';
@@ -105,9 +120,7 @@ echo "</div>";*/
 
 ?>
 <br>
-<a><div class="col-md-3 col-md-offset-5" onclick="history.back()">
-  <img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda.png"></div><div class="col-md-3 col-md-offset-5 hidden-xs" onclick="history.back()">
-<p>Volver Atrás</p></div></a>
+
 
 <br>
 <script type="text/javascript">
