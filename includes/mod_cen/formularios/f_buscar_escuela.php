@@ -1,8 +1,6 @@
 <div class="container">
 	<form class="form-horizontal" action='' method='POST'>
-		<div class="form-group">
-			<label class="col-md-3 col-md-offset-2"><h3>Busqueda de Escuelas</h3></label>
-		</div>
+	
 		<div class="form-group">
 			<label class="control-label col-md-2">Número</label>
 			<div class="col-md-10">

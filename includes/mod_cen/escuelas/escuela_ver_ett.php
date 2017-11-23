@@ -1,3 +1,9 @@
+<style type="text/css">
+hr {
+    border-top: 2px solid #FFC61B;
+  }
+
+</style>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript" src="gmap/gmaps.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
@@ -15,6 +21,15 @@ include_once("includes/mod_cen/clases/director.php");
 /**
  * Inclusión de formulario para la busqueda de Escuelas
  */
+ echo '<div class="container">';
+ echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (3).png"></div><h4><b>Búsqueda de Escuelas</b></h4>';
+
+ echo '<hr>';
+echo'</div>';
+ echo'<br>';
+  echo'<br>';
+	 echo'<br>';
+
 include_once("includes/mod_cen/formularios/f_buscar_escuela.php");
 
 if(($_POST))

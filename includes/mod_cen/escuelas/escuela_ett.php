@@ -1,3 +1,11 @@
+
+<style type="text/css">
+hr {
+    border-top: 2px solid #FF5B61;
+  }
+
+</style>
+
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript" src="gmap/gmaps.js"></script>
 <?php
@@ -203,8 +211,32 @@ $con_ubicacion=0;
 
 
 	echo "<div class='container'>";
+
+
+	echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b></h4>';
+
+  echo '<hr>';
+ echo'</div>';
+  echo'<br>';
+
+  echo'<a>';
+  echo'<div class="col-md-3 col-md-offset-5 pull-right" onclick="history.back()">';
+  echo'<img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda (5).png">';
+  echo'</div>';
+  echo'<div class="col-md-3 col-md-offset-5 pull-right hidden-xs" onclick="history.back()">';
+  echo'<p>Volver Atrás</p>';
+  echo'</div>';
+  echo'</a>';
+
+
+  echo'<br>';
+  echo'<br>';
+  echo'<br>';
+  echo'<br>';
+
+	echo "<div class='container'>";
 	echo '<div class="panel panel-primary">';
-		echo '<div class="panel-heading"><h4>Mis Escuelas</h4></div>';
+		//echo '<div class="panel-heading"><h4>Mis Escuelas</h4></div>';
 		echo '<div class="panel-body">';
 		echo '<div class="table-responsive">';
 			echo "<table class='table table-hover table-striped table-condensed '>";
@@ -214,7 +246,7 @@ $con_ubicacion=0;
 			echo "</table>";
 		echo "</div>";
 		echo '<div class="table-responsive">';
-		echo "<table id='tableEscuelas' class='table table-hover table-striped table-condensed tablesorter'>";
+		echo "<table id='tableEscuelas' class='table-bordered table-hover table-striped table-condensed tablesorter'>";
 		  echo "<thead>";
 				echo "<tr class='info' >";
 					echo "<th>Nº</th>";
