@@ -142,14 +142,26 @@
         //if($dato_escuela->referenteId==$_SESSION['referenteId'])
           //{
 
-              echo '<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">';
-      //<![CDATA[
-              echo 'bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });';
+              echo '<script type="text/javascript" src="js/nicEdit.js"></script> <script type="text/javascript">';
+              //<![CDATA[
+              ?>
+
+              bkLib.onDomLoaded(function() {
+              new nicEditor({iconsPath : 'js/nicEditorIcons.gif'}).panelInstance('contenido');
+
+     });
+     //]]>
+   </script>
+        <?php
+
+          //<![CDATA[
+              //echo 'bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });';
+
               //echo 'nicEditors.findEditor("TextArea").attr("contentEditable","false");';
 
-              echo "jQuery('.nicEdit-main').attr('contenteditable','false');";
+            //  echo "jQuery('.nicEdit-main').attr('contenteditable','false');";
         //]]>
-              echo '</script>';
+            //  echo '</script>';
         //}
         ?>
 
@@ -158,7 +170,7 @@
             <label class="control-label">Contenido</label>
           </div>
           <div class="col-md-12">
-            <textarea  readonly  rows='20' name="contenido" class="form-control" ><?php echo $informe->contenido ?></textarea>
+            <textarea  readonly  rows='20' name="contenido" id="contenido" class="form-control" ><?php echo $informe->contenido ?></textarea>
           </div>
         </div>
         <p>&nbsp;</p>
