@@ -1,3 +1,10 @@
+<style type="text/css">
+hr {
+
+			border-top: 2px solid #84DBFF;
+	}
+
+</style>
 <?php
 	include_once("includes/mod_cen/clases/persona.php");
 	include_once("includes/mod_cen/clases/localidades.php");
@@ -10,16 +17,26 @@
 	$referente= new Referente();
 	$resultado = $referente->Tipo("ETT","Activo");
 
+?>
 
+	<div class="container">
+
+
+				<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/equipo (3).png"></div><h4><b>Todos los ETT</b> <img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></h4>
+	 <hr>
+	 </div>
+
+	 <br><br>
+<?php
 	echo '<div class="table-responsive">';
 	echo '<div class="container">';
 	//$fila=mysqli_fetch_object($resultado);
-	echo "<div class='panel panel-primary'>";
-		echo "<div class='panel-heading'><h4>Todos los ETT</h4></div>";
+	//echo "<div class='panel panel-primary'>";
+	//echo "<div class='panel-heading'><h4>Todos los ETT</h4></div>";
 
-		echo "<div class='panel-body'>";
-		echo "<table id='ett' class='table table-hover table-striped table-condensed tablesorter'>";
-		echo "<thead>";
+	//echo "<div class='panel-body'>";
+		echo "<table id='ett' class='table table-bordered'>";
+		//echo "<thead>";
 			echo "<tr>";
 				echo "<th>Apellidos, Nombre</th>";
 				echo "<th>RTI Cargo</th>";
@@ -28,7 +45,7 @@
 				echo "<th>Departamento</th>";
 				echo "<th>Teléfono</th>";
 			echo "</tr>";
-		echo "</thead>";
+		//echo "</thead>";
 		echo "<tbody>";
 		while ($fila = mysqli_fetch_object($resultado))
 		{
@@ -76,8 +93,8 @@
 		echo "</tbody>";
 		echo "</table>";
 
-		echo "</div>";
-	echo "</div>";
+	//	echo "</div>";
+	//  echo "</div>";
 
 
 
@@ -85,6 +102,9 @@
 	echo "</div>";
 	echo "</div>";
 ?>
+<center>
+ <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></center>
+
 <script type="text/javascript">
 $(document).ready(function()
 		{
@@ -93,4 +113,19 @@ $(document).ready(function()
 
 		}
 );
+</script>
+<script type="text/javascript">
+  new TableExport(document.getElementsByTagName("table"), {
+
+    formats: ['xls',],
+		ignoreCols: 3,
+		filename: 'MisEtt',
+		bootstrap: true,
+
+	});
+
+
+
+
+
 </script>
