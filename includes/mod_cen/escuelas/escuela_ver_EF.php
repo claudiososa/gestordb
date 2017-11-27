@@ -6,7 +6,7 @@ include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/director.php");
-include_once("includes/mod_cen/clases/ProfesoresEF.php");
+//include_once("includes/mod_cen/clases/ProfesoresEF.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxCurso.php");
 include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");

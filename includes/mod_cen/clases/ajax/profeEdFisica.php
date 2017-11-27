@@ -1,12 +1,12 @@
 <?php
 
 
-  include_once('../persona.php');
-  include_once('../conexion.php');
-  include_once('../ProfeEdFisicaxEscuela.php');
-  include_once('../conexionv2.php');
-  include_once('../maestro.php');
-  include_once('../ProfeEdFisicaxCurso.php');
+  include_once('includes/mod_cen/clases/persona.php');
+  include_once('includes/mod_cen/clases/conexion.php');
+  include_once('includes/mod_cen/clases/ProfeEdFisicaxEscuela.php');
+  include_once('includes/mod_cen/clases/conexionv2.php');
+  include_once('includes/mod_cen/clases/maestro.php');
+  include_once('includes/mod_cen/clases/ProfeEdFisicaxCurso.php');
 
 
 
