@@ -24,18 +24,9 @@ $escuela_acargo=$escuela->buscar();
 
 
 echo "<div class='container'>";
-echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/seo (5).png"></div><h4><b>Mis RTI</b></h4>';
+echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/seo (5).png"></div><h4><b>Mis RTI</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-misRti.png"></h4>';
 echo '<hr>';
 echo'<br>';
-
-echo'<a>';
-echo'<div class="col-md-3 col-md-offset-5 pull-right" onclick="history.back()">';
-echo'<img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda.png">';
-echo'</div>';
-echo'<div class="col-md-3 col-md-offset-5 pull-right hidden-xs" onclick="history.back()">';
-echo'<p>Volver Atrás</p>';
-echo'</div>';
-echo'</a>';
 
 
 echo'<br>';
@@ -123,6 +114,8 @@ echo "</div>";*/
 
 
 <br>
+<center>
+ <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-misRti.png"></center>
 <script type="text/javascript">
 $(document).ready(function()
 		{

@@ -1,3 +1,10 @@
+<style type="text/css">
+hr {
+		border-top: 2px solid #FFC61B;
+	}
+
+</style>
+
 <?php
 include_once("includes/mod_cen/clases/persona.php");
 include_once('includes/mod_cen/clases/director.php');//Agregada Arredes
@@ -7,10 +14,19 @@ include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/rti.php");
 ?>
 <div class="container">
+
+
+		<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo (1).png"></div><h4><b>Búsqueda de RTI</b> <img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-buscar-rti.png"></h4>
+
+
+
+	  <hr>
+
+	<br>
+	  <br>
+	 	<br>
 	<form class="form-horizontal" action='' method='POST'>
-		<div class="form-group">
-			<label class="col-md-3 col-md-offset-2"><h3>Busqueda de R.T.I.</h3></label>
-		</div>
+
 		<div class="form-group">
 			<label class="control-label col-md-2">Apellido</label>
 			<div class="col-md-10">
@@ -191,6 +207,8 @@ echo "</table>";
 echo "</div>";
 echo "</div>";
 ?>
+<center>
+ <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-buscar-rti.png"></center>
 <script type="text/javascript">
 $(document).ready(function()
 		{

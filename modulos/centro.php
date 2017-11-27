@@ -113,8 +113,8 @@
 								break;
 					case 13:
 								include("includes/mod_cen/referentes/referente_verEF.php");
-						break;	
-				
+						break;
+
 
 				}
 				break;
@@ -455,6 +455,17 @@
 
 						}
 						break;
+
+						case "videoTutorial":
+						switch ($id) {
+						case 1:
+								include("includes/mod_cen/videoTutorial/videoTutorial.php");
+								//include("includes/mod_cen/edFisica/nuevoProfe.php");
+								break;
+
+						}
+						break;
+
 
 
 

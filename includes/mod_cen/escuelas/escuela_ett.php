@@ -213,23 +213,10 @@ $con_ubicacion=0;
 	echo "<div class='container'>";
 
 
-	echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b></h4>';
+	echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>';
 
   echo '<hr>';
- echo'</div>';
-  echo'<br>';
-
-  echo'<a>';
-  echo'<div class="col-md-3 col-md-offset-5 pull-right" onclick="history.back()">';
-  echo'<img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda (5).png">';
   echo'</div>';
-  echo'<div class="col-md-3 col-md-offset-5 pull-right hidden-xs" onclick="history.back()">';
-  echo'<p>Volver Atrás</p>';
-  echo'</div>';
-  echo'</a>';
-
-
-  echo'<br>';
   echo'<br>';
   echo'<br>';
   echo'<br>';
@@ -386,3 +373,8 @@ $("#tableEscuelas").tableExport({
 
 
 </script>
+
+
+
+<center>
+ <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></center>

@@ -1,6 +1,11 @@
 <!--<script type="text/javascript" src="includes/mod_cen/documentos/panel.js"></script>
 <link href="includes/mod_cen/documentos/estilos.css" rel="stylesheet" type="text/css">-->
+<style type="text/css">
+hr {
+    border-top: 2px solid #2B3B4E;
+  }
 
+</style>
 <?php
 include_once("includes/mod_cen/clases/CategoriaDoc.php");
 include_once("includes/mod_cen/clases/referente.php");
@@ -16,6 +21,13 @@ include_once("includes/mod_cen/clases/Documento.php");
 
 <div class="container-fluid">
 
+  	<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (5).png"></div><h4><b>Documentacion</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-doc.png"></h4>
+
+    <hr>
+
+  <br>
+    <br>
+   	<br>
      <div class="row">
      <!-- aqui debera estar el while principal para escribir las categorias  -->
 
@@ -88,4 +100,6 @@ $num=$num+1;
 ?>
 
 </div>  <!-- cierra  etiqueta row-->
+<center>
+ <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-doc.png"></center>
 </div>  <!-- cierra etiqueta container-fluid -->
