@@ -1,18 +1,18 @@
+
 <!--<script type="text/javascript" src="includes/mod_cen/documentos/panel.js"></script>
 <link href="includes/mod_cen/documentos/estilos.css" rel="stylesheet" type="text/css">-->
-
-<div class="container-fluid">
+<!--
+<div class="container-fluid">-->
   <!--categoria AYUDA DBMS-->
-     <div class="row">
+  <!--   <div class="row">
 		      <div class="col-md-4">
 			         <div class="panel panel-info">
 				           <div class="panel-heading"><a data-toggle="collapse" href="#collapseprincipal1">
                         <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
                         <span class="panel-title clickable"><h3 class="panel-title"><b>Ayuda DBMS</b></h3></span></a>
-                   </div>
-
+                   </div>-->
 <!-- contenido de categoria AYUDA DBMS-->
-<div id="collapseprincipal1" class="panel-collapse collapse">
+<!--<div id="collapseprincipal1" class="panel-collapse collapse">
 
 
     <div class="panel-body">
@@ -70,16 +70,16 @@
             </div>
 
        </div>
-</div>
+</div>-->
     <!--Categoria Servidores escolares-->
 
-		     <div class="col-md-4">
+		   <!--  <div class="col-md-4">
 			        <div class="panel panel-info">
 				           <div class="panel-heading"><a data-toggle="collapse" href="#collapseprincipal2"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
                    <span class="panel-title clickable"><h3 class="panel-title"><b>Servidores Escolares</b></h3></span></a>
-                   </div>
+                 </div>-->
 <!--contenido de categoria SERVIDORES ESCOLARES-->
-<div id="collapseprincipal2" class="panel-collapse collapse">
+<!--<div id="collapseprincipal2" class="panel-collapse collapse">
 				      <div class="panel-body">
                 <div class="panel-group">
                    <div class="panel panel-success">
@@ -116,18 +116,18 @@
 
             </div>
 		          </div>
-	       </div>
+	       </div>-->
 
 
 <!--categoria documentos administrativos-->
-
+<!--
 <div class="col-md-4">
      <div class="panel panel-info">
           <div class="panel-heading"><a data-toggle="collapse" href="#collapseprincipal3"><span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
           <span class="panel-title clickable"><h3 class="panel-title"><b>Documentos Administrativos</b></h3></span></a>
-          </div>
+        </div>-->
 <!--contenido de categoria documentos administrativos-->
-<div id="collapseprincipal3" class="panel-collapse collapse">
+<!--<div id="collapseprincipal3" class="panel-collapse collapse">
               <div class="panel-body">
                 <div class="panel-group">
                   <div class="panel panel-success">
