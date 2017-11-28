@@ -28,28 +28,6 @@
       <input type="text" name="emailTeacher" id="emailTeacher" value="">
     </div>
 
-    <div class="form-group">
-      <label for="departamento">Departamento</label><br>
-      <div class="col-md-10">
-        <div class="row">
-           <div class="col-sm-5">
-            <?php
-              $departamento= new Departamentos();
-              $total=$departamento->getTotal();
-              echo "<select class='form-control' name='localidadId'>";
-              echo  "<option value=0>Ninguno</option>";
-              for($val=2;$val<=$total;$val++) {
-                $departamento= new Departamentos($val);
-                $dato=$departamento->getDepartamento();
-                echo  "<option value='".$dato->getDepartamentoId()."' >".$dato->getDescripcion()."</option>";
-                }
-              echo "</select>";
-            ?>
-           </div>
-        </div>
-      </div>
-      <br>
-    </div>
 
 
     <div class="form-group">

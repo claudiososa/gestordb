@@ -391,8 +391,8 @@ echo "</body>";
 
 
 
-	echo "<h4><b>Carga horaria total:</b></h4>";
-	echo "<p >20 horas semanales</p>";
+	//echo "<h4><b>Carga horaria total:</b></h4>";
+	//echo "<p >20 horas semanales</p>";
 						///////////////
   echo '<div class="asignarCurso" id='.$filaProf->id_Ed_FisicaxEscuela.'>';
 						//echo "<button class='btn btn-primary btnNuevoCurso' id='btnNuevoCurso".$filaProf->personaId."".$fila->escuelaId."'>Asignar Nuevo Curso</button>";
