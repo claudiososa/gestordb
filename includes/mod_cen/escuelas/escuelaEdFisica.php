@@ -6,7 +6,7 @@ include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/Cursos.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 //include_once("includes/mod_cen/clases/ProfesoresEF.php");
-include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
+//include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxCurso.php");
 include_once("includes/mod_cen/clases/departamentos.php");
@@ -45,7 +45,7 @@ $numeroEsc=$_GET['escuelaId'];
 	//echo '<div class="container">';
 
 	?>
-	
+
   <div class='col-md-8'>
 
 <!-- DESDE AQUI -->
@@ -69,9 +69,9 @@ $numeroEsc=$_GET['escuelaId'];
 		<button id="newTeacher" class="btn btn-success" type="button" name="button">Nuevo Profesor</button>
 
 			<?php include('includes/mod_cen/formularios/f_HorarioNuevoProfesorEF.php') ?>
-		<?php echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=escuelas&id=25&retorno=".$numeroEsc."'>Volver</a>&nbsp&nbsp&nbsp"; ?>  
-							
-																	
+		<?php echo "<a class='btn btn-primary' role='button' href='index.php?mod=slat&men=escuelas&id=25&retorno=".$numeroEsc."'>Volver</a>&nbsp&nbsp&nbsp"; ?>
+
+
 	</div>
 </div>
 

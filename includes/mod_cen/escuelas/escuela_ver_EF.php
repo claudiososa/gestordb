@@ -9,7 +9,7 @@ include_once("includes/mod_cen/clases/director.php");
 //include_once("includes/mod_cen/clases/ProfesoresEF.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxEscuela.php");
 include_once("includes/mod_cen/clases/ProfeEdFisicaxCurso.php");
-include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
+//include_once("includes/mod_cen/clases/ajax/profeEdFisica.php");
 ?>
 <div class="container">
 <?php
