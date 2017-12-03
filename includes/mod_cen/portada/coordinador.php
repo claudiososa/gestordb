@@ -475,7 +475,7 @@ $(document).ready(function()
 	<div class="panel-body">
 
 <?php
-require_once("includes/mod_cen/documentos/documento.php");
+require_once("includes/mod_cen/documentos/documentoPortadas.php");
 ?>
 </div>
 </div>
