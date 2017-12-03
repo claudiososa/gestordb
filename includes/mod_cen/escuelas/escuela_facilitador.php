@@ -1,3 +1,10 @@
+<style type="text/css">
+hr {
+    border-top: 2px solid #FF5B61;
+  }
+
+</style>
+
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript" src="gmap/gmaps.js"></script>
 <?php
@@ -157,11 +164,22 @@ $cantidad = mysqli_num_rows($resultado);
 
 
 	echo "<div class='container'>";
+
+	echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>';
+
+  echo '<hr>';
+  echo'</div>';
+  echo'<br>';
+  echo'<br>';
+  echo'<br>';
+
+		echo "<div class='container'>";
+
 	echo '<div class="panel panel-primary">';
-		echo '<div class="panel-heading"><h4>Mis Escuelas</h4></div>';
+	//	echo '<div class="panel-heading"><h4>Mis Escuelas</h4></div>';
 		echo '<div class="panel-body">';
 		echo '<div class="table-responsive">';
-			echo "<table class='table table-hover table-striped table-condensed '>";
+			echo "<table class='table table-bordered'>";
 					echo "<tr><th colspan='10'>Cantidad Total: ".$cantidad."</th></tr>";
 			echo "</table>";
 		echo "</div>";
@@ -275,6 +293,7 @@ echo "<div>";
 echo "<div class='span11'>";
 echo "<div id='map'></div>";
 echo "</div>";
+echo "</div>";
 ?>
 
 <script type="text/javascript">
@@ -298,3 +317,6 @@ $("#tableEscuelas").tableExport({
 
 
 </script>
+
+<center>
+ <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></center>
