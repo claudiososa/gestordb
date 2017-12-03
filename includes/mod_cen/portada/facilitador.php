@@ -24,20 +24,58 @@ echo '<div class="container">';
 <!-- <div class="alert alert-info" role="alert">
 	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
 </div>-->
+
+
+<div class="row hidden-xs">
+	<div class="col-lg-3 col-md-3 col-sm-3"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
+	</div>
+
+	<div class="col-lg-3 col-md-3 col-sm-3"><a href="index.php?mod=slat&men=user&id=17" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
+	</div>
+
+
+<div class="col-lg-3 col-md-3 col-sm-3"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
+</div>
+
+<div class="col-lg-3 col-md-3 col-sm-3"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
+</div>
+
+</div>
+<!--vista mobile-->
+
+<div class="row visible-xs">
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
+	</div>
+
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=17" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
+	</div>
+</div>
+
+
+
+<div class="row visible-xs">
+
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
+	</div>
+
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
+	</div>
+
+</div>
+
+
+<br><br><br>
 <?php
 	echo '<div class="row">';
-	   ?>
-		 <div class="col-md-12 hidden-xs">
- 			<p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
- 			<iframe src="https://player.vimeo.com/video/239149998" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
- 			 <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
- 		</div>
- 		<div class="col-md-12 visible-xs">
- 		 <p class="alert alert-success">Tutorial administración Horario Facilitadores</p>
- 			<iframe src="https://player.vimeo.com/video/239149998" width="320" height="240" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
- 			 <p><a href="https://vimeo.com/user72995653">Tutoriales DBMS</a></p>
- 		</div>
-		 <?php
+
 		echo '<div class="col-md-6">';
 
 
@@ -385,7 +423,7 @@ $(document).ready(function()
 	<div class="panel-body">
 
 				<?php
-require_once("includes/mod_cen/documentos/documento.php")
+require_once("includes/mod_cen/documentos/documentoPortadas.php")
 ?>
 </div>
 </div>

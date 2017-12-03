@@ -64,7 +64,80 @@ echo '<div class="container">';
 //echo '<div class="alert alert-info" role="alert">';
 //echo '<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>';
 //echo '</div>';
+?>
 
+<div class="row hidden-xs">
+	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
+	</div>
+
+
+  <div class="col-lg-2 col-md-4 col-sm-4">
+    <a href="index.php?mod=slat&men=user&id=18" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis Facilitadores</h3></a>
+  </div>
+
+
+	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=admin&id=14" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/contrato.png"><h3 align="center">Informes sobre facilitadores</h3></a>
+	</div>
+
+
+  <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=referentes&id=1" style="text-decoration:none">
+  	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Buscar Referentes</h3></a>
+  </div>
+
+<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
+</div>
+
+<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
+</div>
+
+</div>
+<!--vista mobile-->
+
+<div class="row visible-xs">
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
+	</div>
+
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=18" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis facilitadores</h3></a>
+	</div>
+</div>
+
+
+
+<div class="row visible-xs">
+
+<div class="col-xs-6"><a href="index.php?mod=slat&men=admin&id=14" style="text-decoration:none">
+	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/contrato.png"><h3 align="center">Informes sobre FPD</h3></a>
+</div>
+<div class="col-xs-6">
+  <a href="index.php?mod=slat&men=referentes&id=1" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Buscar Referentes</h3></a>
+</div>
+
+</div>
+
+
+<div class="row visible-xs">
+
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
+	</div>
+
+	<div class="col-xs-6"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
+		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
+	</div>
+</div>
+
+
+<br><br><br>
+
+
+
+<?php
 echo '<div class="row">';
 ?>
 <div class="col-md-12 hidden-xs">
@@ -698,7 +771,7 @@ $(document).ready(function()
   	<div class="panel-body">
 
   				<?php
-  require_once("includes/mod_cen/documentos/documento.php")
+  require_once("includes/mod_cen/documentos/documentoPortadas.php")
   ?>
   </div>
   </div>

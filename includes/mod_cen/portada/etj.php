@@ -113,6 +113,7 @@ echo '<div class="container">';
 	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
 	</div>
+
 </div>
 
 
@@ -408,7 +409,7 @@ $(document).ready(function()
 	<div class="panel-body">
 
 <?php
-require_once("includes/mod_cen/documentos/documento.php");
+require_once("includes/mod_cen/documentos/documentoPortadas.php");
 ?>
 </div>
 </div>

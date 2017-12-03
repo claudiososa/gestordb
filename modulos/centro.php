@@ -432,6 +432,9 @@
 					case 6:
 													include("includes/mod_cen/documentos/coordinadorfacilitador.php");
 													break;
+					case 7:
+					         include("includes/mod_cen/documentos/documentoPortadas.php");
+					break;
 					}
 					break;
 					case "estadistica":

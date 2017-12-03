@@ -1,3 +1,10 @@
+<style type="text/css">
+hr {
+    border-top: 2px solid #84DBFF;
+  }
+
+</style>
+
 <?php
 	include_once("includes/mod_cen/clases/persona.php");
 	include_once("includes/mod_cen/clases/escuela.php");
@@ -14,11 +21,22 @@
 	$resultado = $referente->Cargo("Activo");
 
 
-	echo '<div class="table-responsive">';
+
 	echo '<div class="container">';
+
+	echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/equipo (1).png"></div><h4><b>Mis Facilitadores</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></h4>';
+
+	echo '<hr>';
+
+	echo'<br>';
+	echo'<br>';
+	echo'<br>';
+
+
+	echo '<div class="table-responsive">';
 	//$fila=mysqli_fetch_object($resultado);
-	echo "<table id='MisFacilitadores' class='table table-hover table-striped table-condensed '>";
-	echo "<tr><td colspan='6'><h3>Mis Facilitadores</h3></td></tr>";
+	echo "<table id='MisFacilitadores' class='table table-bordered '>";
+	//echo "<tr><td colspan='6'><h3>Mis Facilitadores</h3></td></tr>";
 	echo "<tr class='info'><td>Apellidos, Nombre</td>";
 	echo "<td>RTI Cargo</td>";
 	echo "<td>Escuelas</td>";
@@ -84,6 +102,10 @@
 	echo "</div>";
 	echo "</div>";
 ?>
+<br>
+<center>
+ <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></center>
+ <br><br>
 <script type="text/javascript">
 new TableExport(document.getElementsByTagName("table"), {
 

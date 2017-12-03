@@ -1,3 +1,11 @@
+
+<style type="text/css">
+hr {
+    border-top: 2px solid #59AE1E;
+  }
+
+</style>
+
 <?php
 
 require_once("includes/mod_cen/clases/informe.php");
@@ -24,6 +32,17 @@ $buscar_ett=$referente_ett->Tipo("Facilitador","Activo");
 //$nFacilitador = 0;
 
 echo '<div class="container">';
+
+
+echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/contrato (2).png"></div><h4><b>Informes Facilitadores</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-hacia-la-izquierda (7).png"></h4>';
+
+echo '<hr>';
+
+echo'<br>';
+echo'<br>';
+echo'<br>';
+
+
     echo "<p class=''><h3>Lista de Facilitadores</h3></p>";
     echo "<table class='table table-hover table-striped table-condensed tablesorter'>";
     echo "<thead>";
@@ -261,3 +280,6 @@ echo '<div class="container">';
 
     </div>
 </div>
+<br>
+<center>
+ <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-hacia-la-izquierda (7).png"></center>
