@@ -58,7 +58,11 @@
                 <li ><a href="index.php?mod=slat&men=personas&id=8&escuelaId=111">Alta Vice-Director</a></li>
                  <li ><a href="index.php?mod=slat&men=personas&id=9">Editar Vice-Director</a></li>
                  <li ><a href="index.php?mod=slat&men=escuelas&id=24">Nueva Escuela</a></li>
-                  <li ><a href="index.php?mod=slat&men=estadistica&id=2">Estadistica Dispositivo</a></li>
+                 <li ><a href="index.php?mod=slat&men=estadistica&id=2">Estadistica Dispositivo</a></li>
+                 <li ><a href="index.php?mod=slat&men=escuelas&id=26">Alta Tipo Autoridades</a></li>
+                 <li ><a href="index.php?mod=slat&men=escuelas&id=27">Listar Tipo Autoridades</a></li>
+                 <li ><a href="index.php?mod=slat&men=escuelas&id=29">Alta de Autoridad</a></li>
+                  <li ><a href="index.php?mod=slat&men=escuelas&id=30">Listar Autoridad</a></li>
 
           </ul>
         </li>

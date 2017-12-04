@@ -250,11 +250,37 @@
 
 						case 24:
 									include("includes/mod_cen/escuelas/agregarEscuelas.php");
-								  break;
+								  break; 
 						case 25:
 
 									include("includes/mod_cen/escuelas/escuela_ver_EF.php");
 								  break;
+						case 26:
+
+									include("includes/mod_cen/escuelas/nuevoTipoAutoridades.php");
+								  break;
+
+						case 27:
+
+									include("includes/mod_cen/escuelas/listarTipoAutoridades.php");
+								  break;
+					    case 28:
+
+									include("includes/mod_cen/escuelas/updateTipoAutoridades.php");
+								  break;
+
+						 case 29:
+
+									include("includes/mod_cen/escuelas/nuevaAutoridad.php");
+								  break;
+						 case 30:
+
+									include("includes/mod_cen/escuelas/listarAutoridades.php");
+								  break;
+
+
+
+
 				}
 				break;
 			 case "encuentros":
