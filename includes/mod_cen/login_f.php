@@ -151,7 +151,30 @@ if(isset($_POST["username"]))
 				case 'CP':
 							  include_once('includes/mod_cen/portada/coordinadoresPrimarias.php');
 							  break;
-
+				case 'SGP':
+								include_once('includes/mod_cen/portada/directorNivelPrimaria.php');
+								break;
+				case 'SI':
+							  include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
+								 break;
+				case 'SH':
+				 			  include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
+				 			  break;
+				case 'CE':
+								 include_once('includes/mod_cen/portada/coordinadoresPrimarias.php');
+							  break;
+				case 'CI':
+								 include_once('includes/mod_cen/portada/coordinadoresPrimarias.php');
+								 break;
+			  case 'CH':
+				 				 include_once('includes/mod_cen/portada/coordinadoresPrimarias.php');
+				 				 break;
+			 case 'SR':
+				 				  include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
+				 				  break;
+				case 'SP':
+								 	include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
+								  break;
 
 				default:
 					include_once('includes/mod_cen/portada/portadaAdmin.php');
