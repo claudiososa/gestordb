@@ -9,13 +9,7 @@ include_once("includes/mod_cen/formularios/f_asignar_escuela.php");
 
 if(($_POST))
 	{
-
-				$cue=$_POST["cue"];
-				$numero=$_POST["numero"];
-				$nombre=$_POST["nombre"];
-				//$localidadId=$_POST["localidadId"];
-
-				$escuela=new Escuela(NULL,null,$cue,$numero,$nombre,null,null,null,null);
+		  	$escuela=new Escuela(NULL,null,$_POST["cue"],$_POST["numero"],$_POST["nombre"];,null,null,null,null);
 
 				$resultado = $escuela->buscar();
 				echo '<div class="table-responsive">';
