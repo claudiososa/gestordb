@@ -250,7 +250,7 @@
 
 						case 24:
 									include("includes/mod_cen/escuelas/agregarEscuelas.php");
-								  break; 
+								  break;
 						case 25:
 
 									include("includes/mod_cen/escuelas/escuela_ver_EF.php");
@@ -672,6 +672,13 @@
 														//	}else {
 											    	//		include("includes/mod_cen/denegado.php");
 														//	}
+														break;
+									case 15:
+														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
+																include("includes/mod_cen/admin/escuelaAsignarSNP.php");
+														}else {
+																include("includes/mod_cen/denegado.php");
+														}
 														break;
 				}
 
