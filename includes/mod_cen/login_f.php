@@ -141,6 +141,16 @@ if(isset($_POST["username"]))
 				case 'ReferenteEducacionFisica':
 						    include_once('includes/mod_cen/portada/referenteEducacionFisica.php');
 						    break;
+				//Vistas generales y de prueba para supervisores primaria,director nivel,coordinadores. 03/12/17
+				case 'DNP':
+						    include_once('includes/mod_cen/portada/directorNivelPrimaria.php');
+						    break;
+				case 'SNP':
+							  include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
+							  break;
+				case 'CP':
+							  include_once('includes/mod_cen/portada/coordinadoresPrimarias.php');
+							  break;
 
 
 				default:

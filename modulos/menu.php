@@ -71,6 +71,16 @@
 			case 'ReferenteEducacionFisica':
                         include_once('includes/mod_men/referenteEducacionFisica.php');
 						break;
+			//Vistas generales y de prueba para supervisores primaria,director nivel,coordinadores. 03/12/17
+			case 'DNP':
+							include_once('includes/mod_men/directorNivelPrimaria.php');
+							break;
+			case 'SNP':
+							include_once('includes/mod_men/supervisoresPrimaria.php');
+							break;
+			case 'CP':
+							include_once('includes/mod_men/coordinadoresPrimaria.php');
+							break;
 			}
 		}
 			else {
