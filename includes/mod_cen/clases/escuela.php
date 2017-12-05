@@ -589,6 +589,7 @@ $estado=array();
 if(isset($_POST["referente_id"])) {
 	//incluye clase referente - crear referente y busca segun el referente_id enviado por post
 	include_once('referente.php');
+	include_once('Autoridades.php');
 	$referente=new Referente($_POST["referente_id"]);
 	$buscar_referente=$referente->buscar();
 	$dato_referente=mysqli_fetch_object($buscar_referente);
@@ -600,21 +601,28 @@ if(isset($_POST["referente_id"])) {
 	$buscar_persona=$persona->buscar();
 	$dato_persona=mysqli_fetch_object($buscar_persona);
 	//********************************************************************************
-$escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
-	//busca escueala de acuerdo a escuelaId enviado por post y actualiza el referenteId acargo del colegio
-	if(isset($_POST['pmi'])){
-		$editar_escuela=$escuela->editarref("pmi");
-	}elseif(isset($_POST['supervisor'])){
-		$editar_escuela=$escuela->editarref("supervisor");
-	}elseif(isset($_POST['facilitador'])){
-		$editar_escuela=$escuela->editarref("facilitador");
-	}elseif(isset($_POST['superior'])){
-		$editar_escuela=$escuela->editarref("superior");
-	}elseif(isset($_POST['adultos'])){
-		$editar_escuela=$escuela->editarref("adultos");
+
+	if(isset($_POST['snp'])){
+		$autoridad = new Autoridades(null,$_POST["escuela_id"],'1',$dato_persona->personaId);
+		$autoridad->agregar();
 	}else{
-		$editar_escuela=$escuela->editarref();
+		$escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
+			//busca escueala de acuerdo a escuelaId enviado por post y actualiza el referenteId acargo del colegio
+			if(isset($_POST['pmi'])){
+				$editar_escuela=$escuela->editarref("pmi");
+			}elseif(isset($_POST['supervisor'])){
+				$editar_escuela=$escuela->editarref("supervisor");
+			}elseif(isset($_POST['facilitador'])){
+				$editar_escuela=$escuela->editarref("facilitador");
+			}elseif(isset($_POST['superior'])){
+				$editar_escuela=$escuela->editarref("superior");
+			}elseif(isset($_POST['adultos'])){
+				$editar_escuela=$escuela->editarref("adultos");
+			}else{
+				$editar_escuela=$escuela->editarref();
+			}
 	}
+
 
 
 	//$editar_escuela=$escuela->editarref("pmi");

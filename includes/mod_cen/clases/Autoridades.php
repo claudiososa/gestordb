@@ -7,7 +7,7 @@ class Autoridades
 {
 	private $autoridadesId;
  	private $escuelaId;
- 	private $tipoAutoridadId;
+ 	private $tipoId;
  	private $personaId;
  	private $mañana;
  	private $intermedio;
@@ -15,16 +15,16 @@ class Autoridades
  	private $vespertino;
  	private $noche;
  	private $extendida;
-	 	
 
 
-function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
+
+function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 	$personaId=NULL,$mañana=NULL,$intermedio=NULL,
 	$tarde=NULL,$vespertino=NULL,$noche=NULL,$extendida=NULL)
 	{
 		$this->autoridadesId = $autoridadesId;
  		$this->escuelaId = $escuelaId;
- 		$this->tipoAutoridadId = $tipoAutoridadId;
+ 		$this->tipoId = $tipoId;
 		$this->personaId = $personaId;
 		$this->mañana = $mañana;
 		$this->intermedio = $intermedio;
@@ -33,7 +33,7 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
 		$this->noche = $noche;
 		$this->extendida = $extendida;
 
- 		
+
 	}
 
 
@@ -43,8 +43,8 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
 		$conexion=$nuevaConexion->getConexion();
 
 
-		$sentencia="INSERT INTO autoridades (autoridadesId,escuelaId,tipoAutoridadId,personaId,mañana,intermedio,tarde,vespertino,noche,extendida)
-		VALUES (NULL,'". $this->escuelaId."','". $this->tipoAutoridadId."','". $this->personaId."','". $this->mañana."','". $this->intermedio."',
+		$sentencia="INSERT INTO autoridades (autoridadesId,escuelaId,tipoId,personaId,mañana,intermedio,tarde,vespertino,noche,extendida)
+		VALUES (NULL,'". $this->escuelaId."','". $this->tipoId."','". $this->personaId."','". $this->mañana."','". $this->intermedio."',
 			'". $this->tarde."','". $this->vespertino."','". $this->noche."','". $this->extendida."');";
 
 
@@ -65,12 +65,12 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="UPDATE autoridades SET  escuelaId ='$this->escuelaId', tipoAutoridadId = '$this->tipoAutoridadId', 
+		$sentencia="UPDATE autoridades SET  escuelaId ='$this->escuelaId', tipoId = '$this->tipoId',
 		personaId = '$this->personaId', mañana = '$this->mañana', intermedio = '$this->intermedio', tarde = '$this.tarde',
 		vespertino = '$this->vespertino', noche = '$this->noche', extendida = '$this->extendida'
 		WHERE autoridadesId = '$this->autoridadesId'";
 
-			
+
 		//echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
@@ -116,10 +116,10 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
 		$resultado=$conexion->query($sentencia);
 		$elemento = mysqli_fetch_object($resultado);
 
-		
+
  		$this->autoridadesId = $elemento->autoridadesId;
  		$this->escuelaId =$elemento->escuelaId;
-		$this->tipoAutoridadId =$elemento->tipoAutoridadId;
+		$this->tipoId =$elemento->tipoId;
 		$this->personaId =$elemento->personaId;
 		$this->mañana =$elemento->mañana;
 		$this->intermedio =$elemento->intermedio;
@@ -127,7 +127,7 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
 		$this->vespertino =$elemento->vespertino;
 		$this->noche =$elemento->noche;
 		$this->extendida =$elemento->extendida;
- 		
+
 
 		return $this;
 
@@ -146,24 +146,44 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
     	return $result;
     }
 
+	public function buscarAutoridad($tipo=NULL)
+		{
+			$nuevaConexion=new Conexion();
+			$conexion=$nuevaConexion->getConexion();
+
+			$sentencia="SELECT autoridades.escuelaid,autoridades.tipoReferente,personas.personaId,
+									personas.nombre,personas.apellido
+			 						FROM autoridades
+									INNER JOIN personas
+									ON personas.personasId=autoridades.personaId
+									INNER JOIN tipoAutoridades
+									ON tipoAutoridades.tipoId=autoridades.tipoId
+									WHERE tipoAutoridades.tipoReferente =$tipo";
+			$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
+			//return $sentencia;
+			return mysqli_fetch_object($conexion->query($sentencia));
 
 
+			//return 'hola mundo';
+		}
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT * FROM autoridades";
+		$sentencia="SELECT * FROM autoridades
+								INNER JOIN tipoAutoridades
+								ON tipoAutoridades.tipoId=autoridades.tipoId";
 
-		if($this->autoridadesId!=NULL || $this->escuelaId!=NULL || $this->tipoAutoridadId!=NULL || $this->personaId!=NULL
+		if($this->autoridadesId!=NULL || $this->escuelaId!=NULL || $this->tipoId!=NULL || $this->personaId!=NULL
 
-			|| $this->mañana!=NULL || $this->intermedio!=NULL || $this->tarde!=NULL || $this->vespertino!=NULL 
+			|| $this->mañana!=NULL || $this->intermedio!=NULL || $this->tarde!=NULL || $this->vespertino!=NULL
 			|| $this->noche!=NULL || $this->extendida!=NULL )
 		{
 			$sentencia.=" WHERE ";
 
 
-		
+
 		if($this->autoridadesId!=NULL)
 		{
 			$sentencia.=" autoridadesId = $this->autoridadesId && ";
@@ -174,9 +194,9 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
 			$sentencia.=" escuelaId = $this->escuelaId && ";
 		}
 
-		if($this->tipoAutoridadId!=NULL)
+		if($this->tipoId!=NULL)
 		{
-			$sentencia.=" tipoAutoridadId = $this->tipoAutoridadId && ";
+			$sentencia.=" tipoId = $this->tipoId && ";
 		}
 
 		if($this->personaId!=NULL)
@@ -222,7 +242,7 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoAutoridadId=NULL,
 		//if(isset($limit)){
 			//$sentencia.=" LIMIT ".$limit;
 		//}
-		//echo $sentencia;
+		echo $sentencia;
 		return $conexion->query($sentencia);
 
 	}

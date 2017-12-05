@@ -5,20 +5,22 @@ include_once("maestro.php");
 
 class TipoAutoridades
 {
-	
+
  	private $tipoId;
+	private $tipoReferente;
  	private $cargoAutoridad;
 	private $login;
- 	
 
 
-function __construct($tipoId=NULL,$cargoAutoridad=NULL,$login=NULL)
+
+function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$login=NULL)
 	{
-		
+
  		$this->tipoId = $tipoId;
+		$this->tipoReferente = $tipoReferente;
  		$this->cargoAutoridad = $cargoAutoridad;
 		$this->login = $login;
- 		
+
 	}
 
 
@@ -28,8 +30,8 @@ function __construct($tipoId=NULL,$cargoAutoridad=NULL,$login=NULL)
 		$conexion=$nuevaConexion->getConexion();
 
 
-		$sentencia="INSERT INTO tipoAutoridades (tipoId,cargoAutoridad,login)
-		VALUES (NULL,'". $this->cargoAutoridad."','". $this->login."');";
+		$sentencia="INSERT INTO tipoAutoridades (tipoId,tipoReferente,cargoAutoridad,login)
+		VALUES (NULL,'". $this->tipoReferente."','". $this->cargoAutoridad."','". $this->login."');";
 
 
 
@@ -49,10 +51,10 @@ function __construct($tipoId=NULL,$cargoAutoridad=NULL,$login=NULL)
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="UPDATE tipoAutoridades SET  cargoAutoridad = '$this->cargoAutoridad', login = '$this->login'
+		$sentencia="UPDATE tipoAutoridades SET  tipoReferente = '$this->tipoReferente',cargoAutoridad = '$this->cargoAutoridad', login = '$this->login'
 		WHERE tipoId = '$this->tipoId'";
 
-			
+
 		//echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
@@ -81,47 +83,7 @@ function __construct($tipoId=NULL,$cargoAutoridad=NULL,$login=NULL)
 
 	}
 
-
-
-
 	//eliminar
-
-
-
-
-	public function getDatos()
-	{
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
-
-		$sentencia="SELECT * FROM tipoAutoridades WHERE tipoId=".$this->tipoId;
-		$resultado=$conexion->query($sentencia);
-		$elemento = mysqli_fetch_object($resultado);
-
-		
- 		$this->tipoId = $elemento->tipoId;
- 		$this->cargoAutoridad =$elemento->cargoAutoridad;
-		$this->login =$elemento->login;
- 		
-
-		return $this;
-
-    }
-
-    public static function camposet($campo,$tabla){
-    	$nuevaConexion=new Conexion();
-    	$conexion=$nuevaConexion->getConexion();
-    	$sentencia="SHOW COLUMNS FROM $tabla LIKE '$campo'";
-    	$query=$conexion->query($sentencia);
-    	$result = mysqli_fetch_assoc($query);
-    	$result=$result['Type'];
-    	$result=substr($result, 5, strlen($result)-5);
-    	$result=substr($result, 0, strlen($result)-2);
-    	$result = explode("','",$result);
-    	return $result;
-    }
-
-
 
 	public function buscar()
 	{
@@ -130,15 +92,20 @@ function __construct($tipoId=NULL,$cargoAutoridad=NULL,$login=NULL)
 
 		$sentencia="SELECT * FROM tipoAutoridades";
 
-		if($this->tipoId!=NULL || $this->cargoAutoridad!=NULL || $this->login!=NULL)
+		if($this->tipoId!=NULL || $this->tipoReferente!=NULL || $this->cargoAutoridad!=NULL || $this->login!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
 
-		
+
 		if($this->tipoId!=NULL)
 		{
 			$sentencia.=" tipoId = $this->tipoId && ";
+		}
+
+		if($this->tipoReferente!=NULL)
+		{
+			$sentencia.=" tipoReferente = $this->tipoReferente && ";
 		}
 
 		if($this->cargoAutoridad!=NULL)

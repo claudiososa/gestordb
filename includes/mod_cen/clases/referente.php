@@ -100,7 +100,7 @@ class Referente
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		if(isset($tipo)<>null){
-			$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido FROM referentes inner join personas on referentes.personaId=personas.personaId
+			$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido,personas.personaId FROM referentes inner join personas on referentes.personaId=personas.personaId
 			WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
 		}elseif(isset($etj)<>null){
 			$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido FROM referentes inner join personas on referentes.personaId=personas.personaId
@@ -181,6 +181,13 @@ class Referente
 																					on referentes.personaId=personas.personaId
 																					WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
 				 																	break;
+							case 'SNP':
+							  							$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido,personas.personaId
+															FROM referentes
+															inner join personas
+															on referentes.personaId=personas.personaId
+															WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
+															break;
 
 				default:
 					# code...
