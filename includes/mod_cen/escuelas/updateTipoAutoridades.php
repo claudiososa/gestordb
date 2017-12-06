@@ -11,7 +11,7 @@ if(isset($_POST["modificarTipoAutoridad"]) ){
 
 
 
-      $tipoAutoridad=new TipoAutoridades( $_GET["tipoId"], $_POST["cargoAutoridad"], $_POST["login"]);
+      $tipoAutoridad=new TipoAutoridades( $_GET["tipoId"], $_POST["tipoReferente"], $_POST["cargoAutoridad"], $_POST["login"]);
       $editado=$tipoAutoridad->editar();
 
     

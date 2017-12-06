@@ -11,7 +11,7 @@ if(isset($_POST["guardar_nuevaAutoridad"])  ){
 
 
   
-  $nuevaAutoridad = new Autoridades(null,$_POST["escuelaId"],$_POST["tipoAutoridadId"],$_POST["personaId"],$_POST["mañana"],$_POST["intermedio"],$_POST["tarde"],$_POST["vespertino"],$_POST["noche"],$_POST["extendida"]);
+  $nuevaAutoridad = new Autoridades(null,$_POST["escuelaId"],$_POST["tipoId"],$_POST["personaId"],$_POST["mañana"],$_POST["intermedio"],$_POST["tarde"],$_POST["vespertino"],$_POST["noche"],$_POST["extendida"]);
 
   $guardar = $nuevaAutoridad->agregar();
 

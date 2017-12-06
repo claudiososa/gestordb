@@ -16,14 +16,14 @@
 
       <div class="col-md-12">
 
-          <select class="form-control" name="tipoAutoridadId" >
+          <select class="form-control" name="tipoId" >
           <?php echo  "<option value=''> Seleccionar</option>";?>
 
           <?php
           while($fila = mysqli_fetch_object($tipoA)) {
 
             //if($fila->idCategoria>0) {
-              echo "<option value=".$fila->tipoId."> Id->".$fila->tipoId."->".$fila->cargoAutoridad."</option>";
+              echo "<option value=".$fila->tipoId.">[".$fila->tipoReferente."]  - ".$fila->cargoAutoridad."</option>";
             //}
           }
           ?>

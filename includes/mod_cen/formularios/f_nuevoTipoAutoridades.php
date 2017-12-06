@@ -11,7 +11,17 @@
 
       <div class="form-group">
         <div class="col-md-12">
-          <label class="control-label" for="cargoAutoridad">Nombre Tipo Autoridad</label>
+          <label class="control-label" for="tipoReferente"> Tipo Autoridad Abreviado</label>
+        </div>
+        <div class="col-md-12">
+          <input type="text" class="form-control" name="tipoReferente" value="">
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="col-md-12">
+          <label class="control-label" for="cargoAutoridad">Tipo Autoridad Nombre</label>
         </div>
         <div class="col-md-12">
           <input type="text" class="form-control" name="cargoAutoridad" value="">
