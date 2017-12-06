@@ -4,13 +4,13 @@ include_once("includes/mod_cen/clases/departamentos.php");
 include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/referente.php");
+include_once("includes/mod_cen/clases/ReferenteEscuela.php");
 
 include_once("includes/mod_cen/formularios/f_asignar_escuela.php");
 
 if(($_POST))
 	{
-		  	$escuela=new Escuela(NULL,null,$_POST["cue"],$_POST["numero"],$_POST["nombre"];,null,null,null,null);
-
+		  	$escuela=new Escuela(NULL,null,$_POST["cue"],$_POST["numero"],$_POST["nombre"],null,null,null,null);
 				$resultado = $escuela->buscar();
 				echo '<div class="table-responsive">';
 				echo "<table class='table table-hover table-striped table-condensed'>";
@@ -21,120 +21,74 @@ if(($_POST))
 			  	echo "<th>Localidad</th>";
 			  	echo "<th>Referente PMI a Cargo</th>";
 				echo "</tr>";
-				$arreglo[]=array();
-				$arreglo["0"]="0";
-				$i=0;
+				//crear objeto vacio de tipo autoridades.
+				$objAutoridades = new Autoridades();
 
 				//Recorre todas las escuelas encontradas de acuerdo a lo ingresado en el buscador
-
 				while ($fila = mysqli_fetch_object($resultado))
 				{
-					$repite=0;
-					$encontrado=0;
-					if($i==0)
-						$arreglo[$i]=$fila->referenteId;
-					else
-						foreach ($arreglo as $clave => $valor)
-						{
-							if($arreglo[$clave]==$fila->referenteId)
-								$repite++;
-						}
-						if($repite>0)
-							$encontrado=$repite;
-							$arreglo[count($arreglo)]=$fila->referenteId;
-					$i++;
-
-					$crearreferente=new Referente($fila->referenteIdPmi);
-			  		$traerreferente= $crearreferente->getContacto();
-			  		$r_personaId=$traerreferente->getPersonaId();
-
-			  		$crearPersona=new Persona($r_personaId);
-			  		$traerPersona=$crearPersona->getContacto();
-			  		$nombrePersona= $traerPersona->getNombre();
-			  		$apellidoPersona= $traerPersona->getApellido();
-			  		$persona=$traerPersona->getPersonaId();
-
-			  		echo "<td>".$fila->numero."</td>";
+					$objAutoridades->escuelaId = $fila->escuelaId;
+					$buscarAutoridad = $objAutoridades->buscarAutoridad('SNP');
+					if ($buscarAutoridad!=NULL) {
+						$encontrado=1;
+					}
+						echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
 						echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>".substr($fila->nombre,0, 40)."</td>";
 
 			  		$locali=new Localidad($fila->localidadId,null);
 			  		$busca_loc= $locali->buscar();
-			  		$fila1=mysqli_fetch_object($busca_loc);
+			  		$fila1 = mysqli_fetch_object($busca_loc);
 			  		echo "<td>".$fila1->nombre."</td>";
 			  		echo "<td>";
-			  		if($encontrado==0){
-			  				//echo "<input type='hidden' id='esc_$fila->referenteId'/>";
+			  		if($encontrado==0){//SI LA ESCUELA ENCONTRADA NO TIENE REFERENTE ACARGO
+			  				//echo "<div class='divSimple' id='sel_".$fila->escuelaId."'>";
+			  			$supervisor= new Referente();
+							$buscar_supervisor=$supervisor->buscarRef2("SNP");
 
-			  				echo "<div class='divSimple' id='sel_".$fila->referenteIdPmi."'>";
-			  			$ett= new Referente();
-
-							$buscar_ett=$ett->buscarRef2("ATT");
-
-							echo "<select disabled id='seleref_".$fila->referenteIdPmi."' name='referentes' >";
-							//echo	"<option value=0>Todos</option>";
+							echo "<select disabled id='seleref_".$fila->escuelaId."' name='referentes' >";
 							echo	"<option value='0001'>Sin Asignar</option>";
-							while ($fila1 = mysqli_fetch_object($buscar_ett))
+							while ($fila1 = mysqli_fetch_object($buscar_supervisor))
 									{
-										$persona = new Persona($fila1->personaId);
-										$persona->getContacto();
-										$nombre=$persona->getNombre();
-										$apellido=$persona->getApellido();
-										if($fila1->referenteId==$_SESSION["referenteId"])
-											echo	"<option value='".$fila1->referenteId."' selected >$apellido".",&nbsp;".$nombre."</option>";
-										else
-											echo	"<option value='".$fila1->referenteId."' >$apellido".",&nbsp;".$nombre."</option>";
+											echo	"<option value='".$fila1->referenteId."' >$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
 									}
-
-							echo "</select></div>";
+									echo "</select></div>";
 			  		}else{
+			  			echo "<div class='divSimple' id='sel_".$fila->escuelaId.$encontrado."'>";
 
-			  			//echo "<input type='hidden' id='esc_$fila->referenteId.$encontrado'/>";
+			  			$supervisor = new Referente();
+							$buscar_supervisor = $supervisor->buscarRef2('SNP');
 
-
-			  			echo "<div class='divSimple' id='sel_".$fila->referenteIdPmi.$encontrado."'>";
-
-			  			$ett= new Referente();
-							$buscar_ett=$ett->buscarRef2('ATT');
-
-			  			echo "<select  disabled id='seleref_".$fila->referenteIdPmi.$encontrado."' name='referentes' >";
+			  			echo "<select  disabled id='seleref_".$fila->escuelaId.$encontrado."' name='referentes' >";
 			  			//echo	"<option value=0>Todos</option>";
 			  			echo	"<option value='0001'>Sin Asignar</option>";
 			  			while ($fila1 = mysqli_fetch_object($buscar_ett))
 			  			{
-			  				$persona = new Persona($fila1->personaId);
-			  				$persona->getContacto();
-			  				$nombre=$persona->getNombre();
-			  				$apellido=$persona->getApellido();
-			  				if($fila1->referenteIdPmi==$_SESSION["referenteId"])
-								echo	"<option value='".$fila1->referenteId."' selected >$apellido".",&nbsp;".$nombre."</option>";
-								//echo	"<option value='$fila1->referenteId' >$apellido".",&nbsp;".$nombre."</option>";
-								}
+			  				echo	"<option value='".$fila1->referenteId."' selected >$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
+							}
 
 			  			echo "</select></div>";
 
 
 			  		}
 
-
-
-			  				if($encontrado==0)
-			  					echo "<div class='divSimple'  value='esc_".$fila->escuelaId."'  id='ref_".$fila->referenteIdPmi."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".$apellidoPersona.", ".$nombrePersona.
+		  				if($encontrado==0)
+			  					echo "<div class='divSimple'  value='esc_".$fila->escuelaId."'  id='ref_".$fila->escuelaId."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$objReferente->personaId."&referenteId=".$fila->referenteId."'>".$objReferente->apellido.", ".$objReferente->nombre.
 					  			"</a></div>";
 					  		else
-					  			echo "<div class='divSimple' value='esc_".$fila->escuelaId."' id='ref_".$fila->referenteIdPmi.$encontrado."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".$apellidoPersona.", ".$nombrePersona.
+					  			echo "<div class='divSimple' value='esc_".$fila->escuelaId."' id='ref_".$fila->escuelaId.$encontrado."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$objReferente->personaId."&referenteId=".$fila->referenteId."'>".$objReferente->apellido.", ".$objReferente->nombre.
 					  			"</a></div>";
 
 					  		echo "<div class='divSimple1'>&nbsp;&nbsp;&nbsp;";
 
 					  		if($encontrado==0)
 
-					  			echo "<input type='image' src='img/iconos/modificar_p.png'  height='22' width='22' value='".$fila->referenteIdPmi."' id='b_".$fila->referenteIdPmi."'/>
-					  	  		<input type='image' src='img/iconos/guardar.png'  height='22' width='22' value='".$fila->referenteIdPmi."' id='g_".$fila->referenteIdPmi."'/>
+					  			echo "<input type='image' src='img/iconos/modificar_p.png'  height='22' width='22' value='".$fila->escuelaId."' id='b_".$fila->escuelaId."'/>
+					  	  		<input type='image' src='img/iconos/guardar.png'  height='22' width='22' value='".$fila->escuelaId."' id='g_".$fila->escuelaId."'/>
 					  	  	</div>";
 					  	  	else
-					  	  		echo "<input type='image' src='img/iconos/modificar_p.png'  height='22' width='22' value='".$fila->referenteIdPmi.$encontrado."' id='b_".$fila->referenteIdPmi.$encontrado."'/>
-					  	  		<input type='image' src='img/iconos/guardar.png'  height='22' width='22' value='".$fila->referenteIdPmi.$encontrado."' id='g_".$fila->referenteIdPmi.$encontrado."'/>
+					  	  		echo "<input type='image' src='img/iconos/modificar_p.png'  height='22' width='22' value='".$fila->escuelaId.$encontrado."' id='b_".$fila->escuelaId.$encontrado."'/>
+					  	  		<input type='image' src='img/iconos/guardar.png'  height='22' width='22' value='".$fila->escuelaId.$encontrado."' id='g_".$fila->escuelaId.$encontrado."'/>
 					  	  		</div>";
 
 
@@ -145,6 +99,8 @@ if(($_POST))
 			  		*			  		<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$r_personaId."&referenteId=".$fila->referenteId."'>".
 			  				"<img  src='img/iconos/modificar_p.png' alt='modificar' longdesc='Modificar Datos de Persona'></a></div></td>";
 			  		**/
+
+
 			  		echo "</tr>";
 		  	  		echo "\n";
 
@@ -196,9 +152,9 @@ if(($_POST))
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 var escuela_id=escuela.substring(4,8);
 
-					 var pmi = 'pmi'
+					 var snp = 'snp'
 
-					 $.post("includes/mod_cen/clases/escuela.php", { pmi:pmi,referente_id: referente_id, escuela_id: escuela_id }, function(data){
+					 $.post("includes/mod_cen/clases/escuela.php", {snp:snp,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);
 					 var dato = resultado['estado'];
 
