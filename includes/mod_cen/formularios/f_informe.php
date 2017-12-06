@@ -112,16 +112,39 @@
        </select>
        </div>
    </div>
+<?php
+if($_SESSION['tipo']=='Facilitador'){
+echo'  <div class="form-group">';
+  echo'  <div class="col-md-12">';
+    echo'  <label class="control-label">Fecha de visita obligatoria</label>';
+echo'   </div>';
+  echo' <div class="col-md-12">';
+    echo' <input required type="date"  name="fechaVisita" id="fechaVisita"  class="form-control"
+     value="'.$informe->fechaVisita.'"';
+      if($informe->informeId<>"" && $informe->referenteId<>$_SESSION['referenteId']){
+        echo 'disabled';
+      }
+echo'   </div>';
+echo'  </div>';
+}else{
+  echo'  <div class="form-group">';
+    echo'  <div class="col-md-12">';
+      echo'  <label class="control-label">Fecha de visita (opcional)</label>';
+  echo'   </div>';
+    echo' <div class="col-md-12">';
+      echo' <input type="date"  name="fechaVisita" id="fechaVisita"  class="form-control"
+       value="'.$informe->fechaVisita.'"';
+        if($informe->informeId<>"" && $informe->referenteId<>$_SESSION['referenteId']){
+          echo 'disabled';
+        }
+  echo'   </div>';
+  echo'  </div>';
+}
 
-     <div class="form-group">
-       <div class="col-md-12">
-         <label class="control-label">Fecha de visita (opcional)</label>
-      </div>
-      <div class="col-md-12">
-        <input type='date'  name="fechaVisita" id="fechaVisita"  class="form-control"
-        value="<?php echo $informe->fechaVisita.'"'; if($informe->informeId<>"" && $informe->referenteId<>$_SESSION['referenteId']){echo 'disabled';}?>>
-      </div>
-    </div>
+
+
+ ?>
+
 
     <div class="form-group">
        <div class="col-md-12">
