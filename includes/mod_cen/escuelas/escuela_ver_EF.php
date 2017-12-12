@@ -376,7 +376,7 @@ while ($filaCurso = mysqli_fetch_object($Cursos)) {
 
 echo "<tbody >";
 	echo"<tr >";
-	echo"<td>".$filaCurso->gradoAño."  ".$filaCurso->seccionDivision."</td>";
+	echo"<td>".$filaCurso->gradoAño."°  ".$filaCurso->seccionDivision."°</td>";
 	echo"<td>".$filaCurso->turno."</td>";
 	echo"<td>".$filaCurso->nivel."</td>";
 	echo"<td>".$filaCurso->horasSemanales."</td>";
