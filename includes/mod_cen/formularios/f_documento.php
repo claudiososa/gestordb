@@ -67,7 +67,7 @@
 
       <div class="form-group" >
         <div class="col-md-12">
-          <label class="control-label">Adjuntar archivos (Peso máximo por archivo 1024 kb)</label>
+          <label class="control-label">Adjuntar archivos (Peso máximo por archivo 10 MB)</label>
         </div>
         <div class="col-md-12" id="input2">
           <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
