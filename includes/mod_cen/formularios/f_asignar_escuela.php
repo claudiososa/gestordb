@@ -1,7 +1,16 @@
 <div class="container">
 	<form class="form-horizontal" action='' method='POST'>
 		<div class="form-group">
-			<label class="col-md-5 col-md-offset-2"><h4>Asignación de Escuelas - Busqueda de Escuelas</h4></label>
+
+			<?php
+			//.Maestro::asignarEscuela($_GET['tipo']).
+			if (isset($_GET['tipo'])){
+				$titulo = Maestro::asignarEscuela($_GET['tipo']);
+				echo '<label class="col-md-5 col-md-offset-2"><h4>Asignación de Escuelas para</h4><h4 class="alert alert-success"> '.$titulo.' </h4></label>';
+			} else {
+				echo '<label class="col-md-5 col-md-offset-2"><h4>Asignación de Escuelas - Busqueda de Escuelas</h4></label>';
+			}
+			?>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-md-2">Número</label>
