@@ -111,7 +111,7 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
           // fin de busqueda mail de referente
 
 
-          echo "Se creo permiso".$value;
+          //echo "Se creo permiso".$value;
 
           $enviado=$doc_guardado->enviarMail($value,$remitente,$_POST["tituloDoc"]);
           //echo "\n".$destino."\n";
