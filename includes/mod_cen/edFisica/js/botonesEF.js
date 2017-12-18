@@ -46,7 +46,7 @@ $(document).ready(function() {
 
     $(this).parent().children('.bodyprof').children('.asignarCurso').empty()
 
-   var numeroGuardarIdCurso= $(this).attr("id").substr(0,4)
+   var numeroGuardarIdCurso= $(this).attr("id").substr(0,5)
    //alert (numeroGuardarIdCurso)
     $(this).parent().children('.bodyprof').children('.asignarCurso').append(`
       <button id="btnHoraSandwich" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2">
@@ -65,13 +65,17 @@ $(document).ready(function() {
                   <label  for="courseName">Curso</label>
                   <select class="form-control" name="courseName" id="courseName">
                       <option value="0">Seleccione</option>
-                      <option value="1°">1°</option>
-                      <option value="2°">2°</option>
-                      <option value="3°">3°</option>
-                      <option value="4°">4°</option>
-                      <option value="5°">5°</option>
-                      <option value="6°">6°</option>
-                      <option value="7°">7°</option>
+                      <option value="1">1°</option>
+                      <option value="2">2°</option>
+                      <option value="3">3°</option>
+                      <option value="4">4°</option>
+                      <option value="5">5°</option>
+                      <option value="6">6°</option>
+                      <option value="7">7°</option>
+                      <option value="8">8°</option>
+                      <option value="9">9°</option>
+                        <option value="P">P</option>
+                        <option value="NULL">NULL</option>
                   </select>
                 </div>
 
@@ -79,26 +83,21 @@ $(document).ready(function() {
                   <label  for="divisionName">Division</label>
                   <select class="form-control" name="divisionName" id="divisionName">
                       <option value="0">Seleccione</option>
-
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                      <option value="C">C</option>
-                      <option value="D">D</option>
-                      <option value="E">E</option>
-                      <option value="F">F</option>
-                      <option value="G">G</option>
-                      <option value="1ra">1ra</option>
-                      <option value="2da">2da</option>
-                      <option value="3ra">3ra</option>
-                      <option value="4ta">4ta</option>
-                      <option value="5ta">5ta</option>
-                      <option value="6ta">6ta</option>
-                      <option value="7ma">7ma</option>
-                      <option value="8va">8va</option>
-                      <option value="9na">9na</option>
-                      <option value="10ma">10ma</option>
-                      <option value="11va">11va</option>
-                      <option value="Otro">Otro</option>
+                      <option value="1">1ra</option>
+                      <option value="2">2da</option>
+                      <option value="3">3ra</option>
+                      <option value="4">4ta</option>
+                      <option value="5">5ta</option>
+                      <option value="6">6ta</option>
+                      <option value="7">7ma</option>
+                      <option value="8">8va</option>
+                      <option value="9">9na</option>
+                      <option value="10">10ma</option>
+                      <option value="11">11va</option>
+                      <option value="12">12va</option>
+                      <option value="GI">GI</option>
+                      <option value="G2">G2</option>
+                      <option value="NULL">NULL</option>
                   </select>
                 </div>
 
@@ -106,13 +105,15 @@ $(document).ready(function() {
                   <label  for="turn">Turno</label>
                   <select class="form-control" name="turn" id="turn">
                     <option value="0">Seleccione</option>
-                    <option value="Mañana">Mañana</option>
-                    <option value="Intermedio">Intermedio</option>
-                    <option value="Tarde">Tarde</option>
-                    <option value="Vespertino">Vespertino</option>
-                    <option value="Noche">Noche</option>
-                    <option value="Alternancia">Alternacia </option>
-                    <option value="Completo">Completo</option>
+                    <option value="MAÑANA">Mañana</option>
+                    <option value="TARDE">Tarde</option>
+                    <option value="VESPERTINO">Vespertino</option>
+                    <option value="NOCHE">Noche</option>
+                    <option value="ALTERNANCIA">Alternancia</option>
+                    <option value="INTERMEDIO">Intermedio </option>
+                    <option value="COMPLETO">Completo</option>
+                    <option value="MAÑANA Y TARDE">Mañana y tarde</option>
+                    <option value="SIN DATOS">Sin datos</option>
                   </select>
                 </div>
 
@@ -120,16 +121,16 @@ $(document).ready(function() {
                   <label  for="nivel">Nivel</label>
                   <select class="form-control" name="nivel" id="nivel">
                     <option value="0">Seleccione</option>
-                    <option value="C. Basico">Ciclo Básico</option>
-                    <option value="C. Basico Comun">Ciclo Básico Común</option>
-                    <option value="C. Basico Tecnico">Ciclo Básico Técnico</option>
-                    <option value="C. Orientado">Ciclo Orientado</option>
-                    <option value="C. Superior">Ciclo Superior</option>
+                    <option value="CICLO BASICO">Ciclo Básico</option>
+                    <option value="CICLO BASICO COMUN">Ciclo Básico Común</option>
+                    <option value="CICLO BASICO TECNICO">Ciclo Básico Técnico</option>
+                    <option value="CICLO ORIENTADO">Ciclo Orientado</option>
+                    <option value="CICLO SUPERIOR">Ciclo Superior</option>
                     <option value="EGB">EGB</option>
-                    <option value="Inicial">Inicial</option>
-                    <option value="Polimodal">Polimodal</option>
-                    <option value="Secundario">Secundario</option>
-                    <option value="Superior">Superior</option>
+                    <option value="INICIAL">Inicial</option>
+                    <option value="POLIMODAL">Polimodal</option>
+                    <option value="SECUNDARIO">Secundario</option>
+                    <option value="SUPERIOR">Superior</option>
                   </select>
                 </div>
 
@@ -144,9 +145,9 @@ $(document).ready(function() {
                     <label  for="tipoCargo">Tipo de Cargo</label>
                     <select class="form-control" name="tipoCargo" id="tipoCargo">
                       <option value="0">Seleccione</option>
-                      <option value="Titular">Titular</option>
-                      <option value="Interino">Interino</option>
-                      <option value="Suplente">Suplente</option>
+                      <option value="TITULAR">Titular</option>
+                      <option value="INTERINO">Interino</option>
+                      <option value="SUPLENTE">Suplente</option>
                       <option value="Otro">Otro</option>
                     </select>
                   </div>

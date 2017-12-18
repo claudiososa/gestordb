@@ -22,14 +22,14 @@ if(($_POST))
 			  	echo "<th>Referente PMI a Cargo</th>";
 				echo "</tr>";
 				//crear objeto vacio de tipo autoridades.
-				$objAutoridades = new Autoridades();
+				$objReferenteEscuela = new ReferenteEscuela();
 
 				//Recorre todas las escuelas encontradas de acuerdo a lo ingresado en el buscador
 				while ($fila = mysqli_fetch_object($resultado))
 				{
-					$objAutoridades->escuelaId = $fila->escuelaId;
-					$buscarAutoridad = $objAutoridades->buscarAutoridad('SNP');
-					if ($buscarAutoridad!=NULL) {
+					$objReferenteEscuela->escuelaId = $fila->escuelaId;
+					$buscarReferente = $objReferenteEscuela->buscarReferente('SNP');
+					if ($buscarReferente!=NULL) {
 						$encontrado=1;
 					}
 						echo "<td>".$fila->numero."</td>";
