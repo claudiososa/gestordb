@@ -20,6 +20,30 @@ class Maestro{
 		return $arrayMeses;
 	}
 
+
+	public static function asignarEscuela($tipo)
+	{
+		switch ($tipo) {
+			case '4':
+				$resultado = 'Supervisor de Nucleo Primaria';
+				break;
+			case '5':
+				$resultado = 'Supervisor Especial Primaria';
+				break;
+			case '6':
+				$resultado = 'Supervisor Inicial';
+				break;
+			case '7':
+				$resultado = 'Supervisor Hospitalaria';
+					break;
+			default:
+				# code...
+				break;
+		}
+
+		return $resultado;
+	}
+
 	public static function debbugPHP($variable)
 	{
 		ob_start();

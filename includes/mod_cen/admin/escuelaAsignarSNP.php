@@ -1,10 +1,11 @@
 <?php
+include_once("includes/mod_cen/clases/maestro.php");
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
 include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/referente.php");
-include_once("includes/mod_cen/clases/ReferenteEscuela.php");
+include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 include_once("includes/mod_cen/formularios/f_asignar_escuela.php");
 
@@ -22,15 +23,16 @@ if(($_POST))
 			  	echo "<th>Referente PMI a Cargo</th>";
 				echo "</tr>";
 				//crear objeto vacio de tipo autoridades.
-				$objReferenteEscuela = new ReferenteEscuela();
+				$objEscuelaReferentes = new EscuelaReferentes();
 
 				//Recorre todas las escuelas encontradas de acuerdo a lo ingresado en el buscador
 				while ($fila = mysqli_fetch_object($resultado))
 				{
-					$objReferenteEscuela->escuelaId = $fila->escuelaId;
-					$buscarReferente = $objReferenteEscuela->buscarReferente('SNP');
-					if ($buscarReferente!=NULL) {
-						$encontrado=1;
+					$objEscuelaReferentes->escuelaId = $fila->escuelaId;
+					$buscarReferente = $objEscuelaReferentes->buscarReferente('SNP');
+					//var_dump($buscarReferente);
+					if ($buscarReferente <>'0') {
+						$encontrado = $buscarReferente;
 					}
 						echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
@@ -41,7 +43,7 @@ if(($_POST))
 			  		$fila1 = mysqli_fetch_object($busca_loc);
 			  		echo "<td>".$fila1->nombre."</td>";
 			  		echo "<td>";
-			  		if($encontrado==0){//SI LA ESCUELA ENCONTRADA NO TIENE REFERENTE ACARGO
+			  		if($encontrado=='0'){//SI LA ESCUELA ENCONTRADA NO TIENE REFERENTE ACARGO
 			  				//echo "<div class='divSimple' id='sel_".$fila->escuelaId."'>";
 			  			$supervisor= new Referente();
 							$buscar_supervisor=$supervisor->buscarRef2("SNP");
@@ -62,9 +64,14 @@ if(($_POST))
 			  			echo "<select  disabled id='seleref_".$fila->escuelaId.$encontrado."' name='referentes' >";
 			  			//echo	"<option value=0>Todos</option>";
 			  			echo	"<option value='0001'>Sin Asignar</option>";
-			  			while ($fila1 = mysqli_fetch_object($buscar_ett))
+			  			while ($fila1 = mysqli_fetch_object($buscar_supervisor))
 			  			{
-			  				echo	"<option value='".$fila1->referenteId."' selected >$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
+								if ($fila1->referenteId==$encontrado) {
+									echo	"<option selected value='".$fila1->referenteId."' selected >$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
+								}else{
+									echo	"<option value='".$fila1->referenteId."' selected >$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
+								}
+
 							}
 
 			  			echo "</select></div>";
@@ -152,9 +159,10 @@ if(($_POST))
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 var escuela_id=escuela.substring(4,8);
 
-					 var snp = 'snp'
+					 //var snp = 'snp'
+					 var tipo = '1'
 
-					 $.post("includes/mod_cen/clases/escuela.php", {snp:snp,referente_id: referente_id, escuela_id: escuela_id }, function(data){
+					 $.post("includes/mod_cen/clases/escuela.php", {tipo:tipo,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);
 					 var dato = resultado['estado'];
 
