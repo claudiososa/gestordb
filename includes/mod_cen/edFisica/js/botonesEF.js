@@ -137,7 +137,7 @@ $(document).ready(function() {
                 <div class="form-group">
                   <label  for="cantidadHoras">Cantidad Horas Semanal</label>
                   <br>
-                  <input type="number" name="cantidadHoras" min="1" max="20" value="1" id="cantidadHoras">
+                  <input type="number" name="cantidadHoras" min="1" max="40" value="1" id="cantidadHoras">
                 </div>
 
 <input type="hidden" id="prueba" name="prueba" value="25">
