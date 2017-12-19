@@ -1,6 +1,7 @@
 <?php
 
 include_once('conexion.php');
+include_once('conexionv2.php');
 include_once("maestro.php");
 
 class EscuelaReferentes
@@ -66,15 +67,13 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="UPDATE escuelaReferentes SET  escuelaId ='$this->escuelaId', tipoId = '$this->tipoId',
-		personaId = '$this->personaId', mañana = '$this->mañana', intermedio = '$this->intermedio', tarde = '$this.tarde',
+		personaId = '$this->personaId', mañana = '$this->mañana', intermedio = '$this->intermedio', tarde = '$this->tarde',
 		vespertino = '$this->vespertino', noche = '$this->noche', extendida = '$this->extendida'
 		WHERE escuelaReferentesId = '$this->escuelaReferentesId'";
-
 
 		//echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
-
 		}else
 		{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
@@ -146,22 +145,30 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
     	return $result;
     }
 
-	public function buscarAutoridad($tipo=NULL)
+	public function buscarReferente($tipo=NULL)
 		{
 			$nuevaConexion=new Conexion();
 			$conexion=$nuevaConexion->getConexion();
 
-			$sentencia="SELECT escuelaReferentes.escuelaid,escuelaReferentes.tipoReferente,personas.personaId,
-									personas.nombre,personas.apellido
+			$sentencia="SELECT escuelaReferentes.escuelaid,escuelaReferentes.tipoId,personas.personaId,
+									personas.nombre,personas.apellido,referentes.referenteId
 			 						FROM escuelaReferentes
 									INNER JOIN personas
-									ON personas.personasId=escuelaReferentes.personaId
-									INNER JOIN tipoEscuelaReferentes
-									ON tipoEscuelaReferentes.tipoId=escuelaReferentes.tipoId
-									WHERE tipoEscuelaReferentes.tipoReferente =$tipo";
+									ON personas.personaId=escuelaReferentes.personaId
+									INNER JOIN referentes
+									ON referentes.personaId=personas.personaId
+									INNER JOIN tipoReferentes
+									ON tipoReferentes.tipoId=escuelaReferentes.tipoId
+									WHERE tipoReferentes.tipoReferente ='".$tipo."' AND escuelaReferentes.escuelaId=$this->escuelaId";
 			$sentencia.="  ORDER BY escuelaReferentes.escuelaReferentesId ASC";
-			//return $sentencia;
-			return mysqli_fetch_object($conexion->query($sentencia));
+
+			if (mysqli_num_rows($conexion->query($sentencia))==0) {
+				$dato = '0';
+			}else{
+				$id = mysqli_fetch_object($conexion->query($sentencia));
+				$dato = $id->referenteId;
+			}
+			return $dato;
 
 
 			//return 'hola mundo';
@@ -244,6 +251,24 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		//}
 		echo $sentencia;
 		return $conexion->query($sentencia);
+
+	}
+
+
+	public function existe()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia="SELECT * FROM escuelaReferentes
+		 						WHERE escuelaId=".$this->escuelaId." AND tipoId=".$this->tipoId;
+
+		$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));
+		if ($cantidad > 0) {
+			 $id = mysqli_fetch_object($bd->ejecutar($sentencia));
+			 $dato = $id->escuelaReferentesId;
+			 return $dato;
+		}else{
+			return 0;
+		}
 
 	}
 

@@ -589,7 +589,7 @@ $estado=array();
 if(isset($_POST["referente_id"])) {
 	//incluye clase referente - crear referente y busca segun el referente_id enviado por post
 	include_once('referente.php');
-	include_once('Autoridades.php');
+	include_once('EscuelaReferentes.php');
 	$referente=new Referente($_POST["referente_id"]);
 	$buscar_referente=$referente->buscar();
 	$dato_referente=mysqli_fetch_object($buscar_referente);
@@ -602,9 +602,16 @@ if(isset($_POST["referente_id"])) {
 	$dato_persona=mysqli_fetch_object($buscar_persona);
 	//********************************************************************************
 
-	if(isset($_POST['snp'])){
-		$autoridad = new Autoridades(null,$_POST["escuela_id"],'1',$dato_persona->personaId);
-		$autoridad->agregar();
+	if(isset($_POST['tipo'])){
+		$escuelaReferentes = new EscuelaReferentes(null,$_POST["escuela_id"],$_POST['tipo'],$dato_persona->personaId);
+		$buscarReferente = $escuelaReferentes->existe();
+		if ($buscarReferente==0) {
+			$escuelaReferentes->agregar();
+		}else{
+			$escuelaReferentes->escuelaReferentesId = $buscarReferente;
+			$escuelaReferentes->editar();
+		}
+
 	}else{
 		$escuela=new Escuela($_POST["escuela_id"],$_POST["referente_id"]);
 			//busca escueala de acuerdo a escuelaId enviado por post y actualiza el referenteId acargo del colegio

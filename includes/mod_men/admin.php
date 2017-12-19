@@ -21,6 +21,7 @@
         <ul class="dropdown-menu">
               <li><a href="index.php?mod=slat&men=admin&id=6">Asignar Escuelas Conectar</a></li>
               <li><a href="index.php?mod=slat&men=admin&id=8">Asignar Escuelas PMI</a></li>
+              <li><a href="index.php?mod=slat&men=admin&id=15&tipo=4">Asignar Supervisor Primaria Nucleo</a></li>
         </ul>
       </li>
 
