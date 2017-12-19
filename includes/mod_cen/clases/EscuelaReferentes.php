@@ -159,14 +159,13 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 									ON referentes.personaId=personas.personaId
 									INNER JOIN tipoReferentes
 									ON tipoReferentes.tipoId=escuelaReferentes.tipoId
-									WHERE tipoReferentes.tipoReferente ='".$tipo."' AND escuelaReferentes.escuelaId=$this->escuelaId";
+									WHERE escuelaReferentes.tipoId =".$tipo." AND escuelaReferentes.escuelaId=$this->escuelaId";
 			$sentencia.="  ORDER BY escuelaReferentes.escuelaReferentesId ASC";
-
+			//echo $sentencia;
 			if (mysqli_num_rows($conexion->query($sentencia))==0) {
 				$dato = '0';
 			}else{
-				$id = mysqli_fetch_object($conexion->query($sentencia));
-				$dato = $id->referenteId;
+				$dato = mysqli_fetch_object($conexion->query($sentencia));
 			}
 			return $dato;
 

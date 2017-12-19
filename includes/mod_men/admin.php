@@ -3,9 +3,9 @@
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar">cas</span>
-        <span class="icon-bar">das</span>
-        <span class="icon-bar">dfdf</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="index.php"><div class="glyphicon glyphicon glyphicon-home">
       </div></a>
@@ -71,6 +71,7 @@
 
 
 		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>
+      <li><a href="index.php?mod=slat&men=escuelas&id=31">Mis escuelas super</a></li>
 
 
 

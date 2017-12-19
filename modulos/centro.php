@@ -277,7 +277,10 @@
 
 									include("includes/mod_cen/escuelas/listarAutoridades.php");
 								  break;
+						 case 31:
 
+								 	include("includes/mod_cen/escuelas/misEscuelasSuper.php");
+								 	break;
 
 
 

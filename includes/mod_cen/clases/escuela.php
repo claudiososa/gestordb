@@ -609,7 +609,7 @@ if(isset($_POST["referente_id"])) {
 			$escuelaReferentes->agregar();
 		}else{
 			$escuelaReferentes->escuelaReferentesId = $buscarReferente;
-			$escuelaReferentes->editar();
+			$editar_escuela= $escuelaReferentes->editar();
 		}
 
 	}else{
