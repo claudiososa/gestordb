@@ -7,11 +7,11 @@ include_once("includes/mod_cen/clases/TipoAutoridades.php");
 
 
 
-if(isset($_POST["guardar_tipo_autoridad"]) AND $_POST["cargoAutoridad"]<>"" AND $_POST["login"]<>"" ){
+if(isset($_POST["guardar_tipo_autoridad"]) AND $_POST["tipoReferente"]<>"" AND $_POST["cargoAutoridad"]<>"" AND $_POST["login"]<>"" ){
 
 
   
-  $nuevaAutoridad = new TipoAutoridades(null,$_POST["cargoAutoridad"],$_POST["login"]);
+  $nuevaAutoridad = new TipoAutoridades(null,$_POST["tipoReferente"],$_POST["cargoAutoridad"],$_POST["login"]);
 
   $guardar = $nuevaAutoridad->agregar();
 

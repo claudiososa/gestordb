@@ -21,11 +21,20 @@
       </div>
 
 
+       <div class="form-group">
+        <div class="col-md-12">
+          <label class="control-label" for="tipoReferente">Tipo Autoridad Abreviado</label>
+        </div>
+        <div class="col-md-12">
+          <input type="text" class="form-control" name="tipoReferente" value="<?php echo $_GET["tipoReferente"]; ?>">
+        </div>
+      </div>
+
 
 
       <div class="form-group">
         <div class="col-md-12">
-          <label class="control-label" for="cargoAutoridad">Nombre de Autoridad</label>
+          <label class="control-label" for="cargoAutoridad">Tipo Autoridad Nombre</label>
         </div>
         <div class="col-md-12">
           <input type="text" class="form-control" name="cargoAutoridad" value="<?php echo $_GET["cargoAutoridad"]; ?>">
@@ -42,7 +51,7 @@
             <option selected value='<?php echo $_GET["login"]; ?> '>
              <?php 
 
-             if ($_GET["estado"] == 1) {
+             if ($_GET["login"] == 1) {
                echo "Permitido";
              } else {
                echo "Denegado";

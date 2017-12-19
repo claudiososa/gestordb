@@ -37,7 +37,7 @@ $objautoridad = new Autoridades();
       echo "<tr>";
       echo "<td>".$fila->autoridadesId."</td>";
       echo "<td>".$fila->escuelaId."</td>";
-      echo "<td>".$fila->tipoAutoridadId."</td>";
+      echo "<td>".$fila->tipoId."</td>";
       echo "<td>".$fila->personaId."</td>";
       echo "<td>".$fila->mañana."</td>";
       echo "<td>".$fila->intermedio."</td>";
