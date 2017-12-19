@@ -29,10 +29,11 @@ if(($_POST))
 				while ($fila = mysqli_fetch_object($resultado))
 				{
 					$objEscuelaReferentes->escuelaId = $fila->escuelaId;
-					$buscarReferente = $objEscuelaReferentes->buscarReferente('SNP');
+					$buscarReferente = $objEscuelaReferentes->buscarReferente('4');
 					//var_dump($buscarReferente);
 					if ($buscarReferente <>'0') {
-						$encontrado = $buscarReferente;
+						$encontrado = $buscarReferente->referenteId;
+						//var_dump($encontrado);
 					}
 						echo "<td>".$fila->numero."</td>";
 			  		echo "<td>".$fila->cue."</td>";
@@ -66,10 +67,11 @@ if(($_POST))
 			  			echo	"<option value='0001'>Sin Asignar</option>";
 			  			while ($fila1 = mysqli_fetch_object($buscar_supervisor))
 			  			{
+								//echo $fila1->referenteId;
 								if ($fila1->referenteId==$encontrado) {
-									echo	"<option selected value='".$fila1->referenteId."' selected >$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
+									echo	"<option selected value='".$fila1->referenteId."'>$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
 								}else{
-									echo	"<option value='".$fila1->referenteId."' selected >$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
+									echo	"<option value='".$fila1->referenteId."'>$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
 								}
 
 							}
@@ -80,13 +82,15 @@ if(($_POST))
 			  		}
 
 		  				if($encontrado==0)
-			  					echo "<div class='divSimple'  value='esc_".$fila->escuelaId."'  id='ref_".$fila->escuelaId."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$objReferente->personaId."&referenteId=".$fila->referenteId."'>".$objReferente->apellido.", ".$objReferente->nombre.
-					  			"</a></div>";
-					  		else
-					  			echo "<div class='divSimple' value='esc_".$fila->escuelaId."' id='ref_".$fila->escuelaId.$encontrado."'>"."<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$objReferente->personaId."&referenteId=".$fila->referenteId."'>".$objReferente->apellido.", ".$objReferente->nombre.
-					  			"</a></div>";
-
-					  		echo "<div class='divSimple1'>&nbsp;&nbsp;&nbsp;";
+							{
+								echo "<div class='divSimple'  value='esc_".$fila->escuelaId."'  id='ref_".$fila->escuelaId."'>Sin asignar</div>";
+							}else{
+								echo "<div class='divSimple' value='esc_".$fila->escuelaId."' id='ref_".$fila->escuelaId.$encontrado."'>".
+								"<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$objReferente->personaId."&referenteId=".$fila->referenteId."'>".
+								$buscarReferente->apellido.", ".$buscarReferente->nombre.
+								"</a></div>";
+								//echo "<div class='divSimple1'>&nbsp;&nbsp;&nbsp;";
+							}
 
 					  		if($encontrado==0)
 
@@ -160,7 +164,7 @@ if(($_POST))
 					 var escuela_id=escuela.substring(4,8);
 
 					 //var snp = 'snp'
-					 var tipo = '1'
+					 var tipo = '4'
 
 					 $.post("includes/mod_cen/clases/escuela.php", {tipo:tipo,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);
