@@ -10,51 +10,46 @@
   <div class="panel-body">
     <div class="">Accesos rapidos a acciones generales</div>
     <br>
-    <div class="btn-group" role="group" aria-label="...">
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Seleccione Escuela
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">5159 palmeritas</a></li>
-          <li><a href="#">5080</a></li>
-          <li><a href="#">5080</a></li>
-          <li><a href="#">5080</a></li>
-        </ul>
-      </div>
 
-      <div class="btn-group" role="group">
-      <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Acción
-          <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Crear informe</a></li>
-            <li><a href="#">Ver informes</a></li>
+    <form class="form-horizontal" action="" method="POST" >
+  		<div class="form-group">
+  				<div><label class="col-md-3">Seleccione Escuela</label></div>
+  			</div>
+  			<div class="form-group">
+  				<div class="col-md-3">
+  						<select class="form-control" name="" >
+  						<option value="">5159</option>
+              <option value="">5159</option>
+              <option value="">5159</option>
 
+  						</select>
 
-            <li class="dropdown-submenu">
-              <a class="test" tabindex="-1" href="#">Cargar/modificar autoridad</a>
-              <ul class="dropdown-menu">
-                <li><a tabindex="-1" href="#">Super 1</a></li>
-                <li><a tabindex="-1" href="#">Super 2</a></li>
+  				</div>
+  			</div>
 
-              </ul>
-            </li>
+  	</form>
 
-          </ul>
+    <form class="form-horizontal" action="" method="POST" >
+      <div class="form-group">
+          <div><label class="col-md-3">Seleccione Escuela</label></div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+              <select class="form-control" name="" >
+              <option value="">Crear informe</option>
+              <option value="">Ver informes</option>
+              <option value="">Cargar modificar autoridad</option>
 
+              </select>
+
+          </div>
         </div>
 
-        </div>
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default ">
-            ir
-          </button>
+    </form>
 
-        </div>
-      </div> <!-- </div btn-group-->
-
+    <div class="form-group">
+      <div class="col-md-6"><input class="btn btn-primary" type="submit" value="ir"></div>
+    </div>
 
   </div><!--</div panel-body-->
 </div><!-- </div panel default -->
