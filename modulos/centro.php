@@ -701,11 +701,25 @@
 														break;		
 									case 18:
 														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
-																include("includes/mod_cen/admin/escuelaAsignarSh.php");
+																include("includes/mod_cen/admin/escuelaAsignarSH.php");
 														}else {
 																include("includes/mod_cen/denegado.php");
 														}
-														break;			
+														break;		
+									case 19:
+														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
+																include("includes/mod_cen/admin/escuelaAsignarSR.php");
+														}else {
+																include("includes/mod_cen/denegado.php");
+														}
+														break;	
+									case 20:
+														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
+																include("includes/mod_cen/admin/escuelaAsignarSP.php");
+														}else {
+																include("includes/mod_cen/denegado.php");
+														}
+														break;		
 				}
 
 			//   default:
