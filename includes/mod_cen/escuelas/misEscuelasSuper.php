@@ -1,3 +1,8 @@
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
+<?php
+include_once 'includes/mod_cen/clases/EscuelaReferentes.php';
+include_once 'includes/mod_cen/clases/escuela.php';
+?>
 
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA DESKTOP-->
@@ -17,16 +22,22 @@
   			</div>
   			<div class="form-group">
   				<div class="col-md-3">
-  						<select class="form-control" name="" >
-  						<option value="">5159</option>
-              <option value="">5159</option>
-              <option value="">5159</option>
-
-  						</select>
-
+            <select class="form-control" name="escuelaId" id="escuelaId" >
+              <option value="0">Seleccione...</option>
+            <?php
+            $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['personaId']);
+            $buscarEscuelas = $escuelasCargo->buscar();
+            $escuela = new Escuela();
+            while ($row = mysqli_fetch_object($buscarEscuelas)) {
+              $escuela->escuelaId=$row->escuelaId;
+              $buscarEscuela = $escuela->buscar();
+              $infoEscuela = mysqli_fetch_object($buscarEscuela);
+              echo '<option value="'.$row->escuelaId.'">'.$infoEscuela->numero.' '.substr($infoEscuela->nombre,0,30).'</option>';
+            }
+          ?>
+          </select>
   				</div>
   			</div>
-
   	</form>
 
     <form class="form-horizontal" action="" method="POST" >
@@ -35,20 +46,22 @@
         </div>
         <div class="form-group">
           <div class="col-md-3">
-              <select class="form-control" name="" >
-              <option value="">Crear informe</option>
-              <option value="">Ver informes</option>
-              <option value="">Cargar modificar autoridad</option>
-
+              <select class="form-control" name="" id="modulo">
+                <option value="informe&id=1">Crear informe</option>
+                <option value="informe&id=2">Ver informes</option>
+                <option value="">-------------</option>
+                <option value="director">Director</option>
+                <option value="">Cargar modificar autoridad</option>
               </select>
-
           </div>
         </div>
 
     </form>
 
     <div class="form-group">
-      <div class="col-md-6"><input class="btn btn-primary" type="submit" value="ir"></div>
+      <div class="col-md-6">
+        <input class="btn btn-primary" type="submit" value="ir" id="btn_ir">
+      </div>
     </div>
 
   </div><!--</div panel-body-->
@@ -69,11 +82,34 @@
   </thead>
 
   <tbody>
-    <td>66025230</td>
-    <td>5159</td>
-    <td>palmeritas</td>
-    <td><button type="button" class="btn btn-danger" name="button">3</button></td>
-    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" name="button">5</button></td>
+
+    <?php
+      //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
+      $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['personaId']);
+      $buscarEscuelas = $escuelasCargo->buscar();
+
+      $escuela = new Escuela();
+
+      while ($row = mysqli_fetch_object($buscarEscuelas)) {
+        $escuela->escuelaId=$row->escuelaId;
+        $buscarEscuela = $escuela->buscar();
+        $infoEscuela = mysqli_fetch_object($buscarEscuela);
+
+        //echo $infoEscuela->numero."<br>";
+        echo '<tr>';
+        echo '<td>'.$infoEscuela->cue.'</td>';
+        echo '<td>'.$infoEscuela->numero.'</td>';
+        echo '<td>'.$infoEscuela->nombre.'</td>';
+        echo '<td><button type="button" class="btn btn-danger" name="button">3</button></td>';
+        echo '<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" name="button">5</button></td>';
+        echo '</tr>';
+        ?>
+
+
+        <?php
+      }
+    ?>
+
   </tbody>
 </table>
 

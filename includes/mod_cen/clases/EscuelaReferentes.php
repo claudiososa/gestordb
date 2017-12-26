@@ -178,8 +178,8 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="SELECT * FROM escuelaReferentes
-								INNER JOIN tipoEscuelaReferentes
-								ON tipoEscuelaReferentes.tipoId=escuelaReferentes.tipoId";
+								INNER JOIN tipoReferentes
+								ON tipoReferentes.tipoId=escuelaReferentes.tipoId";
 
 		if($this->escuelaReferentesId!=NULL || $this->escuelaId!=NULL || $this->tipoId!=NULL || $this->personaId!=NULL
 
@@ -202,12 +202,12 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 
 		if($this->tipoId!=NULL)
 		{
-			$sentencia.=" tipoId = $this->tipoId && ";
+			$sentencia.=" escuelaReferentes.tipoId = $this->tipoId && ";
 		}
 
 		if($this->personaId!=NULL)
 		{
-			$sentencia.=" personaId = $this->personaId && ";
+			$sentencia.=" escuelaReferentes.personaId = $this->personaId && ";
 		}
 
 		if($this->mañana!=NULL)
@@ -248,7 +248,7 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		//if(isset($limit)){
 			//$sentencia.=" LIMIT ".$limit;
 		//}
-		echo $sentencia;
+		//echo $sentencia;
 		return $conexion->query($sentencia);
 
 	}
