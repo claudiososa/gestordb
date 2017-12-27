@@ -66,7 +66,7 @@ echo '<div class="container">';
 //echo '</div>';
 ?>
 
-<div class="row hidden-xs">
+<div class="row hidden-xs wow zoomIn">
 	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
@@ -97,7 +97,7 @@ echo '<div class="container">';
 </div>
 <!--vista mobile-->
 
-<div class="row visible-xs">
+<div class="row visible-xs wow zoomIn">
 	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
@@ -109,7 +109,7 @@ echo '<div class="container">';
 
 
 
-<div class="row visible-xs">
+<div class="row visible-xs wow zoomIn">
 
 <div class="col-xs-6"><a href="index.php?mod=slat&men=admin&id=14" style="text-decoration:none">
 	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/contrato.png"><h3 align="center">Informes sobre FPD</h3></a>
@@ -121,7 +121,7 @@ echo '<div class="container">';
 </div>
 
 
-<div class="row visible-xs">
+<div class="row visible-xs wow zoomIn">
 
 	<div class="col-xs-6"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
@@ -776,3 +776,4 @@ $(document).ready(function()
   </div>
   </div>
 </div>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>
