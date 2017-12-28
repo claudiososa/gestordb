@@ -59,7 +59,7 @@ include_once 'includes/mod_cen/clases/escuela.php';
     </form>
 
     <div class="form-group">
-      <div class="col-md-6">
+      <div class="col-md-6" id="padreIr">
         <input class="btn btn-primary" type="submit" value="ir" id="btn_ir">
       </div>
     </div>
