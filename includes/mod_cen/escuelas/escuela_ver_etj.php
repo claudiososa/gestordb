@@ -26,7 +26,7 @@ $b_referente= $c_referente->buscar();
 /**
  * Inclusión de formulario para la busqueda de Escuelas
  */
- echo '<div class="container">';
+ echo '<div class="container wow flipInX">';
  echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (3).png"></div><h4><b>Búsqueda de Escuelas</b></h4>';
 
  echo '<hr>';
@@ -447,3 +447,4 @@ if(($_POST))
 			     } );
 			} );
 			</script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

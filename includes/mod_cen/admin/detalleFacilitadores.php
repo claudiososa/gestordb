@@ -31,13 +31,14 @@ $buscar_ett=$referente_ett->Tipo("Facilitador","Activo");
 //$informeEquipoSupevisorSecundaria = $informes->buscar(20,null,$arrayFacilitadores);
 //$nFacilitador = 0;
 
-echo '<div class="container">';
+echo '<div class="container wow flipInX">';
 
 
 echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/contrato (2).png"></div><h4><b>Informes Facilitadores</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-hacia-la-izquierda (7).png"></h4>';
 
 echo '<hr>';
-
+echo "</div>";
+echo "<div class='container'>";
 echo'<br>';
 echo'<br>';
 echo'<br>';
@@ -282,4 +283,5 @@ echo'<br>';
 </div>
 <br>
 <center>
- <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-hacia-la-izquierda (7).png"></center>
+ <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-hacia-la-izquierda (7).png"></center>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

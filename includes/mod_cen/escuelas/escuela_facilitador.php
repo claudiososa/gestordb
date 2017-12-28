@@ -163,7 +163,7 @@ $cantidad = mysqli_num_rows($resultado);
 
 
 
-	echo "<div class='container'>";
+	echo "<div class='container wow flipInX'>";
 
 	echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>';
 
@@ -319,4 +319,5 @@ $("#tableEscuelas").tableExport({
 </script>
 
 <center>
- <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></center>
+ <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></center>
+ <script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

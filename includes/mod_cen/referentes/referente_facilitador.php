@@ -22,12 +22,13 @@ hr {
 
 
 
-	echo '<div class="container">';
+	echo '<div class="container wow flipInX">';
 
 	echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/equipo (1).png"></div><h4><b>Mis Facilitadores</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></h4>';
 
 	echo '<hr>';
-
+  echo "</div>";
+echo '<div class="container">'; 
 	echo'<br>';
 	echo'<br>';
 	echo'<br>';
@@ -104,7 +105,7 @@ hr {
 ?>
 <br>
 <center>
- <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></center>
+ <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></center>
  <br><br>
 <script type="text/javascript">
 new TableExport(document.getElementsByTagName("table"), {
@@ -117,3 +118,4 @@ new TableExport(document.getElementsByTagName("table"), {
 
 
 </script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>
