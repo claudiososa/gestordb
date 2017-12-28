@@ -1,7 +1,10 @@
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <script type="text/javascript" src="includes/mod_cen/portada/botonLeido.js"></script>
 
+
 <?php
+
+
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
@@ -25,37 +28,37 @@ echo '<div class="container">';
 ?>
 
 
-<div class="row hidden-xs">
+<div class="row hidden-xs wow zoomIn">
 	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
+		<img class="img-responsive " src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
 	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
+		<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
 	</div>
-	<!--<div class="col-lg-3 col-md-6 col-sm-6">
+	<!--<div class="col-lg-3 col-md-6 col-sm-6"> flipInY bounceIn fadeInDownBig
 		<a href="index.php?mod=slat&men=user&id=2"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h4 align="center">Mis ETT</h4></a>
 	</div>-->
 <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
+	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
 </div>
 
 <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=referentes&id=10" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Buscar RTI</h3></a>
+	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Buscar RTI</h3></a>
 </div>
 
 <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
+	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
 </div>
 
 <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
+	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
 </div>
 
 </div>
 
 
-<div class="row visible-xs">
+<div class="row visible-xs wow zoomIn">
 	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
@@ -65,7 +68,7 @@ echo '<div class="container">';
 	</div>
 </div>
 
-<div class="row visible-xs">
+<div class="row visible-xs wow zoomIn">
 
 <div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
 	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
@@ -77,7 +80,7 @@ echo '<div class="container">';
 
 </div>
 
-<div class="row visible-xs">
+<div class="row visible-xs wow zoomIn">
 
 <div class="col-xs-6"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
 	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
@@ -460,3 +463,4 @@ require_once("includes/mod_cen/documentos/documentoPortadas.php")
 </div>
 </div>
 </div>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

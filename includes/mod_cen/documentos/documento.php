@@ -19,12 +19,13 @@ include_once("includes/mod_cen/clases/Documento.php");
 
 
 
-<div class="container-fluid">
+<div class="container-fluid wow flipInX">
 
   	<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (5).png"></div><h4><b>Documentacion</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-doc.png"></h4>
 
     <hr>
-
+  </div>
+<div class="container-fluid">
   <br>
     <br>
    	<br>
@@ -101,5 +102,6 @@ $num=$num+1;
 
 </div>  <!-- cierra  etiqueta row-->
 <center>
- <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-doc.png"></center>
+ <img class="img-responsive img-circle  wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-doc.png"></center>
 </div>  <!-- cierra etiqueta container-fluid -->
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

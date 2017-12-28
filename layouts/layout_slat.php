@@ -34,6 +34,8 @@ session_start();
        	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
        	<link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/bootstrap.css?1"/>
+				<script type="text/javascript" src="js/wow.min.js"></script>
+				<link rel="stylesheet" href="css/animate.min.css">
 
 				<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 				<script src="js/fileinput.min.js"></script>

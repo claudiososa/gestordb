@@ -22,7 +22,6 @@ if(($_POST))
 			  	echo "<th>Localidad</th>";
 			  	echo "<th>Referente PMI a Cargo</th>";
 				echo "</tr>";
-
 				//crear objeto vacio de tipo autoridades.
 				$objEscuelaReferentes = new EscuelaReferentes();
 
@@ -30,7 +29,7 @@ if(($_POST))
 				while ($fila = mysqli_fetch_object($resultado))
 				{
 					$objEscuelaReferentes->escuelaId = $fila->escuelaId;
-					$buscarReferente = $objEscuelaReferentes->buscarReferente('4');
+					$buscarReferente = $objEscuelaReferentes->buscarReferente('5');
 					//var_dump($buscarReferente);
 					if ($buscarReferente <>'0') {
 						$encontrado = $buscarReferente->referenteId;
@@ -48,7 +47,7 @@ if(($_POST))
 			  		if($encontrado=='0'){//SI LA ESCUELA ENCONTRADA NO TIENE REFERENTE ACARGO
 			  				//echo "<div class='divSimple' id='sel_".$fila->escuelaId."'>";
 			  			$supervisor= new Referente();
-							$buscar_supervisor=$supervisor->buscarRef2("SNP");
+							$buscar_supervisor=$supervisor->buscarRef2("SEP");
 
 							echo "<select disabled id='seleref_".$fila->escuelaId."' name='referentes' >";
 							echo	"<option value='0001'>Sin Asignar</option>";
@@ -58,10 +57,11 @@ if(($_POST))
 									}
 									echo "</select></div>";
 			  		}else{
+
 			  			echo "<div class='divSimple' id='sel_".$fila->escuelaId.$encontrado."'>";
 
 			  			$supervisor = new Referente();
-							$buscar_supervisor = $supervisor->buscarRef2('SNP');
+							$buscar_supervisor = $supervisor->buscarRef2('SEP');
 
 			  			echo "<select  disabled id='seleref_".$fila->escuelaId.$encontrado."' name='referentes' >";
 			  			//echo	"<option value=0>Todos</option>";
@@ -164,8 +164,8 @@ if(($_POST))
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 var escuela_id=escuela.substring(4,8);
 
-					 //var snp = 'SNP'
-					 var tipo = '4'
+					 //var snp = 'SEP'
+					 var tipo = '5'
 
 					 $.post("includes/mod_cen/clases/escuela.php", {tipo:tipo,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);

@@ -4,7 +4,7 @@ hr {
 	}
 
 </style>
-<div class="container">
+<div class="container wow flipInX">
 
 	<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/laptop (1).png"></div><h4><b>Video Tutoriales DBMS</b> <img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></h4>
 
@@ -30,4 +30,5 @@ hr {
 
 </div><br><br>
 <center>
- <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></center>
+ <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></center>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>
