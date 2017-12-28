@@ -57,6 +57,7 @@ if(($_POST))
 									}
 									echo "</select></div>";
 			  		}else{
+
 			  			echo "<div class='divSimple' id='sel_".$fila->escuelaId.$encontrado."'>";
 
 			  			$supervisor = new Referente();
@@ -163,7 +164,7 @@ if(($_POST))
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 var escuela_id=escuela.substring(4,8);
 
-					 //var snp = 'sep'
+					 //var snp = 'SEP'
 					 var tipo = '5'
 
 					 $.post("includes/mod_cen/clases/escuela.php", {tipo:tipo,referente_id: referente_id, escuela_id: escuela_id }, function(data){

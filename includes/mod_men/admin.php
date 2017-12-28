@@ -21,12 +21,12 @@
         <ul class="dropdown-menu">
               <li><a href="index.php?mod=slat&men=admin&id=6">Asignar Escuelas Conectar</a></li>
               <li><a href="index.php?mod=slat&men=admin&id=8">Asignar Escuelas PMI</a></li>
-              <li><a href="index.php?mod=slat&men=admin&id=15&tipo=4">Asignar Supervisor Nucleo Primaria</a></li>
-              <li><a href="index.php?mod=slat&men=admin&id=16&tipo=5">Asignar Supervisor Especial Primaria</a></li>
-              <li><a href="index.php?mod=slat&men=admin&id=17&tipo=6">Asignar Supervisor Inicial</a></li>
-              <li><a href="index.php?mod=slat&men=admin&id=18&tipo=7">Asignar Supervisor Hospitalaria</a></li>
-              <li><a href="index.php?mod=slat&men=admin&id=19&tipo=12">Asignar Supervisor Religion</a></li>
-              <li><a href="index.php?mod=slat&men=admin&id=20&tipo=14">Asignar Supervisor Primaria </a></li>
+              <li><a href="index.php?mod=slat&men=admin&id=15&tipo=4">Asignar Supervisor Nucleo Primaria </a></li>
+              <li><a href="index.php?mod=slat&men=admin&id=16&tipo=5">Asignar Supervisor Especial Primaria </a></li>
+              <li><a href="index.php?mod=slat&men=admin&id=17&tipo=6">Asignar Supervisor Inicial </a></li>
+              <li><a href="index.php?mod=slat&men=admin&id=18&tipo=7">Asignar Supervisor Hospitalaria </a></li>
+              <li><a href="index.php?mod=slat&men=admin&id=19&tipo=12">Asignar Supervisor Religion </a></li>
+              <li><a href="index.php?mod=slat&men=admin&id=20&tipo=14">Asignar Supervisor Primaria  </a></li>
                       </ul>
       </li>
 

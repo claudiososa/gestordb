@@ -681,6 +681,7 @@
 									case 15:
 														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
 																include("includes/mod_cen/admin/escuelaAsignarSNP.php");
+														
 														}else {
 																include("includes/mod_cen/denegado.php");
 														}
@@ -688,6 +689,7 @@
 									case 16:
 														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
 																include("includes/mod_cen/admin/escuelaAsignarSEP.php");
+														
 														}else {
 																include("includes/mod_cen/denegado.php");
 														}
@@ -697,6 +699,7 @@
 									case 17:
 														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
 																include("includes/mod_cen/admin/escuelaAsignarSI.php");
+														
 														}else {
 																include("includes/mod_cen/denegado.php");
 														}
@@ -704,6 +707,7 @@
 									case 18:
 														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
 																include("includes/mod_cen/admin/escuelaAsignarSH.php");
+														
 														}else {
 																include("includes/mod_cen/denegado.php");
 														}
@@ -712,6 +716,7 @@
 									case 19:
 														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
 																include("includes/mod_cen/admin/escuelaAsignarSR.php");
+														
 														}else {
 																include("includes/mod_cen/denegado.php");
 														}
@@ -719,6 +724,7 @@
 									case 20:
 														if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
 																include("includes/mod_cen/admin/escuelaAsignarSP.php");
+														
 														}else {
 																include("includes/mod_cen/denegado.php");
 														}
