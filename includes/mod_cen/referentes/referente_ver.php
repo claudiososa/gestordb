@@ -11,13 +11,14 @@ include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/departamentos.php");
 include_once("includes/mod_cen/clases/localidades.php");
 ?>
-<div class="container">
+<div class="container wow flipInX">
 	<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo (1).png"></div><h4><b>Búsqueda de Referentes</b> <img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-buscar-rti.png"></h4>
 
 
 
 	<hr>
-
+</div>
+<div class="container">
 <br>
 	<br>
 	<br>
@@ -143,7 +144,7 @@ echo "</div>";
 ?>
 
 <center>
- <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-buscar-rti.png"></center>
+ <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-buscar-rti.png"></center>
 <script type="text/javascript">
 $(document).ready(function()
 		{
@@ -151,3 +152,4 @@ $(document).ready(function()
 		}
 );
 </script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

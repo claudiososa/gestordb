@@ -16,7 +16,7 @@ hr {
 	$referente= new Referente();
 	$resultado = $referente->Tipo("ETJ","Activo");
 ?>
-<div class="container">
+<div class="container wow flipInX">
 
 
 			<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/reunion (1).png"></div><h4><b>Todos los ETJ</b> <img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-etj.png"></h4>
@@ -87,7 +87,7 @@ hr {
 	echo "</div>";
 ?>
 <center>
- <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-etj.png"></center>
+ <img class="img-responsive img-circle  wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-etj.png"></center>
 <script type="text/javascript">
   new TableExport(document.getElementsByTagName("table"), {
 
@@ -103,3 +103,4 @@ hr {
 
 
 </script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

@@ -23,12 +23,13 @@ $escuela_acargo=$escuela->buscar();
 
 
 
-echo "<div class='container'>";
-echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/seo (5).png"></div><h4><b>Mis RTI</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-misRti.png"></h4>';
+
+echo "<div class='container wow flipInX'>";
+echo'<div class="col-md-1 "><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/seo (5).png"></div><h4><b>Mis RTI</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-misRti.png"></h4>';
 echo '<hr>';
 echo'<br>';
-
-
+echo'</div>';
+echo "<div class='container '>";
 echo'<br>';
 echo'<br>';
 echo'<br>';
@@ -115,7 +116,7 @@ echo "</div>";*/
 
 <br>
 <center>
- <img class="img-responsive img-circle" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-misRti.png"></center>
+ <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-misRti.png"></center>
 <script type="text/javascript">
 $(document).ready(function()
 		{
@@ -136,3 +137,4 @@ $(document).ready(function()
 
 
 </script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>
