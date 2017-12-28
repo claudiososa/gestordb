@@ -36,6 +36,12 @@ class Maestro{
 			case '7':
 				$resultado = 'Supervisor Hospitalaria';
 					break;
+			case '12':
+				$resultado = 'Supervisor de Religión';
+					break;
+			case '14':
+				$resultado = 'Supervisor de Primaria';
+					break;
 			default:
 				# code...
 				break;
