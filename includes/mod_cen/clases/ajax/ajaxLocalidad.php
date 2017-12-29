@@ -1,5 +1,7 @@
 <?php
   include_once('../localidades.php');
+  include_once('../maestro.php');
+
 
   //verifica que venga desde pedido post desde ajax determinado
   if (isset($_POST['local']))
@@ -13,13 +15,12 @@
       $item=array();
 
       $item=['id' => $row->localidadId,
-                'nombre' => $row->nombre];
+            'nombre' => $row->nombre];
       array_push($arrayPrincipal,$item);
     }
     //$dato=mysqli_fetch_object($buscarCurso);
-
-
     //array_push($list,$temporal);
+
     $json = json_encode($arrayPrincipal);
     Maestro::debbugPHP($json);
     echo $json;
