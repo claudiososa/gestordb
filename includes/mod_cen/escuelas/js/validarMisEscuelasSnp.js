@@ -102,7 +102,7 @@ function formPersona()
                 <label for="" class="control-label">CUIL</label>
               </div>
               <div class="col-md-12">
-                <input class="form-control" type="text" name="txtcuit" id="txtcuit" class="hades" />
+                <input class="form-control" type="text" name="txtcuil" id="txtcuil" class="hades" />
               </div>
             </div>
 
@@ -144,7 +144,7 @@ function formPersona()
                 <label for="" class="control-label">Teléfono </label>
               </div>
               <div class="col-md-12">
-                <input class="form-control" type="text" name="txttelefono1" id="txttelefono1" class="hades" />
+                <input class="form-control" type="text" name="txttelefonoM" id="txttelefonoM" class="hades" />
               </div>
             </div>
 
@@ -153,7 +153,7 @@ function formPersona()
                 <label for="" class="control-label">Email </label>
               </div>
               <div class="col-md-12">
-                <input class="form-control" type="text" name="txtemail1" id="txtemail1" class="hades" />
+                <input class="form-control" type="text" name="txtemail" id="txtemail" class="hades" />
               </div>
             </div>
 
@@ -179,15 +179,29 @@ function formPersona()
     `)
   $('#myModal').modal('show')
   $('#btnBuscarDni').click(function() {
-    let dni = $('#inputDni').val()
+    let dni = $('#txtdni').val()
+    //$json = json_encode($arrayPrincipal);
     $.ajax({
       url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
       type: 'POST',
       dataType: 'json',
       data: {dni: dni}
     })
-    .done(function() {
-      console.log("success");
+    .done(function(lista) {
+      for (let item of lista) {
+        if (item.id=='0') {
+          console.log('no encontrado')
+        }else{
+          console.log('encontrado')
+          $('#txtnombre').val(item.nombre)
+          $('#txtapellido').val(item.apellido)
+          $('#txtcuil').val(item.cuil)
+          $('#txttelefonoM').val(item.telefono)
+          $('#txtemail').val(item.email)
+          //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
+        }
+      }
+      //console.log("success");
     })
     .fail(function() {
       console.log("error");
