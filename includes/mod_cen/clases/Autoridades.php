@@ -1,6 +1,7 @@
 <?php
 
 include_once('conexion.php');
+include_once('conexionv2.php');
 include_once("maestro.php");
 
 class Autoridades
@@ -166,6 +167,33 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 
 			//return 'hola mundo';
 		}
+
+
+		public function buscarAutoridad2()
+			{
+				$bd=Conexion2::getInstance();
+
+				$sentencia="SELECT *
+										FROM autoridades
+										WHERE escuelaId=".$this->escuelaId." AND tipoId=".$this->tipoId;
+				$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
+
+
+				$dato = mysqli_fetch_object($bd->ejecutar($sentencia);
+				return $dato->autoridadesId;
+				//if (mysqli_num_rows($bd->ejecutar($sentencia))>0) {
+					//	return $ultimoRegistroId=$bd->lastID();
+						//return '1';
+	 				//return $ultimoRegistroId=$bd->lastID();
+	 		 //}else{
+	 				//	return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+	 		 }
+
+
+				//return 'hola mundo';
+			}
+
+
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();

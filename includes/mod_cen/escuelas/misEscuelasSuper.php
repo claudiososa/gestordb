@@ -17,6 +17,7 @@ include_once 'includes/mod_cen/clases/escuela.php';
     <br>
 
     <form class="form-horizontal" action="" method="POST" >
+      <input type="hidden" name="tipoId" id="tipoId" value="" />
   		<div class="form-group">
   				<div><label class="col-md-3">Seleccione Escuela</label></div>
   			</div>

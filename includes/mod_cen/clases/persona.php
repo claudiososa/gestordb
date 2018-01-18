@@ -70,6 +70,57 @@ class Persona
 
 	}
 
+	public function updateShort()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia="UPDATE personas SET
+		 									apellido = '$this->apellido',
+											nombre = '$this->nombre',
+											cuil = '$this->cuil',
+											telefonoM = '$this->telefonoM',
+											email = '$this->email',
+											localidadId = '$this->localidadId'
+											WHERE personaId = '$this->personaId'";
+			//Maestro::debbugPHP($sentencia);
+		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+				return $ultimoRegistroId=$this->personaId;
+		 }else{
+					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		 }
+
+	}
+
+	public function addShort()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia="INSERT INTO personas (personaId,apellido,nombre,dni,cuil,telefonoC,
+																							telefonoM,direccion,
+																							email,email2,facebook,twitter,localidadId,cpostal,ubicacion)
+		            VALUES (NULL,
+                        '". $this->apellido."',
+												'". $this->nombre."',
+												'". $this->dni."',
+												'". $this->cuil."',
+												'',
+												'". $this->telefonoM."',
+												'',
+												'". $this->email."',
+												'',
+												'',
+												'',
+												'". $this->localidadId."',
+												'',
+												'');";
+
+
+		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
+				//return $ultimoRegistroId=$bd->lastID();
+		 }else{
+					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+		 }
+
+	}
+
 	public function agregar()
 	{
 		$bd=Conexion2::getInstance();
@@ -148,11 +199,25 @@ class Persona
 		$conexion=$nuevaConexion->getConexion();
 
 
-		$sentencia="UPDATE personas SET apellido = '$this->apellido', nombre = '$this->nombre', dni = '$this->dni', cuil = '$this->cuil', telefonoC = '$this->telefonoC', telefonoM = '$this->telefonoM', direccion = '$this->direccion', email = '$this->email', email2 = '$this->email2', facebook = '$this->facebook', twitter = '$this->twitter', localidadId = '$this->localidadId', cpostal = '$this->cpostal' , ubicacion = '$this->ubicacion' WHERE personaId = '$this->personaId'";
+		$sentencia="UPDATE personas SET apellido = '$this->apellido',
+																		nombre = '$this->nombre',
+																		dni = '$this->dni',
+																		cuil = '$this->cuil',
+																		telefonoC = '$this->telefonoC',
+																		telefonoM = '$this->telefonoM',
+																		direccion = '$this->direccion',
+																		email = '$this->email',
+																		email2 = '$this->email2',
+																		facebook = '$this->facebook',
+																		twitter = '$this->twitter',
+																		localidadId = '$this->localidadId',
+																		cpostal = '$this->cpostal',
+																		ubicacion = '$this->ubicacion'
+																	WHERE personaId = '$this->personaId'";
 		//,direccion = '$this->direccion',facebook = '$this->facebook' WHERE personaId = '$this->personaId'
-
+		return $sentencia;
 		if ($conexion->query($sentencia)) {
-			return 1;
+			return $sentencia;
 		}else
 		{
 			$consulta="SELECT * FROM personas WHERE personaId<>'$this->personaId' AND dni='$this->dni'";

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+//  let update = '0' //determina si se desea guardar nuevo registro o actualizar (valor 0 corresponde a nuevo)
   $('#btn_ir').click(function(){
     $("#myModal").remove()
     let escuelaId = $('#escuelaId option:selected').val()
@@ -7,6 +7,7 @@ $(document).ready(function() {
 
     switch (modulo) {
       case 'director':
+        $('#tipoId').val('3')
         formPersona()
         break;
       default:
@@ -51,6 +52,8 @@ $(document).ready(function() {
 
 function formPersona()
 {
+  let escuelaId =  $('#escuelaId').val()
+  console.log(escuelaId)
   $('#padreIr').append(`
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
       <div class="modal-dialog" role="document">
@@ -72,9 +75,9 @@ function formPersona()
 
               </div>
               <div class="col-md-12">
-
+                  <input name="txtidpersona" type="hidden" id="statusDni" value="0" />
                   <input name="txtidpersona" type="hidden" id="txtidpersona" value="" />
-                  <input name="txtidesacuela" type="hidden" id="txtidesacuela" value=""/>
+                  <input name="txtidesacuela" type="hidden" id="txtescuelaid" value="${escuelaId}"/>
                   <input type="hidden" name="iddirector" id="iddirector" value="" />
 
               </div>
@@ -113,6 +116,7 @@ function formPersona()
               <div class="col-md-12">
                 <select class="form-control" name="localidad" id="localidad">
                 <option value="0">Seleccione...</option>
+
                 `)
                 $.ajax({
                   url: 'includes/mod_cen/clases/ajax/ajaxLocalidad.php',
@@ -170,16 +174,81 @@ function formPersona()
           </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="btnSave">Guardar</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     `)
   $('#myModal').modal('show')
+
+  $('#btnSave').click(function(){
+    console.log('boton guardar')
+
+    let id = $('#txtidpersona').val()
+    let nombre = $('#txtnombre').val()
+    let apellido = $('#txtapellido').val()
+    let cuil = $('#txtcuil').val()
+    let telefonoM = $('#txttelefonoM').val()
+    let email = $('#txtemail').val()
+    let localidad = $('#localidad').val()
+    let txtdni = $('#txtdni').val()
+    let escuelaId = $('#txtescuelaid').val()
+    let tipoId = $('#tipoId').val()
+    //let tipoId = $('#modulo').val()
+    //console.log(localidad)
+    let update = $('#statusDni').val()
+
+    console.log('Estado de update '+update)
+
+
+    $.ajax({
+      url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+            btnSave:'btnSave',
+            escuelaId:escuelaId,
+            tipoId:tipoId,
+            update: update,
+            personaId:id,
+            nombre:nombre,
+            apellido:apellido,
+            txtdni:txtdni,
+            cuil:cuil,
+            telefonoM:telefonoM,
+            email:email,
+            localidad:localidad}
+    })
+    .done(function(lista) {
+
+      for (let item of lista) {
+        if (item.status=='new') {
+          console.log('se creo con exito')
+        }else{
+          console.log('se actualizo con exito')
+        }
+      }
+      console.log("success");
+    })
+    .fail(function() {
+      console.log("error Guardar");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
+
+    //$('#myModal').remove()
+    //$('#myModal').hide()
+
+  })
   $('#btnBuscarDni').click(function() {
     let dni = $('#txtdni').val()
+
+    //$('#localidad option:selected').remove();
+
     //$json = json_encode($arrayPrincipal);
     $.ajax({
       url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
@@ -189,19 +258,38 @@ function formPersona()
     })
     .done(function(lista) {
       for (let item of lista) {
+
         if (item.id=='0') {
           console.log('no encontrado')
+          $('#statusDni').val('0')
+          $('#txtidpersona').val('')
+          $('#txtnombre').val('')
+          $('#txtapellido').val('')
+          $('#txtcuil').val('')
+          $('#txttelefonoM').val('')
+          $('#txtemail').val('')
+          $('#localidad').val('0')
         }else{
+          $('#statusDni').val('1')
+
+
+
+
           console.log('encontrado')
+          $('#txtidpersona').val(item.id)
           $('#txtnombre').val(item.nombre)
           $('#txtapellido').val(item.apellido)
           $('#txtcuil').val(item.cuil)
           $('#txttelefonoM').val(item.telefono)
           $('#txtemail').val(item.email)
+          let selected = $('#localidad option:selected').val();
+          $("#localidad option[value="+ selected +"]").attr("selected",false);
+          console.log(selected)
+          $("#localidad option[value="+ item.localidad +"]").attr("selected",true);
           //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
         }
       }
-      //console.log("success");
+      console.log("success");
     })
     .fail(function() {
       console.log("error");

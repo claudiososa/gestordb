@@ -29,9 +29,7 @@ session_start();
 
 
 
-	        <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
-       	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
-       	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	        
        	<link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/bootstrap.css?1"/>
 				<script type="text/javascript" src="js/wow.min.js"></script>
