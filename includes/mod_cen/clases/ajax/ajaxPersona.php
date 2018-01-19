@@ -21,10 +21,12 @@
       $autoridad =  new Autoridades(null, $escuelaId, $tipoId, $personaId);
       $existeAutoridad = $autoridad->buscarAutoridad2();
       Maestro::debbugPHP($existeAutoridad);
-      if ($existeAutoridad <> 0) {
+
+      if ($existeAutoridad > 0) {
         $autoridad->autoridadesId = $existeAutoridad;
 
         $agregarAutoridad = $autoridad->editar();
+        Maestro::debbugPHP($agregarAutoridad);
       }else{
         $agregarAutoridad = $autoridad->agregar();
       }

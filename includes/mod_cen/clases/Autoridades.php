@@ -72,7 +72,7 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		WHERE autoridadesId = '$this->autoridadesId'";
 
 
-		//echo $sentencia;
+		return $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
 
@@ -179,7 +179,7 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 				$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
 
 
-				$dato = mysqli_fetch_object($bd->ejecutar($sentencia);
+				$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
 				return $dato->autoridadesId;
 				//if (mysqli_num_rows($bd->ejecutar($sentencia))>0) {
 					//	return $ultimoRegistroId=$bd->lastID();
@@ -187,7 +187,7 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 	 				//return $ultimoRegistroId=$bd->lastID();
 	 		 //}else{
 	 				//	return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
-	 		 }
+	 		 //}
 
 
 				//return 'hola mundo';
