@@ -52,6 +52,8 @@ include_once 'includes/mod_cen/clases/escuela.php';
                 <option value="informe&id=2">Ver informes</option>
                 <option value="">-------------</option>
                 <option value="director">Director</option>
+                <option value="snp">Supervisor de Nucleo</option>
+                <option value="srp">Supervisor de Religion</option>
                 <option value="">Cargar modificar autoridad</option>
               </select>
           </div>

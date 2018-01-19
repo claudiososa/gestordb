@@ -66,20 +66,24 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="UPDATE autoridades SET  escuelaId ='$this->escuelaId', tipoId = '$this->tipoId',
-		personaId = '$this->personaId', mañana = '$this->mañana', intermedio = '$this->intermedio', tarde = '$this.tarde',
-		vespertino = '$this->vespertino', noche = '$this->noche', extendida = '$this->extendida'
-		WHERE autoridadesId = '$this->autoridadesId'";
+		//$sentencia="UPDATE autoridades SET  escuelaId ='$this->escuelaId', tipoId = '$this->tipoId',
+		//personaId = '$this->personaId', mañana = '$this->mañana', intermedio = '$this->intermedio', tarde = '$this.tarde',
+		//vespertino = '$this->vespertino', noche = '$this->noche', extendida = '$this->extendida'
+		//WHERE autoridadesId = '$this->autoridadesId'";
+
+		$sentencia="UPDATE autoridades SET  escuelaId =$this->escuelaId, tipoId = $this->tipoId,
+		personaId = $this->personaId
+		WHERE autoridadesId = $this->autoridadesId";
 
 
-		return $sentencia;
+		//return $sentencia;
 		if ($conexion->query($sentencia)) {
 			return 1;
 
-		}else
-		{
+		}else{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		}
+
 	}
 
 	// eliminar
@@ -168,6 +172,29 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 			//return 'hola mundo';
 		}
 
+		public function buscarAutoridad3()
+			{
+				$bd=Conexion2::getInstance();
+
+				$sentencia="SELECT *
+										FROM autoridades
+										WHERE escuelaId=".$this->escuelaId." AND tipoId=".$this->tipoId;
+				$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
+
+
+				$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
+				return $dato->personaId;
+				//if (mysqli_num_rows($bd->ejecutar($sentencia))>0) {
+					//	return $ultimoRegistroId=$bd->lastID();
+						//return '1';
+					//return $ultimoRegistroId=$bd->lastID();
+			 //}else{
+					//	return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
+			 //}
+
+
+				//return 'hola mundo';
+			}
 
 		public function buscarAutoridad2()
 			{
@@ -191,7 +218,8 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 
 
 				//return 'hola mundo';
-			}
+	}
+
 
 
 	public function buscar()

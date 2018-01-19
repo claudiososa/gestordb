@@ -10,6 +10,14 @@ $(document).ready(function() {
         $('#tipoId').val('3')
         formPersona()
         break;
+      case 'snp':
+          $('#tipoId').val('4')
+          formPersona()
+          break;
+      case 'srp':
+          $('#tipoId').val('12')
+              formPersona()
+              break;
       default:
       let url = 'index.php?mod=slat&men='+modulo+'&escuelaId='+escuelaId
       $(location).attr('href',url);
@@ -183,6 +191,63 @@ function formPersona()
     `)
   $('#myModal').modal('show')
 
+  $('#myModal').on('hide.bs.modal', function(){
+    $('#myModal').remove()
+  })
+
+  $('#myModal').on('shown.bs.modal', function(){
+    $('#txtdni').focus()
+
+
+    let escuelaId = $('#txtescuelaid').val()
+    let tipoId = $('#tipoId').val()
+    let search ='search'
+    $.ajax({
+      url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {search:search,escuelaId: escuelaId,tipoId:tipoId}
+    })
+    .done(function(lista) {
+      for (let item of lista) {
+
+        if (item.id=='0') {
+          console.log('no encontrado')
+          $('#statusDni').val('0')
+          $('#txtidpersona').val('')
+          $('#txtnombre').val('')
+          $('#txtapellido').val('')
+          $('#txtcuil').val('')
+          $('#txttelefonoM').val('')
+          $('#txtemail').val('')
+          $('#localidad').val('0')
+        }else{
+          $('#statusDni').val('1')
+          console.log('encontrado')
+          $('#txtdni').val(item.dni)
+          $('#txtidpersona').val(item.id)
+          $('#txtnombre').val(item.nombre)
+          $('#txtapellido').val(item.apellido)
+          $('#txtcuil').val(item.cuil)
+          $('#txttelefonoM').val(item.telefono)
+          $('#txtemail').val(item.email)
+          let selected = $('#localidad option:selected').val();
+          $("#localidad option[value="+ selected +"]").attr("selected",false);
+          console.log(selected)
+          $("#localidad option[value="+ item.localidad +"]").attr("selected",true);
+          //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
+        }
+      }
+      console.log("success");
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+  })
+
   $('#btnSave').click(function(){
     console.log('boton guardar')
 
@@ -197,7 +262,7 @@ function formPersona()
     let escuelaId = $('#txtescuelaid').val()
     let tipoId = $('#tipoId').val()
     //let tipoId = $('#modulo').val()
-    //console.log(localidad)
+    console.log('txtdni' + txtdni)
     let update = $('#statusDni').val()
 
     console.log('Estado de update '+update)
@@ -229,6 +294,9 @@ function formPersona()
         }else{
           console.log('se actualizo con exito')
         }
+          //$('#myModal').remove()
+          $('#myModal').modal('hide')
+
       }
       console.log("success");
     })
@@ -244,6 +312,11 @@ function formPersona()
     //$('#myModal').hide()
 
   })
+
+
+
+
+
   $('#btnBuscarDni').click(function() {
     let dni = $('#txtdni').val()
 
@@ -271,10 +344,6 @@ function formPersona()
           $('#localidad').val('0')
         }else{
           $('#statusDni').val('1')
-
-
-
-
           console.log('encontrado')
           $('#txtidpersona').val(item.id)
           $('#txtnombre').val(item.nombre)

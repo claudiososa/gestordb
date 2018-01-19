@@ -92,6 +92,8 @@ class Persona
 
 	public function addShort()
 	{
+		//$sentencia = 'personas';
+
 		$bd=Conexion2::getInstance();
 		$sentencia="INSERT INTO personas (personaId,apellido,nombre,dni,cuil,telefonoC,
 																							telefonoM,direccion,
@@ -113,12 +115,13 @@ class Persona
 												'');";
 
 
+
 		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
-				//return $ultimoRegistroId=$bd->lastID();
+				return $ultimoRegistroId=$bd->lastID();
 		 }else{
 					return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno." :".$conexion->error;
 		 }
-
+		 
 	}
 
 	public function agregar()
