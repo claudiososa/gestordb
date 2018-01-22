@@ -1,4 +1,5 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
 <?php
 include_once 'includes/mod_cen/clases/EscuelaReferentes.php';
 include_once 'includes/mod_cen/clases/escuela.php';
@@ -79,7 +80,7 @@ include_once 'includes/mod_cen/clases/escuela.php';
       <th>N°</th>
       <th>Nombre</th>
       <th>Mis informes</th>
-      <th>Ver todas Autoridades</th>
+      <th>Autoridades</th>
 
     </tr>
   </thead>
@@ -104,7 +105,7 @@ include_once 'includes/mod_cen/clases/escuela.php';
         echo '<td>'.$infoEscuela->numero.'</td>';
         echo '<td>'.$infoEscuela->nombre.'</td>';
         echo '<td><button type="button" class="btn btn-danger" name="button">3</button></td>';
-        echo '<td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" name="button">5</button></td>';
+        echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-danger" id="autoridad'.$infoEscuela->escuelaId.'" name="button">5</button></td>';
         echo '</tr>';
         ?>
 

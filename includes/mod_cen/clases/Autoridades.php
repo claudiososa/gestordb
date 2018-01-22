@@ -172,18 +172,32 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 			//return 'hola mundo';
 		}
 
-		public function buscarAutoridad3()
+		public function buscarAutoridad3($tipo=null)
 			{
 				$bd=Conexion2::getInstance();
 
-				$sentencia="SELECT *
-										FROM autoridades
-										WHERE escuelaId=".$this->escuelaId." AND tipoId=".$this->tipoId;
-				$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
+				if (isset($tipo)) {
+					if ($tipo=='all') {
+						$sentencia="SELECT *
+												FROM autoridades
+												INNER JOIN personas
+												ON personas.personaId=autoridades.personaId
+												WHERE escuelaId=".$this->escuelaId;
+						$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
+					}
+
+					return $bd->ejecutar($sentencia);
+				}else{
+					$sentencia="SELECT *
+											FROM autoridades
+											WHERE escuelaId=".$this->escuelaId." AND tipoId=".$this->tipoId;
+					$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
+					$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
+					return $dato->personaId;
+				}
 
 
-				$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
-				return $dato->personaId;
+
 				//if (mysqli_num_rows($bd->ejecutar($sentencia))>0) {
 					//	return $ultimoRegistroId=$bd->lastID();
 						//return '1';

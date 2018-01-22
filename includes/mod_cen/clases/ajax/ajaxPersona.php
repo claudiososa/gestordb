@@ -7,6 +7,38 @@
   //verifica que venga desde pedido post desde ajax determinado
     //Maestro::debbugPHP($_POST['dni']);
 
+    if (isset($_POST['all'])) {//buscar todas las autoridades de una escuela
+      $autoridad =  new Autoridades(null,$_POST['escuelaId']);
+      $existeAutoridad = $autoridad->buscarAutoridad3('all');
+      $cantidad = mysqli_num_rows($existeAutoridad);
+      $arrayPrincipal=array();
+
+      if ($cantidad > 0) {//mayor a cero significa que esta escuela ya tenia autoridad registrada
+        while ($row = mysql_fetch_object($existeAutoridad)) {
+          $item=array();
+          $item=['id' => $row->personaId,
+                 'nombre' => $row->nombre,
+                 'apellido' => $row->apellido,
+                 'dni' => $row->dni,
+                 'cuil' => $row->cuil,
+                 'telefono' => $row->telefonoM,
+                 'email' => $row->email,
+                 'localidad' => $row->localidadId,
+               ];
+          array_push($arrayPrincipal,$item);
+          $json = json_encode($arrayPrincipal);
+          Maestro::debbugPHP($json);
+        }
+      }else{
+        $item=['id' => '0',
+              ];
+        array_push($arrayPrincipal,$item);
+        $json = json_encode($arrayPrincipal);
+      }
+      echo $json;
+    }
+
+
   if (isset($_POST['search'])) {
     $autoridad =  new Autoridades(null,$_POST['escuelaId'],$_POST['tipoId']);
     $existeAutoridad = $autoridad->buscarAutoridad3();
