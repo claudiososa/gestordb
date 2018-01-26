@@ -1,1 +1,27 @@
-string(170) "[{"id":"0022","nombre":"CLAUDIO ARIEL Capito","apellido":"ssssss","cuil":"20268999111","telefono":"3874147411","email":"vicomser.claudio@gmail.comss","localidad":"0034"}]"
+array(1) {
+  [0]=>
+  array(11) {
+    ["id"]=>
+    string(4) "1423"
+    ["nombre"]=>
+    string(11) "ARANDA ALDO"
+    ["apellido"]=>
+    string(12) "OSVALDOsasss"
+    ["dni"]=>
+    string(8) "20858616"
+    ["cuil"]=>
+    string(11) "20208586166"
+    ["telefono"]=>
+    string(10) "3875233552"
+    ["email"]=>
+    string(24) "aldoaranda09@hotmail.com"
+    ["localidad"]=>
+    string(4) "0068"
+    ["cargo"]=>
+    string(17) "Director Primaria"
+    ["escuelaId"]=>
+    string(4) "0145"
+    ["cantidad"]=>
+    int(1)
+  }
+}

@@ -182,6 +182,8 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 												FROM autoridades
 												INNER JOIN personas
 												ON personas.personaId=autoridades.personaId
+												INNER JOIN tipoAutoridades
+												ON tipoAutoridades.tipoId=autoridades.tipoId
 												WHERE escuelaId=".$this->escuelaId;
 						$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
 					}

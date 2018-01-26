@@ -10,11 +10,14 @@
     if (isset($_POST['all'])) {//buscar todas las autoridades de una escuela
       $autoridad =  new Autoridades(null,$_POST['escuelaId']);
       $existeAutoridad = $autoridad->buscarAutoridad3('all');
+      //Maestro::debbugPHP($existeAutoridad);
       $cantidad = mysqli_num_rows($existeAutoridad);
       $arrayPrincipal=array();
 
       if ($cantidad > 0) {//mayor a cero significa que esta escuela ya tenia autoridad registrada
-        while ($row = mysql_fetch_object($existeAutoridad)) {
+
+        while ($row = mysqli_fetch_object($existeAutoridad))
+        {
           $item=array();
           $item=['id' => $row->personaId,
                  'nombre' => $row->nombre,
@@ -24,18 +27,23 @@
                  'telefono' => $row->telefonoM,
                  'email' => $row->email,
                  'localidad' => $row->localidadId,
+                 'cargo'=>$row->cargoAutoridad,
+                 'escuelaId'=>$_POST['escuelaId'],
+                 'cantidad'=>$cantidad 
                ];
           array_push($arrayPrincipal,$item);
-          $json = json_encode($arrayPrincipal);
-          Maestro::debbugPHP($json);
         }
+        //$json = json_encode($arrayPrincipal);
+        Maestro::debbugPHP($arrayPrincipal);
       }else{
         $item=['id' => '0',
               ];
         array_push($arrayPrincipal,$item);
-        $json = json_encode($arrayPrincipal);
+
       }
+      $json = json_encode($arrayPrincipal);
       echo $json;
+
     }
 
 

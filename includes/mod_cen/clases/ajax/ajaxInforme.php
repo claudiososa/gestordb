@@ -2,6 +2,34 @@
   include_once('../informe.php');
   include_once('../referente.php');
 
+  if (isset($_POST['myReport']))
+  {
+  	$list=array();
+  	$informe = new informe(null,$_POST['escuelaId'],$_POST['referenteId']);
+    $buscarInforme = $informe->buscar();
+    $cantidadInformes=mysqli_num_rows($buscarInforme);
+
+    while ($fila = mysqli_fetch_object($buscarInforme))
+    {
+  		//$buscar_informe=$informe->search($fila->referenteId);
+
+
+  		$temporal=array(
+        'informeId'=>$fila->informeId,
+        'referenteId'=>$fila->referenteId,
+  			'titulo'=>$fila->titulo,
+        'escuelaId'=>$fila->escuelaId,
+        'cantidad'=>'2'
+  		);
+
+  		array_push($list,$temporal);
+  	}
+
+    $json = json_encode($list);
+//    Maestro::debbugPHP($json);
+  	echo $json;
+  }
+
   //verifica que venga desde pedido post desde ajax determinado
   if (isset($_POST['year']) && isset($_POST['month']))
   {

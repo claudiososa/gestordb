@@ -1,8 +1,13 @@
+<script type="text/javascript">
+    let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
+</script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
 <?php
 include_once 'includes/mod_cen/clases/EscuelaReferentes.php';
 include_once 'includes/mod_cen/clases/escuela.php';
+include_once 'includes/mod_cen/clases/Autoridades.php';
+include_once 'includes/mod_cen/clases/informe.php';
 ?>
 
 <!----------------------------------------------------------------------------->
@@ -95,17 +100,25 @@ include_once 'includes/mod_cen/clases/escuela.php';
       $escuela = new Escuela();
 
       while ($row = mysqli_fetch_object($buscarEscuelas)) {
+        $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
+        $buscarInforme= $informe->buscar();
+        $cantidadInforme = mysqli_num_rows($buscarInforme);
+
+        $autoridad = new Autoridades(null,$row->escuelaId);
+        $buscarAutoridad = $autoridad->buscarAutoridad3('all');
+        $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
+
         $escuela->escuelaId=$row->escuelaId;
         $buscarEscuela = $escuela->buscar();
         $infoEscuela = mysqli_fetch_object($buscarEscuela);
 
         //echo $infoEscuela->numero."<br>";
-        echo '<tr>';
+        echo '<tr id="fila'.$infoEscuela->escuelaId.'">';
         echo '<td>'.$infoEscuela->cue.'</td>';
         echo '<td>'.$infoEscuela->numero.'</td>';
         echo '<td>'.$infoEscuela->nombre.'</td>';
-        echo '<td><button type="button" class="btn btn-danger" name="button">3</button></td>';
-        echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-danger" id="autoridad'.$infoEscuela->escuelaId.'" name="button">5</button></td>';
+        echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-danger" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-danger" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"><i  class="glyphicon glyphicon-chevron-down"></i></span></td>';
         echo '</tr>';
         ?>
 
