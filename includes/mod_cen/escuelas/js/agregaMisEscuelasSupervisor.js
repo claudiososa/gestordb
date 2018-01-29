@@ -22,20 +22,33 @@ $(document).ready(function() {
         .done(function(lista) {
 
           let itemEscuela = 0
+          $('#info'+escuelaId).parent().parent().after(`<table id="tableinformes0069" class="trinformes0069">
+          <thead>
+            <tr>
+              <th>Titulo</th>
+              <th>Respuestas</th>
+              <th>Nada</th>
+            </tr>
+          </thead>
+          <tbody>`)
 
           for (let item of lista) {
               //alert(item.escuelaId)
               console.log(item.cantidad)
             if (item.cantidad > 0) {
               let escuelaIdconCero = pad(item.escuelaId,4,0)
-              //alert(escuelaIdconCero)
+              let escuela = item.escuelaId
+              //console.log('cantidad de informes'+item.cantidad)
+              $('#tableinformes0069').find('tbody').html(`<tr class="trinformes${escuelaIdconCero}">
+              <td>${item.titulo}</td><td><a id='eInforme' href=''>${item.cantidadRespuesta}</a></td></tr>`)
+              //$('#info'+escuelaId).parent().parent().after(`<tr class="trinformes${escuelaIdconCero}"><td>${item.titulo}</td><td><a id='eInforme' href=''>${item.cantidadRespuesta}</a></td></tr>`)
+              //itemEscuela++
+              //if (itemEscuela==item.cantidad) {
+//                $('#info'+escuelaId).parent().parent().after(`<tr class="trinformes${escuelaIdconCero}"><td colspan="5">Informes
+  //              <a href='index.php?mod=slat&men=informe&id=1&escuelaId=${escuela}' class='btn btn-success'>Nuevo Informe</a>
+    //            </td></tr>`)
 
-              $('#info'+escuelaId).parent().parent().after(`<tr class="trinformes${escuelaIdconCero}"><td>${item.titulo}</td><td><a id='eInforme' href=''>Modificar</a></td></tr>`)
-              itemEscuela++
-              if (itemEscuela==item.cantidad) {
-                $('#info'+escuelaId).parent().parent().after(`<tr class="trinformes${escuelaIdconCero}"><td colspan="5">Informes</td></tr>`)
-
-              }
+              //}
               $('.trinformes'+item.escuelaId).hide()
               $('.trinformes'+item.escuelaId).fadeIn('slideUp')
               if (item.id=='0') {
@@ -50,6 +63,7 @@ $(document).ready(function() {
             }
           }
 
+          //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
 
 
           console.log("success");

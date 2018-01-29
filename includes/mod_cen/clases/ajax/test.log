@@ -2,25 +2,25 @@ array(1) {
   [0]=>
   array(11) {
     ["id"]=>
-    string(4) "1423"
+    string(4) "0022"
     ["nombre"]=>
-    string(11) "ARANDA ALDO"
+    string(20) "CLAUDIO ARIEL Capito"
     ["apellido"]=>
-    string(12) "OSVALDOsasss"
+    string(6) "ssssss"
     ["dni"]=>
-    string(8) "20858616"
+    string(8) "26899902"
     ["cuil"]=>
-    string(11) "20208586166"
+    string(11) "20268999111"
     ["telefono"]=>
-    string(10) "3875233552"
+    string(10) "3874147411"
     ["email"]=>
-    string(24) "aldoaranda09@hotmail.com"
+    string(28) "vicomser.claudio@gmail.comss"
     ["localidad"]=>
-    string(4) "0068"
+    string(4) "0034"
     ["cargo"]=>
     string(17) "Director Primaria"
     ["escuelaId"]=>
-    string(4) "0145"
+    string(4) "0177"
     ["cantidad"]=>
     int(1)
   }
