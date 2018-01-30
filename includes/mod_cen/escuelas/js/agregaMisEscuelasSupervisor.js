@@ -24,11 +24,11 @@ $(document).ready(function() {
           let itemEscuela = 0
           $('#info'+escuelaId).parent().parent().after(`<table id="tableinformes0069" class="trinformes0069">
           <thead>
-            <tr>
               <th>Titulo</th>
+              <th>Leido</th>
               <th>Respuestas</th>
-              <th>Nada</th>
-            </tr>
+              <th>Fecha</th>
+              <th>Prioridad</th>
           </thead>
           <tbody>`)
 
@@ -39,8 +39,9 @@ $(document).ready(function() {
               let escuelaIdconCero = pad(item.escuelaId,4,0)
               let escuela = item.escuelaId
               //console.log('cantidad de informes'+item.cantidad)
-              $('#tableinformes0069').find('tbody').html(`<tr class="trinformes${escuelaIdconCero}">
+              $('#tableinformes0069').find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
               <td>${item.titulo}</td><td><a id='eInforme' href=''>${item.cantidadRespuesta}</a></td></tr>`)
+
               //$('#info'+escuelaId).parent().parent().after(`<tr class="trinformes${escuelaIdconCero}"><td>${item.titulo}</td><td><a id='eInforme' href=''>${item.cantidadRespuesta}</a></td></tr>`)
               //itemEscuela++
               //if (itemEscuela==item.cantidad) {
@@ -49,15 +50,15 @@ $(document).ready(function() {
     //            </td></tr>`)
 
               //}
-              $('.trinformes'+item.escuelaId).hide()
-              $('.trinformes'+item.escuelaId).fadeIn('slideUp')
-              if (item.id=='0') {
+              //$('.trinformes'+item.escuelaId).hide()
+              //$('.trinformes'+item.escuelaId).fadeIn('slideUp')
+              //if (item.id=='0') {
                 //alert(item.nombre)
-                console.log('no encontrado')
-              }else{
+                //console.log('no encontrado')
+              //}else{
 
                 //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
-              }
+              //}
             }else{
               alert('Esta escuela no tiene informes creados')
             }

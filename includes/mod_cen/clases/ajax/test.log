@@ -1,5 +1,30 @@
-array(1) {
+array(3) {
   [0]=>
+  array(11) {
+    ["id"]=>
+    string(4) "1423"
+    ["nombre"]=>
+    string(11) "ARANDA ALDO"
+    ["apellido"]=>
+    string(12) "OSVALDOsasss"
+    ["dni"]=>
+    string(8) "20858616"
+    ["cuil"]=>
+    string(11) "20208586166"
+    ["telefono"]=>
+    string(10) "3875233552"
+    ["email"]=>
+    string(24) "aldoaranda09@hotmail.com"
+    ["localidad"]=>
+    string(4) "0068"
+    ["cargo"]=>
+    string(17) "Director Primaria"
+    ["escuelaId"]=>
+    string(4) "0069"
+    ["cantidad"]=>
+    int(3)
+  }
+  [1]=>
   array(11) {
     ["id"]=>
     string(4) "0022"
@@ -18,10 +43,35 @@ array(1) {
     ["localidad"]=>
     string(4) "0034"
     ["cargo"]=>
-    string(17) "Director Primaria"
+    string(29) "Supervisor de Nucleo Primaria"
     ["escuelaId"]=>
-    string(4) "0177"
+    string(4) "0069"
     ["cantidad"]=>
-    int(1)
+    int(3)
+  }
+  [2]=>
+  array(11) {
+    ["id"]=>
+    string(4) "3814"
+    ["nombre"]=>
+    string(6) "nombre"
+    ["apellido"]=>
+    string(5) "nuevo"
+    ["dni"]=>
+    string(8) "20858618"
+    ["cuil"]=>
+    string(8) "33333322"
+    ["telefono"]=>
+    string(5) "33343"
+    ["email"]=>
+    string(5) "email"
+    ["localidad"]=>
+    string(4) "0031"
+    ["cargo"]=>
+    string(22) "Supervisor de Religion"
+    ["escuelaId"]=>
+    string(4) "0069"
+    ["cantidad"]=>
+    int(3)
   }
 }

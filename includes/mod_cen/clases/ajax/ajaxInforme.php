@@ -2,6 +2,7 @@
   include_once('../informe.php');
   include_once('../referente.php');
   include_once('../respuesta.php');
+  include_once('../leido.php');
 
   if (isset($_POST['myReport']))
   {
@@ -10,6 +11,7 @@
     $buscarInforme = $informe->buscar();
     $cantidadInformes=mysqli_num_rows($buscarInforme);
     $respuesta = new Respuesta();
+    $leido = new Leido();
 
     while ($fila = mysqli_fetch_object($buscarInforme))
     {
@@ -18,13 +20,18 @@
       $buscarRespuesta = $respuesta->buscar();
       $cantidadRespuesta = mysqli_num_rows($buscarRespuesta);
 
+      $leido->informeId=$fila->informeId;
+      $buscarLeido = $leido->buscarLeido();
+      $cantidadLeido = mysqli_num_rows($buscarLeido);
+
   		$temporal=array(
         'informeId'=>$fila->informeId,
         'referenteId'=>$fila->referenteId,
   			'titulo'=>$fila->titulo,
         'escuelaId'=>$fila->escuelaId,
         'cantidad'=>$cantidadInformes,
-        'cantidadRespuesta' =>$cantidadRespuesta
+        'cantidadRespuesta' =>$cantidadRespuesta,
+        'cantidadLeido' =>$cantidadLeido
   		);
 
   		array_push($list,$temporal);
