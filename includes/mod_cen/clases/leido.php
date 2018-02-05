@@ -122,12 +122,10 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 			return $conexion->query($sentencia);
 		}
 
-		public function buscarLeido($limit=NULL,$tipo=NULL)
+		public function buscarLeido()
 		{
 			$nuevaConexion=new Conexion();
 			$conexion=$nuevaConexion->getConexion();
-
-
 
 			$sentencia="SELECT leido.referenteId, leido.leidoId, leido.informeId, leido.fechaHora, personas.nombre, personas.apellido
 									FROM leido
@@ -135,8 +133,9 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 									ON leido.referenteId=referentes.referenteId
 									INNER JOIN personas
 									ON referentes.personaId=personas.personaId
-									WHERE leido.referenteId<>".$this->referenteId;
+									WHERE leido.informeId=".$this->informeId." AND leido.referenteId<>".$this->referenteId;
 			$sentencia.="  ORDER BY leido.fechaHora ASC";
+			//return $sentencia;
 			return $conexion->query($sentencia);
 	}
 

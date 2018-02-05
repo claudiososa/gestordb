@@ -3,6 +3,8 @@
   include_once('../referente.php');
   include_once('../respuesta.php');
   include_once('../leido.php');
+  include_once('../maestro.php');
+
 
   if (isset($_POST['myReport']))
   {
@@ -20,10 +22,11 @@
       $buscarRespuesta = $respuesta->buscar();
       $cantidadRespuesta = mysqli_num_rows($buscarRespuesta);
 
+      $leido->referenteId=$_POST['referenteId'];
       $leido->informeId=$fila->informeId;
       $buscarLeido = $leido->buscarLeido();
       $cantidadLeido = mysqli_num_rows($buscarLeido);
-
+      Maestro::debbugPHP($buscarLeido);
   		$temporal=array(
         'informeId'=>$fila->informeId,
         'referenteId'=>$fila->referenteId,
@@ -31,7 +34,10 @@
         'escuelaId'=>$fila->escuelaId,
         'cantidad'=>$cantidadInformes,
         'cantidadRespuesta' =>$cantidadRespuesta,
-        'cantidadLeido' =>$cantidadLeido
+        'cantidadLeido' =>$cantidadLeido,
+        'fecha' =>$fila->fechaCarga,
+        'prioridad' =>$fila->prioridad
+
   		);
 
   		array_push($list,$temporal);
