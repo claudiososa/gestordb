@@ -58,23 +58,6 @@ $(document).ready(function() {
               <td><a id='eInforme' href=''>${item.prioridad}</a></td>
               </tr>`)
 
-              //$('#info'+escuelaId).parent().parent().after(`<tr class="trinformes${escuelaIdconCero}"><td>${item.titulo}</td><td><a id='eInforme' href=''>${item.cantidadRespuesta}</a></td></tr>`)
-              //itemEscuela++
-              //if (itemEscuela==item.cantidad) {
-//                $('#info'+escuelaId).parent().parent().after(`<tr class="trinformes${escuelaIdconCero}"><td colspan="5">Informes
-  //              <a href='index.php?mod=slat&men=informe&id=1&escuelaId=${escuela}' class='btn btn-success'>Nuevo Informe</a>
-    //            </td></tr>`)
-
-              //}
-              //$('.trinformes'+item.escuelaId).hide()
-              //$('.trinformes'+item.escuelaId).fadeIn('slideUp')
-              //if (item.id=='0') {
-                //alert(item.nombre)
-                //console.log('no encontrado')
-              //}else{
-
-                //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
-              //}
             }else{
               alert('Esta escuela no tiene informes creados')
             }
@@ -110,11 +93,14 @@ $(document).ready(function() {
   $('[id ^=row]').on('click', function(){
 
     let escuelaId = $(this).attr('id').substr(3)
+    //alert(escuelaId)
     let $this = $(this)
-    let existe = $('.trautoridad'+escuelaId).attr('class')
 
-    if (typeof(existe)==='undefined') {
-        console.log(existe)
+    let existeAutoridad = $('.tableAutoridades'+escuelaId).attr('class')
+    //let existe = $('.trautoridad'+escuelaId).attr('class')
+
+    if (typeof(existeAutoridad)==='undefined') {
+        //console.log(existe)
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
         console.log(escuelaId)
         let all ='all'
@@ -125,19 +111,53 @@ $(document).ready(function() {
           data: {all:all,escuelaId: escuelaId}
         })
         .done(function(lista) {
+          let tableinforme = 0
+
+          for (let item of lista) {
+              tableAuto=pad(item.escuelaId,4,0)
+
+          }
+
+          $('#autoridad'+escuelaId).parent().parent().after(`<tr class="tableAutoridades${tableAuto}"><td colspan="5">
+          <table id=tableAutoridades${tableAuto} class="table">
+          <thead>
+            <tr class='success'>
+              <th>Tipo</th>
+              <th>Nombre</th>
+              <th>Telefono</th>
+              <th>Email</th>
+              <th>Accion</th>
+            </tr>
+          </thead>
+          <tbody>`)
 
           let itemEscuela = 0
 
           for (let item of lista) {
 
+            let escuelaIdconCero = pad(item.escuelaId,4,0)
+            let escuela = item.escuelaId
+
+
             if (item.cantidad > 0) {
 
-              $('#autoridad'+escuelaId).parent().parent().after(`<tr class="trautoridad${item.escuelaId}"><td>${item.cargo}</td><td>${item.apellido}, ${item.nombre}</td><td>${item.telefono}</td><td>${item.email}</td><td><a id='eAutoridad' href=''>Modificar</a></td></tr>`)
+              $('#tableAutoridades'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
+              <td>${item.cargo}</td>
+              <td><a id='eInforme' href=''>${item.apellido},${item.nombre}</a></td>
+              <td><a id='eInforme' href=''>${item.telefono}</a></td>
+              <td><a id='eInforme' href=''>${item.email}</a></td>
+              <td><a id='eAutoridad' href=''>Modificar</a></td>
+              </tr>`)
+
+
+
+
+              /*$('#autoridad'+escuelaId).parent().parent().after(`<tr class="trautoridad${item.escuelaId}"><td>${item.cargo}</td><td>${item.apellido}, ${item.nombre}</td><td>${item.telefono}</td><td>${item.email}</td><td><a id='eAutoridad' href=''>Modificar</a></td></tr>`)
               itemEscuela++
               if (itemEscuela==item.cantidad) {
                 $('#autoridad'+escuelaId).parent().parent().after(`<tr class="trautoridad${item.escuelaId}"><td colspan="5">listado de autoridades</td></tr>`)
 
-              }
+              }*/
               $('.trautoridad'+item.escuelaId).hide()
               $('.trautoridad'+item.escuelaId).fadeIn('slideUp')
               if (item.id=='0') {
@@ -163,11 +183,12 @@ $(document).ready(function() {
           console.log("complete");
         });
     }else{
-        $('.trautoridad'+escuelaId).remove()
+
+        $('.tableAutoridades'+escuelaId).remove()
         //$('.trautoridad'+escuelaId).closest('tr').remove()
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
 
-        console.log(existe)
+        //console.log(existe)
     }
 
 
