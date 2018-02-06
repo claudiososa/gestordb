@@ -1,11 +1,3 @@
-
-
-
-<?php
-  if($informe->informeId==""){
-  }
-  //var_dump($informe);
-?>
 <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="index.php?mod=slat&men=informe&id=1&escuelaId=<?php echo $_GET["escuelaId"]?>" method="post">
  		<div class="form-group">
       <div class="col-md-12">

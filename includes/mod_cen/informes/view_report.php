@@ -128,24 +128,9 @@ while ($fila = mysqli_fetch_object($buscar_respuesta)) {
 
 
 }
-//echo "</div>";
+
 echo "</div>";
 echo "</div>";
 }
-/*
-<script type="text/javascript">
-var arrayFile = new Array();
-<?php
-      foreach ($arrayFile as $indice=>$valor)
-      {
-        ?>
-        archivo =
-        alert('aqui');
-        <?php
-        //  echo 'arrayFile['. $i .'] = '. $arrayFile($i) .';\n';
-      }
-?>
-//alert(arrayFile[0]);
-</script>
-*/
+
 ?>
