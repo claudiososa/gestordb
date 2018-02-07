@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+
+  //fo
+
   $('[id ^=informes]').on('click', function(){
 
     let escuelaId = $(this).attr('id').substr(8)
@@ -51,11 +54,11 @@ $(document).ready(function() {
               let escuela = item.escuelaId
               console.log('cantidad de leido'+item.cantidadLeido)
               $('#tableinformes'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
-              <td>${item.titulo}</td>
-              <td><a id='eInforme' href=''>${item.cantidadLeido}</a></td>
-              <td><a id='eInforme' href=''>${item.cantidadRespuesta}</a></td>
-              <td><a id='eInforme' href=''>${item.fecha}</a></td>
-              <td><a id='eInforme' href=''>${item.prioridad}</a></td>
+              <td><button type='button' id='if${item.informeId}'>${item.titulo}</button></td>
+              <td>${item.cantidadLeido}</td>
+              <td>${item.cantidadRespuesta}</td>
+              <td>${item.fecha}</td>
+              <td>${item.prioridad}</td>
               </tr>`)
 
             }else{
@@ -63,8 +66,40 @@ $(document).ready(function() {
             }
           }
 
-          //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
 
+
+
+          //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
+          $('[id ^=if]').click( function(){            //$('[id ^=if]').on('click', function(){
+              let idPrueba = $(this).attr('id');
+              let informeId = idPrueba.substr(2)
+              $.ajax({
+                url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {informeId:informeId}
+              })
+              .done(function(lista) {
+                for (let item of lista) {
+                  if (item.cantidad > 0) {
+                    let escuelaNombre = item.nombre
+                    let escuelaNumero = item.numero
+                  }else{
+                    alert('Esta escuela no tiene informes creados')
+                  }
+                }
+
+                console.log("success");
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+              });
+
+              formPersona()
+              });
 
           console.log("success");
         })
@@ -130,6 +165,8 @@ $(document).ready(function() {
             </tr>
           </thead>
           <tbody>`)
+
+
 
           let itemEscuela = 0
 
@@ -200,9 +237,13 @@ $(document).ready(function() {
     //alert('fila')
   })
 
+
+
   function pad(num, largo, char) {
     char = char || '0';
     num = num + '';
     return num.length >= largo ? num : new Array(largo - num.length + 1).join(char) + num;
   }
+
+
 });
