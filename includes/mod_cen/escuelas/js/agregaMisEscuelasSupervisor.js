@@ -70,7 +70,17 @@ $(document).ready(function() {
 
 
           //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
-          $('[id ^=if]').click( function(){            //$('[id ^=if]').on('click', function(){
+          $('[id ^=if]').click( function(){
+              let escuelaNombre = ""
+              let escuelaNumero = ""
+              let escuelaCue = ""
+              let fecha = ""
+              let prioridad = ""
+              let categoria =  ""
+              let subcategoria =  ""
+              let titulo =  ""
+              let contenido =  ""
+                   //$('[id ^=if]').on('click', function(){
               let idPrueba = $(this).attr('id');
               let informeId = idPrueba.substr(2)
               $.ajax({
@@ -81,12 +91,16 @@ $(document).ready(function() {
               })
               .done(function(lista) {
                 for (let item of lista) {
-                  if (item.cantidad > 0) {
                     let escuelaNombre = item.nombre
                     let escuelaNumero = item.numero
-                  }else{
-                    alert('Esta escuela no tiene informes creados')
-                  }
+                    let escuelaCue = item.cue
+                    let fecha = item.fecha
+                    let prioridad = item.prioridad
+                    let categoria =  item.categoria
+                    let subcategoria =  item.subcategoria
+                    let titulo =  item.titulo
+                    let contenido =  item.contenido
+
                 }
 
                 console.log("success");
@@ -98,7 +112,7 @@ $(document).ready(function() {
                 console.log("complete");
               });
 
-              formPersona()
+              formPersona(escuelNombre)
               });
 
           console.log("success");

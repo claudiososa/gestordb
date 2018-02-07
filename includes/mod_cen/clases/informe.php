@@ -458,7 +458,23 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 	}
 
 
-
+public function buscarUnico()
+{
+	$nuevaConexion=new Conexion();
+	$conexion=$nuevaConexion->getConexion();
+	$sentencia = "SELECT informe.informeId,informe.titulo,informe.contenido,informe.fechaCarga,informe.prioridad,
+											 tipoInformes.nombre AS tipoNombre,SubTipoInforme.nombre AS subNombre,
+											 escuelas.escuelaId,escuelas.nombre,escuelas.numero,escuelas.cue
+								FROM informes
+								INNER JOIN tipoInformes
+								ON tipoInformes.tipoInformeId=informe.informeId
+								INNER JOIN SubTipoInforme
+								ON SubTipoInforme.tipoId=tipoInformes.tipoInformeId
+								INNER JOIN escuelas
+								ON escuelas.escuelaId=informe.escuelaId
+								WHERE informe.informeId=".$this->informeId;
+	return $conexion->query($sentencia);
+}
 
 
 

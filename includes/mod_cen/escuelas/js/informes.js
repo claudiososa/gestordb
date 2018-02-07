@@ -10,7 +10,7 @@
   //})
   //formPersona()
 
-  function formPersona()
+  function formPersona(escuelaNombre)
   {
     let escuelaId =  $('#escuelaId').val()
     console.log(escuelaId)

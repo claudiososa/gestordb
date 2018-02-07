@@ -6,6 +6,32 @@
   include_once('../maestro.php');
 
 
+  if (isset($_POST['informeId']))
+  {
+    $informe =  new informe($_POST['informeId']);
+    $buscarInforme = $informe->buscarUnico();
+    $datoInforme = mysqli_fetch_object($buscarInforme);
+    $list=array();
+    $temporal=array(
+      'informeId'=>$datoInforme->informeId,
+      'escuelaId'=>$datoInforme->escuelaId,
+      'numero'=>$datoInforme->numero,
+      'cue'=>$datoInforme->cue,
+      'nombre'=>$datoInforme->nombre,
+      'categoria'=>$datoInforme->tipoNombre,
+      'subcategoria'=>$datoInforme->subNombre,
+      'fecha' =>$datoInforme->fechaCarga,
+      'prioridad' =>$datoInforme->prioridad,
+      'titulo' =>$datoInforme->titulo,
+      'contenido' =>$datoInforme->contenido
+    );
+
+    array_push($list,$temporal);
+    $json = json_encode($list);
+  //    Maestro::debbugPHP($json);
+    echo $json;
+  }
+
   if (isset($_POST['myReport']))
   {
   	$list=array();
