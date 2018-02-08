@@ -1,16 +1,4 @@
-
-
-  //$('#informeId7062').click(function(){
-//    alert('hola')
-//  });
-
-  //$('[id ^=informeId]').on('click', function(){
-//.    alert('hola')
-  //  formPersona()
-  //})
-  //formPersona()
-
-  function formPersona(escuelaNombre)
+  function formPersona(informeActual)
   {
     let escuelaId =  $('#escuelaId').val()
     console.log(escuelaId)
@@ -20,127 +8,24 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">${escuelaNombre}<br>
-              Numero: ${escuelaNumero} Cue: 660034321 <br>Departamento: Oran
-              <br>Fecha: 14-2-2018<br>Prioridad: Alta
-              <br>Categoria: Cate<br>Subcategoria:subte
+              <h4 class="modal-title">${informeActual.escuelaNombre}<br>
+              Numero: ${informeActual.escuelaNumero} Cue: ${informeActual.escuelaCue} <br>Departamento: Oran
+              <br>Fecha: ${informeActual.fecha}<br>Prioridad: ${informeActual.prioridad}
+              <br>Categoria: ${informeActual.categoria}<br>Subcategoria:${informeActual.subcategoria}
               <br>
-              <br>Titulo: Mi titulo
-              <br>Contenido</h4>
+              <br>Titulo: ${informeActual.titulo}
+              <br>Contenido:</h4>${informeActual.contenido}
 
             </div>
             <div class="modal-body" id="modal-body" >
             <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
-             		<div class="form-group">
-                  <div class="col-md-12">
-                    <label class="control-label"><br>Escuela</label>
-                  </div>
-                  <div class="col-md-12">
-                       <input type='text' name="escuelaId"  class="form-control" value="" disabled>
-                  </div>
-                </div>
 
-                <div class="form-group">
-                  <div class="col-md-12">
-                    <label class="control-label">Nombre de Escuela</label>
-                  </div>
-                  <div class="col-md-12">
-                    <input type='text' name="nombre_escuela"  class="form-control" value="" disabled>
-                  </div>
-                </div>
-    <div class="col-md-12">
+
+
                     <input name="txtidpersona" type="hidden" id="statusDni" value="0" />
                     <input name="txtidpersona" type="hidden" id="txtidpersona" value="" />
                     <input name="txtidesacuela" type="hidden" id="txtescuelaid" value="${escuelaId}"/>
                     <input type="hidden" name="iddirector" id="iddirector" value="" />
-
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Apellido</label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txtapellido" id="txtapellido" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Nombre</label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txtnombre" id="txtnombre" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">CUIL</label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txtcuil" id="txtcuil" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Localidad</label>
-                </div>
-                <div class="col-md-12">
-                  <select class="form-control" name="localidad" id="localidad">
-                  <option value="0">Seleccione...</option>
-
-                  `)
-                  $.ajax({
-                    url: 'includes/mod_cen/clases/ajax/ajaxLocalidad.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {local: 'local'}
-                  })
-                  .done(function(lista) {
-                    for (let item of lista) {
-                      $('#localidad').append(`<option value="${item.id}">${item.nombre}</option>`)
-                    }
-                    console.log("success");
-                  })
-                  .fail(function() {
-                    console.log("error");
-                  })
-                  .always(function() {
-                    console.log("complete");
-                  });
-
-
-                  $("#modal-body").append(`
-                      </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Teléfono </label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txttelefonoM" id="txttelefonoM" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Email </label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txtemail" id="txtemail" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label"></label>
-                </div>
-
-              </div>
 
 
 
@@ -149,7 +34,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" id="btnSave">Guardar</button>
+              <button type="button" class="btn btn-primary" id="btnSave">Responder</button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

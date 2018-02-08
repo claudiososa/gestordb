@@ -68,18 +68,20 @@ $(document).ready(function() {
 
 
 
-
           //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
           $('[id ^=if]').click( function(){
-              let escuelaNombre = ""
-              let escuelaNumero = ""
-              let escuelaCue = ""
-              let fecha = ""
-              let prioridad = ""
-              let categoria =  ""
-              let subcategoria =  ""
-              let titulo =  ""
-              let contenido =  ""
+
+            let informeActual ={
+              escuelaNombre: "ddded",
+              escuelaNumero: "",
+              escuelaCue: "",
+              fecha: "",
+              prioridad: "",
+              categoria:  "",
+              subcategoria:  "",
+              titulo: ""
+            }
+
                    //$('[id ^=if]').on('click', function(){
               let idPrueba = $(this).attr('id');
               let informeId = idPrueba.substr(2)
@@ -91,7 +93,18 @@ $(document).ready(function() {
               })
               .done(function(lista) {
                 for (let item of lista) {
-                    let escuelaNombre = item.nombre
+                    console.log('item. nombre'+item.nombre)
+                    informeActual.escuelaNombre=item.nombre
+                    informeActual.escuelaNumero=item.numero
+                    informeActual.escuelaCue=item.cue
+                    informeActual.fecha=item.fecha
+                    informeActual.prioridad=item.prioridad
+                    informeActual.categoria=item.categoria
+                    informeActual.subcategoria=item.subcategoria
+                    informeActual.titulo=item.titulo
+                    informeActual.contenido=item.contenido
+
+                    /*let escuelaNombre = item.nombre
                     let escuelaNumero = item.numero
                     let escuelaCue = item.cue
                     let fecha = item.fecha
@@ -99,29 +112,34 @@ $(document).ready(function() {
                     let categoria =  item.categoria
                     let subcategoria =  item.subcategoria
                     let titulo =  item.titulo
-                    let contenido =  item.contenido
+                    let contenido =  item.contenido*/
 
                 }
-
-                console.log("success");
+                //console.log(informeActual.escuelaNombre)
+                //console.log("success Ajax Informe");
               })
+
               .fail(function() {
                 console.log("error");
               })
               .always(function() {
-                console.log("complete");
+                console.log(informeActual.escuelaNombre)
+                console.log("success Ajax Informe");
+                formPersona(informeActual)
+                //console.log("complete");
               });
 
-              formPersona(escuelNombre)
-              });
 
-          console.log("success");
+
+          });
+
+          //console.log("success");
         })
         .fail(function() {
           console.log("error");
         })
         .always(function() {
-          console.log("complete");
+          //console.log("complete");
         });
     }else{
         //$('.trinformes'+escuelaId).remove()
