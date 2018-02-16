@@ -126,6 +126,9 @@ $(document).ready(function() {
                 console.log(informeActual.escuelaNombre)
                 console.log("success Ajax Informe");
                 formPersona(informeActual)
+
+
+
                 //console.log("complete");
               });
 

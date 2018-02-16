@@ -3,12 +3,13 @@
   function formPersona(informeActual)
   {
     let escuelaId =  $('#escuelaId').val()
-    $.getScript("js/nicEdit.js",function() {
+
       console.log("script cargado");
       bkLib.onDomLoaded(function() {
               new nicEditor({iconsPath : 'js/nicEditorIcons.gif'}).panelInstance('contenido');
 
-     });
+      });
+      
 
       //bkLib.onDomLoaded(function() {
 //        new nicEditor({iconsPath : 'js/nicEditorIcons.gif'}).panelInstance('contenido');
@@ -62,7 +63,7 @@
       $('#btnSave').click(function(){
         console.log('boton guardar')
       })
-    });
+
 
 
 
