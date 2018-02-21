@@ -72,7 +72,8 @@ $(document).ready(function() {
           $('[id ^=if]').click( function(){
 
             let informeActual ={
-              escuelaNombre: "ddded",
+              informeId: "",
+              escuelaNombre: "",
               escuelaNumero: "",
               escuelaCue: "",
               fecha: "",
@@ -103,6 +104,7 @@ $(document).ready(function() {
                     informeActual.subcategoria=item.subcategoria
                     informeActual.titulo=item.titulo
                     informeActual.contenido=item.contenido
+                    informeActual.informeId=informeId
 
                     /*let escuelaNombre = item.nombre
                     let escuelaNumero = item.numero

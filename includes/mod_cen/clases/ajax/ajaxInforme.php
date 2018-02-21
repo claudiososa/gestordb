@@ -14,7 +14,7 @@
     //Maestro::debbugPHP($buscarInforme);
     $list=array();
     $temporal=array(
-      'informeId'=>$datoInforme->informeId,
+      'informeId2'=>$datoInforme->informeId,
       'escuelaId'=>$datoInforme->escuelaId,
       'numero'=>$datoInforme->numero,
       'cue'=>$datoInforme->cue,
