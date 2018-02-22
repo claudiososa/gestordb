@@ -1,6 +1,6 @@
 <?php
-include_once('includes/mod_cen/clases/conexion.php');
-include_once("includes/mod_cen/clases/maestro.php");
+include_once('conexion.php');
+include_once("maestro.php");
 
 class Respuesta
 {
@@ -143,7 +143,13 @@ function __construct($respuestaId=NULL,$informeId=NULL,$referenteId=NULL, $conte
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT * FROM respuestas";
+		$sentencia="SELECT *
+								FROM respuestas
+								INNER JOIN referentes
+								ON referentes.referenteId=respuestas.referenteId
+								INNER JOIN personas
+								ON personas.personaId=referentes.personaId
+								";
 		if($this->informeId!=NULL || $this->referenteId!=NULL
 		|| $this->fechaVisita!=NULL || $this->fechaCarga!=NULL || $this->contenido!=NULL)
 		{
