@@ -129,6 +129,49 @@ function __construct($tipoInformeId=NULL,$nombre=NULL,$descripcion=NULL, $estado
 
 	}
 
+
+
+
+//var_dump ($arrayReferentes);
+	public function buscarCat($limit=NULL)
+	{
+		/*
+		$arraySuperPrimaria= array('SGP');
+		foreach ($arraySuperPrimaria as $tipo ) {
+			echo "$tipo";
+		}*/
+
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+	  $sentencia="SELECT * FROM tipoinformes";
+
+		if($this->tipoInformeId!=NULL || $this->nombre!=NULL || $this->descripcion!=NULL || $this->estado!=NULL || $this->descripcion!=NULL
+		|| $this->fechaModif!=NULL || $this->usuarioModif!=NULL || $this->exclusiva!=NULL)
+		{
+			$sentencia.=" WHERE ";
+
+
+
+		if($this->nombre!=NULL)
+		{
+			$sentencia.=" nombre LIKE '%$this->nombre%'  && ";
+		}
+
+		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+		}
+
+		$sentencia.="  ORDER BY nombre DESC";
+		if(isset($limit)){
+			$sentencia.=" LIMIT ".$limit;
+		}
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
+
+
 	public function __get($var)
 	{
 		return $this->$var;
