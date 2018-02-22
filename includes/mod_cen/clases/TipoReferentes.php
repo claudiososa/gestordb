@@ -10,16 +10,18 @@ class TipoReferentes
 	private $tipoReferente;
  	private $cargoAutoridad;
 	private $login;
+  private $linea;
 
 
 
-function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$login=NULL)
+function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$login=NULL,$linea=NULL)
 	{
 
  		$this->tipoId = $tipoId;
 		$this->tipoReferente = $tipoReferente;
  		$this->cargoAutoridad = $cargoAutoridad;
 		$this->login = $login;
+    $this->linea = $linea;
 
 	}
 
@@ -30,8 +32,8 @@ function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$logi
 		$conexion=$nuevaConexion->getConexion();
 
 
-		$sentencia="INSERT INTO tipoReferentes (tipoId,tipoReferente,cargoAutoridad,login)
-		VALUES (NULL,'". $this->tipoReferente."','". $this->cargoAutoridad."','". $this->login."');";
+		$sentencia="INSERT INTO tipoReferentes (tipoId,tipoReferente,cargoAutoridad,login,linea)
+		VALUES (NULL,'". $this->tipoReferente."','". $this->cargoAutoridad."','". $this->login."','". $this->linea."');";
 
 
 
@@ -51,7 +53,7 @@ function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$logi
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="UPDATE tipoReferentes SET  tipoReferente = '$this->tipoReferente',cargoAutoridad = '$this->cargoAutoridad', login = '$this->login'
+		$sentencia="UPDATE tipoReferentes SET  tipoReferente = '$this->tipoReferente',cargoAutoridad = '$this->cargoAutoridad', login = '$this->login', linea = '$this->linea'
 		WHERE tipoId = '$this->tipoId'";
 
 
@@ -92,7 +94,7 @@ function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$logi
 
 		$sentencia="SELECT * FROM tipoReferentes";
 
-		if($this->tipoId!=NULL || $this->tipoReferente!=NULL || $this->cargoAutoridad!=NULL || $this->login!=NULL)
+		if($this->tipoId!=NULL || $this->tipoReferente!=NULL || $this->cargoAutoridad!=NULL || $this->login!=NULL|| $this->linea!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -116,6 +118,11 @@ function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$logi
 		if($this->login!=NULL)
 		{
 			$sentencia.=" login = $this->login && ";
+		}
+    
+    if($this->linea!=NULL)
+		{
+			$sentencia.=" linea = $this->linea && ";
 		}
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
