@@ -1,4 +1,5 @@
 <?php
+  include_once('../imgRespuesta.php');
   include_once('../respuesta.php');
   include_once('../maestro.php');
 
@@ -28,9 +29,50 @@
     //Maestro::debbugPHP($_POST['informeId']);
     $fecha=date("Y-m-d H:i:s");
     $nuevaRespuesta =  new Respuesta(null,$_POST['informeId'],$_POST['referenteId'],$_POST['contenido'],$fecha,$fecha,$fecha);
-    Maestro::debbugPHP($nuevaRespuesta);
-    $nuevaRespuesta->agregar();
-    //Maestro::debbugPHP($nueva);
+    //Maestro::debbugPHP($nuevaRespuesta);
+    $guardar_respuesta=$nuevaRespuesta->agregar();
+    Maestro::debbugPHP($guardar_respuesta);
+
+    foreach ($_FILES['input-img'] as $key) {
+      $cantidadElmentos=count($_FILES['input-img']['name']);
+
+      for ($i=0; $i < $cantidadElmentos ; $i++) {
+        # code...
+        $img1 = $_FILES['input-img']['tmp_name'][$i];
+        $img1 = $_FILES['input-img']['name'][$i];
+      //  echo 'dato'.img1;
+        $dir_subida = './img/respuestas/';
+
+        if($_FILES['input-img']['type'][$i]=='image/jpeg'){
+          $nombreArchivo='doc_'.$guardar_respuesta.'_'.$i.'.jpg';
+          $nombreArchivoMediano='doc_'.$guardar_respuesta.'_'.$i.'m.jpg';
+          $tipoArchivo='image/jpeg';
+        } elseif($_FILES['input-img']['type'][$i]=='application/pdf') {
+          $nombreArchivo='doc_'.$guardar_respuesta.'_'.$i.'.pdf';
+          $tipoArchivo='application/pdf';
+        }
+        //$fichero_subido = $dir_subida . basename($_FILES['input-img']['name'][0]);
+        $fichero_subido = $dir_subida . $nombreArchivo;
+  //      echo $fichero_subido;
+
+
+  //echo '<pre>';
+        if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
+          if($_FILES['input-img']['type'][$i]=='image/jpeg'){
+            $nuevoArchivo = $dir_subida.$nombreArchivoMediano;
+            copy($fichero_subido,$nuevoArchivo);
+          }
+          $imagen = new ImgRespuesta(null,$guardar_respuesta,$nombreArchivo,$tipoArchivo);
+          $agregarImg = $imagen->agregar();
+          echo "El fichero es válido y se subió con éxito.\n";
+        }	 else {
+   echo "¡Posible ataque de subida de ficheros!\n";
+        }
+
+      }
+      break;
+    }
+
       $list=array();
       $temporal=array(
         'estado'=>'guardado'

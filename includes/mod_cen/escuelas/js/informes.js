@@ -36,8 +36,17 @@
                       </textarea>
                     </div>
                     <div id="divRespuesta" class="col-md-12">
+
+
+
                       <textarea  rows='20' name="respuesta" id="respuesta" class="form-control" >
                       </textarea>
+                      <div class="col-md-12">
+                        <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
+                      </div>
+                      <div class="col-md-12">
+                        <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
+                      </div>
                     </div>
                   </div>
               </form>
@@ -88,6 +97,38 @@
       })
 
       $('#myModal').on('shown.bs.modal', function(){
+        $("#input-img").fileinput({
+            browseClass: "btn btn-success btn-block",
+            allowedFileExtensions: ["jpg", "pdf"],
+            maxFileCount: 5,
+            showCaption: true,
+            initialCaption: "Seleccione archivos para informe",
+            showRemove: false,
+            maxFileSize: 1024,
+            maxFilePreviewSize: 1024,
+            showUpload: false
+        });
+
+
+        $("#input-24").fileinput({
+
+
+                initialPreview: [
+                    'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg',
+                    'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg'
+                ],
+                initialPreviewAsData: true,
+                initialPreviewConfig: [
+                    {caption: "Moon.jpg", size: 930321, width: "120px", key: 1},
+                    {caption: "Earth.jpg", size: 1218822, width: "120px", key: 2}
+                ],
+                showCaption: false,
+              showRemove: false,
+              showDelete: false,
+
+              showUpload: false
+
+            });
         $('#divRespuesta').hide()
         $('[id ^=rp]').hide()
 
@@ -146,12 +187,19 @@
           $('#divRespuesta').show()
         }else{
           let contenido = CKEDITOR.instances['respuesta'].getData();
+          let adjunto = $('#input-img').val()
+          let paqueteData = new FormData()
+          paqueteData.append('informeId', informeId);
+          paqueteData.append('referenteId', referenteId2);
+          paqueteData.append('contenido', contenido);
+          paqueteData.append('adjunto', $('#input-img')[0].files[0]);
+
           console.log("Contenido" +contenido)
           $.ajax({
             url: 'includes/mod_cen/clases/ajax/ajaxRespuesta.php',
             type: 'POST',
             dataType: 'json',
-            data: {informeId:informeId,referenteId:referenteId2,contenido:contenido}
+            data: {informeId:informeId,referenteId:referenteId2,contenido:contenido,adjunto:adjunto}
           })
           .done(function() {
 
