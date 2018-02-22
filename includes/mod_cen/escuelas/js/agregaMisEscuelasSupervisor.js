@@ -68,9 +68,22 @@ $(document).ready(function() {
 
 
 
-
           //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
-          $('[id ^=if]').click( function(){            //$('[id ^=if]').on('click', function(){
+          $('[id ^=if]').click( function(){
+
+            let informeActual ={
+              informeId: "",
+              escuelaNombre: "",
+              escuelaNumero: "",
+              escuelaCue: "",
+              fecha: "",
+              prioridad: "",
+              categoria:  "",
+              subcategoria:  "",
+              titulo: ""
+            }
+
+                   //$('[id ^=if]').on('click', function(){
               let idPrueba = $(this).attr('id');
               let informeId = idPrueba.substr(2)
               $.ajax({
@@ -81,33 +94,57 @@ $(document).ready(function() {
               })
               .done(function(lista) {
                 for (let item of lista) {
-                  if (item.cantidad > 0) {
-                    let escuelaNombre = item.nombre
-                    let escuelaNumero = item.numero
-                  }else{
-                    alert('Esta escuela no tiene informes creados')
-                  }
-                }
+                    console.log('item. nombre'+item.nombre)
+                    informeActual.escuelaNombre=item.nombre
+                    informeActual.escuelaNumero=item.numero
+                    informeActual.escuelaCue=item.cue
+                    informeActual.fecha=item.fecha
+                    informeActual.prioridad=item.prioridad
+                    informeActual.categoria=item.categoria
+                    informeActual.subcategoria=item.subcategoria
+                    informeActual.titulo=item.titulo
+                    informeActual.contenido=item.contenido
+                    informeActual.informeId=informeId
 
-                console.log("success");
+                    /*let escuelaNombre = item.nombre
+                    let escuelaNumero = item.numero
+                    let escuelaCue = item.cue
+                    let fecha = item.fecha
+                    let prioridad = item.prioridad
+                    let categoria =  item.categoria
+                    let subcategoria =  item.subcategoria
+                    let titulo =  item.titulo
+                    let contenido =  item.contenido*/
+
+                }
+                //console.log(informeActual.escuelaNombre)
+                //console.log("success Ajax Informe");
               })
+
               .fail(function() {
                 console.log("error");
               })
               .always(function() {
-                console.log("complete");
+                console.log(informeActual.escuelaNombre)
+                console.log("success Ajax Informe");
+                formPersona(informeActual)
+
+
+
+                //console.log("complete");
               });
 
-              formPersona()
-              });
 
-          console.log("success");
+
+          });
+
+          //console.log("success");
         })
         .fail(function() {
           console.log("error");
         })
         .always(function() {
-          console.log("complete");
+          //console.log("complete");
         });
     }else{
         //$('.trinformes'+escuelaId).remove()

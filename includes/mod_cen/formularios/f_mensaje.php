@@ -140,7 +140,7 @@ if ($_GET['id']==3) {
 
 
       <?php
-      if ($_GET['id']==1) {
+      if ($_GET['id']==1) {//Si esta en la ventana de escribir Mensaje
         ?>
         <script type="text/javascript">
         //<![CDATA[

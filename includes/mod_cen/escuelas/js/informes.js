@@ -1,338 +1,177 @@
 
 
-  //$('#informeId7062').click(function(){
-//    alert('hola')
-//  });
-
-  //$('[id ^=informeId]').on('click', function(){
-//.    alert('hola')
-  //  formPersona()
-  //})
-  //formPersona()
-
-  function formPersona()
+  function formPersona(informeActual)
   {
     let escuelaId =  $('#escuelaId').val()
-    console.log(escuelaId)
-    $('#padreIr').append(`
-      <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">${escuelaNombre}<br>
-              Numero: ${escuelaNumero} Cue: 660034321 <br>Departamento: Oran
-              <br>Fecha: 14-2-2018<br>Prioridad: Alta
-              <br>Categoria: Cate<br>Subcategoria:subte
-              <br>
-              <br>Titulo: Mi titulo
-              <br>Contenido</h4>
 
-            </div>
-            <div class="modal-body" id="modal-body" >
-            <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
-             		<div class="form-group">
-                  <div class="col-md-12">
-                    <label class="control-label"><br>Escuela</label>
+      console.log("script cargado");
+      console.log(informeActual.informeId);
+
+
+      //bkLib.onDomLoaded(function() {
+//        new nicEditor({iconsPath : 'js/nicEditorIcons.gif'}).panelInstance('contenido');
+  //      });
+      $('#padreIr').append(`
+        <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">${informeActual.escuelaNombre}<br>
+                Numero: ${informeActual.escuelaNumero} Cue: ${informeActual.escuelaCue} <br>Departamento: Oran
+                <br>Fecha: ${informeActual.fecha}<br>Prioridad: ${informeActual.prioridad}
+                <br>Categoria: ${informeActual.categoria}<br>Subcategoria:${informeActual.subcategoria}
+                <br>
+                <br>Titulo: ${informeActual.titulo}
+                </h5>
+              </div>
+              <div class="modal-body" id="modal-body" >
+              <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="control-label">Contenido</label>
+                    </div>
+                    <div id="divContenido" class="col-md-12">
+                      <textarea  rows='20' name="contenido" id="contenido" class="form-control" >${informeActual.contenido}
+                      </textarea>
+                    </div>
+                    <div id="divRespuesta" class="col-md-12">
+                      <textarea  rows='20' name="respuesta" id="respuesta" class="form-control" >
+                      </textarea>
+                    </div>
                   </div>
-                  <div class="col-md-12">
-                       <input type='text' name="escuelaId"  class="form-control" value="" disabled>
-                  </div>
-                </div>
+              </form>
+              `)
+              let buscar ="buscar"
+              let informeIdBuscar = informeActual.informeId
+              $.ajax({
+                url: 'includes/mod_cen/clases/ajax/ajaxRespuesta.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {informeIdBuscar:informeIdBuscar}
+              })
+              .done(function(data) {
+                for (let item of data) {
+                  $('#modal-body').append(`
+                    <p class="alert alert-success rp" id="titulo${item.id}">Respuesta de ${item.apellido},${item.nombre} Fecha:${item.fecha}</p>
+                    <div id="rp${item.id}">
+                      ${item.contenido}
+                    </div>
+                    `)
+                  //console.log("id"+item.id+"Contenido"+item.contenido);
+                }
+                //console.log("Se guardo con exito... success");
+                //$("#myModal").modal("hide");
 
-                <div class="form-group">
-                  <div class="col-md-12">
-                    <label class="control-label">Nombre de Escuela</label>
-                  </div>
-                  <div class="col-md-12">
-                    <input type='text' name="nombre_escuela"  class="form-control" value="" disabled>
-                  </div>
-                </div>
-    <div class="col-md-12">
-                    <input name="txtidpersona" type="hidden" id="statusDni" value="0" />
-                    <input name="txtidpersona" type="hidden" id="txtidpersona" value="" />
-                    <input name="txtidesacuela" type="hidden" id="txtescuelaid" value="${escuelaId}"/>
-                    <input type="hidden" name="iddirector" id="iddirector" value="" />
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+              });
 
-                </div>
+              $('#modal-body').append(`
               </div>
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Apellido</label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txtapellido" id="txtapellido" class="hades" />
-                </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnSave">Responder</button>
               </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Nombre</label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txtnombre" id="txtnombre" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">CUIL</label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txtcuil" id="txtcuil" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Localidad</label>
-                </div>
-                <div class="col-md-12">
-                  <select class="form-control" name="localidad" id="localidad">
-                  <option value="0">Seleccione...</option>
-
-                  `)
-                  $.ajax({
-                    url: 'includes/mod_cen/clases/ajax/ajaxLocalidad.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {local: 'local'}
-                  })
-                  .done(function(lista) {
-                    for (let item of lista) {
-                      $('#localidad').append(`<option value="${item.id}">${item.nombre}</option>`)
-                    }
-                    console.log("success");
-                  })
-                  .fail(function() {
-                    console.log("error");
-                  })
-                  .always(function() {
-                    console.log("complete");
-                  });
-
-
-                  $("#modal-body").append(`
-                      </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Teléfono </label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txttelefonoM" id="txttelefonoM" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label">Email </label>
-                </div>
-                <div class="col-md-12">
-                  <input class="form-control" type="text" name="txtemail" id="txtemail" class="hades" />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="col-md-12">
-                  <label for="" class="control-label"></label>
-                </div>
-
-              </div>
-
-
-
-
-            </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" id="btnSave">Guardar</button>
-            </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-      `)
-    $('#myModal').modal('show')
-
-    $('#myModal').on('hide.bs.modal', function(){
-      $('#myModal').remove()
-    })
-
-    $('#myModal').on('shown.bs.modal', function(){
-      $('#txtdni').focus()
-
-
-      let escuelaId = $('#txtescuelaid').val()
-      let tipoId = $('#tipoId').val()
-      let search ='search'
-      $.ajax({
-        url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {search:search,escuelaId: escuelaId,tipoId:tipoId}
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        `)
+      $('#myModal').modal('show')
+      //$("#operar").attr("disabled",false);
+      $('#myModal').on('hide.bs.modal', function(){
+        $('#myModal').remove()
       })
-      .done(function(lista) {
-        for (let item of lista) {
 
-          if (item.id=='0') {
-            console.log('no encontrado')
-            $('#statusDni').val('0')
-            $('#txtidpersona').val('')
-            $('#txtnombre').val('')
-            $('#txtapellido').val('')
-            $('#txtcuil').val('')
-            $('#txttelefonoM').val('')
-            $('#txtemail').val('')
-            $('#localidad').val('0')
-          }else{
-            $('#statusDni').val('1')
-            console.log('encontrado')
-            $('#txtdni').val(item.dni)
-            $('#txtidpersona').val(item.id)
-            $('#txtnombre').val(item.nombre)
-            $('#txtapellido').val(item.apellido)
-            $('#txtcuil').val(item.cuil)
-            $('#txttelefonoM').val(item.telefono)
-            $('#txtemail').val(item.email)
-            let selected = $('#localidad option:selected').val();
-            $("#localidad option[value="+ selected +"]").attr("selected",false);
-            console.log(selected)
-            $("#localidad option[value="+ item.localidad +"]").attr("selected",true);
-            //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
-          }
-        }
-        console.log("success");
-      })
-      .fail(function() {
-        console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
-      });
-    })
+      $('#myModal').on('shown.bs.modal', function(){
+        $('#divRespuesta').hide()
+        $('[id ^=rp]').hide()
 
-    $('#btnSave').click(function(){
-      console.log('boton guardar')
-
-      let id = $('#txtidpersona').val()
-      let nombre = $('#txtnombre').val()
-      let apellido = $('#txtapellido').val()
-      let cuil = $('#txtcuil').val()
-      let telefonoM = $('#txttelefonoM').val()
-      let email = $('#txtemail').val()
-      let localidad = $('#localidad').val()
-      let txtdni = $('#txtdni').val()
-      let escuelaId = $('#txtescuelaid').val()
-      let tipoId = $('#tipoId').val()
-      //let tipoId = $('#modulo').val()
-      console.log('txtdni' + txtdni)
-      let update = $('#statusDni').val()
-
-      console.log('Estado de update '+update)
+        $('[id ^=titulo]').click(function(){
+          let resp = $(this).attr('id')
+          let numeroResp = resp.substr(6)
+          $("#rp"+numeroResp).toggle()
+          console.log('respuestas ...'+numeroResp)
+        });
 
 
-      $.ajax({
-        url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-              btnSave:'btnSave',
-              escuelaId:escuelaId,
-              tipoId:tipoId,
-              update: update,
-              personaId:id,
-              nombre:nombre,
-              apellido:apellido,
-              txtdni:txtdni,
-              cuil:cuil,
-              telefonoM:telefonoM,
-              email:email,
-              localidad:localidad}
-      })
-      .done(function(lista) {
+        CKEDITOR.replace( 'contenido', {
+        toolbar: [
 
-        for (let item of lista) {
-          if (item.status=='new') {
-            console.log('se creo con exito')
-          }else{
-            console.log('se actualizo con exito')
-          }
-            //$('#myModal').remove()
-            $('#myModal').modal('hide')
-
-        }
-        console.log("success");
-      })
-      .fail(function() {
-        console.log("error Guardar");
-      })
-      .always(function() {
-        console.log("complete");
+        ]
       });
 
-
-      //$('#myModal').remove()
-      //$('#myModal').hide()
-
-    })
-
-
-
-
-
-    $('#btnBuscarDni').click(function() {
-      let dni = $('#txtdni').val()
-
-      //$('#localidad option:selected').remove();
-
-      //$json = json_encode($arrayPrincipal);
-      $.ajax({
-        url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {dni: dni}
-      })
-      .done(function(lista) {
-        for (let item of lista) {
-
-          if (item.id=='0') {
-            console.log('no encontrado')
-            $('#statusDni').val('0')
-            $('#txtidpersona').val('')
-            $('#txtnombre').val('')
-            $('#txtapellido').val('')
-            $('#txtcuil').val('')
-            $('#txttelefonoM').val('')
-            $('#txtemail').val('')
-            $('#localidad').val('0')
-          }else{
-            $('#statusDni').val('1')
-            console.log('encontrado')
-            $('#txtidpersona').val(item.id)
-            $('#txtnombre').val(item.nombre)
-            $('#txtapellido').val(item.apellido)
-            $('#txtcuil').val(item.cuil)
-            $('#txttelefonoM').val(item.telefono)
-            $('#txtemail').val(item.email)
-            let selected = $('#localidad option:selected').val();
-            $("#localidad option[value="+ selected +"]").attr("selected",false);
-            console.log(selected)
-            $("#localidad option[value="+ item.localidad +"]").attr("selected",true);
-            //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
-          }
-        }
-        console.log("success");
-      })
-      .fail(function() {
-        console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
-      });
-
-      console.log('hola dni')
+      CKEDITOR.replace( 'respuesta', {
+      toolbar: [
+          { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+          { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Strike', 'Subscript', 'Superscript', '-' ] },
+          { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+          { name: 'links', items: [ 'Link', 'Unlink' ] },
+          '/',
+          { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+          { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+          { name: 'others', items: [ '-' ] }
+      ]
     });
+        //CKEDITOR.replace('contenido');
+
+        $.fn.modal.Constructor.prototype.enforceFocus = function () {
+            modal_this = this
+            $(document).on('focusin.modal', function (e) {
+                if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+                // add whatever conditions you need here:
+                &&
+                !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select') && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+                    modal_this.$element.focus()
+                }
+            })
+          };
+      })
+
+      $('#btnSave').click(function(){
+        let valorBoton = $(this).text()
+        let informeId = informeActual.informeId
+
+
+        console.log("Valor de Informe Id" +informeId)
+
+        if (valorBoton=="Responder") {
+          console.log('boton responder')
+          $('#divContenido').hide()
+          $('#btnSave').html('Enviar')
+          $('#divRespuesta').show()
+        }else{
+          let contenido = CKEDITOR.instances['respuesta'].getData();
+          console.log("Contenido" +contenido)
+          $.ajax({
+            url: 'includes/mod_cen/clases/ajax/ajaxRespuesta.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {informeId:informeId,referenteId:referenteId2,contenido:contenido}
+          })
+          .done(function() {
+
+            console.log("Se guardo con exito... success");
+            $("#myModal").modal("hide");
+
+          })
+          .fail(function() {
+            console.log("error");
+          })
+          .always(function() {
+            console.log("complete");
+          });
+
+          console.log('guardando respuesta...')
+        }
+
+      })
+
+
+
+
   }

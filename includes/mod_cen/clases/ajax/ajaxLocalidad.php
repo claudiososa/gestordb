@@ -22,7 +22,7 @@
     //array_push($list,$temporal);
 
     $json = json_encode($arrayPrincipal);
-    Maestro::debbugPHP($json);
+    //Maestro::debbugPHP($json);
     echo $json;
   }
   ?>
