@@ -187,39 +187,60 @@
           $('#divRespuesta').show()
         }else{
           let contenido = CKEDITOR.instances['respuesta'].getData();
-          let inputFileImage = document.getElementById("input-img");
-          let file = inputFileImage.files[0];
 
-          let adjunto = $('#input-img').val()
-          let paqueteData = new FormData()
-          paqueteData.append('informeId', informeId);
-          paqueteData.append('referenteId', referenteId2);
-          paqueteData.append('contenido', contenido);
-          paqueteData.append('file', $('#input-img')[0] );
+          //$("#formInforme").on("submit", function(e) {//
+              alert( "Handler for .submit() called." );
+              let paqueteData = new FormData()
+              //let form =
+              paqueteData.append('informeId', informeId);
+              paqueteData.append('referenteId', referenteId2);
+              paqueteData.append('contenido', contenido);
+              paqueteData.append('input-img', $('#input-img')[0]);
+                console.log("Contenido" +paqueteData)
+                $.ajax({
+                  url: 'includes/mod_cen/clases/ajax/ajaxRespuesta.php',
+                  type: 'POST',
+                  contentType: false,
+                  processData: false,
+                  dataType: 'json',
+                  data: paqueteData,
+                  //data: {informeId:informeId,referenteId:referenteId2,contenido:contenido,adjunto:adjunto}
+                })
+                .done(function() {
+
+                  console.log("Se guardo con exito... success Ahora");
+                  $("#myModal").modal("hide");
+
+                })
+                .fail(function() {
+                  console.log("error");
+                })
+                .always(function() {
+                  console.log("complete");
+                });
+          //  });
+            //alert( "Handler for .submit() called." );
+
+
+            //paqueteData.append('adjunto', $('#input-img')[0].files[0]);
+
+
+            //});
+          //$( "#formInforme" ).submit();
+          //let inputFileImage = document.getElementById("input-img");
+          //let file = inputFileImage.files[0];
+
+          //let adjunto = $('#input-img').val()
+
+
+
+
+          //paqueteData.append('informeId', informeId);
+          //paqueteData.append('referenteId', referenteId2);
+          //paqueteData.append('contenido', contenido);
+          //paqueteData.append('input-img', $('#input-img')[0].file[0]);
           //paqueteData.append('adjunto', $('#input-img')[0].files[0]);
 
-          console.log("Contenido" +contenido)
-          $.ajax({
-            url: 'includes/mod_cen/clases/ajax/ajaxRespuesta.php',
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            data: paqueteData,
-            //data: {informeId:informeId,referenteId:referenteId2,contenido:contenido,adjunto:adjunto}
-          })
-          .done(function() {
-
-            console.log("Se guardo con exito... success");
-            $("#myModal").modal("hide");
-
-          })
-          .fail(function() {
-            console.log("error");
-          })
-          .always(function() {
-            console.log("complete");
-          });
 
           //console.log('guardando respuesta...')
         }

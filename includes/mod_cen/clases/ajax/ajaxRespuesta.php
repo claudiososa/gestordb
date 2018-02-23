@@ -31,9 +31,10 @@
     $nuevaRespuesta =  new Respuesta(null,$_POST['informeId'],$_POST['referenteId'],$_POST['contenido'],$fecha,$fecha,$fecha);
     //Maestro::debbugPHP($nuevaRespuesta);
     $guardar_respuesta=$nuevaRespuesta->agregar();
-    Maestro::debbugPHP($_FILES['input-img']);
+    //Maestro::debbugPHP($_FILES['input-img']);
+    
+    foreach ($_FILES['input-img'] as $key) {
 
-    foreach ($_FILES['file'] as $key) {
       $cantidadElmentos=count($_FILES['input-img']['name']);
 
       for ($i=0; $i < $cantidadElmentos ; $i++) {
