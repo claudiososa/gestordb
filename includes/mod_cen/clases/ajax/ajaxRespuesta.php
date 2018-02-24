@@ -9,13 +9,22 @@
     $buscarRespuesta = $respuesta->buscar();
     $list=array();
     while ($row = mysqli_fetch_object($buscarRespuesta)) {
+      $img = new ImgRespuesta(null,$row->respuestaId);
+      $buscarImg = $img->buscar();
       $temporal=array(
         'id'=>$row->respuestaId,
         'contenido'=>$row->contenido,
         'nombre'=>$row->nombre,
         'apellido'=>$row->apellido,
         'fecha'=>$row->fechaCarga,
+
       );
+      $indiceImg =0;
+      while ($rowImg = mysqli_fetch_object($buscarImg)) {
+        $temporal['img'.$indiceImg] = $rowImg->nombre;
+        $indiceImg++;
+      }
+
       array_push($list,$temporal);
     }
     $json = json_encode($list);
@@ -31,18 +40,18 @@
     $nuevaRespuesta =  new Respuesta(null,$_POST['informeId'],$_POST['referenteId'],$_POST['contenido'],$fecha,$fecha,$fecha);
     //Maestro::debbugPHP($nuevaRespuesta);
     $guardar_respuesta=$nuevaRespuesta->agregar();
-    //Maestro::debbugPHP($_FILES['input-img']);
-    
+    Maestro::debbugPHP($_FILES);
+
     foreach ($_FILES['input-img'] as $key) {
 
       $cantidadElmentos=count($_FILES['input-img']['name']);
-
+      //Maestro::debbugPHP($cantidadElmentos);
       for ($i=0; $i < $cantidadElmentos ; $i++) {
         # code...
         $img1 = $_FILES['input-img']['tmp_name'][$i];
         $img1 = $_FILES['input-img']['name'][$i];
       //  echo 'dato'.img1;
-        $dir_subida = './img/respuestas/';
+        $dir_subida = '../../../../img/respuestas/';
 
         if($_FILES['input-img']['type'][$i]=='image/jpeg'){
           $nombreArchivo='doc_'.$guardar_respuesta.'_'.$i.'.jpg';

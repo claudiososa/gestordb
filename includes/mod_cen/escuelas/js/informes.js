@@ -1,16 +1,6 @@
-
-
   function formPersona(informeActual)
   {
     let escuelaId =  $('#escuelaId').val()
-
-      console.log("script cargado");
-      console.log(informeActual.informeId);
-
-
-      //bkLib.onDomLoaded(function() {
-//        new nicEditor({iconsPath : 'js/nicEditorIcons.gif'}).panelInstance('contenido');
-  //      });
       $('#padreIr').append(`
         <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
           <div class="modal-dialog" role="document">
@@ -36,9 +26,6 @@
                       </textarea>
                     </div>
                     <div id="divRespuesta" class="col-md-12">
-
-
-
                       <textarea  rows='20' name="respuesta" id="respuesta" class="form-control" >
                       </textarea>
                       <div class="col-md-12">
@@ -50,6 +37,7 @@
                     </div>
                   </div>
               </form>
+              </div>
               `)
               let buscar ="buscar"
               let informeIdBuscar = informeActual.informeId
@@ -65,12 +53,32 @@
                     <p class="alert alert-success rp" id="titulo${item.id}">Respuesta de ${item.apellido},${item.nombre} Fecha:${item.fecha}</p>
                     <div id="rp${item.id}">
                       ${item.contenido}
-                    </div>
-                    `)
-                  //console.log("id"+item.id+"Contenido"+item.contenido);
+                    </div>`)
+
+                      if (item.img0) {
+                        $('#modal-body').append(`<div class="img${item.id}">Archivos Adjuntos:<br><a download="${item.img0}" href="img/respuestas/${item.img0}">${item.img0}</a></div>`)
+                      }
+                      if (item.img1) {
+                        $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img1}" href="img/respuestas/${item.img1}">${item.img1}</a></div>`)
+                      }
+                      if (item.img2) {
+                        $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img2}" href="img/respuestas/${item.img2}">${item.img2}</a></div>`)
+                      }
+                      if (item.img3) {
+                        $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img3}" href="img/respuestas/${item.img3}">${item.img3}</a></div>`)
+                      }
+                      if (item.img4) {
+                        $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img4}" href="img/respuestas/${item.img4}">${item.img4}</a></div>`)
+                      }
+                      if (item.img5) {
+                        $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img5}" href="img/respuestas/${item.img5}">${item.img5}</a></div>`)
+                      }
+
+                      //$('#modal-body').after(`</div>`)
+
+
+
                 }
-                //console.log("Se guardo con exito... success");
-                //$("#myModal").modal("hide");
 
               })
               .fail(function() {
@@ -81,7 +89,7 @@
               });
 
               $('#modal-body').append(`
-              </div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" id="btnSave">Responder</button>
@@ -91,7 +99,7 @@
         </div><!-- /.modal -->
         `)
       $('#myModal').modal('show')
-      //$("#operar").attr("disabled",false);
+
       $('#myModal').on('hide.bs.modal', function(){
         $('#myModal').remove()
       })
@@ -131,11 +139,13 @@
             });
         $('#divRespuesta').hide()
         $('[id ^=rp]').hide()
+        $('[class ^=img]').hide()
 
         $('[id ^=titulo]').click(function(){
           let resp = $(this).attr('id')
           let numeroResp = resp.substr(6)
           $("#rp"+numeroResp).toggle()
+          $(".img"+numeroResp).toggle()
           console.log('respuestas ...'+numeroResp)
         });
 
@@ -176,35 +186,28 @@
       $('#btnSave').click(function(){
         let valorBoton = $(this).text()
         let informeId = informeActual.informeId
-
-
-        console.log("Valor de Informe Id" +informeId)
-
         if (valorBoton=="Responder") {
-          console.log('boton responder')
           $('#divContenido').hide()
           $('#btnSave').html('Enviar')
           $('#divRespuesta').show()
         }else{
           let contenido = CKEDITOR.instances['respuesta'].getData();
-
-          //$("#formInforme").on("submit", function(e) {//
-              alert( "Handler for .submit() called." );
+          $('#formInforme').on('submit',(function(e) {
               let paqueteData = new FormData()
-              //let form =
+              let ins = document.getElementById('input-img').files.length;
+                    for (var x = 0; x < ins; x++) {
+                        paqueteData.append("input-img[]", document.getElementById('input-img').files[x]);
+                    }
               paqueteData.append('informeId', informeId);
               paqueteData.append('referenteId', referenteId2);
               paqueteData.append('contenido', contenido);
-              paqueteData.append('input-img', $('#input-img')[0]);
-                console.log("Contenido" +paqueteData)
-                $.ajax({
+              $.ajax({
                   url: 'includes/mod_cen/clases/ajax/ajaxRespuesta.php',
                   type: 'POST',
                   contentType: false,
                   processData: false,
                   dataType: 'json',
-                  data: paqueteData,
-                  //data: {informeId:informeId,referenteId:referenteId2,contenido:contenido,adjunto:adjunto}
+                  data: paqueteData
                 })
                 .done(function() {
 
@@ -218,36 +221,8 @@
                 .always(function() {
                   console.log("complete");
                 });
-          //  });
-            //alert( "Handler for .submit() called." );
-
-
-            //paqueteData.append('adjunto', $('#input-img')[0].files[0]);
-
-
-            //});
-          //$( "#formInforme" ).submit();
-          //let inputFileImage = document.getElementById("input-img");
-          //let file = inputFileImage.files[0];
-
-          //let adjunto = $('#input-img').val()
-
-
-
-
-          //paqueteData.append('informeId', informeId);
-          //paqueteData.append('referenteId', referenteId2);
-          //paqueteData.append('contenido', contenido);
-          //paqueteData.append('input-img', $('#input-img')[0].file[0]);
-          //paqueteData.append('adjunto', $('#input-img')[0].files[0]);
-
-
-          //console.log('guardando respuesta...')
+            }));
+          $( "#formInforme" ).submit();
         }
-
       })
-
-
-
-
   }
