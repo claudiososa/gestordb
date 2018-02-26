@@ -42,6 +42,9 @@ class Maestro{
 			case '14':
 				$resultado = 'Supervisor de Primaria';
 					break;
+			case '19':
+				$resultado = 'Referente ETT';
+					break;
 			default:
 				# code...
 				break;
