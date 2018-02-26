@@ -62,11 +62,12 @@ include_once 'includes/mod_cen/clases/informe.php';
               <select class="form-control" name="" id="modulo">
                 <option value="informe&id=1">Crear informe</option>
                 <option value="informe&id=2">Ver informes</option>
-                <option value="">-------------</option>
+                <optgroup label="____________________________"></optgroup>
                 <option value="director">Director</option>
                 <option value="snp">Supervisor de Nucleo</option>
                 <option value="srp">Supervisor de Religion</option>
                 <option value="">Cargar modificar autoridad</option>
+
               </select>
           </div>
         </div>
@@ -144,57 +145,119 @@ include_once 'includes/mod_cen/clases/informe.php';
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA MOBILE-->
 <!----------------------------------------------------------------------------->
-
-
 <div class="container visible-xs">
+<?php
+  //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
+  $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['personaId']);
+  $buscarEscuelas = $escuelasCargo->buscar();
 
-<div class="panel panel-danger">
-  <div class="panel-heading clickable" id="panel-heading">Escuela N° 5159</div>
-  <div class="panel-body escuela">
-    <h4><b>Datos Institución</b></h4>
-    <div class="row">
-    <div class="col-md-12"><b>Dirección:&nbsp</b></div>
-    </div>
-    <div class="row">
-    <div class="col-md-5"><b>Localidad:&nbsp</b></div>
+  $escuela = new Escuela();
 
-    </div>
-    <div class="row">
+  while ($row = mysqli_fetch_object($buscarEscuelas)) {
+    $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
+    $buscarInforme= $informe->buscar();
+    $cantidadInforme = mysqli_num_rows($buscarInforme);
 
-    <div class="col-md-12"><b>Nivel:</div>
-    </div>
+    $autoridad = new Autoridades(null,$row->escuelaId);
+    $buscarAutoridad = $autoridad->buscarAutoridad3('all');
+    $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
 
-    <div class="row">
-    <div class="col-md-12"><b>Teléfono:'</div>
-    </div>
-    <div class="row">
-    <div class="col-md-12"><b>Email:'</div>
-    </div>
-    <br>
-    <hr>
-    <h4><b>Informes</b></h4>
-    <div class="row">
-    <div class="col-md-12"><button type="button" class="btn btn-danger"name="button">ver informes (8)</button></div>
-    <br>
-    <div class="col-md-12"><button type="button" class="btn btn-danger"name="button">Crear</button></div>
-    </div>
-    <hr>
-    <h4><b>Autoridades</b></h4>
-    <div class="row">
-    <div class="col-md-12">perez juan supervisor cel: 1546431354</div>
-    <div class="col-md-12">perez juan supervisor primaria</div>
-    </div>
-  </div><!--</div panel-body-->
-</div><!--</div panel panel-default-->
+    //$arrayPrincipal=array();
+
+    $escuela->escuelaId=$row->escuelaId;
+    $buscarEscuela = $escuela->buscar();
+    $infoEscuela = mysqli_fetch_object($buscarEscuela);
 
 
-</div> <!--</div container vista mobile-->
 
+    //echo $infoEscuela->numero."<br>";
+    //echo '<div class="container visible-xs">';
+    echo '<div class="panel panel-danger">';
+    echo '<div class="panel-heading clickable" id="panel-heading">'.$infoEscuela->numero.' '.$infoEscuela->nombre.'</div>';
+    echo '<div class="panel-body escuela">';
+    echo '<div class="row">';
+    echo '<br>';
+    echo '<div class="col-md-12"><b>Teléfono: </b>'.$infoEscuela->telefono.'</div>';
+    echo '</div>';
+  //  echo '<div class="row">';
+  //  echo '<div class="col-md-12"><b>Email:</b></div>';
+  //  echo '</div>';
+    //echo '<br>';
+    echo '<hr>';
+    echo '<h4><b>Mis Informes</b></h4>';
+    echo '<div class="row">';
+    echo '<div class="col-md-12">';
+    echo '<button type="button" class="btn btn-danger"name="button" >Ver Informes '.$cantidadInforme.'</button>&nbsp&nbsp&nbsp&nbsp&nbsp';
+
+    echo '<button type="button" class="btn btn-danger"name="button">Crear Nuevo</button>';
+    echo '</div>';
+    echo '<br>';
+  //  echo '<div class="col-md-12">';
+    //echo '<button type="button" class="btn btn-danger"name="button">Crear</button>';
+  //  echo '</div>';
+    echo '</div>';
+    echo '<hr>';
+    echo '<h4><b>Autoridades: ('.$cantidadAutoridades.')</b></h4>';
+
+    if ($cantidadAutoridades > 0) {
+      while ($rowAutoridades = mysqli_fetch_object($buscarAutoridad)) {
+      echo '<div class="row" >';
+      echo '<div class="col-xs-10"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
+      echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/anadir-usuario (2).png" data-toggle="popover" tabindex="0" data-trigger="focus" title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" ></div>';
+        echo '</div>';
+        echo '<br>';
+      if ($rowAutoridades->telefonoM != '') {
+
+        echo '<div class="row">';
+        echo '<div class="col-xs-2 pull-right"><a target="_blank" href="https://api.whatsapp.com/send?phone=54'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/whatsapp (1).png"></a></div>';
+        echo '<div class="col-xs-2 pull-right"><a href="tel:'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/llamada-saliente (1).png"></a>';
+        echo '</div>';
+
+
+        echo '</div>';
+        echo '<br>';
+
+      //  echo '<div class="col-xs-2"></div>';
+
+      }
+      if ($rowAutoridades->email != '') {
+        echo '<div class="row">';
+        echo '<div class="col-xs-2 pull-right"><a href="mailto:'.$rowAutoridades->email. '"><img class="img-responsive" src="img/iconos/logo-gmail.png"></a>';
+        echo '</div>';
+          echo '</div>';
+      }
+
+
+      //${ echo'<a href="tel:'.$rowAutoridades->telefonoM.'">Llama</a>';}
+    //  echo '<br>';
+    //  echo '<br>';
+      //echo '<br>';
+
+
+      echo '<hr>';
+      }
+    }
+
+    //echo '<div class="col-md-12">perez juan supervisor primaria</div>';
+
+    echo '</div>';
+
+    echo '</div>';
+
+
+    echo '<div>';
+    echo '<div>';
+
+
+  }
+  ?>
+
+</div>
 
 
 <!--modal boton autoridades vista desktop-->
 
-
+<!--
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -213,7 +276,7 @@ include_once 'includes/mod_cen/clases/informe.php';
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 <!--fin modal vista desktop-->
 
@@ -242,4 +305,7 @@ include_once 'includes/mod_cen/clases/informe.php';
     });
 
   });
+  $(function () {
+  $('[data-toggle="popover"]').popover({ html : true })
+})
   </script>
