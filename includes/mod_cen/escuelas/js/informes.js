@@ -1,5 +1,8 @@
   function formPersona(informeActual)
   {
+
+
+
     let escuelaId =  $('#escuelaId').val()
       $('#padreIr').append(`
         <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
@@ -17,6 +20,37 @@
               </div>
               <div class="modal-body" id="modal-body" >
               <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
+              `)
+
+              let informe =informeActual.informeId
+              console.log('ajaxImg'+informe)
+
+              $.ajax({
+                url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {informeAdjunto:informe},
+              })
+              .done(function(data) {
+                $('#modal-body').append(`
+                <p>Archivos Adjuntos</p>
+                `)
+                for (let item of data) {
+                  //$('#padreIr').append(`
+                    $('#padreIr').append(`
+                    <p><a download="${item.nombre}" href="img/respuestas/${item.nombre}">${item.nombre}</a></p>
+                    `)
+                }
+              console.log("success");
+              })
+
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+              });
+                $('#modal-body').append(`
                   <div class="form-group">
                     <div class="col-md-12">
                       <label class="control-label">Contenido</label>

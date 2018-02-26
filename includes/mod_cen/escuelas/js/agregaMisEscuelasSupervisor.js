@@ -94,7 +94,7 @@ $(document).ready(function() {
               })
               .done(function(lista) {
                 for (let item of lista) {
-                    console.log('item. nombre'+item.nombre)
+                    //console.log('item. nombre'+item.nombre)
                     informeActual.escuelaNombre=item.nombre
                     informeActual.escuelaNumero=item.numero
                     informeActual.escuelaCue=item.cue
@@ -125,8 +125,8 @@ $(document).ready(function() {
                 console.log("error");
               })
               .always(function() {
-                console.log(informeActual.escuelaNombre)
-                console.log("success Ajax Informe");
+                //console.log(informeActual.escuelaNombre)
+                //console.log("success Ajax Informe");
                 formPersona(informeActual)
 
 
@@ -153,9 +153,9 @@ $(document).ready(function() {
         //$('.trautoridad'+escuelaId).closest('tr').remove()
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
 
-        console.log('variable existe'+existe)
+        //console.log('variable existe'+existe)
         existe.stop
-        console.log('variable existe'+existe)
+        //console.log('variable existe'+existe)
     }
 
     //alert('fila')
@@ -174,7 +174,7 @@ $(document).ready(function() {
     if (typeof(existeAutoridad)==='undefined') {
         //console.log(existe)
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
-        console.log(escuelaId)
+        //console.log(escuelaId)
         let all ='all'
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
