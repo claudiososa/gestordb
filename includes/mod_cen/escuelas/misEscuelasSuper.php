@@ -1,3 +1,5 @@
+
+<link rel="stylesheet" href="includes/mod_cen/css/styleIconos.css">
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
 </script>
@@ -21,20 +23,25 @@ include_once 'includes/mod_cen/clases/informe.php';
 <!----------------------------------------------------------------------------->
 
 <div class="container">
+  <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
+  <hr class='hrMisEscRed'>
+<br>
+</div>
+<div class="container">
 
-<h3>Mis escuelas</h3>
-<div class="panel panel-default">
+<div class="panel panel-primary col-md-4">
   <div class="panel-body">
-    <div class="">Accesos rapidos a acciones generales</div>
+    <div class="styleFont" style="color: #068587; font-size: large;">Accesos rapidos a acciones generales</div>
+
     <br>
 
     <form class="form-horizontal" action="" method="POST" >
       <input type="hidden" name="tipoId" id="tipoId" value="" />
   		<div class="form-group">
-  				<div><label class="col-md-3">Seleccione Escuela</label></div>
+  				<div><label class="">Seleccione Escuela</label></div>
   			</div>
   			<div class="form-group">
-  				<div class="col-md-3">
+  				<div class="">
             <select class="form-control" name="escuelaId" id="escuelaId" >
               <option value="0">Seleccione...</option>
             <?php
@@ -55,10 +62,10 @@ include_once 'includes/mod_cen/clases/informe.php';
 
     <form class="form-horizontal" action="" method="POST" >
       <div class="form-group">
-          <div><label class="col-md-3">Seleccione Escuela</label></div>
+          <div><label class="">Seleccione Escuela</label></div>
         </div>
         <div class="form-group">
-          <div class="col-md-3">
+          <div class="">
               <select class="form-control" name="" id="modulo">
                 <option value="informe&id=1">Crear informe</option>
                 <option value="informe&id=2">Ver informes</option>
@@ -75,7 +82,7 @@ include_once 'includes/mod_cen/clases/informe.php';
     </form>
 
     <div class="form-group">
-      <div class="col-md-6" id="padreIr">
+      <div class="" id="padreIr">
         <input class="btn btn-primary" type="submit" value="ir" id="btn_ir">
       </div>
     </div>
@@ -172,7 +179,7 @@ include_once 'includes/mod_cen/clases/informe.php';
 
     //echo $infoEscuela->numero."<br>";
     //echo '<div class="container visible-xs">';
-    echo '<div class="panel panel-danger">';
+    echo '<div class="panel panel-primary panelPrimarySuperP">';
     echo '<div class="panel-heading clickable" id="panel-heading">'.$infoEscuela->numero.' '.$infoEscuela->nombre.'</div>';
     echo '<div class="panel-body escuela">';
     echo '<div class="row">';

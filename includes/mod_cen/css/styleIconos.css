@@ -1,0 +1,11 @@
+
+.hrMisEscRed {
+    border-top: 2px solid #FF5B61;
+  }
+.panel-primarySuperP {
+    border-color: #83b5a9;
+  }
+.panelPrimarySuperP > .panel-heading{
+  background-color: #83b5a9;
+  border-color: #83b5a9;
+}
