@@ -9,7 +9,7 @@ class EscuelaReferentes
 	private $escuelaReferentesId;
  	private $escuelaId;
  	private $tipoId;
- 	private $personaId;
+ 	private $referenteId; // cambiado x personaId
  	private $mañana;
  	private $intermedio;
  	private $tarde;
@@ -20,13 +20,13 @@ class EscuelaReferentes
 
 
 function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
-	$personaId=NULL,$mañana=NULL,$intermedio=NULL,
+	$referenteId=NULL,$mañana=NULL,$intermedio=NULL,
 	$tarde=NULL,$vespertino=NULL,$noche=NULL,$extendida=NULL)
 	{
 		$this->escuelaReferentesId = $escuelaReferentesId;
  		$this->escuelaId = $escuelaId;
  		$this->tipoId = $tipoId;
-		$this->personaId = $personaId;
+		$this->referenteId = $referenteId;
 		$this->mañana = $mañana;
 		$this->intermedio = $intermedio;
 		$this->tarde = $tarde;
@@ -44,8 +44,8 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		$conexion=$nuevaConexion->getConexion();
 
 
-		$sentencia="INSERT INTO escuelaReferentes (escuelaReferentesId,escuelaId,tipoId,personaId,mañana,intermedio,tarde,vespertino,noche,extendida)
-		VALUES (NULL,'". $this->escuelaId."','". $this->tipoId."','". $this->personaId."','". $this->mañana."','". $this->intermedio."',
+		$sentencia="INSERT INTO escuelaReferentes (escuelaReferentesId,escuelaId,tipoId,referenteId,mañana,intermedio,tarde,vespertino,noche,extendida)
+		VALUES (NULL,'". $this->escuelaId."','". $this->tipoId."','". $this->referenteId."','". $this->mañana."','". $this->intermedio."',
 			'". $this->tarde."','". $this->vespertino."','". $this->noche."','". $this->extendida."');";
 
 
@@ -67,7 +67,7 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="UPDATE escuelaReferentes SET  escuelaId ='$this->escuelaId', tipoId = '$this->tipoId',
-		personaId = '$this->personaId', mañana = '$this->mañana', intermedio = '$this->intermedio', tarde = '$this->tarde',
+		referenteId = '$this->referenteId', mañana = '$this->mañana', intermedio = '$this->intermedio', tarde = '$this->tarde',
 		vespertino = '$this->vespertino', noche = '$this->noche', extendida = '$this->extendida'
 		WHERE escuelaReferentesId = '$this->escuelaReferentesId'";
 
@@ -119,7 +119,7 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
  		$this->escuelaReferentesId = $elemento->escuelaReferentesId;
  		$this->escuelaId =$elemento->escuelaId;
 		$this->tipoId =$elemento->tipoId;
-		$this->personaId =$elemento->personaId;
+		$this->referenteId =$elemento->referenteId;
 		$this->mañana =$elemento->mañana;
 		$this->intermedio =$elemento->intermedio;
 		$this->tarde =$elemento->tarde;
@@ -152,14 +152,17 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 
 			$sentencia="SELECT escuelaReferentes.escuelaid,escuelaReferentes.tipoId,personas.personaId,
 									personas.nombre,personas.apellido,referentes.referenteId
-			 						FROM escuelaReferentes
-									INNER JOIN personas
-									ON personas.personaId=escuelaReferentes.personaId
+			 						FROM personas	
+									
 									INNER JOIN referentes
-									ON referentes.personaId=personas.personaId
+									ON personas.personaId=referentes.personaId
+									INNER JOIN escuelaReferentes
+									ON referentes.referenteId=escuelaReferentes.referenteId
 									INNER JOIN tipoReferentes
 									ON tipoReferentes.tipoId=escuelaReferentes.tipoId
+									
 									WHERE escuelaReferentes.tipoId =".$tipo." AND escuelaReferentes.escuelaId=$this->escuelaId";
+			
 			$sentencia.="  ORDER BY escuelaReferentes.escuelaReferentesId ASC";
 			//echo $sentencia;
 			if (mysqli_num_rows($conexion->query($sentencia))==0) {
@@ -181,7 +184,7 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 								INNER JOIN tipoReferentes
 								ON tipoReferentes.tipoId=escuelaReferentes.tipoId";
 
-		if($this->escuelaReferentesId!=NULL || $this->escuelaId!=NULL || $this->tipoId!=NULL || $this->personaId!=NULL
+		if($this->escuelaReferentesId!=NULL || $this->escuelaId!=NULL || $this->tipoId!=NULL || $this->referenteId!=NULL
 
 			|| $this->mañana!=NULL || $this->intermedio!=NULL || $this->tarde!=NULL || $this->vespertino!=NULL
 			|| $this->noche!=NULL || $this->extendida!=NULL )
@@ -205,9 +208,9 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 			$sentencia.=" escuelaReferentes.tipoId = $this->tipoId && ";
 		}
 
-		if($this->personaId!=NULL)
+		if($this->referenteId!=NULL)
 		{
-			$sentencia.=" escuelaReferentes.personaId = $this->personaId && ";
+			$sentencia.=" escuelaReferentes.referenteId = $this->referenteId && ";
 		}
 
 		if($this->mañana!=NULL)

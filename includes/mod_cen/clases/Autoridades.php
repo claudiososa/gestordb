@@ -319,6 +319,31 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 
 	}
 
+// metodo existe
+
+public function existe()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia="SELECT * FROM autoridades
+		 						WHERE escuelaId=".$this->escuelaId." AND tipoId=".$this->tipoId;
+
+		$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));
+		if ($cantidad > 0) {
+			 $id = mysqli_fetch_object($bd->ejecutar($sentencia));
+			 $dato = $id->autoridadesId; 
+			 return $dato;
+		}else{
+			return 0;
+		}
+
+	}
+
+
+// fin metodo existe
+
+
+
+
 	public function __get($var)
 	{
 		return $this->$var;
