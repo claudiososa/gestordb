@@ -101,7 +101,7 @@ include_once 'includes/mod_cen/clases/informe.php';
 
     <?php
       //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-      $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['personaId']);
+      $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
       $buscarEscuelas = $escuelasCargo->buscar();
 
       $escuela = new Escuela();
@@ -148,7 +148,7 @@ include_once 'includes/mod_cen/clases/informe.php';
 <div class="container visible-xs">
 <?php
   //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-  $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['personaId']);
+  $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
   $buscarEscuelas = $escuelasCargo->buscar();
 
   $escuela = new Escuela();
