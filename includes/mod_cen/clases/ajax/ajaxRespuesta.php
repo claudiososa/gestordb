@@ -28,30 +28,26 @@
       array_push($list,$temporal);
     }
     $json = json_encode($list);
-  //    Maestro::debbugPHP($json);
     echo $json;
   }
 
 
   if (isset($_POST['informeId']))
   {
-    //Maestro::debbugPHP($_POST['informeId']);
     $fecha=date("Y-m-d H:i:s");
     $nuevaRespuesta =  new Respuesta(null,$_POST['informeId'],$_POST['referenteId'],$_POST['contenido'],$fecha,$fecha,$fecha);
-    //Maestro::debbugPHP($nuevaRespuesta);
     $guardar_respuesta=$nuevaRespuesta->agregar();
-    Maestro::debbugPHP($_FILES);
+    //Maestro::debbugPHP($_FILES);
 
     foreach ($_FILES['input-img'] as $key) {
 
       $cantidadElmentos=count($_FILES['input-img']['name']);
-      //Maestro::debbugPHP($cantidadElmentos);
+
       for ($i=0; $i < $cantidadElmentos ; $i++) {
         # code...
         $img1 = $_FILES['input-img']['tmp_name'][$i];
         $img1 = $_FILES['input-img']['name'][$i];
-      //  echo 'dato'.img1;
-        $dir_subida = '../../../../img/respuestas/';
+              $dir_subida = '../../../../img/respuestas/';
 
         if($_FILES['input-img']['type'][$i]=='image/jpeg'){
           $nombreArchivo='doc_'.$guardar_respuesta.'_'.$i.'.jpg';
@@ -61,12 +57,8 @@
           $nombreArchivo='doc_'.$guardar_respuesta.'_'.$i.'.pdf';
           $tipoArchivo='application/pdf';
         }
-        //$fichero_subido = $dir_subida . basename($_FILES['input-img']['name'][0]);
         $fichero_subido = $dir_subida . $nombreArchivo;
-  //      echo $fichero_subido;
 
-
-  //echo '<pre>';
         if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
           if($_FILES['input-img']['type'][$i]=='image/jpeg'){
             $nuevoArchivo = $dir_subida.$nombreArchivoMediano;
@@ -90,18 +82,5 @@
 
       array_push($list,$temporal);
       $json = json_encode($list);
-    //    Maestro::debbugPHP($json);
       echo $json;
-    //}
-
   }
-/*
-  $list=array();
-  $temporal=array(
-    'estado'=>'guardado'
-  );
-
-  array_push($list,$temporal);
-  $json = json_encode($list);
-  //Maestro::debbugPHP($json);
-  echo $json;

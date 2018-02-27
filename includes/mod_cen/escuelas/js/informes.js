@@ -37,11 +37,11 @@
                 `)
                 for (let item of data) {
                   //$('#padreIr').append(`
-                    $('#padreIr').append(`
-                    <p><a download="${item.nombre}" href="img/respuestas/${item.nombre}">${item.nombre}</a></p>
+                    $('#modal-body').append(`
+                    <p><a download="${item.nombre}" href="img/informes/${item.nombre}">${item.nombre}</a></p>
                     `)
                 }
-              console.log("success");
+              console.log("Adjunto de Informe success");
               })
 
               .fail(function() {
