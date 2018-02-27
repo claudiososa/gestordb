@@ -38,7 +38,7 @@ include_once 'includes/mod_cen/clases/informe.php';
             <select class="form-control" name="escuelaId" id="escuelaId" >
               <option value="0">Seleccione...</option>
             <?php
-            $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['personaId']);
+            $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
             $buscarEscuelas = $escuelasCargo->buscar();
             $escuela = new Escuela();
             while ($row = mysqli_fetch_object($buscarEscuelas)) {
