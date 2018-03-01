@@ -603,7 +603,7 @@ if(isset($_POST["referente_id"])) {
 	$dato_persona=mysqli_fetch_object($buscar_persona);
 	//********************************************************************************
 
-	if(isset($_POST['tipo'])){
+	if(isset($_POST['tipo'])){	
 		$escuelaReferentes = new EscuelaReferentes(null,$_POST["escuela_id"],$_POST['tipo'],$_POST["referente_id"]);
 		// buscamos el referente en la tabla escuela referente
 		$buscarReferente = $escuelaReferentes->existe();
@@ -620,6 +620,58 @@ if(isset($_POST["referente_id"])) {
 			case '19': // si es ETT
 				
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],30,$dato_persona->personaId);
+		        $buscarAutoridad = $autoridadEscolar->existe();
+
+					if ($buscarAutoridad==0)
+					{
+							$autoridadEscolar->agregar();
+
+					}else{
+							
+					      if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
+
+						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
+					    		$borrar_autoridad=$autoridadEscolar->eliminar();
+
+						   
+					    }else{ // tiene referente asignado entonces editamos
+
+					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
+							   $editar_autoridad=$autoridadEscolar->editar();
+					         }
+
+							
+					}
+
+				break;
+			case '20': // si es ETJ
+				
+				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],31,$dato_persona->personaId);
+		        $buscarAutoridad = $autoridadEscolar->existe();
+
+					if ($buscarAutoridad==0)
+					{
+							$autoridadEscolar->agregar();
+
+					}else{
+
+						  if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
+
+						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
+					    		$borrar_autoridad=$autoridadEscolar->eliminar();
+
+						   
+					    }else{ // tiene referente asignado entonces editamos
+
+					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
+							   $editar_autoridad=$autoridadEscolar->editar();
+					         }
+						}
+
+				break;
+			case '4': // si es SNP
+				
+				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],4,$dato_persona->personaId);
 		        $buscarAutoridad = $autoridadEscolar->existe();
 
 					if ($buscarAutoridad==0)
