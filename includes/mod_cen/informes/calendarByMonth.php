@@ -129,7 +129,7 @@ while ($registro = mysqli_fetch_object($buscar_ref)) {
 
 
 $informeMesReferente = new Informe();
-$buscar_informe = $informeMesReferente->summary("mesAñoReferente",null,null,null,$defecto,"2017",null,$referente,null);
+$buscar_informe = $informeMesReferente->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
 
 $lista = array();
 $indice=0;
