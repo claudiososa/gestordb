@@ -341,6 +341,28 @@ public function existe()
 
 // fin metodo existe
 
+// metodo existe2
+
+public function existe2()
+	{
+		$bd=Conexion2::getInstance();
+		$sentencia="SELECT * FROM autoridades
+		 						WHERE escuelaId=".$this->escuelaId." AND tipoId=".$this->tipoId;
+
+		$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));
+		if ($cantidad > 0) {
+			 $id = mysqli_fetch_object($bd->ejecutar($sentencia));
+			 $dato = $id->personaId; 
+			 return $dato;
+		}else{
+			return 0;
+		}
+
+	}
+
+
+
+// fin metodo existe2
 
 
 

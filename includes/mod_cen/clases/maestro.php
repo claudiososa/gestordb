@@ -45,6 +45,9 @@ class Maestro{
 			case '19':
 				$resultado = 'Referente ETT';
 					break;
+			case '20':
+				$resultado = 'Referente ETJ';
+					break;
 			default:
 				# code...
 				break;
