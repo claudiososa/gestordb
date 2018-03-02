@@ -56,7 +56,12 @@
   if (isset($_POST['myReport']))
   {
   	$list=array();
-  	$informe = new informe(null,$_POST['escuelaId'],$_POST['referenteId']);
+    if (isset($_POST['reports'])){
+      $informe = new informe(null,$_POST['escuelaId']);  
+    }else{
+      $informe = new informe(null,$_POST['escuelaId'],$_POST['referenteId']);
+    }
+
     $buscarInforme = $informe->buscarInforme();
     $cantidadInformes=mysqli_num_rows($buscarInforme);
     $respuesta = new Respuesta();

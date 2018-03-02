@@ -121,7 +121,7 @@
 			case "escuelas":
 				switch ($id) {
 					case 1:
-						include("includes/mod_cen/escuelas/escuela_ver_ett.php");
+						include("includes/mod_cen/escuelas/buscarEscuela.php");
 						break;
 					case 2:
 						include("includes/mod_cen/escuelas/escuela_vermas.php");
