@@ -28,6 +28,7 @@
               <li><a href="index.php?mod=slat&men=admin&id=19&tipo=12">Asignar Supervisor Religion </a></li>
               <li><a href="index.php?mod=slat&men=admin&id=20&tipo=14">Asignar Supervisor Primaria  </a></li>
               <li><a href="index.php?mod=slat&men=admin&id=21&tipo=19">Asignar Escuelas Conectar ETT  </a></li>
+               <li><a href="index.php?mod=slat&men=admin&id=22&tipo=20">Asignar Escuelas Conectar ETJ  </a></li>
                       </ul>
       </li>
 
