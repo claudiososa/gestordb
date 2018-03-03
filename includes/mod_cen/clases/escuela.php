@@ -679,13 +679,122 @@ if(isset($_POST["referente_id"])) {
 							$autoridadEscolar->agregar();
 
 					}else{
+ 							if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
 
-							$autoridadEscolar->autoridadesId=$buscarAutoridad;
-							$editar_autoridad=$autoridadEscolar->editar();
+						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
+					    		$borrar_autoridad=$autoridadEscolar->eliminar();
+
+						   
+					         }else{ // tiene referente asignado entonces editamos
+
+					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
+							   $editar_autoridad=$autoridadEscolar->editar();
+					         }
+						}
+
+				break;
+
+				case '5': // si es SEP
+				
+				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],5,$dato_persona->personaId);
+		        $buscarAutoridad = $autoridadEscolar->existe();
+
+					if ($buscarAutoridad==0)
+					{
+							$autoridadEscolar->agregar();
+
+					}else{
+ 							if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
+
+						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
+					    		$borrar_autoridad=$autoridadEscolar->eliminar();
+
+						   
+					         }else{ // tiene referente asignado entonces editamos
+
+					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
+							   $editar_autoridad=$autoridadEscolar->editar();
+					         }
 						}
 
 				break;
 			
+				case '6': // si es SI
+				
+				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],6,$dato_persona->personaId);
+		        $buscarAutoridad = $autoridadEscolar->existe();
+
+					if ($buscarAutoridad==0)
+					{
+							$autoridadEscolar->agregar();
+
+					}else{
+ 							if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
+
+						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
+					    		$borrar_autoridad=$autoridadEscolar->eliminar();
+
+						   
+					         }else{ // tiene referente asignado entonces editamos
+
+					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
+							   $editar_autoridad=$autoridadEscolar->editar();
+					         }
+						}
+
+				break;
+
+				case '7': // si es S Hospitalaria
+				
+				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],7,$dato_persona->personaId);
+		        $buscarAutoridad = $autoridadEscolar->existe();
+
+					if ($buscarAutoridad==0)
+					{
+							$autoridadEscolar->agregar();
+
+					}else{
+ 							if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
+
+						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
+					    		$borrar_autoridad=$autoridadEscolar->eliminar();
+
+						   
+					         }else{ // tiene referente asignado entonces editamos
+
+					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
+							   $editar_autoridad=$autoridadEscolar->editar();
+					         }
+						}
+
+				break;
+
+				case '12': // si es Sup. Religion
+				
+				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],12,$dato_persona->personaId);
+		        $buscarAutoridad = $autoridadEscolar->existe();
+
+					if ($buscarAutoridad==0)
+					{
+							$autoridadEscolar->agregar();
+
+					}else{
+ 							if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
+
+						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
+					    		$borrar_autoridad=$autoridadEscolar->eliminar();
+
+						   
+					         }else{ // tiene referente asignado entonces editamos
+
+					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
+							   $editar_autoridad=$autoridadEscolar->editar();
+					         }
+						}
+
+				break;
+
+
 			default:
 				# code...
 				break;
