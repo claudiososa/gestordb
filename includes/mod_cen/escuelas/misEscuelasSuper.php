@@ -16,22 +16,32 @@ include_once 'includes/mod_cen/clases/EscuelaReferentes.php';
 include_once 'includes/mod_cen/clases/escuela.php';
 include_once 'includes/mod_cen/clases/Autoridades.php';
 include_once 'includes/mod_cen/clases/informe.php';
+
+include_once "includes/mod_cen/clases/persona.php" ;
+include_once "includes/mod_cen/clases/referente.php" ;
+include_once "includes/mod_cen/clases/leido.php" ;
 ?>
 
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA DESKTOP-->
 <!----------------------------------------------------------------------------->
+<?php
+$mis_informes= new informe(null,null,$_SESSION["referenteId"]);
+
+$b_mis_informe = $mis_informes->buscar(5);
+?>
 
 <div class="container">
   <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
   <hr class='hrMisEscRed'>
 <br>
 </div>
-<div class="container">
 
+<div class="container">
+<div class="row">
 <div class="panel panel-primary col-md-4">
   <div class="panel-body">
-    <div class="styleFont" style="color: #068587; font-size: large;">Accesos rapidos a acciones generales</div>
+    <div class="styleFont" ><u>Accesos rapidos a acciones generales</u></div>
 
     <br>
 
@@ -89,7 +99,81 @@ include_once 'includes/mod_cen/clases/informe.php';
 
   </div><!--</div panel-body-->
 </div><!-- </div panel default -->
+<div class="panel panel-primary col-md-7 col-md-offset-1 hidden-xs">
+  <div class="panel-body">
+    <div class="styleFont" align="text-center"><u>Ultimos 5 informes creados</u><a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION['referenteId'] ?>"></a></div>
+      <?php
 
+
+  echo "<table id='tablaPrincipal' class='table table-hover table-striped table-condensed tablesorter'>";
+  echo "<thead>";
+  echo "<tr>";
+  echo "<th>Id</th>";
+  echo "<th>Título</th>";
+  echo "<th>Nº</th>";
+  echo "<th>Prioridad</th>";
+  echo "</tr>";
+  echo "</thead>";
+  echo "<tbody>";
+
+  while ($fila=mysqli_fetch_object($b_mis_informe)){
+
+    $escuela= new Escuela($fila->escuelaId);
+    $buscar_escuela= $escuela->buscar();
+    $dato_escuela= mysqli_fetch_object($buscar_escuela);
+
+
+    $referente = new Referente($_SESSION["referenteId"]);
+    $b_referente = $referente->buscar();
+
+    $dato_referente= mysqli_fetch_object($b_referente);
+
+    $persona = new Persona($dato_referente->personaId);
+
+    $b_persona = $persona->buscar();
+
+    $dato_persona=mysqli_fetch_object($b_persona);
+
+
+
+
+
+  echo "<tr id= 'encabezado.$fila->informeId'>";
+
+
+
+    ?>
+
+
+    <td> <?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
+    <td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
+    <?php
+
+    echo "<td>".$dato_escuela->numero."</td>";
+    echo "<td>".$fila->prioridad."</td>";
+
+
+
+  echo "</tr>";
+
+
+
+
+
+    }
+    echo "</tbody>";
+  echo "</table>";
+
+
+  ?>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+
+<div class="container">
 
 
 <table class="table table-bordered hidden-xs">
@@ -144,9 +228,10 @@ include_once 'includes/mod_cen/clases/informe.php';
   </tbody>
 </table>
 
-
+</div>
 
 </div> <!-- </div container> -->
+
 
 
 <!----------------------------------------------------------------------------->
@@ -183,14 +268,14 @@ include_once 'includes/mod_cen/clases/informe.php';
     echo '<div class="panel-heading clickable" id="panel-heading">'.$infoEscuela->numero.' '.$infoEscuela->nombre.'</div>';
     echo '<div class="panel-body escuela">';
     echo '<div class="row">';
-    echo '<br>';
-    echo '<div class="col-md-12"><b>Teléfono: </b>'.$infoEscuela->telefono.'</div>';
+  //  echo '<br>';
+    echo '<div class="col-md-12"><h4><b>Teléfono: </b></h4>'.$infoEscuela->telefono.'</div>';
     echo '</div>';
   //  echo '<div class="row">';
   //  echo '<div class="col-md-12"><b>Email:</b></div>';
   //  echo '</div>';
     //echo '<br>';
-    echo '<hr>';
+    echo '<hr class="hrSeparador">';
     echo '<h4><b>Mis Informes</b></h4>';
     echo '<div class="row">';
     echo '<div class="col-md-12">';
@@ -198,42 +283,44 @@ include_once 'includes/mod_cen/clases/informe.php';
 
     echo '<button type="button" class="btn btn-danger"name="button">Crear Nuevo</button>';
     echo '</div>';
-    echo '<br>';
+  //  echo '<br>';
   //  echo '<div class="col-md-12">';
     //echo '<button type="button" class="btn btn-danger"name="button">Crear</button>';
   //  echo '</div>';
     echo '</div>';
-    echo '<hr>';
+    echo '<hr class="hrSeparador">';
     echo '<h4><b>Autoridades: ('.$cantidadAutoridades.')</b></h4>';
 
     if ($cantidadAutoridades > 0) {
       while ($rowAutoridades = mysqli_fetch_object($buscarAutoridad)) {
       echo '<div class="row" >';
-      echo '<div class="col-xs-10"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
-      echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/anadir-usuario (2).png" data-toggle="popover" tabindex="0" data-trigger="focus" title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" ></div>';
+      echo '<div class="col-xs-8"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
+      echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/lapiz (4).png"></div>';
+      echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus" title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" ></div>';
         echo '</div>';
         echo '<br>';
+        echo '<div class="row" id="rowContacto">';
       if ($rowAutoridades->telefonoM != '') {
 
-        echo '<div class="row">';
+
         echo '<div class="col-xs-2 pull-right"><a target="_blank" href="https://api.whatsapp.com/send?phone=54'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/whatsapp (1).png"></a></div>';
         echo '<div class="col-xs-2 pull-right"><a href="tel:'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/llamada-saliente (1).png"></a>';
         echo '</div>';
 
 
-        echo '</div>';
-        echo '<br>';
+
+      //  echo '<br>';
 
       //  echo '<div class="col-xs-2"></div>';
 
       }
       if ($rowAutoridades->email != '') {
-        echo '<div class="row">';
-        echo '<div class="col-xs-2 pull-right"><a href="mailto:'.$rowAutoridades->email. '"><img class="img-responsive" src="img/iconos/logo-gmail.png"></a>';
-        echo '</div>';
-          echo '</div>';
-      }
 
+        echo '<div class="col-xs-2 pull-right"><a href="mailto:'.$rowAutoridades->email. '"><img class="img-responsive" src="img/iconos/gmail.png"></a>';
+        echo '</div>';
+
+      }
+echo '</div>';
 
       //${ echo'<a href="tel:'.$rowAutoridades->telefonoM.'">Llama</a>';}
     //  echo '<br>';
