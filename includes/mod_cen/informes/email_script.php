@@ -177,7 +177,7 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
             		$enviado=1;
             	} else {
-            		echo "Falló el envio ".$para." $header" ;
+            		echo "Falló el envio ";
 
             	}
 
