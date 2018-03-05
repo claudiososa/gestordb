@@ -478,13 +478,18 @@ public function buscarUnico()
 	return $conexion->query($sentencia);
 }
 
-public function buscarInforme(){
+public function buscarInforme($referente=null){
 	$nuevaConexion=new Conexion();
 	$conexion=$nuevaConexion->getConexion();
 	$sentencia="SELECT *
 								FROM informes
-								WHERE escuelaId=$this->escuelaId AND referenteId=$this->referenteId
-								ORDER BY informes.informeId DESC";
+								WHERE escuelaId=$this->escuelaId";
+	if (isset($referente)) {
+		$sentencia.=" AND referenteId=$referente ";
+	}
+
+
+		$sentencia.=" ORDER BY informes.informeId DESC ";
 	return $conexion->query($sentencia);
 	}
 

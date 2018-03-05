@@ -33,7 +33,7 @@ $(document).ready(function() {
 
           }
 
-          console.log('item Escuela Id = '+tableinforme)
+          //console.log('item Escuela Id = '+tableinforme)
           $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme}"><td colspan="5"><table id=tableinformes${tableinforme}
           class="table">
           <thead>
@@ -49,11 +49,11 @@ $(document).ready(function() {
 
           for (let item of lista) {
               //alert(item.escuelaId)
-              console.log(item.cantidad)
+              //console.log(item.cantidad)
             if (item.cantidad > 0) {
               let escuelaIdconCero = pad(item.escuelaId,4,0)
               let escuela = item.escuelaId
-              console.log('cantidad de leido'+item.cantidadLeido)
+              //console.log('cantidad de leido'+item.cantidadLeido)
               $('#tableinformes'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
               <td><button type='button' id='if${item.informeId}'>${item.titulo}</button></td>
               <td>${item.cantidadLeido}</td>
@@ -95,7 +95,7 @@ $(document).ready(function() {
               })
               .done(function(lista) {
                 for (let item of lista) {
-                    //console.log('item. nombre'+item.nombre)
+                    console.log('item. nombre'+item.nombre)
                     informeActual.escuelaNombre=item.nombre
                     informeActual.escuelaNumero=item.numero
                     informeActual.escuelaCue=item.cue
@@ -106,37 +106,15 @@ $(document).ready(function() {
                     informeActual.titulo=item.titulo
                     informeActual.contenido=item.contenido
                     informeActual.informeId=informeId
-
-                    /*let escuelaNombre = item.nombre
-                    let escuelaNumero = item.numero
-                    let escuelaCue = item.cue
-                    let fecha = item.fecha
-                    let prioridad = item.prioridad
-                    let categoria =  item.categoria
-                    let subcategoria =  item.subcategoria
-                    let titulo =  item.titulo
-                    let contenido =  item.contenido*/
-
                 }
-                //console.log(informeActual.escuelaNombre)
-                //console.log("success Ajax Informe");
               })
 
               .fail(function() {
                 console.log("error");
               })
               .always(function() {
-                //console.log(informeActual.escuelaNombre)
-                //console.log("success Ajax Informe");
                 formPersona(informeActual)
-
-
-
-                //console.log("complete");
               });
-
-
-
           });
 
           //console.log("success");

@@ -28,6 +28,8 @@ echo'</div>';
 	 echo'<br>';
 
 include_once("includes/mod_cen/formularios/f_buscar_escuela.php");
+echo '<div class="" id="padreIr">';
+echo '</div>';
 
 if(($_POST))
 	{

@@ -32,7 +32,7 @@ $(document).ready(function() {
 
           }
 
-          console.log('item Escuela Id = '+tableinforme)
+          //console.log('item Escuela Id = '+tableinforme)
           $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme}"><td colspan="5"><table id=tableinformes${tableinforme}
           class="table">
           <thead>
@@ -48,11 +48,11 @@ $(document).ready(function() {
 
           for (let item of lista) {
               //alert(item.escuelaId)
-              console.log(item.cantidad)
+              //console.log(item.cantidad)
             if (item.cantidad > 0) {
               let escuelaIdconCero = pad(item.escuelaId,4,0)
               let escuela = item.escuelaId
-              console.log('cantidad de leido'+item.cantidadLeido)
+              //console.log('cantidad de leido'+item.cantidadLeido)
               $('#tableinformes'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
               <td><button type='button' id='if${item.informeId}'>${item.titulo}</button></td>
               <td>${item.cantidadLeido}</td>
