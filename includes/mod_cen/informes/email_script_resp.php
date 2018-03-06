@@ -4,6 +4,7 @@ include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/respuesta.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/escuela.php");
+include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 
     
@@ -82,9 +83,19 @@ include_once("includes/mod_cen/clases/escuela.php");
 
                     $escuela= new Escuela($num_escuela);
                     $buscar_escuela=$escuela->buscar();
+
                     $dato_escuela=mysqli_fetch_object($buscar_escuela);
-                    $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID de la escuela
+
+                     $referenteEscuela = new EscuelaReferentes(null,$dato_escuela->escuelaId); //**** nueva entrada con el escuelaId para buscar
+                     $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos los ett referentes de la escuela
+                     $id_referente_escuela=$buscarEscuelaReferente->referenteId;   //***** obtenemos el referente ETT
+
+
+
+
+                    // $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID de la escuela  (** codigo reemplazado)
                            
+
 
                     $dato_ref_esc =  new Referente($id_referente_escuela);
                     $buscar_dato_ref_esc =  $dato_ref_esc->buscar();
