@@ -5,6 +5,7 @@ include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
+include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 
 // a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
@@ -17,8 +18,17 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
     // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
 	   $escuela= new Escuela($_GET["escuelaId"]);
 	   $buscar_escuela=$escuela->buscar();
-	   $dato_escuela=mysqli_fetch_object($buscar_escuela);
-	   $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID conectar igualdad
+
+      // buscamos el referente de la escuela en la tabla escuelaReferentes.
+
+         $referenteEscuela = new EscuelaReferentes(null,$_GET["escuelaId"]); //**** nueva entrada
+         $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos los ett referentes de la escuela
+         $id_referente_escuela=$buscarEscuelaReferente->referenteId;         //**** obtenemos el referenteId del ETT
+      
+      // fin de busqueda de referente en la tabla escuelaReferentes.
+	      
+        // $dato_escuela=mysqli_fetch_object($buscar_escuela); // Codigo reemplazado por la busqueda en escuelaReferentes
+     	   //$id_referente_escuela= $dato_escuela->referenteId; // Codigo reemplazado por la busqueda en escuelaReferentes(Obtengo el referentID conectar igualdad)
 
 	    // en el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
 	        $dato_ref_esc =  new Referente($id_referente_escuela);
@@ -167,7 +177,8 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
             		$enviado=1;
             	} else {
-            		echo "Falló el envio";
+            		echo "Falló el envio ";
+
             	}
 
 
@@ -177,7 +188,7 @@ include_once("includes/mod_cen/clases/SubTipoInforme.php");
 
 
 
-        }else{  // aqui entra si es ATT O COORDINADOR PMI
+        }else{  // aqui entra si es ATT O COORDINADOR PMI  // 
 
 
         	if($referente_actual->tipo=="ATT" ||  $referente_actual->tipo=="CoordinadorPmi" ){
