@@ -117,7 +117,17 @@ echo '<div class="container">';
 <?php
 	echo '<div class="row">';
 	?>
-
+	<div class="col-md-12 hidden-xs">
+			<p class="alert alert-success">Presentación Proyecto trabajo 2018</p>
+			<iframe allowFullScreen frameborder="0" height="564" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="640"></iframe>
+			 <p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
+		</div>
+		<div class="col-md-12 visible-xs">
+		 <p class="alert alert-success">Presentación Proyecto trabajo 2018</p>
+		 <iframe allowFullScreen frameborder="0" height="240" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="320"></iframe>
+			<!-- <iframe src="https://player.vimeo.com/video/239149998" width="320" height="240" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
+			 <p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
+	</div>
 	<?php
 		echo '<div class="col-md-6">';
 
