@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $("#input-img").fileinput({
       browseClass: "btn btn-success btn-block",
-      allowedFileExtensions: ["jpg", "pdf"],
+      allowedFileExtensions: ["jpeg","jpg", "pdf"],
       maxFileCount: 5,
       showCaption: true,
       initialCaption: "Seleccione archivos para informe",
@@ -11,7 +11,7 @@ $(document).ready(function () {
       showUpload: false
   });
 
-    
+
   $("#input-24").fileinput({
 
 

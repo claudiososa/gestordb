@@ -1,0 +1,22 @@
+
+.hrMisEscRed {
+    border-top: 2px solid #FF5B61;
+  }
+.panel-primarySuperP {
+    border-color: #83b5a9;
+  }
+.panelPrimarySuperP > .panel-heading{
+  background-color: #83b5a9;
+  border-color: #83b5a9;
+}
+.styleFont {
+  color: #068587;
+  font-size: large;
+}
+.hrSeparador {
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 2px solid #83b5a9;
+}

@@ -175,6 +175,7 @@ class Referente
 
 															break;
 							case 'ETT':
+							case 'ETJ':
 															$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido,personas.personaId
 																					FROM referentes
 																					inner join personas

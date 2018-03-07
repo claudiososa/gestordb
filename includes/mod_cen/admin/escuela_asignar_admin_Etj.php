@@ -11,7 +11,7 @@ include_once("includes/mod_cen/formularios/f_asignar_escuela.php");
 
 if(($_POST))
 	{
-		  	$escuela=new Escuela(NULL,null,$_POST["cue"],$_POST["numero"],$_POST["nombre"],null,null,null,null);
+		  	    $escuela=new Escuela(NULL,null,$_POST["cue"],$_POST["numero"],$_POST["nombre"],null,null,null,null);
 				$resultado = $escuela->buscar();
 				echo '<div class="table-responsive">';
 				echo "<table class='table table-hover table-striped table-condensed'>";
@@ -20,24 +20,25 @@ if(($_POST))
 			  	echo "<th>CUE</th>";
 			  	echo "<th>Nombre de Escuela</th>";
 			  	echo "<th>Localidad</th>";
-			  	echo "<th>Referente PMI a Cargo</th>";
+			  	echo "<th>Referente a Cargo</th>";
 				echo "</tr>";
 
-				//crear objeto vacio de tipo autoridades.
+				//crear objeto vacio de tipo EscuelaReferentes.
 				$objEscuelaReferentes = new EscuelaReferentes();
 
 				//Recorre todas las escuelas encontradas de acuerdo a lo ingresado en el buscador
 				while ($fila = mysqli_fetch_object($resultado))
 				{
 					$objEscuelaReferentes->escuelaId = $fila->escuelaId;
-					$buscarReferente = $objEscuelaReferentes->buscarReferente('4');
+					//$buscarReferente = $objEscuelaReferentes->buscarReferente('4'); ******* cambiado
+					$buscarReferente = $objEscuelaReferentes->buscarReferente('20'); 
 					//var_dump($buscarReferente);
 					if ($buscarReferente <>'0') {
-						$encontrado = $buscarReferente->referenteId;
+						$encontrado = $buscarReferente->referenteId; // encontrado tiene el referenteId
 						//var_dump($encontrado);
 					}
 						echo "<td>".$fila->numero."</td>";
-			  		echo "<td>".$fila->cue."</td>";
+			  		    echo "<td>".$fila->cue."</td>";
 						echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>".substr($fila->nombre,0, 40)."</td>";
 
 			  		$locali=new Localidad($fila->localidadId,null);
@@ -45,28 +46,43 @@ if(($_POST))
 			  		$fila1 = mysqli_fetch_object($busca_loc);
 			  		echo "<td>".$fila1->nombre."</td>";
 			  		echo "<td>";
-			  		if($encontrado=='0'){//SI LA ESCUELA ENCONTRADA NO TIENE REFERENTE ACARGO
+
+
+                   // Aqui debemos mostrar el referente encontrado o no //
+
+			  		if($encontrado=='0'){//SI LA ESCUELA ENCONTRADA NO TIENE REFERENTE A CARGO
+			  				
 			  				//echo "<div class='divSimple' id='sel_".$fila->escuelaId."'>";
-			  			$supervisor= new Referente();
-							$buscar_supervisor=$supervisor->buscarRef2("SNP");
+			  			    
+			  			    //$supervisor= new Referente(); ********** Cambiado
+			  			    $ett= new Referente();
+
+							//$buscar_supervisor=$supervisor->buscarRef2("SNP"); ******* Cambiado
+							$buscar_ett=$ett->buscarRef2("ETJ");
 
 							echo "<select disabled id='seleref_".$fila->escuelaId."' name='referentes' >";
 							echo	"<option value='0001'>Sin Asignar</option>";
-							while ($fila1 = mysqli_fetch_object($buscar_supervisor))
+
+							//while ($fila1 = mysqli_fetch_object($buscar_supervisor)) ********* Cambiado
+
+								while ($fila1 = mysqli_fetch_object($buscar_ett))
 									{
 											echo	"<option value='".$fila1->referenteId."' >$fila1->apellido".",&nbsp;".$fila1->nombre."</option>";
 									}
 									echo "</select></div>";
-			  		}else{
+			  		}else{   // Si la escuela encontrada tiene referente a cargo // 
+
 			  			echo "<div class='divSimple' id='sel_".$fila->escuelaId.$encontrado."'>";
 
-			  			$supervisor = new Referente();
-							$buscar_supervisor = $supervisor->buscarRef2('SNP');
+			  			    //$supervisor = new Referente();
+							//$buscar_supervisor = $supervisor->buscarRef2('SNP');
+			  			 $ett= new Referente();
+			  			 $buscar_ett=$ett->buscarRef2("ETJ");
 
 			  			echo "<select  disabled id='seleref_".$fila->escuelaId.$encontrado."' name='referentes' >";
 			  			//echo	"<option value=0>Todos</option>";
 			  			echo	"<option value='0001'>Sin Asignar</option>";
-			  			while ($fila1 = mysqli_fetch_object($buscar_supervisor))
+			  			while ($fila1 = mysqli_fetch_object($buscar_ett))
 			  			{
 								//echo $fila1->referenteId;
 								if ($fila1->referenteId==$encontrado) {
@@ -82,10 +98,17 @@ if(($_POST))
 
 			  		}
 
-		  				if($encontrado==0)
+
+
+
+
+		  				if($encontrado==0)  // si la escuela no tiene referente a cargo
 							{
+							
 								echo "<div class='divSimple'  value='esc_".$fila->escuelaId."'  id='ref_".$fila->escuelaId."'>Sin asignar</div>";
-							}else{
+							
+							}else{  // si la escuela si tiene referente a cargo
+
 								echo "<div class='divSimple' value='esc_".$fila->escuelaId."' id='ref_".$fila->escuelaId.$encontrado."'>".
 								"<a href='index.php?mod=slat&men=referentes&id=2&personaId=".$buscarReferente->personaId."&referenteId=".$fila->referenteId."'>".
 								$buscarReferente->apellido.", ".$buscarReferente->nombre.
@@ -93,12 +116,12 @@ if(($_POST))
 								//echo "<div class='divSimple1'>&nbsp;&nbsp;&nbsp;";
 							}
 
-					  		if($encontrado==0)
+					  		if($encontrado==0)  // si la escuela no tiene referente a cargo
 
 					  			echo "<input type='image' src='img/iconos/modificar_p.png'  height='22' width='22' value='".$fila->escuelaId."' id='b_".$fila->escuelaId."'/>
 					  	  		<input type='image' src='img/iconos/guardar.png'  height='22' width='22' value='".$fila->escuelaId."' id='g_".$fila->escuelaId."'/>
 					  	  	</div>";
-					  	  	else
+					  	  	else     // si la escuela si tiene referente a cargo
 					  	  		echo "<input type='image' src='img/iconos/modificar_p.png'  height='22' width='22' value='".$fila->escuelaId.$encontrado."' id='b_".$fila->escuelaId.$encontrado."'/>
 					  	  		<input type='image' src='img/iconos/guardar.png'  height='22' width='22' value='".$fila->escuelaId.$encontrado."' id='g_".$fila->escuelaId.$encontrado."'/>
 					  	  		</div>";
@@ -132,7 +155,7 @@ if(($_POST))
 				$('[id^=sel_]').hide();
 				$('[id^=g_]').hide();
 				//alert(boton);
-				 $('[id^=b_]').click(function () {
+				 $('[id^=b_]').click(function () {   // click en modificar 
 
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 					 $('#'+seleref).attr('disabled', false);
@@ -147,7 +170,7 @@ if(($_POST))
          			});
 
 
-				 $('[id^=g_]').click(function () {
+				 $('[id^=g_]').click(function () { // click en guardar
 					 var seleref = $('#seleref_'+$(this).val()).attr("id");
 
 					 var refe = $('#ref_'+$(this).val()).attr("id");
@@ -165,7 +188,7 @@ if(($_POST))
 					 var escuela_id=escuela.substring(4,8);
 
 					 //var snp = 'SNP'
-					 var tipo = '4'
+					 var tipo = '20'
 
 					 $.post("includes/mod_cen/clases/escuela.php", {tipo:tipo,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);

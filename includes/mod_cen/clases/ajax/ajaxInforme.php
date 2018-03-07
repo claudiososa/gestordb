@@ -1,9 +1,29 @@
 <?php
   include_once('../informe.php');
+  include_once('../img.php');
   include_once('../referente.php');
   include_once('../respuesta.php');
   include_once('../leido.php');
   include_once('../maestro.php');
+
+
+  if (isset($_POST['informeAdjunto']))//devuelve la lista de archivos adjuntos
+  {
+    $img =  new Img(null,$_POST['informeAdjunto']);
+    $buscarAdjunto = $img->buscar();
+    $list=[];
+
+    while ($row = mysqli_fetch_object($buscarAdjunto)) {
+      $temporal = [
+        'nombre'=>$row->nombre,
+      ];
+      array_push($list,$temporal);
+    }
+
+    $json = json_encode($list);
+  //    Maestro::debbugPHP($json);
+    echo $json;
+  }
 
 
   if (isset($_POST['informeId']))
@@ -36,8 +56,15 @@
   if (isset($_POST['myReport']))
   {
   	$list=array();
-  	$informe = new informe(null,$_POST['escuelaId'],$_POST['referenteId']);
-    $buscarInforme = $informe->buscar();
+    if (isset($_POST['reports'])){
+      $informe = new informe(null,$_POST['escuelaId']);
+      $buscarInforme = $informe->buscarInforme();
+    }else{
+      $informe = new informe(null,$_POST['escuelaId']);
+      $buscarInforme = $informe->buscarInforme($_POST['referenteId']);
+    }
+
+    //$buscarInforme = $informe->buscarInforme();
     $cantidadInformes=mysqli_num_rows($buscarInforme);
     $respuesta = new Respuesta();
     $leido = new Leido();

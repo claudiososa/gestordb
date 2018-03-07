@@ -175,6 +175,9 @@ if(isset($_POST["username"]))
 				case 'SP':
 								 	include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
 								  break;
+				case 'SP':
+				  			 	include_once('includes/mod_cen/portada/subSecretarioPlaneamiento.php');
+								  break;
 
 				default:
 					include_once('includes/mod_cen/portada/portadaAdmin.php');

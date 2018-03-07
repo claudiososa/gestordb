@@ -1,3 +1,5 @@
+
+<link rel="stylesheet" href="includes/mod_cen/css/styleIconos.css">
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
 </script>
@@ -14,31 +16,46 @@ include_once 'includes/mod_cen/clases/EscuelaReferentes.php';
 include_once 'includes/mod_cen/clases/escuela.php';
 include_once 'includes/mod_cen/clases/Autoridades.php';
 include_once 'includes/mod_cen/clases/informe.php';
+
+include_once "includes/mod_cen/clases/persona.php" ;
+include_once "includes/mod_cen/clases/referente.php" ;
+include_once "includes/mod_cen/clases/leido.php" ;
 ?>
 
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA DESKTOP-->
 <!----------------------------------------------------------------------------->
+<?php
+$mis_informes= new informe(null,null,$_SESSION["referenteId"]);
+
+$b_mis_informe = $mis_informes->buscar(5);
+?>
 
 <div class="container">
+  <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
+  <hr class='hrMisEscRed'>
+<br>
+</div>
 
-<h3>Mis escuelas</h3>
-<div class="panel panel-default">
+<div class="container">
+<div class="row">
+<div class="panel panel-primary col-md-4">
   <div class="panel-body">
-    <div class="">Accesos rapidos a acciones generales</div>
+    <div class="styleFont" ><u>Accesos rapidos a acciones generales</u></div>
+
     <br>
 
     <form class="form-horizontal" action="" method="POST" >
       <input type="hidden" name="tipoId" id="tipoId" value="" />
   		<div class="form-group">
-  				<div><label class="col-md-3">Seleccione Escuela</label></div>
+  				<div><label class="">Seleccione Escuela</label></div>
   			</div>
   			<div class="form-group">
-  				<div class="col-md-3">
+  				<div class="">
             <select class="form-control" name="escuelaId" id="escuelaId" >
               <option value="0">Seleccione...</option>
             <?php
-            $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['personaId']);
+            $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
             $buscarEscuelas = $escuelasCargo->buscar();
             $escuela = new Escuela();
             while ($row = mysqli_fetch_object($buscarEscuelas)) {
@@ -55,18 +72,19 @@ include_once 'includes/mod_cen/clases/informe.php';
 
     <form class="form-horizontal" action="" method="POST" >
       <div class="form-group">
-          <div><label class="col-md-3">Seleccione Escuela</label></div>
+          <div><label class="">Seleccione Escuela</label></div>
         </div>
         <div class="form-group">
-          <div class="col-md-3">
+          <div class="">
               <select class="form-control" name="" id="modulo">
                 <option value="informe&id=1">Crear informe</option>
                 <option value="informe&id=2">Ver informes</option>
-                <option value="">-------------</option>
+                <optgroup label="____________________________"></optgroup>
                 <option value="director">Director</option>
                 <option value="snp">Supervisor de Nucleo</option>
                 <option value="srp">Supervisor de Religion</option>
                 <option value="">Cargar modificar autoridad</option>
+
               </select>
           </div>
         </div>
@@ -74,14 +92,88 @@ include_once 'includes/mod_cen/clases/informe.php';
     </form>
 
     <div class="form-group">
-      <div class="col-md-6" id="padreIr">
+      <div class="" id="padreIr">
         <input class="btn btn-primary" type="submit" value="ir" id="btn_ir">
       </div>
     </div>
 
   </div><!--</div panel-body-->
 </div><!-- </div panel default -->
+<div class="panel panel-primary col-md-7 col-md-offset-1 hidden-xs">
+  <div class="panel-body">
+    <div class="styleFont" align="text-center"><u>Ultimos 5 informes creados</u><a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION['referenteId'] ?>"></a></div>
+      <?php
 
+
+  echo "<table id='tablaPrincipal' class='table table-hover table-striped table-condensed tablesorter'>";
+  echo "<thead>";
+  echo "<tr>";
+  echo "<th>Id</th>";
+  echo "<th>Título</th>";
+  echo "<th>Nº</th>";
+  echo "<th>Prioridad</th>";
+  echo "</tr>";
+  echo "</thead>";
+  echo "<tbody>";
+
+  while ($fila=mysqli_fetch_object($b_mis_informe)){
+
+    $escuela= new Escuela($fila->escuelaId);
+    $buscar_escuela= $escuela->buscar();
+    $dato_escuela= mysqli_fetch_object($buscar_escuela);
+
+
+    $referente = new Referente($_SESSION["referenteId"]);
+    $b_referente = $referente->buscar();
+
+    $dato_referente= mysqli_fetch_object($b_referente);
+
+    $persona = new Persona($dato_referente->personaId);
+
+    $b_persona = $persona->buscar();
+
+    $dato_persona=mysqli_fetch_object($b_persona);
+
+
+
+
+
+  echo "<tr id= 'encabezado.$fila->informeId'>";
+
+
+
+    ?>
+
+
+    <td> <?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
+    <td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
+    <?php
+
+    echo "<td>".$dato_escuela->numero."</td>";
+    echo "<td>".$fila->prioridad."</td>";
+
+
+
+  echo "</tr>";
+
+
+
+
+
+    }
+    echo "</tbody>";
+  echo "</table>";
+
+
+  ?>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+
+<div class="container">
 
 
 <table class="table table-bordered hidden-xs">
@@ -100,7 +192,7 @@ include_once 'includes/mod_cen/clases/informe.php';
 
     <?php
       //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-      $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['personaId']);
+      $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
       $buscarEscuelas = $escuelasCargo->buscar();
 
       $escuela = new Escuela();
@@ -136,65 +228,130 @@ include_once 'includes/mod_cen/clases/informe.php';
   </tbody>
 </table>
 
-
+</div>
 
 </div> <!-- </div container> -->
+
 
 
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA MOBILE-->
 <!----------------------------------------------------------------------------->
-
-
 <div class="container visible-xs">
+<?php
+  //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
+  $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
+  $buscarEscuelas = $escuelasCargo->buscar();
 
-<div class="panel panel-danger">
-  <div class="panel-heading clickable" id="panel-heading">Escuela N° 5159</div>
-  <div class="panel-body escuela">
-    <h4><b>Datos Institución</b></h4>
-    <div class="row">
-    <div class="col-md-12"><b>Dirección:&nbsp</b></div>
-    </div>
-    <div class="row">
-    <div class="col-md-5"><b>Localidad:&nbsp</b></div>
+  $escuela = new Escuela();
 
-    </div>
-    <div class="row">
+  while ($row = mysqli_fetch_object($buscarEscuelas)) {
+    $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
+    $buscarInforme= $informe->buscar();
+    $cantidadInforme = mysqli_num_rows($buscarInforme);
 
-    <div class="col-md-12"><b>Nivel:</div>
-    </div>
+    $autoridad = new Autoridades(null,$row->escuelaId);
+    $buscarAutoridad = $autoridad->buscarAutoridad3('all');
+    $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
 
-    <div class="row">
-    <div class="col-md-12"><b>Teléfono:'</div>
-    </div>
-    <div class="row">
-    <div class="col-md-12"><b>Email:'</div>
-    </div>
-    <br>
-    <hr>
-    <h4><b>Informes</b></h4>
-    <div class="row">
-    <div class="col-md-12"><button type="button" class="btn btn-danger"name="button">ver informes (8)</button></div>
-    <br>
-    <div class="col-md-12"><button type="button" class="btn btn-danger"name="button">Crear</button></div>
-    </div>
-    <hr>
-    <h4><b>Autoridades</b></h4>
-    <div class="row">
-    <div class="col-md-12">perez juan supervisor cel: 1546431354</div>
-    <div class="col-md-12">perez juan supervisor primaria</div>
-    </div>
-  </div><!--</div panel-body-->
-</div><!--</div panel panel-default-->
+    //$arrayPrincipal=array();
+
+    $escuela->escuelaId=$row->escuelaId;
+    $buscarEscuela = $escuela->buscar();
+    $infoEscuela = mysqli_fetch_object($buscarEscuela);
 
 
-</div> <!--</div container vista mobile-->
 
+    //echo $infoEscuela->numero."<br>";
+    //echo '<div class="container visible-xs">';
+    echo '<div class="panel panel-primary panelPrimarySuperP">';
+    echo '<div class="panel-heading clickable" id="panel-heading">'.$infoEscuela->numero.' '.$infoEscuela->nombre.'</div>';
+    echo '<div class="panel-body escuela">';
+    echo '<div class="row">';
+  //  echo '<br>';
+    echo '<div class="col-md-12"><h4><b>Teléfono: </b></h4>'.$infoEscuela->telefono.'</div>';
+    echo '</div>';
+  //  echo '<div class="row">';
+  //  echo '<div class="col-md-12"><b>Email:</b></div>';
+  //  echo '</div>';
+    //echo '<br>';
+    echo '<hr class="hrSeparador">';
+    echo '<h4><b>Mis Informes</b></h4>';
+    echo '<div class="row">';
+    echo '<div class="col-md-12">';
+    echo '<button type="button" class="btn btn-danger"name="button" >Ver Informes '.$cantidadInforme.'</button>&nbsp&nbsp&nbsp&nbsp&nbsp';
+
+    echo '<button type="button" class="btn btn-danger"name="button">Crear Nuevo</button>';
+    echo '</div>';
+  //  echo '<br>';
+  //  echo '<div class="col-md-12">';
+    //echo '<button type="button" class="btn btn-danger"name="button">Crear</button>';
+  //  echo '</div>';
+    echo '</div>';
+    echo '<hr class="hrSeparador">';
+    echo '<h4><b>Autoridades: ('.$cantidadAutoridades.')</b></h4>';
+
+    if ($cantidadAutoridades > 0) {
+      while ($rowAutoridades = mysqli_fetch_object($buscarAutoridad)) {
+      echo '<div class="row" >';
+      echo '<div class="col-xs-8"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
+      echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/lapiz (4).png"></div>';
+      echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus" title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" ></div>';
+        echo '</div>';
+        echo '<br>';
+        echo '<div class="row" id="rowContacto">';
+      if ($rowAutoridades->telefonoM != '') {
+
+
+        echo '<div class="col-xs-2 pull-right"><a target="_blank" href="https://api.whatsapp.com/send?phone=54'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/whatsapp (1).png"></a></div>';
+        echo '<div class="col-xs-2 pull-right"><a href="tel:'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/llamada-saliente (1).png"></a>';
+        echo '</div>';
+
+
+
+      //  echo '<br>';
+
+      //  echo '<div class="col-xs-2"></div>';
+
+      }
+      if ($rowAutoridades->email != '') {
+
+        echo '<div class="col-xs-2 pull-right"><a href="mailto:'.$rowAutoridades->email. '"><img class="img-responsive" src="img/iconos/gmail.png"></a>';
+        echo '</div>';
+
+      }
+echo '</div>';
+
+      //${ echo'<a href="tel:'.$rowAutoridades->telefonoM.'">Llama</a>';}
+    //  echo '<br>';
+    //  echo '<br>';
+      //echo '<br>';
+
+
+      echo '<hr>';
+      }
+    }
+
+    //echo '<div class="col-md-12">perez juan supervisor primaria</div>';
+
+    echo '</div>';
+
+    echo '</div>';
+
+
+    echo '<div>';
+    echo '<div>';
+
+
+  }
+  ?>
+
+</div>
 
 
 <!--modal boton autoridades vista desktop-->
 
-
+<!--
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -213,7 +370,7 @@ include_once 'includes/mod_cen/clases/informe.php';
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 <!--fin modal vista desktop-->
 
@@ -242,4 +399,7 @@ include_once 'includes/mod_cen/clases/informe.php';
     });
 
   });
+  $(function () {
+  $('[data-toggle="popover"]').popover({ html : true })
+})
   </script>

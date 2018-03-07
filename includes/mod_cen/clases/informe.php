@@ -478,12 +478,27 @@ public function buscarUnico()
 	return $conexion->query($sentencia);
 }
 
+public function buscarInforme($referente=null){
+	$nuevaConexion=new Conexion();
+	$conexion=$nuevaConexion->getConexion();
+	$sentencia="SELECT *
+								FROM informes
+								WHERE escuelaId=$this->escuelaId";
+	if (isset($referente)) {
+		$sentencia.=" AND referenteId=$referente ";
+	}
+
+
+		$sentencia.=" ORDER BY informes.informeId DESC ";
+	return $conexion->query($sentencia);
+	}
 
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
+
 		/**
 		 * busca las categorias de tipo exclusivas "si"
 		 *

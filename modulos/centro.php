@@ -121,7 +121,7 @@
 			case "escuelas":
 				switch ($id) {
 					case 1:
-						include("includes/mod_cen/escuelas/escuela_ver_ett.php");
+						include("includes/mod_cen/escuelas/buscarEscuela.php");
 						break;
 					case 2:
 						include("includes/mod_cen/escuelas/escuela_vermas.php");
@@ -732,6 +732,21 @@
 																include("includes/mod_cen/denegado.php");
 														}
 														break;
+									case 21:
+														if($_SESSION['tipo']=='Coordinador' || $_SESSION['tipo']=='admin' || $_SESSION['tipo']=='ETJ') {
+																include("includes/mod_cen/admin/escuela_asignar_admin_Ett.php");
+														}else {
+																include("includes/mod_cen/denegado.php");
+														}
+														break;
+									case 22:
+														if($_SESSION['tipo']=='Coordinador' || $_SESSION['tipo']=='admin' || $_SESSION['tipo']=='ETJ') {
+																include("includes/mod_cen/admin/escuela_asignar_admin_Etj.php");
+														}else {
+																include("includes/mod_cen/denegado.php");
+														}
+														break;
+
 
 				}
 

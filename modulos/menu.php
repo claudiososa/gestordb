@@ -81,6 +81,9 @@
 			case 'CP':
 							include_once('includes/mod_men/coordinadoresPrimaria.php');
 							break;
+			case 'SSPL':
+							include_once('includes/mod_men/subSecretarioPlaneamiento.php');
+							break;
 			}
 		}
 			else {

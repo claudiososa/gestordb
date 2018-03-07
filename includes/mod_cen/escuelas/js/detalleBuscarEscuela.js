@@ -15,12 +15,13 @@ $(document).ready(function() {
         //$this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
         //console.log(escuelaId)
         let myReport ='all'
+        let reports ='all'
 
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
           type: 'POST',
           dataType: 'json',
-          data: {myReport:myReport,referenteId:referenteId2,escuelaId: escuelaId}
+          data: {myReport:myReport,reports:reports,referenteId:referenteId2,escuelaId: escuelaId}
         })
         .done(function(lista) {
 
@@ -94,7 +95,7 @@ $(document).ready(function() {
               })
               .done(function(lista) {
                 for (let item of lista) {
-                    //console.log('item. nombre'+item.nombre)
+                    console.log('item. nombre'+item.nombre)
                     informeActual.escuelaNombre=item.nombre
                     informeActual.escuelaNumero=item.numero
                     informeActual.escuelaCue=item.cue
@@ -105,37 +106,15 @@ $(document).ready(function() {
                     informeActual.titulo=item.titulo
                     informeActual.contenido=item.contenido
                     informeActual.informeId=informeId
-
-                    /*let escuelaNombre = item.nombre
-                    let escuelaNumero = item.numero
-                    let escuelaCue = item.cue
-                    let fecha = item.fecha
-                    let prioridad = item.prioridad
-                    let categoria =  item.categoria
-                    let subcategoria =  item.subcategoria
-                    let titulo =  item.titulo
-                    let contenido =  item.contenido*/
-
                 }
-                //console.log(informeActual.escuelaNombre)
-                //console.log("success Ajax Informe");
               })
 
               .fail(function() {
                 console.log("error");
               })
               .always(function() {
-                //console.log(informeActual.escuelaNombre)
-                //console.log("success Ajax Informe");
                 formPersona(informeActual)
-
-
-
-                //console.log("complete");
               });
-
-
-
           });
 
           //console.log("success");
