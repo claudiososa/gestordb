@@ -102,15 +102,16 @@ $b_mis_informe = $mis_informes->buscar(5);
 <div class="panel panel-primary col-md-7 col-md-offset-1 hidden-xs">
   <div class="panel-body">
     <div class="styleFont" align="text-center"><u>Ultimos 5 informes creados</u><a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION['referenteId'] ?>"></a></div>
+
       <?php
 
-
-  echo "<table id='tablaPrincipal' class='table table-hover table-striped table-condensed tablesorter'>";
+echo "<div class='table-responsive'>";
+  echo "<table id='tablaPrincipal' class='table table-bordered'>";
   echo "<thead>";
   echo "<tr>";
-  echo "<th>Id</th>";
-  echo "<th>Título</th>";
-  echo "<th>Nº</th>";
+  echo "<th class='hidden'>Id</th>";
+  echo "<th>Título Informe</th>";
+  echo "<th>Nº Esc</th>";
   echo "<th>Prioridad</th>";
   echo "</tr>";
   echo "</thead>";
@@ -145,7 +146,7 @@ $b_mis_informe = $mis_informes->buscar(5);
     ?>
 
 
-    <td> <?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
+    <td class='hidden'> <?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
     <td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
     <?php
 
@@ -163,7 +164,7 @@ $b_mis_informe = $mis_informes->buscar(5);
     }
     echo "</tbody>";
   echo "</table>";
-
+echo "</div>";
 
   ?>
   </div>

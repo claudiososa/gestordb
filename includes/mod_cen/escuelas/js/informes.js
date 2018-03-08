@@ -1,8 +1,6 @@
 function formPersona(informeActual)
 {
 
-
-
   let escuelaId =  $('#escuelaId').val()
   console.log('mi escuela:'+escuelaId)
     $('#padreIr').append(`
@@ -11,14 +9,14 @@ function formPersona(informeActual)
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h5 class="modal-title" id="myModalLabel">${informeActual.escuelaNombre}<br></h5>
+              <h4 class="modal-title" id="myModalLabel"><b>${informeActual.escuelaNombre}</b><br></h4>
               <div class="row"><div class="col-md-6">
               Numero: ${informeActual.escuelaNumero}</div><div class="col-md-6">Cue: ${informeActual.escuelaCue}</div></div>
 
               <div class="row"><div class="col-md-6">Creado por: </div><div class="col-md-6">Fecha: ${informeActual.fecha}</div></div>
               <div class="row"><div class="col-md-6">Prioridad: ${informeActual.prioridad}</div></div>
 
-              <div class="infoOculta" id="infoOculta">
+              <div class="infoOculta" id="infoOculta${informeActual.informeId}">
 
               <div class="row"><div class="col-md-12">Categoria: ${informeActual.categoria}</div></div>
               <div class="row"><div class="col-md-12">Subcategoria:${informeActual.subcategoria}
@@ -28,7 +26,7 @@ function formPersona(informeActual)
               <div class="row"><div class="col-md-12">Departamento:</div></div>
               </div>
               <div class="row">
-              <div class="col-md-4 col-md-offset-5"><img class="clickable verMas" id="verMas" src="includes/mod_cen/escuelas/js/redimensionar.png"></div>
+              <div class="col-md-4 col-md-offset-5"><img class="clickable verMas" id="verMas${informeActual.informeId}" src="includes/mod_cen/escuelas/js/redimensionar.png"></div>
               </div>
             </div>
 
@@ -67,13 +65,13 @@ function formPersona(informeActual)
               $('#modal-body').append(`
                 <div class="form-group">
                 <div class="container">
-                <button type="button" class="btn btn-success btn-md" id="verInforme" style="display: none;">
+                <button type="button" class="btn btn-success btn-md" id="verInforme${informeActual.informeId}" style="display: none;">
                   <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  Ver Informe
                 </button>
 
                 </div>
                 <br>
-                  <div id="divContenido" class="col-md-12">
+                  <div id="divContenido${informeActual.informeId}" class="col-md-12">
                     <textarea  rows='20' name="contenido" id="contenido" class="form-control" >${informeActual.contenido}
                     </textarea>
                   </div>
@@ -240,8 +238,8 @@ function formPersona(informeActual)
       let valorBoton = $(this).text()
       let informeId = informeActual.informeId
       if (valorBoton=="Responder") {
-        $('#divContenido').hide()
-        $('#verInforme').show()
+        $('#divContenido'+informeId).hide()
+        $('#verInforme'+informeId).show()
         $('#btnSave').html('Enviar')
         $('#divRespuesta').show()
       }else{
@@ -280,25 +278,23 @@ function formPersona(informeActual)
       }
     })
 
-  $(".infoOculta").hide()
+////////js boton ver mas datos de informe
+  let informeId = informeActual.informeId
+//alert (informeId)
+  $("#infoOculta"+informeId).hide()
 
-  $(document).on('click', '.verMas ' , 'span.clickable', function(){
+  $(document).on('click', '#verMas'+informeId , 'span.clickable', function(){
 
-      //var $this = $(this);
-  //   $('.clickable').removeClass('glyphicon-chevron-down')
-//$(this).children("i").addClass("glyphicon-chevron-up");
-      $('.infoOculta').toggle();
-      //$('#verMas').toggle();
+      $('#infoOculta' + informeId).toggle();
 
   });
+/////
+//////boton ver /ocultar informe
 
+$('#verInforme'+informeId).click(function(event) {
+$('#divContenido'+informeId).toggle()
+});
 
-  $('#verInforme').click(function(event) {
-   $('#divContenido').toggle()
-  });
-
-
-  // jQuery
 
 
 }
