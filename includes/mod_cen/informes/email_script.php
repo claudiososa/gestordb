@@ -414,7 +414,82 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 
 
+              } else{
+                         //**** INICIO de Plan de Lectura
+
+
+                       if($referente_actual->tipo=="CPPL"
+                ||  $referente_actual->tipo=="ETTPL"){
+
+
+                 
+                 // En el siguiente codigo obtenemos datos del Referente de Plan de Lectura que inicio sesion
+                 $dato_referente =  new Referente($_SESSION["referenteId"]);
+                 $buscar_dato = $dato_referente->Persona($_SESSION["referenteId"]);
+                 $origen =  mysqli_fetch_object($buscar_dato);
+
+                 $creadopor=$origen->nombre." ".$origen->apellido;
+                 //quien envia el mensaje - (email)
+                 $mail_propio=$origen->email;
+
+                 $header = "From: ". $origen->email; // datos de quien envia el mail
+
+               if ($referente_actual->tipo=="ETTPL")
+               { //mandamos mail al coordinador de Plan de Lectura si es prioridad alta o media
+
+                   if($_POST["prioridad"]=="Alta" || $_POST["prioridad"]=="Media" || $_POST["prioridad"]=="Normal") // modificacion 
+
+                    {
+                      $para="mauriciocoudert@gmail.com";
+                    }else{
+
+                      $para="";
+                    }
+
+
+                        
+
+               }else{  // entra por que es coordinador del Plan de Lectura envia mail al att de la escuela en cuestion
+
+                   $para=""; // no envia mail.
+
+                    }
+
+                 //buscamos el ultimo informe creado por el usuario logeado
+                 $ultimo= new Informe(null,null,$_SESSION["referenteId"]);
+                 $buscar_ultimo= $ultimo->buscar(1);
+                 $dato_ultimo = mysqli_fetch_object($buscar_ultimo);
+
+                 $linkinforme="index.php?mod=slat&men=informe&id=3&informeId=".$dato_ultimo->informeId;
+                 $mailobtenido=$para;
+                 //$para="jfvpipo@gmail.com"; // prueba de mail a superior
+
+                $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
+                $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
+
+                if (mail($para, $titulo, $mensaje, $header)) {
+
+                  $enviado=1;
+                  //echo $para;
+                  //sleep(20);
+                } else {
+                  
+                  echo "Falló el envio  ";
+                  
+                  
+                }
+
+
+
               }
+
+
+
+
+
+
+                        //**** FIN  de Plan de Lectura
+                     }
 
 
 
@@ -429,11 +504,17 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
         }// fin del if-else principal
 
+       
+      if ($_SESSION['tipo']=='CPPL') {
+        
+         $variablephp = "index.php?mod=slat&men=informe&id=2&escuelaId=".$_POST["escuelaId"]."&tipo=lectura";
+      }else{
         $variablephp = "index.php?mod=slat&men=informe&id=2&escuelaId=".$_POST["escuelaId"];
-
-
+}
+            
        ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
                 setTimeout ("redireccion()",0);
                     </script>
+

@@ -84,6 +84,12 @@
 			case 'SSPL':
 							include_once('includes/mod_men/subSecretarioPlaneamiento.php');
 							break;
+			case 'CPPL':
+							include_once('includes/mod_men/coordinadorPlanLectura.php');
+							break;
+			case 'ETTPL':
+							include_once('includes/mod_men/ettPlanLectura.php');
+							break;
 			}
 		}
 			else {
