@@ -7,7 +7,7 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
-<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<!--<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>-->
 
 
 
@@ -37,8 +37,9 @@ $b_mis_informe = $mis_informes->buscar(5);
 <br>
 </div>
 
-<div class="container">
+
 <div class="row">
+  <div class="container">
 <div class="panel panel-primary col-md-4">
   <div class="panel-body">
     <div class="styleFont" ><u>Accesos rapidos a acciones generales</u></div>
@@ -216,8 +217,8 @@ echo "</div>";
         echo '<td>'.$infoEscuela->cue.'</td>';
         echo '<td>'.$infoEscuela->numero.'</td>';
         echo '<td>'.$infoEscuela->nombre.'</td>';
-        echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-danger" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
-        echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-danger" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"><i  class="glyphicon glyphicon-chevron-down"></i></span></td>';
+        echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"><i  class="glyphicon glyphicon-chevron-down"></i></span></td>';
         echo '</tr>';
         ?>
 
