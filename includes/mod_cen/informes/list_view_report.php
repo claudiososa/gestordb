@@ -32,7 +32,11 @@ if (isset($_GET['tipo'])) {
 		        break;
 		case 'facilitador':
 						$arrayTipo = array('Facilitador','CoordinadorFacilitador');
-						break;				
+						break;	
+		case 'lectura':
+        $arrayTipo = array('ETTPL','CPPL');
+        break;				
+
     default:
       # code...
       break;

@@ -280,6 +280,9 @@
 						 case 31:
 								 	include("includes/mod_cen/escuelas/misEscuelasSuper.php");
 								 	break;
+						case 32:
+								 	include("includes/mod_cen/escuelas/escuela_ver_PL.php");
+								 	break;
 
 
 

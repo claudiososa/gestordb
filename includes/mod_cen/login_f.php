@@ -178,6 +178,12 @@ if(isset($_POST["username"]))
 				case 'SP':
 				  			 	include_once('includes/mod_cen/portada/subSecretarioPlaneamiento.php');
 								  break;
+				case 'CPPL':
+				  			 	include_once('includes/mod_cen/portada/coordinadorPlanLectura.php');
+								  break;
+				case 'ETTPL':
+				  			 	include_once('includes/mod_cen/portada/ettPlanLectura.php');
+								  break;
 
 				default:
 					include_once('includes/mod_cen/portada/portadaAdmin.php');
