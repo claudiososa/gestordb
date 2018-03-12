@@ -27,16 +27,29 @@ $(document).ready(function() {
           let itemEscuela = 0
           let tableinforme = 0
 
+
           for (let item of lista) {
               tableinforme=pad(item.escuelaId,4,0)
+
 
           }
 
           //console.log('item Escuela Id = '+tableinforme)
-          $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme}"><td colspan="5"><table id=tableinformes${tableinforme}
-          class="table">
+          $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="5"><table id=tableinformes${tableinforme}
+          class="table StyleTable">
           <thead>
-            <tr class='success'>
+            <tr class='warningStyle'>
+              <th><h4>Informes&nbsp&nbsp  N° Escuela:1111 </h4></th>
+              <th>&nbsp</th>
+              <th>&nbsp</th>
+              <th>&nbsp</th>
+              <th><button type='button' class='btn btn-warning'>Crear Nuevo Informe</button></th>
+
+            </tr>
+          </thead>
+
+          <thead>
+            <tr>
               <th>Titulo</th>
               <th>Leido</th>
               <th>Respuestas</th>
@@ -54,11 +67,13 @@ $(document).ready(function() {
               let escuela = item.escuelaId
               //console.log('cantidad de leido'+item.cantidadLeido)
               $('#tableinformes'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
-              <td><button type='button' id='if${item.informeId}'>${item.titulo}</button></td>
+
+              <td><a class="btn btn-default" role="button" id='if${item.informeId}'>${item.titulo}</a></td>
               <td>${item.cantidadLeido}</td>
               <td>${item.cantidadRespuesta}</td>
               <td>${item.fecha}</td>
               <td>${item.prioridad}</td>
+
               </tr>`)
 
             }else{
@@ -190,10 +205,24 @@ $(document).ready(function() {
 
           }
 
-          $('#autoridad'+escuelaId).parent().parent().after(`<tr class="tableAutoridades${tableAuto}"><td colspan="5">
-          <table id=tableAutoridades${tableAuto} class="table">
+          $('#autoridad'+escuelaId).parent().parent().after(`<tr class="tableAutoridades${tableAuto} success"><td colspan="5"><table class="table StyleTable1">
           <thead>
-            <tr class='success'>
+          <tr class='success'>
+          <th><h4>Autoridades &nbsp&nbsp&nbsp  N° Escuela:  1454</h4></th>
+         <th>&nbsp</th>
+         <th>&nbsp</th>
+         <th>&nbsp</th>
+         <th>&nbsp</th>
+         <th><button type='button' class='btn btn-success'>Nueva Autoridad</button></th>
+
+         </tr>
+        </thead>
+
+
+          <table id=tableAutoridades${tableAuto} class="table StyleTable1">
+
+          <thead>
+            <tr>
               <th>Tipo</th>
               <th>Nombre</th>
               <th>Telefono</th>
@@ -201,7 +230,7 @@ $(document).ready(function() {
               <th>Accion</th>
             </tr>
           </thead>
-          <tbody>`)
+          `)
 
 
 
@@ -215,13 +244,14 @@ $(document).ready(function() {
 
             if (item.cantidad > 0) {
 
-              $('#tableAutoridades'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
+              $('#tableAutoridades'+escuelaIdconCero).find('thead').after(`<tbody><tr class="trinformes${escuelaIdconCero}">
               <td>${item.cargo}</td>
               <td><a id='eInforme' href=''>${item.apellido},${item.nombre}</a></td>
               <td><a id='eInforme' href=''>${item.telefono}</a></td>
               <td><a id='eInforme' href=''>${item.email}</a></td>
-              <td><a id='eAutoridad' href=''>Modificar</a></td>
-              </tr>`)
+              <td><img class='img-responsive' src='img/iconos/lapiz (4).png' id='eAutoridad'></td>
+
+              </tr></tbody></table>`)
 
 
 
