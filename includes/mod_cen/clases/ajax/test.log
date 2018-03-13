@@ -1,12 +1,46 @@
-object(mysqli_result)#4 (5) {
-  ["current_field"]=>
-  int(0)
-  ["field_count"]=>
-  int(6)
-  ["lengths"]=>
-  NULL
-  ["num_rows"]=>
-  int(0)
-  ["type"]=>
-  int(0)
+object(stdClass)#5 (22) {
+  ["escuelaId"]=>
+  string(4) "0069"
+  ["referenteId"]=>
+  string(4) "0037"
+  ["cue"]=>
+  string(9) "660067300"
+  ["numero"]=>
+  string(4) "5001"
+  ["nombre"]=>
+  string(39) "Nº 5001 ESCUELA DE COMERCIO H.YRIGOYEN"
+  ["domicilio"]=>
+  string(9) "MITRE 468"
+  ["nivel"]=>
+  string(17) "Secundaria Común"
+  ["localidadId"]=>
+  string(4) "0031"
+  ["turnos"]=>
+  string(5) "nnssn"
+  ["telefono"]=>
+  string(7) "4215280"
+  ["supervisor_id"]=>
+  string(3) "516"
+  ["ubicacion"]=>
+  string(22) "-24.784444, -65.410278"
+  ["sitio"]=>
+  string(0) ""
+  ["facebook"]=>
+  string(0) ""
+  ["twitter"]=>
+  string(0) ""
+  ["youtube"]=>
+  string(0) ""
+  ["referenteIdPmi"]=>
+  string(3) "101"
+  ["referenteIdSuperSec"]=>
+  string(3) "120"
+  ["referenteIdSuperSup"]=>
+  string(1) "1"
+  ["referenteIdSuperAdultos"]=>
+  string(1) "1"
+  ["referenteIdFacilitador"]=>
+  string(1) "1"
+  ["email"]=>
+  string(0) ""
 }

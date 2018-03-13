@@ -7,7 +7,7 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
-<!--<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>-->
+<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 
 
 
@@ -20,16 +20,15 @@ include_once 'includes/mod_cen/clases/informe.php';
 include_once "includes/mod_cen/clases/persona.php" ;
 include_once "includes/mod_cen/clases/referente.php" ;
 include_once "includes/mod_cen/clases/leido.php" ;
+include_once "includes/mod_cen/clases/respuesta.php" ;
+include_once "includes/mod_cen/clases/rtixescuela.php";
+include_once "includes/mod_cen/clases/rti.php";
 ?>
 
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA DESKTOP-->
 <!----------------------------------------------------------------------------->
-<?php
-$mis_informes= new informe(null,null,$_SESSION["referenteId"]);
 
-$b_mis_informe = $mis_informes->buscar(5);
-?>
 
 <div class="container">
   <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
@@ -103,64 +102,54 @@ $b_mis_informe = $mis_informes->buscar(5);
 <div class="panel panel-primary col-md-7 col-md-offset-1 hidden-xs">
   <div class="panel-body">
     <div class="styleFont" align="text-center"><u>Ultimos 5 informes creados</u><a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION['referenteId'] ?>"></a></div>
-
       <?php
+        echo "<div class='table-responsive'>";
+        echo "<table id='tablaPrincipal' class='table table-bordered'>";
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th class='hidden'>Id</th>";
+        echo "<th>Título Informe</th>";
+        echo "<th>Nº Esc</th>";
+        echo "<th>Leido</th>";
+        echo "<th>Respuestas</th>";
+        echo "<th>Prioridad</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
 
-echo "<div class='table-responsive'>";
-  echo "<table id='tablaPrincipal' class='table table-bordered'>";
-  echo "<thead>";
-  echo "<tr>";
-  echo "<th class='hidden'>Id</th>";
-  echo "<th>Título Informe</th>";
-  echo "<th>Nº Esc</th>";
-  echo "<th>Prioridad</th>";
-  echo "</tr>";
-  echo "</thead>";
-  echo "<tbody>";
+
+  // listo los ultimos 5 informes realizado por el ett loguegado.
+
+  $mis_informes= new informe(null,null,$_SESSION["referenteId"]);
+  $b_mis_informe = $mis_informes->buscar(5);
+  $leido = new Leido();
+  $resp = new Respuesta();
 
   while ($fila=mysqli_fetch_object($b_mis_informe)){
 
-    $escuela= new Escuela($fila->escuelaId);
-    $buscar_escuela= $escuela->buscar();
-    $dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-
-    $referente = new Referente($_SESSION["referenteId"]);
-    $b_referente = $referente->buscar();
-
-    $dato_referente= mysqli_fetch_object($b_referente);
-
-    $persona = new Persona($dato_referente->personaId);
-
-    $b_persona = $persona->buscar();
-
-    $dato_persona=mysqli_fetch_object($b_persona);
-
-
-
-
-
-  echo "<tr id= 'encabezado.$fila->informeId'>";
-
-
-
+    echo "<tr id= 'encabezado.$fila->informeId'>";
     ?>
-
-
     <td class='hidden'> <?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-    <td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
+    <td><?php  echo   '<a class="btn btn-default" role="button" id="list'.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
+
+
+    <?php // echo '<a id="list'.$fila->informeId.'" href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?>
     <?php
+    echo "<td>".$fila->numero."</td>";
 
-    echo "<td>".$dato_escuela->numero."</td>";
+    $leido->informeId=$fila->informeId;
+    $buscarLeido = $leido->buscar();
+    $cantidadLeido=mysqli_num_rows($buscarLeido);
+
+    echo "<td>".$cantidadLeido."</td>";
+
+    $resp->informeId=$fila->informeId;
+    $buscarResp = $resp->buscar();
+    $cantidadResp = mysqli_num_rows($buscarResp);
+
+    echo "<td>".$cantidadResp."</td>";
     echo "<td>".$fila->prioridad."</td>";
-
-
-
-  echo "</tr>";
-
-
-
-
+    echo "</tr>";
 
     }
     echo "</tbody>";
@@ -184,9 +173,9 @@ echo "</div>";
       <th>CUE</th>
       <th>N°</th>
       <th>Nombre</th>
-      <th>Mis informes</th>
+      <th>Informes</th>
       <th>Autoridades</th>
-
+      <th>RTI</th>
     </tr>
   </thead>
 
@@ -200,6 +189,14 @@ echo "</div>";
       $escuela = new Escuela();
 
       while ($row = mysqli_fetch_object($buscarEscuelas)) {
+
+        $rtix= new rtixescuela($row->escuelaId);
+
+        $buscar_rti=$rtix->buscar();
+
+        $cantidadRti=mysqli_num_rows($buscar_rti);
+
+
         $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
         $buscarInforme= $informe->buscar();
         $cantidadInforme = mysqli_num_rows($buscarInforme);
@@ -219,6 +216,7 @@ echo "</div>";
         echo '<td>'.$infoEscuela->nombre.'</td>';
         echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
         echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"><i  class="glyphicon glyphicon-chevron-down"></i></span></td>';
+        echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="rti'.$infoEscuela->escuelaId.'" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"><i  class="glyphicon glyphicon-chevron-down"></i></span></td>';
         echo '</tr>';
         ?>
 

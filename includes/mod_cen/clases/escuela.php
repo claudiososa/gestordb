@@ -290,7 +290,7 @@ class Escuela
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		$smt="SELECT * FROM escuelas WHERE escuelaId=$this->escuelaId";
-		echo $stm;
+		//echo $stm;
 		if($conexion->query($smt)){
 			//return 'encontrado';
 			return mysqli_fetch_object($conexion->query($smt));
@@ -603,7 +603,7 @@ if(isset($_POST["referente_id"])) {
 	$dato_persona=mysqli_fetch_object($buscar_persona);
 	//********************************************************************************
 
-	if(isset($_POST['tipo'])){	
+	if(isset($_POST['tipo'])){
 		$escuelaReferentes = new EscuelaReferentes(null,$_POST["escuela_id"],$_POST['tipo'],$_POST["referente_id"]);
 		// buscamos el referente en la tabla escuela referente
 		$buscarReferente = $escuelaReferentes->existe();
@@ -618,7 +618,7 @@ if(isset($_POST["referente_id"])) {
 
 		switch ($_POST['tipo']) {
 			case '19': // si es ETT
-				
+
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],30,$dato_persona->personaId);
 		        $buscarAutoridad = $autoridadEscolar->existe();
 
@@ -627,25 +627,25 @@ if(isset($_POST["referente_id"])) {
 							$autoridadEscolar->agregar();
 
 					}else{
-							
+
 					      if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
 
 						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
 					    		$borrar_autoridad=$autoridadEscolar->eliminar();
 
-						   
+
 					    }else{ // tiene referente asignado entonces editamos
 
 					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
 							   $editar_autoridad=$autoridadEscolar->editar();
 					         }
 
-							
+
 					}
 
 				break;
 			case '20': // si es ETJ
-				
+
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],31,$dato_persona->personaId);
 		        $buscarAutoridad = $autoridadEscolar->existe();
 
@@ -660,7 +660,7 @@ if(isset($_POST["referente_id"])) {
 						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
 					    		$borrar_autoridad=$autoridadEscolar->eliminar();
 
-						   
+
 					    }else{ // tiene referente asignado entonces editamos
 
 					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
@@ -670,7 +670,7 @@ if(isset($_POST["referente_id"])) {
 
 				break;
 			case '4': // si es SNP
-				
+
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],4,$dato_persona->personaId);
 		        $buscarAutoridad = $autoridadEscolar->existe();
 
@@ -684,7 +684,7 @@ if(isset($_POST["referente_id"])) {
 						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
 					    		$borrar_autoridad=$autoridadEscolar->eliminar();
 
-						   
+
 					         }else{ // tiene referente asignado entonces editamos
 
 					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
@@ -695,7 +695,7 @@ if(isset($_POST["referente_id"])) {
 				break;
 
 				case '5': // si es SEP
-				
+
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],5,$dato_persona->personaId);
 		        $buscarAutoridad = $autoridadEscolar->existe();
 
@@ -709,7 +709,7 @@ if(isset($_POST["referente_id"])) {
 						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
 					    		$borrar_autoridad=$autoridadEscolar->eliminar();
 
-						   
+
 					         }else{ // tiene referente asignado entonces editamos
 
 					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
@@ -718,9 +718,9 @@ if(isset($_POST["referente_id"])) {
 						}
 
 				break;
-			
+
 				case '6': // si es SI
-				
+
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],6,$dato_persona->personaId);
 		        $buscarAutoridad = $autoridadEscolar->existe();
 
@@ -734,7 +734,7 @@ if(isset($_POST["referente_id"])) {
 						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
 					    		$borrar_autoridad=$autoridadEscolar->eliminar();
 
-						   
+
 					         }else{ // tiene referente asignado entonces editamos
 
 					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
@@ -745,7 +745,7 @@ if(isset($_POST["referente_id"])) {
 				break;
 
 				case '7': // si es S Hospitalaria
-				
+
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],7,$dato_persona->personaId);
 		        $buscarAutoridad = $autoridadEscolar->existe();
 
@@ -759,7 +759,7 @@ if(isset($_POST["referente_id"])) {
 						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
 					    		$borrar_autoridad=$autoridadEscolar->eliminar();
 
-						   
+
 					         }else{ // tiene referente asignado entonces editamos
 
 					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
@@ -770,7 +770,7 @@ if(isset($_POST["referente_id"])) {
 				break;
 
 				case '12': // si es Sup. Religion
-				
+
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],12,$dato_persona->personaId);
 		        $buscarAutoridad = $autoridadEscolar->existe();
 
@@ -784,7 +784,7 @@ if(isset($_POST["referente_id"])) {
 						        $autoridadEscolar->autoridadesId=$buscarAutoridad;
 					    		$borrar_autoridad=$autoridadEscolar->eliminar();
 
-						   
+
 					         }else{ // tiene referente asignado entonces editamos
 
 					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
