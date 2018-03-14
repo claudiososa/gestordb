@@ -7,11 +7,11 @@ $(document).ready(function() {
 
     switch (modulo) {
       case 'director':
-        $('#tipoId').val('3')
+        $('#tipoId').val('20')
         formPersona()
         break;
       case 'snp':
-          $('#tipoId').val('4')
+          $('#tipoId').val('15')
           formPersona()
           break;
       case 'srp':

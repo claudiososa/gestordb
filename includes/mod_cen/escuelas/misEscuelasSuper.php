@@ -138,10 +138,20 @@ include_once "includes/mod_cen/clases/rti.php";
     echo "<td>".$fila->numero."</td>";
 
     $leido->informeId=$fila->informeId;
-    $buscarLeido = $leido->buscar();
+    $buscarLeido = $leido->buscar(null,null,$fila->referenteId);
     $cantidadLeido=mysqli_num_rows($buscarLeido);
+    $lectores="";
+    while ($rowLeido = mysqli_fetch_object($buscarLeido)) {
+      $lectores.= $rowLeido->apellido.', '.$rowLeido->nombre.'<br>';
+      //.'<br>'.$rowLeido->fechaHora;
+    }
 
-    echo "<td>".$cantidadLeido."</td>";
+    if ($cantidadLeido>0) {
+      echo '<td><a href="#" data-toggle="popover" title="Usuarios que leyeron" data-content="'.$lectores.'">'.$cantidadLeido.'</a></td>';
+    }else{
+      echo '<td>'.$cantidadLeido.'</td>';
+    }
+
 
     $resp->informeId=$fila->informeId;
     $buscarResp = $resp->buscar();
@@ -296,7 +306,10 @@ echo "</div>";
       echo '<div class="row" >';
       echo '<div class="col-xs-8"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
       echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/lapiz (4).png"></div>';
-      echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus" title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" ></div>';
+      echo '<div class="col-xs-2">
+            <img class="img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus"
+            title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" >
+          </div>';
         echo '</div>';
         echo '<br>';
         echo '<div class="row" id="rowContacto">';

@@ -1,46 +1,77 @@
-object(stdClass)#5 (22) {
-  ["escuelaId"]=>
-  string(4) "0069"
-  ["referenteId"]=>
-  string(4) "0037"
-  ["cue"]=>
-  string(9) "660067300"
-  ["numero"]=>
-  string(4) "5001"
-  ["nombre"]=>
-  string(39) "Nº 5001 ESCUELA DE COMERCIO H.YRIGOYEN"
-  ["domicilio"]=>
-  string(9) "MITRE 468"
-  ["nivel"]=>
-  string(17) "Secundaria Común"
-  ["localidadId"]=>
-  string(4) "0031"
-  ["turnos"]=>
-  string(5) "nnssn"
-  ["telefono"]=>
-  string(7) "4215280"
-  ["supervisor_id"]=>
-  string(3) "516"
-  ["ubicacion"]=>
-  string(22) "-24.784444, -65.410278"
-  ["sitio"]=>
-  string(0) ""
-  ["facebook"]=>
-  string(0) ""
-  ["twitter"]=>
-  string(0) ""
-  ["youtube"]=>
-  string(0) ""
-  ["referenteIdPmi"]=>
-  string(3) "101"
-  ["referenteIdSuperSec"]=>
-  string(3) "120"
-  ["referenteIdSuperSup"]=>
-  string(1) "1"
-  ["referenteIdSuperAdultos"]=>
-  string(1) "1"
-  ["referenteIdFacilitador"]=>
-  string(1) "1"
-  ["email"]=>
-  string(0) ""
+array(3) {
+  [0]=>
+  array(11) {
+    ["id"]=>
+    string(4) "0516"
+    ["nombre"]=>
+    string(11) "MARIA LUISA"
+    ["apellido"]=>
+    string(6) "FRANCO"
+    ["dni"]=>
+    string(8) "17580680"
+    ["cuil"]=>
+    string(11) "27175806801"
+    ["telefono"]=>
+    string(0) ""
+    ["email"]=>
+    string(21) "francomaria@gmail.com"
+    ["localidad"]=>
+    string(4) "0031"
+    ["cargo"]=>
+    string(21) "Supervisor Secundaria"
+    ["escuelaId"]=>
+    string(4) "0069"
+    ["cantidad"]=>
+    int(3)
+  }
+  [1]=>
+  array(11) {
+    ["id"]=>
+    string(4) "0550"
+    ["nombre"]=>
+    string(14) "RAUL FRANCISCO"
+    ["apellido"]=>
+    string(6) "FABIAN"
+    ["dni"]=>
+    string(7) "8180661"
+    ["cuil"]=>
+    string(10) "2081806617"
+    ["telefono"]=>
+    string(0) ""
+    ["email"]=>
+    string(26) "ELCHANGOBAHIA@YAHOO.COM.AR"
+    ["localidad"]=>
+    string(4) "0031"
+    ["cargo"]=>
+    string(27) "Director Escuela Secundaria"
+    ["escuelaId"]=>
+    string(4) "0069"
+    ["cantidad"]=>
+    int(3)
+  }
+  [2]=>
+  array(11) {
+    ["id"]=>
+    string(4) "0216"
+    ["nombre"]=>
+    string(11) "JUAN CARLOS"
+    ["apellido"]=>
+    string(9) "GUTIERREZ"
+    ["dni"]=>
+    string(8) "36280631"
+    ["cuil"]=>
+    string(11) "20362806314"
+    ["telefono"]=>
+    string(13) "0387154437489"
+    ["email"]=>
+    string(20) "juancg.016@gmail.com"
+    ["localidad"]=>
+    string(4) "0031"
+    ["cargo"]=>
+    string(26) "Equipo Tecnico Territorial"
+    ["escuelaId"]=>
+    string(4) "0069"
+    ["cantidad"]=>
+    int(3)
+  }
 }

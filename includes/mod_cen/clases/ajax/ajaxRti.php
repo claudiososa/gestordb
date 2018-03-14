@@ -2,40 +2,24 @@
 include_once("../escuela.php");
 include_once("../referente.php");
 include_once("../rtixescuela.php");
-//include_once("../persona.php");
+include_once("../persona.php");
 include_once("../rti.php");
 include_once("../maestro.php");
 
-
-
+$referenteId=$_SESSION['referenteId'];
 
   if (isset($_POST['rti']))
   {
-
-    $referenteId=$_SESSION['referenteId'];
-    //Maestro::debbugPHP($_POST);
-    //$escuelaId = $_POST['escuelaId'];
-    //Crear objeto escuela y buscar las escuelas que tiene a cargo el Referente
-    $escuela= new Escuela('0069');
+    $list=array();
+    $escuela= new Escuela($_POST['escuela']);
     $fila=$escuela->buscarUnico();
-    //$fila=mysqli_fetch_object($escuela_acargo);
-    Maestro::debbugPHP($fila);
+    $rtix= new rtixescuela($fila->escuelaId);
+    $buscar_rti=$rtix->buscar();
+    while($filarti=mysqli_fetch_object($buscar_rti)){
 
-
-    //while($fila=mysqli_fetch_object($escuela_acargo)){
-      //echo $fila->escuelaId.$fila->nombre."<br><br>";
-      //echo "_______________________<br>";
-      $rtix= new rtixescuela($fila->escuelaId);
-
-      $buscar_rti=$rtix->buscar();
-      //var_dump($rtix);
-      while($filarti=mysqli_fetch_object($buscar_rti)){
-        $list=[];
         $rti=new Rti($filarti->rtiId);
         $buscar_dato=$rti->buscar();
         $cantidadRti='2';
-
-
         while($filadato=mysqli_fetch_object($buscar_dato)){
           $persona= new Persona($filadato->personaId);
           $buscar_persona=$persona->buscar();
@@ -58,12 +42,7 @@ include_once("../maestro.php");
         }
 
       }
-
-
-
     $json = json_encode($list);
-    //Maestro::debbugPHP($json);
+    Maestro::debbugPHP($json);
     echo $json;
-
   }
-  ?>

@@ -139,7 +139,7 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 			return $conexion->query($sentencia);
 	}
 
-	public function buscar($limit=NULL,$tipo=NULL)
+	public function buscar($limit=NULL,$tipo=NULL,$referenteId=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -151,11 +151,16 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 												ON leido.referenteId=referentes.referenteId
 												INNER JOIN personas
 												ON referentes.personaId=personas.personaId";
+
+
 		if($this->informeId!=NULL || $this->referenteId!=NULL
 		|| $this->fechaHora!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
+		if (isset($referenteId)) {
+				$sentencia.=" leido.referenteId<>$referenteId && ";
+		}
 
 		if($this->informeId!=NULL)
 		{
@@ -164,7 +169,7 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 
 		if($this->referenteId!=NULL)
 		{
-			$sentencia.=" leido.referenteId='$this->referenteId' && ";
+			//$sentencia.=" leido.referenteId='$this->referenteId' && ";
 		}
 
 		if($this->fechaHora!=NULL)

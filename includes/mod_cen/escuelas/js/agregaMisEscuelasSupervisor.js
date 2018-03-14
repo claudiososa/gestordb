@@ -259,14 +259,15 @@ $(document).ready(function() {
     if (typeof(existeRti)==='undefined') {
         //console.log(existe)
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
-        //console.log(escuelaId)
+        let escuela = $(this).attr('id').substr(7)
+        //console.log('dentro de rti:'+escuela)
         //alert(escuelaId)
         let rti ='rti'
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxRti.php',
           type: 'POST',
           dataType: 'json',
-          data: {rti:rti}
+          data: {rti:rti,escuela:escuela}
         })
         .done(function(lista) {
           let tableinforme = 0
@@ -276,7 +277,7 @@ $(document).ready(function() {
 
           }
 
-          $('#rti'+escuelaId).parent().parent().after(`<tr class="tableRti${tableAuto} success"><td colspan="6"><table class="table StyleTable1">
+          $('#rti'+escuela).parent().parent().after(`<tr class="tableRti${tableAuto} success"><td colspan="6"><table class="table StyleTable1">
           <thead>
           <tr class='success'>
           <th><h4>RTI &nbsp&nbsp&nbsp  N° Escuela:  1454</h4></th>
@@ -315,10 +316,10 @@ $(document).ready(function() {
             if (item.cantidad > 0) {
 
               $('#tableRti'+escuelaIdconCero).find('thead').after(`<tbody><tr class="trinformes${escuelaIdconCero}">
-              <td>${item.cargo}</td>
-              <td><a id='eRti' href=''>${item.nombre}</a></td>
+              <td>${item.nombre}</td>
               <td><a id='eRti' href=''>${item.telefonoM}/ ${item.telefonoC}</a></td>
               <td><a id='eRti' href=''>${item.email}</a></td>
+              <td><a id='eRti' href=''>${item.turno}</a></td>
               <td><img class='img-responsive' src='img/iconos/lapiz (4).png' id='eAutoridad'></td>
 
               </tr></tbody></table>`)
