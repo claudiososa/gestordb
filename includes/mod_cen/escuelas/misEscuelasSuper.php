@@ -147,7 +147,7 @@ include_once "includes/mod_cen/clases/rti.php";
     }
 
     if ($cantidadLeido>0) {
-      echo '<td><a href="#" data-toggle="popover" title="Usuarios que leyeron" data-content="'.$lectores.'">'.$cantidadLeido.'</a></td>';
+      echo '<td><a href="#" data-toggle="popover" data-trigger="focus" title="Leido por" data-content="'.$lectores.'">'.$cantidadLeido.'</a></td>';
     }else{
       echo '<td>'.$cantidadLeido.'</td>';
     }
@@ -156,8 +156,21 @@ include_once "includes/mod_cen/clases/rti.php";
     $resp->informeId=$fila->informeId;
     $buscarResp = $resp->buscar();
     $cantidadResp = mysqli_num_rows($buscarResp);
+    $autores="";
+    while ($rowResp = mysqli_fetch_object($buscarResp)) {
+      $autores.= $rowResp->apellido.', '.$rowResp->nombre.'<br>';
+      //.'<br>'.$rowLeido->fechaHora;
+    }
 
-    echo "<td>".$cantidadResp."</td>";
+
+    if ($cantidadLeido>0) {
+      echo '<td><a href="#" data-toggle="popover" data-trigger="focus" title="Respondido por" data-content="'.$autores.'">'.$cantidadResp.'</a></td>';
+    }else{
+      echo "<td>".$cantidadResp."</td>";
+    }
+
+
+
     echo "<td>".$fila->prioridad."</td>";
     echo "</tr>";
 
