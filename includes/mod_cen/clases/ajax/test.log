@@ -1,1 +1,12 @@
-string(177) "[{"id":"0550","nombre":"RAUL FRANCISCO","apellido":"FABIAN","dni":"8180661","cuil":"2081806617","telefono":"3874373093","email":"ELCHANGOBAHIA@YAHOO.COM.AR","localidad":"0031"}]"
+object(mysqli_result)#5 (5) {
+  ["current_field"]=>
+  int(0)
+  ["field_count"]=>
+  int(6)
+  ["lengths"]=>
+  NULL
+  ["num_rows"]=>
+  int(0)
+  ["type"]=>
+  int(0)
+}
