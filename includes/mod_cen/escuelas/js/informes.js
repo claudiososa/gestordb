@@ -15,14 +15,15 @@ function formPersona(informeActual)
 
               <div class="row"><div class="col-md-6">Creado por: </div><div class="col-md-6">Fecha: ${informeActual.fecha}</div></div>
               <div class="row"><div class="col-md-6">Prioridad: ${informeActual.prioridad}</div></div>
+              <div class="row"><div class="col-md-12">Titulo: ${informeActual.titulo}
+              </div></div>
 
-              <div class="infoOculta" id="infoOculta${informeActual.informeId}">
+              <div class="infoOculta" style="display:none" id="infoOculta${informeActual.informeId}">
 
               <div class="row"><div class="col-md-12">Categoria: ${informeActual.categoria}</div></div>
               <div class="row"><div class="col-md-12">Subcategoria:${informeActual.subcategoria}
               </div></div>
-              <div class="row"><div class="col-md-12">Titulo: ${informeActual.titulo}
-              </div></div>
+
               <div class="row"><div class="col-md-12">Departamento:</div></div>
               </div>
               <div class="row">
@@ -45,7 +46,7 @@ function formPersona(informeActual)
             })
             .done(function(data) {
               $('#modal-body').append(`
-              <p>Archivos Adjuntos</p>
+              <p id='archAdjuntos'>Archivos Adjuntos</p>
               `)
               for (let item of data) {
                 //$('#padreIr').append(`
@@ -100,32 +101,31 @@ function formPersona(informeActual)
             })
             .done(function(data) {
               for (let item of data) {
-                $('#modal-body').append(`
-                  <p class="alert alert-success rp" id="titulo${item.id}">Respuesta de ${item.apellido},${item.nombre} Fecha:${item.fecha}</p>
+                $('#modal-body').append(`<p class="alert alert-success rp" id="titulo${item.id}">Respuesta de ${item.apellido},${item.nombre} Fecha:${item.fecha}</p>
                   <div id="rp${item.id}">
                     ${item.contenido}
                   </div>`)
 
                     if (item.img0) {
-                      $('#modal-body').append(`<div class="img${item.id}">Archivos Adjuntos:<br><a download="${item.img0}" href="img/respuestas/${item.img0}">${item.img0}</a></div>`)
+                      $('#modal-body').append(`<div class=" img${item.id}">Archivos Adjuntos:<br><a download="${item.img0}" hre</div>f="img/respuestas/${item.img0}">${item.img0}</a></div>`)
                     }
                     if (item.img1) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img1}" href="img/respuestas/${item.img1}">${item.img1}</a></div>`)
+                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img1}" href="img/respuestas/${item.img1}">${item.img1}</a></div></div>`)
                     }
                     if (item.img2) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img2}" href="img/respuestas/${item.img2}">${item.img2}</a></div>`)
+                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img2}" href="img/respuestas/${item.img2}">${item.img2}</a></div></div>`)
                     }
                     if (item.img3) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img3}" href="img/respuestas/${item.img3}">${item.img3}</a></div>`)
+                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img3}" href="img/respuestas/${item.img3}">${item.img3}</a></div></div>`)
                     }
                     if (item.img4) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img4}" href="img/respuestas/${item.img4}">${item.img4}</a></div>`)
+                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img4}" href="img/respuestas/${item.img4}">${item.img4}</a></div></div>`)
                     }
                     if (item.img5) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img5}" href="img/respuestas/${item.img5}">${item.img5}</a></div>`)
+                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img5}" href="img/respuestas/${item.img5}">${item.img5}</a></div></div>`)
                     }
 
-                    //$('#modal-body').after(`</div>`)
+                //$('#modal-body').after(`</div>`)
 
 
 
@@ -281,17 +281,17 @@ function formPersona(informeActual)
 ////////js boton ver mas datos de informe
   let informeId = informeActual.informeId
 //alert (informeId)
-  $("#infoOculta"+informeId).hide()
+//  $("#infoOculta"+informeId).hide()
 
-  $(document).on('click', '#verMas'+informeId , 'span.clickable', function(){
-
-      $('#infoOculta' + informeId).toggle();
-
-  });
-/////
+  $('#verMas'+informeId).click(function(event) {
+    /* Act on the event */
+    $('#infoOculta' + informeId).toggle();
+evt.preventDefault();
+  })
 //////boton ver /ocultar informe
 
 $('#verInforme'+informeId).click(function(event) {
+//alert ('informe');
 $('#divContenido'+informeId).toggle()
 });
 
