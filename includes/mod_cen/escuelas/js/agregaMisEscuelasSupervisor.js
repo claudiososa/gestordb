@@ -273,7 +273,7 @@ $(document).ready(function() {
           let tableinforme = 0
 
           for (let item of lista) {
-              tableAuto=pad(item.escuelaId,4,0)
+              tableAuto=pad(item.escuelaIdxxx,4,0)
 
           }
 
@@ -303,14 +303,12 @@ $(document).ready(function() {
           </thead>
           `)
 
-
-
           let itemEscuela = 0
 
           for (let item of lista) {
 
-            let escuelaIdconCero = pad(item.escuelaId,4,0)
-            let escuela = item.escuelaId
+            let escuelaIdconCero = pad(item.escuelaIdxxx,4,0)
+            let escuela = item.escuelaIdxxx
 
 
             if (item.cantidad > 0) {
@@ -325,16 +323,8 @@ $(document).ready(function() {
               </tr></tbody></table>`)
 
 
-
-
-              /*$('#autoridad'+escuelaId).parent().parent().after(`<tr class="trautoridad${item.escuelaId}"><td>${item.cargo}</td><td>${item.apellido}, ${item.nombre}</td><td>${item.telefono}</td><td>${item.email}</td><td><a id='eAutoridad' href=''>Modificar</a></td></tr>`)
-              itemEscuela++
-              if (itemEscuela==item.cantidad) {
-                $('#autoridad'+escuelaId).parent().parent().after(`<tr class="trautoridad${item.escuelaId}"><td colspan="5">listado de autoridades</td></tr>`)
-
-              }*/
-              $('.trautoridad'+item.escuelaId).hide()
-              $('.trautoridad'+item.escuelaId).fadeIn('slideUp')
+              //$('.trautoridad'+item.escuelaId).hide()
+              //$('.trautoridad'+item.escuelaId).fadeIn('slideUp')
               if (item.id=='0') {
                 //alert(item.nombre)
                 console.log('no encontrado')
@@ -343,7 +333,7 @@ $(document).ready(function() {
                 //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
               }
             }else{
-              alert('Esta escuela no tiene autoridad asignada')
+              alert('Esta escuela no tiene RTI asignado')
             }
           }
 
@@ -357,13 +347,9 @@ $(document).ready(function() {
         .always(function() {
           console.log("complete");
         });
-    }else{
-
+    }else{//si la tabla con datos rti esta visualizada ingresa por aqui
         $('.tableRti'+escuelaId).remove()
-        //$('.trautoridad'+escuelaId).closest('tr').remove()
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
-
-        //console.log(existe)
     }
 
   })//fin de clic en tecnico
