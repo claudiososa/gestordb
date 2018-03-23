@@ -28,6 +28,7 @@
       array_push($list,$temporal);
     }
     $json = json_encode($list);
+    Maestro::debbugPHP($json);
     echo $json;
   }
 
