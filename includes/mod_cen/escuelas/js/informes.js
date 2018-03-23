@@ -46,7 +46,8 @@ function formPersona(informeActual)
             })
             .done(function(data) {
               $('#modal-body').append(`
-              <p id='archAdjuntos'>Archivos Adjuntos</p>
+
+
               `)
               for (let item of data) {
                 //$('#padreIr').append(`
@@ -63,34 +64,31 @@ function formPersona(informeActual)
             .always(function() {
               console.log("complete");
             });
-              $('#modal-body').append(`
-                <div class="form-group">
-                <div class="container">
-                <button type="button" class="btn btn-success btn-md" id="verInforme${informeActual.informeId}" style="display: none;">
-                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  Ver Informe
-                </button>
+              $(`<div class="form-group">
+              <div class="container">
+              <button type="button" class="btn btn-success btn-md" id="verInforme${informeActual.informeId}" style="display: none;">
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  Ver Informe
+              </button>
 
+              </div>
+              <br>
+                <div id="divContenido${informeActual.informeId}" class="col-md-12">
+                  <textarea  rows='20' name="contenido" id="contenido" class="form-control" >${informeActual.contenido}
+                  </textarea>
                 </div>
-                <br>
-                  <div id="divContenido${informeActual.informeId}" class="col-md-12">
-                    <textarea  rows='20' name="contenido" id="contenido" class="form-control" >${informeActual.contenido}
-                    </textarea>
+                <div id="divRespuesta" class="col-md-12">
+                  <textarea  rows='20' name="respuesta" id="respuesta" class="form-control" >
+                  </textarea>
+                  <div class="col-md-12">
+                    <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
                   </div>
-                  <div id="divRespuesta" class="col-md-12">
-                    <textarea  rows='20' name="respuesta" id="respuesta" class="form-control" >
-                    </textarea>
-                    <div class="col-md-12">
-                      <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
-                    </div>
-                    <div class="col-md-12">
-                      <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
-                    </div>
+                  <div class="col-md-12">
+                    <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
                   </div>
+                </div>
 
+          </form></div>`).appendTo('#modal-body')
 
-            </form>
-            </div>
-            `)
             let buscar ="buscar"
             let informeIdBuscar = informeActual.informeId
             $.ajax({
@@ -105,35 +103,32 @@ function formPersona(informeActual)
                   <div id="rp${item.id}">
                     ${item.contenido}
                   </div>`)
-
+                    $('#modal-body').append(`<div class="row" id="rowArchivos${item.id}"><div>`)
                     if (item.img0) {
-                      $('#modal-body').append(`<div class=" img${item.id}">Archivos Adjuntos:<br><a download="${item.img0}" hre</div>f="img/respuestas/${item.img0}">${item.img0}</a></div>`)
+                      $(`<div class="img${item.id} container "><img  img-responsive" src="img/iconos/archivos-adjuntos (3).png">&nbspArchivos adjuntos:</div><div class="col-md-3"><div class="img${item.id}"><a download="${item.img0}" href="img/respuestas/${item.img0}">${item.img0}</a></div></div>`).appendTo(`#rowArchivos${item.id}`)
                     }
                     if (item.img1) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img1}" href="img/respuestas/${item.img1}">${item.img1}</a></div></div>`)
+                      $(`<div class="col-md-3"><div class="img${item.id}"><a download="${item.img1}" href="img/respuestas/${item.img1}">${item.img1}</a></div></div>`).appendTo(`#rowArchivos${item.id}`)
                     }
                     if (item.img2) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img2}" href="img/respuestas/${item.img2}">${item.img2}</a></div></div>`)
+                      $(`<div class="col-md-3"><div class="img${item.id}"><a download="${item.img2}" href="img/respuestas/${item.img2}">${item.img2}</a></div></div>`).appendTo(`#rowArchivos${item.id}`)
                     }
                     if (item.img3) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img3}" href="img/respuestas/${item.img3}">${item.img3}</a></div></div>`)
+                      $(`<div class="col-md-3"><div class="img${item.id}"><a download="${item.img3}" href="img/respuestas/${item.img3}">${item.img3}</a></div></div>`).appendTo(`#rowArchivos${item.id}`)
                     }
                     if (item.img4) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img4}" href="img/respuestas/${item.img4}">${item.img4}</a></div></div>`)
+                      $(`<div class="col-md-3"><div class="img${item.id}"><a download="${item.img4}" href="img/respuestas/${item.img4}">${item.img4}</a></div></div>`).appendTo(`#rowArchivos${item.id}`)
                     }
                     if (item.img5) {
-                      $('#modal-body').append(`<div class="img${item.id}"><a download="${item.img5}" href="img/respuestas/${item.img5}">${item.img5}</a></div></div>`)
+                      $(`<div class="col-md-3"><div class="img${item.id}"><a download="${item.img5}" href="img/respuestas/${item.img5}">${item.img5}</a></div></div>`).appendTo(`#rowArchivos${item.id}`)
                     }
 
-                //$('#modal-body').after(`</div>`)
-
-
-
               }
+              // $('#modal-body').append(`</div>`)
 
             })
             .fail(function() {
-              console.log("error");
+              console.log("error en Devolucion de Respuesta");
             })
             .always(function() {
               console.log("complete");
@@ -142,6 +137,8 @@ function formPersona(informeActual)
             $('#modal-body').append(`
 
             <div class="modal-footer">
+
+            <br><br><br>
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
               <button type="button" class="btn btn-primary" id="btnSave">Responder</button>
             </div>
