@@ -60,7 +60,6 @@ if(isset($_GET["ref"])){
 	}
 
 
-
 ?>
 <style>
 	#calendar {
@@ -94,41 +93,30 @@ if(isset($_GET["ref"])){
 	#calendar .hoy {
 		background-color:#81F781;
 	}
+	#calendar .mas {
+		background-color:orange;
+	}
 </style>
 
 <div class="container">
 
-
-
-
 <?php
 
-
-$cantidadVisitas=0;
+$cantidadVisitas=0;  // cantidad de visitas realizada por el ETT en el Mes
 
 //_________________________________________________//
 // Recorrido de todos los referentes de Tipo ETT  //
 //_________________________________________________//
 while ($registro = mysqli_fetch_object($buscar_ref)) {
-	# code...
+	
+	$escuelas= new Escuela(null,$registro->referenteId); // buscamos las escuelas del ETT 
+	$buscarEscuelas=$escuelas->buscar();  // devuelve todos los datos de las escuelas del ETT
+	$cantEscuelas=mysqli_num_rows($buscarEscuelas); // Guardamos la Cantidad de Escuelas de cada ETT
 
-
-	$escuelas= new Escuela(null,$registro->referenteId);
-	$buscarEscuelas=$escuelas->buscar();
-	$cantEscuelas=mysqli_num_rows($buscarEscuelas);
-
-
-
-
- $referente=$registro->referenteId;
-
-/*if (isset($_GET["referenteId"])>0) {
-
-	$referente=$_GET["referenteId"];
-}*/
-
+    $referente=$registro->referenteId;  // guardamos en la variable $referente el referenteId del ETT
 
 $informeMesReferente = new Informe();
+// Buscamos los informes creados por el ETT en el mes que indiquemos en el año actual
 $buscar_informe = $informeMesReferente->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
 
 $lista = array();
@@ -138,24 +126,51 @@ $escuelaInformeActual=0;
 
 //_________________________________________________//
 //  Recorrido de todos los informes del un mes y año determinado  //
-//  para un determinado referente                  //
+//  para un determinado ETT                        //
 //_________________________________________________//
 
-$cantidadEscuelasVisitadas=0;
-$escuelaInformeActual=0;
+$cantidadEscuelasVisitadas=0;  // contador e indice del array de escuelas de agrupamiento propio
+//$escuelaInformeActual=0;
+$listaEscVisitadas=array();    // Array para guardar el numero de las escuelas  visitadas
+$listaEscOtroAgrup=array();    // Array para guardar el numero de las escuelas visitadas de otro agrupamiento 
+$cantidadEscuelasOtroAgrup=0;  // contador e indice del array de escuelas de otro agrupamiento
+$VisitaOficina=0;              // contador de cantidad de visitas a la oficina
+
+
 while ($fila = mysqli_fetch_object($buscar_informe)) {
 	$lista[$indice]=$fila->dia;
+
 	$indice++;
-	if($escuelaInformeActual <> $fila->escuelaId){
-		 	$cantidadEscuelasVisitadas++;
+	
+    if($escuelaInformeActual <> $fila->escuelaId){
+
+    		$escuelaEtt = new Escuela($fila->escuelaId); // buscamos a quien le pertenece la escuela
+    		$escuelaEttResultado= $escuelaEtt->buscar();
+    		$datoEscuela = mysqli_fetch_object($escuelaEttResultado); // obtenemos datos de la escuela con el escuelaId ingresado
+    		
+    		if ($datoEscuela->referenteId == $referente) {  // preguntamos si la escuela es de su agrupamiento
+    			
+    			$listaEscVisitadas[$cantidadEscuelasVisitadas]=$datoEscuela->numero; // almacenamos el numero de c/u de las escuelas de su agrupamiento visitadas por el Referente.
+		 	    $cantidadEscuelasVisitadas++;
+    		}else{
+    			    if ($datoEscuela->numero != 2) // preguntamos si la escuela es distinta de 660000000 (Oficina de Conectar Igualdad)
+    			    	{
+    			    	
+    			    	$listaEscOtroAgrup[$cantidadEscuelasOtroAgrup]=$datoEscuela->numero; // almacenamos el numero de la escuela visitada por el ETT.
+		 	    		$cantidadEscuelasOtroAgrup++;
+    			    }
+ 				         
+    		}	 	
+
 	}
 	$escuelaInformeActual=$fila->escuelaId;
-}
+	if ($fila->escuelaId == 2) 
+    			    	{
+    			    	$VisitaOficina++;
+    			    }
+	}
 
-//$array_informe= mysqli_fetch_all($buscar_informe,MYSQLI_ASSOC);
 
-
-//var_dump($lista);
 # definimos los valores iniciales para nuestro calendario
 $monthActual=date("n");
 $month=$defecto;
@@ -204,23 +219,34 @@ $meses=array(1=>"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
 				}
 				if($i<$diaSemana || $i>=$last_cell)
 				{
-					// celca vacia
-					echo "<td>&nbsp;</td>";
-				}else{
-					$encontrado=0;
+					// celdas vacias que estan fuera de los rangos de los dias del mes
+					echo "<td>&nbsp;</td>";  
+				}else{			// dentro del else trabajamos buscando dias de visitas
+					$encontrado=0;  
+					$visitasxDias=0;  //contamos las visitas x dias
 
 					foreach ($lista as $valor) {
 						if($day==$valor){
-							if($encontrado==0){
-								echo "<td class='hoy'>$day</td>";
-							}
+							//if($encontrado==0){
+								$visitasxDias++;
+								//echo "<td class='hoy'>$day $visitasxDias</td>";
+							//}
 							$encontrado=1;
 							$cantidadVisitas++;
+							
 							//breaK;
 						}
 					}
-					if($encontrado==0){
+					if($encontrado ==0){
 						echo "<td>$day</td>";
+					}
+					else{
+						if ($visitasxDias > 1) {
+							echo "<td class='mas'>$day <span class='badge'> $visitasxDias</span></td>";
+						}else{
+
+						echo "<td class='hoy'>$day <span class='badge'>$visitasxDias</span></td>";
+					}
 					}
 					$day++;
 				}
@@ -246,23 +272,355 @@ $meses=array(1=>"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
 			</div>
 			<div class="panel-body">
 				<ul class="list-group">
-				  <li class="list-group-item list-group-item-info">Escuelas a Cargo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" class="btn btn-primary">	<?php echo $cantEscuelas ?></li></a>
-				  <li class="list-group-item list-group-item-info">Escuelas Visitadas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<a href="#" class="btn btn-success">	<?php echo $cantidadEscuelasVisitadas ?></li></a>
-				  <li class="list-group-item list-group-item-info">Escuelas No Visitadas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<a href="#" class="btn btn-danger">	<?php echo $cantEscuelas-$cantidadEscuelasVisitadas ?></li></a>
-				  <li class="list-group-item list-group-item-info">Cant. Visitadas realizadas	<a href="#" class="btn btn-primary">	<?php echo $cantidadVisitas ?></li></a>
+				
+						  <?php 
+
+						 echo "<li class='list-group-item list-group-item-info'> Escuelas a Cargo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<a class='btn btn-primary btnEsc' role='button' id='btnEsc".$referente."' data-toggle='modal' data-target='#myModalEsc".$referente."' > $cantEscuelas</a></li>";
+
+						 echo "<li class='list-group-item list-group-item-info'> Escuelas Visitadas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-success btnDatosInst' role='button' id='btnDatosInst".$referente."' data-toggle='modal' data-target='#myModalDatosEsc".$referente."' > $cantidadEscuelasVisitadas</a></li>";
+
+						    $cantEscNoVisitas=$cantEscuelas-$cantidadEscuelasVisitadas;
+
+			             echo "<li class='list-group-item list-group-item-info'> Escuelas No Visitadas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btnEscNoVisitas' role='button' id='btnEscNoVisitas".$referente."' data-toggle='modal' data-target='#myModalEscNoVisitas".$referente."' > $cantEscNoVisitas</a></li>";
+
+						echo "    <br>";
+						 echo "<li class='list-group-item list-group-item-info'> Escuelas Visitadas Otro Agrup.&nbsp;&nbsp;&nbsp;<a class='btn btn-success btnDatosOtroAgrup' role='button' id='btnDatosOtroAgrup".$referente."' data-toggle='modal' data-target='#myModalEscOtroAgrup".$referente."' > $cantidadEscuelasOtroAgrup</a></li>";
+
+						 echo "<li class='list-group-item list-group-item-info'> Visita Oficina / Sede &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-success btnDatosOficina' role='button' id='btnDatosOficina".$referente."' data-toggle='modal' data-target='#myModalOficina".$referente."' > $VisitaOficina</a></li>";
+						    			 
+						 echo "<li class='list-group-item list-group-item-info'> Total de Visitas  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' class='btn btn-primary'> $cantidadVisitas</a></li>";
+						 
+						    ?>
+
 				</ul>
 			</div>
+			
+
+	
+			
+<!-- ************************************************** -->
+<!--                  Ventanas Modales                  -->
+<!-- ************************************************** -->
+
+
+<!-- Empieza el modal Escuelas escuelas a cargo -->
+ 
+ <?php 
+
+echo '<div class="modal fade" id="myModalEsc'.$referente.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabelEsc'.$referente.'">';
+							
+ ?>
+ 
+<div class="modal-dialog" role="document">
+      <!-- Modal content-->
+ <div class="modal-content">
+ 
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Escuelas a Cargo</h4>
+</div>
+ 
+ <div class="modal-body">
+         
+         <?php
+
+          $escuelasAcargo= new Escuela(null,$registro->referenteId);
+	      $buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
+
+          while ($filaEsc = mysqli_fetch_object($buscarEscuelasAcargo)) 
+					  		{
+
+						 		echo $filaEsc->cue." - ".$filaEsc->numero." - ".$filaEsc->nombre." <br> ";
+             				}
+				
+	    ?>
+
+       </div>
+ 
+ 
+<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+ 
+      </div>
+ 
+    </div>
+ 
+  </div> <!-- cierra Modal Escuelas a cargo -->
+
+
+  <!-- ************************************************** -->
+  <!-- ************************************************** -->
+
+
+ <!-- Empieza el modal Escuelas Visitadas -->
+ 
+ <?php 
+
+echo '<div class="modal fade" id="myModalDatosEsc'.$referente.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabelDatosEsc'.$referente.'">';
+							
+ ?>
+ 
+<div class="modal-dialog" role="document">
+      <!-- Modal content-->
+ <div class="modal-content">
+ 
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Escuelas a Cargo Visitadas</h4>
+</div>
+ 
+ <div class="modal-body">
+         
+         <?php
+          	  
+          	  foreach ($listaEscVisitadas as $escNum) {   // Listamos las escuelas visitadas de su agrupamiento
+						
+						$datoEscuela= new Escuela(null,null,null,$escNum);
+						$resultado= $datoEscuela->buscar();
+                		$objEscuela = mysqli_fetch_object($resultado);		
+
+		 	     		 //echo $objEscuela->numero." - ".$objEscuela->nombre."<br>";
+                		$informeMesETT = new Informe();
+					// Buscamos los informes creados por el ETT en el mes que indiquemos en el año actual
+						$buscar_informeETT = $informeMesETT->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
+
+          	  			
+          	  			while ($lista = mysqli_fetch_object($buscar_informeETT)) 
+					  		{
+					  			if ($objEscuela->escuelaId == $lista->escuelaId) 
+					  			{
+					  				
+					  					echo "[".$lista->fechaVisita."  ]     Escuela n°  ".$objEscuela->numero."<br>";
+
+					  			}   
+							}
+							
+					}
+					
+		?>
+
+       </div>
+ 
+<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+ 
+      </div>
+ 
+    </div>
+ 
+  </div> <!-- cierra Modal Escuelas Visitadas -->
+
+
+  <!-- ************************************************** -->
+  <!-- ************************************************** -->
+
+   <!-- Empieza el modal Escuelas escuelas no Visitadas -->
+ 
+ <?php 
+
+echo '<div class="modal fade" id="myModalEscNoVisitas'.$referente.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabelEscNoVisitas'.$referente.'">';
+							
+ ?>
+ 
+<div class="modal-dialog" role="document">
+      <!-- Modal content-->
+ <div class="modal-content">
+ 
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Escuelas a Cargo No Visitadas</h4>
+</div>
+ 
+ <div class="modal-body">
+         
+         <?php
+
+          $escuelasAcargo= new Escuela(null,$registro->referenteId);
+	      $buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
+
+          while ($filaEsc = mysqli_fetch_object($buscarEscuelasAcargo)) 
+					  		{
+						 		
+					  			$visitada=0;
+								foreach ($listaEscVisitadas as $escNum) 
+								{
+						           
+											if ($escNum == $filaEsc->numero) {
+												
+												$visitada=1;
+												
+											}
+
+						              
+					            }
+					            if ($visitada == 0) {
+					            	
+					            	echo $filaEsc->numero." - ".$filaEsc->nombre."<br>";
+
+
+					            }
+                          }
+				
+	    ?>
+ 
+       </div>
+ 
+ 
+<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+ 
+      </div>
+ 
+    </div>
+ 
+  </div> <!-- cierra Modal Escuelas No Visitadas -->
+
+
+  <!-- ************************************************** -->
+  <!-- ************************************************** -->
+
+  <!-- Empieza el modal Escuelas Visitadas de otro agrupamiento -->
+ 
+ <?php 
+
+echo '<div class="modal fade" id="myModalEscOtroAgrup'.$referente.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabelEscOtroAgrup'.$referente.'">';
+							
+ ?>
+ 
+<div class="modal-dialog" role="document">
+      <!-- Modal content-->
+ <div class="modal-content">
+ 
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Escuelas Visitadas Otro Agrupamiento</h4>
+</div>
+ 
+ <div class="modal-body">
+         
+         <?php
+          	  
+          	  foreach ($listaEscOtroAgrup as $escNum) {   // Listamos las escuelas visitadas de su agrupamiento
+						
+						$datoEscuela= new Escuela(null,null,null,$escNum);
+						$resultado= $datoEscuela->buscar();
+                		$objEscuela = mysqli_fetch_object($resultado);		
+
+		 	     		 //echo $objEscuela->numero." - ".$objEscuela->nombre."<br>";
+                		$informeMesETT = new Informe();
+					// Buscamos los informes creados por el ETT en el mes que indiquemos en el año actual
+						$buscar_informeETT = $informeMesETT->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
+
+          	  			
+          	  			while ($lista = mysqli_fetch_object($buscar_informeETT)) 
+					  		{
+					  			if ($objEscuela->escuelaId == $lista->escuelaId) 
+					  			{
+					  				
+					  					echo "[".$lista->fechaVisita."  ]     Escuela n° : ".$objEscuela->numero."<br>";
+
+					  			}   
+							}
+
+						}
+			?>
+
+       </div>
+ 
+ 
+<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+ 
+      </div>
+ 
+    </div>
+ 
+  </div> <!-- cierra Modal Escuelas Visitadas de otro agrupamiento -->
+
+  
+  <!-- ************************************************** -->
+  <!-- ************************************************** -->
+  <!--      Empieza el modal Visitas a la Oficina         -->
+ 
+ <?php 
+
+echo '<div class="modal fade" id="myModalOficina'.$referente.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabelOficina'.$referente.'">';
+							
+ ?>
+ 
+<div class="modal-dialog" role="document">
+      <!-- Modal content-->
+ <div class="modal-content">
+ 
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Visitas a Oficina / Sede </h4>
+</div>
+ 
+ <div class="modal-body">
+         
+         <?php
+               		$informeMesETT = new Informe();
+					// Buscamos los informes creados por el ETT en el mes que indiquemos en el año actual
+						$buscar_informeETT = $informeMesETT->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
+
+          	  			
+          	  			while ($lista = mysqli_fetch_object($buscar_informeETT)) 
+					  		{
+					  			if ($lista->escuelaId == 2) 
+					  			{
+					  				
+					  					echo "[".$lista->fechaVisita."  ]   Oficina Conectar Igualdad / Sede:<br>";
+
+					  			}   
+							}					
+			?>
+
+       </div>
+ 
+ 
+<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+ 
+      </div>
+ 
+    </div>
+ 
+  </div> <!-- cierra Modal Visitas a Oficina -->
+
+  <!-- ************************************************** -->
+  <!--           Fin de Ventanas Modales                  -->
+  <!-- ************************************************** -->
+
+			
 </div>
 </div>
 </div>
 
 
 <?php
+
 $cantidadVisitas=0;
-} ?>
+} 
+?>
 
 </div>
 <?php }
 //$defecto=0;
 }
 ?>
+<script language="javascript">
+			$(document).ready(function(){
+				//alert("llego hasta aqui");
+				
+				//});
+
+				
+
+			});
+</script>
