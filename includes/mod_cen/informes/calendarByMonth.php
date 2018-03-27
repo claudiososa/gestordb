@@ -139,6 +139,7 @@ $VisitaOficina=0;              // contador de cantidad de visitas a la oficina
 
 while ($fila = mysqli_fetch_object($buscar_informe)) {
 	$lista[$indice]=$fila->dia;
+	$listaEsc[$indice]=$fila->escuelaId;
 
 	$indice++;
 	
@@ -224,11 +225,17 @@ $meses=array(1=>"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
 				}else{			// dentro del else trabajamos buscando dias de visitas
 					$encontrado=0;  
 					$visitasxDias=0;  //contamos las visitas x dias
-
+						$contEsc=0;
+						$listado="";
 					foreach ($lista as $valor) {
+							
+						
 						if($day==$valor){
 							//if($encontrado==0){
 								$visitasxDias++;
+								$cadena=(string)$listaEsc[$contEsc];
+								$listado.=$cadena."-";
+
 								//echo "<td class='hoy'>$day $visitasxDias</td>";
 							//}
 							$encontrado=1;
@@ -236,16 +243,17 @@ $meses=array(1=>"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
 							
 							//breaK;
 						}
+					  $contEsc++;
 					}
 					if($encontrado ==0){
 						echo "<td>$day</td>";
 					}
 					else{
 						if ($visitasxDias > 1) {
-							echo "<td class='mas'>$day <span class='badge'> $visitasxDias</span></td>";
+							echo "<td class='mas'>$day <span class='badge'> $visitasxDias</span>$listado</td>";
 						}else{
 
-						echo "<td class='hoy'>$day <span class='badge'>$visitasxDias</span></td>";
+						echo "<td class='hoy'>$day <span class='badge'>$visitasxDias</span>$listado </td>";
 					}
 					}
 					$day++;
