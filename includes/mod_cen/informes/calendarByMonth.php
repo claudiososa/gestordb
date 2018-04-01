@@ -246,12 +246,14 @@ if(isset($_GET["ref"])){
 							}
 						}
 
+
 					?>
 					</tr>
 					</tbody>
 				</table>
 </div>
 				</div>
+
 
 				<!-- Info detallada -->
 				<div class="col-md-6">
@@ -262,6 +264,7 @@ if(isset($_GET["ref"])){
 			 					echo "<li class='list-group-item'><span class='badge btnEsc' id='btnEsc".$referente."' data-toggle='modal' data-target='#myModalEsc".$referente."'>$cantEscuelas</span><img class='img-responsive' src='img/iconos/calendar/vieja-escuela.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas a Cargo</li>";
 
 			 					echo "<li class='list-group-item'><span class='badge btnDatosInst' id='btnDatosInst".$referente."' data-toggle='modal' data-target='#myModalDatosEsc".$referente."'>$cantidadEscuelasVisitadas</span><img class='img-responsive' src='img/iconos/calendar/marcador-de-posicion.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas Visitadas</li>";
+
 
 			 					$cantEscNoVisitas=$cantEscuelas-$cantidadEscuelasVisitadas;
 
