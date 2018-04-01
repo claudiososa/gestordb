@@ -1,6 +1,16 @@
 #containerStyle {
   background-color: #f2f2f2;
 }
+@media only screen and (max-width:768px) {
+  #containerStyle {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+.fluidXs{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+}
 .hrStyle {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -10,4 +20,26 @@
 }
 .img-responsive{
   display: inline-flex;
+}
+.bstyle1 {
+	background-color: #068587;
+  padding: 5px 4px;
+  font-size: 14px;
+
+}
+.bstyle2{
+	background-color: #dc3a3a;
+  padding: 5px 4px;
+  font-size: 14px;
+}
+
+.close{
+  color: #068587;
+  opacity: inherit;
+}
+.modal-header {
+  border-bottom: 2px solid #068587;
+}
+.modal-footer {
+  border-top: 2px solid #068587;
 }

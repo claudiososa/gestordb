@@ -52,12 +52,12 @@ if(isset($_POST["enviarMes"])){
 <div class="container">
 
 
-<div class="container-fluid" id="containerStyle">
+<div class="container-fluid " id="containerStyle">
 	<br>
 
 
 <!-- #Container Principal# -->
-<div class="container-fluid">
+<div class="container-fluid fluidXs">
 <?php
 
 if($defecto>0){
@@ -175,9 +175,8 @@ if(isset($_GET["ref"])){
 
 			<div class="row">
 				<!-- calendario -->
-
-				<div class="col-md-6">
-					<div class="col-md-10">
+			 <div class="col-md-6 ">
+					<div class="col-md-10 calendar">
 
 
 					<table id="calendar" class="table table-bordered">
@@ -259,13 +258,13 @@ if(isset($_GET["ref"])){
 					<ul class="list-group">
 						<?php
 
-			 					echo "<li class='list-group-item'><span class='badge btnEsc' id='btnEsc".$referente."' data-toggle='modal' data-target='#myModalEsc".$referente."'>$cantEscuelas</span><img class='img-responsive' src='img/iconos/calendar/vieja-escuela.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas a Cargo</li>";
+			 					echo "<li class='list-group-item'><span class='badge btnEsc bstyle1' id='btnEsc".$referente."' data-toggle='modal' data-target='#myModalEsc".$referente."'>$cantEscuelas</span><img class='img-responsive' src='img/iconos/calendar/vieja-escuela.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas a Cargo</li>";
 
-			 					echo "<li class='list-group-item'><span class='badge btnDatosInst' id='btnDatosInst".$referente."' data-toggle='modal' data-target='#myModalDatosEsc".$referente."'>$cantidadEscuelasVisitadas</span><img class='img-responsive' src='img/iconos/calendar/marcador-de-posicion.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas Visitadas</li>";
+			 					echo "<li class='list-group-item'><span class='badge btnDatosInst bstyle1' id='btnDatosInst".$referente."' data-toggle='modal' data-target='#myModalDatosEsc".$referente."'>$cantidadEscuelasVisitadas</span><img class='img-responsive' src='img/iconos/calendar/marcador-de-posicion.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas Visitadas</li>";
 
 			 					$cantEscNoVisitas=$cantEscuelas-$cantidadEscuelasVisitadas;
 
- 								echo "<li class='list-group-item'><span class='badge btnEscNoVisitas' id='btnEscNoVisitas".$referente."' data-toggle='modal' data-target='#myModalEscNoVisitas".$referente."'>$cantEscNoVisitas</span><img class='img-responsive' src='img/iconos/calendar/marcador-de-posicion (1).png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas No Visitadas</li>";
+ 								echo "<li class='list-group-item'><span class='badge btnEscNoVisitas bstyle2' id='btnEscNoVisitas".$referente."' data-toggle='modal' data-target='#myModalEscNoVisitas".$referente."'>$cantEscNoVisitas</span><img class='img-responsive' src='img/iconos/calendar/marcador-de-posicion (1).png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas No Visitadas</li>";
 
 
 
@@ -275,13 +274,13 @@ if(isset($_GET["ref"])){
 
 						echo "<br>";
 
-			 					echo "<li class='list-group-item'><span class='badge btnDatosOtroAgrup' id='btnDatosOtroAgrup".$referente."' data-toggle='modal' data-target='#myModalEscOtroAgrup".$referente."'>$cantidadEscuelasOtroAgrup</span><img class='img-responsive' src='img/iconos/calendar/marcadores-de-posicion.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas Visitadas Otro Agrup.</li>";
+			 					echo "<li class='list-group-item'><span class='badge btnDatosOtroAgrup bstyle1' id='btnDatosOtroAgrup".$referente."' data-toggle='modal' data-target='#myModalEscOtroAgrup".$referente."'>$cantidadEscuelasOtroAgrup</span><img class='img-responsive' src='img/iconos/calendar/marcadores-de-posicion.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas Visitadas Otro Agrup.</li>";
 
-			 					echo "<li class='list-group-item'><span class='badge btnDatosOficina' id='btnDatosOficina".$referente."' data-toggle='modal' data-target='#myModalOficina".$referente."'>$VisitaOficina</span><img class='img-responsive' src='img/iconos/calendar/lugar-de-trabajo.png'>&nbsp&nbsp&nbsp&nbsp&nbspVisita Oficina / Sede</li>";
+			 					echo "<li class='list-group-item'><span class='badge btnDatosOficina bstyle1' id='btnDatosOficina".$referente."' data-toggle='modal' data-target='#myModalOficina".$referente."'>$VisitaOficina</span><img class='img-responsive' src='img/iconos/calendar/lugar-de-trabajo.png'>&nbsp&nbsp&nbsp&nbsp&nbspVisita Oficina / Sede</li>";
 
 								echo "<br>";
 
-			 					echo "<li class='list-group-item'><span class='badge'>$cantidadVisitas</span><img class='img-responsive' src='img/iconos/calendar/positivo-simbolo-verificado.png'>&nbsp&nbsp&nbsp&nbsp&nbspTotal de Visitas</li>";
+			 					echo "<li class='list-group-item'><span class='badge bstyle2'>$cantidadVisitas</span><img class='img-responsive' src='img/iconos/calendar/positivo-simbolo-verificado.png'>&nbsp&nbsp&nbsp&nbsp&nbspTotal de Visitas</li>";
 						?>
 
 					</ul>
@@ -300,9 +299,12 @@ if(isset($_GET["ref"])){
 
 </div> <!-- # ./container-fluid# -->
 
+
+
 <!-- ************************************************** -->
 <!--                  Ventanas Modales                  -->
 <!-- ************************************************** -->
+
 
 
 <!-- Empieza el modal Escuelas escuelas a cargo -->
@@ -328,6 +330,7 @@ echo '<div class="modal fade" id="myModalEsc'.$referente.'" tabindex="-1" role="
 
           $escuelasAcargo= new Escuela(null,$registro->referenteId);
 	      $buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
+
 				echo "<table class='table table-bordered'>";
 				echo "<thead>";
 				echo "<td>Cue</td>";
@@ -672,6 +675,10 @@ $cantidadVisitas=0;
 				//alert("llego hasta aqui");
 
 				//});
+        if (screen.width<1024) {
+          $('.calendar').addClass('table-responsive')
+// alert ('hola')
+        }
 
 
 
