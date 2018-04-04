@@ -29,3 +29,9 @@
 .StyleTable1 {
       margin-bottom: 0px;
 }
+.modal-footer {
+  text-align: left;
+}
+button .btn .footerButton {
+float: right;
+}

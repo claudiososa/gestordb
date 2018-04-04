@@ -1,0 +1,44 @@
+#calendar td {
+	text-align:center;
+	padding:7px 14px;
+
+	border: 1px solid #0685878a;
+
+}
+#calendar .mes {
+	background-color: #06858736;
+}
+#calendar th {
+	text-align:center;
+	padding:7px 14px;
+
+	border: 1px solid #0685878a;
+}
+
+/*
+	#calendar {
+		font-family:Arial;
+		font-size:12px;
+
+	}
+	#calendar th {
+		text-align:center;
+		background-color:red;
+		padding:2px 4px;
+		color:#fff;
+		width:40px;
+		border: 1px solid #red;
+
+	}
+	#calendar td {
+		text-align:center;
+		padding:7px 14px;
+		background-color:blue;
+		border: 1px solid #blue;
+	}
+	#calendar .hoy {
+		background-color:#81F781;
+	}
+	#calendar .mas {
+		background-color:orange;
+	}*/

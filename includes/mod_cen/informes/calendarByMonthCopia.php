@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="includes/mod_cen/informes/css/stylesCalendar.css">
- <link rel="stylesheet" href="includes/mod_cen/informes/css/stylesVisitaMensual.css"/>
 <?php
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/referente.php");
@@ -48,16 +47,8 @@ if(isset($_POST["enviarMes"])){
 
 </div>
 <!-- ****FIN SELECT AÑO**** -->
-
-<div class="container">
-
-
-<div class="container-fluid" id="containerStyle">
-	<br>
-
-
 <!-- #Container Principal# -->
-<div class="container-fluid">
+<div class="container">
 <?php
 
 if($defecto>0){
@@ -169,32 +160,54 @@ if(isset($_GET["ref"])){
 	<div class="panel panel-default">
     <div class="panel-body">
 			<h4 align="center"><?php echo strtoupper($registro->apellido." ".$registro->nombre); ?></h4>
-			<hr class="hrStyle">
-			<h4><img class="img-responsive"src="img/iconos/calendar/fecha.png"> Detalle hasta el día <?php echo $diaActual." de  ".$meses[$monthActual]." de ".$year?> </h4>
+			<hr>
+			<h5>Detalle hasta el día <?php echo $diaActual." de  ".$meses[$monthActual]." de ".$year?> </h5>
 			<br>
 
 			<div class="row">
+				<!-- Info detallada -->
+				<div class="col-md-6">
+					<!-- lista 1 -->
+					<ul class="list-group">
+						<?php
+
+			 					echo "<li class='list-group-item'><span class='badge btnEsc' id='btnEsc".$referente."' data-toggle='modal' data-target='#myModalEsc".$referente."'>$cantEscuelas</span> Escuelas a Cargo</li>";
+
+			 					echo "<li class='list-group-item'><span class='badge btnDatosInst' id='btnDatosInst".$referente."' data-toggle='modal' data-target='#myModalDatosEsc".$referente."'>$cantidadEscuelasVisitadas</span> Escuelas Visitadas</li>";
+
+			 					$cantEscNoVisitas=$cantEscuelas-$cantidadEscuelasVisitadas;
+
+ 								echo "<li class='list-group-item'><span class='badge btnEscNoVisitas' id='btnEscNoVisitas".$referente."' data-toggle='modal' data-target='#myModalEscNoVisitas".$referente."'>$cantEscNoVisitas</span> Escuelas No Visitadas</li>";
+
+
+
+
+					//  lista 2
+
+
+						echo "<br>";
+
+			 					echo "<li class='list-group-item'><span class='badge btnDatosOtroAgrup' id='btnDatosOtroAgrup".$referente."' data-toggle='modal' data-target='#myModalEscOtroAgrup".$referente."'>$cantidadEscuelasOtroAgrup</span> Escuelas Visitadas Otro Agrup.</li>";
+
+			 					echo "<li class='list-group-item'><span class='badge btnDatosOficina' id='btnDatosOficina".$referente."' data-toggle='modal' data-target='#myModalOficina".$referente."'>$VisitaOficina</span> Visita Oficina / Sede</li>";
+
+			 					echo "<li class='list-group-item'><span class='badge'>$cantidadVisitas</span> Total de Visitas</li>";
+						?>
+
+					</ul>
+
+				</div>
+
 				<!-- calendario -->
 
 				<div class="col-md-6">
-					<div class="col-md-10">
-
-
-					<table id="calendar" class="table table-bordered">
-						<thead>
-							<td colspan="7" class='mes'><?php echo $meses[$month]." ".$year?></td>
-						</thead>
-						<thead class='mes'>
-
-
-
-							<th>Lun</th><th>Mar</th><th>Mie</th><th>Jue</th>
-							<th>Vie</th><th>Sab</th><th>Dom</th>
-							</thead>
-<tbody>
-
-
-					<tr bgcolor="silver" style="display:none">
+					<table id="calendar">
+					<caption><?php echo $meses[$month]." ".$year?></caption>
+					<tr>
+						<th>Lun</th><th>Mar</th><th>Mie</th><th>Jue</th>
+						<th>Vie</th><th>Sab</th><th>Dom</th>
+					</tr>
+					<tr bgcolor="silver">
 						<?php
 						$last_cell=$diaSemana+$ultimoDiaMes;
 						// hacemos un bucle hasta 42, que es el máximo de valores que puede
@@ -231,10 +244,10 @@ if(isset($_GET["ref"])){
 								}
 								else{
 									if ($visitasxDias > 1) {
-										echo "<td class='mas' style='background-image: url(img/iconos/calendar/2.png);'>$day<br>   $visitasxDias</td>";
+										echo "<td class='mas'>$day <span class='badge'> $visitasxDias</span></td>";
 									}else{
 
-									echo "<td class='hoy' style='background-image: url(img/iconos/calendar/3.png);'>$day<br> $visitasxDias</td>";
+									echo "<td class='hoy'>$day <span class='badge'>$visitasxDias</span></td>";
 								}
 								}
 								$day++;
@@ -246,52 +259,11 @@ if(isset($_GET["ref"])){
 							}
 						}
 
-
 					?>
 					</tr>
-					</tbody>
 				</table>
-</div>
-				</div>
-
-
-				<!-- Info detallada -->
-				<div class="col-md-6">
-					<!-- lista 1 -->
-					<ul class="list-group">
-						<?php
-
-			 					echo "<li class='list-group-item'><span class='badge btnEsc' id='btnEsc".$referente."' data-toggle='modal' data-target='#myModalEsc".$referente."'>$cantEscuelas</span><img class='img-responsive' src='img/iconos/calendar/vieja-escuela.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas a Cargo</li>";
-
-			 					echo "<li class='list-group-item'><span class='badge btnDatosInst' id='btnDatosInst".$referente."' data-toggle='modal' data-target='#myModalDatosEsc".$referente."'>$cantidadEscuelasVisitadas</span><img class='img-responsive' src='img/iconos/calendar/marcador-de-posicion.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas Visitadas</li>";
-
-
-			 					$cantEscNoVisitas=$cantEscuelas-$cantidadEscuelasVisitadas;
-
- 								echo "<li class='list-group-item'><span class='badge btnEscNoVisitas' id='btnEscNoVisitas".$referente."' data-toggle='modal' data-target='#myModalEscNoVisitas".$referente."'>$cantEscNoVisitas</span><img class='img-responsive' src='img/iconos/calendar/marcador-de-posicion (1).png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas No Visitadas</li>";
-
-
-
-
-					//  lista 2
-
-
-						echo "<br>";
-
-			 					echo "<li class='list-group-item'><span class='badge btnDatosOtroAgrup' id='btnDatosOtroAgrup".$referente."' data-toggle='modal' data-target='#myModalEscOtroAgrup".$referente."'>$cantidadEscuelasOtroAgrup</span><img class='img-responsive' src='img/iconos/calendar/marcadores-de-posicion.png'>&nbsp&nbsp&nbsp&nbsp&nbspEscuelas Visitadas Otro Agrup.</li>";
-
-			 					echo "<li class='list-group-item'><span class='badge btnDatosOficina' id='btnDatosOficina".$referente."' data-toggle='modal' data-target='#myModalOficina".$referente."'>$VisitaOficina</span><img class='img-responsive' src='img/iconos/calendar/lugar-de-trabajo.png'>&nbsp&nbsp&nbsp&nbsp&nbspVisita Oficina / Sede</li>";
-
-								echo "<br>";
-
-			 					echo "<li class='list-group-item'><span class='badge'>$cantidadVisitas</span><img class='img-responsive' src='img/iconos/calendar/positivo-simbolo-verificado.png'>&nbsp&nbsp&nbsp&nbsp&nbspTotal de Visitas</li>";
-						?>
-
-					</ul>
 
 				</div>
-
-
 
 			</div><!-- ./row-->
 
@@ -302,6 +274,8 @@ if(isset($_GET["ref"])){
 
 
 </div> <!-- # ./container-fluid# -->
+
+
 
 <!-- ************************************************** -->
 <!--                  Ventanas Modales                  -->
@@ -322,7 +296,7 @@ echo '<div class="modal fade" id="myModalEsc'.$referente.'" tabindex="-1" role="
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Escuelas a Cargo <?php echo ($registro->apellido." ".$registro->nombre); ?></h4>
+    <h4 class="modal-title">Escuelas a Cargo</h4>
 </div>
 
  <div class="modal-body">
@@ -331,33 +305,20 @@ echo '<div class="modal fade" id="myModalEsc'.$referente.'" tabindex="-1" role="
 
           $escuelasAcargo= new Escuela(null,$registro->referenteId);
 	      $buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
-				echo "<table class='table table-bordered'>";
-				echo "<thead>";
-				echo "<td>Cue</td>";
-				echo "<td>N°</td>";
-				echo "<td>Nombre</td>";
-				echo "</thead>";
 
           while ($filaEsc = mysqli_fetch_object($buscarEscuelasAcargo))
 					  		{
-echo "<tbody>";
-									echo "<td>$filaEsc->cue</td>";
-									echo "<td>$filaEsc->numero</td>";
-									echo "<td>$filaEsc->nombre</td>";
-									echo "</tbody>";
 
-								//
-								// 	echo $filaEsc->cue." - ".$filaEsc->numero." - ".$filaEsc->nombre." <br> ";
+						 		echo $filaEsc->cue." - ".$filaEsc->numero." - ".$filaEsc->nombre." <br> ";
              				}
 
-										echo "</table>";
 	    ?>
 
        </div>
 
 
 <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
 
       </div>
@@ -385,17 +346,12 @@ echo '<div class="modal fade" id="myModalDatosEsc'.$referente.'" tabindex="-1" r
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Escuelas a Cargo Visitadas por  <?php echo ($registro->apellido." ".$registro->nombre); ?></h4>
+    <h4 class="modal-title">Escuelas a Cargo Visitadas</h4>
 </div>
 
  <div class="modal-body">
 
          <?php
-				 echo "<table class='table table-bordered'>";
-				 echo "<thead>";
-				 echo"<td>Fecha</td>";
-				 echo "<td>N° Escuela</td>";
-				 echo "</thead>";
 
           	  foreach ($listaEscVisitadas as $escNum) {   // Listamos las escuelas visitadas de su agrupamiento
 
@@ -409,29 +365,24 @@ echo '<div class="modal fade" id="myModalDatosEsc'.$referente.'" tabindex="-1" r
 						$buscar_informeETT = $informeMesETT->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
 
 
-
           	  			while ($lista = mysqli_fetch_object($buscar_informeETT))
 					  		{
 					  			if ($objEscuela->escuelaId == $lista->escuelaId)
 					  			{
-										$originalDate = $lista->fechaVisita;
-										$newDate = date("d/m/Y", strtotime($originalDate));
-										echo "<tbody>";
-										echo "<td>$newDate</td>";
-										echo "<td>$objEscuela->numero</td>";
-										echo "</tbody>";
+
+					  					echo "[".$lista->fechaVisita."  ]     Escuela n°  ".$objEscuela->numero."<br>";
 
 					  			}
 							}
 
 					}
-echo "</table>";
+
 		?>
 
        </div>
 
 <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
 
       </div>
@@ -458,17 +409,12 @@ echo '<div class="modal fade" id="myModalEscNoVisitas'.$referente.'" tabindex="-
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">Escuelas a Cargo No Visitadas <?php echo ($registro->apellido." ".$registro->nombre); ?></h4>
+    <h4 class="modal-title">Escuelas a Cargo No Visitadas</h4>
 </div>
 
  <div class="modal-body">
 
          <?php
-				 echo "<table class='table table-bordered'>";
-				 echo "<thead>";
-				 echo "<td>N°</td>";
-				 echo "<td>Nombre</td>";
-				 echo "</thead>";
 
           $escuelasAcargo= new Escuela(null,$registro->referenteId);
 	      $buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
@@ -489,15 +435,12 @@ echo '<div class="modal fade" id="myModalEscNoVisitas'.$referente.'" tabindex="-
 
 					            }
 					            if ($visitada == 0) {
-												echo "<tbody>";
-												echo "<td>$filaEsc->numero</td>";
-												echo "<td>$filaEsc->nombre</td>";
-												echo "</tbody>";
+
+					            	echo $filaEsc->numero." - ".$filaEsc->nombre."<br>";
 
 
 					            }
                           }
-													echo "</table>";
 
 	    ?>
 
@@ -505,7 +448,7 @@ echo '<div class="modal fade" id="myModalEscNoVisitas'.$referente.'" tabindex="-
 
 
 <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
 
       </div>
@@ -538,12 +481,6 @@ echo '<div class="modal fade" id="myModalEscOtroAgrup'.$referente.'" tabindex="-
  <div class="modal-body">
 
          <?php
-				 echo "<table class='table table-bordered'>";
-				 echo "<thead>";
-				 echo "<td>Fecha</td>";
-				 echo "<td>Nombre</td>";
-				 echo "</thead>";
-
 
           	  foreach ($listaEscOtroAgrup as $escNum) {   // Listamos las escuelas visitadas de su agrupamiento
 
@@ -561,25 +498,20 @@ echo '<div class="modal fade" id="myModalEscOtroAgrup'.$referente.'" tabindex="-
 					  		{
 					  			if ($objEscuela->escuelaId == $lista->escuelaId)
 					  			{
-										$originalDate = $lista->fechaVisita;
-										$newDate = date("d/m/Y", strtotime($originalDate));
-										echo "<tbody>";
-										echo "<td>$newDate</td>";
-										echo "<td>$objEscuela->numero</td>";
-										echo "</tbody>";
+
+					  					echo "[".$lista->fechaVisita."  ]     Escuela n° : ".$objEscuela->numero."<br>";
 
 					  			}
 							}
 
 						}
-						echo "</table>";
 			?>
 
        </div>
 
 
 <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
 
       </div>
@@ -611,9 +543,6 @@ echo '<div class="modal fade" id="myModalOficina'.$referente.'" tabindex="-1" ro
  <div class="modal-body">
 
          <?php
-				 echo "<table class='table table-condensed'>";
-				//  echo "<thead>";
-				//  echo "<td></td>";
                		$informeMesETT = new Informe();
 					// Buscamos los informes creados por el ETT en el mes que indiquemos en el año actual
 						$buscar_informeETT = $informeMesETT->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
@@ -623,15 +552,11 @@ echo '<div class="modal fade" id="myModalOficina'.$referente.'" tabindex="-1" ro
 					  		{
 					  			if ($lista->escuelaId == 2)
 					  			{
-										echo "<tbody>";
-										echo "<td>$lista->fechaVisita</td>";
-										echo "<td>Oficina Conectar Igualdad / Sede</td>";
-										echo "</tbody>";
 
+					  					echo "[".$lista->fechaVisita."  ]   Oficina Conectar Igualdad / Sede:<br>";
 
 					  			}
 							}
-							echo "</table>";
 			?>
 
        </div>
@@ -663,11 +588,9 @@ $cantidadVisitas=0;
 //$defecto=0;
 }
 ?>
-
-
 </div><!-- #Fin Container Principal# -->
-</div>
-</div>
+
+
 
 
 <script language="javascript">

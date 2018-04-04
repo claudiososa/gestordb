@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="includes/mod_cen/css/styleIconos.css">
+<link rel="stylesheet" href="includes/mod_cen/css/styleIconosSuperPrim.css">
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
 </script>
@@ -238,8 +238,8 @@ echo "</div>";
         echo '<td>'.$infoEscuela->numero.'</td>';
         echo '<td>'.$infoEscuela->nombre.'</td>';
         echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
-        echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"><i  class="glyphicon glyphicon-chevron-down"></i></span></td>';
-        echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="rti'.$infoEscuela->escuelaId.'" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"><i  class="glyphicon glyphicon-chevron-down"></i></span></td>';
+        echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
+        echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="rti'.$infoEscuela->escuelaId.'" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
         echo '</tr>';
         ?>
 
