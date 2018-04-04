@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
+
   $('[id ^=list]').click( function(){
 
     let informeActual ={
@@ -113,7 +113,7 @@ $(document).ready(function() {
               <th>&nbsp</th>
               <th>&nbsp</th>
               <th>&nbsp</th>
-              <th><button type='button' class='btn btn-warning'>Crear Nuevo Informe</button></th>
+              <th><button type='button' class='btn btn-warning' id=nuevoInforme${tableinforme} >Crear Nuevo Informe</button></th>
 
             </tr>
           </thead>
@@ -151,6 +151,51 @@ $(document).ready(function() {
             }
           }
 
+          $('[id ^=nuevoInforme]').click( function(){
+
+            let informeNuevo ={
+              informeId: "",
+              escuelaNombre: "",
+              escuelaNumero: "",
+              escuelaCue: "",
+              fecha: "",
+              prioridad: "",
+              categoria:  "",
+              subcategoria:  "",
+              titulo: ""
+            }
+              let idPrueba = $(this).attr('id');
+              let escuela_id = idPrueba.substr(12)
+              $.ajax({
+                url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {escuela_id:escuela_id}
+              })
+              .done(function(lista) {
+                for (let item of lista) {
+                    informeActual.escuelaNombre=item.nombre
+                    informeActual.escuelaNumero=item.numero
+                    informeActual.escuelaCue=item.cue
+                    informeActual.fecha=item.fecha
+                    informeActual.prioridad=item.prioridad
+                    informeActual.categoria=item.categoria
+                    informeActual.subcategoria=item.subcategoria
+                    informeActual.titulo=item.titulo
+                    informeActual.contenido=item.contenido
+                    informeActual.informeId=informeId
+                }
+              })
+
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                formInformeNuevo(informeNuevo)
+              });
+
+
+          });
 
 
           //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
