@@ -47,8 +47,6 @@ if(isset($_POST["enviarMes"])){
 
 </div>
 <!-- ****FIN SELECT AÑO**** -->
-<!-- #Container Principal# -->
-<div class="container">
 <?php
 
 if($defecto>0){
@@ -68,7 +66,8 @@ if(isset($_GET["ref"])){
 	}
 
 
-?>
+?><!-- #Container Principal# -->
+<div class="container">
 	<?php
 
 	$cantidadVisitas=0;  // cantidad de visitas realizada por el ETT en el Mes
@@ -274,6 +273,11 @@ if(isset($_GET["ref"])){
 
 
 </div> <!-- # ./container-fluid# -->
+
+
+
+</div><!-- #Fin Container Principal# -->
+
 
 
 
@@ -588,11 +592,6 @@ $cantidadVisitas=0;
 //$defecto=0;
 }
 ?>
-</div><!-- #Fin Container Principal# -->
-
-
-
-
 <script language="javascript">
 			$(document).ready(function(){
 				//alert("llego hasta aqui");
