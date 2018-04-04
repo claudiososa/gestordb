@@ -638,7 +638,7 @@ echo '<div class="modal fade" id="myModalOficina'.$referente.'" tabindex="-1" ro
 
 
 <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
 
       </div>
