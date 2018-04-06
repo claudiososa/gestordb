@@ -1,6 +1,13 @@
 #containerStyle {
   background-color: #f2f2f2;
 }
+.panel-default > .panel-heading{
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+/*h4 , .h4{
+  margin-bottom: 1px;
+}*/
 @media only screen and (max-width:768px) {
   #containerStyle {
     padding-left: 0px;
@@ -10,6 +17,23 @@
   padding-right: 0px;
   padding-left: 0px;
 }
+}
+
+.btnBuscar{
+  color:#ffff;
+  background-color:#068587;
+  border-color: #068587;
+  font-size: 19px;
+  border-radius: 100px;
+}
+.labelMes{
+  font-size: 15px;
+}
+.seleMes{
+  font-size: 22px;
+  color: #068587;
+  border: 1px solid #068587;
+  border-radius: 100px;
 }
 .hrStyle {
     margin-top: 10px;
@@ -23,14 +47,16 @@
 }
 .bstyle1 {
 	background-color: #068587;
-  padding: 5px 4px;
-  font-size: 14px;
+  padding: 5px 8px;
+  font-size: 15px;
+  border-radius: 15px;
 
 }
 .bstyle2{
 	background-color: #dc3a3a;
-  padding: 5px 4px;
-  font-size: 14px;
+  padding: 5px 8px;
+  font-size: 15px;
+  border-radius: 15px;
 }
 
 .close{

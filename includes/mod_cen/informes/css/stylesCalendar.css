@@ -2,17 +2,18 @@
 	text-align:center;
 	padding:7px 14px;
 
-	border: 1px solid #0685878a;
+	border: 1px solid #068587;
 
 }
 #calendar .mes {
-	background-color: #06858736;
+	background-color: #a8d4d5;
+	/*background-color: red;*/
 }
 #calendar th {
 	text-align:center;
 	padding:7px 14px;
 
-	border: 1px solid #0685878a;
+	border: 1px solid #068587;
 }
 
 
