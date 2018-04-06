@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="includes/mod_cen/informes/css/stylesCalendar.css">
  <link rel="stylesheet" href="includes/mod_cen/informes/css/stylesVisitaMensual.css"/>
+ <script type="text/javascript"src="includes/mod_cen/informes/js/calendar.js"></script>
 <?php
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/referente.php");
@@ -18,11 +19,34 @@ if(isset($_POST["enviarMes"])){
 
 
  <div class="container">
+<br><br>
+<!-- <div class="form-group"> -->
+  <form class="form-inline" action="index.php?mod=slat&men=informe&id=9&ref=<?php echo $_GET['ref']?>" method="post" align="center">
+    <div class="form-group">
+      <label class="labelMes" for="seleMes">Seleccione Mes:</label>
+    	<select class="form-control seleMes" name="seleMes">
+    		<option value="1" <?php if ($defecto==1){echo "selected";}   ?>>Enero</option>
+    		<option value="2" <?php if ($defecto==2){echo "selected";}  ?>>Febrero</option>
+    		<option value="3" <?php if ($defecto==3){echo "selected";}  ?>>Marzo</option>
+    		<option value="4" <?php if ($defecto==4){echo "selected";}  ?>>Abril</option>
+    		<option value="5" <?php if ($defecto==5){echo "selected";}  ?>>Mayo</option>
+    		<option value="6" <?php if ($defecto==6){echo "selected";}  ?>>Junio</option>
+    		<option value="7" <?php if ($defecto==7){echo "selected";}  ?>>Julio</option>
+    		<option value="8" <?php if ($defecto==8){echo "selected";}  ?>>Agosto</option>
+    		<option value="9" <?php if ($defecto==9){echo "selected";}  ?>>Septiembre</option>
+    		<option value="10" <?php if ($defecto==10){echo "selected";}  ?>>Octubre</option>
+    		<option value="11" <?php if ($defecto==11){echo "selected";}  ?>>Noviembre</option>
+    		<option value="12" <?php if ($defecto==12){echo "selected";}  ?>>Diciembre</option>
 
-<div class="form-group">
+    	</select>
+      <button type="submit" class="btn btn-default btnBuscar" name="enviarMes">&nbsp<span class="glyphicon glyphicon-search"></span>&nbsp</button>
 
+    </div>
 
-<form class="" action="index.php?mod=slat&men=informe&id=9&ref=<?php echo $_GET['ref']?>" method="post">
+  </form>
+<br><br>
+
+<!-- <form class="" action="index.php?mod=slat&men=informe&id=9&ref=<?php echo $_GET['ref']?>" method="post">
 	<label class="" for="seleMes">Seleccione Mes</label>
 	<select class="form-control" name="seleMes">
 		<option value="1" <?php if ($defecto==1){echo "selected";}   ?>>Enero</option>
@@ -44,7 +68,7 @@ if(isset($_POST["enviarMes"])){
 		<input type="submit" class="btn btn-primary" name="enviarMes" value="Ver">
 	</div>
 
-</form>
+</form> -->
 
 </div>
 <!-- ****FIN SELECT AÑO**** -->
@@ -98,6 +122,7 @@ if(isset($_GET["ref"])){
 	$buscar_informe = $informeMesReferente->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
 
 	$lista = array();
+  $lista2= array(); //array para guardar num de escuelas calendario
 	$indice=0;
 	$cantidadEscuelasVisitas=0;
 	$escuelaInformeActual=0;
@@ -117,6 +142,10 @@ if(isset($_GET["ref"])){
 
 	while ($fila = mysqli_fetch_object($buscar_informe)) {
 		$lista[$indice]=$fila->dia;
+    $escuelaDatos= new Escuela($fila->escuelaId);//busca datos de escuela asociada al informe
+    $escuelaBuscar =$escuelaDatos->buscar();
+    $escuelaResultado= mysqli_fetch_object($escuelaBuscar);
+    $lista2[$indice]=$escuelaResultado->numero;
 
 		$indice++;
 
@@ -167,10 +196,17 @@ if(isset($_GET["ref"])){
 	<!-- #inicio container fluid# -->
 <div class="container-fluid">
 	<div class="panel panel-default">
-    <div class="panel-body">
-			<h4 align="center"><?php echo strtoupper($registro->apellido." ".$registro->nombre); ?></h4>
+    <div class="panel-heading headPanel">
+      <h4 align="center" class="h4" ><?php echo strtoupper($registro->apellido." ".$registro->nombre); ?></h4>
+    </div>
+    <div class="panel-body divOculto">
+      <!-- aqui se oculta -->
+
 			<hr class="hrStyle">
-			<h4><img class="img-responsive"src="img/iconos/calendar/fecha.png"> Detalle hasta el día <?php echo $diaActual." de  ".$meses[$monthActual]." de ".$year?> </h4>
+
+
+
+			<h4>&nbsp&nbsp&nbsp<img class="img-responsive"src="img/iconos/calendar/fecha.png">&nbsp&nbspDetalle mes <?php echo " de  ".$meses[$month]." de ".$year?> </h4>
 			<br>
 
 			<div class="row">
@@ -198,7 +234,7 @@ if(isset($_GET["ref"])){
 						$last_cell=$diaSemana+$ultimoDiaMes;
 						// hacemos un bucle hasta 42, que es el máximo de valores que puede
 						// haber... 6 columnas de 7 dias
-						for($i=1;$i<=42;$i++)
+						for($i=0;$i<=49;$i++)
 						{
 							if($i==$diaSemana)
 							{
@@ -212,11 +248,14 @@ if(isset($_GET["ref"])){
 							}else{			// dentro del else trabajamos buscando dias de visitas
 								$encontrado=0;
 								$visitasxDias=0;  //contamos las visitas x dias
+                $cant=0;//contador para array de num esc.calendario
+                $data=" ";//se almacenan los n° de escuelas del array $lista2
 
 								foreach ($lista as $valor) {
 									if($day==$valor){
 										//if($encontrado==0){
 											$visitasxDias++;
+                      $data.=$lista2[$cant].'<br>';
 											//echo "<td class='hoy'>$day $visitasxDias</td>";
 										//}
 										$encontrado=1;
@@ -224,17 +263,27 @@ if(isset($_GET["ref"])){
 
 										//breaK;
 									}
+                  $cant++;
 								}
 								if($encontrado ==0){
 									echo "<td>$day</td>";
 								}
 								else{
-									if ($visitasxDias > 1) {
-										echo "<td class='mas' style='background-image: url(img/iconos/calendar/2.png);'>$day<br>   $visitasxDias</td>";
-									}else{
+									if ($visitasxDias == 1) {
 
-									echo "<td class='hoy' style='background-image: url(img/iconos/calendar/3.png);'>$day<br> $visitasxDias</td>";
-								}
+										echo "<td class='mas' style='background-image: url(img/iconos/calendar/rosa.png); background-repeat: no-repeat;
+                    background-size: contain;background-size: 100% 100%;'><a tabindex='0' role='button' data-container='body' data-trigger='focus' data-toggle='popover' data-placement='top'  title='Esc. visitadas el $day de $meses[$month] ($visitasxDias)' data-content='$data' >$day</a></td>";
+
+  }else {
+    if ($visitasxDias == 2){
+
+									echo "<td class='hoy' style='background-image: url(img/iconos/calendar/lavanda.png);background-repeat: no-repeat;
+  background-size: contain;background-size: 100% 100%;'><a tabindex='0' role='button' data-container='body' data-toggle='popover' data-placement='top' data-trigger='focus' title='Esc. visitadas el $day de $meses[$month] ($visitasxDias)' data-content='$data' >$day</a></td>";
+                }else {
+                  echo "<td class='mas' style='background-image: url(img/iconos/calendar/star.png); background-repeat: no-repeat;background-size: contain;background-size: 100% 100%;'><a tabindex='0' role='button' data-container='body' data-trigger='focus' data-toggle='popover' data-placement='top' title='Esc. visitadas el $day de $meses[$month] ($visitasxDias)' data-content='$data'  >$day</a></td>";
+
+                }
+          }
 								}
 								$day++;
 							}
@@ -250,6 +299,17 @@ if(isset($_GET["ref"])){
 					</tr>
 					</tbody>
 				</table>
+        <table class='table table-bordered'>
+          <tbody>
+            <tr>
+              <td><img class='img-responsive' src="img/iconos/calendar/3.png" alt="ColorRosa">1 Visita&nbsp<img class='img-responsive' src="img/iconos/calendar/2.png" alt="ColorRosa">2 visitas&nbsp<img class='img-responsive' src="img/iconos/calendar/st.png" alt="ColorRosa">3 o más Visitas</td>
+
+              <!-- <td> 1 escuela</td> -->
+            </tr>
+
+
+        </tbody>
+        </table>
 </div>
 				</div>
 
@@ -671,19 +731,3 @@ $cantidadVisitas=0;
 </div><!-- #Fin Container Principal# -->
 </div>
 </div>
-
-
-<script language="javascript">
-			$(document).ready(function(){
-				//alert("llego hasta aqui");
-
-				//});
-        if (screen.width<1024) {
-          $('.calendar').addClass('table-responsive')
-// alert ('hola')
-        }
-
-
-
-			});
-</script>
