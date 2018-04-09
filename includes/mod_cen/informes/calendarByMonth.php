@@ -120,6 +120,7 @@ if(isset($_GET["ref"])){
 	$informeMesReferente = new Informe();
 	// Buscamos los informes creados por el ETT en el mes que indiquemos en el año actual
 	$buscar_informe = $informeMesReferente->summary("mesAñoReferente",null,null,null,$defecto,"2018",null,$referente,null);
+  $totalvisitascabecera=mysqli_num_rows($buscar_informe);
 
 	$lista = array();
   $lista2= array(); //array para guardar num de escuelas calendario
@@ -196,24 +197,24 @@ if(isset($_GET["ref"])){
 	<!-- #inicio container fluid# -->
 <div class="container-fluid">
 	<div class="panel panel-default">
+    <div class="row">
     <div class="panel-heading headPanel">
-      <h4 align="center" class="h4" ><?php echo strtoupper($registro->apellido." ".$registro->nombre); ?></h4>
+      <h4 align="center" class="h4 col-md-10 col-xs-10 h4Head" ><?php echo strtoupper($registro->apellido." ".$registro->nombre); ?></h4>
+      <div class="col-md-2 col-xs-2" align="right"><span class='badge spanHead'><?php echo "$totalvisitascabecera"; ?></span></div>
     </div>
+      </div>
     <div class="panel-body divOculto">
       <!-- aqui se oculta -->
 
 			<hr class="hrStyle">
 
-
-
-			<h4>&nbsp&nbsp&nbsp<img class="img-responsive"src="img/iconos/calendar/fecha.png">&nbsp&nbspDetalle mes <?php echo " de  ".$meses[$month]." de ".$year?> </h4>
+			<h4>&nbsp&nbsp&nbsp<img class="img-responsive"src="img/iconos/calendar/fecha.png">&nbsp&nbspDetalle mes <?php echo " de  ".$meses[$month]." de ".$year?></h4>
 			<br>
 
 			<div class="row">
 				<!-- calendario -->
 			 <div class="col-md-6 ">
 					<div class="col-md-10 calendar">
-
 
 					<table id="calendar" class="table table-bordered">
 						<thead>

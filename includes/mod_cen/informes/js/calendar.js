@@ -19,7 +19,7 @@ $('.headPanel').click(function(event) {
 	/* Act on the event */
 	// alert("hola");
 	// var $this=$(this)
-	$(this).parent().find('.divOculto').toggle()
+	$(this).parent().parent().find('.divOculto').toggle()
 });
 //         $('.headPanel').click(function(event) {
 //         // //   var $this=$(this)

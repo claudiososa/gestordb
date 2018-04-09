@@ -5,6 +5,16 @@
   background-color: #ffffff;
   border-color: #ffffff;
 }
+.spanHead{
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #068587;
+}
+.h4Head{
+  padding-left: 100px;
+  padding-right: 0px;
+}
 /*h4 , .h4{
   margin-bottom: 1px;
 }*/
@@ -25,18 +35,19 @@
   border-color: #068587;
   font-size: 19px;
   border-radius: 100px;
+  padding: 3px 10px;
 }
 .labelMes{
   font-size: 15px;
 }
 .seleMes{
-  font-size: 22px;
+  font-size: 21px;
   color: #068587;
   border: 1px solid #068587;
   border-radius: 100px;
 }
 .hrStyle {
-    margin-top: 10px;
+    margin-top: 1px;
     margin-bottom: 20px;
     border: 0;
     border-top: 3px solid #068587;
