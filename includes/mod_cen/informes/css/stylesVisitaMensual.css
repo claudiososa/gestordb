@@ -27,10 +27,14 @@
   padding-right: 0px;
   padding-left: 0px;
 }
+.h4Head{
+  padding-left: 0px;
+  padding-right: 0px;
+}
 }
 
 .btnBuscar{
-  color:#ffff;
+  color:#ffffff;
   background-color:#068587;
   border-color: #068587;
   font-size: 19px;
