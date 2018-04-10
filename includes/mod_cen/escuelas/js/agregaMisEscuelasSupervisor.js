@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 
+
   $('[id ^=list]').click( function(){
 
     let informeActual ={
@@ -37,20 +38,7 @@ $(document).ready(function() {
             informeActual.titulo=item.titulo
             informeActual.contenido=item.contenido
             informeActual.informeId=informeId
-
-            /*let escuelaNombre = item.nombre
-            let escuelaNumero = item.numero
-            let escuelaCue = item.cue
-            let fecha = item.fecha
-            let prioridad = item.prioridad
-            let categoria =  item.categoria
-            let subcategoria =  item.subcategoria
-            let titulo =  item.titulo
-            let contenido =  item.contenido*/
-
         }
-        //console.log(informeActual.escuelaNombre)
-        //console.log("success Ajax Informe");
       })
 
       .fail(function() {
@@ -70,8 +58,6 @@ $(document).ready(function() {
 
   });
 
-
-  //fo
 
   $('[id ^=informes]').on('click', function(){
 
@@ -151,52 +137,23 @@ $(document).ready(function() {
             }
           }
 
+
           $('[id ^=nuevoInforme]').click( function(){
 
-            let informeNuevo ={
-              informeId: "",
-              escuelaNombre: "",
-              escuelaNumero: "",
-              escuelaCue: "",
-              fecha: "",
-              prioridad: "",
-              categoria:  "",
-              subcategoria:  "",
-              titulo: ""
-            }
               let idPrueba = $(this).attr('id');
               let escuela_id = idPrueba.substr(12)
-              $.ajax({
-                url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {escuela_id:escuela_id}
-              })
-              .done(function(lista) {
-                for (let item of lista) {
-                    informeActual.escuelaNombre=item.nombre
-                    informeActual.escuelaNumero=item.numero
-                    informeActual.escuelaCue=item.cue
-                    informeActual.fecha=item.fecha
-                    informeActual.prioridad=item.prioridad
-                    informeActual.categoria=item.categoria
-                    informeActual.subcategoria=item.subcategoria
-                    informeActual.titulo=item.titulo
-                    informeActual.contenido=item.contenido
-                    informeActual.informeId=informeId
+              escuela ={
+                  escuelaId:escuela_id,
+                  numero:'',
+                  cue:'',
+                  nombre:''
                 }
-              })
-
-              .fail(function() {
-                console.log("error");
-              })
-              .always(function() {
-                formInformeNuevo(informeNuevo)
-              });
-
-
+              //console.log(escuela)
+              buscarDatosEscuela(escuela)
+              //                //trae los datos basicos de la escuela selecciona
+              //console.log(escuela)
+              //informeNuevo(objEscuela)
           });
-
 
           //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
           $('[id ^=if]').click( function(){

@@ -7,6 +7,8 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 
 
