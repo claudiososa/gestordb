@@ -256,7 +256,12 @@ if(isset($_GET["ref"])){
 									if($day==$valor){
 										//if($encontrado==0){
 											$visitasxDias++;
-                      $data.=$lista2[$cant].'<br>';
+                      if ($lista2[$cant] == 2) {
+                        $data ='Oficina Conectar Igualdad'.'<br>';
+                        # code...
+                      }else{
+                        $data.=$lista2[$cant].'<br>';
+                      }
 											//echo "<td class='hoy'>$day $visitasxDias</td>";
 										//}
 										$encontrado=1;
