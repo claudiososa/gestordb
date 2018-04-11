@@ -1,11 +1,7 @@
-function buscarDatosEscuela(escuela){
+function buscarDatosEscuela(){
   //let escuela ={}
-
   let id = escuela.escuelaId
-  let numero =''
-  let nombre =''
-  let cue =''
-  //console.log('escuelaId de funcion buscarDatosEscuela'+id)
+
   $.ajax({
     url: 'includes/mod_cen/clases/ajax/ajaxEscuela.php',
     type: 'POST',
@@ -13,8 +9,7 @@ function buscarDatosEscuela(escuela){
     data: {id:id}
   })
   .done(function(lista) {
-    for (let item of lista) {
-      numero=item.numero
+    for (let item of lista) {      
       escuela.numero=item.numero
       escuela.cue= item.cue,
       escuela.nombre= item.nombre,

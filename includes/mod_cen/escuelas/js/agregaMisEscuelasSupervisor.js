@@ -142,16 +142,16 @@ $(document).ready(function() {
 
               let idPrueba = $(this).attr('id');
               let escuela_id = idPrueba.substr(12)
-              escuela ={
+              var escuela ={
                   escuelaId:escuela_id,
                   numero:'',
                   cue:'',
                   nombre:''
                 }
-              //console.log(escuela)
-              buscarDatosEscuela(escuela)
+              console.log(escuela)
+              buscarDatosEscuela()
               //                //trae los datos basicos de la escuela selecciona
-              //console.log(escuela)
+              console.log(escuela)
               //informeNuevo(objEscuela)
           });
 

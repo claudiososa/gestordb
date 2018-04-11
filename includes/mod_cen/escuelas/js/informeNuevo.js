@@ -1,5 +1,5 @@
 
-function informeNuevo(escuela)
+function informeNuevo()
 {
 
   let escuelaId = escuela.escuelaId
