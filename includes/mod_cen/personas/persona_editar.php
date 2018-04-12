@@ -34,7 +34,7 @@
 										<h4><img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="">&nbsp&nbsp&nbsp<?php echo $persona->getEmail() ?></h4>
 										<?php
 										if ($persona->getTelefonoC() != "") {
-											echo'<h4><img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="">&nbsp&nbsp&nbsp'.$persona->getTelefonoC().'</h4>';
+											echo'<h4><img src="img/iconos/pruebaFotoPerfil/casa.png" alt="">&nbsp&nbsp&nbsp'.$persona->getTelefonoC().'</h4>';
 										}
 										// if ($persona->getEmail2() != "") {
 										// 	echo'<h4><img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="">&nbsp&nbsp&nbsp'.$persona->getEmail2().'</h4>';
