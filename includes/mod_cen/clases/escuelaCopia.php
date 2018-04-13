@@ -170,7 +170,7 @@ class Escuela
 		}
 	}
 
-	public function editarref($tipo=NULL, $personaId=NULL)
+	public function editarref($tipo=NULL)
 	{
 
 		$nuevaConexion=new Conexion();
@@ -183,10 +183,10 @@ class Escuela
 				$sentencia="UPDATE escuelas SET referenteIdPmi ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 				break;
 			case 'supervisor':
-					$sentencia="UPDATE escuelas SET referenteIdSuperSec ='$this->referenteId', supervisor_Id='$personaId' WHERE escuelaId = '$this->escuelaId'";
+					$sentencia="UPDATE escuelas SET referenteIdSuperSec ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 					break;
 			case 'superior':
-					$sentencia="UPDATE escuelas SET referenteIdSuperSup ='$this->referenteId', supervisor_Id='$personaId' WHERE escuelaId = '$this->escuelaId'";
+					$sentencia="UPDATE escuelas SET referenteIdSuperSup ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
 					break;
 			case 'adultos':
 							$sentencia="UPDATE escuelas SET referenteIdSuperAdultos ='$this->referenteId' WHERE escuelaId = '$this->escuelaId'";
@@ -809,11 +809,11 @@ if(isset($_POST["referente_id"])) {
 			if(isset($_POST['pmi'])){
 				$editar_escuela=$escuela->editarref("pmi");
 			}elseif(isset($_POST['supervisor'])){
-				$editar_escuela=$escuela->editarref("supervisor",$dato_referente->personaId);
+				$editar_escuela=$escuela->editarref("supervisor");
 			}elseif(isset($_POST['facilitador'])){
 				$editar_escuela=$escuela->editarref("facilitador");
 			}elseif(isset($_POST['superior'])){
-				$editar_escuela=$escuela->editarref("superior",$dato_referente->personaId);
+				$editar_escuela=$escuela->editarref("superior");
 			}elseif(isset($_POST['adultos'])){
 				$editar_escuela=$escuela->editarref("adultos");
 			}else{
