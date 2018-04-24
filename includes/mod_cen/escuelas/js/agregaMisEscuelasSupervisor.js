@@ -142,17 +142,19 @@ $(document).ready(function() {
 
               let idPrueba = $(this).attr('id');
               let escuela_id = idPrueba.substr(12)
-              var escuela ={
-                  escuelaId:escuela_id,
-                  numero:'',
-                  cue:'',
-                  nombre:''
+              let escuela = {escuelaId:escuela_id,
+                             numero:'',
+                             cue:'',
+                             nombre:''
                 }
-              console.log(escuela)
-              buscarDatosEscuela()
-              //                //trae los datos basicos de la escuela selecciona
-              console.log(escuela)
-              //informeNuevo(objEscuela)
+              buscarDatosEscuela(escuela)//consulta a tabla escuela... ajax.js
+
+              .then(function(escuela){
+                informeNuevo(escuela)//inicia modal para carga de informe
+               })
+              .catch(error=> console.log(error + ' Noooo'))
+
+
           });
 
           //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)

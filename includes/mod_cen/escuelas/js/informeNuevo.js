@@ -1,5 +1,5 @@
 
-function informeNuevo()
+function informeNuevo(escuela)
 {
 
   let escuelaId = escuela.escuelaId
@@ -24,10 +24,6 @@ function informeNuevo()
                 <div class="col-md-6">Cue: ${escuela.cue}</div>
               </div>
 
-              <div class="row">
-                <div class="col-md-6">Creado por: </div><div class="col-md-6">Fecha: ${escuela.fecha}</div>
-              </div>
-
             </div><!--./modal-header-->
 
 
@@ -36,19 +32,54 @@ function informeNuevo()
             <div class="modal-body" id="modal-body" >
               <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
               <div class="form-group">
-                    <div class="container">
-                      <button type="button" class="btn btn-success btn-md" id="verInforme${escuela.informeId}" style="display: none;">
-                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  Ver Informe
-                      </button>
-                    </div>
-                    <br>
+                 <div class="col-md-12">
+                   <label class="control-label">Prioridad</label>
+                 </div>
+                   <div class="col-md-12">
+                     <select  class="form-control" id="prioridad" name="prioridad">
+                          <option value='normal'>Normal</option>
+                          <option value='media'>Media</option>
+                          <option value='alta'>Alta</option>
+                     </select>
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  <div class="col-md-12">
+                    <label class="control-label">Categoría</label>
+                  </div>
+                  <div class="col-md-12">
+                  <select  class="form-control" id="tipo" name="nuevotipo">
+                        <option value='0'>Seleccione</option>
+                </select>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                 <div class="col-md-12">
+                   <label class="control-label">Sub Categoría</label>
+                 </div>
+
+                 <div class="col-md-12" id="divsubtipo">
+                 <select  class="form-control" id="subTipo" name="subTipo">
+                    <option value='0'>Seleccione</option>
+                 </select>
+                 </div>
+             </div>
+             <div class="form-group">
+                <div class="col-md-12">
+                  <label class="control-label">Título</label>
+                </div>
+                <div class="col-md-12">
+                   <input required type='text' id='titulo' name="titulo" class="form-control" placeholder="Titulo corto para tu informe" value="">
+                 </div>
+               </div>
+               <div class="form-group">
                     <div id="divContenido" class="col-md-12">
                       <textarea  rows='20' name="contenido" id="contenido" class="form-control" >
                       </textarea>
                     </div>
                     <div id="divRespuesta" class="col-md-12">
-                      <textarea  rows='20' name="respuesta" id="respuesta" class="form-control" >
-                      </textarea>
                       <div class="col-md-12">
                         <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
                       </div>
@@ -77,6 +108,16 @@ function informeNuevo()
         </div><!-- /.modal -->
             `).appendTo('#padreIr')
 
+            traerCategorias(tipoR)
+
+            $('#tipo').change(function(event) {
+              /* Act on the event */
+
+              //console.log($(this).val())
+              traerSubcategorias($(this).val())
+            });
+
+            //$(`<option>Conectar</option>`).appendTo('#tipo')
     $('#myModal').modal('show')
 
     $('#myModal').on('hide.bs.modal', function(){
@@ -116,7 +157,7 @@ function informeNuevo()
             showUpload: false
 
           });
-      $('#divRespuesta').hide()
+      //$('#divRespuesta').hide()
       $('[id ^=rp]').hide()
       $('[class ^=img]').hide()
 
@@ -131,12 +172,6 @@ function informeNuevo()
 
       CKEDITOR.replace( 'contenido', {
       toolbar: [
-
-      ]
-    });
-
-    CKEDITOR.replace( 'respuesta', {
-    toolbar: [
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Strike', 'Subscript', 'Superscript', '-' ] },
         { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
@@ -145,8 +180,9 @@ function informeNuevo()
         { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
         { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
         { name: 'others', items: [ '-' ] }
-    ]
-  });
+      ]
+    });
+
       //CKEDITOR.replace('contenido');
 
       $.fn.modal.Constructor.prototype.enforceFocus = function () {
@@ -171,7 +207,11 @@ function informeNuevo()
         $('#btnSave').html('Enviar')
         $('#divRespuesta').show()
       }else{
-        let contenido = CKEDITOR.instances['respuesta'].getData();
+        let contenido = CKEDITOR.instances['contenido'].getData();
+        let prioridad = $('#prioridad').val()
+        let titulo = $('#titulo').val()
+        let tipo = $('#tipo').val()
+        let subTipo = $('#subTipo').val()
         $('#formInforme').on('submit',(function(e) {
             let paqueteData = new FormData()
             let ins = document.getElementById('input-img').files.length;
@@ -179,10 +219,15 @@ function informeNuevo()
                       paqueteData.append("input-img[]", document.getElementById('input-img').files[x]);
                   }
             paqueteData.append('informeId', informeId);
+            paqueteData.append('escuelaId', escuelaId);
+            paqueteData.append('prioridad', prioridad);
+            paqueteData.append('titulo', titulo);
+            paqueteData.append('tipo', tipo);
+            paqueteData.append('subTipo', subTipo);
             paqueteData.append('referenteId', referenteId2);
             paqueteData.append('contenido', contenido);
             $.ajax({
-                url: 'includes/mod_cen/clases/ajax/ajaxRespuesta.php',
+                url: 'includes/mod_cen/clases/ajax/ajaxInformeNuevo.php',
                 type: 'POST',
                 contentType: false,
                 processData: false,
