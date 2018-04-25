@@ -11,6 +11,7 @@ session_start();
        	<meta name="keywords" content="conectar,dbms,salta">
        	<link rel="shortcut icon" href="img/iconos/logo_icono.png">
 				<script src="js/jquery-3.1.0.min.js"></script>
+				<script type="text/javascript" src="jqueryui/jquery-ui.min.js"></script>
 			 <script src="js/bootstrap.min.js"></script>
 
 				<script type="text/javascript" src="jquery/jquery.tablesorter.js"></script>
@@ -29,7 +30,7 @@ session_start();
 
 
 
-	        
+
        	<link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/bootstrap.css?1"/>
 				<script type="text/javascript" src="js/wow.min.js"></script>

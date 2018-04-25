@@ -1,12 +1,12 @@
 <div class="container">
 	<form class='form-horizontal' action='' method='POST'>
-	
+
 	<div class="form-group">
 		<label class="control-label col-md-2">Número</label>
 		<div class="col-md-10">
 			<div class="row">
 				 <div class="col-sm-5">
-					 <input class="form-control" size="30" type="text" name="numero" placeholder="sin puntos" autofocus>
+					 <input class="form-control" size="30" type="text" name="numero" placeholder="Ingrese número sin puntos" autofocus>
 				 </div>
 			</div>
 		</div>
@@ -17,7 +17,7 @@
 		<div class="col-md-10">
 			<div class="row">
 				 <div class="col-sm-5">
-					 <input size="30" class="form-control"  type="text" name="cue" placeholder="sin guiones" >
+					 <input size="30" class="form-control"  type="text" name="cue" placeholder="Ingrese cue sin guiones" >
 				 </div>
 			</div>
 		</div>
@@ -28,11 +28,18 @@
 		<div class="col-md-10">
 			<div class="row">
 				 <div class="col-sm-5">
-					 <input size="30" class="form-control"  type="text" name="nombre">
+					 <input size="30" class="form-control"  type="text" name="nombre" placeholder="Ingrese nombre">
 				 </div>
 			</div>
 		</div>
 	</div>
+	<div class="form-group">
+		<div class="col-md-6 col-md-offset-2">
+			<p class="help-block" id="busquedaAvanzada"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbspBúsqueda avanzada</p>
+		</div>
+	</div>
+
+<div class=""id="ocultoForm">
 
 	<div class="form-group">
 		<label class="control-label col-md-2">Departamento</label>
@@ -117,6 +124,8 @@
 			</div>
 		</div>
 	</div>
+
+	</div>
 	<div class="form-group">
 		<div class="col-md-2 col-md-offset-2">
 			<input class="btn btn-primary" type='submit' value='Buscar'>
@@ -125,3 +134,11 @@
 
 	</form>
 </div>
+
+<script type="text/javascript">
+$('#ocultoForm').hide()
+$('#busquedaAvanzada').click(function(event) {
+	$('#ocultoForm').toggle()
+});
+
+</script>
