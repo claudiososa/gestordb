@@ -248,6 +248,8 @@ function informeNuevo(escuela)
         let titulo = $('#titulo').val()
         let tipo = $('#tipo').val()
         let subTipo = $('#subTipo').val()
+        let fecha = $('input[name=date_submit]').val()
+        //console.log(fecha)
         $('#formInforme').on('submit',(function(e) {
             let paqueteData = new FormData()
             let ins = document.getElementById('input-img').files.length;
@@ -260,6 +262,7 @@ function informeNuevo(escuela)
             paqueteData.append('titulo', titulo);
             paqueteData.append('tipo', tipo);
             paqueteData.append('subTipo', subTipo);
+            paqueteData.append('fecha', fecha);
             paqueteData.append('referenteId', referenteId2);
             paqueteData.append('contenido', contenido);
             $.ajax({

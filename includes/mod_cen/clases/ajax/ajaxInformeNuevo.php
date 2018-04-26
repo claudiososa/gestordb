@@ -9,9 +9,9 @@
     $fecha=date("Y-m-d H:i:s");
     $nuevaInforme =  new Informe($_POST['informeId'],$_POST['escuelaId'],$_POST['referenteId'],
                                     $_POST['prioridad'],"Acta de Visita",$_POST['titulo'],
-                                    $_POST['contenido'],"0","0",$fecha,$fecha,$fecha,$_POST['tipo'],$_POST['subTipo']);
+                                    $_POST['contenido'],"0","0",$_POST['fecha'],$fecha,$fecha,$_POST['tipo'],$_POST['subTipo']);
     $guardar_informe=$nuevaInforme->agregar();
-    //Maestro::debbugPHP($_FILES);
+    Maestro::debbugPHP($_POST['fecha']);
 
     foreach ($_FILES['input-img'] as $key) {
 

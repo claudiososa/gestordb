@@ -120,7 +120,7 @@ include_once "includes/mod_cen/clases/rti.php";
         echo "<th>Título Informe</th>";
         echo "<th>Nº Esc</th>";
         echo "<th>Leido</th>";
-        echo "<th>Respuestas</th>";
+        echo "<th>Resp.</th>";
         echo "<th>Prioridad</th>";
         echo "</tr>";
         echo "</thead>";

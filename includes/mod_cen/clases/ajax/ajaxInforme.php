@@ -41,7 +41,7 @@
       'nombre'=>$datoInforme->nombre,
       'categoria'=>$datoInforme->tipoNombre,
       'subcategoria'=>$datoInforme->subNombre,
-      'fecha' =>$datoInforme->fechaCarga,
+      'fecha' =>$datoInforme->fechaVisita,
       'prioridad' =>$datoInforme->prioridad,
       'titulo' =>$datoInforme->titulo,
       'contenido' =>$datoInforme->contenido
@@ -89,7 +89,7 @@
         'cantidad'=>$cantidadInformes,
         'cantidadRespuesta' =>$cantidadRespuesta,
         'cantidadLeido' =>$cantidadLeido,
-        'fecha' =>$fila->fechaCarga,
+        'fecha' =>$fila->fechaVisita,
         'prioridad' =>$fila->prioridad
 
   		);
