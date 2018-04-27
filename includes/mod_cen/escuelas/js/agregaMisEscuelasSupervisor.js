@@ -423,7 +423,7 @@ $(document).ready(function() {
               <td><a id='eInforme' href=''>${item.apellido},${item.nombre}</a></td>
               <td><a id='eInforme' href=''>${item.telefono}</a></td>
               <td><a id='eInforme' href=''>${item.email}</a></td>
-              <td><img class='img-responsive' src='img/iconos/lapiz (4).png' id='idAuto${item.idCargo}'></td>
+              <td><img class='img-responsive' src='img/iconos/lapiz (4).png'  id='idAuto${item.idCargo}'></td>
 
               </tr></tbody></table>`)
         $('.trautoridad'+item.escuelaId).hide()

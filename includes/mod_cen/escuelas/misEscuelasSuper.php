@@ -327,7 +327,7 @@ echo "</div>";
       while ($rowAutoridades = mysqli_fetch_object($buscarAutoridad)) {
       echo '<div class="row" >';
       echo '<div class="col-xs-8"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
-      echo '<div class="col-xs-2"><img class="img-responsive" src="img/iconos/lapiz (4).png"></div>';
+      echo '<div class="col-xs-2"><img id="celIdAuto" class="img-responsive" src="img/iconos/lapiz (4).png"></div>';
       echo '<div class="col-xs-2">
             <img class="img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus"
             title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" >
