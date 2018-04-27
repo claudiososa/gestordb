@@ -189,7 +189,7 @@ function formPersona()
           </form>
           </div>
           <div class="modal-footer">
-
+            <button type="button" class="btn btn-primary" id="btnEditar">Editar</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" id="btnSave">Guardar</button>
           </div>
@@ -242,6 +242,7 @@ function formPersona()
             $(this).hide()
             camposOcultos.hide()
             $(' #btnBuscarDni').show()
+            $('#btnEditar').hide()
             $('#statusDni, #localidad').val('0')
             $('#txtdni').val('').focus()
             $('#txtidpersona, #txtnombre, #txtapellido, #txtcuil, #txttelefonoM, #txtemail').val('')
@@ -272,7 +273,7 @@ function formPersona()
     });
   })
 
-  $('#btnSave').on('click',function(){
+  $('#btnSave , #btnEditar').on('click',function(){
 
 
     console.log('boton guardar')
@@ -592,6 +593,7 @@ if (validarpersona()) {
         if (item.id=='0') {
           console.log('no encontrado')
           $('#btnSave').show()
+          $('#btnEditar').hide()
           $('#statusDni').val('0')
           $('#txtidpersona').val('')
           $('#txtnombre').val('')
