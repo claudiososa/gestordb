@@ -30,12 +30,12 @@
                  'cargo'=>$row->cargoAutoridad,
                  'escuelaId'=>$_POST['escuelaId'],
                  'cantidad'=>$cantidad,
-                 'idCargo'=>$row->tipoId 
+                 'idCargo'=>$row->tipoId
                ];
           array_push($arrayPrincipal,$item);
         }
         //$json = json_encode($arrayPrincipal);
-        Maestro::debbugPHP($arrayPrincipal);
+      //  Maestro::debbugPHP($arrayPrincipal);
       }else{
         $item=['id' => '0',
               ];
@@ -51,6 +51,7 @@
   if (isset($_POST['search'])) {
     $autoridad =  new Autoridades(null,$_POST['escuelaId'],$_POST['tipoId']);
     $existeAutoridad = $autoridad->buscarAutoridad3();
+        Maestro::debbugPHP($_POST);
     $arrayPrincipal=array();
     if ($existeAutoridad > 0) {//mayor a cero significa que esta escuela ya tenia autoridad registrada
       $persona = new Persona($existeAutoridad);
@@ -70,7 +71,7 @@
            ];
       array_push($arrayPrincipal,$item);
       $json = json_encode($arrayPrincipal);
-      Maestro::debbugPHP($json);
+    //  Maestro::debbugPHP($json);
     }else{
       $item=['id' => '0',
             ];
@@ -85,7 +86,7 @@
 
   if (isset($_POST['btnSave'])) {//si accede a este archivo desde el boton guardar pantalla autoridad de la escuela
     $arrayPrincipal=array();
-
+  Maestro::debbugPHP($_POST);
     if ($_POST['update']=='1') {
       $persona = new Persona($_POST['personaId'],$_POST['apellido'],$_POST['nombre'],null,$_POST['cuil'],null,$_POST['telefonoM'],
                              null,$_POST['email'],null,null,null,$_POST['localidad']);
@@ -97,7 +98,7 @@
 
       $autoridad =  new Autoridades(null, $escuelaId, $tipoId, $personaId);
       $existeAutoridad = $autoridad->buscarAutoridad2();
-      Maestro::debbugPHP($existeAutoridad);
+
 
       if ($existeAutoridad > 0) {//mayor a cero significa que esta escuela ya tenia autoridad registrada
         $autoridad->autoridadesId = $existeAutoridad;
@@ -116,14 +117,14 @@
             ];
     }else{
       $dato ='hola';
-      Maestro::debbugPHP($dato);
+      //Maestro::debbugPHP($dato);
       //Maestro::debbugPHP($_POST['update']);
 
       $persona = new Persona(null,$_POST['apellido'],$_POST['nombre'],$_POST['txtdni'],$_POST['cuil'],null,$_POST['telefonoM'],
                              null,$_POST['email'],null,null,null,$_POST['localidad']);
       //Maestro::debbugPHP($persona);
       $modificarPersona = $persona->addShort();  # code...
-      Maestro::debbugPHP($modificarPersona);
+    //  Maestro::debbugPHP($modificarPersona);
 
 
       $escuelaId = $_POST['escuelaId'];
@@ -184,7 +185,7 @@
       array_push($arrayPrincipal,$item);
       $json = json_encode($arrayPrincipal);
     }
-    Maestro::debbugPHP($json);
+    //Maestro::debbugPHP($json);
     echo $json;
   }
   ?>

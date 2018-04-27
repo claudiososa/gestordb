@@ -6,11 +6,11 @@
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
 </script>
-
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
+
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
