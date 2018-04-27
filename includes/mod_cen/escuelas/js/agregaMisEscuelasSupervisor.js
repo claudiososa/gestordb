@@ -577,7 +577,7 @@ $(document).ready(function() {
                         </form>
                         </div>
                         <div class="modal-footer">
-
+                          <button type="button" class="btn btn-primary" id="btnEditar">Editar</button>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                           <button type="button" class="btn btn-primary" id="btnSave">Guardar</button>
                         </div>
@@ -633,6 +633,7 @@ $(document).ready(function() {
                           $(this).hide()
                           camposOcultos.hide()
                           $(' #btnBuscarDni').show()
+                          $('#btnEditar').hide()
                           $('#statusDni, #localidad').val('0')
                           $('#txtdni').val('').focus()
                           $('#txtidpersona, #txtnombre, #txtapellido, #txtcuil, #txttelefonoM, #txtemail').val('')
@@ -663,7 +664,7 @@ $(document).ready(function() {
                   });
                 })
 
-                $('#btnSave').on('click',function(){
+                $('#btnSave, #btnEditar').on('click',function(){
 
 
                   console.log('boton guardar')
@@ -967,6 +968,7 @@ $(document).ready(function() {
                   let dni = $('#txtdni').val()
                     let camposOcultos = $('.ctxtnombre, .ctxtapellido, .ctxtcuil, .ctxttelefonoM, .ctxtemail, .clocalidad')
                     camposOcultos.show()
+
 
                   //$('#localidad option:selected').remove();
 
