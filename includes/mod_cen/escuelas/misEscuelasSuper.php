@@ -1,5 +1,7 @@
 
 <link rel="stylesheet" href="includes/mod_cen/css/styleIconosSuperPrim.css">
+<link rel="stylesheet" href="includes/mod_cen/css/default.css">
+<link rel="stylesheet" href="includes/mod_cen/css/default.date.css">
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
@@ -9,6 +11,9 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
 
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
@@ -115,7 +120,7 @@ include_once "includes/mod_cen/clases/rti.php";
         echo "<th>Título Informe</th>";
         echo "<th>Nº Esc</th>";
         echo "<th>Leido</th>";
-        echo "<th>Respuestas</th>";
+        echo "<th>Resp.</th>";
         echo "<th>Prioridad</th>";
         echo "</tr>";
         echo "</thead>";

@@ -462,7 +462,7 @@ public function buscarUnico()
 {
 	$nuevaConexion=new Conexion();
 	$conexion=$nuevaConexion->getConexion();
-	$sentencia = "SELECT informes.informeId,informes.titulo,informes.contenido,informes.fechaCarga,informes.prioridad,
+	$sentencia = "SELECT informes.informeId,informes.titulo,informes.contenido,informes.fechaVisita,informes.fechaCarga,informes.prioridad,
 											 tipoinformes.nombre AS tipoNombre,SubTipoInforme.nombre AS subNombre,
 											 escuelas.escuelaId,escuelas.nombre,escuelas.numero,escuelas.cue
 								FROM informes

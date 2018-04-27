@@ -108,7 +108,7 @@ $(document).ready(function() {
             <tr>
               <th>Titulo</th>
               <th>Leido</th>
-              <th>Respuestas</th>
+              <th>Resp.</th>
               <th>Fecha</th>
               <th>Prioridad</th>
             </tr>
@@ -361,18 +361,12 @@ $(document).ready(function() {
 
   //evento al hacer click en el td con id que inicia en row // corresponde a Autoridades
   $('[id ^=row]').on('click', function(){
-
     let escuelaId = $(this).attr('id').substr(3)
-    //alert(escuelaId)
     let $this = $(this)
-
     let existeAutoridad = $('.tableAutoridades'+escuelaId).attr('class')
-    //let existe = $('.trautoridad'+escuelaId).attr('class')
 
     if (typeof(existeAutoridad)==='undefined') {
-        //console.log(existe)
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
-        //console.log(escuelaId)
         let all ='all'
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
@@ -414,9 +408,6 @@ $(document).ready(function() {
             </tr>
           </thead>
           `)
-
-
-
           let itemEscuela = 0
 
           for (let item of lista) {
@@ -432,20 +423,10 @@ $(document).ready(function() {
               <td><a id='eInforme' href=''>${item.apellido},${item.nombre}</a></td>
               <td><a id='eInforme' href=''>${item.telefono}</a></td>
               <td><a id='eInforme' href=''>${item.email}</a></td>
-              <td><img class='img-responsive' src='img/iconos/lapiz (4).png' id='eAutoridad'></td>
+              <td><img class='img-responsive' src='img/iconos/lapiz (4).png' id='idAuto${item.idCargo}'></td>
 
               </tr></tbody></table>`)
-
-
-
-
-              /*$('#autoridad'+escuelaId).parent().parent().after(`<tr class="trautoridad${item.escuelaId}"><td>${item.cargo}</td><td>${item.apellido}, ${item.nombre}</td><td>${item.telefono}</td><td>${item.email}</td><td><a id='eAutoridad' href=''>Modificar</a></td></tr>`)
-              itemEscuela++
-              if (itemEscuela==item.cantidad) {
-                $('#autoridad'+escuelaId).parent().parent().after(`<tr class="trautoridad${item.escuelaId}"><td colspan="5">listado de autoridades</td></tr>`)
-
-              }*/
-              $('.trautoridad'+item.escuelaId).hide()
+        $('.trautoridad'+item.escuelaId).hide()
               $('.trautoridad'+item.escuelaId).fadeIn('slideUp')
               if (item.id=='0') {
                 //alert(item.nombre)
@@ -459,6 +440,11 @@ $(document).ready(function() {
             }
           }
 
+          $('[id ^=idAuto]').click( function(){              
+              let idAutoridad = $(this).attr('id')
+              console.log(idAutoridad)
+              //   console.log('llego a idauto')
+             })
 
 
           console.log("success");

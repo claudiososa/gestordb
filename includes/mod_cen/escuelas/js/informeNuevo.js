@@ -68,6 +68,21 @@ function informeNuevo(escuela)
              </div>
              <div class="form-group">
                 <div class="col-md-12">
+                  <label class="control-label">Fecha</label>
+                </div>
+                <div class="col-md-12">
+                    <input
+                        id="input_01"
+                        class="datepicker"
+                        name="date"
+                        type="text"
+                        autofocuss
+                        value="14 August, 2018"
+                        data-valuee="2014-08-08">
+                 </div>
+               </div>
+             <div class="form-group">
+                <div class="col-md-12">
                   <label class="control-label">Título</label>
                 </div>
                 <div class="col-md-12">
@@ -106,6 +121,7 @@ function informeNuevo(escuela)
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        <div id="container"></div>
             `).appendTo('#padreIr')
 
             traerCategorias(tipoR)
@@ -136,6 +152,26 @@ function informeNuevo(escuela)
           maxFilePreviewSize: 1024,
           showUpload: false
       });
+
+
+
+        var $input = $( '.datepicker' ).pickadate({
+            formatSubmit: 'yyyy/mm/dd',
+            // min: [2015, 7, 14],
+            container: '#container',
+            // editable: true,
+            closeOnSelect: false,
+            closeOnClear: false,
+        });
+
+        var picker = $input.pickadate('picker');
+        // picker.set('select', '14 October, 2014')
+        // picker.open()
+
+        // $('button').on('click', function() {
+        //     picker.set('disable', true);
+        // });
+
 
 
       $("#input-24").fileinput({
@@ -212,6 +248,8 @@ function informeNuevo(escuela)
         let titulo = $('#titulo').val()
         let tipo = $('#tipo').val()
         let subTipo = $('#subTipo').val()
+        let fecha = $('input[name=date_submit]').val()
+        //console.log(fecha)
         $('#formInforme').on('submit',(function(e) {
             let paqueteData = new FormData()
             let ins = document.getElementById('input-img').files.length;
@@ -224,6 +262,7 @@ function informeNuevo(escuela)
             paqueteData.append('titulo', titulo);
             paqueteData.append('tipo', tipo);
             paqueteData.append('subTipo', subTipo);
+            paqueteData.append('fecha', fecha);
             paqueteData.append('referenteId', referenteId2);
             paqueteData.append('contenido', contenido);
             $.ajax({
