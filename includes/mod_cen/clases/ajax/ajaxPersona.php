@@ -29,7 +29,8 @@
                  'localidad' => $row->localidadId,
                  'cargo'=>$row->cargoAutoridad,
                  'escuelaId'=>$_POST['escuelaId'],
-                 'cantidad'=>$cantidad 
+                 'cantidad'=>$cantidad,
+                 'idCargo'=>$row->tipoId 
                ];
           array_push($arrayPrincipal,$item);
         }

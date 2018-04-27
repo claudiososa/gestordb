@@ -1,4 +1,17 @@
 $(document).ready(function() {
+
+  $('[id ^=idAuto]').on('click',function(){
+  // $('[id ^=idAuto]').click(function(){
+  //     //let idAutoridad = $(this).attr('id')
+  //     //console.log(idAutoridad)
+       console.log('llego a idauto')
+   })
+
+  //  $('#casa').on('click',function(){
+  // //     //let idAutoridad = $(this).attr('id')
+  // //     //console.log(idAutoridad)
+  //      console.log('llego a idauto')
+  //  });
 //  let update = '0' //determina si se desea guardar nuevo registro o actualizar (valor 0 corresponde a nuevo)
   $('#btn_ir').click(function(){
     $("#myModal").remove()

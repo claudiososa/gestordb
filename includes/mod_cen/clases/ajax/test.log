@@ -1,1 +1,83 @@
-string(176) "[{"id":"0022","nombre":"CLAUDIO ARIEL","apellido":"SOSA","dni":"26899902","cuil":"20268999028","telefono":"3874147415","email":"vicomser.claudio@gmail.com","localidad":"0001"}]"
+array(3) {
+  [0]=>
+  array(12) {
+    ["id"]=>
+    string(4) "0516"
+    ["nombre"]=>
+    string(11) "MARIA LUISA"
+    ["apellido"]=>
+    string(6) "FRANCO"
+    ["dni"]=>
+    string(8) "17580680"
+    ["cuil"]=>
+    string(11) "27175806801"
+    ["telefono"]=>
+    string(0) ""
+    ["email"]=>
+    string(21) "francomaria@gmail.com"
+    ["localidad"]=>
+    string(4) "0031"
+    ["cargo"]=>
+    string(21) "Supervisor Secundaria"
+    ["escuelaId"]=>
+    string(4) "0069"
+    ["cantidad"]=>
+    int(3)
+    ["idCargo"]=>
+    string(2) "15"
+  }
+  [1]=>
+  array(12) {
+    ["id"]=>
+    string(4) "0022"
+    ["nombre"]=>
+    string(13) "CLAUDIO ARIEL"
+    ["apellido"]=>
+    string(4) "SOSA"
+    ["dni"]=>
+    string(8) "26899902"
+    ["cuil"]=>
+    string(11) "20268999028"
+    ["telefono"]=>
+    string(10) "3874147415"
+    ["email"]=>
+    string(26) "vicomser.claudio@gmail.com"
+    ["localidad"]=>
+    string(4) "0001"
+    ["cargo"]=>
+    string(27) "Director Escuela Secundaria"
+    ["escuelaId"]=>
+    string(4) "0069"
+    ["cantidad"]=>
+    int(3)
+    ["idCargo"]=>
+    string(2) "20"
+  }
+  [2]=>
+  array(12) {
+    ["id"]=>
+    string(4) "0216"
+    ["nombre"]=>
+    string(11) "JUAN CARLOS"
+    ["apellido"]=>
+    string(9) "GUTIERREZ"
+    ["dni"]=>
+    string(8) "36280631"
+    ["cuil"]=>
+    string(11) "20362806314"
+    ["telefono"]=>
+    string(10) "3874437489"
+    ["email"]=>
+    string(20) "juancg.016@gmail.com"
+    ["localidad"]=>
+    string(4) "0031"
+    ["cargo"]=>
+    string(26) "Equipo Tecnico Territorial"
+    ["escuelaId"]=>
+    string(4) "0069"
+    ["cantidad"]=>
+    int(3)
+    ["idCargo"]=>
+    string(2) "30"
+  }
+}
