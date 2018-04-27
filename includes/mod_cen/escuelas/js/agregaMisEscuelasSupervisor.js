@@ -108,7 +108,7 @@ $(document).ready(function() {
             <tr>
               <th>Titulo</th>
               <th>Leido</th>
-              <th>Respuestas</th>
+              <th>Resp.</th>
               <th>Fecha</th>
               <th>Prioridad</th>
             </tr>
