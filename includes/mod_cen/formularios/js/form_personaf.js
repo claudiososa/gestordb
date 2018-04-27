@@ -2,7 +2,7 @@ $(document).ready(function() {
 
      // nombre - apellido
      var persona = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ_\s]+$/;
-
+// Crear nueva variable o combinar poar numero telefonico y validar con formtqatos para codigo y para numero
      // cuil - dni - tel casa - tel cel - cp
      var num =  /^[0-9]+$/;
 
@@ -17,6 +17,36 @@ $("#boton1").click(function (){
 
 // campos nombre y apellido obligatorios
 
+//
+// #######################################
+// validacion ejemplo con inputs alertados
+//
+// #### al presionar teclas evento keyup
+// $("#txtapellido").keyup(function(event){
+//   if( $('#txtapellido').val() != "" && (letras.test($('#txtapellido').val() ))){
+//       $(".error").removeClass('show').fadeOut();
+//
+//       $('.ctxtapellido').removeClass('has-error').addClass('has-success')
+//       $('.validacion').attr('for','txtapellido')
+
+//##### agrega leyenda de error con color de clase correspondiente
+//       $('#txtapellido').attr('aria-describedby','helpBlock2')
+//
+//     //  return true;
+//
+//   }else{
+//     $('.ctxtapellido').addClass('has-error')
+//     $('.validacion').attr('for','txtapellido')
+//     $('#txtapellido').attr('aria-describedby','helpBlock2')
+//     $('.error').addClass('show').addClass('help-block').attr('id','help-block2')
+//   //  return true;
+//   }
+//
+//
+// })
+//
+////
+// ################################
          if ( $("#apellido").val() =="" || !persona.test($("#apellido").val())) {
            $("#apellido").focus().after("<span class='error'>Campo obligatorio.(Solo letras)</span");
 

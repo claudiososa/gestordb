@@ -162,7 +162,7 @@ if(($_POST))
 
 						</script>
 
-            <div id="tabs">
+            <!-- <div id="tabs">
               <ul>
                 <li><a href="#tabs-1">Escuela</a></li>
                 <li><a href="ajax/content4-broken.php">Autoridades Esc.</a></li>
@@ -179,34 +179,34 @@ if(($_POST))
                   <div class="row">
                     <div class="col-md-6">
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-6">
                           <h5>N°: 5001</h5>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-6">
                           <h5>CUE:66250100</h5>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-6">
                           <h5>Localidad: Salta</h5>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-6">
                           <h5>Direccion:xxxxxxxxxx</h5>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-6">
                           <img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" alt="Telefono">254688445</>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-12">
                           <img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="email">email@gmail.com</>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-6">
                         <h5>Total Informes: (20)</h5>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-12">
                           <img src="img/iconos/pruebaFotoPerfil/ubicacion.png" alt=""></>
 
                         </div>
@@ -214,8 +214,16 @@ if(($_POST))
                       </div>
 
                     </div>
-                    <div class="col-md-6 col-md-push-2">
-                        <img src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" align="center" class="img-responsive" alt="Imagen no disponible">
+                    <!-- <div class="col-md-6 col-xs-12 col-xs-push-2 col-md-push-2">
+                        <img src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" align="center" class="img-responsive" alt="Imagen no disponible" style="max-width: 300px; max-height: 300px">
+                    </div> -->
+
+                    <div class="col-md-6 col-xs-12">
+                        <img src="img/iconos/busquedaEsc/normal4.jpg" align="center" class="img-responsive img-thumbnail" alt="FotoEscxxxx"style="max-width: 300px; max-height: 300px" >
+                    </div>
+
+                    <div class="col-md-6 col-xs-12">
+                        <img src="img/iconos/busquedaEsc/normal4.jpg" align="center" class="img-responsive img-thumbnail" alt="FotoEscxxxx"style="max-width: 300px; max-height: 300px" >
                     </div>
 
                   </div>
@@ -311,7 +319,7 @@ if(($_POST))
 
               </div>
             </div>
-
+ -->
 
             <script>
   $( function() {
