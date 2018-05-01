@@ -836,30 +836,31 @@ if(isset($_POST["referente_id"])) {
 	}
 	echo json_encode($estado);
 }
-if(isset($_POST["escuelaId"]))
-{
-	include_once ('FacilEscuelas.php');
-	include_once ('rti.php');
 
-	$facilitador = new FacilEscuelas(null,$_POST["escuelaId"]);
-	$buscarFacil= $facilitador->buscar();
-	$datoFacil =  mysqli_num_rows($buscarFacil);
-	//echo $datoFacil;
-
-	//$dato_rti= new Rtixinstitucion(null,$_POST["escuelaId"]);
-	$buscarRti= Rti::existeRtixinstitucion($_POST["escuelaId"]);
-	$cantidadRti=mysqli_num_rows($buscarRti);
-
-	if ($cantidadRti > 0) {
-		echo '<option value="referentes&id=8">Ver Rti</option>';
-	}
-
-	if ($datoFacil > 0) {
-		echo '<option value="referentes&id=11">Ver Facilitadores</option>';
-}/*if ($rti > 0) {
-	echo '<option value="referentes&id=8">Ver RTI</option>';
-}*/
-
-//<option value="referentes&id=8">Ver RTI</option>
-
-}
+// if(isset($_POST["escuelaId"]))
+// {
+// 	include_once ('FacilEscuelas.php');
+// 	include_once ('rti.php');
+//
+// 	$facilitador = new FacilEscuelas(null,$_POST["escuelaId"]);
+// 	$buscarFacil= $facilitador->buscar();
+// 	$datoFacil =  mysqli_num_rows($buscarFacil);
+// 	//echo $datoFacil;
+//
+// 	//$dato_rti= new Rtixinstitucion(null,$_POST["escuelaId"]);
+// 	$buscarRti= Rti::existeRtixinstitucion($_POST["escuelaId"]);
+// 	$cantidadRti=mysqli_num_rows($buscarRti);
+//
+// 	if ($cantidadRti > 0) {
+// 		echo '<option value="referentes&id=8">Ver Rti</option>';
+// 	}
+//
+// 	if ($datoFacil > 0) {
+// 		echo '<option value="referentes&id=11">Ver Facilitadores</option>';
+// }/*if ($rti > 0) {
+// 	echo '<option value="referentes&id=8">Ver RTI</option>';
+// }*/
+//
+// //<option value="referentes&id=8">Ver RTI</option>
+//
+// }

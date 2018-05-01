@@ -371,7 +371,7 @@
 						include("includes/mod_cen/referentes/referente_ett.php");
 						break;
 				case 3:
-						include("includes/mod_cen/escuelas/escuela_ett.php");
+						include("includes/mod_cen/escuelas/misEscuelasEtt.php");
 						break;
 				case 4:
 						include("includes/mod_cen/rti/rti_ett.php");

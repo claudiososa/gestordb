@@ -95,7 +95,7 @@ $(document).ready(function() {
           class="table StyleTable">
           <thead>
             <tr class='warningStyle'>
-              <th><h4>Informes&nbsp&nbsp  N° Escuela:1111 </h4></th>
+              <th><h4>Informes</h4></th>
               <th>&nbsp</th>
               <th>&nbsp</th>
               <th>&nbsp</th>
@@ -284,12 +284,12 @@ $(document).ready(function() {
           $('#rti'+escuela).parent().parent().after(`<tr class="tableRti${tableAuto} success"><td colspan="6"><table class="table StyleTable1">
           <thead>
           <tr class='success'>
-          <th><h4>RTI &nbsp&nbsp&nbsp  N° Escuela:  1454</h4></th>
+          <th><h4>RTI</h4></th>
          <th>&nbsp</th>
          <th>&nbsp</th>
          <th>&nbsp</th>
          <th>&nbsp</th>
-         <th><button type='button' class='btn btn-success'>Nueva RTI</button></th>
+
 
          </tr>
         </thead>
@@ -362,6 +362,7 @@ $(document).ready(function() {
   //evento al hacer click en el td con id que inicia en row // corresponde a Autoridades
   $('[id ^=row]').on('click', function(){
     let escuelaId = $(this).attr('id').substr(3)
+    console.log('escuelaId de row'+escuelaId)
     let $this = $(this)
     let existeAutoridad = $('.tableAutoridades'+escuelaId).attr('class')
 
@@ -375,22 +376,23 @@ $(document).ready(function() {
           data: {all:all,escuelaId: escuelaId}
         })
         .done(function(lista) {
+          //alert(lista)
           let tableinforme = 0
 
           for (let item of lista) {
               tableAuto=pad(item.escuelaId,4,0)
 
           }
-
+          console.log('tableAuto'+tableAuto)
           $('#autoridad'+escuelaId).parent().parent().after(`<tr class="tableAutoridades${tableAuto} success"><td colspan="6"><table class="table StyleTable1">
           <thead>
           <tr class='success'>
-          <th><h4>Autoridades &nbsp&nbsp&nbsp  N° Escuela:  1454</h4></th>
+          <th><h4>Autoridades</h4></th>
          <th>&nbsp</th>
          <th>&nbsp</th>
          <th>&nbsp</th>
          <th>&nbsp</th>
-         <th><button type='button' class='btn btn-success'>Nueva Autoridad</button></th>
+
 
          </tr>
         </thead>
@@ -415,43 +417,43 @@ $(document).ready(function() {
             let escuelaIdconCero = pad(item.escuelaId,4,0)
             let escuela = item.escuelaId
 
-
-            if (item.cantidad > 0) {
+            if (item.id != '0') {
 
               $('#tableAutoridades'+escuelaIdconCero).find('thead').after(`<tbody><tr class="trinformes${escuelaIdconCero}">
               <td>${item.cargo}</td>
               <td><a id='eInforme' href=''>${item.apellido},${item.nombre}</a></td>
               <td><a id='eInforme' href=''>${item.telefono}</a></td>
               <td><a id='eInforme' href=''>${item.email}</a></td>
-              <td><img class='img-responsive' src='img/iconos/lapiz (4).png'  id='idAuto${item.idCargo}'></td>
-
-              </tr></tbody></table>`)
-        $('.trautoridad'+item.escuelaId).hide()
+              <td id='${item.escuelaId}'><img class='img-responsive' src='img/iconos/lapiz (4).png'  id='idAuto${item.idCargo}'></td>
+              </tr>`)
+              //</tbody></table>`)
+              $('.trautoridad'+item.escuelaId).hide()
               $('.trautoridad'+item.escuelaId).fadeIn('slideUp')
-              if (item.id=='0') {
-                //alert(item.nombre)
-                console.log('no encontrado')
-              }else{
-
-                //$('#localidad').append(`<option value="${item.localidad}">${item.nombre}</option>`)
-              }
-            }else{
-              alert('Esta escuela no tiene autoridad asignada')
+             }else{
+               $('#tableAutoridades'+escuelaIdconCero).find('thead').after(`<tbody><tr class="trinformes${escuelaIdconCero}">
+               <td>${item.cargo}</td>
+               <td colspan="3">Sin Asignar</td>
+               <td id='${item.escuelaId}'><img class='img-responsive' src='img/iconos/lapiz (4).png'  id='idAuto${item.idCargo}'></td>
+               </tr>`)
             }
           }
+
+          //$('#tableAutoridades'+escuelaIdconCero).find('thead').after(`</tbody></table>`)
 
           $('[id ^=idAuto]').click( function(){
               let idAutoridad = $(this).attr('id')
               $('#tipoId').val(idAutoridad)
 
+              let escuelaActual= $(this).parent().attr('id')
+
               console.log(idAutoridad)
-              formPersona()
+              formPersona22()
 
 
-              function formPersona()
+              function formPersona22()
               {
                 //let escuelaId =  $('#escuelaId').val()
-                escuelaId=69
+                escuelaId=escuelaActual
                 console.log(escuelaId)
                 $('#padreIr').append(`
                   <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
@@ -598,8 +600,10 @@ $(document).ready(function() {
                   let escuelaId = $('#txtescuelaid').val()
                   console.log('desde txtescuelaid'+escuelaId)
                   let tipoId = $('#tipoId').val().substr(6)
+                  //let idPrueba = $(this).attr('id');
+                  //let tipoId = $('#idAuto').attr('id')
 
-                    console.log('desde tipoId'+tipoId)
+                  console.log('desde tipoId'+tipoId)
                   let search ='search'
                   $.ajax({
                     url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
@@ -1029,8 +1033,39 @@ $(document).ready(function() {
 
           console.log("success");
         })
-        .fail(function() {
-          console.log("error");
+
+        .fail( function( jqXHR, textStatus, errorThrown ) {
+          if (jqXHR.status === 0) {
+
+   alert('Not connect: Verify Network.');
+
+ } else if (jqXHR.status == 404) {
+
+   alert('Requested page not found [404]');
+
+ } else if (jqXHR.status == 500) {
+
+   alert('Internal Server Error [500].');
+
+ } else if (textStatus === 'parsererror') {
+
+   alert('Requested JSON parse failed.');
+
+ } else if (textStatus === 'timeout') {
+
+   alert('Time out error.');
+
+ } else if (textStatus === 'abort') {
+
+   alert('Ajax request aborted.');
+
+ } else {
+
+   alert('Uncaught Error: ' + jqXHR.responseText);
+
+ }
+
+          console.log("erroraaaa");
         })
         .always(function() {
           console.log("complete");

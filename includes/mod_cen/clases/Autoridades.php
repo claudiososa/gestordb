@@ -186,6 +186,16 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 												ON tipoAutoridades.tipoId=autoridades.tipoId
 												WHERE escuelaId=".$this->escuelaId;
 						$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
+					}else{
+						$sentencia="SELECT *
+												FROM autoridades
+												INNER JOIN personas
+												ON personas.personaId=autoridades.personaId
+												INNER JOIN tipoAutoridades
+												ON tipoAutoridades.tipoId=autoridades.tipoId
+												WHERE escuelaId=".$this->escuelaId." AND autoridades.tipoId=".$this->tipoId;
+						$sentencia.="  ORDER BY autoridades.autoridadesId ASC";
+						//return $sentencia;
 					}
 
 					return $bd->ejecutar($sentencia);
@@ -314,7 +324,7 @@ function __construct($autoridadesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		//if(isset($limit)){
 			//$sentencia.=" LIMIT ".$limit;
 		//}
-		echo $sentencia;
+		//echo $sentencia;
 		return $conexion->query($sentencia);
 
 	}
@@ -330,7 +340,7 @@ public function existe()
 		$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));
 		if ($cantidad > 0) {
 			 $id = mysqli_fetch_object($bd->ejecutar($sentencia));
-			 $dato = $id->autoridadesId; 
+			 $dato = $id->autoridadesId;
 			 return $dato;
 		}else{
 			return 0;
