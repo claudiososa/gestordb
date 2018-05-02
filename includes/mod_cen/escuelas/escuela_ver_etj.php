@@ -171,9 +171,9 @@ if(($_POST))
                 <li><a href="ajax/content2.html">PMI</a></li>
                 <li><a href="ajax/content3-slow.php">ESC.FUTURO</a></li>
 
-              </ul>
+              </ul>-->
               <!-- ###########CONTENIDO EJEMPLO############ -->
-              <div id="tabs-1">
+              <!-- <div id="tabs-1">
                   <h4 align="center">COLEGIO SECUNDARIO XXXXXXXXXXX</h4>
                   <hr>
                   <div class="row">
@@ -218,7 +218,7 @@ if(($_POST))
                         <img src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" align="center" class="img-responsive" alt="Imagen no disponible" style="max-width: 300px; max-height: 300px">
                     </div> -->
 
-                    <div class="col-md-6 col-xs-12">
+                    <!-- <div class="col-md-6 col-xs-12">
                         <img src="img/iconos/busquedaEsc/normal4.jpg" align="center" class="img-responsive img-thumbnail" alt="FotoEscxxxx"style="max-width: 300px; max-height: 300px" >
                     </div>
 
@@ -226,7 +226,7 @@ if(($_POST))
                         <img src="img/iconos/busquedaEsc/normal4.jpg" align="center" class="img-responsive img-thumbnail" alt="FotoEscxxxx"style="max-width: 300px; max-height: 300px" >
                     </div>
 
-                  </div>
+                  </div> -->
                 <!-- <div class="row">
                   <div class="col-md-3">
                     <h5>N°: 5001</h5>
@@ -274,13 +274,13 @@ if(($_POST))
                   </div>
 
                 </div> -->
-
-              </div>
+<!--
+              </div> -->
 
 
               <!-- ###EJEMPLO DE INTERFAZ PARA VISTA PLANIED### -->
 
-              <div id="tabs-2">
+              <!-- <div id="tabs-2">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="panel panel-default">
@@ -310,18 +310,18 @@ if(($_POST))
 
                   </div>
 
-                </div>
+                </div> -->
                 <!-- <div class="panel panel-default">
                   <div class="panel-body">
 
                   </div>
                 </div> -->
-
+<!--
               </div>
             </div>
  -->
 
-            <script>
+            <!-- <script>
   $( function() {
     $( "#tabs" ).tabs({
       beforeLoad: function( event, ui ) {
@@ -333,8 +333,8 @@ if(($_POST))
       }
     });
   } );
-  </script>
-
+  </script> -->
+ <!-- -->
 
 
 						<?php
