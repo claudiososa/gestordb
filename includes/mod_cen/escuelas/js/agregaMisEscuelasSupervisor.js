@@ -631,6 +631,7 @@ $(document).ready(function() {
                         $('#txtemail').val('')
                         $('#localidad').val('0')
                       }else{
+                        $('#btnEditar').show()
                         $('#statusDni').val('1')
                         console.log('encontrado')
                         camposOcultos.show()
