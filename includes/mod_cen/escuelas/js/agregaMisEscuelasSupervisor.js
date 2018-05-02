@@ -600,6 +600,8 @@ $(document).ready(function() {
                   let escuelaId = $('#txtescuelaid').val()
                   console.log('desde txtescuelaid'+escuelaId)
                   let tipoId = $('#tipoId').val().substr(6)
+                  $('#btnEditar').hide()
+                    $('#btnSave').hide()
                   //let idPrueba = $(this).attr('id');
                   //let tipoId = $('#idAuto').attr('id')
 
@@ -618,6 +620,8 @@ $(document).ready(function() {
                         console.log('no encontrado')
                         //  $('#btnSave').show()
                         camposOcultos.hide()
+                        // $('#btnEditar').hide()
+                        // $('#btnSave').hide()
                         $('#statusDni').val('0')
                         $('#txtidpersona').val('')
                         $('#txtnombre').val('')
@@ -633,6 +637,7 @@ $(document).ready(function() {
                         $('#btnBuscarDni').hide()
                         $('#btnSave').hide()
                         $('.buscar').append('<button type="button" class="btn btn-primary" id="btnNew">Nueva Autoridad</button>')
+
                         $('#btnNew').click(function(event) {
                           $(this).hide()
                           camposOcultos.hide()
@@ -672,7 +677,8 @@ $(document).ready(function() {
 
 
                   console.log('boton guardar')
-
+                  // $('#btnEditar').hide()
+                  //   $('#btnSave').hide()
                   let id = $('#txtidpersona').val()
                   let nombre = $('#txtnombre').val()
                   let apellido = $('#txtapellido').val()
@@ -989,6 +995,7 @@ $(document).ready(function() {
                       if (item.id=='0') {
                         console.log('no encontrado')
                         $('#btnSave').show()
+
                         $('#statusDni').val('0')
                         $('#txtidpersona').val('')
                         $('#txtnombre').val('')
