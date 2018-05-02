@@ -21,7 +21,11 @@
             <li><a href="index.php?mod=slat&men=user&id=2">Mis ETT <span class="sr-only">(current)</span></a></li>
             <li><a href="index.php?mod=slat&men=user&id=3">Mis Escuelas <span class="sr-only">(current)</span></a></li>
             <li><a href="index.php?mod=slat&men=user&id=4">Mis RTI</a></li>
-            <li><a href="index.php?mod=slat&men=admin&id=6">Asignar Escuelas Admin</a></li>
+            <!-- <li><a href="index.php?mod=slat&men=admin&id=6">Asignar Escuelas Admin</a></li> -->
+            <li><a href="index.php?mod=slat&men=admin&id=21">Asignar Escuelas ETT</a></li>
+                          
+
+
           </ul>
         </li>
         <li class="dropdown">
