@@ -220,6 +220,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 			case 'entreFechas':
 				if(isset($fecha1)<>NULL && isset($fecha2)<>NULL){
 					$sentencia="SELECT ".$filtro." * "."FROM informes WHERE fechaCarga "." BETWEEN '".$fecha1."' AND '".$fecha2."'";
+
 				}else{
 					$sentencia="SELECT ".$filtro." * "."FROM informes";
 				}
@@ -244,6 +245,12 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 			case 'año':
 					$sentencia="SELECT ".$filtro." * "."FROM informes WHERE  YEAR(fechaCarga) =".$año1;
+					if(isset($referenteId)){
+						$sentencia.=" AND informes.referenteId=".$referenteId;
+					}
+					if(isset($prioridad)){
+						$sentencia.=" AND informes.prioridad='".$prioridad."'";
+					}
 					break;
 
 			default:
@@ -251,7 +258,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 				break;
 		}
 
-//echo $sentencia."<br>";
+    // echo $sentencia."<br>";
 		return $conexion->query($sentencia);
 	}
 

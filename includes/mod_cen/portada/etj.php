@@ -13,6 +13,7 @@
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
+require_once("includes/mod_cen/clases/leido.php");
 
 
 //create object referenteId and filter of status active
@@ -44,7 +45,99 @@ $mis_informes= new informe(null,null,$_SESSION["referenteId"]);
 $b_mis_informe = $mis_informes->buscar(10);
 
 echo '<div class="container">';
+
+
+		if(mysqli_num_rows($resultado_ett_acargo)>0){
+			?>
+
+			<div class="panel panel-primary">
+				<div class="panel-heading" id="panel22"><span class="panel-title clickable">
+					<h4>Informes de ETT a cargo 2018<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
+				</div>
+				<div>
+					<?php
+
+					echo "<table id='informe_ett' class='table table-hover table-striped table-condensed tablesorter'>";
+					echo "<thead>";
+					echo "<tr>";
+					echo "<th>Apellido y Nombre</th>";
+
+					echo "<th>Normal</th>";
+					echo "<th>Media</th>";
+					echo "<th>Alta</th>";
+					echo "<th>Total</th>";
+					echo "<th>Leidos</th>";
+					echo "<th>No Leidos</th>";
+					echo "</tr>";
+					echo "</thead>";
+
+					echo "<tbody>";
+
+					while ($fila=mysqli_fetch_object($resultado_ett_acargo)){
+				 		echo "<tr id=ett$fila->referenteId>";
+					 	echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
+
+						$informe_ett= new informe(null,null,$fila->referenteId);
+
+						$leido = new Leido(null,null,$_SESSION['referenteId']);
+						//$cantidadLeido = $leido->cantidadLeido($_SESSION['referenteId'],$fila->referenteId,'2018');
+
+
+						//buscar por fecha de informes
+
+
+
+
+						//busqueda de informes de proiridad alta
+
+						$buscar_alta =$informe_ett->summary('año',null,null,null,null,'2018','Alta',$fila->referenteId);
+						$totalAlta = mysqli_num_rows($buscar_alta);
+
+						//busqueda de informes de proiridad media
+
+						$buscar_media =$informe_ett->summary('año',null,null,null,null,'2018','Media',$fila->referenteId);
+						$totalMedia = mysqli_num_rows($buscar_media);
+
+						//busqueda de informes de proiridad normal
+						//$informe_normal= new Informe(null,null,$fila->referenteId,"Normal");
+						$buscar_normal = $informe_ett->summary('año',null,null,null,null,'2018','Normal',$fila->referenteId);
+						$totalNormal = mysqli_num_rows($buscar_normal);
+
+
+						$actual = $informe_ett->summary('año',null,null,null,null,'2018',null,$fila->referenteId);
+						$cantidadActual=mysqli_num_rows($actual);
+
+						$cantidadLeido = 0;
+						while ($row = mysqli_fetch_object($actual)) {
+							$leido->informeId=$row->informeId;
+							$buscarL = $leido->buscar();
+							if (mysqli_num_rows($buscarL)>0) {
+								$cantidadLeido++;
+							}
+
+						}
+
+						$cantidadNoLeidos=$cantidadActual-$cantidadLeido;
+						//echo $cantidad;
+
+
+						echo "<td><buttom id='normal$fila->referenteId' class='btn btn-success'>$totalNormal</buttom></td>";
+						echo "<td><buttom id='media$fila->referenteId' class='btn btn-success'>$totalMedia</buttom></td>";
+						echo "<td><buttom id='alta$fila->referenteId' class='btn btn-primary'>$totalAlta</buttom></td>";
+
+						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadActual.'</a></td>';
+						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadLeido.'</a></td>';
+						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadNoLeidos.'</a></td>';
+
+
+						echo "</tr>";
+					}
+
+					echo "</tbody>";
+					echo "</table>";
+				}
 ?>
+
 <!--
 <div class="alert alert-info" role="alert">
 	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>

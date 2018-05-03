@@ -1,6 +1,8 @@
+
 <?php
 include_once('conexion.php');
 include_once("maestro.php");
+include_once("informe.php");
 
 class Leido
 {
@@ -138,6 +140,32 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 			//return $sentencia;
 			return $conexion->query($sentencia);
 	}
+
+// 	public function cantidadLeido($etj=null,$referente=null,$aa=null)
+// 	{
+//
+// 		$nuevaConexion=new Conexion();
+// 		$conexion=$nuevaConexion->getConexion();
+//
+// 		$informe = new Infome();
+// 		$actual = $informe->summary('año',null,null,null,null,'2018',null,$referente);
+//
+// 		while ($fila = mysqli_fetch_object($actual)) {
+//
+// 		}
+//
+//
+// 		 $sentencia ="SELECT *
+// 		 						 FROM informes
+// 		 						 INNER JOIN leido
+// 		 						 ON leido.informeId=informes.informeId
+// 								 WHERE leido.referenteId=$etj AND informes.referenteId=".$referente. " AND YEAR(informes.fechaCarga)=".$aa;
+// 		$sentencia.="  ORDER BY leido.fechaHora ASC";
+// 		//echo $sentencia;
+// 		$cantidad= mysqli_num_rows($conexion->query($sentencia));
+//
+// 		return $cantidad;
+// }
 
 	public function buscar($limit=NULL,$tipo=NULL,$referenteId=NULL)
 	{
