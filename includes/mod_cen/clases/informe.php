@@ -258,7 +258,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 							$sentencia.="(SELECT informes.informeId FROM informes
 							INNER JOIN leido
 							ON informes.informeId=leido.informeId
-							WHERE leido.referenteId <>".$etj.")";
+							WHERE leido.referenteId <>".$etj.") ORDER BY informes.prioridad DESC";
 
 							break;
 			default:

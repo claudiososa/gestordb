@@ -10,32 +10,15 @@
 </style>
 <script>
   $( function() {
-    $( "#tabs" ).tabs({
-      collapsible: true
-    });
-		$( "#accordion,#accordion1" ).accordion({
-      collapsible: true
-    });
-		
-		$( "#accordion2" ).accordion({
-			collapsible: true
-		});
-		$( "#accordion3" ).accordion({
-			collapsible: true
-		});
-		$( "#accordion4" ).accordion({
-			collapsible: true
-		});
-		$( "#accordion5" ).accordion({
-			collapsible: true
-		});
-		$( "#accordion6" ).accordion({
-			collapsible: true
-		});
-		$( "#accordion7" ).accordion({
-			collapsible: true
-		});
 
+		 $( "#accordion1,#accordion2,#accordion3,#accordion4,#accordion5,#accordion6,#accordion7" ).accordion({
+			 active: false,
+			 collapsible: true
+     });
+
+		 $( "#tabs" ).tabs({
+       collapsible: true
+     });
 
   } );
 
@@ -82,217 +65,14 @@ $mis_informes= new informe(null,null,$_SESSION["referenteId"]);
 $b_mis_informe = $mis_informes->buscar(10);
 
 echo '<div class="container">';
-
-
-		if(mysqli_num_rows($resultado_ett_acargo)>0){
-
-				echo "<div id='tabs'>";
-				 echo "<ul>";
-
-							while ($fila=mysqli_fetch_object($ett1))
-							{
-								$buscar   = ' ';
-								$pos = strpos($fila->apellido, $buscar);
-
-								if ($pos===false) {
-									echo "<li><a href='#tabs-".$fila->referenteId."'>".strtoupper($fila->apellido)."</a></li>";
-								}else{
-									echo "<li><a href='#tabs-".$fila->referenteId."'>".substr(strtoupper($fila->apellido),0,strpos($fila->apellido,' '))."</a></li>";	# code...
-								}
-
-							}
-
-				  echo '</ul>';
-					$contador=0;
-					while ($fila=mysqli_fetch_object($ett2))
-					{
-						echo "<div id='tabs-$fila->referenteId'>";
-
-						$informe_ett= new informe(null,null,$fila->referenteId);
-
-						$leido = new Leido(null,null,$_SESSION['referenteId']);
-						//busqueda de informes de proiridad alta
-
-						$buscar_alta =$informe_ett->summary('año',null,null,null,null,'2018','Alta',$fila->referenteId);
-						$totalAlta = mysqli_num_rows($buscar_alta);
-
-						//busqueda de informes de proiridad media
-
-						$buscar_media =$informe_ett->summary('año',null,null,null,null,'2018','Media',$fila->referenteId);
-						$totalMedia = mysqli_num_rows($buscar_media);
-
-						//busqueda de informes de proiridad normal
-						//$informe_normal= new Informe(null,null,$fila->referenteId,"Normal");
-						$buscar_normal = $informe_ett->summary('año',null,null,null,null,'2018','Normal',$fila->referenteId);
-						$totalNormal = mysqli_num_rows($buscar_normal);
-
-
-						$actual = $informe_ett->summary('año',null,null,null,null,'2018',null,$fila->referenteId);
-						$cantidadActual=mysqli_num_rows($actual);
-
-						$cantidadLeido = 0;
-						while ($row = mysqli_fetch_object($actual)) {
-							$leido->informeId=$row->informeId;
-							$buscarL = $leido->buscar();
-							if (mysqli_num_rows($buscarL)>0) {
-								$cantidadLeido++;
-							}
-
-						}
-
-						$cantidadNoLeidos=$cantidadActual-$cantidadLeido;
-						//echo $cantidad;
-
-						$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$fila->referenteId,null,$_SESSION['referenteId']);
-
-						echo "<p>".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</p>";
-
-						echo "<p>Total Informes - $cantidadActual</p>";
-						//echo "<p>Informes Leidos - $cantidadLeido</p>";
-
-						$contador++;
-
-						echo "<div id='accordion$contador'>";
-						?>
-							<h3>Informes No Leidos</h3>
-							<div>
-								<p>Informes No Leidos - <?php echo $cantidadNoLeidos;?></p>
-								<?php
-								while ($row = mysqli_fetch_object($informesNoLeidos)) {
-									echo "<p>$row->informeId---$row->titulo></p>";
-								}
-								 ?>
-
-							</div>
-						  <h3>Prioridad Alta</h3>
-						  <div>
-						    <p><buttom id='normal$fila->referenteId' class='btn btn-success'><?php echo $totalAlta?></buttom></p>
-						  </div>
-						  <h3>Prioridad Media</h3>
-						  <div>
-						    <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
-						  </div>
-						  <h3>Prioridad Normal</h3>
-						  <div>
-						    <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
-						    <ul>
-						      <li>List item one</li>
-						      <li>List item two</li>
-						      <li>List item three</li>
-						    </ul>
-						  </div>
-						</div>
-
-
-						<?php
-						echo "<p>Prioridad Normal</p>";
-						echo "<p>Prioridad Media<buttom id='media$fila->referenteId' class='btn btn-success'>$totalMedia</buttom></p>";
-						echo "<p>Prioridad Alta<buttom id='alta$fila->referenteId' class='btn btn-primary'>$totalAlta</buttom></p>";
-
-						echo '<p>Total Informes<a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadActual.'</a></p>';
-						echo '<p>Leidos<a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadLeido.'</a></p>';
-						echo '<p>No leidos<a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadNoLeidos.'</a></p>';
-
-					  echo "</div>";
-					}
-				  echo "</div>";
-
-					?>
-			<div class="panel panel-primary">
-				<div class="panel-heading" id="panel22"><span class="panel-title clickable">
-					<h4>Informes de ETT a cargo 2018<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-				</div>
-				<div>
-					<?php
-
-					echo "<table id='informe_ett' class='table table-hover table-striped table-condensed tablesorter'>";
-					echo "<thead>";
-					echo "<tr>";
-					echo "<th>Apellido y Nombre</th>";
-
-					echo "<th>Normal</th>";
-					echo "<th>Media</th>";
-					echo "<th>Alta</th>";
-					echo "<th>Total</th>";
-					echo "<th>Leidos</th>";
-					echo "<th>No Leidos</th>";
-					echo "</tr>";
-					echo "</thead>";
-
-					echo "<tbody>";
-
-					while ($fila=mysqli_fetch_object($resultado_ett_acargo))
-					{
-				 		echo "<tr id=ett$fila->referenteId>";
-					 	echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
-
-						$informe_ett= new informe(null,null,$fila->referenteId);
-
-						$leido = new Leido(null,null,$_SESSION['referenteId']);
-				   	//busqueda de informes de proiridad alta
-
-						$buscar_alta =$informe_ett->summary('año',null,null,null,null,'2018','Alta',$fila->referenteId);
-						$totalAlta = mysqli_num_rows($buscar_alta);
-
-						//busqueda de informes de proiridad media
-
-						$buscar_media =$informe_ett->summary('año',null,null,null,null,'2018','Media',$fila->referenteId);
-						$totalMedia = mysqli_num_rows($buscar_media);
-
-						//busqueda de informes de proiridad normal
-						//$informe_normal= new Informe(null,null,$fila->referenteId,"Normal");
-						$buscar_normal = $informe_ett->summary('año',null,null,null,null,'2018','Normal',$fila->referenteId);
-						$totalNormal = mysqli_num_rows($buscar_normal);
-
-
-						$actual = $informe_ett->summary('año',null,null,null,null,'2018',null,$fila->referenteId);
-						$cantidadActual=mysqli_num_rows($actual);
-
-						$cantidadLeido = 0;
-						while ($row = mysqli_fetch_object($actual)) {
-							$leido->informeId=$row->informeId;
-							$buscarL = $leido->buscar();
-							if (mysqli_num_rows($buscarL)>0) {
-								$cantidadLeido++;
-							}
-
-						}
-
-						$cantidadNoLeidos=$cantidadActual-$cantidadLeido;
-						//echo $cantidad;
-
-
-						echo "<td><buttom id='normal$fila->referenteId' class='btn btn-success'>$totalNormal</buttom></td>";
-						echo "<td><buttom id='media$fila->referenteId' class='btn btn-success'>$totalMedia</buttom></td>";
-						echo "<td><buttom id='alta$fila->referenteId' class='btn btn-primary'>$totalAlta</buttom></td>";
-
-						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadActual.'</a></td>';
-						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadLeido.'</a></td>';
-						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidadNoLeidos.'</a></td>';
-
-
-						echo "</tr>";
-					}
-
-					echo "</tbody>";
-					echo "</table>";
-				}
 ?>
-
-<!--
-<div class="alert alert-info" role="alert">
-	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
-</div>
--->
-
-
 
 <div class="row hidden-xs  wow zoomIn">
 	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
-	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
+	<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
 	</div>
 
@@ -302,15 +82,15 @@ echo '<div class="container">';
 
 <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
 	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
-</div>
+</div> -->
 
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
+<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
 	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
-</div>
+</div> -->
 
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
+<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
 	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
-</div>
+</div> -->
 
 </div>
 <!--vista mobile-->
@@ -349,6 +129,131 @@ echo '<div class="container">';
 	</div>
 
 </div>
+<?php
+
+		if(mysqli_num_rows($resultado_ett_acargo)>0){
+
+				echo "<div id='tabs'>";
+				 echo "<ul>";
+
+							while ($fila=mysqli_fetch_object($ett1))
+							{
+								$informe_ett= new informe(null,null,$fila->referenteId);
+
+								$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$fila->referenteId,null,$_SESSION['referenteId']);
+								$totalNoLeidos= mysqli_num_rows($informesNoLeidos);
+								$buscar   = ' ';
+								$pos = strpos($fila->apellido, $buscar);
+
+								if ($pos===false) {
+									echo "<li><a href='#tabs-".$fila->referenteId."'>".strtoupper($fila->apellido)." <span class='badge'>".$totalNoLeidos."</span></a></li>";
+								}else{
+									echo "<li><a href='#tabs-".$fila->referenteId."'>".substr(strtoupper($fila->apellido),0,strpos($fila->apellido,' '))."  <span class='badge'>".$totalNoLeidos."</span></a></li>";	# code...
+								}
+
+							}
+
+				  echo '</ul>';
+					$contador=0;
+					while ($fila=mysqli_fetch_object($ett2))
+					{
+						$informe_ett= new informe(null,null,$fila->referenteId);
+						$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$fila->referenteId,null,$_SESSION['referenteId']);
+						echo "<div id='tabs-$fila->referenteId'>";
+						$leido = new Leido(null,null,$_SESSION['referenteId']);
+						$buscar_alta =$informe_ett->summary('año',null,null,null,null,'2018','Alta',$fila->referenteId);
+						$totalAlta = mysqli_num_rows($buscar_alta);
+						$buscar_media =$informe_ett->summary('año',null,null,null,null,'2018','Media',$fila->referenteId);
+						$totalMedia = mysqli_num_rows($buscar_media);
+						$buscar_normal = $informe_ett->summary('año',null,null,null,null,'2018','Normal',$fila->referenteId);
+						$totalNormal = mysqli_num_rows($buscar_normal);
+						$actual = $informe_ett->summary('año',null,null,null,null,'2018',null,$fila->referenteId);
+						$cantidadActual=mysqli_num_rows($actual);
+						$cantidadNoLeidos=mysqli_num_rows($informesNoLeidos);
+
+						echo "<p>".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</p>";
+						//echo "<p class='alert alert-success'>Total Informes - $cantidadActual</p>";
+						$contador++;
+						echo "<div id='accordion$contador'>";
+						?>
+							<h3>Informes No Leidos <span class="badge"> <?php echo $cantidadNoLeidos;?></span></h3>
+							<div>
+								<?php
+								while ($row = mysqli_fetch_object($informesNoLeidos))
+								{
+									switch ($row->prioridad) {
+										case 'Normal':
+											$class="alert alert-success";
+											break;
+										case 'Media':
+											$class="alert alert-info";
+											break;
+										case 'Alta':
+											$class="alert alert-warning";
+											break;
+										default:
+											# code...
+											break;
+									}
+									echo "<p class='".$class."'>Id:$row->informeId Asunto: $row->titulo<br>
+												Fecha:".$row->fechaVisita."</p>";
+								}
+								 ?>
+
+							</div>
+							<h3>Informes prioridad Alta <span class="badge"> <?php echo $totalAlta;?></span></h3>
+
+						  <div>
+
+								<?php
+								while ($row = mysqli_fetch_object($buscar_alta)) {
+									echo "<p class='alert alert-warning'>$row->informeId---$row->titulo></p>";
+
+								}
+								?>
+						  </div>
+							<h3>Informes prioridad Media <span class="badge"> <?php echo $totalMedia;?></span></h3>
+						  <div>
+							<?php
+								while ($row = mysqli_fetch_object($buscar_media)) {
+										echo "<p class='alert alert-info'>$row->informeId---$row->titulo></p>";
+								}
+							?>
+						 </div>
+							<h3>Informes prioridad Normal <span class="badge"> <?php echo $totalNormal;?></span></h3>
+						  <div>
+								<?php
+	 							 while ($row = mysqli_fetch_object($buscar_normal)) {
+	 									 echo "<p class='alert alert-success'>$row->informeId---$row->titulo></p>";
+	 							 }
+	 						 ?>
+						  </div>
+							<h3>Calendario de Visitas realizadas</h3>
+						  <div>
+	 							<p>Normal</p>
+						  </div>
+						</div>
+
+
+						<?php
+
+
+					  echo "</div>";
+					}
+				  echo "</div>";
+
+
+
+				}
+?>
+
+<!--
+<div class="alert alert-info" role="alert">
+	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
+</div>
+-->
+
+
 
 
 <br><br><br>
@@ -365,274 +270,7 @@ echo '<div class="container">';
 		 <iframe allowFullScreen frameborder="0" height="240" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="320"></iframe>
 			<p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
 	</div> -->
-	<?php
-		echo '<div class="col-md-6">';
-		//informes de prioridad alta ///
-	  if(mysqli_num_rows($buscar_alta)>0){
-	 	?>
 
-
-	 	<div class="panel panel-primary">
-			<div class="panel-heading" id="panel1"><span class="panel-title clickable">
-				<h4>Informes Prioridad Alta<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-			</div>
-	 		<div class="panel-body">
-	 			<?php
-
-	 	echo "<table id='myTableAlta' class='table table-hover table-striped table-condensed tablesorter'>";
-	 	echo "<thead>";
-	 	echo "<tr>";
-	 	echo "<th>Id</th>";
-	 	echo "<th>Título</th>";
-	 	echo "<th>Nº</th>";
-	 	echo "<th>Creado por...</th>";
-	 	echo "<th>Prioridad</th>";
-	 	echo "</tr>";
-	 	echo "</thead>";
-
-	 	echo "<tbody>";
-	 	while ($fila=mysqli_fetch_object($buscar_alta)){
-
-	 		$escuela= new Escuela($fila->escuelaId);
-	 		$buscar_escuela= $escuela->buscar();
-	 		$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-	 		$referente = new Referente($fila->referenteId);
-	 		$b_referente = $referente->buscar();
-
-	 		$dato_referente= mysqli_fetch_object($b_referente);
-
-	 		$persona = new Persona($dato_referente->personaId);
-
-	 		$b_persona = $persona->buscar();
-
-	 		$dato_persona=mysqli_fetch_object($b_persona);
-
-
-
-	 		echo "<tr>";
-	 		?>
-	 		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-	 		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-	 		<?php
-	 		echo "<td>".$dato_escuela->numero."</td>";
-	 		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-	 		echo "<td>".$fila->prioridad."</td>";
-	 		echo "</td>";
-	 	}
-	 	echo "</tbody>";
-	 	echo "</table>";
-	 	?>
-	  </div>
-	  </div>
-	  <?php
-	  }
-
-	  ///////////////////////////////
-
-
-		if(mysqli_num_rows($resultado_ett_acargo)>0){
-			?>
-			<div class="panel panel-primary">
-				<div class="panel-heading" id="panel2"><span class="panel-title clickable">
-					<h4>Informes de ETT a cargo<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-				</div>
-				<div class="panel-body">
-					<?php
-
-					echo "<table id='informe_ett' class='table table-hover table-striped table-condensed tablesorter'>";
-					echo "<thead>";
-					echo "<tr>";
-					echo "<th>Apellido y Nombre</th>";
-
-					echo "<th>Normal</th>";
-					echo "<th>Media</th>";
-					echo "<th>Alta</th>";
-					echo "<th>Total</th>";
-					echo "</tr>";
-					echo "</thead>";
-
-					echo "<tbody>";
-
-					while ($fila=mysqli_fetch_object($resultado_ett_acargo)){
-				 		echo "<tr>";
-					 	echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
-
-						$informe_ett= new informe(null,null,$fila->referenteId);
-						$buscar_informe=$informe_ett->buscar();
-						$cantidad=mysqli_num_rows($buscar_informe);
-
-						//busqueda de informes de proiridad alta
-						$informe_alta= new Informe(null,null,$fila->referenteId,"Alta");
-						$buscar_alta =$informe_alta->buscar();
-						$totalAlta = mysqli_num_rows($buscar_alta);
-
-						//busqueda de informes de proiridad media
-						$informe_media= new Informe(null,null,$fila->referenteId,"Media");
-						$buscar_media =$informe_media->buscar();
-						$totalMedia = mysqli_num_rows($buscar_media);
-
-						//busqueda de informes de proiridad normal
-						$informe_normal= new Informe(null,null,$fila->referenteId,"Normal");
-						$buscar_normal =$informe_normal->buscar();
-						$totalNormal = mysqli_num_rows($buscar_normal);
-
-						//echo $cantidad;
-
-
-						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'&prioridad=Normal">'.$totalNormal.'</a></td>';
-						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'&prioridad=Media">'.$totalMedia.'</a></td>';
-						echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'&prioridad=Alta">'.$totalAlta.'</a></td>';
-
-  echo '<td><a href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a></td>';
-
-						echo "</tr>";
-					}
-
-					echo "</tbody>";
-					echo "</table>";
-				}
-
-					 ?>
-				</div>
-			</div>
-<?php
-
-
-if(mysqli_num_rows($b_mis_informe)>0){
-	?>
-
-
-
-<?php
-}
-echo "</div>";
-echo "<div class='col-md-6'>";
-
-
-if(mysqli_num_rows($b_informe)>0){
-	?>
-	<div class="panel panel-primary">
-		<div class="panel-heading" id="panel3"><span class="panel-title clickable">
-			<h4>Ultimos informes creados<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-		</div>
-		<div class="panel-body">
-			<?php
-
-	echo "<table id='myTable1' class='table table-hover table-striped table-condensed tablesorter'>";
-	echo "<thead>";
-	echo "<tr>";
-	echo "<th>Id</th>";
-	echo "<th>Título</th>";
-	echo "<th>Número</th>";
-	echo "<th>Creado por...</th>";
-	echo "</tr>";
-	echo "</thead>";
-	echo "<tbody>";
-
-	while ($fila=mysqli_fetch_object($informeEquipoConectar)){
-
-		$escuela= new Escuela($fila->escuelaId);
-		$buscar_escuela= $escuela->buscar();
-		$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-
-		$referente = new Referente($fila->referenteId);
-		$b_referente = $referente->buscar();
-
-		$dato_referente= mysqli_fetch_object($b_referente);
-
-		$persona = new Persona($dato_referente->personaId);
-
-		$b_persona = $persona->buscar();
-
-		$dato_persona=mysqli_fetch_object($b_persona);
-		echo "<tr>";
-		?>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-		<?php
-		echo "<td>".$dato_escuela->numero."</td>";
-		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-		echo "</td>";
-	}
-	echo "</tbody>";
-	echo "</table>";
-	?>
-</div>
-</div>
-<div class="panel panel-primary">
-	<div class="panel-heading" id="panel4"><span class="panel-title clickable">
-		<h4>Mis Informes (últimos 10)<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-	</div>
-	<div class="panel-body">
-		<?php
-
-echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
-echo "<thead>";
-echo "<tr>";
-echo "<th>Id</th>";
-echo "<th>Título</th>";
-echo "<th>Número</th>";
-echo "<th>Creado por...</th>";
-echo "</tr>";
-echo "</thead>";
-
-echo "<tbody>";
-while ($fila=mysqli_fetch_object($b_mis_informe)){
-
-	$escuela= new Escuela($fila->escuelaId);
-	$buscar_escuela= $escuela->buscar();
-	$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-	$referente = new Referente($_SESSION["referenteId"]);
-	$b_referente = $referente->buscar();
-
-	$dato_referente= mysqli_fetch_object($b_referente);
-
-	$persona = new Persona($dato_referente->personaId);
-
-	$b_persona = $persona->buscar();
-
-	$dato_persona=mysqli_fetch_object($b_persona);
-
-
-
-	echo "<tr>";
-	?>
-	<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-	<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-	<?php
-	echo "<td>".$dato_escuela->numero."</td>";
-	echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-	echo "</td>";
-}
-echo "</tbody>";
-echo "</table>";
-?>
-</div>
-</div>
-<?php
-}
-echo "</div>";
-echo "</div>";
-echo "<div class='col-md-12'>";
-
-
-
-?>
-
-<script type="text/javascript">
-$(document).ready(function()
-		{
-			//$("#myTable").tablesorter();
-			$("#myTable").tablesorter( {sortList: [[0,1]]} );
-			//$("#myTable1").tablesorter();
-			$("#myTable1").tablesorter( {sortList: [[0,1]]} );
-			$("#informe_ett").tablesorter( {sortList: [[1,1]]} );
-		}
-);
-</script>
 <div class="row">
 
 <div class="panel panel-primary">
