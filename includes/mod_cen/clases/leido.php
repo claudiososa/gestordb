@@ -115,6 +115,7 @@ function __construct($leidoId=NULL,$informeId=NULL,$referenteId=NULL, $fechaHora
 				case 'añoUnicos':
 					$sentencia="SELECT ".$filtro." ".$campo_principal." FROM leido WHERE informeId IN (SELECT informeId FROM informes WHERE YEAR(fechaCarga) = 2017)";
 					break;
+				
 				default:
 					//$sentencia="SELECT ".$filtro." ".$campo_principal." FROM leido";
 					break;

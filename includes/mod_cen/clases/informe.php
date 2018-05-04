@@ -211,7 +211,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 
 
-	public function summary($condicion=NULL,$filtro=NULL,$fecha1=NULL,$fecha2=NULL,$mes1=NULL,$año1=NULL,$prioridad=NULL,$referenteId=NULL,$tipo=NULL){
+	public function summary($condicion=NULL,$filtro=NULL,$fecha1=NULL,$fecha2=NULL,$mes1=NULL,$año1=NULL,$prioridad=NULL,$referenteId=NULL,$tipo=NULL,$etj=NULL){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
@@ -252,13 +252,21 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 						$sentencia.=" AND informes.prioridad='".$prioridad."'";
 					}
 					break;
+			case 'noLeido':
+							$sentencia="SELECT ".$filtro." * "."FROM informes
+							WHERE YEAR(fechaCarga) =$año1 AND informes.referenteId=$referenteId AND informes.informeId NOT IN ";
+							$sentencia.="(SELECT informes.informeId FROM informes
+							INNER JOIN leido
+							ON informes.informeId=leido.informeId
+							WHERE leido.referenteId <>".$etj.")";
 
+							break;
 			default:
 				# code...
 				break;
 		}
 
-    // echo $sentencia."<br>";
+    //echo $sentencia."<br>";
 		return $conexion->query($sentencia);
 	}
 

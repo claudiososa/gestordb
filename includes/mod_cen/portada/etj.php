@@ -13,12 +13,10 @@
     $( "#tabs" ).tabs({
       collapsible: true
     });
-		$( "#accordion" ).accordion({
+		$( "#accordion,#accordion1" ).accordion({
       collapsible: true
     });
-		$( "#accordion1" ).accordion({
-			collapsible: true
-		});
+		
 		$( "#accordion2" ).accordion({
 			collapsible: true
 		});
@@ -110,8 +108,6 @@ echo '<div class="container">';
 					{
 						echo "<div id='tabs-$fila->referenteId'>";
 
-
-
 						$informe_ett= new informe(null,null,$fila->referenteId);
 
 						$leido = new Leido(null,null,$_SESSION['referenteId']);
@@ -147,16 +143,27 @@ echo '<div class="container">';
 						$cantidadNoLeidos=$cantidadActual-$cantidadLeido;
 						//echo $cantidad;
 
+						$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$fila->referenteId,null,$_SESSION['referenteId']);
+
 						echo "<p>".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</p>";
 
 						echo "<p>Total Informes - $cantidadActual</p>";
-						echo "<p>Informes Leidos - $cantidadLeido</p>";
-						echo "<p>Informes No Leidos - $cantidadNoLeidos</p>";
+						//echo "<p>Informes Leidos - $cantidadLeido</p>";
+
 						$contador++;
 
 						echo "<div id='accordion$contador'>";
 						?>
+							<h3>Informes No Leidos</h3>
+							<div>
+								<p>Informes No Leidos - <?php echo $cantidadNoLeidos;?></p>
+								<?php
+								while ($row = mysqli_fetch_object($informesNoLeidos)) {
+									echo "<p>$row->informeId---$row->titulo></p>";
+								}
+								 ?>
 
+							</div>
 						  <h3>Prioridad Alta</h3>
 						  <div>
 						    <p><buttom id='normal$fila->referenteId' class='btn btn-success'><?php echo $totalAlta?></buttom></p>
@@ -173,10 +180,6 @@ echo '<div class="container">';
 						      <li>List item two</li>
 						      <li>List item three</li>
 						    </ul>
-						  </div>
-						  <h3>Section 4</h3>
-						  <div>
-						    <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
 						  </div>
 						</div>
 
