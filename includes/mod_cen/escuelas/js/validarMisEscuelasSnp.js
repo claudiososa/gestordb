@@ -299,6 +299,7 @@ function validarpersona(){
           let letras=  /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ_\s]+$/;
           let num =  /^[0-9]+$/;
           let correo = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}|[.][a-zA-Z]{2,4}$/;
+
           $("#txtapellido").keyup(function(event){
             if( $('#txtapellido').val() != "" && (letras.test($('#txtapellido').val() ))){
                 $(".error").removeClass('show').fadeOut();
@@ -402,7 +403,7 @@ function validarpersona(){
 
           });
 
-
+///////////////////////////////////////////////////
           if ($('#txtdni').val() == '' || !num.test($('#txtdni').val()) ) {
           //alert('Apellido: Ingrese solo letras')
 
@@ -420,7 +421,7 @@ function validarpersona(){
           }
 
           if ($('#txtapellido').val() == '' || !letras.test($('#txtapellido').val()) ) {
-        //alert('Apellido: Ingrese solo letras')
+         //alert('Apellido: Ingrese solo letras')
 
           $('.ctxtapellido').addClass('has-error')
           $('.validacion').attr('for','txtapellido')
