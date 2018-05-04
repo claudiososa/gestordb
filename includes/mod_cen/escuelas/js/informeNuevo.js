@@ -31,9 +31,9 @@ function informeNuevo(escuela)
 
             <div class="modal-body" id="modal-body" >
               <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
-              <div class="form-group">
+              <div class="form-group  cprioridad">
                  <div class="col-md-12">
-                   <label class="control-label">Prioridad</label>
+                   <label class="control-label cvalidacion">Prioridad</label>
                  </div>
                    <div class="col-md-12">
                      <select  class="form-control" id="prioridad" name="prioridad">
@@ -41,34 +41,38 @@ function informeNuevo(escuela)
                           <option value='media'>Media</option>
                           <option value='alta'>Alta</option>
                      </select>
+                     <span class=" hide errorp">Seleccione prioridad</span>
                   </div>
+
                </div>
 
-               <div class="form-group">
+               <div class="form-group ccategoria">
                   <div class="col-md-12">
-                    <label class="control-label">Categoría</label>
+                    <label class="control-label ctvalidacion">Categoría</label>
                   </div>
                   <div class="col-md-12">
                   <select  class="form-control" id="tipo" name="nuevotipo">
                         <option value='0'>Seleccione</option>
                 </select>
+                <span class=" hide errorc">Seleccione una categoria</span>
                   </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group csubcategoria">
                  <div class="col-md-12">
-                   <label class="control-label">Sub Categoría</label>
+                   <label class="control-label svalidacion">Sub Categoría</label>
                  </div>
 
                  <div class="col-md-12" id="divsubtipo">
                  <select  class="form-control" id="subTipo" name="subTipo">
                     <option value='0'>Seleccione</option>
                  </select>
+                 <span class=" hide errors">Seleccione una subcategoria</span>
                  </div>
              </div>
-             <div class="form-group">
+             <div class="form-group cfecha">
                 <div class="col-md-12">
-                  <label class="control-label">Fecha</label>
+                  <label class="control-label fvalidacion">Fecha</label>
                 </div>
                 <div class="col-md-12">
                     <input
@@ -77,16 +81,18 @@ function informeNuevo(escuela)
                         name="date"
                         type="text"
                         autofocuss
-                        value="14 August, 2018"
-                        data-valuee="2014-08-08">
+                        value=""
+                        data-valuee="">
                  </div>
+                 <span class=" hide errorf">Seleccione una fecha</span>
                </div>
-             <div class="form-group">
+             <div class="form-group ctxttitulo">
                 <div class="col-md-12">
-                  <label class="control-label">Título</label>
+                  <label class="control-label validacion">Título</label>
                 </div>
                 <div class="col-md-12">
                    <input required type='text' id='titulo' name="titulo" class="form-control" placeholder="Titulo corto para tu informe" value="">
+                   <span class="hide error">Titulo obligatorio </span>
                  </div>
                </div>
                <div class="form-group">
@@ -234,15 +240,185 @@ function informeNuevo(escuela)
         };
     })
 
+    function validarInforme(){
+    //       if ($('#titulo').val() != "") {
+    //         //alert ('vacio')
+    // $(this).focus()
+    //       }
+    //let letras=  /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ_\s]+$/;
+    //
+
+    $('#tipo').keyup(function(event){
+          if( $(this).val() != "0"){
+            // alert('Obligatorio')
+              $(".errorc").removeClass('show').fadeOut();
+              $('.ccategoria').removeClass('has-error').addClass('has-success')
+              $('.ctvalidacion').attr('for','nuevotipo')
+              $('#tipo').attr('aria-describedby','helpBlock1')
+
+             return true;
+
+          }else{
+            // alert ('paso')
+            $('.ccategoria').addClass('has-error')
+            $('.ctvalidacion').attr('for','nuevotipo')
+            $('#tipo').attr('aria-describedby','helpBlock1')
+            $('.errorc').addClass('show').addClass('help-block').attr('id','help-block1')
+           return true;
+          }
+
+
+    })
+
+
+        $('#subTipo').keyup(function(event){
+              if( $(this).val() != "0"){
+                // alert('Obligatorio')
+                  $(".errorc").removeClass('show').fadeOut();
+                  $('.csubcategoria').removeClass('has-error').addClass('has-success')
+                  $('.svalidacion').attr('for','subTipo')
+                  $('#subTipo').attr('aria-describedby','helpBlock3')
+
+                 return true;
+
+              }else{
+                // alert ('paso')
+                $('.csubcategoria').addClass('has-error')
+                $('.svalidacion').attr('for','subTipo')
+                $('#subTipo').attr('aria-describedby','helpBlock3')
+                $('.errors').addClass('show').addClass('help-block').attr('id','help-block3')
+               return true;
+              }
+
+
+        })
+     $('#titulo').keyup(function(event){
+      if( $(this).val() != ""){
+        // alert('Obligatorio')
+          $(".error").removeClass('show').fadeOut();
+          $('.ctxttitulo').removeClass('has-error').addClass('has-success')
+          $('.validacion').attr('for','titulo')
+          $('#titulo').attr('aria-describedby','helpBlock2')
+
+         return true;
+
+      }else{
+        // alert ('paso')
+        $('.ctxttitulo').addClass('has-error')
+        $('.validacion').attr('for','titulo')
+        $('#titulo').attr('aria-describedby','helpBlock2')
+        $('.error').addClass('show').addClass('help-block').attr('id','help-block2')
+       return true;
+      }
+
+})
+
+
+
+////////////////////////////////////////////
+
+
+
+      if ($('#prioridad').val() == '0') {
+        //alert('Seleccione Localidad')
+
+        $('.cprioridad').addClass('has-error')
+        $('.cvalidacion').attr('for','prioridad')
+        $('#prioridad').attr('aria-describedby','helpBlock8')
+        $('.errorp').removeClass('hide').addClass('help-block').attr('id','help-block8')
+
+   return false
+    }else{
+        $('.cprioridad').removeClass('has-error').addClass('has-success')
+        $('.cvalidacion').attr('for','prioridad')
+        $('#prioridad').attr('aria-describedby','helpBlock8')
+        $('.errorp').addClass('hide').removeClass('show').addClass('help-block').attr('id','help-block8')
+
+      }
+
+
+
+      if ($('#tipo').val() == '0') {
+        //alert('Seleccione Localidad')
+
+        $('.ccategoria').addClass('has-error')
+        $('.ctvalidacion').attr('for','nuevotipo')
+        $('#tipo').attr('aria-describedby','helpBlock1')
+        $('.errorc').removeClass('hide').addClass('help-block').attr('id','help-block1')
+
+   return false
+    }else{
+        $('.ccategoria').removeClass('has-error').addClass('has-success')
+        $('.ctvalidacion').attr('for','nuevotipo')
+        $('#tipo').attr('aria-describedby','helpBlock1')
+        $('.errorc').addClass('hide').removeClass('show').addClass('help-block').attr('id','help-block1')
+
+      }
+
+              if ($('#subTipo').val() == '0') {
+                //alert('Seleccione Localidad')
+
+                $('.csubcategoria').addClass('has-error')
+                $('.svalidacion').attr('for','subTipo')
+                $('#subTipo').attr('aria-describedby','helpBlock3')
+                $('.errors').removeClass('hide').addClass('help-block').attr('id','help-block3')
+
+           return false
+            }else{
+                $('.csubcategoria').removeClass('has-error').addClass('has-success')
+                $('.svalidacion').attr('for','subTipo')
+                $('#subTipo').attr('aria-describedby','helpBlock3')
+                $('.errors').addClass('hide').removeClass('show').addClass('help-block').attr('id','help-block3')
+
+              }
+
+      if( $('#titulo').val() == "" ){
+              //  alert('Apellido: Ingrese solo letras')
+          $('.ctxttitulo').addClass('has-error')
+          $('.validacion').attr('for','titulo')
+          $('#titulo').attr('aria-describedby','helpBlock2')
+          $('.error').removeClass('hide').addClass('help-block').attr('id','help-block2')
+
+          return false
+      }else{
+          $('.ctxttitulo').removeClass('has-error').addClass('has-success')
+          $('.validacion').attr('for','titulo')
+          $('#titulo').attr('aria-describedby','helpBlock2')
+          $('.error').addClass('hide').removeClass('show').addClass('help-block').attr('id','help-block2')
+
+        }
+
+        if( $('#input_01').val() == "" ){
+                //  alert('Apellido: Ingrese solo letras')
+            $('.cfecha').addClass('has-error')
+            $('.fvalidacion').attr('for','date')
+            $('#input_01').attr('aria-describedby','helpBlock4')
+            $('.errorf').removeClass('hide').addClass('help-block').attr('id','help-block4')
+
+            return false
+        }else{
+            $('.cfecha').removeClass('has-error').addClass('has-success')
+            $('.fvalidacion').attr('for','date')
+            $('#input_01').attr('aria-describedby','helpBlock4')
+            $('.errorf').addClass('hide').removeClass('show').addClass('help-block').attr('id','help-block4')
+
+          }
+return true
+        }
+
+
     $('#btnSave').click(function(){
+ if (validarInforme()) {
       let valorBoton = $(this).text()
       let informeId = escuela.informeId
+
       if (valorBoton=="Responder") {
         $('#divContenido'+informeId).hide()
         $('#verInforme'+informeId).show()
         $('#btnSave').html('Enviar')
         $('#divRespuesta').show()
       }else{
+
         let contenido = CKEDITOR.instances['contenido'].getData();
         let prioridad = $('#prioridad').val()
         let titulo = $('#titulo').val()
@@ -250,6 +426,9 @@ function informeNuevo(escuela)
         let subTipo = $('#subTipo').val()
         let fecha = $('input[name=date_submit]').val()
         //console.log(fecha)
+
+
+
         $('#formInforme').on('submit',(function(e) {
             let paqueteData = new FormData()
             let ins = document.getElementById('input-img').files.length;
@@ -265,6 +444,7 @@ function informeNuevo(escuela)
             paqueteData.append('fecha', fecha);
             paqueteData.append('referenteId', referenteId2);
             paqueteData.append('contenido', contenido);
+
             $.ajax({
                 url: 'includes/mod_cen/clases/ajax/ajaxInformeNuevo.php',
                 type: 'POST',
@@ -285,10 +465,17 @@ function informeNuevo(escuela)
               .always(function() {
                 console.log("complete");
               });
-          }));
+
+          })
+        );
+
         $( "#formInforme" ).submit();
+
       }
+}
     })
+
+
 
 ////////js boton ver mas datos de informe
   let informeId = escuela.informeId
