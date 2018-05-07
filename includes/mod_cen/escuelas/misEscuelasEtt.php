@@ -1,20 +1,20 @@
-
 <link rel="stylesheet" href="includes/mod_cen/css/styleIconosSuperPrim.css">
 <link rel="stylesheet" href="includes/mod_cen/css/default.css">
 <link rel="stylesheet" href="includes/mod_cen/css/default.date.css">
+
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
 </script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
 
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo(rand()); ?>"></script>
 
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 
@@ -40,7 +40,7 @@ include_once "includes/mod_cen/clases/rti.php";
 
 
 <div class="container">
-  <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
+  <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
   <hr class='hrMisEscRed'>
 <br>
 </div>
@@ -52,8 +52,8 @@ include_once "includes/mod_cen/clases/rti.php";
   <input type="hidden" name="tipoId" id="tipoId" value="" />
 <div class="row">
   <div class="container">
-<div class="panel panel-primary col-md-12 hidden-xs">
-  <div class="panel-body">
+<div class="panel panel-primary col-md-12">
+  <div class="panel-body hidden-xs">
     <div class="styleFont" align="text-center"><u>Ultimos 5 informes creados</u><a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION['referenteId'] ?>"></a></div>
       <?php
         echo "<div class='table-responsive'>";
@@ -220,15 +220,23 @@ echo "</div>";
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA MOBILE-->
 <!----------------------------------------------------------------------------->
-<div class="container visible-xs">
+<!-- <div class="container visible-xs">
 <?php
   //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-  $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
+  $escuelasCargo = new EscuelaReferentes(null,null,'19',$_SESSION['referenteId']);
   $buscarEscuelas = $escuelasCargo->buscar();
 
   $escuela = new Escuela();
 
   while ($row = mysqli_fetch_object($buscarEscuelas)) {
+    $rtix= new rtixescuela($row->escuelaId);
+
+   $buscar_rti=$rtix->buscar();
+
+   $cantidadRti=mysqli_num_rows($buscar_rti);
+
+
+
     $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
     $buscarInforme= $informe->buscar();
     $cantidadInforme = mysqli_num_rows($buscarInforme);
@@ -244,10 +252,10 @@ echo "</div>";
     $infoEscuela = mysqli_fetch_object($buscarEscuela);
 
 
-
-    //echo $infoEscuela->numero."<br>";
-    //echo '<div class="container visible-xs">';
-    echo '<div class="panel panel-primary panelPrimarySuperP">';
+    //
+    // echo $infoEscuela->numero."<br>";
+    // echo '<div class="container visible-xs">';
+    echo '<div class="panel panel-primary">';
     echo '<div class="panel-heading clickable" id="panel-heading">'.$infoEscuela->numero.' '.$infoEscuela->nombre.'</div>';
     echo '<div class="panel-body escuela">';
     echo '<div class="row">';
@@ -332,40 +340,15 @@ echo '</div>';
   }
   ?>
 
-</div>
+</div> -->
 
-
-<!--modal boton autoridades vista desktop-->
-
-<!--
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Autoridades escuela 5159</h4>
-      </div>
-      <div class="modal-body">
-      Supervisor primaria diaz juan
-      <br>
-      director colque juan
-      <br>supervisor religion marta diaz
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>-->
-
-<!--fin modal vista desktop-->
 
 
 
   <script>
   $(document).ready(function(){
 
-   $(".escuela").hide()
+   //$(".escuela").hide()
 
 //dropdown accesos acciones generales
     $('.dropdown-submenu a.test').on("click", function(e){
