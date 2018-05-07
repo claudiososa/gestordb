@@ -258,7 +258,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 							$sentencia.="(SELECT informes.informeId FROM informes
 							INNER JOIN leido
 							ON informes.informeId=leido.informeId
-							WHERE leido.referenteId <>".$etj.") ORDER BY informes.prioridad DESC";
+							WHERE leido.referenteId =".$etj.") ORDER BY informes.prioridad DESC";
 
 							break;
 			default:
@@ -477,7 +477,7 @@ public function buscarUnico()
 {
 	$nuevaConexion=new Conexion();
 	$conexion=$nuevaConexion->getConexion();
-	$sentencia = "SELECT informes.informeId,informes.titulo,informes.contenido,informes.fechaVisita,informes.fechaCarga,informes.prioridad,
+	$sentencia = "SELECT informes.informeId,informes.referenteId,informes.titulo,informes.contenido,informes.fechaVisita,informes.fechaCarga,informes.prioridad,
 											 tipoinformes.nombre AS tipoNombre,SubTipoInforme.nombre AS subNombre,
 											 escuelas.escuelaId,escuelas.nombre,escuelas.numero,escuelas.cue
 								FROM informes

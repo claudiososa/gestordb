@@ -1,5 +1,66 @@
 $(document).ready(function() {
 
+/**
+ * Metodo clic para id / informeId
+ */
+$('[id ^=informeId],[id ^=inforalta],[id ^=informedi],[id ^=infornorm]').on('click', function()
+ {
+
+   let informeActual ={
+     informeId: "",
+     escuelaNombre: "",
+     escuelaNumero: "",
+     escuelaCue: "",
+     fecha: "",
+     prioridad: "",
+     categoria:  "",
+     subcategoria:  "",
+     titulo: "",
+     contenido: "",
+     escuelaId: "",
+     etjPortada: "",
+     referente: ""
+   }
+
+          //$('[id ^=if]').on('click', function(){
+     //let idPrueba = $(this).attr('id').substr(9);
+     let informeId = $(this).attr('id').substr(9);
+     //alert(informeId)
+     $.ajax({
+       url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+       type: 'POST',
+       dataType: 'json',
+       data: {informeId:informeId,referenteId:referenteId2}
+     })
+     .done(function(lista) {
+       for (let item of lista) {
+           //console.log('item. nombre'+item.nombre)
+           informeActual.escuelaNombre=item.nombre
+           informeActual.escuelaNumero=item.numero
+           informeActual.escuelaCue=item.cue
+           informeActual.fecha=item.fecha
+           informeActual.prioridad=item.prioridad
+           informeActual.categoria=item.categoria
+           informeActual.subcategoria=item.subcategoria
+           informeActual.titulo=item.titulo
+           informeActual.contenido=item.contenido
+           informeActual.escuelaId=item.escuelaId
+           informeActual.informeId=informeId
+           informeActual.etjPortada='si'
+           informeActual.referente=item.referente
+
+       }
+     })
+
+     .fail(function() {
+       console.log("error");
+     })
+     .always(function() {
+       formPersona(informeActual)
+     });
+
+ });
+
 
 
   $('[id ^=list]').click( function(){
@@ -59,197 +120,6 @@ $(document).ready(function() {
   });
 
 
-  $('[id ^=informes]').on('click', function(){
-
-    let escuelaId = $(this).attr('id').substr(8)
-    //alert(escuelaId)
-    let $this = $(this)
-    let existe = $('.tableinformes'+escuelaId).attr('class')
-
-    if (typeof(existe)==='undefined') {
-        console.log('definicion de existe'+existe)
-        //$this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
-        //console.log(escuelaId)
-        let myReport ='all'
-
-        $.ajax({
-          url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
-          type: 'POST',
-          dataType: 'json',
-          data: {myReport:myReport,referenteId:referenteId2,escuelaId: escuelaId}
-        })
-        .done(function(lista) {
-
-          let itemEscuela = 0
-          let tableinforme = 0
-
-
-          for (let item of lista) {
-              tableinforme=pad(item.escuelaId,4,0)
-
-
-          }
-
-          //console.log('item Escuela Id = '+tableinforme)
-          $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6"><table id=tableinformes${tableinforme}
-          class="table StyleTable">
-          <thead>
-            <tr class='warningStyle'>
-              <th><h4>Informes</h4></th>
-              <th>&nbsp</th>
-              <th>&nbsp</th>
-              <th>&nbsp</th>
-              <th><button type='button' class='btn btn-warning' id=nuevoInforme${tableinforme} >Crear Nuevo Informe</button></th>
-
-            </tr>
-          </thead>
-
-          <thead>
-            <tr>
-              <th>Titulo</th>
-              <th>Leido</th>
-              <th>Resp.</th>
-              <th>Fecha</th>
-              <th>Prioridad</th>
-            </tr>
-          </thead>
-          <tbody>`)
-
-          for (let item of lista) {
-              //alert(item.escuelaId)
-              //console.log(item.cantidad)
-            if (item.cantidad > 0) {
-              let escuelaIdconCero = pad(item.escuelaId,4,0)
-              let escuela = item.escuelaId
-              //console.log('cantidad de leido'+item.cantidadLeido)
-              $('#tableinformes'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
-
-              <td><a class="btn btn-default" role="button" id='if${item.informeId}'>${item.titulo}</a></td>
-              <td>${item.cantidadLeido}</td>
-              <td>${item.cantidadRespuesta}</td>
-              <td>${item.fecha}</td>
-              <td>${item.prioridad}</td>
-
-              </tr>`)
-
-            }else{
-              alert('Esta escuela no tiene informes creados')
-            }
-          }
-
-
-          $('[id ^=nuevoInforme]').click( function(){
-
-              let idPrueba = $(this).attr('id');
-              let escuela_id = idPrueba.substr(12)
-              let escuela = {escuelaId:escuela_id,
-                             numero:'',
-                             cue:'',
-                             nombre:''
-                }
-              buscarDatosEscuela(escuela)//consulta a tabla escuela... ajax.js
-
-              .then(function(escuela){
-                informeNuevo(escuela)//inicia modal para carga de informe
-               })
-              .catch(error=> console.log(error + ' Noooo'))
-
-
-          });
-
-          //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
-          $('[id ^=if]').click( function(){
-
-            let informeActual ={
-              informeId: "",
-              escuelaNombre: "",
-              escuelaNumero: "",
-              escuelaCue: "",
-              fecha: "",
-              prioridad: "",
-              categoria:  "",
-              subcategoria:  "",
-              titulo: ""
-            }
-
-                   //$('[id ^=if]').on('click', function(){
-              let idPrueba = $(this).attr('id');
-              let informeId = idPrueba.substr(2)
-              $.ajax({
-                url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {informeId:informeId}
-              })
-              .done(function(lista) {
-                for (let item of lista) {
-                    //console.log('item. nombre'+item.nombre)
-                    informeActual.escuelaNombre=item.nombre
-                    informeActual.escuelaNumero=item.numero
-                    informeActual.escuelaCue=item.cue
-                    informeActual.fecha=item.fecha
-                    informeActual.prioridad=item.prioridad
-                    informeActual.categoria=item.categoria
-                    informeActual.subcategoria=item.subcategoria
-                    informeActual.titulo=item.titulo
-                    informeActual.contenido=item.contenido
-                    informeActual.informeId=informeId
-                    informeActual.escuelaId=item.escuelaId
-
-                    /*let escuelaNombre = item.nombre
-                    let escuelaNumero = item.numero
-                    let escuelaCue = item.cue
-                    let fecha = item.fecha
-                    let prioridad = item.prioridad
-                    let categoria =  item.categoria
-                    let subcategoria =  item.subcategoria
-                    let titulo =  item.titulo
-                    let contenido =  item.contenido*/
-
-                }
-                //console.log(informeActual.escuelaNombre)
-                //console.log("success Ajax Informe");
-              })
-
-              .fail(function() {
-                console.log("error");
-              })
-              .always(function() {
-                //console.log(informeActual.escuelaNombre)
-                //console.log("success Ajax Informe");
-                formPersona(informeActual)
-
-
-
-                //console.log("complete");
-              });
-
-
-
-          });
-
-          //console.log("success");
-        })
-        .fail(function() {
-          console.log("error");
-        })
-        .always(function() {
-          //console.log("complete");
-        });
-    }else{
-        //$('.trinformes'+escuelaId).remove()
-
-        $('.tableinformes'+escuelaId).remove()
-        //$('.trautoridad'+escuelaId).closest('tr').remove()
-        $this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
-
-        //console.log('variable existe'+existe)
-        existe.stop
-        //console.log('variable existe'+existe)
-    }
-
-    //alert('fila')
-  })
 
   //evento al hacer click en el td con id que inicia en tecnico // corresponde a Rti
   $('[id ^=tecnico]').on('click', function(){

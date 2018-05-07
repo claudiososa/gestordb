@@ -1,5 +1,8 @@
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
-
+<script type="text/javascript">
+    let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
+    let tipoR = '<?php echo $_SESSION['tipo'];?>'
+</script>
 <style type="text/css">
 
 .btn-default {
@@ -23,14 +26,21 @@
   } );
 
   </script>
-
-
+<script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
 require_once("includes/mod_cen/clases/leido.php");
+
 
 
 
@@ -66,6 +76,8 @@ $b_mis_informe = $mis_informes->buscar(10);
 
 echo '<div class="container">';
 ?>
+<div class="" id="padreIr">
+</div>
 
 <div class="row hidden-xs  wow zoomIn">
 	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
@@ -146,15 +158,18 @@ echo '<div class="container">';
 								$pos = strpos($fila->apellido, $buscar);
 
 								if ($pos===false) {
-									echo "<li><a href='#tabs-".$fila->referenteId."'>".strtoupper($fila->apellido)." <span class='badge'>".$totalNoLeidos."</span></a></li>";
+									echo "<li><a  href='#tabs-".$fila->referenteId."'>".strtoupper($fila->apellido)." <span id='badge-".ltrim($fila->referenteId,'0')."' class='badge'>".$totalNoLeidos."</span></a></li>";
 								}else{
-									echo "<li><a href='#tabs-".$fila->referenteId."'>".substr(strtoupper($fila->apellido),0,strpos($fila->apellido,' '))."  <span class='badge'>".$totalNoLeidos."</span></a></li>";	# code...
+									echo "<li><a  href='#tabs-".$fila->referenteId."'>".substr(strtoupper($fila->apellido),0,strpos($fila->apellido,' '))."  <span id='badge-".ltrim($fila->referenteId,'0')."' class='badge'>".$totalNoLeidos."</span></a></li>";	# code...
 								}
 
 							}
 
 				  echo '</ul>';
 					$contador=0;
+					/**
+					 * Creado de tabs por ett, con contenido de sus informes, datos de contacto y calendario de visitas.
+					 */
 					while ($fila=mysqli_fetch_object($ett2))
 					{
 						$informe_ett= new informe(null,null,$fila->referenteId);
@@ -175,8 +190,10 @@ echo '<div class="container">';
 						//echo "<p class='alert alert-success'>Total Informes - $cantidadActual</p>";
 						$contador++;
 						echo "<div id='accordion$contador'>";
+            echo '<h3>Informes No Leidos <span id="badgeNoLeidos-'.ltrim($fila->referenteId,'0').'" class="badge">'.$cantidadNoLeidos.'</span></h3>';
+            //<h3>Informes No Leidos <span id='badgeNoLeidos-".$fila->referenteId."' class="badge"> <?php echo $cantidadNoLeidos;</span></h3>
+
 						?>
-							<h3>Informes No Leidos <span class="badge"> <?php echo $cantidadNoLeidos;?></span></h3>
 							<div>
 								<?php
 								while ($row = mysqli_fetch_object($informesNoLeidos))
@@ -195,7 +212,7 @@ echo '<div class="container">';
 											# code...
 											break;
 									}
-									echo "<p class='".$class."'>Id:$row->informeId Asunto: $row->titulo<br>
+									echo "<p id='informeId".$row->informeId."' class='".$class."'>Id:$row->informeId Asunto: <b>$row->titulo</b><br>
 												Fecha:".$row->fechaVisita."</p>";
 								}
 								 ?>
@@ -207,7 +224,7 @@ echo '<div class="container">';
 
 								<?php
 								while ($row = mysqli_fetch_object($buscar_alta)) {
-									echo "<p class='alert alert-warning'>$row->informeId---$row->titulo></p>";
+									echo "<p id='inforalta".$row->informeId."' class='alert alert-warning'>$row->informeId---$row->titulo</p>";
 
 								}
 								?>
@@ -216,7 +233,7 @@ echo '<div class="container">';
 						  <div>
 							<?php
 								while ($row = mysqli_fetch_object($buscar_media)) {
-										echo "<p class='alert alert-info'>$row->informeId---$row->titulo></p>";
+										echo "<p id='informedi".$row->informeId."' class='alert alert-info'>$row->informeId---$row->titulo></p>";
 								}
 							?>
 						 </div>
@@ -224,7 +241,7 @@ echo '<div class="container">';
 						  <div>
 								<?php
 	 							 while ($row = mysqli_fetch_object($buscar_normal)) {
-	 									 echo "<p class='alert alert-success'>$row->informeId---$row->titulo></p>";
+	 									 echo "<p id='infornorm".$row->informeId."' class='alert alert-success'>$row->informeId---$row->titulo></p>";
 	 							 }
 	 						 ?>
 						  </div>

@@ -26,8 +26,29 @@
   }
 
 
+  if (isset($_POST['ajaxLeido']))
+  {
+    $informe_ett = new informe();
+    $informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$_POST['referenteId'],null,$_POST['etj']);
+    $totalNoLeidos= mysqli_num_rows($informesNoLeidos);
+
+    $list=array();
+    $temporal=array(
+      'total'=>$totalNoLeidos
+    );
+
+    array_push($list,$temporal);
+    $json = json_encode($list);
+      Maestro::debbugPHP($json);
+    echo $json;
+  }
+
   if (isset($_POST['informeId']))
   {
+    $fecha=date("Y-m-d H:i:s");
+    $leido = new Leido(null,$_POST['informeId'],$_POST['referenteId'],$fecha);
+    $guardar_leido=$leido->agregar();
+
     $informe =  new informe($_POST['informeId']);
     $buscarInforme = $informe->buscarUnico();
     $datoInforme = mysqli_fetch_object($buscarInforme);
@@ -44,12 +65,13 @@
       'fecha' =>$datoInforme->fechaVisita,
       'prioridad' =>$datoInforme->prioridad,
       'titulo' =>$datoInforme->titulo,
-      'contenido' =>$datoInforme->contenido
+      'contenido' =>$datoInforme->contenido,
+      'referente' =>$datoInforme->referenteId
     );
 
     array_push($list,$temporal);
     $json = json_encode($list);
-  //    Maestro::debbugPHP($json);
+      //Maestro::debbugPHP($json);
     echo $json;
   }
 
@@ -80,7 +102,7 @@
       $leido->informeId=$fila->informeId;
       $buscarLeido = $leido->buscarLeido();
       $cantidadLeido = mysqli_num_rows($buscarLeido);
-      Maestro::debbugPHP($buscarLeido);
+      //Maestro::debbugPHP($buscarLeido);
   		$temporal=array(
         'informeId'=>$fila->informeId,
         'referenteId'=>$fila->referenteId,

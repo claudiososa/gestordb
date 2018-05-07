@@ -1,8 +1,9 @@
 function formPersona(informeActual)
 {
 
-  let escuelaId =  $('#escuelaId').val()
+  let escuelaId =  informeActual.escuelaId  //$('#escuelaId').val()
   console.log('mi escuela:'+escuelaId)
+  console.log(informeActual.escuelaNombre)
     $(`
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
         <div class="modal-dialog modal-lg" role="document">
@@ -89,11 +90,6 @@ function formPersona(informeActual)
               data: {informeAdjunto:informe},
             })
             .done(function(data) {
-              // $('#modal-body').append(`
-
-
-              // `)
-
               for (let item of data) {
 
                    $('#modal-body').append(`
@@ -101,8 +97,8 @@ function formPersona(informeActual)
                   `)
 
               }
-            console.log("Adjunto de Informe success");
-})
+
+            })
 
             .fail(function() {
               console.log("error");
@@ -202,7 +198,38 @@ function formPersona(informeActual)
     $('#myModal').modal('show')
 
     $('#myModal').on('hide.bs.modal', function(){
+      if (informeActual.etjPortada) {
+        let ajaxLeido = 'leido'
+
+        $.ajax({
+          url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+          type: 'POST',
+          dataType: 'json',
+          data: {ajaxLeido:ajaxLeido,etj:referenteId2,referenteId:informeActual.referente}
+        })
+        .done(function(data) {
+        for (let item of data) {
+            //alert(informeActual.referente)
+            $('#badge-'+informeActual.referente).text(item.total)
+            $('#badgeNoLeidos-'+informeActual.referente).text(item.total)
+            $('#informeId'+informeActual.informeId).remove()
+          }
+        })
+        .fail(function() {
+          console.log("error en Devolucion de Respuesta");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+
+
+
+        //alert('hola mundo')
+      }
+
+
       $('#myModal').remove()
+
     })
 
     $('#myModal').on('shown.bs.modal', function(){
