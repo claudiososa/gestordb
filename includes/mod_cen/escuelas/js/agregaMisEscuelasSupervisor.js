@@ -82,39 +82,79 @@ $(document).ready(function() {
         .done(function(lista) {
 
           let itemEscuela = 0
-          let tableinforme = 0
+         let tableinforme = 0
+         let cant = 0
 
 
-          for (let item of lista) {
-              tableinforme=pad(item.escuelaId,4,0)
+         for (let item of lista) {
+             tableinforme=pad(item.escuelaId,4,0)
+             cant= item.cantidad
+
+               }
+
+         if (cant > 0) {
 
 
-          }
+           // console.log('item Escuela Id = '+cant)
+         $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6"><table id=tableinformes${tableinforme}
+         class="table StyleTable">
+         <thead>
+           <tr class='warningStyle'>
+             <th><h4>Informes</h4></th>
+             <th>&nbsp</th>
+             <th>&nbsp</th>
+             <th>&nbsp</th>
 
-          //console.log('item Escuela Id = '+tableinforme)
-          $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6"><table id=tableinformes${tableinforme}
-          class="table StyleTable">
-          <thead>
-            <tr class='warningStyle'>
-              <th><h4>Informes</h4></th>
-              <th>&nbsp</th>
-              <th>&nbsp</th>
-              <th>&nbsp</th>
-              <th><button type='button' class='btn btn-warning' id=nuevoInforme${tableinforme} >Crear Nuevo Informe</button></th>
+             <th><button type='button' class='btn btn-warning' id=nuevoInforme${tableinforme} >Crear Nuevo Informe</button></th>
 
-            </tr>
-          </thead>
+           </tr>
 
-          <thead>
-            <tr>
-              <th>Titulo</th>
-              <th>Leido</th>
-              <th>Resp.</th>
-              <th>Fecha</th>
-              <th>Prioridad</th>
-            </tr>
-          </thead>
-          <tbody>`)
+         </thead>
+
+
+
+         <thead>
+           <tr>
+             <th>Titulo</th>
+             <th>Leido</th>
+             <th>Resp.</th>
+             <th>Fecha</th>
+             <th>Prioridad</th>
+           </tr>
+         </thead>
+         <tbody>`)
+
+
+        }else{   // entra por que no tiene informes cargados
+
+
+       //  console.log('item Escuela Id = '+cant)
+         $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6"><table id=tableinformes${tableinforme}
+         class="table StyleTable">
+         <thead>
+           <tr class='warningStyle'>
+             <th><h4>Informes</h4></th>
+             <th>&nbsp</th>
+             <th>&nbsp</th>
+             <th>&nbsp</th>
+             <th><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button></th>
+           </tr>
+         </thead>
+
+         <thead>
+           <tr>
+             <th>Titulo</th>
+             <th>Leido</th>
+             <th>Resp.</th>
+             <th>Fecha</th>
+             <th>Prioridad</th>
+           </tr>
+         </thead>
+         <tbody>`)
+
+
+
+       }
 
           for (let item of lista) {
               //alert(item.escuelaId)
@@ -134,7 +174,7 @@ $(document).ready(function() {
               </tr>`)
 
             }else{
-              alert('Esta escuela no tiene informes creados')
+              //alert('Esta escuela no tiene informes creados')
             }
           }
 
