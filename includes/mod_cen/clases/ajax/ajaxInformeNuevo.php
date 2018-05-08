@@ -2,16 +2,16 @@
   include_once('../img.php');
   include_once('../informe.php');
   include_once('../maestro.php');
+  Maestro::debbugPHP($_POST);
 
-
-  if (isset($_POST['informeId']))
+  if (isset($_POST))
   {
     $fecha=date("Y-m-d H:i:s");
     $nuevaInforme =  new Informe($_POST['informeId'],$_POST['escuelaId'],$_POST['referenteId'],
                                     $_POST['prioridad'],"Acta de Visita",$_POST['titulo'],
                                     $_POST['contenido'],"0","0",$_POST['fecha'],$fecha,$fecha,$_POST['tipo'],$_POST['subTipo']);
     $guardar_informe=$nuevaInforme->agregar();
-    Maestro::debbugPHP($_POST['fecha']);
+
 
     foreach ($_FILES['input-img'] as $key) {
 
@@ -49,12 +49,13 @@
       break;
     }
 
-      $list=array();
-      $temporal=array(
-        'estado'=>'guardado'
-      );
-
-      array_push($list,$temporal);
-      $json = json_encode($list);
-      echo $json;
+      // $list=array();
+      // $temporal=array(
+      //   'estado'=>'guardado'
+      // );
+      //
+      // array_push($list,$temporal);
+      // $json = json_encode($list);
+      // //Maestro::debbugPHP($json);
+      // echo $json;
   }

@@ -67,16 +67,17 @@ $(document).ready(function() {
     let existe = $('.tableinformes'+escuelaId).attr('class')
 
     if (typeof(existe)==='undefined') {
-        console.log('definicion de existe'+existe)
+        //console.log('definicion de existe'+existe)
         //$this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
         //console.log(escuelaId)
         let myReport ='all'
+        let reports ='conectar'
 
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
           type: 'POST',
           dataType: 'json',
-          data: {myReport:myReport,referenteId:referenteId2,escuelaId: escuelaId}
+          data: {myReport:myReport,reports:reports,referenteId:referenteId2,escuelaId: escuelaId}
         })
         .done(function(lista) {
 
@@ -182,6 +183,7 @@ $(document).ready(function() {
                 data: {informeId:informeId}
               })
               .done(function(lista) {
+
                 for (let item of lista) {
                     //console.log('item. nombre'+item.nombre)
                     informeActual.escuelaNombre=item.nombre
@@ -231,7 +233,8 @@ $(document).ready(function() {
           //console.log("success");
         })
         .fail(function() {
-          console.log("error");
+
+          console.log("error al tratar de traer los informes para listar ");
         })
         .always(function() {
           //console.log("complete");

@@ -134,6 +134,7 @@ function informeNuevo(escuela)
 
             $('#tipo').change(function(event) {
               /* Act on the event */
+              $('#subTipo').find('option').remove().end().append('<option value="0">Selecione...</option>').val('0');
 
               //console.log($(this).val())
               traerSubcategorias($(this).val())
@@ -203,13 +204,13 @@ function informeNuevo(escuela)
       $('[id ^=rp]').hide()
       $('[class ^=img]').hide()
 
-      $('[id ^=titulo]').click(function(){
-        let resp = $(this).attr('id')
-        let numeroResp = resp.substr(6)
-        $("#rp"+numeroResp).toggle()
-        $(".img"+numeroResp).toggle()
-        console.log('respuestas ...'+numeroResp)
-      });
+      // $('[id ^=titulo]').click(function(){
+      //   let resp = $(this).attr('id')
+      //   let numeroResp = resp.substr(6)
+      //   $("#rp"+numeroResp).toggle()
+      //   $(".img"+numeroResp).toggle()
+      //   console.log('respuestas ...'+numeroResp)
+      // });
 
 
       CKEDITOR.replace( 'contenido', {
@@ -419,12 +420,12 @@ return true
         $('#divRespuesta').show()
       }else{
 
-        let contenido = CKEDITOR.instances['contenido'].getData();
-        let prioridad = $('#prioridad').val()
-        let titulo = $('#titulo').val()
-        let tipo = $('#tipo').val()
-        let subTipo = $('#subTipo').val()
-        let fecha = $('input[name=date_submit]').val()
+        let contenido = new String(CKEDITOR.instances['contenido'].getData());
+        let prioridad = new String($('#prioridad').val())
+        let titulo = new String($('#titulo').val())
+        let tipo = new String($('#tipo').val())
+        let subTipo = new String($('#subTipo').val())
+        let fecha = new String($('input[name=date_submit]').val())
         //console.log(fecha)
 
 
@@ -450,18 +451,53 @@ return true
                 type: 'POST',
                 contentType: false,
                 processData: false,
-                dataType: 'json',
+                cache: false,
+                //dataType: 'json',
                 data: paqueteData
               })
               .done(function() {
-
+                //alert("Guardado correctamente")
                 console.log("Se guardo con exito... success Ahora");
                 $("#myModal").modal("hide");
 
               })
-              .fail(function() {
-                console.log("error");
-              })
+              .fail(function(dato) {
+                 //   alert('dato');
+                 console.log("error al volver de guardar");
+               })
+              // .fail( function( jqXHR, textStatus, errorThrown ) {
+              //   if (jqXHR.status === 0) {
+              //
+              //      alert('Not connect: Verify Network.');
+              //
+              //    } else if (jqXHR.status == 404) {
+              //
+              //      alert('Requested page not found [404]');
+              //
+              //    } else if (jqXHR.status == 500) {
+              //
+              //      alert('Internal Server Error [500].');
+              //
+              //    } else if (textStatus === 'parsererror') {
+              //
+              //      alert('Requested JSON parse failed.');
+              //
+              //    } else if (textStatus === 'timeout') {
+              //
+              //      alert('Time out error.');
+              //
+              //    } else if (textStatus === 'abort') {
+              //
+              //      alert('Ajax request aborted.');
+              //
+              //    } else {
+              //
+              //      alert('Uncaught Error: ' + jqXHR.responseText);
+              //
+              //    }
+              //
+              //   console.log("al volver de ajax de guardar informe ");
+              // })
               .always(function() {
                 console.log("complete");
               });

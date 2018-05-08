@@ -173,8 +173,12 @@ echo "</div>";
         $cantidadRti=mysqli_num_rows($buscar_rti);
 
 
-        $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
-        $buscarInforme= $informe->buscar();
+        $informe = new informe(null,$row->escuelaId);
+
+        $arrayReferente= ['ETT','ETJ','Coordinador'];
+
+        $buscarInforme= $informe->buscar(null,null,$arrayReferente);
+
         $cantidadInforme = mysqli_num_rows($buscarInforme);
 
         $autoridad = new Autoridades(null,$row->escuelaId);

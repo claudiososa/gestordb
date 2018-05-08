@@ -39,7 +39,7 @@
 
     array_push($list,$temporal);
     $json = json_encode($list);
-      Maestro::debbugPHP($json);
+      //Maestro::debbugPHP($json);
     echo $json;
   }
 
@@ -78,11 +78,14 @@
   if (isset($_POST['myReport']))
   {
   	$list=array();
+    $informe = new informe(null,$_POST['escuelaId']);
     if (isset($_POST['reports'])){
-      $informe = new informe(null,$_POST['escuelaId']);
-      $buscarInforme = $informe->buscarInforme();
+      //if ($_POST['reports']=="conectar") {
+        $arrayReferente= ['ETT','ETJ','Coordinador'];
+        $buscarInforme= $informe->buscar(null,null,$arrayReferente);
+      //}
+//      $buscarInforme = $informe->buscarInforme();
     }else{
-      $informe = new informe(null,$_POST['escuelaId']);
       $buscarInforme = $informe->buscarInforme($_POST['referenteId']);
     }
 
@@ -103,6 +106,7 @@
       $buscarLeido = $leido->buscarLeido();
       $cantidadLeido = mysqli_num_rows($buscarLeido);
       //Maestro::debbugPHP($buscarLeido);
+
   		$temporal=array(
         'informeId'=>$fila->informeId,
         'referenteId'=>$fila->referenteId,
@@ -120,7 +124,7 @@
   	}
 
     $json = json_encode($list);
-//    Maestro::debbugPHP($json);
+    //Maestro::debbugPHP($json);
   	echo $json;
   }
 

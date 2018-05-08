@@ -73,16 +73,9 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		'". $this->fechaModificado."','". $this->nuevoTipo."','". $this->subTipo."');";
 
 		//echo $sentencia;
-
+		//return $sentencia;
 		if ($conexion->query($sentencia)) {
 			$informeId=$conexion->insert_id;
-			//printf ("Nuevo registro con el id %d.\n", $conexion->insert_id);
-			/*$sentencia="INSERT INTO img (imgId,informeId,nombre,formato)
-			VALUES (NULL,$informeId,$nombre,'jpg');
-			if ($conexion->query($sentencia)) {
-			echo 'se guardo todo completo'
-		}*/
-
 			return $informeId;
 		}else
 		{
@@ -165,7 +158,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
     }
 
 
-		public function summary2($condicion=NULL,$filtro=NULL,$fecha1=NULL,$fecha2=NULL,$mes1=NULL,$año1=NULL,$prioridad=NULL,$referenteId=NULL,$tipo=NULL){
+		public function summary2($condicion=NULL,$filtro=NULL,$fecha1=NULL,$fecha2=NULL,$mes1=NULL,$año1=NULL,$prioridad=NULL,$referenteId=NULL,$tipo=NULL)
+		{
 			$nuevaConexion=new Conexion();
 			$conexion=$nuevaConexion->getConexion();
 
@@ -211,7 +205,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 
 
 
-	public function summary($condicion=NULL,$filtro=NULL,$fecha1=NULL,$fecha2=NULL,$mes1=NULL,$año1=NULL,$prioridad=NULL,$referenteId=NULL,$tipo=NULL,$etj=NULL){
+	public function summary($condicion=NULL,$filtro=NULL,$fecha1=NULL,$fecha2=NULL,$mes1=NULL,$año1=NULL,$prioridad=NULL,$referenteId=NULL,$tipo=NULL,$etj=NULL)
+	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
@@ -493,7 +488,8 @@ public function buscarUnico()
 	return $conexion->query($sentencia);
 }
 
-public function buscarInforme($referente=null){
+public function buscarInforme($referente=null)
+{
 	$nuevaConexion=new Conexion();
 	$conexion=$nuevaConexion->getConexion();
 	$sentencia="SELECT *
@@ -600,6 +596,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 
 		if ($listaRefer <> NULL){
 				$sinParam=1;
+				//var_dump($listaRefer);
 				$sentencia.="  AND ( ";
 				foreach ($listaRefer as $value) {
 					$sentencia.=" referentes.tipo='".$value."' || ";
