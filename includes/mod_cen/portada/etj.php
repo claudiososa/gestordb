@@ -29,13 +29,13 @@
   } );
 
   </script>
-<script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo(rand()); ?>"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 
 <?php
@@ -256,8 +256,7 @@ echo '<div class="container">';
                   <?php
                   include'includes/mod_cen/portada/calendarioEtt.php';
                    ?>
-
-                  Normal</p>
+              </p>
 						  </div>
 						</div>
 

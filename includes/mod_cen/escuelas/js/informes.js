@@ -198,6 +198,7 @@ function formPersona(informeActual)
     $('#myModal').modal('show')
 
     $('#myModal').on('hide.bs.modal', function(){
+
       if (informeActual.etjPortada) {
         let ajaxLeido = 'leido'
 
