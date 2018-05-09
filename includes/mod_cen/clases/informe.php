@@ -552,7 +552,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 
 												while ($row = mysqli_fetch_object($buscarTipoPermiso)) { //recorre los permisos para la categoria exclusiva
 
-													if ($_SESSION['tipo']==$row->tipoReferente) { //si el usuario logueado es igual al tipo de referente que tiene permiso entonces cambia el estado de $encontrado
+													if (isset($_SESSION['tipo'])==$row->tipoReferente) { //si el usuario logueado es igual al tipo de referente que tiene permiso entonces cambia el estado de $encontrado
 														$encontrado=1;
 													}
 												}
@@ -684,7 +684,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-		//echo $sentencia.'<br><br>';
+		//return $sentencia;//echo $sentencia.'<br><br>';
 		return $conexion->query($sentencia);
 	}
 
