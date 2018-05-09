@@ -51,8 +51,9 @@
 
     $informe =  new informe($_POST['informeId']);
     $buscarInforme = $informe->buscarUnico();
+    Maestro::debbugPHP($buscarInforme);
     $datoInforme = mysqli_fetch_object($buscarInforme);
-    //Maestro::debbugPHP($buscarInforme);
+
     $list=array();
     $temporal=array(
       'informeId2'=>$datoInforme->informeId,

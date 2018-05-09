@@ -3,6 +3,9 @@
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
 </script>
+<link rel="stylesheet" href="includes/mod_cen/informes/css/stylesCalendar.css">
+<link rel="stylesheet" href="includes/mod_cen/informes/css/stylesVisitaMensual.css"/>
+<script type="text/javascript"src="includes/mod_cen/portada/js/calendarETJ.js?v=<?php echo(rand()); ?>"></script>
 <style type="text/css">
 
 .btn-default {
@@ -40,6 +43,7 @@ require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
 require_once("includes/mod_cen/clases/leido.php");
+require_once("includes/mod_cen/clases/escuela.php");
 
 
 
@@ -247,7 +251,13 @@ echo '<div class="container">';
 						  </div>
 							<h3>Calendario de Visitas realizadas</h3>
 						  <div>
-	 							<p>Normal</p>
+	 							<p>
+
+                  <?php
+                  include'includes/mod_cen/portada/calendarioEtt.php';
+                   ?>
+
+                  Normal</p>
 						  </div>
 						</div>
 

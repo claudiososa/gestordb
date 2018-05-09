@@ -479,11 +479,11 @@ public function buscarUnico()
 								INNER JOIN tipoinformes
 								ON tipoinformes.tipoInformeId=informes.nuevotipo
 								INNER JOIN SubTipoInforme
-								ON SubTipoInforme.tipoId=tipoinformes.tipoInformeId
+								ON SubTipoInforme.subTipoId=informes.subtipo
 								INNER JOIN escuelas
 								ON escuelas.escuelaId=informes.escuelaId
 								WHERE informes.informeId=".$this->informeId;
-	$sentencia .=" limit 1";
+	//$sentencia .=" limit 1";
   //return $sentencia;
 	return $conexion->query($sentencia);
 }
