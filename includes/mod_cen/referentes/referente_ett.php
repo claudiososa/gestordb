@@ -13,6 +13,7 @@ hr {
 	include_once("includes/mod_cen/clases/referente.php");
 	include_once("includes/mod_cen/clases/rtixescuela.php");
 	include_once("includes/mod_cen/clases/informe.php");
+  include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 	$referenteId=$_SESSION['referenteId'];
 
@@ -55,9 +56,12 @@ echo'<br>';
 
 		////////////////////////////////////////
 
-		$escuela= new Escuela(null,$fila->referenteId);
-		$buscar_escuela = $escuela->buscar();
+		//$escuela= new Escuela(null,$fila->referenteId);
+    $escuelaReferente= new EscuelaReferentes(null,null,null,$fila->referenteId);
+		$buscar_escuela = $escuelaReferente->buscar();
 		$cantidad_escuela = mysqli_num_rows($buscar_escuela);
+
+
 
 		$cant_rti=0;
 
