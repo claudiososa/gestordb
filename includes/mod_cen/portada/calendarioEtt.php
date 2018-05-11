@@ -1,5 +1,6 @@
 <?php
 
+  include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 //_________________________________________________//
 // Recorrido de todos los referentes de Tipo ETT  //
 //_________________________________________________//
@@ -12,8 +13,13 @@ $buscar_ref=$ref->buscar();
 $registro = mysqli_fetch_object($buscar_ref);
 
 
-  $escuelas= new Escuela(null,$registro->referenteId); // buscamos las escuelas del ETT
-  $buscarEscuelas=$escuelas->buscar();  // devuelve todos los datos de las escuelas del ETT
+ // $escuelas= new Escuela(null,$registro->referenteId); // buscamos las escuelas del ETT
+ // $buscarEscuelas=$escuelas->buscar();  // devuelve todos los datos de las escuelas del ETT
+  
+  $escuelas=new EscuelaReferentes(null,null,'19',$registro->referenteId); // buscamos las escuelas del ETT
+  $buscarEscuelas=$escuelas->buscar2();// devuelve todos los datos de las escuelas del ETT
+    
+
   $cantEscuelas=mysqli_num_rows($buscarEscuelas); // Guardamos la Cantidad de Escuelas de cada ETT
 
     $referente=$registro->referenteId;  // guardamos en la variable $referente el referenteId del ETT
@@ -53,8 +59,12 @@ while ($fila = mysqli_fetch_object($buscar_informe)) {
 
     if($escuelaInformeActual <> $fila->escuelaId){
 
-        $escuelaEtt = new Escuela($fila->escuelaId); // buscamos a quien le pertenece la escuela
-        $escuelaEttResultado= $escuelaEtt->buscar();
+       // $escuelaEtt = new Escuela($fila->escuelaId); // buscamos a quien le pertenece la escuela
+        //$escuelaEttResultado= $escuelaEtt->buscar();
+        $escuelaEtt = new EscuelaReferentes(null,$fila->escuelaId,'19');  // buscamos a quien le pertenece la escuela
+        $escuelaEttResultado= $escuelaEtt->buscar2();
+
+
         $datoEscuela = mysqli_fetch_object($escuelaEttResultado); // obtenemos datos de la escuela con el escuelaId ingresado
 
         if ($datoEscuela->referenteId == $referente) {  // preguntamos si la escuela es de su agrupamiento
@@ -62,12 +72,23 @@ while ($fila = mysqli_fetch_object($buscar_informe)) {
           $listaEscVisitadas[$cantidadEscuelasVisitadas]=$datoEscuela->numero; // almacenamos el numero de c/u de las escuelas de su agrupamiento visitadas por el Referente.
           $cantidadEscuelasVisitadas++;
         }else{
-              if ($datoEscuela->numero != 2) // preguntamos si la escuela es distinta de 660000000 (Oficina de Conectar Igualdad)
-                {
+               if ($datoEscuela->referenteId!=NULL && $fila->escuelaId != 2   ) // Preguntamos si la escuela tiene ETT (referenteId!=NULL) en la tabla escuelaReferentes Y si la escuelaId es distinta de 2 (Oficina de Conectar Igualdad)  
+                  {
 
-                $listaEscOtroAgrup[$cantidadEscuelasOtroAgrup]=$datoEscuela->numero; // almacenamos el numero de la escuela visitada por el ETT.
-              $cantidadEscuelasOtroAgrup++;
-              }
+                  $listaEscOtroAgrup[$cantidadEscuelasOtroAgrup]=$datoEscuela->numero; // almacenamos el numero de la escuela visitada que es de otro ETT.
+                
+                $cantidadEscuelasOtroAgrup++;
+                }else{ 
+                      if ($datoEscuela->referenteId==NULL && $fila->escuelaId != 2) { // preguntamos si NO HAY ETT para la escuela en la tabla escuelaReferentes y si la escuela buscada NO ES la Oficina de conectar igualdad
+                        
+                         $listaEscOtroAgrup[$cantidadEscuelasOtroAgrup]=$escuelaResultado->numero; // almacenamos el numero de la escuela visitada que no tiene ETT.
+                       $cantidadEscuelasOtroAgrup++;
+                      }
+
+
+
+
+                }
 
         }
 
@@ -298,8 +319,11 @@ echo '<div class="modal fade" id="myModalEsc'.$referente.'" tabindex="-1" role="
 
        <?php
 
-        $escuelasAcargo= new Escuela(null,$registro->referenteId);
-      $buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
+      //$escuelasAcargo= new Escuela(null,$registro->referenteId);
+      //$buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
+      $escuelas=new EscuelaReferentes(null,null,'19',$registro->referenteId);
+      $buscarEscuelasAcargo=$escuelas->buscar2();  // devuelve todos los datos de la escuelas a Cargo
+
 
       echo "<table class='table table-bordered'>";
       echo "<thead>";
@@ -440,8 +464,10 @@ echo '<div class="modal fade" id="myModalEscNoVisitas'.$referente.'" tabindex="-
        echo "<td>Nombre</td>";
        echo "</thead>";
 
-        $escuelasAcargo= new Escuela(null,$registro->referenteId);
-      $buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
+       //$escuelasAcargo= new Escuela(null,$registro->referenteId);
+      //$buscarEscuelasAcargo=$escuelas->buscar();  // devuelve todos los datos de la escuelas a Cargo
+       $escuelasAcargo=new EscuelaReferentes(null,null,'19',$registro->referenteId);
+      $buscarEscuelasAcargo=$escuelas->buscar2();
 
         while ($filaEsc = mysqli_fetch_object($buscarEscuelasAcargo))
               {
