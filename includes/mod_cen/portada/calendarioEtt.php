@@ -15,10 +15,10 @@ $registro = mysqli_fetch_object($buscar_ref);
 
  // $escuelas= new Escuela(null,$registro->referenteId); // buscamos las escuelas del ETT
  // $buscarEscuelas=$escuelas->buscar();  // devuelve todos los datos de las escuelas del ETT
-  
+
   $escuelas=new EscuelaReferentes(null,null,'19',$registro->referenteId); // buscamos las escuelas del ETT
   $buscarEscuelas=$escuelas->buscar2();// devuelve todos los datos de las escuelas del ETT
-    
+
 
   $cantEscuelas=mysqli_num_rows($buscarEscuelas); // Guardamos la Cantidad de Escuelas de cada ETT
 
@@ -48,20 +48,20 @@ $cantidadEscuelasOtroAgrup=0;  // contador e indice del array de escuelas de otr
 $VisitaOficina=0;              // contador de cantidad de visitas a la oficina
 
 
-while ($fila = mysqli_fetch_object($buscar_informe)) {
-  $lista[$indice]=$fila->dia;
-  $escuelaDatos= new Escuela($fila->escuelaId);//busca datos de escuela asociada al informe
+while ($fila1 = mysqli_fetch_object($buscar_informe)) {
+  $lista[$indice]=$fila1->dia;
+  $escuelaDatos= new Escuela($fila1->escuelaId);//busca datos de escuela asociada al informe
   $escuelaBuscar =$escuelaDatos->buscar();
   $escuelaResultado= mysqli_fetch_object($escuelaBuscar);
   $lista2[$indice]=$escuelaResultado->numero;
 
   $indice++;
 
-    if($escuelaInformeActual <> $fila->escuelaId){
+    if($escuelaInformeActual <> $fila1->escuelaId){
 
        // $escuelaEtt = new Escuela($fila->escuelaId); // buscamos a quien le pertenece la escuela
         //$escuelaEttResultado= $escuelaEtt->buscar();
-        $escuelaEtt = new EscuelaReferentes(null,$fila->escuelaId,'19');  // buscamos a quien le pertenece la escuela
+        $escuelaEtt = new EscuelaReferentes(null,$fila1->escuelaId,'19');  // buscamos a quien le pertenece la escuela
         $escuelaEttResultado= $escuelaEtt->buscar2();
 
 
@@ -72,15 +72,15 @@ while ($fila = mysqli_fetch_object($buscar_informe)) {
           $listaEscVisitadas[$cantidadEscuelasVisitadas]=$datoEscuela->numero; // almacenamos el numero de c/u de las escuelas de su agrupamiento visitadas por el Referente.
           $cantidadEscuelasVisitadas++;
         }else{
-               if ($datoEscuela->referenteId!=NULL && $fila->escuelaId != 2   ) // Preguntamos si la escuela tiene ETT (referenteId!=NULL) en la tabla escuelaReferentes Y si la escuelaId es distinta de 2 (Oficina de Conectar Igualdad)  
+               if ($datoEscuela->referenteId!=NULL && $fila1->escuelaId != 2   ) // Preguntamos si la escuela tiene ETT (referenteId!=NULL) en la tabla escuelaReferentes Y si la escuelaId es distinta de 2 (Oficina de Conectar Igualdad)
                   {
 
                   $listaEscOtroAgrup[$cantidadEscuelasOtroAgrup]=$datoEscuela->numero; // almacenamos el numero de la escuela visitada que es de otro ETT.
-                
+
                 $cantidadEscuelasOtroAgrup++;
-                }else{ 
-                      if ($datoEscuela->referenteId==NULL && $fila->escuelaId != 2) { // preguntamos si NO HAY ETT para la escuela en la tabla escuelaReferentes y si la escuela buscada NO ES la Oficina de conectar igualdad
-                        
+                }else{
+                      if ($datoEscuela->referenteId==NULL && $fila1->escuelaId != 2) { // preguntamos si NO HAY ETT para la escuela en la tabla escuelaReferentes y si la escuela buscada NO ES la Oficina de conectar igualdad
+
                          $listaEscOtroAgrup[$cantidadEscuelasOtroAgrup]=$escuelaResultado->numero; // almacenamos el numero de la escuela visitada que no tiene ETT.
                        $cantidadEscuelasOtroAgrup++;
                       }
@@ -93,8 +93,8 @@ while ($fila = mysqli_fetch_object($buscar_informe)) {
         }
 
   }
-  $escuelaInformeActual=$fila->escuelaId;
-  if ($fila->escuelaId == 2)
+  $escuelaInformeActual=$fila1->escuelaId;
+  if ($fila1->escuelaId == 2)
                 {
                 $VisitaOficina++;
               }

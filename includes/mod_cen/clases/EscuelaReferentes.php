@@ -152,17 +152,17 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 
 			$sentencia="SELECT escuelaReferentes.escuelaid,escuelaReferentes.tipoId,personas.personaId,
 									personas.nombre,personas.apellido,referentes.referenteId
-			 						FROM personas	
-									
+			 						FROM personas
+
 									INNER JOIN referentes
 									ON personas.personaId=referentes.personaId
 									INNER JOIN escuelaReferentes
 									ON referentes.referenteId=escuelaReferentes.referenteId
 									INNER JOIN tipoReferentes
 									ON tipoReferentes.tipoId=escuelaReferentes.tipoId
-									
+
 									WHERE escuelaReferentes.tipoId =".$tipo." AND escuelaReferentes.escuelaId=$this->escuelaId";
-			
+
 			$sentencia.="  ORDER BY escuelaReferentes.escuelaReferentesId ASC";
 			//echo $sentencia;
 			if (mysqli_num_rows($conexion->query($sentencia))==0) {
@@ -264,7 +264,7 @@ public function buscar2()
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT escuelaReferentes.referenteId,escuelaReferentes.escuelaId,escuelas.numero,escuelas.cue,escuelas.nombre 
+		$sentencia="SELECT escuelaReferentes.referenteId,escuelaReferentes.escuelaId,escuelas.numero,escuelas.cue,escuelas.nombre
 		                    FROM escuelaReferentes
 								INNER JOIN escuelas
 								ON escuelas.escuelaId = escuelaReferentes.escuelaId	";
@@ -350,7 +350,7 @@ public function buscar2()
 
 
 
-  //*** Fin de Metodo para Calendario  ***// 
+  //*** Fin de Metodo para Calendario  ***//
 
 
 	public function existe()
