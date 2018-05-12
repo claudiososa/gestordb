@@ -59,15 +59,15 @@ $(document).ready(function() {
   });
 
 
-  $('[id ^=informes]').on('click', function(){
+  $('[id ^=informes],[id ^=informeM]').on('click', function(){
 
     let escuelaId = $(this).attr('id').substr(8)
     //alert(escuelaId)
     let $this = $(this)
-    let existe = $('.tableinformes'+escuelaId).attr('class')
+    let existe = $('.tableinformes,.tableinformesM'+escuelaId).attr('class')
 
     if (typeof(existe)==='undefined') {
-        //console.log('definicion de existe'+existe)
+        console.log('definicion de existe'+existe)
         //$this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
         //console.log(escuelaId)
         let myReport ='all'
@@ -125,6 +125,12 @@ $(document).ready(function() {
          <tbody>`)
 
 
+
+         $('#infoM'+escuelaId).parent().parent().after(`<div class="list-group tableinformesM${tableinforme}" id="tableinformesM${tableinforme}"><br><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button><br><div>`)
+
+
+
+
         }else{   // entra por que no tiene informes cargados
 
 
@@ -153,6 +159,9 @@ $(document).ready(function() {
          <tbody>`)
 
 
+         $('#infoM'+escuelaId).parent().parent().after(`<p tableinformesM${tableinforme}" id="tableinformesM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button>`)
+
+
 
        }
 
@@ -173,6 +182,11 @@ $(document).ready(function() {
 
               </tr>`)
 
+              $('#tableinformesM'+escuelaIdconCero).find('div').after(`<a  class="list-group-item">
+              <h5 class="list-group-item-heading trinformes${escuelaIdconCero}"id='if${item.informeId}'><b>${item.titulo}</b></h5>
+              <p class="list-group-item-text">${item.fecha} Prioridad:${item.prioridad}</p><br><p class="btn-group" role="group">
+              <button type="button" class="btn btn-default"disabled="true">Leido: ${item.cantidadLeido}</button><button type="button" disabled="true"class="btn btn-default">Resp.: ${item.cantidadRespuesta}</button></p></a>`)
+
             }else{
               //alert('Esta escuela no tiene informes creados')
             }
@@ -180,6 +194,7 @@ $(document).ready(function() {
 
 
           $('[id ^=nuevoInforme]').click( function(){
+
 
               let idPrueba = $(this).attr('id');
               let escuela_id = idPrueba.substr(12)
@@ -192,6 +207,7 @@ $(document).ready(function() {
 
               .then(function(escuela){
                 informeNuevo(escuela)//inicia modal para carga de informe
+
                })
               .catch(error=> console.log(error + ' Noooo'))
 
@@ -282,7 +298,7 @@ $(document).ready(function() {
     }else{
         //$('.trinformes'+escuelaId).remove()
 
-        $('.tableinformes'+escuelaId).remove()
+        $('.tableinformes, .tableinformesM'+escuelaId).remove()
         //$('.trautoridad'+escuelaId).closest('tr').remove()
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
 
@@ -721,7 +737,9 @@ $(document).ready(function() {
                 $('#btnSave, #btnEditar').on('click',function(){
 
 
+
                   console.log('boton guardar')
+
                   // $('#btnEditar').hide()
                   //   $('#btnSave').hide()
                   let id = $('#txtidpersona').val()
@@ -966,7 +984,7 @@ $(document).ready(function() {
               }
                     ////////////////////////////////////////////////
               if (validarpersona()) {
-                //alert ('validacion correcta')
+          //      alert ('validacion correcta')
 
                 let tipoIdSave = $('#tipoId').val().substr(6)
 
@@ -990,8 +1008,11 @@ $(document).ready(function() {
                   })
                   .done(function(lista) {
 
+
                     for (let item of lista) {
                       if (item.status=='new') {
+
+
                         console.log('se creo con exito')
                       }else{
                         console.log('se actualizo con exito')

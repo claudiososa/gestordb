@@ -111,11 +111,16 @@ function informeNuevo(escuela)
                   </div>
               </form>
             </div>
+            <div id="cargando">
 
+            <img class="img img-responsive cargando" style="display:none;margin:auto;" src="img/iconos/informes/ajax-loader.gif"><br>
+            <b><p class="cargando"align="center"style="display:none;color:#068587;">GUARDANDO INFORME, POR FAVOR ESPERE...</p></b>
+            </div>
             <!-- **** FIN MODAL BODY ****-->
             <!-- **** INICIO MODAL FOOTER ****-->
 
             <div class="modal-footer" id="modal-footer">
+
               <div id="divButton">
                 <button type="button" class="btn btn-default footerButton" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary footerButton" id="btnSave">Guardar</button>
@@ -316,9 +321,6 @@ function informeNuevo(escuela)
 
 
 
-////////////////////////////////////////////
-
-
 
       if ($('#prioridad').val() == '0') {
         //alert('Seleccione Localidad')
@@ -409,9 +411,14 @@ return true
 
 
     $('#btnSave').click(function(){
+
  if (validarInforme()) {
       let valorBoton = $(this).text()
       let informeId = escuela.informeId
+     $(this).attr('disabled',true);
+     $('#formInforme').hide()
+     $('.cargando').css('display','block')
+     $('#divButton').hide()
 
       if (valorBoton=="Responder") {
         $('#divContenido'+informeId).hide()
@@ -459,6 +466,7 @@ return true
                 //alert("Guardado correctamente")
                 console.log("Se guardo con exito... success Ahora");
                 $("#myModal").modal("hide");
+
 
               })
               .fail(function(dato) {
