@@ -152,17 +152,17 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 
 			$sentencia="SELECT escuelaReferentes.escuelaid,escuelaReferentes.tipoId,personas.personaId,
 									personas.nombre,personas.apellido,referentes.referenteId
-			 						FROM personas	
-									
+			 						FROM personas
+
 									INNER JOIN referentes
 									ON personas.personaId=referentes.personaId
 									INNER JOIN escuelaReferentes
 									ON referentes.referenteId=escuelaReferentes.referenteId
 									INNER JOIN tipoReferentes
 									ON tipoReferentes.tipoId=escuelaReferentes.tipoId
-									
+
 									WHERE escuelaReferentes.tipoId =".$tipo." AND escuelaReferentes.escuelaId=$this->escuelaId";
-			
+
 			$sentencia.="  ORDER BY escuelaReferentes.escuelaReferentesId ASC";
 			//echo $sentencia;
 			if (mysqli_num_rows($conexion->query($sentencia))==0) {
@@ -255,6 +255,102 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 		return $conexion->query($sentencia);
 
 	}
+
+  //*** Metodo creado para Calendario  ***//
+
+
+public function buscar2()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="SELECT escuelaReferentes.referenteId,escuelaReferentes.escuelaId,escuelas.numero,escuelas.cue,escuelas.nombre
+		                    FROM escuelaReferentes
+								INNER JOIN escuelas
+								ON escuelas.escuelaId = escuelaReferentes.escuelaId	";
+
+		if($this->escuelaReferentesId!=NULL || $this->escuelaId!=NULL || $this->tipoId!=NULL || $this->referenteId!=NULL
+
+			|| $this->mañana!=NULL || $this->intermedio!=NULL || $this->tarde!=NULL || $this->vespertino!=NULL
+			|| $this->noche!=NULL || $this->extendida!=NULL )
+		{
+			$sentencia.=" WHERE ";
+
+
+
+		if($this->escuelaReferentesId!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.escuelaReferentesId = $this->escuelaReferentesId && ";
+		}
+
+		if($this->escuelaId!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.escuelaId = $this->escuelaId && ";
+		}
+
+		if($this->tipoId!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.tipoId = $this->tipoId && ";
+		}
+
+		if($this->referenteId!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.referenteId = $this->referenteId && ";
+		}
+
+		if($this->mañana!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.mañana = $this->mañana && ";
+		}
+
+		if($this->intermedio!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.intermedio = $this->intermedio && ";
+		}
+
+		if($this->tarde!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.tarde = $this->tarde && ";
+		}
+
+		if($this->vespertino!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.vespertino = $this->vespertino && ";
+		}
+
+		if($this->noche!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.noche = $this->noche && ";
+		}
+
+		if($this->extendida!=NULL)
+		{
+			$sentencia.=" escuelaReferentes.extendida = $this->extendida && ";
+		}
+
+		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+		}
+
+		$sentencia.="  ORDER BY escuelaId ASC";
+		//if(isset($limit)){
+			//$sentencia.=" LIMIT ".$limit;
+		//}
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+
+	}
+
+
+
+
+
+
+
+
+
+
+  //*** Fin de Metodo para Calendario  ***//
 
 
 	public function existe()

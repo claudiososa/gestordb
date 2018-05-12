@@ -1,3 +1,19 @@
+<!-- Carga para Mis escuelas de cada ett -->
+<link rel="stylesheet" href="includes/mod_cen/css/styleIconosSuperPrim.css">
+<link rel="stylesheet" href="includes/mod_cen/css/default.css">
+<link rel="stylesheet" href="includes/mod_cen/css/default.date.css">
+
+
+<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo(rand()); ?>"></script>
+<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<!-- ////////////////////// ///////////////////////////////////// -->
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
@@ -31,12 +47,7 @@
   </script>
 <script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo(rand()); ?>"></script>
-<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+
 
 <?php
 require_once("includes/mod_cen/clases/informe.php");
@@ -44,7 +55,10 @@ require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
 require_once("includes/mod_cen/clases/leido.php");
 require_once("includes/mod_cen/clases/escuela.php");
-
+include_once 'includes/mod_cen/clases/Autoridades.php';
+include_once "includes/mod_cen/clases/respuesta.php" ;
+include_once "includes/mod_cen/clases/rtixescuela.php";
+include_once "includes/mod_cen/clases/rti.php";
 
 
 
@@ -249,6 +263,7 @@ echo '<div class="container">';
 	 							 }
 	 						 ?>
 						  </div>
+
 							<h3>Calendario de Visitas realizadas</h3>
 						  <div>
 	 							<p>
@@ -258,6 +273,107 @@ echo '<div class="container">';
                    ?>
               </p>
 						  </div>
+
+              <!-- //
+              // //  echo $fila->referenteId;
+              //   $escuelasCargo = new EscuelaReferentes(null,null,null,$fila->referenteId);
+              // //  var_dump($escuelasCargo);
+              //   $buscarEscuelas = $escuelasCargo->buscar2();
+              //   $totalEscuelas = mysqli_num_rows($buscarEscuelas);
+              //  echo "<h3>Escuelas a cargo <span class='badge'>$totalEscuelas</span></h3>";
+              // echo '<div>';
+              //
+              //   while ($fila2 = mysqli_fetch_object($buscarEscuelas)) {
+              //     echo "<p>$fila2->numero - $fila2->cue -".substr($fila2->nombre,0,35)."</p>";
+              //   } -->
+              <?php
+              $escuelasCargo = new EscuelaReferentes(null,null,null,$fila->referenteId);
+              //ar_dump($escuelasCargo);
+              $buscarEscuelas = $escuelasCargo->buscar2();
+              $totalEscuelas = mysqli_num_rows($buscarEscuelas);
+              echo "<h3>Escuelas a cargo <span class='badge'>$totalEscuelas</span></h3>";
+              echo '<div>';
+               ?>
+              <div class="row">
+
+              <!-- <div class="container"> -->
+
+
+              <table class="table table-bordered hidden-xs">
+                <thead>
+                  <tr class='danger' >
+                    <th>CUE</th>
+                    <th>N°</th>
+                    <th>Nombre</th>
+                    <th>Informes</th>
+                    <th>Autoridades</th>
+                    <th>RTI</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <?php
+                    //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
+                  //  $escuelasCargo = new EscuelaReferentes(null,null,'19',$_SESSION['referenteId']);
+                  //  $buscarEscuelas = $escuelasCargo->buscar();
+
+                    $escuela = new Escuela();
+
+                    while ($row = mysqli_fetch_object($buscarEscuelas)) {
+
+                      $rtix= new rtixescuela($row->escuelaId);
+
+                      $buscar_rti=$rtix->buscar();
+
+                      $cantidadRti=mysqli_num_rows($buscar_rti);
+
+
+                      $informe = new informe(null,$row->escuelaId);
+
+                      $arrayReferente= ['ETT','ETJ','Coordinador'];
+
+                      $buscarInforme= $informe->buscar(null,null,$arrayReferente);
+
+                      $cantidadInforme = mysqli_num_rows($buscarInforme);
+
+                      $autoridad = new Autoridades(null,$row->escuelaId);
+                      $buscarAutoridad = $autoridad->buscarAutoridad3('all');
+                      $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
+
+                      $escuela->escuelaId=$row->escuelaId;
+                      $buscarEscuela = $escuela->buscar();
+                      $infoEscuela = mysqli_fetch_object($buscarEscuela);
+
+                      //echo $infoEscuela->numero."<br>";
+                      echo '<tr id="fila'.$infoEscuela->escuelaId.'">';
+                      echo '<td>'.$infoEscuela->cue.'</td>';
+                      echo '<td>'.$infoEscuela->numero.'</td>';
+                      echo '<td>'.substr($infoEscuela->nombre,0,30).'</td>';
+                      echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+                      echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
+                      if ($cantidadRti > 0 ) {
+                        echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="rti'.$infoEscuela->escuelaId.'" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
+                      }else{
+                        echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
+                      }
+
+
+
+                      echo '</tr>';
+
+                    }
+                  ?>
+
+                </tbody>
+              </table>
+
+              </div>
+
+              <!-- </div> </div container> --> -->
+
+              </div>
+
 						</div>
 
 
