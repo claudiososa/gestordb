@@ -1,4 +1,4 @@
-<?php
+ <?php
 
   include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 //_________________________________________________//

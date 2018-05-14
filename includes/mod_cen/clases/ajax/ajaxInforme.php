@@ -117,6 +117,7 @@
         'cantidadRespuesta' =>$cantidadRespuesta,
         'cantidadLeido' =>$cantidadLeido,
         'fecha' =>$fila->fechaVisita,
+        'fechaCarga' =>$fila->fechaCarga,
         'prioridad' =>$fila->prioridad
 
   		);

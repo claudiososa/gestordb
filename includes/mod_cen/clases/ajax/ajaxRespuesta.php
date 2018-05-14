@@ -76,7 +76,7 @@
       break;
     }
 
-    if($guardar_respuesta>0){          // entra si se agrego la respuesta
+    if(isset($guardar_respuesta)>0){          // entra si se agrego la respuesta
 
 
             include_once("includes/mod_cen/informes/email_script_resp.php");
