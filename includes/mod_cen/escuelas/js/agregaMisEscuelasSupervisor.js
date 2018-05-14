@@ -62,17 +62,21 @@ $(document).ready(function() {
   $('[id ^=informes],[id ^=informeM]').on('click', function(){
 
     let escuelaId = $(this).attr('id').substr(8)
-    //alert(escuelaId)
+    let click = $(this).attr('id').substr(0,8) // guarda el id del elemento donde se hizo clic, puede ser informes o informeM
+    let existe
     let $this = $(this)
-    let existe = $('.tableinformes,.tableinformesM'+escuelaId).attr('class')
 
-    if (typeof(existe)==='undefined') {
+    if (click=='informes') {//almacena en variable existe, la clase de la tableinformes en el caso que no existe dicha tabla se guarda comno undefined
+      existe = $('.tableinformes'+escuelaId).attr('class')
+    }else{
+      existe = $('.tableinformeM'+escuelaId).attr('class')
+    }
+
+    if (typeof(existe)==='undefined')
+    {
         console.log('definicion de existe'+existe)
-        //$this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
-        //console.log(escuelaId)
         let myReport ='all'
         let reports ='conectar'
-
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
           type: 'POST',
@@ -298,7 +302,8 @@ $(document).ready(function() {
     }else{
         //$('.trinformes'+escuelaId).remove()
 
-        $('.tableinformes, .tableinformesM'+escuelaId).remove()
+        $('.tableinformes'+escuelaId).remove()
+        $('.tableinformeM'+escuelaId).remove()
         //$('.trautoridad'+escuelaId).closest('tr').remove()
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
 
