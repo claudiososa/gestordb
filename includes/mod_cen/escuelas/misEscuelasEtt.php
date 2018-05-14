@@ -50,10 +50,10 @@ include_once "includes/mod_cen/clases/rti.php";
   </div>
 </div>
   <input type="hidden" name="tipoId" id="tipoId" value="" />
-<div class="row">
+<div class="row hidden-xs">
   <div class="container">
 <div class="panel panel-primary col-md-12">
-  <div class="panel-body hidden-xs">
+  <div class="panel-body">
     <div class="styleFont" align="text-center"><u>Ultimos 5 informes creados</u><a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION['referenteId'] ?>"></a></div>
       <?php
         echo "<div class='table-responsive'>";
@@ -217,9 +217,8 @@ echo "</div>";
 
 </div>
 
-</div> <!-- </div container> -->
-
-
+</div>
+ </div ><!---row>
 
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA MOBILE-->
@@ -227,29 +226,32 @@ echo "</div>";
 <!-- <div class="container visible-xs">
 <?php
   //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
+  //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
   $escuelasCargo = new EscuelaReferentes(null,null,'19',$_SESSION['referenteId']);
   $buscarEscuelas = $escuelasCargo->buscar();
 
   $escuela = new Escuela();
 
   while ($row = mysqli_fetch_object($buscarEscuelas)) {
+
     $rtix= new rtixescuela($row->escuelaId);
 
-   $buscar_rti=$rtix->buscar();
+    $buscar_rti=$rtix->buscar();
 
-   $cantidadRti=mysqli_num_rows($buscar_rti);
+    $cantidadRti=mysqli_num_rows($buscar_rti);
 
 
+    $informe = new informe(null,$row->escuelaId);
 
-    $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
-    $buscarInforme= $informe->buscar();
+    $arrayReferente= ['ETT','ETJ','Coordinador'];
+
+    $buscarInforme= $informe->buscar(null,null,$arrayReferente);
+
     $cantidadInforme = mysqli_num_rows($buscarInforme);
 
     $autoridad = new Autoridades(null,$row->escuelaId);
     $buscarAutoridad = $autoridad->buscarAutoridad3('all');
     $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
-
-    //$arrayPrincipal=array();
 
     $escuela->escuelaId=$row->escuelaId;
     $buscarEscuela = $escuela->buscar();
@@ -272,16 +274,18 @@ echo "</div>";
     //echo '<br>';
     echo '<hr class="hrSeparador">';
     echo '<h4><b>Mis Informes</b></h4>';
-    echo '<div class="row">';
-    echo '<div class="col-md-12">';
-    echo '<button type="button" class="btn btn-danger"name="button" >Ver Informes '.$cantidadInforme.'</button>&nbsp&nbsp&nbsp&nbsp&nbsp';
+    echo '<div class="row" >';
 
-    echo '<button type="button" class="btn btn-danger"name="button">Crear Nuevo</button>';
+    echo '<div class="col-md-12" id="informeM'.$infoEscuela->escuelaId.'" >';
+    echo '<button type="button" class="btn btn-danger"name="button" id="infoM'.$infoEscuela->escuelaId.'">Ver Informes '.$cantidadInforme.'</button>';
+    //echo '&nbsp';
+    //echo '</div>';
+//echo '<br>';
+echo '<br>';
+    //echo '<div class="col-md-12" id="informeN'.$infoEscuela->escuelaId.'" >';
+  //  echo '<button type="button"id="nuevoInforme'.$infoEscuela->escuelaId.'" class="btn btn-danger"name="button">Crear Informe</button>';
     echo '</div>';
-  //  echo '<br>';
-  //  echo '<div class="col-md-12">';
-    //echo '<button type="button" class="btn btn-danger"name="button">Crear</button>';
-  //  echo '</div>';
+
     echo '</div>';
     echo '<hr class="hrSeparador">';
     echo '<h4><b>Autoridades: ('.$cantidadAutoridades.')</b></h4>';
@@ -290,9 +294,9 @@ echo "</div>";
       while ($rowAutoridades = mysqli_fetch_object($buscarAutoridad)) {
       echo '<div class="row" >';
       echo '<div class="col-xs-8"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
-      echo '<div class="col-xs-2"><img id="celIdAuto" class="img-responsive" src="img/iconos/lapiz (4).png"></div>';
+      echo '<div class="col-xs-2"><img id="celIdAuto" class="img img-responsive" src="img/iconos/lapiz (4).png"></div>';
       echo '<div class="col-xs-2">
-            <img class="img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus"
+            <img class="img img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus"
             title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" >
           </div>';
         echo '</div>';
@@ -301,8 +305,8 @@ echo "</div>";
       if ($rowAutoridades->telefonoM != '') {
 
 
-        echo '<div class="col-xs-2 pull-right"><a target="_blank" href="https://api.whatsapp.com/send?phone=54'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/whatsapp (1).png"></a></div>';
-        echo '<div class="col-xs-2 pull-right"><a href="tel:'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/llamada-saliente (1).png"></a>';
+        echo '<div class="col-xs-2 pull-right"><a target="_blank" href="https://api.whatsapp.com/send?phone=54'.$rowAutoridades->telefonoM.'" ><img class="img img-responsive" src="img/iconos/whatsapp (1).png"></a></div>';
+        echo '<div class="col-xs-2 pull-right"><a href="tel:'.$rowAutoridades->telefonoM.'" ><img class="img img-responsive" src="img/iconos/llamada-saliente (1).png"></a>';
         echo '</div>';
 
 
@@ -314,7 +318,7 @@ echo "</div>";
       }
       if ($rowAutoridades->email != '') {
 
-        echo '<div class="col-xs-2 pull-right"><a href="mailto:'.$rowAutoridades->email. '"><img class="img-responsive" src="img/iconos/gmail.png"></a>';
+        echo '<div class="col-xs-2 pull-right"><a href="mailto:'.$rowAutoridades->email. '"><img class="img img-responsive" src="img/iconos/gmail.png"></a>';
         echo '</div>';
 
       }
@@ -337,8 +341,8 @@ echo '</div>';
     echo '</div>';
 
 
-    echo '<div>';
-    echo '<div>';
+  //  echo '</div>';
+  //  echo '</div>';
 
 
   }
@@ -352,7 +356,8 @@ echo '</div>';
   <script>
   $(document).ready(function(){
 
-   //$(".escuela").hide()
+   $(".escuela").hide()
+  // $(".img").css('display', 'true');
 
 //dropdown accesos acciones generales
     $('.dropdown-submenu a.test').on("click", function(e){
