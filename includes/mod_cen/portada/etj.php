@@ -38,7 +38,15 @@
 			 collapsible: true
      });
 
+     $( "#accordionBuscar1,#accordionBuscar2,#accordionBuscar3,#accordionBuscar4,#accordionBuscar5").accordion({
+      active: false,
+      collapsible: true
+     });
+
 		 $( "#tabs" ).tabs({
+       collapsible: true
+     });
+     $( "#tabsBuscar" ).tabs({
        collapsible: true
      });
 
@@ -97,10 +105,55 @@ echo '<div class="container">';
 <div class="" id="padreIr">
 </div>
 
-<div class="row hidden-xs  wow zoomIn">
-	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
+<div class="hidden-xs  wow zoomIn">
+  <div id="tabsBuscar">
+    <ul>
+      <li><a  href='#tabsBuscar-1'>Buscar</a></li>
+      <li><a  href='#tabsBuscar-2'>Informe prioridad Alta</a></li>
+      <li><a  href='#tabsBuscar-3'>Conectividad PNCE</a></li>
+      <li><a  href='#tabsBuscar-4'>Documentos</a></li>
+    </ul>
+    <div id="tabsBuscar-1">
+      <div id='accordionBuscar1'>
+        <h3>Escuela</h3>
+        <div>
+          <p>buscar de escuelas</p>
+        </div>
+      </div>
+      <div id='accordionBuscar2'>
+          <h3>RTI</h3>
+          <div>
+            <p>buscar rti</p>
+          </div>
+      </div>
+      <div id='accordionBuscar3'>
+          <h3>Referente</h3>
+          <div>
+            <p>buscar de Referentes</p>
+          </div>
+      </div>
+      <div id='accordionBuscar4'>
+          <h3>Informe</h3>
+          <div>
+            <p>buscar de Informe</p>
+          </div>
+      </div>
+
+    </div>
+    <div id="tabsBuscar-2">
+      Ultimos informes Alta
+    </div>
+    <div id="tabsBuscar-3">
+      Conectividad
+    </div>
+    <div id="tabsBuscar-4">
+      Documentos
+    </div>
+  </div>
+
+	<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
-	</div>
+	</div> -->
 
 	<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
@@ -130,14 +183,14 @@ echo '<div class="container">';
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
+	<!-- <div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
-	</div>
+	</div> -->
 </div>
 
 
 
-<div class="row visible-xs wow zoomIn">
+<!-- <div class="row visible-xs wow zoomIn">
 	<div class="col-xs-6">
 		<a href="index.php?mod=slat&men=user&id=2" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis ETT</h3></a>
 	</div>
@@ -145,10 +198,10 @@ echo '<div class="container">';
 	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
 </div>
 
-</div>
+</div> -->
 
 
-<div class="row visible-xs wow zoomIn">
+<!-- <div class="row visible-xs wow zoomIn">
 
 	<div class="col-xs-6"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
@@ -158,7 +211,7 @@ echo '<div class="container">';
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
 	</div>
 
-</div>
+</div> -->
 <?php
 
 		if(mysqli_num_rows($resultado_ett_acargo)>0){
