@@ -118,7 +118,8 @@ $(document).ready(function() {
              <th>Titulo</th>
              <th>Leido</th>
              <th>Resp.</th>
-             <th>Fecha</th>
+             <th>F. Visita</th>
+             <th>F. Carga</th>
              <th>Prioridad</th>
            </tr>
          </thead>
@@ -146,7 +147,8 @@ $(document).ready(function() {
              <th>Titulo</th>
              <th>Leido</th>
              <th>Resp.</th>
-             <th>Fecha</th>
+             <th>F. Visita</th>
+             <th>F. Carga</th>
              <th>Prioridad</th>
            </tr>
          </thead>
@@ -169,6 +171,7 @@ $(document).ready(function() {
               <td>${item.cantidadLeido}</td>
               <td>${item.cantidadRespuesta}</td>
               <td>${item.fecha}</td>
+              <td>${item.fechaCarga}</td>
               <td>${item.prioridad}</td>
 
               </tr>`)

@@ -49,6 +49,11 @@
       break;
     }
 
+    if($guardar_informe>0){
+
+          include_once("includes/mod_cen/informes/email_script.php");
+          }
+
       // $list=array();
       // $temporal=array(
       //   'estado'=>'guardado'
