@@ -207,7 +207,7 @@ function informeNuevo(escuela)
           });
       //$('#divRespuesta').hide()
       $('[id ^=rp]').hide()
-      $('[class ^=img]').hide()
+    //  $('[class ^=img]').hide()
 
       // $('[id ^=titulo]').click(function(){
       //   let resp = $(this).attr('id')
