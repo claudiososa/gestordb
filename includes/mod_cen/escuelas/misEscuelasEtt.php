@@ -223,7 +223,7 @@ echo "</div>";
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA MOBILE-->
 <!----------------------------------------------------------------------------->
-<!-- <div class="container visible-xs">
+<div class="container visible-xs">
 <?php
   //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
   //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
@@ -348,7 +348,7 @@ echo '</div>';
   }
   ?>
 
-</div> -->
+</div>
 
 
 

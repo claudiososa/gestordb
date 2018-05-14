@@ -69,7 +69,9 @@ $(document).ready(function() {
     if (click=='informes') {//almacena en variable existe, la clase de la tableinformes en el caso que no existe dicha tabla se guarda comno undefined
       existe = $('.tableinformes'+escuelaId).attr('class')
     }else{
+      //alert('ingresa  por informeM')
       existe = $('.tableinformeM'+escuelaId).attr('class')
+      //alert(existe)
     }
 
     if (typeof(existe)==='undefined')
@@ -98,46 +100,46 @@ $(document).ready(function() {
 
          if (cant > 0) {
 
+            if (click=='informes') {
+               // console.log('item Escuela Id = '+cant)
+             $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6"><table id=tableinformes${tableinforme}
+             class="table StyleTable">
+             <thead>
+               <tr class='warningStyle'>
+                 <th><h4>Informes</h4></th>
+                 <th>&nbsp</th>
+                 <th>&nbsp</th>
+                 <th>&nbsp</th>
 
-           // console.log('item Escuela Id = '+cant)
-         $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6"><table id=tableinformes${tableinforme}
-         class="table StyleTable">
-         <thead>
-           <tr class='warningStyle'>
-             <th><h4>Informes</h4></th>
-             <th>&nbsp</th>
-             <th>&nbsp</th>
-             <th>&nbsp</th>
+                 <th><button type='button' class='btn btn-warning' id=nuevoInforme${tableinforme} >Crear Nuevo Informe</button></th>
 
-             <th><button type='button' class='btn btn-warning' id=nuevoInforme${tableinforme} >Crear Nuevo Informe</button></th>
+               </tr>
 
-           </tr>
-
-         </thead>
-
-
-
-         <thead>
-           <tr>
-             <th>Titulo</th>
-             <th>Leido</th>
-             <th>Resp.</th>
-             <th>Fecha</th>
-             <th>Prioridad</th>
-           </tr>
-         </thead>
-         <tbody>`)
+             </thead>
 
 
 
-         $('#infoM'+escuelaId).parent().parent().after(`<div class="list-group tableinformesM${tableinforme}" id="tableinformesM${tableinforme}"><br><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button><br><div>`)
+             <thead>
+               <tr>
+                 <th>Titulo</th>
+                 <th>Leido</th>
+                 <th>Resp.</th>
+                 <th>Fecha</th>
+                 <th>Prioridad</th>
+               </tr>
+             </thead>
+             <tbody>`)
 
+          }else{
 
+             $('#infoM'+escuelaId).parent().parent().after(`<div class="list-group tableinformeM${tableinforme}" id="tableinformeM${tableinforme}"><br><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button><br><div>`)
+
+          }
 
 
         }else{   // entra por que no tiene informes cargados
 
-
+          if (click=='informes') {
        //  console.log('item Escuela Id = '+cant)
          $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6"><table id=tableinformes${tableinforme}
          class="table StyleTable">
@@ -162,12 +164,11 @@ $(document).ready(function() {
          </thead>
          <tbody>`)
 
-
-         $('#infoM'+escuelaId).parent().parent().after(`<p tableinformesM${tableinforme}" id="tableinformesM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button>`)
-
-
-
+       }else{
+          $('#infoM'+escuelaId).parent().parent().after(`<p tableinformeM${tableinforme}" id="tableinformeM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button>`)
        }
+
+     }
 
           for (let item of lista) {
               //alert(item.escuelaId)
@@ -175,6 +176,8 @@ $(document).ready(function() {
             if (item.cantidad > 0) {
               let escuelaIdconCero = pad(item.escuelaId,4,0)
               let escuela = item.escuelaId
+
+              if (click=='informes') {
               //console.log('cantidad de leido'+item.cantidadLeido)
               $('#tableinformes'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
 
@@ -185,11 +188,13 @@ $(document).ready(function() {
               <td>${item.prioridad}</td>
 
               </tr>`)
-
-              $('#tableinformesM'+escuelaIdconCero).find('div').after(`<a  class="list-group-item">
+            }else{
+              $('#tableinformeM'+escuelaIdconCero).find('div').after(`<a  class="list-group-item">
               <h5 class="list-group-item-heading trinformes${escuelaIdconCero}"id='if${item.informeId}'><b>${item.titulo}</b></h5>
               <p class="list-group-item-text">${item.fecha} Prioridad:${item.prioridad}</p><br><p class="btn-group" role="group">
               <button type="button" class="btn btn-default"disabled="true">Leido: ${item.cantidadLeido}</button><button type="button" disabled="true"class="btn btn-default">Resp.: ${item.cantidadRespuesta}</button></p></a>`)
+            }
+
 
             }else{
               //alert('Esta escuela no tiene informes creados')
