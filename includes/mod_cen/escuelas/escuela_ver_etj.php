@@ -18,6 +18,7 @@ include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/rti.php");
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/director.php");
+include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 $c_referente= new Referente(null,null,null,null,null,null,null,'Activo');
 $b_referente= $c_referente->buscar();
@@ -386,7 +387,28 @@ if(($_POST))
 									 * Buscar referente de conectar igualdad de la de la escuela actual
 									 * guarda el dato en $datoEtt - incluye el nombre y apellido del referente
 									 */
-									$referente=new Referente($fila->referenteId);
+
+									//******** Modificaciones para leer de la tabla escuelaReferentes para ETT ********//
+									//**********************************************************************************
+
+											$escuelasETT=new EscuelaReferentes(null,$fila->escuelaId,'19'); // buscamos las escuelas del ETT
+											$buscar_referenteETT=$escuelasETT->buscar2();// devuelve todos los datos de las escuelas del ETT
+											$datoBuscarETT=mysqli_fetch_object($buscar_referenteETT);
+								
+						
+										if ($datoBuscarETT->referenteId == NULL){  // Preguntamos si no existe ETT para la escuela (tambien puede ser que la escuela no tenga entrada en la tabla escuelaReferentes)
+
+										$referente=new Referente('0001');     // vamos a mostrar Sin, Asignar
+									  }else{
+
+			                            $referente=new Referente($datoBuscarETT->referenteId);  // vamos a mostrar el ETT
+
+									  } 
+
+									 // Fin de modificaciones para leer de la tabla escuelaReferentes para ETT 
+									//************************************************************************
+
+									//$referente=new Referente($fila->referenteId);
 									$buscar_referente=$referente->buscar();
 									$datoEtt=mysqli_fetch_object($buscar_referente);
 
@@ -408,11 +430,46 @@ if(($_POST))
 									 * Buscar dato de persona de referente ETJ de la escuela actual
 									 * guarda el dato en $datoEtj
 									 */
-									$persona= new Referente($datoEtt->etjcargo);
-									$buscar_referente=$persona->buscar();
-									$datoEtj=mysqli_fetch_object($buscar_referente);
 
-									/**
+
+								//******* Modificaciones para leer de la tabla escuelaReferentes para ETJ
+								//***********************************************************************
+
+								if ($datoBuscarETT->referenteId == NULL){  // preguntamos si no tiene ETT asignado 
+
+								$escuelasETJ=new EscuelaReferentes(null,$fila->escuelaId,'20'); // buscamos la escuelas del ETJ
+								$buscar_referenteETJ=$escuelasETJ->buscar2();// devuelve todos los datos de la escuelas del ETJ
+								$datoBuscarETJ=mysqli_fetch_object($buscar_referenteETJ);
+
+								if ($datoBuscarETJ->referenteId == NULL ) {   // preguntamos si NO tiene ETJ asignado (tambien puede ser que la escuela no tenga entrada en la tabla escuelaReferentes)
+									
+								$persona= new Referente('0001');     // vamos a mostrar Sin, Asignar
+								$buscar_referente=$persona->buscar();
+								$datoEtj=mysqli_fetch_object($buscar_referente);
+
+								}else{
+
+										$persona= new Referente($datoBuscarETJ->referenteId);  // vamos a mostrar el ETJ asignado
+										$buscar_referente=$persona->buscar();
+										$datoEtj=mysqli_fetch_object($buscar_referente);
+
+								     }
+						
+
+								}else{  // buscamos datos del ETJ a cargo del ETT de la escuela
+
+								$persona= new Referente($datoEtt->etjcargo);
+								$buscar_referente=$persona->buscar();
+								$datoEtj=mysqli_fetch_object($buscar_referente);
+
+								}
+
+								// ******Fin de modificaciones para leer de la tabla escuelaReferentes para ETJ******
+								//*****************************************************************************	
+
+								
+
+								/**
 									 * Buscar director de la institución
 									 * se guarda el objeto con datso en $datoDirector
 									 */
@@ -429,7 +486,6 @@ if(($_POST))
 											$buscarPersona = $personaDirector->buscar();
 											$datoDirector =mysqli_fetch_object($buscarPersona);
 									 }
-
 
 									 /**
 										* [$locali description]
