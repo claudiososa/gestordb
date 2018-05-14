@@ -680,7 +680,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		  // fin else
 
 
-		$sentencia.="  ORDER BY informes.informeId DESC";
+		$sentencia.="  ORDER BY informes.informeId ASC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
