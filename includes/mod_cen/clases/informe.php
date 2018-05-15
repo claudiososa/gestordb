@@ -239,7 +239,10 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 					break;
 
 			case 'año':
-					$sentencia="SELECT ".$filtro." * "."FROM informes WHERE  YEAR(fechaCarga) =".$año1;
+					$sentencia="SELECT ".$filtro." * "."FROM informes
+					INNER JOIN escuelas
+					ON escuelas.escuelaId=informes.escuelaId
+					WHERE  YEAR(fechaCarga) =".$año1;
 					if(isset($referenteId)){
 						$sentencia.=" AND informes.referenteId=".$referenteId;
 					}
@@ -249,6 +252,8 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 					break;
 			case 'noLeido':
 							$sentencia="SELECT ".$filtro." * "."FROM informes
+							INNER JOIN escuelas
+							ON escuelas.escuelaId=informes.escuelaId
 							WHERE YEAR(fechaCarga) =$año1 AND informes.referenteId=$referenteId AND informes.informeId NOT IN ";
 							$sentencia.="(SELECT informes.informeId FROM informes
 							INNER JOIN leido
