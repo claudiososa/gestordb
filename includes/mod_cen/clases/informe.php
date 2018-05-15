@@ -473,6 +473,27 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 	}
 
 
+	public function buscarxCategoria($categoriaId)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia = "SELECT informes.informeId,informes.referenteId,informes.titulo,informes.contenido,informes.fechaVisita,informes.fechaCarga,informes.prioridad,
+												 tipoinformes.nombre AS tipoNombre,SubTipoInforme.nombre AS subNombre,
+												 escuelas.escuelaId,escuelas.nombre,escuelas.numero,escuelas.cue
+									FROM informes
+									INNER JOIN tipoinformes
+									ON tipoinformes.tipoInformeId=informes.nuevotipo
+									INNER JOIN SubTipoInforme
+									ON SubTipoInforme.subTipoId=informes.subtipo
+									INNER JOIN escuelas
+									ON escuelas.escuelaId=informes.escuelaId
+									WHERE tipoinformes.tipoInformeId=$categoriaId";
+		//$sentencia .=" limit 1";
+	  //echo $sentencia;
+		return $conexion->query($sentencia);
+	}
+
 public function buscarUnico()
 {
 	$nuevaConexion=new Conexion();

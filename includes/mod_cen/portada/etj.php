@@ -144,11 +144,13 @@ echo '<div class="container">';
       Ultimos informes Alta
     </div>
     <div id="tabsBuscar-3">
-      Conectividad
+      <?php
+      include 'includes/mod_cen/portada/etj/etjConectividad.php';
+       ?>
     </div>
     <div id="tabsBuscar-4">
       <?php
-      include'includes/mod_cen/portada/etj/etjDocumentos.php';
+      include 'includes/mod_cen/portada/etj/etjDocumentos.php';
        ?>
     </div>
   </div>
@@ -473,18 +475,5 @@ echo '<div class="container">';
 			<p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
 	</div> -->
 
-<div class="row">
 
-<div class="panel panel-primary">
-	<div class="panel-heading" id="panel5"><span class="panel-title clickable">
-		<h4>Documentación<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-	</div>
-	<div class="panel-body">
-
-<?php
-require_once("includes/mod_cen/documentos/documentoPortadas.php");
-?>
-</div>
-</div>
-</div>
 <script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>
