@@ -86,6 +86,25 @@ public function editar($tipo=NULL)
 
 // buscar nuevo
 
+public function buscarxTipoReferente($tipoReferente=null,$limit=NULL)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$sentencia="SELECT * FROM documentos
+								INNER JOIN categoria_doc
+								ON categoria_doc.categoriaDocId=documentos.categoriaDocId
+								INNER JOIN permiso_categoria_doc
+								ON permiso_categoria_doc.categoriaDocId=categoria_doc.categoriaDocId
+								WHERE permiso_categoria_doc.tipoReferente='$tipoReferente'";
+
+		$sentencia.="  ORDER BY documentos.fechaSubida ASC";
+		if(isset($limit)){
+			$sentencia.=" LIMIT ".$limit;
+		}
+		//echo $sentencia;
+		return $conexion->query($sentencia);
+}
+
 public function buscar($limit=NULL)
 	{
 		$nuevaConexion=new Conexion();
@@ -162,7 +181,7 @@ public function buscar($limit=NULL)
 
 		}
 
-		$sentencia.="  ORDER BY documentoId DESC";
+		$sentencia.="  ORDER BY fechaSubida ASC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
@@ -174,15 +193,12 @@ public function buscar($limit=NULL)
 
 // metodo para buscar documentos segun permiso.
 
-	public function buscarDocPermiso($cargo,$cat_id)
+	public function buscarDocPermiso($cargo,$cat_id,$limit=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-
-
-
-	    $sentencia="SELECT  documentos.nombreArchivo,documentos.titulo,documentos.destacado,documentos.descripcion
+	    $sentencia="SELECT  documentos.nombreArchivo,documentos.titulo,documentos.destacado,documentos.descripcion,documentos.fechaSubida
 								FROM documentos
 								JOIN permiso_doc
 								ON (permiso_doc.documentoId = documentos.documentoId ) ";
@@ -198,7 +214,10 @@ public function buscar($limit=NULL)
 
 
 
-		$sentencia.="  ORDER BY destacado DESC";
+		$sentencia.="  ORDER BY documentos.fechaSubida DESC";
+		if(isset($limit)){
+			$sentencia.=" LIMIT ".$limit;
+		}
 		//echo $sentencia;
 
 		return $conexion->query($sentencia);
@@ -271,14 +290,14 @@ public function buscar($limit=NULL)
       	  $para.=$fila->email.",";
 
         }
-        
-        
+
+
 
       // preparamos el para enviar
        $header = "From: ". $remitente;
 
        $titulo = "   Nuevo Documento Disponible   < ".$tituloDoc." > ";
-	   
+
 	   $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\n Se encuentra disponible un NUEVO Archivo en la seccion Documentos/ \n Nombre del Documento: ".$tituloDoc." \n\nEnlace a documentos ->  http://ticsalta.com.ar/conectar/index.php?mod=slat&men=doc&id=1";
 
             	if (mail($para, $titulo, $mensaje, $header)) {
@@ -294,7 +313,7 @@ public function buscar($limit=NULL)
 
 
 
-		
+
 		//echo $sentencia;
 
 		//return $conexion->query($sentencia);

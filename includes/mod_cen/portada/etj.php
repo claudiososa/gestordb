@@ -147,7 +147,9 @@ echo '<div class="container">';
       Conectividad
     </div>
     <div id="tabsBuscar-4">
-      Documentos
+      <?php
+      include'includes/mod_cen/portada/etj/etjDocumentos.php';
+       ?>
     </div>
   </div>
 
@@ -283,8 +285,8 @@ echo '<div class="container">';
 											# code...
 											break;
 									}
-									echo "<p id='informeId".$row->informeId."' class='".$class."'>Id:$row->informeId Asunto: <b>$row->titulo</b><br>
-												Fecha:".$row->fechaVisita."</p>";
+									echo "<p id='informeId".$row->informeId."' class='".$class."'><b>$row->titulo</b><br>
+												<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
 								}
 								 ?>
 
@@ -295,7 +297,8 @@ echo '<div class="container">';
 
 								<?php
 								while ($row = mysqli_fetch_object($buscar_alta)) {
-									echo "<p id='inforalta".$row->informeId."' class='alert alert-warning'>$row->informeId---$row->titulo</p>";
+									echo "<p id='inforalta".$row->informeId."' class='alert alert-warning'><b>$row->titulo</b><br>
+												<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
 
 								}
 								?>
@@ -304,7 +307,9 @@ echo '<div class="container">';
 						  <div>
 							<?php
 								while ($row = mysqli_fetch_object($buscar_media)) {
-										echo "<p id='informedi".$row->informeId."' class='alert alert-info'>$row->informeId---$row->titulo></p>";
+										echo "<p id='informedi".$row->informeId."' class='alert alert-info'><b>$row->titulo</b><br>
+  												<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
+
 								}
 							?>
 						 </div>
@@ -312,7 +317,9 @@ echo '<div class="container">';
 						  <div>
 								<?php
 	 							 while ($row = mysqli_fetch_object($buscar_normal)) {
-	 									 echo "<p id='infornorm".$row->informeId."' class='alert alert-success'>$row->informeId---$row->titulo></p>";
+	 									 echo "<p id='infornorm".$row->informeId."' class='alert alert-success'><b>$row->titulo</b><br>
+   												<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
+
 	 							 }
 	 						 ?>
 						  </div>
