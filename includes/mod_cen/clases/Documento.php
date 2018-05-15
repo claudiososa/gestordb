@@ -97,7 +97,7 @@ public function buscarxTipoReferente($tipoReferente=null,$limit=NULL)
 								ON permiso_categoria_doc.categoriaDocId=categoria_doc.categoriaDocId
 								WHERE permiso_categoria_doc.tipoReferente='$tipoReferente'";
 
-		$sentencia.="  ORDER BY documentos.fechaSubida ASC";
+		$sentencia.="  ORDER BY documentos.fechaSubida DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}

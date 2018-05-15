@@ -15,6 +15,9 @@ include_once("includes/mod_cen/clases/Documento.php");
  $resultadoBuscar = $documentos->buscarxTipoReferente('ETJ','5');
 ?>
 <div class="container-fluid">
+  <div class="alert alert-warning">
+    Ultimos 5 archivos subidos
+  </div>
 <!-- aqui debera estar el while principal para escribir las categorias  -->
 
 <?php
@@ -26,7 +29,8 @@ while ($filaResultado = mysqli_fetch_object($resultadoBuscar))
   //  while ($filaResultado2 = mysqli_fetch_object($resultadoBuscar) )
   //  {
     ?>
-     <div class=alert-info><?php echo $filaResultado2->descripcion;?><br><a href="documentacion/<?php echo $filaResultado2->nombreArchivo;?>" download="<?php echo $filaResultado2->nombreArchivo;?>">
+
+     <div class='alert alert-info'><?php echo "Archivo: <b>".$filaResultado->nombreArchivo."</b><br> Fecha Subida:".$filaResultado->fechaSubida."<br> Descripcion: ".$filaResultado->descripcion;?><br><a href="documentacion/<?php echo $filaResultado->nombreArchivo;?>" download="<?php echo $filaResultado2->nombreArchivo;?>">
       <button type="button" class="btn btn-default btn-lg"><span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span><font color="darkolivegreen">Descargar&nbsp;</font></button>
       </a></center>
     </div><br>
