@@ -51,7 +51,7 @@
 
     $informe =  new informe($_POST['informeId']);
     $buscarInforme = $informe->buscarUnico();
-    Maestro::debbugPHP($buscarInforme);
+    //Maestro::debbugPHP($buscarInforme);
     $datoInforme = mysqli_fetch_object($buscarInforme);
 
     $list=array();
@@ -83,7 +83,8 @@
     if (isset($_POST['reports'])){
       //if ($_POST['reports']=="conectar") {
         $arrayReferente= ['ETT','ETJ','Coordinador'];
-        $buscarInforme= $informe->buscar(null,null,$arrayReferente);
+        $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC');
+        //Maestro::debbugPHP($buscarInforme);
       //}
 //      $buscarInforme = $informe->buscarInforme();
     }else{

@@ -245,7 +245,7 @@ $(document).ready(function() {
                 url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
                 type: 'POST',
                 dataType: 'json',
-                data: {informeId:informeId}
+                data: {informeId:informeId,referenteId:referenteId2}
               })
               .done(function(lista) {
 
