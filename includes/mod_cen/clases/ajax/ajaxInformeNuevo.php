@@ -2,7 +2,7 @@
   include_once('../img.php');
   include_once('../informe.php');
   include_once('../maestro.php');
-  Maestro::debbugPHP($_POST);
+ 
 
   if (isset($_POST))
   {
@@ -49,10 +49,14 @@
       break;
     }
 
-    if($guardar_informe>0){
+   
+   if($guardar_informe > 0){
 
+       
           include_once("includes/mod_cen/informes/email_script.php");
-          }
+          //Maestro::debbugPHP($guardar_informe);
+          
+         }
 
       // $list=array();
       // $temporal=array(

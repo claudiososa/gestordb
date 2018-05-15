@@ -6,6 +6,8 @@ include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
 include_once("includes/mod_cen/clases/EscuelaReferentes.php");
+//include_once("includes/mod_cen/clases/maestro.php");
+
 
 
 // a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
@@ -13,15 +15,34 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
   $buscar_dato_ref =  $dato_ref->buscar();
   $referente_actual = mysqli_fetch_object($buscar_dato_ref);
 
+   
+
   // entra si es ett o etj o coordinador de Conectar Igualdad
   if($referente_actual->tipo=="ETT" || $referente_actual->tipo=="ETJ" || $referente_actual->tipo=="Coordinador" ){
     // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
-	   $escuela= new Escuela($_GET["escuelaId"]);
+	  
+    if (isset($_GET)) {
+      
+      $escuela= new Escuela($_GET["escuelaId"]);
+      $escuelaI=$_GET["escuelaId"];
+     
+
+    }else{
+
+      $escuela= new Escuela($_POST["escuelaId"]);
+      $escuelaI=$_POST["escuelaId"];
+       
+
+     
+      }
+   
+  // Maestro::debbugPHP($escuelaI);
+     
 	   $buscar_escuela=$escuela->buscar();
 
       // buscamos el referente de la escuela en la tabla escuelaReferentes.
 
-         $referenteEscuela = new EscuelaReferentes(null,$_GET["escuelaId"]); //**** nueva entrada
+         $referenteEscuela = new EscuelaReferentes(null,$escuelaI); //**** nueva entrada
          $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos los ett referentes de la escuela
          $id_referente_escuela=$buscarEscuelaReferente->referenteId;         //**** obtenemos el referenteId del ETT
       
@@ -179,7 +200,8 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
             	} else {
             		echo "Falló el envio ";
 
-            	}
+            	
+              }
 
 
 
