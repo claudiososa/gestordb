@@ -49,11 +49,13 @@
       break;
     }
 
-   
+   //Maestro::debbugPHP($guardar_informe);
+
    if($guardar_informe > 0){
 
        
-          include_once("includes/mod_cen/informes/email_script.php");
+
+          include_once("../../informes/email_script.php");
           //Maestro::debbugPHP($guardar_informe);
           
          }

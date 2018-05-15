@@ -1,4 +1,5 @@
 <?php
+
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/escuela.php");
@@ -6,8 +7,11 @@ include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
 include_once("includes/mod_cen/clases/EscuelaReferentes.php");
-//include_once("includes/mod_cen/clases/maestro.php");
 
+//include_once("../../clases/maestro.php");
+
+//$cartel="hola llego email descomentado xxxx";
+//Maestro::debbugPHP($cartel);
 
 
 // a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
@@ -36,7 +40,7 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
      
       }
    
-  // Maestro::debbugPHP($escuelaI);
+   //Maestro::debbugPHP($escuelaI);
      
 	   $buscar_escuela=$escuela->buscar();
 
@@ -533,10 +537,13 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
       }else{
         $variablephp = "index.php?mod=slat&men=informe&id=2&escuelaId=".$_POST["escuelaId"];
 }
-            
+             
        ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
                 setTimeout ("redireccion()",0);
                     </script>
 
+
+
+     
