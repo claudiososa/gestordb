@@ -510,7 +510,7 @@ public function buscarInforme($referente=null)
 	}
 
 
-public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL)
+public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL,$order=NULL)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -684,11 +684,15 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 
 		  // fin else
 
-
-		$sentencia.="  ORDER BY informes.informeId ASC";
+		if (isset($order)) {
+			$sentencia.="  ORDER BY informes.fechaCarga $ORDER";	# code...
+		}else{
+			$sentencia.="  ORDER BY informes.fechaCarga DESC";
+		}
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
+		//echo $sentencia;
 		//return $sentencia;//echo $sentencia.'<br><br>';
 		return $conexion->query($sentencia);
 	}
