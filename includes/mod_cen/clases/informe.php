@@ -685,7 +685,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		  // fin else
 
 		if (isset($order)) {
-			$sentencia.="  ORDER BY informes.fechaCarga $ORDER";	# code...
+			$sentencia.="  ORDER BY informes.fechaCarga $order";	# code...
 		}else{
 			$sentencia.="  ORDER BY informes.fechaCarga DESC";
 		}
