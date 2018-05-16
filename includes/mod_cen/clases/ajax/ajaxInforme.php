@@ -117,8 +117,8 @@
         'cantidad'=>$cantidadInformes,
         'cantidadRespuesta' =>$cantidadRespuesta,
         'cantidadLeido' =>$cantidadLeido,
-        'fecha' =>$fila->fechaVisita,
-        'fechaCarga' =>$fila->fechaCarga,
+        'fecha' =>Maestro::formatoFecha($fila->fechaVisita),
+        'fechaCarga'=>Maestro::formatoFecha($fila->fechaCarga),
         'prioridad' =>$fila->prioridad
 
   		);

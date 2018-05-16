@@ -96,7 +96,8 @@ $(document).ready(function() {
 
 
            // console.log('item Escuela Id = '+cant)
-         $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6"><table id=tableinformes${tableinforme}
+         $('#info'+escuelaId).parent().parent().after(`<tr class="tableinformes${tableinforme} warningStyle"><td colspan="6">
+         <table id=tableinformes${tableinforme}
          class="table StyleTable">
          <thead>
            <tr class='warningStyle'>
@@ -104,7 +105,8 @@ $(document).ready(function() {
              <th>&nbsp</th>
              <th>&nbsp</th>
              <th>&nbsp</th>
-
+             <th>&nbsp</th>
+             <th>&nbsp</th>
              <th><button type='button' class='btn btn-warning' id=nuevoInforme${tableinforme} >Crear Nuevo Informe</button></th>
 
            </tr>
@@ -115,6 +117,7 @@ $(document).ready(function() {
 
          <thead>
            <tr>
+             <th>Id</th>
              <th>Titulo</th>
              <th>Leido</th>
              <th>Resp.</th>
@@ -144,6 +147,7 @@ $(document).ready(function() {
 
          <thead>
            <tr>
+             <th>Id</th>
              <th>Titulo</th>
              <th>Leido</th>
              <th>Resp.</th>
@@ -166,7 +170,7 @@ $(document).ready(function() {
               let escuela = item.escuelaId
               //console.log('cantidad de leido'+item.cantidadLeido)
               $('#tableinformes'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
-
+              <td>${item.informeId}</td>
               <td><a class="btn btn-default" role="button" id='if${item.informeId}'>${item.titulo}</a></td>
               <td>${item.cantidadLeido}</td>
               <td>${item.cantidadRespuesta}</td>
@@ -241,32 +245,14 @@ $(document).ready(function() {
                     informeActual.informeId=informeId
                     informeActual.escuelaId=item.escuelaId
 
-                    /*let escuelaNombre = item.nombre
-                    let escuelaNumero = item.numero
-                    let escuelaCue = item.cue
-                    let fecha = item.fecha
-                    let prioridad = item.prioridad
-                    let categoria =  item.categoria
-                    let subcategoria =  item.subcategoria
-                    let titulo =  item.titulo
-                    let contenido =  item.contenido*/
-
                 }
-                //console.log(informeActual.escuelaNombre)
-                //console.log("success Ajax Informe");
               })
 
               .fail(function() {
                 console.log("error");
               })
               .always(function() {
-                //console.log(informeActual.escuelaNombre)
-                //console.log("success Ajax Informe");
                 formPersona(informeActual)
-
-
-
-                //console.log("complete");
               });
 
 

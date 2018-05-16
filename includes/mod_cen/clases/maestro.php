@@ -1,6 +1,18 @@
 <?php
 class Maestro{
 
+	public static function formatoFecha($fecha){
+		$newDate = date("d/m/Y", strtotime($fecha));
+
+		//$myDateTime = DateTime::createFromFormat('Y-m-d', $fecha);
+		//$newDateString = $myDateTime->format('d-m-Y');
+
+		//$cadena_nuevo_formato = date_format($fecha, "d/m/Y");
+		return $newDate;
+	}
+
+
+
 	public static function meses()
 	{
 		$arrayMeses = [

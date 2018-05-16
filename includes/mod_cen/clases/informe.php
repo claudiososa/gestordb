@@ -532,7 +532,7 @@ public function buscarInforme($referente=null)
 
 
 public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL,$order=NULL)
-	{
+{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
