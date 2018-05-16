@@ -62,6 +62,11 @@ function formPersona(informeActual)
               <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
               </form>
             </div>
+            <div id="cargando">
+
+            <img class="img img-responsive cargando" style="display:none;margin:auto;" src="img/iconos/informes/ajax-loader.gif"><br>
+            <b><p class="cargando"align="center"style="display:none;color:#068587;">GUARDANDO RESPUESTA, POR FAVOR ESPERE...</p></b>
+            </div>
 
             <!-- **** FIN MODAL BODY ****-->
             <!-- **** INICIO MODAL FOOTER ****-->
@@ -313,6 +318,7 @@ function formPersona(informeActual)
     })
 
     $('#btnSave').click(function(){
+
       let valorBoton = $(this).text()
       let informeId = informeActual.informeId
       if (valorBoton=="Responder") {
@@ -323,6 +329,10 @@ function formPersona(informeActual)
       }else{
         let contenido = CKEDITOR.instances['respuesta'].getData();
         $('#formInforme').on('submit',(function(e) {
+          $('#formInforme').hide()
+          $('.cargando').css('display','block')
+          $('#divButton').hide()
+          $('#respuestasContenido').hide()
             let paqueteData = new FormData()
             let ins = document.getElementById('input-img').files.length;
                   for (var x = 0; x < ins; x++) {
@@ -342,6 +352,7 @@ function formPersona(informeActual)
               .done(function() {
 
                 console.log("Se guardo con exito... success Ahora");
+
                 $("#myModal").modal("hide");
 
               })
