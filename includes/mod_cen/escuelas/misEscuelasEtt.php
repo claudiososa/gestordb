@@ -15,6 +15,8 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js?v=<?php echo(rand()); ?>"></script>
 
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 
@@ -292,9 +294,9 @@ echo '<br>';
 
     if ($cantidadAutoridades > 0) {
       while ($rowAutoridades = mysqli_fetch_object($buscarAutoridad)) {
-      echo '<div class="row" >';
+      echo '<div class="row" id="row'.$infoEscuela->escuelaId.'">';
       echo '<div class="col-xs-8"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
-      echo '<div class="col-xs-2"><img id="celIdAuto" class="img img-responsive" src="img/iconos/lapiz (4).png"></div>';
+      echo '<div class="col-xs-2" id="'.$infoEscuela->escuelaId.'"><img id="idAuto'.$rowAutoridades->tipoId.'" class="img img-responsive hide" src="img/iconos/lapiz (4).png"></div>';
       echo '<div class="col-xs-2">
             <img class="img img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus"
             title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" >
