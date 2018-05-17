@@ -294,9 +294,9 @@ echo '<br>';
 
     if ($cantidadAutoridades > 0) {
       while ($rowAutoridades = mysqli_fetch_object($buscarAutoridad)) {
-      echo '<div class="row" id="row'.$infoEscuela->escuelaId.'">';
+      echo '<div class="row" id="'.$infoEscuela->escuelaId.'">';
       echo '<div class="col-xs-8"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
-      echo '<div class="col-xs-2" id="'.$infoEscuela->escuelaId.'"><img id="idAuto'.$rowAutoridades->tipoId.'" class="img img-responsive hide" src="img/iconos/lapiz (4).png"></div>';
+            echo '<div class="col-xs-2" id="'.$infoEscuela->escuelaId.'"><img id="autorM'.$rowAutoridades->tipoId.'" class="img img-responsive" src="img/iconos/lapiz (4).png"></div>';
       echo '<div class="col-xs-2">
             <img class="img img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus"
             title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" >
