@@ -473,14 +473,15 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 	}
 
 
-	public function buscarxCategoria($categoriaId)
+	public function buscarxPrioridad($prioridad,$etjCargo=null)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia = "SELECT informes.informeId,informes.referenteId,informes.titulo,informes.contenido,informes.fechaVisita,informes.fechaCarga,informes.prioridad,
+		$sentencia = "SELECT informes.informeId,informes.referenteId,informes.titulo,
+												 informes.contenido,informes.fechaVisita,informes.fechaCarga,informes.prioridad,informes.nuevotipo,
 												 tipoinformes.nombre AS tipoNombre,SubTipoInforme.nombre AS subNombre,
-												 escuelas.escuelaId,escuelas.nombre,escuelas.numero,escuelas.cue
+												 escuelas.escuelaId,escuelas.nombre AS escuelaNombre,escuelas.numero,escuelas.cue
 									FROM informes
 									INNER JOIN tipoinformes
 									ON tipoinformes.tipoInformeId=informes.nuevotipo
@@ -488,8 +489,31 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									ON SubTipoInforme.subTipoId=informes.subtipo
 									INNER JOIN escuelas
 									ON escuelas.escuelaId=informes.escuelaId
-									WHERE tipoinformes.tipoInformeId=$categoriaId";
-		//$sentencia .=" limit 1";
+									WHERE informes.prioridad='$prioridad' AND informes.referenteId IN (SELECT referenteId FROM referentes WHERE etjcargo = $etjCargo)";
+		$sentencia .=" ORDER BY informes.fechaCarga DESC";
+	  //echo $sentencia;
+		return $conexion->query($sentencia);
+	}
+
+
+	public function buscarxCategoria($categoriaId,$etjCargo=null)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia = "SELECT informes.informeId,informes.referenteId,informes.titulo,
+												 informes.contenido,informes.fechaVisita,informes.fechaCarga,informes.prioridad,informes.nuevotipo,
+												 tipoinformes.nombre AS tipoNombre,SubTipoInforme.nombre AS subNombre,
+												 escuelas.escuelaId,escuelas.nombre AS escuelaNombre,escuelas.numero,escuelas.cue
+									FROM informes
+									INNER JOIN tipoinformes
+									ON tipoinformes.tipoInformeId=informes.nuevotipo
+									INNER JOIN SubTipoInforme
+									ON SubTipoInforme.subTipoId=informes.subtipo
+									INNER JOIN escuelas
+									ON escuelas.escuelaId=informes.escuelaId
+									WHERE tipoinformes.tipoInformeId=$categoriaId AND informes.referenteId IN (SELECT referenteId FROM referentes WHERE etjcargo = $etjCargo)";
+		$sentencia .=" ORDER BY informes.fechaCarga DESC LIMIT 10";
 	  //echo $sentencia;
 		return $conexion->query($sentencia);
 	}

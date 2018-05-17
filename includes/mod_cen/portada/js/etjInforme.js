@@ -3,7 +3,7 @@ $(document).ready(function() {
 /**
  * Metodo clic para id / informeId
  */
-$('[id ^=informeId],[id ^=inforalta],[id ^=informedi],[id ^=infornorm]').on('click', function()
+$('[id ^=informeId],[id ^=inforalta],[id ^=informedi],[id ^=infornorm],[id ^=infoconec]').on('click', function()
  {
 
    let informeActual ={

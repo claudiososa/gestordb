@@ -67,6 +67,7 @@ include_once 'includes/mod_cen/clases/Autoridades.php';
 include_once "includes/mod_cen/clases/respuesta.php" ;
 include_once "includes/mod_cen/clases/rtixescuela.php";
 include_once "includes/mod_cen/clases/rti.php";
+include_once "includes/mod_cen/clases/maestro.php";
 
 
 
@@ -111,7 +112,8 @@ echo '<div class="container">';
       <li><a  href='#tabsBuscar-1'>Buscar</a></li>
       <li><a  href='#tabsBuscar-2'>Informe prioridad Alta</a></li>
       <li><a  href='#tabsBuscar-3'>Conectividad PNCE</a></li>
-      <li><a  href='#tabsBuscar-4'>Documentos</a></li>
+      <li><a  href='#tabsBuscar-4'>Aprendizaje Competencias</a></li>
+      <li><a  href='#tabsBuscar-5'>Documentos</a></li>
     </ul>
     <div id="tabsBuscar-1">
       <div id='accordionBuscar1'>
@@ -141,7 +143,9 @@ echo '<div class="container">';
 
     </div>
     <div id="tabsBuscar-2">
-      Ultimos informes Alta
+      <?php
+      include 'includes/mod_cen/portada/etj/etjPrioridad.php';
+       ?>
     </div>
     <div id="tabsBuscar-3">
       <?php
@@ -149,6 +153,11 @@ echo '<div class="container">';
        ?>
     </div>
     <div id="tabsBuscar-4">
+      <?php
+      include 'includes/mod_cen/portada/etj/etjCompetencias.php';
+       ?>
+    </div>
+    <div id="tabsBuscar-5">
       <?php
       include 'includes/mod_cen/portada/etj/etjDocumentos.php';
        ?>

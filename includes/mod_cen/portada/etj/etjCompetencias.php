@@ -1,10 +1,10 @@
 <?php
 $informeC = new informe();
-$resultado=$informeC->buscarxCategoria('18',$_SESSION['referenteId']);
+$resultado=$informeC->buscarxCategoria('20',$_SESSION['referenteId']);
 ?>
 <div class="container-fluid">
   <div class="alert alert-warning">
-    Informes Categoria PNCE
+    Informes Categoria "Aprendizaje de Competencias en la era digital"
   </div>
 <?php
 while ($filaResultado = mysqli_fetch_object($resultado))
