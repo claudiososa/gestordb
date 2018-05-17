@@ -55,7 +55,7 @@
 
        
 
-          include_once("../../informes/email_script.php");
+          include_once("../../informes/email_scriptAjax.php");
           //Maestro::debbugPHP($guardar_informe);
           
          }
