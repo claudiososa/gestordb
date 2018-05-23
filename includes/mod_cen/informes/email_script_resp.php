@@ -90,10 +90,23 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
                      $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos los ett referentes de la escuela
                      $id_referente_escuela=$buscarEscuelaReferente->referenteId;   //***** obtenemos el referente ETT
 
+                     // *** 
+
+                     if ($id_referente_escuela == "") {    // aqui entra si la escuela no tiene ETT
+          
+                       $buscarEscuelaReferente = $referenteEscuela->buscarReferente('20');   //**** buscamos ETJ referente de la escuela
+                       $id_referente_escuela=$buscarEscuelaReferente->referenteId;
+                
+                       if ($id_referente_escuela == "") {  // aqui entra si no tiene ni ETT ni ETJ
+                       $id_referente_escuela=0001;
+
+                                     }
+                             }
+
+                     // ***
 
 
-
-                    // $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID de la escuela  (** codigo reemplazado)
+                   
                            
 
 
@@ -140,7 +153,7 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
                     $enviado_resp=1;
                     
                   } else {
-                            echo "Falló el envio";
+                            echo "Falló el envio"." ".$para." Header: ".$header;
                             //echo $para;
                          }
               

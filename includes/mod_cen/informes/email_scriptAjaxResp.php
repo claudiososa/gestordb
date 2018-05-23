@@ -92,11 +92,23 @@ include_once("../../clases/maestro.php");
                      $id_referente_escuela=$buscarEscuelaReferente->referenteId;   //***** obtenemos el referente ETT
 
 
+                      // *** 
+
+                     if ($id_referente_escuela == "") {    // aqui entra si la escuela no tiene ETT
+          
+                       $buscarEscuelaReferente = $referenteEscuela->buscarReferente('20');   //**** buscamos ETJ referente de la escuela
+                       $id_referente_escuela=$buscarEscuelaReferente->referenteId;
+                
+                       if ($id_referente_escuela == "") {  // aqui entra si no tiene ni ETT ni ETJ
+                       $id_referente_escuela=0001;
+
+                                     }
+                             }
+
+                     // ***
 
 
-                    // $id_referente_escuela= $dato_escuela->referenteId; //hasta aqui obtengo el referentID de la escuela  (** codigo reemplazado)
-                           
-
+                    
 
                     $dato_ref_esc =  new Referente($id_referente_escuela);
                     $buscar_dato_ref_esc =  $dato_ref_esc->buscar();
@@ -133,9 +145,7 @@ include_once("../../clases/maestro.php");
                    $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\n Hay una nueva respuesta para revisar.\n \n Creado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme." \n ";
 
                   $destinatario=$para;
-                  //$para=",jfvpipo@gmail.com";
-                   //$cartel=$para."-".$header;
-                   //Maestro::debbugPHP($cartel);
+                 
                   if (mail($para, $titulo, $mensaje, $header))
                   {
 
@@ -145,6 +155,8 @@ include_once("../../clases/maestro.php");
                             echo "Falló el envio";
                             //echo $para;
                          }
+
+                  Maestro::debbugPHP($para);
               
                          
 

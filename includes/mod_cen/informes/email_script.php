@@ -7,7 +7,7 @@ include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
 include_once("includes/mod_cen/clases/EscuelaReferentes.php");
-//include_once("../../clases/maestro.php");
+include_once("includes/mod_cen/clases/maestro.php");
   
 // a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
  
@@ -23,17 +23,26 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
      $escuela= new Escuela($_GET["escuelaId"]);
 	   $buscar_escuela=$escuela->buscar();
 
-      // buscamos el referente de la escuela en la tabla escuelaReferentes.
+      // buscamos el referente de la escuela en la tabla escuelaReferentes  [puede ser ETT o ETJ o sin Referente].
 
-         $referenteEscuela = new EscuelaReferentes(null,$_GET["escuelaId"]); //**** nueva entrada
-         $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos los ett referentes de la escuela
-         $id_referente_escuela=$buscarEscuelaReferente->referenteId;         //**** obtenemos el referenteId del ETT
-      
-      // fin de busqueda de referente en la tabla escuelaReferentes.
+         $referenteEscuela = new EscuelaReferentes(null,$_GET["escuelaId"]); 
+         $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos el ETT referente de la escuela
+         $id_referente_escuela=$buscarEscuelaReferente->referenteId; 
+         
+         if ($id_referente_escuela == "") {    // aqui entra si la escuela no tiene ETT
+          
+              $buscarEscuelaReferente = $referenteEscuela->buscarReferente('20');   //**** buscamos ETJ referente de la escuela
+              $id_referente_escuela=$buscarEscuelaReferente->referenteId;
+                
+                  if ($id_referente_escuela == "") {  // aqui entra si no tiene ni ETT ni ETJ
+                       $id_referente_escuela=0001;
+
+                  }
+         }
+              
+              // fin de busqueda de referente en la tabla escuelaReferentes.
 	      
-        // $dato_escuela=mysqli_fetch_object($buscar_escuela); // Codigo reemplazado por la busqueda en escuelaReferentes
-     	   //$id_referente_escuela= $dato_escuela->referenteId; // Codigo reemplazado por la busqueda en escuelaReferentes(Obtengo el referentID conectar igualdad)
-
+        
 	    // en el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
 	        $dato_ref_esc =  new Referente($id_referente_escuela);
 	        $buscar_dato_ref_esc =  $dato_ref_esc->Persona($id_referente_escuela);
@@ -181,10 +190,10 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
             		$enviado=1;
             	} else {
-            		echo "Falló el envio   ".$para;
-
+            		echo "Falló el envio";
             	
               }
+
 
 
 
@@ -510,7 +519,7 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
         }// fin del if-else principal
 
        
-      if ($_SESSION['tipo']=='CPPL') {
+      if ($_SESSION['tipo']=='CPPL' || $_SESSION['tipo']=='ETTPL') {
         
          $variablephp = "index.php?mod=slat&men=informe&id=2&escuelaId=".$_POST["escuelaId"]."&tipo=lectura";
       }else{
