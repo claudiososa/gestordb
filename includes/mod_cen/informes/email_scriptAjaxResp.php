@@ -1,33 +1,29 @@
-
 <?php
-include_once("includes/mod_cen/clases/informe.php");
-include_once("includes/mod_cen/clases/respuesta.php");
-include_once("includes/mod_cen/clases/referente.php");
-include_once("includes/mod_cen/clases/escuela.php");
-include_once("includes/mod_cen/clases/EscuelaReferentes.php");
-
-
+include_once("../../clases/informe.php");
+include_once("../../clases/respuesta.php");
+include_once("../../clases/referente.php");
+include_once("../../clases/escuela.php");
+include_once("../../clases/EscuelaReferentes.php");
+include_once("../../clases/maestro.php");
     
 
-      // ingresa cuando se agregó la respuesta
-
-            $informeId = $_POST["informeId"]; // informeId del informe creado
-            
+          
+         
+          $informeId = $_POST["informeId"]; // informeId del informe creado
+             
       // a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
 
-          $dato_ref =  new Referente($_SESSION["referenteId"]);
+          $dato_ref =  new Referente($_POST["referenteId"]);  // cambiamos por $_POST["referenteId"] x $_SESSION["referenteId"]
           $buscar_dato_ref =  $dato_ref->buscar();
           $referente_actual = mysqli_fetch_object($buscar_dato_ref); // guardo el cargo del referente que se usara para una validacion mas adelante
-
-          
 
             $resp_mail = new respuesta(); //creamos un objeto respuesta
             
             $resultad=$resp_mail->buscarMailRespuesta($informeId); // llamamos el metodo que devuelve los mail de las personas que participaron en las respuestas
             
              // busco el mail del referente que inicio sesion
-            $referente= new Referente($_SESSION["referenteId"]);
-            $buscar_ref = $referente->Persona($_SESSION["referenteId"]);
+            $referente= new Referente($_POST["referenteId"]);   // cambiamos por $_POST["referenteId"] x $_SESSION["referenteId"]
+            $buscar_ref = $referente->Persona($_POST["referenteId"]); // cambiamos por $_POST["referenteId"] x $_SESSION["referenteId"]
             $dato_ref = mysqli_fetch_object($buscar_ref);
             $mail_login=$dato_ref->email; // guardo el mail del referente que inicia sesion
             
@@ -37,10 +33,14 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
             $para="";
 
+         
+        
 
            while ($fila = mysqli_fetch_object($resultad)) // empezamos a concatenar los mail devuelto por el metodo buscarmailrespuesta()
                {
                
+                     
+
                 if ($mail_login != $fila->email) { // evitamos que se concatene el mail del que inicio sesion
                   
                   $para=$para.",".$fila->email;
@@ -51,6 +51,7 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
               
                 }
               
+               
                 // armo el tituo del mail
              
             $dato_informe_resp = new Informe($informeId);
@@ -90,7 +91,8 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
                      $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos los ett referentes de la escuela
                      $id_referente_escuela=$buscarEscuelaReferente->referenteId;   //***** obtenemos el referente ETT
 
-                     // *** 
+
+                      // *** 
 
                      if ($id_referente_escuela == "") {    // aqui entra si la escuela no tiene ETT
           
@@ -106,9 +108,7 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
                      // ***
 
 
-                   
-                           
-
+                    
 
                     $dato_ref_esc =  new Referente($id_referente_escuela);
                     $buscar_dato_ref_esc =  $dato_ref_esc->buscar();
@@ -145,30 +145,23 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
                    $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\n Hay una nueva respuesta para revisar.\n \n Creado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme." \n ";
 
                   $destinatario=$para;
-                  //$para=",jfvpipo@gmail.com";
-
+                 
                   if (mail($para, $titulo, $mensaje, $header))
                   {
 
                     $enviado_resp=1;
                     
                   } else {
-                            echo "Falló el envio"." ".$para." Header: ".$header;
+                            echo "Falló el envio";
                             //echo $para;
                          }
+
+                  Maestro::debbugPHP($para);
               
-              $variablephp = "index.php?mod=slat&men=informe&id=3&informeId=$informeId";
+                         
 
             ?>   
 
             
-             <script type="text/javascript">
-                var variablejs = "<?php echo $variablephp; ?>" ;
-                function redireccion(){window.location=variablejs;}
-                setTimeout ("redireccion()",0);
-             </script>
+        
 
-
-              
-
-           

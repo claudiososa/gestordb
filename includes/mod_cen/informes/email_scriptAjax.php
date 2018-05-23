@@ -48,6 +48,16 @@ include_once("../../clases/maestro.php");
      $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos los ett referentes de la escuela
      $id_referente_escuela=$buscarEscuelaReferente->referenteId;         //**** obtenemos el referenteId del ETT
      
+     if ($id_referente_escuela == "") {    // aqui entra si la escuela no tiene ETT
+          
+          $buscarEscuelaReferente = $referenteEscuela->buscarReferente('20');   //**** buscamos ETJ referente de la escuela
+          $id_referente_escuela=$buscarEscuelaReferente->referenteId;
+             
+                   if ($id_referente_escuela == "") {  // aqui entra si no tiene ni ETT ni ETJ
+                       $id_referente_escuela=0001;
+
+                  }
+         }
        
      
       // fin de busqueda de referente en la tabla escuelaReferentes.
