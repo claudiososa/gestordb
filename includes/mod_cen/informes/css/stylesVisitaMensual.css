@@ -78,9 +78,9 @@
   color: #068587;
   opacity: inherit;
 }
-.modal-header {
+.modal-header-calendar {
   border-bottom: 2px solid #068587;
 }
-.modal-footer {
+.modal-footer-calendar {
   border-top: 2px solid #068587;
 }

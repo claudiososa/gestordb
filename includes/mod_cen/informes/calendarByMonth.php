@@ -115,15 +115,15 @@ if(isset($_GET["ref"])){
 
 		// ***** aqui se modifico la busqueda en tabla escuelaReferentes  ******//
 
-		//$escuelas= new Escuela(null,$registro->referenteId); 
-		//$buscarEscuelas=$escuelas->buscar();  
+		//$escuelas= new Escuela(null,$registro->referenteId);
+		//$buscarEscuelas=$escuelas->buscar();
 		$escuelas=new EscuelaReferentes(null,null,'19',$registro->referenteId); // buscamos las escuelas del ETT
 		$buscarEscuelas=$escuelas->buscar2();// devuelve todos los datos de las escuelas del ETT
 		$cantEscuelas=mysqli_num_rows($buscarEscuelas); // Guardamos la Cantidad de Escuelas de cada ETT
-		
-		
+
+
 		// ***** fin de modificaciones  ******//////
-	    
+
 
 	$referente=$registro->referenteId;  // guardamos en la variable $referente el referenteId del ETT
 	$informeMesReferente = new Informe();
@@ -136,7 +136,7 @@ if(isset($_GET["ref"])){
 	$indice=0;
 	$cantidadEscuelasVisitas=0;
 	$escuelaInformeActual=0;
-	
+
 
 	//_________________________________________________//
 	//  Recorrido de todos los informes del un mes y año determinado  //
@@ -164,30 +164,30 @@ if(isset($_GET["ref"])){
 
 	    		// ******** aqui modificamos la busqueda del ett en la tabla escuelaReferentes ***//
 
-	    		//$escuelaEtt = new Escuela($fila->escuelaId); 
+	    		//$escuelaEtt = new Escuela($fila->escuelaId);
 	    		//$escuelaEttResultado= $escuelaEtt->buscar();
 	    		$escuelaEtt = new EscuelaReferentes(null,$fila->escuelaId,'19');  // buscamos a quien le pertenece la escuela
 	    		$escuelaEttResultado= $escuelaEtt->buscar2();
 
 	    		$datoEscuela = mysqli_fetch_object($escuelaEttResultado); // obtenemos datos de la escuela con el escuelaId ingresado
-	    		
-	    	
+
+
 	    		if ($datoEscuela->referenteId == $referente) {  // preguntamos si la escuela es de su agrupamiento
 
 
 	    			$listaEscVisitadas[$cantidadEscuelasVisitadas]=$datoEscuela->numero; // almacenamos el numero de c/u de las escuelas de su agrupamiento visitadas por el Referente.
 			 	    $cantidadEscuelasVisitadas++;
-	    		     
+
 	    		}else{
-	    			    if ($datoEscuela->referenteId!=NULL && $fila->escuelaId != 2   ) // Preguntamos si la escuela tiene ETT (referenteId!=NULL) en la tabla escuelaReferentes Y si la escuelaId es distinta de 2 (Oficina de Conectar Igualdad)  
+	    			    if ($datoEscuela->referenteId!=NULL && $fila->escuelaId != 2   ) // Preguntamos si la escuela tiene ETT (referenteId!=NULL) en la tabla escuelaReferentes Y si la escuelaId es distinta de 2 (Oficina de Conectar Igualdad)
 	    			    	{
 
 	    			    	$listaEscOtroAgrup[$cantidadEscuelasOtroAgrup]=$datoEscuela->numero; // almacenamos el numero de la escuela visitada que es de otro ETT.
-			 	    		
+
 			 	    		$cantidadEscuelasOtroAgrup++;
-	    			    }else{ 
+	    			    }else{
 	    			    	    if ($datoEscuela->referenteId==NULL && $fila->escuelaId != 2) { // preguntamos si NO HAY ETT para la escuela en la tabla escuelaReferentes y si la escuela buscada NO ES la Oficina de conectar igualdad
-	    			    	    	
+
 	    			    	       $listaEscOtroAgrup[$cantidadEscuelasOtroAgrup]=$escuelaResultado->numero; // almacenamos el numero de la escuela visitada que no tiene ETT.
 			 	    		       $cantidadEscuelasOtroAgrup++;
 	    			    	    }
@@ -417,7 +417,7 @@ echo '<div class="modal fade" id="myModalEsc'.$referente.'" tabindex="-1" role="
       <!-- Modal content-->
  <div class="modal-content">
 
-<div class="modal-header">
+<div class="modal-header modal-header-calendar">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Escuelas a Cargo <?php echo ($registro->apellido." ".$registro->nombre); ?></h4>
 </div>
@@ -456,7 +456,7 @@ echo "<tbody>";
        </div>
 
 
-<div class="modal-footer">
+<div class="modal-footer modal-footer-calendar">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
 
@@ -483,7 +483,7 @@ echo '<div class="modal fade" id="myModalDatosEsc'.$referente.'" tabindex="-1" r
       <!-- Modal content-->
  <div class="modal-content">
 
-<div class="modal-header">
+<div class="modal-header modal-header-calendar">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Escuelas a Cargo Visitadas por  <?php echo ($registro->apellido." ".$registro->nombre); ?></h4>
 </div>
@@ -530,7 +530,7 @@ echo "</table>";
 
        </div>
 
-<div class="modal-footer">
+<div class="modal-footer modal-footer-calendar">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
 
@@ -556,7 +556,7 @@ echo '<div class="modal fade" id="myModalEscNoVisitas'.$referente.'" tabindex="-
       <!-- Modal content-->
  <div class="modal-content">
 
-<div class="modal-header">
+<div class="modal-header modal-header-calendar">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Escuelas a Cargo No Visitadas <?php echo ($registro->apellido." ".$registro->nombre); ?></h4>
 </div>
@@ -608,7 +608,7 @@ echo '<div class="modal fade" id="myModalEscNoVisitas'.$referente.'" tabindex="-
        </div>
 
 
-<div class="modal-footer">
+<div class="modal-footer modal-footer-calendar">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
 
@@ -634,7 +634,7 @@ echo '<div class="modal fade" id="myModalEscOtroAgrup'.$referente.'" tabindex="-
       <!-- Modal content-->
  <div class="modal-content">
 
-<div class="modal-header">
+<div class="modal-header modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Escuelas Visitadas Otro Agrupamiento</h4>
 </div>
@@ -682,7 +682,7 @@ echo '<div class="modal fade" id="myModalEscOtroAgrup'.$referente.'" tabindex="-
        </div>
 
 
-<div class="modal-footer">
+<div class="modal-footer modal-footer-calendar">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
 
@@ -707,7 +707,7 @@ echo '<div class="modal fade" id="myModalOficina'.$referente.'" tabindex="-1" ro
       <!-- Modal content-->
  <div class="modal-content">
 
-<div class="modal-header">
+<div class="modal-header modal-header-calendar">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Visitas a Oficina / Sede </h4>
 </div>
@@ -741,7 +741,7 @@ echo '<div class="modal fade" id="myModalOficina'.$referente.'" tabindex="-1" ro
        </div>
 
 
-<div class="modal-footer">
+<div class="modal-footer modal-footer-calendar">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
 

@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="includes/mod_cen/css/styleIconosSuperPrim.css">
 <link rel="stylesheet" href="includes/mod_cen/css/default.css">
 <link rel="stylesheet" href="includes/mod_cen/css/default.date.css">
+<link rel="stylesheet" href="includes/mod_cen/portada/css/portadaEtjMisEtt.css">
 
 
 <script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js?v=<?php echo(rand()); ?>"></script>
@@ -120,6 +121,9 @@ echo '<div class="container">';
         <h3>Escuela</h3>
         <div>
           <p>buscar de escuelas</p>
+          <?php
+          include 'includes/mod_cen/portada/etj/etjBuscarEscuela.php';
+           ?>
         </div>
       </div>
       <div id='accordionBuscar2'>
@@ -242,12 +246,13 @@ echo '<div class="container">';
 								$pos = strpos($fila->apellido, $buscar);
 
 								if ($pos===false) {
-									echo "<li><a  href='#tabs-".$fila->referenteId."'>".strtoupper($fila->apellido)." <span id='badge-".ltrim($fila->referenteId,'0')."' class='badge'>".$totalNoLeidos."</span></a></li>";
+									echo "<li><a  href='#tabs-".$fila->referenteId."'>&nbsp".strtoupper($fila->apellido)." &nbsp<span id='badge-".ltrim($fila->referenteId,'0')."' class='badge badgeNoLeido'>".$totalNoLeidos."</span></a></li>";
 								}else{
-									echo "<li><a  href='#tabs-".$fila->referenteId."'>".substr(strtoupper($fila->apellido),0,strpos($fila->apellido,' '))."  <span id='badge-".ltrim($fila->referenteId,'0')."' class='badge'>".$totalNoLeidos."</span></a></li>";	# code...
+									echo "<li><a  href='#tabs-".$fila->referenteId."'>&nbsp".substr(strtoupper($fila->apellido),0,strpos($fila->apellido,' '))."  &nbsp<span id='badge-".ltrim($fila->referenteId,'0')."' class='badge badgeNoLeido'>".$totalNoLeidos."</span></a></li>";	# code...
 								}
 
 							}
+
 
 				  echo '</ul>';
 					$contador=0;
@@ -270,68 +275,103 @@ echo '<div class="container">';
 						$cantidadActual=mysqli_num_rows($actual);
 						$cantidadNoLeidos=mysqli_num_rows($informesNoLeidos);
 
-						echo "<p>".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</p>";
+						echo "<h4><p align='center' class='nombreApellido'><b>".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</b></p></h4>";
+            echo "<hr class='hrNombreApellido'>";
 						//echo "<p class='alert alert-success'>Total Informes - $cantidadActual</p>";
 						$contador++;
 						echo "<div id='accordion$contador'>";
-            echo '<h3>Informes No Leidos <span id="badgeNoLeidos-'.ltrim($fila->referenteId,'0').'" class="badge">'.$cantidadNoLeidos.'</span></h3>';
+            echo '<h3> <span id="badgeNoLeidos-'.ltrim($fila->referenteId,'0').'" class="badge badgeNoLeido">'.$cantidadNoLeidos.'</span>Informes No Leidos</h3>';
             //<h3>Informes No Leidos <span id='badgeNoLeidos-".$fila->referenteId."' class="badge"> <?php echo $cantidadNoLeidos;</span></h3>
 
 						?>
 							<div>
 								<?php
+                echo "<div class='list-group'>";
 								while ($row = mysqli_fetch_object($informesNoLeidos))
+
 								{
 									switch ($row->prioridad) {
 										case 'Normal':
 											$class="alert alert-success";
+                      $parrafo="color:#646161;";
 											break;
 										case 'Media':
-											$class="alert alert-info";
+											$class="alert alert-warning";
+                      $parrafo="color:#646161;";
 											break;
 										case 'Alta':
-											$class="alert alert-warning";
+											$class="alert alert-danger";
+                      $parrafo="color:#646161;";
 											break;
 										default:
 											# code...
 											break;
 									}
-									echo "<p id='informeId".$row->informeId."' class='".$class."'><b>$row->titulo</b><br>
-												<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
+
+                  //echo "<div class='list-group ".$class."' id='informeId".$row->informeId."'";
+                  echo "<div class='list-group-item  ".$class."'id='informeId".$row->informeId."'>";
+                  echo "<h4 class='list-group-item-heading'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'>&nbsp</span><b>".ucwords($row->titulo)."</b></h4>";
+                  echo "<p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Institución N°:  </b>".$row->numero."  <b></p><p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha V.:</b>".Maestro::formatoFecha($row->fechaVisita)."&nbsp<b> Fecha Carga.:</b> ".Maestro::formatoFecha($row->fechaCarga)." &nbsp<b>Id:</b>".$row->informeId." </p>";
+                  echo "</div>";
+                  //echo "</div>";
+									//echo "<p id='informeId".$row->informeId."' class='".$class."'><b>$row->titulo</b><br>
+											//	<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
 								}
+              echo "</div>";
 								 ?>
 
 							</div>
-							<h3>Informes prioridad Alta <span class="badge"> <?php echo $totalAlta;?></span></h3>
+							<h3>Informes prioridad Alta <span class="badge badgeAlta"> <?php echo $totalAlta;?></span></h3>
 
 						  <div>
 
 								<?php
+                  echo "<div class='list-group'>";
 								while ($row = mysqli_fetch_object($buscar_alta)) {
-									echo "<p id='inforalta".$row->informeId."' class='alert alert-warning'><b>$row->titulo</b><br>
-												<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
+                  echo "<div class='list-group-item alert alert-danger'id='inforalta".$row->informeId."'>";
+                  echo "<h4 class='list-group-item-heading'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'>&nbsp</span><b>".ucwords($row->titulo)."</b></h4>";
+                  echo "<p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Institución N°:  </b>".$row->numero."  <b></p><p class='list-group-item-text'style='".$parrafo."' >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha V.:</b>".Maestro::formatoFecha($row->fechaVisita)."&nbsp<b> Fecha Carga.:</b> ".Maestro::formatoFecha($row->fechaCarga)." &nbsp<b>Id:</b>".$row->informeId." </p>";
+                  echo "</div>";
+
+									// echo "<p id='inforalta".$row->informeId."' class='alert alert-danger'><b>$row->titulo</b><br>
+									// 			<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
 
 								}
+                echo "</div>";
 								?>
 						  </div>
-							<h3>Informes prioridad Media <span class="badge"> <?php echo $totalMedia;?></span></h3>
+							<h3>Informes prioridad Media <span class="badge badgeMedia"> <?php echo $totalMedia;?></span></h3>
 						  <div>
 							<?php
+              echo "<div class='list-group'>";
 								while ($row = mysqli_fetch_object($buscar_media)) {
-										echo "<p id='informedi".$row->informeId."' class='alert alert-info'><b>$row->titulo</b><br>
-  												<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
+
+                  echo "<div class='list-group-item alert alert-warning'id='informedi".$row->informeId."'>";
+                  echo "<h4 class='list-group-item-heading'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'>&nbsp</span><b>".ucwords($row->titulo)."</b></h4>";
+                  echo "<p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Institución N°:  </b>".$row->numero."  <b></p><p class='list-group-item-text'style='".$parrafo."' >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha V.:</b>".Maestro::formatoFecha($row->fechaVisita)."&nbsp<b> Fecha Carga.:</b> ".Maestro::formatoFecha($row->fechaCarga)." &nbsp<b>Id:</b>".$row->informeId." </p>";
+                  echo "</div>";
+                    //
+										// echo "<p id='informedi".$row->informeId."' class='alert alert-warning'><b>$row->titulo</b><br>
+  									// 			<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
 
 								}
+                echo "</div>";
 							?>
 						 </div>
-							<h3>Informes prioridad Normal <span class="badge"> <?php echo $totalNormal;?></span></h3>
+							<h3>Informes prioridad Normal <span class="badge badgeNormal"> <?php echo $totalNormal;?></span></h3>
 						  <div>
 								<?php
+                echo "<div class='list-group'>";
 	 							 while ($row = mysqli_fetch_object($buscar_normal)) {
-	 									 echo "<p id='infornorm".$row->informeId."' class='alert alert-success'><b>$row->titulo</b><br>
-   												<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
+                   echo "<div class='list-group-item alert alert-success'id='infornorm".$row->informeId."'>";
+                   echo "<h4 class='list-group-item-heading'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'>&nbsp</span><b>".ucwords($row->titulo)."</b></h4>";
+                   echo "<p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Institución N°:  </b>".$row->numero."  <b></p><p class='list-group-item-text'style='".$parrafo."' >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha V.:</b>".Maestro::formatoFecha($row->fechaVisita)."&nbsp<b> Fecha Carga.:</b> ".Maestro::formatoFecha($row->fechaCarga)." &nbsp<b>Id:</b>".$row->informeId." </p>";
+                   echo "</div>";
+                     // id='infornorm".$row->informeId."' class='alert alert-success'><b>$row->titulo</b><br>
+   								// 				<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
 
 	 							 }
+                   echo "</div>";
 	 						 ?>
 						  </div>
 
@@ -362,9 +402,10 @@ echo '<div class="container">';
               //ar_dump($escuelasCargo);
               $buscarEscuelas = $escuelasCargo->buscar2();
               $totalEscuelas = mysqli_num_rows($buscarEscuelas);
-              echo "<h3>Escuelas a cargo <span class='badge'>$totalEscuelas</span></h3>";
+              echo "<h3>Escuelas a cargo <span class='badge badgeEscuelaCargo'>$totalEscuelas</span></h3>";
               echo '<div>';
                ?>
+
               <div class="row">
 
               <!-- <div class="container"> -->
@@ -446,6 +487,7 @@ echo '<div class="container">';
               </div>
 
 						</div>
+
 
 
 						<?php
