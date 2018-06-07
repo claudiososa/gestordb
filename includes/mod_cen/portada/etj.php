@@ -13,6 +13,8 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js?v=<?php echo(rand()); ?>"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <!-- ////////////////////// ///////////////////////////////////// -->
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>

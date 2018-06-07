@@ -3,6 +3,10 @@
   include_once('../respuesta.php');
   include_once('../maestro.php');
 
+
+
+    
+
   if (isset($_POST['informeIdBuscar']))
   {
     $respuesta =  new Respuesta(null,$_POST['informeIdBuscar']);
@@ -76,10 +80,14 @@
       break;
     }
 
+
+        
+
     if(isset($guardar_respuesta)>0){          // entra si se agrego la respuesta
 
-
-            include_once("includes/mod_cen/informes/email_script_resp.php");
+          
+            
+            include_once("../../informes/email_scriptAjaxResp.php");
         }
 
       $list=array();

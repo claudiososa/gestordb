@@ -7,54 +7,42 @@ include_once("includes/mod_cen/clases/TipoInforme.php");
 include_once("includes/mod_cen/clases/TipoPermisos.php");
 include_once("includes/mod_cen/clases/SubTipoInforme.php");
 include_once("includes/mod_cen/clases/EscuelaReferentes.php");
-
-//include_once("../../clases/maestro.php");
-
-//$cartel="hola llego email descomentado xxxx";
-//Maestro::debbugPHP($cartel);
-
-
+include_once("includes/mod_cen/clases/maestro.php");
+  
 // a partir de este codigo trabajamos en recabar datos del usuario que inicio sesion.
+ 
   $dato_ref =  new Referente($_SESSION["referenteId"]);
   $buscar_dato_ref =  $dato_ref->buscar();
   $referente_actual = mysqli_fetch_object($buscar_dato_ref);
 
    
-
   // entra si es ett o etj o coordinador de Conectar Igualdad
   if($referente_actual->tipo=="ETT" || $referente_actual->tipo=="ETJ" || $referente_actual->tipo=="Coordinador" ){
     // en el siguiente codigo usamos el escuelaID para encontrar el referente de la escuela asociada al informe por crear
-	  
-    if (isset($_GET)) {
-      
-      $escuela= new Escuela($_GET["escuelaId"]);
-      $escuelaI=$_GET["escuelaId"];
-     
-
-    }else{
-
-      $escuela= new Escuela($_POST["escuelaId"]);
-      $escuelaI=$_POST["escuelaId"];
-       
-
-     
-      }
-   
-   //Maestro::debbugPHP($escuelaI);
-     
+	    
+     $escuela= new Escuela($_GET["escuelaId"]);
 	   $buscar_escuela=$escuela->buscar();
 
-      // buscamos el referente de la escuela en la tabla escuelaReferentes.
+      // buscamos el referente de la escuela en la tabla escuelaReferentes  [puede ser ETT o ETJ o sin Referente].
 
-         $referenteEscuela = new EscuelaReferentes(null,$escuelaI); //**** nueva entrada
-         $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos los ett referentes de la escuela
-         $id_referente_escuela=$buscarEscuelaReferente->referenteId;         //**** obtenemos el referenteId del ETT
-      
-      // fin de busqueda de referente en la tabla escuelaReferentes.
+         $referenteEscuela = new EscuelaReferentes(null,$_GET["escuelaId"]); 
+         $buscarEscuelaReferente = $referenteEscuela->buscarReferente('19'); //**** buscamos el ETT referente de la escuela
+         $id_referente_escuela=$buscarEscuelaReferente->referenteId; 
+         
+         if ($id_referente_escuela == "") {    // aqui entra si la escuela no tiene ETT
+          
+              $buscarEscuelaReferente = $referenteEscuela->buscarReferente('20');   //**** buscamos ETJ referente de la escuela
+              $id_referente_escuela=$buscarEscuelaReferente->referenteId;
+                
+                  if ($id_referente_escuela == "") {  // aqui entra si no tiene ni ETT ni ETJ
+                       $id_referente_escuela=0001;
+
+                  }
+         }
+              
+              // fin de busqueda de referente en la tabla escuelaReferentes.
 	      
-        // $dato_escuela=mysqli_fetch_object($buscar_escuela); // Codigo reemplazado por la busqueda en escuelaReferentes
-     	   //$id_referente_escuela= $dato_escuela->referenteId; // Codigo reemplazado por la busqueda en escuelaReferentes(Obtengo el referentID conectar igualdad)
-
+        
 	    // en el siguiente codigo usamos el referenteID obtenido en el paso anterior para obtener  su mail e usarlo mas adelante
 	        $dato_ref_esc =  new Referente($id_referente_escuela);
 	        $buscar_dato_ref_esc =  $dato_ref_esc->Persona($id_referente_escuela);
@@ -196,16 +184,16 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
               //$para="jfvpipo@gmail.com";
 
 	            $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
-	            $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2017 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
+	            $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2018 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
 
             	if (mail($para, $titulo, $mensaje, $header)) {
 
             		$enviado=1;
             	} else {
-            		echo "Falló el envio ";
-
+            		echo "Falló el envio";
             	
               }
+
 
 
 
@@ -531,13 +519,18 @@ include_once("includes/mod_cen/clases/EscuelaReferentes.php");
         }// fin del if-else principal
 
        
-      if ($_SESSION['tipo']=='CPPL') {
+      if ($_SESSION['tipo']=='CPPL' || $_SESSION['tipo']=='ETTPL') {
         
          $variablephp = "index.php?mod=slat&men=informe&id=2&escuelaId=".$_POST["escuelaId"]."&tipo=lectura";
       }else{
         $variablephp = "index.php?mod=slat&men=informe&id=2&escuelaId=".$_POST["escuelaId"];
 }
              
+       
+    //$cartel="hola llego email final";
+    
+
+
        ?>    <script type="text/javascript">
                 var variablejs = "<?php echo $variablephp; ?>" ;
                 function redireccion(){window.location=variablejs;}
