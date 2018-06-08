@@ -1,0 +1,64 @@
+/*nombre encabezado ett*/
+.nombreApellido{
+  margin: 10px 0 15px;
+}
+/*hr separador*/
+.hrNombreApellido{
+  margin-top: 1px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 3px solid #068587;
+  width: 60%;
+}
+/*badge no leido*/
+.badgeNoLeido {
+  /*font-size: 13px;
+  padding: 4px 4px;
+  border-radius: 20px;*/
+  float: left;
+  display: block;
+  background-color: #068587;
+}
+.badgeAlta {
+  /*font-size: 13px;
+  padding: 4px 4px;
+  border-radius: 20px;*/
+  float: left;
+  display: block;
+}
+.badgeMedia{
+  float: left;
+  display: block;
+  /*background-color:#d99012;*/
+background-color: #777777;
+
+
+}
+.badgeNormal{
+  float: left;
+  display: block;
+  /*background-color: #3c763d;*/
+    background-color: #777777;
+}
+.badgeEscuelaCargo{
+  float: left;
+  display: block;
+  /*background-color: #3c763d;*/
+    background-color: #777777;
+}
+/*
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: #000000;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border: 2px solid #068587;
+    background: #ffffff;
+    font-weight: normal;
+
+}*/
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{
+  border: 1px solid #068587;
+    background: #068587bf;
+    font-weight: bold;
+    color: #ffffff;
+}
