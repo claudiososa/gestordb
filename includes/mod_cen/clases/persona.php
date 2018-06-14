@@ -21,8 +21,9 @@ class Persona
  	private $localidadId;
  	private $cpostal;
  	private $ubicacion;
+ 	private $fotoPerfil;
 
- 	function __construct($personaId=NULL,$apellido=NULL,$nombre=NULL,$dni=NULL,$cuil=NULL,$telefonoC=NULL,$telefonoM=NULL,$direccion=NULL,$email=NULL,$email2=NULL,$facebook=NULL,$twitter=NULL,$localidadId=NULL,$cpostal=NULL,$ubicacion=NULL)
+ 	function __construct($personaId=NULL,$apellido=NULL,$nombre=NULL,$dni=NULL,$cuil=NULL,$telefonoC=NULL,$telefonoM=NULL,$direccion=NULL,$email=NULL,$email2=NULL,$facebook=NULL,$twitter=NULL,$localidadId=NULL,$cpostal=NULL,$ubicacion=NULL,$fotoPerfil=NULL)
 	{
 			 //seteo los atributos
 		 	$this->personaId = $personaId;
@@ -40,6 +41,7 @@ class Persona
 		 	$this->localidadId = $localidadId;
 		 	$this->cpostal = $cpostal;
 		 	$this->ubicacion = $ubicacion;
+		 	$this->fotoPerfil = $fotoPerfil;
 	}
 
 	public function update()
@@ -59,7 +61,8 @@ class Persona
 											twitter = '$this->twitter',
 											localidadId = '$this->localidadId',
 											cpostal = '$this->cpostal',
-											ubicacion = '$this->ubicacion'
+											ubicacion = '$this->ubicacion',
+											fotoPerfil = '$this->fotoPerfil'
 											WHERE personaId = '$this->personaId'";
 			//Maestro::debbugPHP($sentencia);
 		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
@@ -129,7 +132,7 @@ class Persona
 		$bd=Conexion2::getInstance();
 		$sentencia="INSERT INTO personas (personaId,apellido,nombre,dni,cuil,telefonoC,
 																							telefonoM,direccion,
-																							email,email2,facebook,twitter,localidadId,cpostal,ubicacion)
+																							email,email2,facebook,twitter,localidadId,cpostal,ubicacion,fotoPerfil)
 		            VALUES (NULL,
                         '". $this->apellido."',
 												'". $this->nombre."',
@@ -144,7 +147,8 @@ class Persona
 												'". $this->twitter."',
 												'". $this->localidadId."',
 												'". $this->cpostal."',
-												'". $this->ubicacion."');";
+												'". $this->ubicacion."',
+												'". $this->fotoPerfil."');";
 
 		 if ($bd->ejecutar($sentencia)) {//Ingresa aqui si fue ejecutada la sentencia con exito
 				return $ultimoRegistroId=$bd->lastID();
@@ -215,10 +219,11 @@ class Persona
 																		twitter = '$this->twitter',
 																		localidadId = '$this->localidadId',
 																		cpostal = '$this->cpostal',
-																		ubicacion = '$this->ubicacion'
+																		ubicacion = '$this->ubicacion',
+																		fotoPerfil = '$this->fotoPerfil'
 																	WHERE personaId = '$this->personaId'";
 		//,direccion = '$this->direccion',facebook = '$this->facebook' WHERE personaId = '$this->personaId'
-		return $sentencia;
+		//return $sentencia;
 		if ($conexion->query($sentencia)) {
 			return $sentencia;
 		}else
@@ -381,7 +386,7 @@ class Persona
 	 	$this->localidadId = $elemento->localidadId;
 	 	$this->cpostal = $elemento->cpostal;
 	 	$this->ubicacion = $elemento->ubicacion;
-	 	//$this->ubicacion = $elemento->ubicacion;
+	 	$this->fotoPerfil = $elemento->fotoPerfil;
 		return $this;
 
     }
@@ -459,6 +464,11 @@ class Persona
 	public function getUbicacion()
 	{
 		return $this->ubicacion;
+	}
+	
+	public function getFotoPerfil()
+	{
+		return $this->fotoPerfil;
 	}
 }
 ?>

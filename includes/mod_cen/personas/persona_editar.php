@@ -60,8 +60,30 @@
 								</div>
 								<!-- columnas de foto -->
 								<br>
+
+
+
 								<div class="col-md-4">
-									<img src="img/iconos/pruebaFotoPerfil/foto-perfil.jpg" alt="..." class=" img-responsive img-circle" style="max-width:60%;">
+
+								<!-- carga de foto de perfil --> 
+								<?php 
+							       $nomArchivoFoto="./img/perfil/";
+							       if ($persona->getFotoPerfil() == "") {
+								         $nomArchivoFoto.= "0000.jpg";
+							       }else {
+							           $nomArchivoFoto.= $persona->getFotoPerfil();
+							           //$nomArchivoFoto.=".jpg";
+							             }
+
+							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style='max-width:60%; height:auto;' > "; 
+							
+							//$fotperfil=$persona->getFotoPerfil();
+							
+						    //echo "<input type='hidden' name='fotoPerfil' value='$fotperfil' >";
+						       
+						        ?>		
+
+									<!--  original <img src="tests/0483.jpg" alt="..." class=" img-responsive img-circle" style="max-width:60%;"> -->
 
 								</div>
 
@@ -80,11 +102,11 @@
 
 		</div>
 
-<?php include_once('includes/mod_cen/formularios/personaf.php'); ?>
+     <?php include_once('includes/mod_cen/formularios/personaf.php'); ?>
 <!--
 		<div class="container">
 		<form class="form-horizontal" action="index.php?men=personas&id=4" method="POST" >
-			<input type="hidden" name="personaId" value="<?php echo $personaId ?>"/>
+			<input type="hidden" name="personaId" value="<?php //echo $personaId ?>"/>
 
 			<div class="col-md-12">
         		<label class="control-label"><h3>Editar Perfil</h3></label>
@@ -94,7 +116,7 @@
 
 
 
-		<?php include_once('includes/mod_cen/formularios/personaf.php'); ?>
+		<?php //include_once('includes/mod_cen/formularios/personaf.php'); ?>
 			<div class="form-group">
 				<div class="col-md-12">
 					<input type='submit' id="boton1" class="btn btn-primary" value='Aplicar Cambios'>
