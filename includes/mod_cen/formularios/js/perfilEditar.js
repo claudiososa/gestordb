@@ -1,5 +1,4 @@
 $(document).ready(function() {
- 
 
 
    $("#input-img").fileinput({
@@ -9,8 +8,8 @@ $(document).ready(function() {
       showCaption: true,
       initialCaption: "Seleccione 1 archivo para foto de perfil",
       showRemove: false,
-      maxFileSize: 10240,
-      maxFilePreviewSize: 2048,
+      maxFileSize: 512,
+      maxFilePreviewSize: 512,
       showUpload: false
        });
 
