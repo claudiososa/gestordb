@@ -1,5 +1,5 @@
-<script type="text/javascript" src="includes/mod_cen/formularios/js/form_personaf.js"></script>
-<script type="text/javascript" src="includes/mod_cen/formularios/js/perfilEditar.js"></script>
+<script type="text/javascript" src="includes/mod_cen/formularios/js/form_personaf2.js"></script>
+<script type="text/javascript" src="includes/mod_cen/formularios/js/perfilEditar.js"></script> 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -15,16 +15,16 @@
  ?>
         <form name ="form" class="form-horizontal formuploadajax" enctype="multipart/form-data"  id="formuploadajax" method="post" action="" >
 					<input type="hidden" name="personaId" id="personaId" value="<?php echo $personaId ?>"/>
-										
+									
 						<div class="form-group">
 						<label for="" class="col-sm-2 control-label">Apellidos</label>
-						<div class="col-sm-10">
+						<div class="col-sm-4">
 						   <input size="30" type="text" name="apellido" id="apellido" value="<?php echo $persona->getApellido()?>" placeholder="Ingrese Apellido" autofocus>
 						</div>
 						</div>
 						<div class="form-group">
 						<label for="" class="col-sm-2 control-label">Nombres</label>
-						<div class="col-sm-10">
+						<div class="col-sm-4">
 						  <input size="30" type="text" name="nombre" id="nombre" value="<?php echo $persona->getNombre()?>" placeholder="Ingrese Nombres">
 						</div>
 						</div>
@@ -141,7 +141,7 @@
 <div class="form-group">
 
    <div class="col-md-12">
-        <label class="control-label">Adjuntar archivos (máximo 5 archivos, peso máximo por archivo 1024 kb)</label>
+        <label class="control-label">Adjuntar archivos para foto de Perfil (máximo 512 kb)</label>
    </div>
    <div class="col-md-12">
         <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
@@ -154,7 +154,7 @@
 
   <div class="col-md-12">
 
-  <input type="submit" class="btn btn-warning saveDatos" name='boton1'  value="Guardar Cambios">
+  <input type="submit" class="btn btn-warning saveDatos" id='boton1'   value="Guardar Cambios">
     
   </div>
   
@@ -173,6 +173,7 @@
 				<!-- <input type='submit' id="boton1" class="btn btn-primary" value='Aplicar Cambios'> -->
       </div>
     </div>
-  </div</div>
+  </div>
+</div>
 
 
