@@ -163,181 +163,6 @@ if(($_POST))
 
 						</script>
 
-            <!-- <div id="tabs">
-              <ul>
-                <li><a href="#tabs-1">Escuela</a></li>
-                <li><a href="ajax/content4-broken.php">Autoridades Esc.</a></li>
-                <li><a href="ajax/content5.html">SUPER</a></li>
-                <li><a href="#tabs-2">PLANIED</a></li>
-                <li><a href="ajax/content2.html">PMI</a></li>
-                <li><a href="ajax/content3-slow.php">ESC.FUTURO</a></li>
-
-              </ul>-->
-              <!-- ###########CONTENIDO EJEMPLO############ -->
-              <!-- <div id="tabs-1">
-                  <h4 align="center">COLEGIO SECUNDARIO XXXXXXXXXXX</h4>
-                  <hr>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="row">
-                        <div class="col-md-6 col-xs-6">
-                          <h5>N°: 5001</h5>
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                          <h5>CUE:66250100</h5>
-
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                          <h5>Localidad: Salta</h5>
-
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                          <h5>Direccion:xxxxxxxxxx</h5>
-
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                          <img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" alt="Telefono">254688445</>
-
-                        </div>
-                        <div class="col-md-6 col-xs-12">
-                          <img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="email">email@gmail.com</>
-
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                        <h5>Total Informes: (20)</h5>
-
-                        </div>
-                        <div class="col-md-6 col-xs-12">
-                          <img src="img/iconos/pruebaFotoPerfil/ubicacion.png" alt=""></>
-
-                        </div>
-
-                      </div>
-
-                    </div>
-                    <!-- <div class="col-md-6 col-xs-12 col-xs-push-2 col-md-push-2">
-                        <img src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" align="center" class="img-responsive" alt="Imagen no disponible" style="max-width: 300px; max-height: 300px">
-                    </div> -->
-
-                    <!-- <div class="col-md-6 col-xs-12">
-                        <img src="img/iconos/busquedaEsc/normal4.jpg" align="center" class="img-responsive img-thumbnail" alt="FotoEscxxxx"style="max-width: 300px; max-height: 300px" >
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-                        <img src="img/iconos/busquedaEsc/normal4.jpg" align="center" class="img-responsive img-thumbnail" alt="FotoEscxxxx"style="max-width: 300px; max-height: 300px" >
-                    </div>
-
-                  </div> -->
-                <!-- <div class="row">
-                  <div class="col-md-3">
-                    <h5>N°: 5001</h5>
-
-                  </div>
-                  <div class="col-md-3">
-                    <h5>CUE:66250100</h5>
-
-                  </div>
-                  <div class="col-md-6">
-                    <img src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" align="center"class="img-responsive" alt="Imagen no disponible">
-
-                  </div>
-
-                </div> -->
-
-                <!-- <div class="row">
-                  <div class="col-md-3">
-                    <h5>Localidad: Salta</h5>
-
-                  </div>
-                  <div class="col-md-3">
-                    <h5>Direccion:xxxxxxxxxx</h5>
-
-                  </div>
-
-                </div> -->
-
-                <!-- <div class="row">
-                  <div class="col-md-3">
-                    <img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" alt="Telefono">254688445</>
-
-                  </div>
-                  <div class="col-md-3">
-                    <img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="email">email@gmail.com</>
-
-                  </div>
-                  <div class="col-md-3">
-                  <h5>Total Informes: (20)</h5>
-
-                  </div>
-                  <div class="col-md-3">
-                    <img src="img/iconos/pruebaFotoPerfil/ubicacion.png" alt=""></>
-
-                  </div>
-
-                </div> -->
-<!--
-              </div> -->
-
-
-              <!-- ###EJEMPLO DE INTERFAZ PARA VISTA PLANIED### -->
-
-              <!-- <div id="tabs-2">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h4 align="center">ETT</h4>
-                        <hr>
-                        <div class="row">
-                          <div class="col-md-8">
-                            <h4>VIDAURRE JULIO</h4>
-
-                          </div>
-
-                          <div class="col-md-4">
-                            <img src="img/iconos/pruebaFotoPerfil/foto-perfil.jpg" alt="..." class=" img-responsive img-circle" style="max-width:60%;">
-
-                          </div>
-
-                        </div>
-                        <h4><img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" alt="">:35896944</h4>
-                        <h4><img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="">:email@gmail.com</h4>
-                        <h4>Escuelas a cargo:(10)</h4>
-
-
-
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div> -->
-                <!-- <div class="panel panel-default">
-                  <div class="panel-body">
-
-                  </div>
-                </div> -->
-<!--
-              </div>
-            </div>
- -->
-
-            <!-- <script>
-  $( function() {
-    $( "#tabs" ).tabs({
-      beforeLoad: function( event, ui ) {
-        ui.jqXHR.fail(function() {
-          ui.panel.html(
-            "Couldn't load this tab. We'll try to fix this as soon as possible. " +
-            "If this wouldn't be a demo." );
-        });
-      }
-    });
-  } );
-  </script> -->
- <!-- -->
-
-
 						<?php
 
 						echo "<div class='row' style='margin: 5px;padding: 3px;'>Cantidad de escuelas encontradas: <b>".$cantidadEscuela."</b></div>";
@@ -394,8 +219,8 @@ if(($_POST))
 											$escuelasETT=new EscuelaReferentes(null,$fila->escuelaId,'19'); // buscamos las escuelas del ETT
 											$buscar_referenteETT=$escuelasETT->buscar2();// devuelve todos los datos de las escuelas del ETT
 											$datoBuscarETT=mysqli_fetch_object($buscar_referenteETT);
-								
-						
+
+
 										if ($datoBuscarETT->referenteId == NULL){  // Preguntamos si no existe ETT para la escuela (tambien puede ser que la escuela no tenga entrada en la tabla escuelaReferentes)
 
 										$referente=new Referente('0001');     // vamos a mostrar Sin, Asignar
@@ -403,9 +228,9 @@ if(($_POST))
 
 			                            $referente=new Referente($datoBuscarETT->referenteId);  // vamos a mostrar el ETT
 
-									  } 
+									  }
 
-									 // Fin de modificaciones para leer de la tabla escuelaReferentes para ETT 
+									 // Fin de modificaciones para leer de la tabla escuelaReferentes para ETT
 									//************************************************************************
 
 									//$referente=new Referente($fila->referenteId);
@@ -435,14 +260,14 @@ if(($_POST))
 								//******* Modificaciones para leer de la tabla escuelaReferentes para ETJ
 								//***********************************************************************
 
-								if ($datoBuscarETT->referenteId == NULL){  // preguntamos si no tiene ETT asignado 
+								if ($datoBuscarETT->referenteId == NULL){  // preguntamos si no tiene ETT asignado
 
 								$escuelasETJ=new EscuelaReferentes(null,$fila->escuelaId,'20'); // buscamos la escuelas del ETJ
 								$buscar_referenteETJ=$escuelasETJ->buscar2();// devuelve todos los datos de la escuelas del ETJ
 								$datoBuscarETJ=mysqli_fetch_object($buscar_referenteETJ);
 
 								if ($datoBuscarETJ->referenteId == NULL ) {   // preguntamos si NO tiene ETJ asignado (tambien puede ser que la escuela no tenga entrada en la tabla escuelaReferentes)
-									
+
 								$persona= new Referente('0001');     // vamos a mostrar Sin, Asignar
 								$buscar_referente=$persona->buscar();
 								$datoEtj=mysqli_fetch_object($buscar_referente);
@@ -454,7 +279,7 @@ if(($_POST))
 										$datoEtj=mysqli_fetch_object($buscar_referente);
 
 								     }
-						
+
 
 								}else{  // buscamos datos del ETJ a cargo del ETT de la escuela
 
@@ -465,9 +290,9 @@ if(($_POST))
 								}
 
 								// ******Fin de modificaciones para leer de la tabla escuelaReferentes para ETJ******
-								//*****************************************************************************	
+								//*****************************************************************************
 
-								
+
 
 								/**
 									 * Buscar director de la institución
@@ -504,16 +329,54 @@ if(($_POST))
 									$locali=new Localidad($fila->localidadId,null);
 									$busca_loc= $locali->buscar();
 									$fila1=mysqli_fetch_object($busca_loc);
-								echo "<div class='row' style='margin: 5px;padding: 3px;'>";
-								echo '<div class="panel-group">';
-								echo '<div class="panel panel-default">';
-								//echo '<div class="panel-heading">';
+								// echo "<div class='row' style='margin: 5px;padding: 3px;'>";
+								// echo '<div class="panel-group">';
+								// echo '<div class="panel panel-default">';
+
 								?>
+                <div class="col-md-12">
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <div class="row">
+                        <!-- escuela sin foto -->
+                        <div class="col-md-9" id="">
+                          <h4><b><?php
+    									 		echo $fila->numero." - ".substr($fila->nombre,0,40);
+    									 		?></b></h4>
+                          <h4>Cue: <?php echo $fila->cue?></h4>
+                          <h4>Localidad: <?php echo $fila1->nombre ?></h4>
 
+                        </div>
 
+                        <!-- imagen de escuela -->
+                        <div class="col-md-3">
+                          <br><img class="img-thumbnail" src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" alt="imagen no disponible">
 
+                        </div><!-- </col-md-3 -->
 
-									<h1 class="panel-title">
+                      </div><!-- </row -->
+                      <div class="" id="" style="">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <img src="img/iconos/pruebaFotoPerfil/ubicacion.png" class="img-responsive" alt="iconoGoogleMaps" align="left"><?php echo $fila->domicilio ?>
+                          </div>
+                          <?php
+                          if ($fila->getTelefono()) {
+                            echo "hola";
+                            # code...
+                          }
+                           ?>
+
+                        </div>
+
+                      </div>
+                    </li>
+
+                  </ul>
+
+                </div>
+
+									<!-- <h1 class="panel-title">
 									 <a data-toggle="collapse" href="#collapse1<?php echo $fila->escuelaId ?>">
 									 	<div class="alert alert-info" role="alert" >
 											<b>
@@ -523,7 +386,7 @@ if(($_POST))
 									 		</b>
 										</div>
 									</a>
-								 </h1>
+								 </h1> -->
 
 
 
