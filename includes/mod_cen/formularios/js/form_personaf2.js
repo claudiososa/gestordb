@@ -1,7 +1,9 @@
 $(document).ready(function() {
-alert('hola soy y');
-     // nombre - apellido
-     var persona = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ_\s]+$/;
+
+//alert('no');
+
+
+ var persona = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ_\s]+$/;
 // Crear nueva variable o combinar poar numero telefonico y validar con formtqatos para codigo y para numero
      // cuil - dni - tel casa - tel cel - cp
      var num =  /^[0-9]+$/;
@@ -11,42 +13,12 @@ alert('hola soy y');
      var correo = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}|[.][a-zA-Z]{2,4}$/;
 
 
-$("#boton1").click(function (){
 
+$("#boton1").click(function(event){
+
+      
         $("#error").remove();
 
-// campos nombre y apellido obligatorios
-
-//
-// #######################################
-// validacion ejemplo con inputs alertados
-//
-// #### al presionar teclas evento keyup
-// $("#txtapellido").keyup(function(event){
-//   if( $('#txtapellido').val() != "" && (letras.test($('#txtapellido').val() ))){
-//       $(".error").removeClass('show').fadeOut();
-//
-//       $('.ctxtapellido').removeClass('has-error').addClass('has-success')
-//       $('.validacion').attr('for','txtapellido')
-
-//##### agrega leyenda de error con color de clase correspondiente
-//       $('#txtapellido').attr('aria-describedby','helpBlock2')
-//
-//     //  return true;
-//
-//   }else{
-//     $('.ctxtapellido').addClass('has-error')
-//     $('.validacion').attr('for','txtapellido')
-//     $('#txtapellido').attr('aria-describedby','helpBlock2')
-//     $('.error').addClass('show').addClass('help-block').attr('id','help-block2')
-//   //  return true;
-//   }
-//
-//
-// })
-//
-////
-// ################################
          if ( $("#apellido").val() =="" || !persona.test($("#apellido").val())) {
            $("#apellido").focus().after("<span class='error'>Campo obligatorio.(Solo letras)</span");
 
@@ -54,8 +26,7 @@ $("#boton1").click(function (){
          }else {
            $(".error").fadeOut();
          }
-
-         if ( $("#nombre").val() =="" || !persona.test($("#nombre").val())) {
+          if ( $("#nombre").val() =="" || !persona.test($("#nombre").val())) {
            $("#nombre").focus().after("<span class='error'>Campo obligatorio.(Solo letras)</span");
 
             return false;
@@ -104,22 +75,16 @@ $("#boton1").click(function (){
 
  // correo1 obligatorio
 
-        if ($("#correo1").val() == "" || !correo.test($("#correo1").val())) {
-           $("#correo1").focus().after("<span class='error'>Campo obligatorio.Ingrese formato valido ej:nombre@gmail.com</span>");
+        if ($("#email").val() == "" || !correo.test($("#email").val())) {
+           $("#email").focus().after("<span class='error'>Campo obligatorio.Ingrese formato valido ej:nombre@gmail.com</span>");
                 return false;
         }else {
             $(".error").fadeOut();
         }
 
+ // correo2
 
-  // correo2
-
-        if ($("#correo2").val() != "" && !correo.test($("#correo2").val())) {
-            $("#correo2").focus().after("<span class='error'>Ingrese formato valido ej:nombre@gmail.com</span>");
-                return false;
-        }else {
-            $(".error").fadeOut();
-        }
+       
 
 
   // cp obligatorio
@@ -130,13 +95,12 @@ $("#boton1").click(function (){
         }else {
             $(".error").fadeOut();
         }
+              
+return true;
 });
 
 
-///////////////
-
-
-          $("#apellido").keyup(function(event){
+ $("#apellido").keyup(function(event){
               if( $(this).val() != "" && (persona.test($(this).val() ))){
                   $(".error").fadeOut();
                   return true;
@@ -194,7 +158,7 @@ $("#boton1").click(function (){
             });
 
 
-            $("#correo1").keyup(function(){
+            $("#email").keyup(function(){
                 if( $(this).val() != "" && (correo.test($(this).val() ))){
                     $(".error").fadeOut();
                     return true;
@@ -203,15 +167,6 @@ $("#boton1").click(function (){
 
             });
 
-
-            $("#correo2").keyup(function(){
-                if( $(this).val() != "" && (correo.test($(this).val() ))){
-                    $(".error").fadeOut();
-                    return true;
-
-                }
-
-            });
 
             $("#cpostal").keyup(function(){
                 if( $(this).val() != "" && (num.test($(this).val() ))){
@@ -223,6 +178,9 @@ $("#boton1").click(function (){
             });
 
 
+	 
+         
+        
 
 
-});
+});   

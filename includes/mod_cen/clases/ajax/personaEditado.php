@@ -45,7 +45,8 @@ if (isset($_POST['dni'])) {
      
 
       $fichero_subido = $dir_subida . $nombreArchivo;
-            
+         
+         Maestro::debbugPHP($_FILES['input-img']);
 
       if (move_uploaded_file($_FILES['input-img']['tmp_name'][$i], $fichero_subido)) {
                               
