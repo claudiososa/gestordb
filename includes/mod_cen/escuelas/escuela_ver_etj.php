@@ -9,6 +9,7 @@ hr {
 <script type="text/javascript" src="gmap/gmaps.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsEscuelaVerEtj.js"></script>
 <?php
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
@@ -339,13 +340,20 @@ if(($_POST))
                     <li class="list-group-item">
                       <div class="row">
                         <!-- escuela sin foto -->
-                        <div class="col-md-9" id="">
-                          <h4><b><?php
+                      <?php echo '  <div class="col-md-9" id="escuela'.$fila->escuelaId.'">
+                          <h4><b>';
     									 		echo $fila->numero." - ".substr($fila->nombre,0,40);
     									 		?></b></h4>
+
+
+                        </div>
+
+
+                      </div><!-- </row -->
+                      <?php echo '<div class="" id="ver'.$fila->escuelaId.'" style="display:none">'; ?>
+                        <div class="col-md-9">
                           <h4>Cue: <?php echo $fila->cue?></h4>
                           <h4>Localidad: <?php echo $fila1->nombre ?></h4>
-
                         </div>
 
                         <!-- imagen de escuela -->
@@ -353,22 +361,65 @@ if(($_POST))
                           <br><img class="img-thumbnail" src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" alt="imagen no disponible">
 
                         </div><!-- </col-md-3 -->
-
-                      </div><!-- </row -->
-                      <div class="" id="" style="">
                         <div class="row">
                           <div class="col-md-6">
                             <img src="img/iconos/pruebaFotoPerfil/ubicacion.png" class="img-responsive" alt="iconoGoogleMaps" align="left"><?php echo $fila->domicilio ?>
                           </div>
                           <?php
-                          if ($fila->getTelefono()) {
-                            echo "hola";
-                            # code...
+                          if ($fila->telefono) {
+
+                            echo '<img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" class="img-responsive" alt="iconoGoogleMaps" align="left">'.$fila->telefono.'';
+                          }
+                          if ($fila->email) {
+
+                            echo '<img src="img/iconos/pruebaFotoPerfil/gmail (1).png" class="img-responsive" alt="iconoGoogleMaps" align="left">'.$fila->email.'';
                           }
                            ?>
 
                         </div>
 
+
+
+      <br>
+      				<!-- botones por programas -->
+      				<div class="row" >
+      		<div class="col-md-8 col-md-offset-2">
+
+       <?php
+      					echo '<div class="btn-group" role="group" aria-label="..." >
+        					<button type="button" class="btn btn-default" id="planied'.$fila->escuelaId.'">
+      							PLANIED (13)</button>
+        					<button type="button" class="btn btn-default" id="super'.$fila->escuelaId.'">SUPERVISION (2)</button>
+
+      						<button type="button" class="btn btn-default" id="autoridadesEsc'.$fila->escuelaId.'">AUTORIDADES ESCUELA</button>
+                  <button type="button" class="btn btn-default" id="futuro'.$fila->escuelaId.'">ESC FUTURO</button>
+      					</div>';
+        ?>
+      				</div>
+      				</div>
+<!-- fin botones por programas -->
+<!-- contenido por prograMAS -->
+
+<br>
+
+<!-- div de contenido por programas -->
+<?php echo '
+<div class="row">
+  <div class="col-md-12" id="programas'.$fila->escuelaId.'" style="display:none">
+    <div class="panel panel-default">
+      <div class="panel-body" id="bodyProgramas'.$fila->escuelaId.'">
+      
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+'; ?>
+<!-- FIN CONTENIDO PROGRAMAS -->
                       </div>
                     </li>
 
