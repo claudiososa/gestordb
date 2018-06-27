@@ -65,8 +65,8 @@
 
 								<div class="col-md-4">
 
-								<!-- carga de foto de perfil --> 
-								<?php 
+								<!-- carga de foto de perfil -->
+								<?php
 							       $nomArchivoFoto="./img/perfil/";
 							       if ($persona->getFotoPerfil() == "") {
 								         $nomArchivoFoto.= "0000.jpg";
@@ -75,13 +75,13 @@
 							           //$nomArchivoFoto.=".jpg";
 							             }
 
-							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style='max-width:60%; height:auto;' > "; 
-							
+							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style='width:60%; height:auto;' > "; 
+
 							//$fotperfil=$persona->getFotoPerfil();
-							
+
 						    //echo "<input type='hidden' name='fotoPerfil' value='$fotperfil' >";
-						       
-						        ?>		
+
+						        ?>
 
 									<!--  original <img src="tests/0483.jpg" alt="..." class=" img-responsive img-circle" style="max-width:60%;"> -->
 
