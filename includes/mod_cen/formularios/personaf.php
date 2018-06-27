@@ -1,5 +1,5 @@
 <script type="text/javascript" src="includes/mod_cen/formularios/js/form_personaf2.js"></script>
-<script type="text/javascript" src="includes/mod_cen/formularios/js/perfilEditar.js"></script> 
+<script type="text/javascript" src="includes/mod_cen/formularios/js/perfilEditar.js"></script>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -10,55 +10,66 @@
       </div>
       <div class="modal-body">
         <!-- panel body inicio -->
-<?php 
+<?php
 //action="index.php?men=personas&id=12"
  ?>
         <form name ="form" class="form-horizontal formuploadajax" enctype="multipart/form-data"  id="formuploadajax" method="post" action="" >
 					<input type="hidden" name="personaId" id="personaId" value="<?php echo $personaId ?>"/>
-									
-						<div class="form-group">
-						<label for="" class="col-sm-2 control-label">Apellidos</label>
-						<div class="col-sm-4">
-						   <input size="30" type="text" name="apellido" id="apellido" value="<?php echo $persona->getApellido()?>" placeholder="Ingrese Apellido" autofocus>
-						</div>
-						</div>
-						<div class="form-group">
-						<label for="" class="col-sm-2 control-label">Nombres</label>
-						<div class="col-sm-4">
-						  <input size="30" type="text" name="nombre" id="nombre" value="<?php echo $persona->getNombre()?>" placeholder="Ingrese Nombres">
-						</div>
-						</div>
-						<div class="form-group">
-						<label for="" class="col-sm-2 control-label">Foto de perfil</label>
-						
-						<div class="col-md-4">
 
-						<!-- carga de foto de perfil inicio -->
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+    						<label for="" class="col-sm-2 control-label">Apellidos </label>
+    						<div class="col-sm-4">
+    						   <input size="30" type="text" name="apellido" id="apellido" value="<?php echo $persona->getApellido()?>" placeholder="Ingrese Apellido" autofocus>
+    						</div>
+    						</div>
+    						<div class="form-group">
+    						<label for="" class="col-sm-2 control-label">Nombres </label>
+    						<div class="col-sm-4">
+    						  <input size="30" type="text" name="nombre" id="nombre" value="<?php echo $persona->getNombre()?>" placeholder="Ingrese Nombres">
+    						</div>
+    						</div>
 
-							 <?php 
-							       $nomArchivoFoto="./img/perfil/";
-							       if ($persona->getFotoPerfil() == "") {
-								         $nomArchivoFoto.= "0000.jpg";
-							       }else {
-							           $nomArchivoFoto.= $persona->getFotoPerfil();
-							          
-							             }
-
-							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' id='fotoPerfil2' style='max-width:60%;' > "; 
-							
-							$fotoperfil=$persona->getFotoPerfil();
-							
-						    echo "<input type='hidden' name='fotoPerfil' id='fotoPerfil' value='$fotoperfil' >";
-						       
-						        ?>	
-						        <!-- carga de foto de perfil Fin -->
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
 
 
-							<!-- <br><img src="img/iconos/pruebaFotoPerfil/foto-perfil.jpg" alt="..." class=" img-responsive img-circle" style="max-width:60%;"> -->
+    						<div class="">
 
-						</div>
-						</div>
-					
+    						<!-- carga de foto de perfil inicio -->
+
+    							 <?php
+    							       $nomArchivoFoto="./img/perfil/";
+    							       if ($persona->getFotoPerfil() == "") {
+    								         $nomArchivoFoto.= "0000.jpg";
+    							       }else {
+    							           $nomArchivoFoto.= $persona->getFotoPerfil();
+
+    							             }
+
+    							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' id='fotoPerfil2' style='max-width:60%;' > ";
+
+    							$fotoperfil=$persona->getFotoPerfil();
+
+    						    echo "<input type='hidden' name='fotoPerfil' id='fotoPerfil' value='$fotoperfil' >";
+
+    						        ?>
+    						        <!-- carga de foto de perfil Fin -->
+
+
+    							<!-- <br><img src="img/iconos/pruebaFotoPerfil/foto-perfil.jpg" alt="..." class=" img-responsive img-circle" style="max-width:60%;"> -->
+
+    						</div>
+    						</div>
+
+              </div>
+
+            </div>
+
+
+
 
 <div class="form-group">
 <label for="" class="col-sm-2 control-label">Dni</label>
@@ -146,7 +157,7 @@
    <div class="col-md-12">
         <input id="input-img" name="input-img[]"  multiple="true" type="file" class="file-loading">
    </div>
-  
+
 </div>
 
 
@@ -155,10 +166,10 @@
   <div class="col-md-12">
 
   <input type="submit" class="btn btn-warning saveDatos" id='boton1'   value="Guardar Cambios">
-    
+
   </div>
-  
-</div> 
+
+</div>
 
 
 </form>
@@ -167,7 +178,7 @@
       <div class="modal-footer">
 		<!--		<button type="button" id="boton1" class="btn btn-primary">Aplicar Cambios</button>  -->
 			<!--	 <button type="button" class="btn btn-warning saveDatos" name='boton1' id="saveDatos" data-dismiss="modal" > Guardar Cambios </button> -->
-        
+
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 
 				<!-- <input type='submit' id="boton1" class="btn btn-primary" value='Aplicar Cambios'> -->
@@ -175,5 +186,3 @@
     </div>
   </div>
 </div>
-
-
