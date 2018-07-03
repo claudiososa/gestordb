@@ -1,20 +1,23 @@
-
 <link rel="stylesheet" href="includes/mod_cen/css/styleIconosSuperPrim.css">
 <link rel="stylesheet" href="includes/mod_cen/css/default.css">
 <link rel="stylesheet" href="includes/mod_cen/css/default.date.css">
+
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
+    let reports =   '<?php echo $_SESSION['tipo'];?>'
 </script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
 
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js?v=<?php echo(rand()); ?>"></script>
 
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 
@@ -40,75 +43,19 @@ include_once "includes/mod_cen/clases/rti.php";
 
 
 <div class="container">
-  <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle"  onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
+  <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
   <hr class='hrMisEscRed'>
 <br>
 </div>
 
-
-<div class="row">
+<div class="form-group">
+  <div class="" id="padreIr">
+  </div>
+</div>
+  <input type="hidden" name="tipoId" id="tipoId" value="" />
+<div class="row hidden-xs">
   <div class="container">
-<div class="panel panel-primary col-md-4">
-  <div class="panel-body">
-    <div class="styleFont" ><u>Accesos rapidos a acciones generales</u></div>
-
-    <br>
-
-    <form class="form-horizontal" action="" method="POST" >
-      <input type="hidden" name="tipoId" id="tipoId" value="" />
-  		<div class="form-group">
-  				<div><label class="">Seleccione Escuela</label></div>
-  			</div>
-  			<div class="form-group">
-  				<div class="">
-            <select class="form-control" name="escuelaId" id="escuelaId" >
-              <option value="0">Seleccione...</option>
-            <?php
-            $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
-            $buscarEscuelas = $escuelasCargo->buscar();
-            $escuela = new Escuela();
-            while ($row = mysqli_fetch_object($buscarEscuelas)) {
-              $escuela->escuelaId=$row->escuelaId;
-              $buscarEscuela = $escuela->buscar();
-              $infoEscuela = mysqli_fetch_object($buscarEscuela);
-              echo '<option value="'.$row->escuelaId.'">'.$infoEscuela->numero.' '.substr($infoEscuela->nombre,0,30).'</option>';
-            }
-          ?>
-          </select>
-  				</div>
-  			</div>
-  	</form>
-
-    <form class="form-horizontal" action="" method="POST" >
-      <div class="form-group">
-          <div><label class="">Seleccione Escuela</label></div>
-        </div>
-        <div class="form-group">
-          <div class="">
-              <select class="form-control" name="" id="modulo">
-                <option value="informe&id=1">Crear informe</option>
-                <option value="informe&id=2">Ver informes</option>
-                <optgroup label="____________________________"></optgroup>
-                <option value="director">Director</option>
-                <option value="snp">Supervisor de Nucleo</option>
-                <option value="srp">Supervisor de Religion</option>
-                <option value="">Cargar modificar autoridad</option>
-
-              </select>
-          </div>
-        </div>
-
-    </form>
-
-    <div class="form-group">
-      <div class="" id="padreIr">
-        <input class="btn btn-primary" type="submit" value="ir" id="btn_ir">
-      </div>
-    </div>
-
-  </div><!--</div panel-body-->
-</div><!-- </div panel default -->
-<div class="panel panel-primary col-md-7 col-md-offset-1 hidden-xs">
+<div class="panel panel-primary col-md-12">
   <div class="panel-body">
     <div class="styleFont" align="text-center"><u>Ultimos 5 informes creados</u><a href="index.php?mod=slat&men=informe&id=6&referenteId=<?php echo $_SESSION['referenteId'] ?>"></a></div>
       <?php
@@ -215,7 +162,7 @@ echo "</div>";
 
     <?php
       //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-      $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
+      $escuelasCargo = new EscuelaReferentes(null,null,$_SESSION['tipoN'],$_SESSION['referenteId']);
       $buscarEscuelas = $escuelasCargo->buscar();
 
       $escuela = new Escuela();
@@ -229,8 +176,12 @@ echo "</div>";
         $cantidadRti=mysqli_num_rows($buscar_rti);
 
 
-        $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
-        $buscarInforme= $informe->buscar();
+        $informe = new informe(null,$row->escuelaId);
+
+        $arrayReferente= [$_SESSION['tipo']];
+
+        $buscarInforme= $informe->buscar(null,null,$arrayReferente);
+
         $cantidadInforme = mysqli_num_rows($buscarInforme);
 
         $autoridad = new Autoridades(null,$row->escuelaId);
@@ -248,7 +199,14 @@ echo "</div>";
         echo '<td>'.$infoEscuela->nombre.'</td>';
         echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
         echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
-        echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="rti'.$infoEscuela->escuelaId.'" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
+        if ($cantidadRti > 0 ) {
+          echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="rti'.$infoEscuela->escuelaId.'" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
+        }else{
+          echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
+        }
+
+
+
         echo '</tr>';
         ?>
 
@@ -262,9 +220,8 @@ echo "</div>";
 
 </div>
 
-</div> <!-- </div container> -->
-
-
+</div>
+ </div ><!---row>
 
 <!----------------------------------------------------------------------------->
 <!--MIS ESCUELAS SUPER VISTA MOBILE-->
@@ -272,31 +229,42 @@ echo "</div>";
 <div class="container visible-xs">
 <?php
   //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-  $escuelasCargo = new EscuelaReferentes(null,null,'4',$_SESSION['referenteId']);
+  //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
+  $escuelasCargo = new EscuelaReferentes(null,null,'19',$_SESSION['referenteId']);
   $buscarEscuelas = $escuelasCargo->buscar();
 
   $escuela = new Escuela();
 
   while ($row = mysqli_fetch_object($buscarEscuelas)) {
-    $informe = new informe(null,$row->escuelaId,$_SESSION['referenteId']);
-    $buscarInforme= $informe->buscar();
+
+    $rtix= new rtixescuela($row->escuelaId);
+
+    $buscar_rti=$rtix->buscar();
+
+    $cantidadRti=mysqli_num_rows($buscar_rti);
+
+
+    $informe = new informe(null,$row->escuelaId);
+
+    $arrayReferente= [$_SESSION['tipo']];
+
+    $buscarInforme= $informe->buscar(null,null,$arrayReferente);
+
     $cantidadInforme = mysqli_num_rows($buscarInforme);
 
     $autoridad = new Autoridades(null,$row->escuelaId);
     $buscarAutoridad = $autoridad->buscarAutoridad3('all');
     $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
 
-    //$arrayPrincipal=array();
-
     $escuela->escuelaId=$row->escuelaId;
     $buscarEscuela = $escuela->buscar();
     $infoEscuela = mysqli_fetch_object($buscarEscuela);
 
 
-
-    //echo $infoEscuela->numero."<br>";
-    //echo '<div class="container visible-xs">';
-    echo '<div class="panel panel-primary panelPrimarySuperP">';
+    //
+    // echo $infoEscuela->numero."<br>";
+    // echo '<div class="container visible-xs">';
+    echo '<div class="panel panel-primary">';
     echo '<div class="panel-heading clickable" id="panel-heading">'.$infoEscuela->numero.' '.$infoEscuela->nombre.'</div>';
     echo '<div class="panel-body escuela">';
     echo '<div class="row">';
@@ -309,27 +277,29 @@ echo "</div>";
     //echo '<br>';
     echo '<hr class="hrSeparador">';
     echo '<h4><b>Mis Informes</b></h4>';
-    echo '<div class="row">';
-    echo '<div class="col-md-12">';
-    echo '<button type="button" class="btn btn-danger"name="button" >Ver Informes '.$cantidadInforme.'</button>&nbsp&nbsp&nbsp&nbsp&nbsp';
+    echo '<div class="row" >';
 
-    echo '<button type="button" class="btn btn-danger"name="button">Crear Nuevo</button>';
+    echo '<div class="col-md-12" id="informeM'.$infoEscuela->escuelaId.'" >';
+    echo '<button type="button" class="btn btn-danger"name="button" id="infoM'.$infoEscuela->escuelaId.'">Ver Informes '.$cantidadInforme.'</button>';
+    //echo '&nbsp';
+    //echo '</div>';
+//echo '<br>';
+echo '<br>';
+    //echo '<div class="col-md-12" id="informeN'.$infoEscuela->escuelaId.'" >';
+  //  echo '<button type="button"id="nuevoInforme'.$infoEscuela->escuelaId.'" class="btn btn-danger"name="button">Crear Informe</button>';
     echo '</div>';
-  //  echo '<br>';
-  //  echo '<div class="col-md-12">';
-    //echo '<button type="button" class="btn btn-danger"name="button">Crear</button>';
-  //  echo '</div>';
+
     echo '</div>';
     echo '<hr class="hrSeparador">';
     echo '<h4><b>Autoridades: ('.$cantidadAutoridades.')</b></h4>';
 
     if ($cantidadAutoridades > 0) {
       while ($rowAutoridades = mysqli_fetch_object($buscarAutoridad)) {
-      echo '<div class="row" >';
+      echo '<div class="row" id="'.$infoEscuela->escuelaId.'">';
       echo '<div class="col-xs-8"> <b>'.$rowAutoridades->cargoAutoridad. ':</b> '.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '</div>';
-      echo '<div class="col-xs-2"><img id="celIdAuto" class="img-responsive" src="img/iconos/lapiz (4).png"></div>';
+            echo '<div class="col-xs-2" id="'.$infoEscuela->escuelaId.'"><img id="autorM'.$rowAutoridades->tipoId.'" class="img img-responsive" src="img/iconos/lapiz (4).png"></div>';
       echo '<div class="col-xs-2">
-            <img class="img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus"
+            <img class="img img-responsive" src="img/iconos/mas.png" data-toggle="popover" tabindex="0" data-trigger="focus"
             title="'.$rowAutoridades->nombre. ' '.$rowAutoridades->apellido. '" data-placement="left" data-content=" Cel:'.$rowAutoridades->telefonoM.'<br>  Email: '.$rowAutoridades->email. '<br>  Dni: '.$rowAutoridades->dni. '<br>  Cuil: '.$rowAutoridades->cuil. '" >
           </div>';
         echo '</div>';
@@ -338,8 +308,8 @@ echo "</div>";
       if ($rowAutoridades->telefonoM != '') {
 
 
-        echo '<div class="col-xs-2 pull-right"><a target="_blank" href="https://api.whatsapp.com/send?phone=54'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/whatsapp (1).png"></a></div>';
-        echo '<div class="col-xs-2 pull-right"><a href="tel:'.$rowAutoridades->telefonoM.'" ><img class="img-responsive" src="img/iconos/llamada-saliente (1).png"></a>';
+        echo '<div class="col-xs-2 pull-right"><a target="_blank" href="https://api.whatsapp.com/send?phone=54'.$rowAutoridades->telefonoM.'" ><img class="img img-responsive" src="img/iconos/whatsapp (1).png"></a></div>';
+        echo '<div class="col-xs-2 pull-right"><a href="tel:'.$rowAutoridades->telefonoM.'" ><img class="img img-responsive" src="img/iconos/llamada-saliente (1).png"></a>';
         echo '</div>';
 
 
@@ -351,7 +321,7 @@ echo "</div>";
       }
       if ($rowAutoridades->email != '') {
 
-        echo '<div class="col-xs-2 pull-right"><a href="mailto:'.$rowAutoridades->email. '"><img class="img-responsive" src="img/iconos/gmail.png"></a>';
+        echo '<div class="col-xs-2 pull-right"><a href="mailto:'.$rowAutoridades->email. '"><img class="img img-responsive" src="img/iconos/gmail.png"></a>';
         echo '</div>';
 
       }
@@ -374,8 +344,8 @@ echo '</div>';
     echo '</div>';
 
 
-    echo '<div>';
-    echo '<div>';
+  //  echo '</div>';
+  //  echo '</div>';
 
 
   }
@@ -384,37 +354,13 @@ echo '</div>';
 </div>
 
 
-<!--modal boton autoridades vista desktop-->
-
-<!--
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Autoridades escuela 5159</h4>
-      </div>
-      <div class="modal-body">
-      Supervisor primaria diaz juan
-      <br>
-      director colque juan
-      <br>supervisor religion marta diaz
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>-->
-
-<!--fin modal vista desktop-->
-
 
 
   <script>
   $(document).ready(function(){
 
    $(".escuela").hide()
+  // $(".img").css('display', 'true');
 
 //dropdown accesos acciones generales
     $('.dropdown-submenu a.test').on("click", function(e){

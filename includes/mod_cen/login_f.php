@@ -148,6 +148,9 @@ if(isset($_POST["username"]))
 				case 'SNP':
 							  include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
 							  break;
+				case 'SEP':
+							  include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
+							  break;				
 				case 'CP':
 							  include_once('includes/mod_cen/portada/coordinadoresPrimarias.php');
 							  break;

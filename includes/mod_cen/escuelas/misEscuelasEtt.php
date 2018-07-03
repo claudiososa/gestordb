@@ -5,6 +5,7 @@
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
+    let reports = 'ETT'
 </script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
