@@ -1,7 +1,4 @@
 $(document).ready(function() {
-
-
-
   /** al clickear la escuela muestra info de la misma**/
 
   ///// one= agrega contenido una sola vez
@@ -32,7 +29,7 @@ $('#bodyProgramas'+escuela).empty()
     $(`<div class="row">
     <div class="col-md-12">
     <div class="panel panel-default">
-      <div class="panel-body">
+      <div class="panel-body" id="informes${escuela}">
       <h3>informes planied</h3>
 
       </div>
@@ -40,58 +37,199 @@ $('#bodyProgramas'+escuela).empty()
     </div>
     </div>
 
-    <div class="row">
+    `).appendTo('#bodyProgramas'+escuela)
 
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h3 align="center">ETJ: MARCO MAMANI</h3>
-          <hr>
+    $('[id ^=informes]').on('click', function(event) {
+      alert('hola informes')
+      //event.preventDefault();
+      /* Act on the event */
+      let escuelaId = $(this).attr('id').substr(8)
+      let click = $(this).attr('id').substr(0,8) // guarda el id del elemento donde se hizo clic, puede ser informes o informeM
+      let existe
+      let $this = $(this)
 
-          <div class="row">
-          <div class="col-md-8">
-          <h4><img src="img/iconos/pruebaFotoPerfil/carnet-de-identidad (2).png" alt="">&nbsp&nbsp&nbsp25652325 / 21-52658985-5</h4>
-          <h4><img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" alt="">&nbsp&nbsp&nbsp15265897</h4>
+      if (click=='informes') {//almacena en variable existe, la clase de la tableinformes en el caso que no existe dicha tabla se guarda comno undefined
+        existe = $('.tableinformes'+escuelaId).attr('class')
+      }
 
-          <h4><img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="">&nbsp&nbsp&nbspemail@gmail.com</h4>
-          <h4><img src="img/iconos/pruebaFotoPerfil/casa.png"alt="">&nbsp&nbsp&nbsp4258698</h4>
-          <h4><img src="img/iconos/pruebaFotoPerfil/casa (5).png" alt="">&nbsp&nbsp&nbsp'.$persona->getDireccion().'</h4>
-          <h4><img src="img/iconos/pruebaFotoPerfil/facebook (1).png" alt="">&nbsp&nbsp&nbsp'.$persona->getFacebook().'</h4>
-          <img src="img/iconos/pruebaFotoPerfil/gorjeo.png" alt="">&nbsp&nbsp&nbsp'.$persona->getTwitter().'</h4>
-          <h4>Informes PLANIED: (5)</h4>
+          if (typeof(existe)==='undefined')
+          {
+              console.log('definicion de existe'+existe)
+              let myReport ='all'
+              let reports ='conectar'
+              $.ajax({
+                url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {myReport:myReport,reports:reports,referenteId:referenteId2,escuelaId: escuelaId}
+              })
+              .done(function(lista) {
 
-          </div>
+                let itemEscuela = 0
+               let tableinforme = 0
+               let cant = 0
 
-          <div class="col-md-4">
-          <img src="img/iconos/pruebaFotoPerfil/foto-perfil.jpg" alt="..." class="img-circle img-responsive">
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h3 align="center">ETT: VIDAURRE JULIO</h3>
-          <hr class='hrStyle'>
-        </div>
-      </div>
-    </div>
+               for (let item of lista) {
+                   tableinforme=item.escuelaId
+                   cant= item.cantidad
+                   console.log(tableinforme)
+                     }
 
-    </div>
+               if (cant > 0) {
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h3 align="center">RTI</h3>
-            <hr class='hrStyle'>
-          </div>
-        </div>
-    </div>
-    </div>`).appendTo('#bodyProgramas'+escuela)
+                  if (click=='informes') {
+                      console.log('item Escuela ID= '+cant)
+                      $('#informes'+escuela).after(`<tr class="tableinformes${tableinforme} warningStyle"><td ><table id=tableinformes${tableinforme}
+                      class="table StyleTable">
+                      <thead>
+                        <tr class='warningStyle'>
+                          <th><h4>Informes</h4></th>
+                          <th>&nbsp</th>
+                          <th>&nbsp</th>
+                          <th>&nbsp</th>
+
+                          <th><button type='button' class='btn btn-warning' id=nuevoInforme${tableinforme} >Crear Nuevo Informe</button></th>
+
+                        </tr>
+
+                      </thead>
+
+
+
+                      <thead>
+                        <tr>
+                          <th>Titulo</th>
+                          <th>Leido</th>
+                          <th>Resp.</th>
+                          <th>Fecha</th>
+                          <th>Prioridad</th>
+                        </tr>
+                      </thead>
+                      <tbody>`)
+
+
+
+                }
+
+
+              }
+          //     else{   // entra por que no tiene informes cargados
+          //
+          //       if (click=='informes') {
+          //     console.log('item Escuela Id = '+cant)
+          //
+          //
+          //    }
+          //
+          //  }
+
+                for (let item of lista) {
+                    //alert(item.escuelaId)
+                    //console.log(item.cantidad)
+                  if (item.cantidad > 0) {
+                    let escuelaIdconCero = item.escuelaId
+                    let escuela = item.escuelaId
+
+                    if (click=='informes') {
+                    //console.log('cantidad de leido'+item.cantidadLeido)
+                    $('#tableinformes'+escuelaIdconCero).find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
+
+                    <td><a class="btn btn-default" role="button" id='if${item.informeId}'>${item.titulo}</a></td>
+                    <td>${item.cantidadLeido}</td>
+                    <td>${item.cantidadRespuesta}</td>
+                    <td>${item.fecha}</td>
+                    <td>${item.prioridad}</td>
+
+                    </tr>`)
+                  }
+
+
+                  }else{
+                    //alert('Esta escuela no tiene informes creados')
+                  }
+                }
+
+
+                //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
+                $('[id ^=if]').click( function(){
+
+                  let informeActual ={
+                    informeId: "",
+                    escuelaNombre: "",
+                    escuelaNumero: "",
+                    escuelaCue: "",
+                    fecha: "",
+                    prioridad: "",
+                    categoria:  "",
+                    subcategoria:  "",
+                    titulo: ""
+                  }
+
+                         //$('[id ^=if]').on('click', function(){
+                    let idPrueba = $(this).attr('id');
+                    let informeId = idPrueba.substr(2)
+                    $.ajax({
+                      url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+                      type: 'POST',
+                      dataType: 'json',
+                      data: {informeId:informeId,referenteId:referenteId2}
+                    })
+                    .done(function(lista) {
+
+                      for (let item of lista) {
+                          //console.log('item. nombre'+item.nombre)
+                          informeActual.escuelaNombre=item.nombre
+                          informeActual.escuelaNumero=item.numero
+                          informeActual.escuelaCue=item.cue
+                          informeActual.fecha=item.fecha
+                          informeActual.prioridad=item.prioridad
+                          informeActual.categoria=item.categoria
+                          informeActual.subcategoria=item.subcategoria
+                          informeActual.titulo=item.titulo
+                          informeActual.contenido=item.contenido
+                          informeActual.informeId=informeId
+                          informeActual.escuelaId=item.escuelaId
+
+
+
+                      }
+                      //console.log(informeActual.escuelaNombre)
+                      //console.log("success Ajax Informe");
+                    })
+
+                    .fail(function() {
+                      console.log("error");
+                    })
+                    .always(function() {
+                  //  console.log(informeActual.escuelaId)
+                      //console.log("success Ajax Informe");
+                    formPersona(informeActual)
+
+
+
+                      //console.log("complete");
+                    });
+
+
+
+                });
+
+                //console.log("success");
+              })
+              .fail(function() {
+
+                console.log("error al tratar de traer los informes para listar ");
+              })
+              .always(function() {
+                //console.log("complete");
+              });
+          }
+
+
+    });
  });
+
 
 
 

@@ -10,6 +10,19 @@ hr {
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/jsEscuelaVerEtj.js"></script>
+<!-- <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script> -->
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
+
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript">
+    let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
+    let tipoR = '<?php echo $_SESSION['tipo'];?>'
+</script>
 <?php
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
@@ -408,7 +421,7 @@ if(($_POST))
   <div class="col-md-12" id="programas'.$fila->escuelaId.'" style="display:none">
     <div class="panel panel-default">
       <div class="panel-body" id="bodyProgramas'.$fila->escuelaId.'">
-      
+
 
 
       </div>

@@ -5,16 +5,16 @@
 <link rel="stylesheet" href="includes/mod_cen/portada/css/portadaEtjMisEtt.css">
 
 
-<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js?v=<?php echo(rand()); ?>"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo(rand()); ?>"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js?v=<?php echo(rand()); ?>"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <!-- ////////////////////// ///////////////////////////////////// -->
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
@@ -24,7 +24,7 @@
 </script>
 <link rel="stylesheet" href="includes/mod_cen/informes/css/stylesCalendar.css">
 <link rel="stylesheet" href="includes/mod_cen/informes/css/stylesVisitaMensual.css"/>
-<script type="text/javascript"src="includes/mod_cen/portada/js/calendarETJ.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript"src="includes/mod_cen/portada/js/calendarETJ.js"></script>
 <style type="text/css">
 
 .btn-default {
@@ -56,7 +56,7 @@
   } );
 
   </script>
-<script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 
 
@@ -124,7 +124,7 @@ echo '<div class="container">';
         <div>
           <p>buscar de escuelas</p>
           <?php
-          include 'includes/mod_cen/portada/etj/etjBuscarEscuela.php';
+        //  include 'includes/mod_cen/portada/etj/etjBuscarEscuela.php';
            ?>
         </div>
       </div>
