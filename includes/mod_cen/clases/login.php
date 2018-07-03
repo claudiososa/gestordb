@@ -46,6 +46,7 @@ public function iniciarSesion()
 				$referente= new Referente($elemento->referenteId);
 				$referente = $referente->getContacto();
 				$_SESSION["tipo"]=$referente->getTipo();
+				$_SESSION["tipoN"]=0;
 				$persona="SELECT referentes.referenteId,personas.nombre,personas.apellido,personas.personaId FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE referenteId=".$elemento->referenteId."";
 				$result=$conexion->query($persona);
 				$dato=mysqli_fetch_object($result);

@@ -78,7 +78,7 @@ $(document).ready(function() {
     {
         console.log('definicion de existe'+existe)
         let myReport ='all'
-        let reports ='conectar'
+        //let reports ='conectar'
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
           type: 'POST',
