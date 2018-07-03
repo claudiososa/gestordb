@@ -4,8 +4,7 @@ function formPersona(informeActual)
   let escuelaId =  informeActual.escuelaId  //$('#escuelaId').val()
   console.log('mi escuela:'+escuelaId)
   console.log(informeActual.escuelaNombre)
-    $(`
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    $(`<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
           <!--**** Inicio de Header **** -->
