@@ -71,13 +71,15 @@ $(document).ready(function() {
         //$this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
         //console.log(escuelaId)
         let myReport ='all'
-        let reports ='conectar'
+        let referenteId3 =$(this).parent().parent().attr('id').substr(12)
+        let reports='SNP'
+        console.log('Atributo Territorial:::'+$(this).parent().parent().attr('id').substr(12))
 
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
           type: 'POST',
           dataType: 'json',
-          data: {myReport:myReport,reports:reports,referenteId:referenteId2,escuelaId: escuelaId}
+          data: {myReport:myReport,reports:reports,referenteId:referenteId3,escuelaId: escuelaId}
         })
         .done(function(lista) {
 
