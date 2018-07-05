@@ -150,12 +150,12 @@ if(isset($_POST["username"]))
 							  break;
 				case 'SEP':
 							  include_once('includes/mod_cen/portada/supervisoresPrimaria.php');
-							  break;				
+							  break;
 				case 'CP':
 							  include_once('includes/mod_cen/portada/coordinadoresPrimarias.php');
 							  break;
 				case 'SGP':
-								include_once('includes/mod_cen/portada/directorNivelPrimaria.php');
+								include_once('includes/mod_cen/portada/sgp.php');
 								break;
 				case 'SI':
 							  include_once('includes/mod_cen/portada/supervisoresPrimaria.php');

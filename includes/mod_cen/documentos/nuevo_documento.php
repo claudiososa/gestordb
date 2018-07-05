@@ -63,6 +63,9 @@ if(isset($_POST["guardar_doc"]) AND $_POST["tituloDoc"]<>""){
        case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
                $nombreArchivo=$_POST["tituloDoc"].'.pptx';
                break;
+      case 'video/mpeg':
+               $nombreArchivo=$_POST["tituloDoc"].'.mp4';
+               break;
 
 
         default:
