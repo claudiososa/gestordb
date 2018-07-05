@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $("#input-img").fileinput({
       browseClass: "btn btn-success btn-block",
-      allowedFileExtensions: ["pdf","xlsx","docx","pptx","xls","doc","jpg","png"],
+      allowedFileExtensions: ["pdf","xlsx","docx","pptx","xls","doc","jpg","png",'mp4'],
       maxFileCount: 1,
       showCaption: true,
       initialCaption: "Seleccione 1 archivo para crear documento nuevo",
