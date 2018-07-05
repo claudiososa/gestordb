@@ -79,6 +79,10 @@
 							include_once('includes/mod_men/supervisoresPrimaria.php');
 							$_SESSION["tipoN"]=4;
 							break;
+			case 'SGP':
+							include_once('includes/mod_men/supervisoresGeneralPrimaria.php');
+							$_SESSION["tipoN"]=2;
+							break;
 			case 'SEP':
 							include_once('includes/mod_men/supervisoresPrimaria.php');
 								$_SESSION["tipoN"]=5;
