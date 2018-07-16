@@ -1,1 +1,12 @@
-string(755) "[{"id":"3907","nombre":"Marta","apellido":"Cayo Santander","dni":"16000585","cuil":"16000585","telefono":"3874575021","email":"martadebumalen@hotmail.com","localidad":"0031","cargo":"Director Escuela Primaria","escuelaId":"0378","cantidad":1,"idCargo":"3"},{"id":"0495","nombre":"MARGARITA CRISTINA ","apellido":"LAIME","dni":"16307396","cuil":"27163073965","telefono":"","email":"margalai@hotmail.com","localidad":"0031","cargo":"Supervisor de Nucleo Primaria","escuelaId":"0378","cantidad":1,"idCargo":"4"},{"id":"1639","nombre":"JULIO","apellido":"VIDAURRE","dni":"27631704","cuil":"20276317048","telefono":"3875198191","email":"jfvpipo@gmail.com","localidad":"0031","cargo":"Equipo Tecnico Territorial","escuelaId":"0378","cantidad":1,"idCargo":"30"}]"
+object(mysqli_result)#10 (5) {
+  ["current_field"]=>
+  int(0)
+  ["field_count"]=>
+  int(19)
+  ["lengths"]=>
+  NULL
+  ["num_rows"]=>
+  int(60)
+  ["type"]=>
+  int(0)
+}
