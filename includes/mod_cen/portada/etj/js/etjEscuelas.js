@@ -1,6 +1,52 @@
 $(document).ready(function() {
 
+  $('#buscarInforme').click(function() {
+     //alert('boton guardar de buscarInforme')
+     let buscarInforme='buscarInforme'
+     let numero = $('#numero').val()
+     let titulo = $('#titulo').val()
+     let categoria = $('#seleCategoria').val()
+     let subcategoria = $('#seleSubCategoria').val()
+     
 
+     $.ajax({
+       url: 'includes/mod_cen/clases/ajax/ajaxBuscarInforme.php',
+       type: 'POST',
+       dataType: 'json',
+       data: {buscarInforme:buscarInforme,numero:numero,titulo:titulo,categoria:categoria,subcategoria:subcategoria}
+     })
+     .done(function(data) {
+      for (let item of data) {
+          $(`<p>${item.numero}-${item.titulo}</p>`).appendTo('#resultadoInforme')
+      }
+     })
+
+  });
+
+  $('#seleCategoria').change(function(event) {
+  //  alert('cambio de opcion')
+    let idCategoria= $(this).val()
+    $('#seleSubCategoria').find('option').remove().end().append('<option value="0">Todas las Subcategorias...</option>').val('0');
+    $.ajax({
+      url: 'includes/mod_cen/clases/ajax/ajaxCategoriaInforme.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {idCategoria:idCategoria}
+    })
+    .done(function(data) {
+      for (let item of data) {
+        $(`<option value="${item.subTipoId}">${item.nombre}</option>`).appendTo('#seleSubCategoria')
+      }
+      //console.log("success");
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
+  });
 
   $('[id ^=list]').click( function(){
 
@@ -71,13 +117,15 @@ $(document).ready(function() {
         //$this.find('i').removeClass('.glyphicon glyphicon-chevron-down').addClass('.glyphicon glyphicon-chevron-up');
         //console.log(escuelaId)
         let myReport ='all'
-        let reports ='conectar'
+        let referenteId3 =$(this).parent().parent().attr('id').substr(12)
+        let reports='SNP'
+        console.log('Atributo Territorial:::'+$(this).parent().parent().attr('id').substr(12))
 
         $.ajax({
           url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
           type: 'POST',
           dataType: 'json',
-          data: {myReport:myReport,reports:reports,referenteId:referenteId2,escuelaId: escuelaId}
+          data: {myReport:myReport,reports:reports,referenteId:referenteId3,escuelaId: escuelaId}
         })
         .done(function(lista) {
 

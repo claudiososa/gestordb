@@ -1,77 +1,204 @@
-	<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+<!-- Carga para Mis escuelas de cada ett -->
+<link rel="stylesheet" href="includes/mod_cen/css/styleIconosSuperPrim.css">
+<link rel="stylesheet" href="includes/mod_cen/css/default.css">
+<link rel="stylesheet" href="includes/mod_cen/css/default.date.css">
+<link rel="stylesheet" href="includes/mod_cen/portada/css/portadaEtjMisEtt.css">
+
+
+<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js"></script>
+<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<!-- ////////////////////// ///////////////////////////////////// -->
+<script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
+<script type="text/javascript">
+    let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
+    let tipoR = '<?php echo $_SESSION['tipo'];?>'
+</script>
+<link rel="stylesheet" href="includes/mod_cen/informes/css/stylesCalendar.css">
+<link rel="stylesheet" href="includes/mod_cen/informes/css/stylesVisitaMensual.css"/>
+<script type="text/javascript"src="includes/mod_cen/portada/js/calendarETJ.js"></script>
+<style type="text/css">
+
+.btn-default {
+		color: #333;
+		background-color: #E9ECEC;
+		border-color: #ccc;
+}
+</style>
+<script>
+  $( function() {
+
+	   $( "#accordionBuscar1,#accordionBuscar2,#accordionBuscar3,#accordionBuscar4,#accordionBuscar5").accordion({
+      active: false,
+      collapsible: true
+     });
+
+		 $( "#tabs" ).tabs({
+       collapsible: true
+     });
+     $( "#tabsBuscar" ).tabs({
+       collapsible: true
+     });
+
+  } );
+
+  </script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
+
+
 <?php
 require_once("includes/mod_cen/clases/informe.php");
 require_once("includes/mod_cen/clases/persona.php");
 require_once("includes/mod_cen/clases/referente.php");
+require_once("includes/mod_cen/clases/leido.php");
+require_once("includes/mod_cen/clases/escuela.php");
+include_once 'includes/mod_cen/clases/Autoridades.php';
+include_once "includes/mod_cen/clases/respuesta.php" ;
+include_once "includes/mod_cen/clases/rtixescuela.php";
+include_once "includes/mod_cen/clases/rti.php";
+include_once "includes/mod_cen/clases/maestro.php";
+include_once "includes/mod_cen/clases/TipoInforme.php";
+include_once "includes/mod_cen/clases/TipoPermisos.php";
+
+
+
+/**
+ * Obtener todas las categorias relacionadas a Planied, coordinacion
+ */
+
+$categoriasPermitidas = new TipoPermisos(null,null,'Coordinador');
+$buscarPermitidas = $categoriasPermitidas->buscar();
+
+ /**********************************************/
 
 //create object referenteId and filter of status active
 $referenteId=$_SESSION['referenteId'];
 
 $referente= new Referente($referenteId);
-$resultado_ett_acargo = $referente->Cargo("Activo");
-
-$referente_ett= new Referente(null,null,"ETT");
-$buscar_ett=$referente_ett->Tipo("ETT","Activo");
+$todoReferente= new Referente(null,null,'ETT',null,null,null,null,'Activo');
+$ett1 = $todoReferente->buscar();//$referente->Cargo("Activo");
+$ett2 = $todoReferente->buscar();//$referente->Cargo("Activo");
+$resultado_ett_acargo = $todoReferente->buscar();
+//$referente->Cargo("Activo");
+$informes= new informe();
+////////////////////////////////////////////////
+// todos los informes creados por referente Conectar Igualdad
+$arrayReferenteConectar = array ('ETT','ETJ','Coordinador');
+$informeEquipoConectar = $informes->buscar(20,null,$arrayReferenteConectar);
 
 //busqueda de informes de proiridad alta
 $informe_alta= new Informe(null,null,null,"Alta");
-$buscar_alta =$informe_alta->buscar();
+$buscar_alta =$informe_alta->buscar(20,null,$arrayReferenteConectar);
 $total = mysqli_num_rows($buscar_alta);
 
-//busqueda de informes de proiridad media
-$informe_media= new Informe(null,null,null,"Media");
-$buscar_media =$informe_media->buscar();
-$media = mysqli_num_rows($buscar_media);
-
-
-//echo "alta".$total;
-//echo "media".$media;
-
-
-
 // creación y busqueda de todos los informes
-$informes= new informe();
+
 
 $b_informe = $informes->buscar(20);
 
 ////////////////////////////////////////////////
+
 
 $mis_informes= new informe(null,null,$_SESSION["referenteId"]);
 
 $b_mis_informe = $mis_informes->buscar(10);
 
 echo '<div class="container">';
-
-
-
 ?>
-
-<div class="row hidden-xs wow zoomIn">
-	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
-	</div>
-
-	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=8" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/reunion.png"><h3 align="center">Mis ETJ</h3></a>
-	</div>
-
-	<div class="col-lg-2 col-md-4 col-sm-4">
-		<a href="index.php?mod=slat&men=user&id=7" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis ETT</h3></a>
-	</div>
-
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=referentes&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Buscar Referentes</h3></a>
+<div class="" id="padreIr">
 </div>
 
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
+<div class="hidden-xs  wow zoomIn">
+  <div id="tabsBuscar">
+    <ul>
+      <li><a  href='#tabsBuscar-1'>Buscar</a></li>
+      <li><a  href='#tabsBuscar-2'>Informe prioridad Alta</a></li>
+      <li><a  href='#tabsBuscar-3'>Conectividad PNCE</a></li>
+      <li><a  href='#tabsBuscar-4'>Aprendizaje Competencias</a></li>
+      <li><a  href='#tabsBuscar-5'>Documentos</a></li>
+    </ul>
+    <div id="tabsBuscar-1">
+      <!-- <div id='accordionBuscar1'>
+        <h3>Escuela</h3>
+        <div>
+          <p>buscar de escuelas</p>
+          <?php
+        //  include 'includes/mod_cen/portada/etj/etjBuscarEscuela.php';
+           ?>
+        </div>
+      </div> -->
+      <!-- <div id='accordionBuscar2'>
+          <h3>RTI</h3>
+          <div>
+            <p>buscar rti</p>
+          </div>
+      </div>
+      <div id='accordionBuscar3'>
+          <h3>Referente</h3>
+          <div>
+            <p>buscar de Referentes</p>
+          </div>
+      </div> -->
+      <div id='accordionBuscar4'>
+          <h3>Informe</h3>
+          <div>
+            <form class="form-inline" id="formBuscarInforme" action="" method="post">
+              <input type="text" name="numero" id="numero" value="" placeholder="N° Esc." size="5" class="form-control">
+              <input type="text" name="titulo" id="titulo" value="" placeholder="Titulo Informe" class="form-control">
+              <select class="form-control" id="seleCategoria" name="categoria">
+                <option value="0">Todas las Categorias...</option>
+                <?php
+                while ($rowCate = mysqli_fetch_object($buscarPermitidas) ) {
+                  echo '<option value="'.$rowCate->tipoId.'">'.$rowCate->nombre.'</option>';
+                }
+                 ?>
+              </select>
+              <select class="form-control" id="seleSubCategoria" name="subCategoria" >
+                <option value="0">Todas las subcategorias...</option>
+              </select>
+              <button type="button" id="buscarInforme" class="btn btn-primary" name="button">Buscar</button>
+            </form>
+          </div>
+      </div>
+
+    </div>
+    <div id="tabsBuscar-2">
+      <?php
+      include 'includes/mod_cen/portada/etj/etjPrioridad.php';
+       ?>
+    </div>
+    <div id="tabsBuscar-3">
+      <?php
+      include 'includes/mod_cen/portada/etj/etjConectividad.php';
+       ?>
+    </div>
+    <div id="tabsBuscar-4">
+      <?php
+      include 'includes/mod_cen/portada/etj/etjCompetencias.php';
+       ?>
+    </div>
+    <div id="tabsBuscar-5">
+      <?php
+      include 'includes/mod_cen/portada/etj/etjDocumentos.php';
+       ?>
+    </div>
+  </div>
+
+  <div id="resultadoInforme">
+
+  </div>
 </div>
 
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
-</div>
 
-</div>
 <!--vista mobile-->
 
 <div class="row visible-xs wow zoomIn">
@@ -79,41 +206,10 @@ echo '<div class="container">';
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=8" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/reunion.png"><h3 align="center">Mis ETJ</h3></a>
-	</div>
-</div>
-
-
-
-<div class="row visible-xs wow zoomIn">
-	<div class="col-xs-6">
-		<a href="index.php?mod=slat&men=user&id=7" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis ETT</h3></a>
-	</div>
-<div class="col-xs-6"><a href="index.php?mod=slat&men=referentes&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Buscar Referentes</h3></a>
-</div>
-
-</div>
-
-
-<div class="row visible-xs wow zoomIn">
-
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
-	</div>
-
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
-	</div>
 </div>
 
 
 <br><br><br>
-
-<!-- <div class="alert alert-info" role="alert">
-	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
-</div>-->
 <?php
 	echo '<div class="row">';
 	?>
@@ -125,370 +221,8 @@ echo '<div class="container">';
 		<div class="col-md-12 visible-xs">
 		 <p class="alert alert-success">Presentación Proyecto trabajo 2018</p>
 		 <iframe allowFullScreen frameborder="0" height="240" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="320"></iframe>
-			 <p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
+			<p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
 	</div> -->
-	<?php
-		echo '<div class="col-md-6">';
 
-	 //informes de prioridad alta ///
-	 if(mysqli_num_rows($buscar_alta)>0){
-	 	?>
-	 	<div class="panel panel-primary">
-			<div class="panel-heading" id="panel1"><span class="panel-title clickable">
-				<h4>Informes Prioridad Alta<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-			</div>
-	 		<div class="panel-body">
-	 			<?php
 
-	 	echo "<table id='myTableAlta' class='table table-hover table-striped table-condensed tablesorter'>";
-	 	echo "<thead>";
-	 	echo "<tr>";
-	 	echo "<th>Id</th>";
-	 	echo "<th>Título</th>";
-	 	echo "<th>Nº</th>";
-	 	echo "<th>Creado por...</th>";
-		echo "<th>Prioridad</th>";
-	 	echo "</tr>";
-	 	echo "</thead>";
-
-	 	echo "<tbody>";
-	 	while ($fila=mysqli_fetch_object($buscar_alta)){
-
-	 		$escuela= new Escuela($fila->escuelaId);
-	 		$buscar_escuela= $escuela->buscar();
-	 		$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-	 		$referente = new Referente($fila->referenteId);
-	 		$b_referente = $referente->buscar();
-
-	 		$dato_referente= mysqli_fetch_object($b_referente);
-
-	 		$persona = new Persona($dato_referente->personaId);
-
-	 		$b_persona = $persona->buscar();
-
-	 		$dato_persona=mysqli_fetch_object($b_persona);
-
-
-
-	 		echo "<tr>";
-	 		?>
-	 		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-	 		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-	 		<?php
-	 		echo "<td>".$dato_escuela->numero."</td>";
-	 		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-			echo "<td>".$fila->prioridad."</td>";
-	 		echo "</td>";
-	 	}
-	 	echo "</tbody>";
-	 	echo "</table>";
-	 	?>
-	 </div>
-	 </div>
-	 <?php
-	 }
-
-	 ///////////////////////////////
-
-	 //informes de prioridad media ///
-	 if(mysqli_num_rows($buscar_media)>0){
-		?>
-		<div class="panel panel-primary">
-			<div class="panel-heading" id="panel2"><span class="panel-title clickable">
-				<h4>Informes prioridad Media<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-			</div>
-			<div class="panel-body">
-				<?php
-
-		echo "<table id='myTableMedia' class='table table-hover table-striped table-condensed tablesorter'>";
-		echo "<thead>";
-		echo "<tr>";
-		echo "<th>Id</th>";
-		echo "<th>Título</th>";
-		echo "<th>Nº</th>";
-		echo "<th>Creado por...</th>";
-		echo "<th>Prioridad</th>";
-		echo "</tr>";
-		echo "</thead>";
-
-		echo "<tbody>";
-		while ($fila=mysqli_fetch_object($buscar_media)){
-
-			$escuela= new Escuela($fila->escuelaId);
-			$buscar_escuela= $escuela->buscar();
-			$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-			$referente = new Referente($fila->referenteId);
-			$b_referente = $referente->buscar();
-
-			$dato_referente= mysqli_fetch_object($b_referente);
-
-			$persona = new Persona($dato_referente->personaId);
-
-			$b_persona = $persona->buscar();
-
-			$dato_persona=mysqli_fetch_object($b_persona);
-
-
-
-			echo "<tr>";
-			?>
-			<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-			<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-			<?php
-			echo "<td>".$dato_escuela->numero."</td>";
-			echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-			echo "<td>".$fila->prioridad."</td>";
-			echo "</td>";
-		}
-		echo "</tbody>";
-		echo "</table>";
-		?>
-	 </div>
-	 </div>
-	 <?php
-	 }
-
-	 ///////////////////////////////
-
-
-
-		if(mysqli_num_rows($buscar_ett)>0){
-			?>
-			<div class="panel panel-primary">
-				<div class="panel-heading" id="panel3"><span class="panel-title clickable">
-					<h4>Informes por ETT<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-				</div>
-				<div class="panel-body">
-					<?php
-
-					echo "<table id='informe_etj' class='table table-hover table-striped table-condensed tablesorter'>";
-					echo "<thead>";
-					echo "<tr>";
-					echo "<th>Apellido y Nombre</th>";
-					echo "<th>Cantidad</th>";
-					echo "</tr>";
-					echo "</thead>";
-
-					echo "<tbody>";
-
-					while ($fila=mysqli_fetch_object($buscar_ett)){
-						echo "<tr>";
-						echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
-						echo "<td>";
-						$informe_ett= new informe(null,null,$fila->referenteId);
-						$buscar_informe=$informe_ett->buscar();
-						$cantidad=mysqli_num_rows($buscar_informe);
-						//echo $cantidad;
-						echo '<a class="btn btn-success" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a>';
-
-						echo "</td>";
-						echo "</tr>";
-					}
-
-					echo "</tbody>";
-					echo "</table>";
-				}
-
-					 ?>
-				</div>
-			</div>
-	<?php
-
-	if(mysqli_num_rows($resultado_ett_acargo)>0){
-		?>
-<?php
-}
-echo "</div>";
-echo "<div class='col-md-6'>";
-
-
-if(mysqli_num_rows($b_informe)>0){
-	?>
-	<div class="panel panel-primary">
-		<div class="panel-heading" id="panel4"><span class="panel-title clickable">
-			<h4>Ultimos informes creados<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-		</div>
-		<div class="panel-body">
-			<?php
-
-	echo "<table id='myTable1' class='table table-hover table-striped table-condensed tablesorter'>";
-	echo "<thead>";
-	echo "<tr>";
-	echo "<th>Id</th>";
-	echo "<th>Título</th>";
-	echo "<th>Nº</th>";
-	echo "<th>Creado por...</th>";
-	echo "</tr>";
-	echo "</thead>";
-	echo "<tbody>";
-
-	while ($fila=mysqli_fetch_object($b_informe)){
-
-		$escuela= new Escuela($fila->escuelaId);
-		$buscar_escuela= $escuela->buscar();
-		$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-		$referente = new Referente($fila->referenteId);
-		$b_referente = $referente->buscar();
-
-		$dato_referente= mysqli_fetch_object($b_referente);
-
-		$persona = new Persona($dato_referente->personaId);
-
-		$b_persona = $persona->buscar();
-
-		$dato_persona=mysqli_fetch_object($b_persona);
-		echo "<tr>";
-		?>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-		<?php
-		echo "<td>".$dato_escuela->numero."</td>";
-		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-		echo "</td>";
-	}
-	echo "</tbody>";
-	echo "</table>";
-	?>
-</div>
-</div>
-
-
-<div class="panel panel-primary">
-	<div class="panel-heading" id="panel5"><span class="panel-title clickable">
-		<h4>Informes ETJ a Cargo<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-	</div>
-	<div class="panel-body">
-		<?php
-
-		echo "<table id='informe_etj' class='table table-hover table-striped table-condensed tablesorter'>";
-		echo "<thead>";
-		echo "<tr>";
-		echo "<th>Apellido y Nombre</th>";
-		echo "<th>Cantidad</th>";
-		echo "</tr>";
-		echo "</thead>";
-
-		echo "<tbody>";
-
-		while ($fila=mysqli_fetch_object($resultado_ett_acargo)){
-			echo "<tr>";
-			echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
-			echo "<td>";
-			$informe_ett= new informe(null,null,$fila->referenteId);
-			$buscar_informe=$informe_ett->buscar();
-			$cantidad=mysqli_num_rows($buscar_informe);
-			//echo $cantidad;
-			echo '<a class="btn btn-success" href="?mod=slat&men=informe&id=6&referenteId='.$fila->referenteId.'">'.$cantidad.'</a>';
-
-			echo "</td>";
-			echo "</tr>";
-		}
-
-		echo "</tbody>";
-		echo "</table>";
-	}
-
-		 ?>
-	</div>
-</div>
-<?php
-
-
-if(mysqli_num_rows($b_mis_informe)>0){
-?>
-<div class="panel panel-primary">
-	<div class="panel-heading" id="panel6"><span class="panel-title clickable">
-		<h4>Mis Informes (últimos 10)<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-	</div>
-<div class="panel-body">
-	<?php
-
-echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
-echo "<thead>";
-echo "<tr>";
-echo "<th>Id</th>";
-echo "<th>Título</th>";
-echo "<th>Nº</th>";
-echo "<th>Creado por...</th>";
-echo "</tr>";
-echo "</thead>";
-
-echo "<tbody>";
-while ($fila=mysqli_fetch_object($b_mis_informe)){
-
-$escuela= new Escuela($fila->escuelaId);
-$buscar_escuela= $escuela->buscar();
-$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-$referente = new Referente($_SESSION["referenteId"]);
-$b_referente = $referente->buscar();
-
-$dato_referente= mysqli_fetch_object($b_referente);
-
-$persona = new Persona($dato_referente->personaId);
-
-$b_persona = $persona->buscar();
-
-$dato_persona=mysqli_fetch_object($b_persona);
-
-
-
-echo "<tr>";
-?>
-<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-<?php
-echo "<td>".$dato_escuela->numero."</td>";
-echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-echo "</td>";
-}
-echo "</tbody>";
-echo "</table>";
-?>
-</div>
-</div>
-<?php
-}
-echo "</div>";
-echo "</div>";
-echo "<div class='col-md-12'>";
-
-
-
-?>
-<script type="text/javascript">
-$(document).ready(function()
-		{
-			//$("#myTable").tablesorter();
-			$("#myTable").tablesorter( {sortList: [[0,1]]} );
-
-				$("#myTableAlta").tablesorter( {sortList: [[0,1]]} );
-				$("#myTableMedia").tablesorter( {sortList: [[0,1]]} );
-
-			//$("#myTable1").tablesorter();
-			$("#myTable1").tablesorter( {sortList: [[0,1]]} );
-			$("#informe_etj").tablesorter( {sortList: [[1,1]]} );
-
-		}
-);
-</script>
-<div class="row">
-
-<div class="panel panel-primary">
-	<div class="panel-heading" id="panel7"><span class="panel-title clickable">
-		<h4>Documentación<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-	</div>
-	<div class="panel-body">
-
-<?php
-require_once("includes/mod_cen/documentos/documentoPortadas.php");
-?>
-</div>
-</div>
-</div>
-</div>
-</div>
 <script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

@@ -749,6 +749,9 @@
 																include("includes/mod_cen/denegado.php");
 														}
 														break;
+									case 23:
+																include("includes/mod_cen/admin/escuelaNuevo_ver_admin.php");
+																break;
 
 
 				}

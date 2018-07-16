@@ -21,6 +21,7 @@
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
+    let reports = 'SNP'
 </script>
 <link rel="stylesheet" href="includes/mod_cen/informes/css/stylesCalendar.css">
 <link rel="stylesheet" href="includes/mod_cen/informes/css/stylesVisitaMensual.css"/>
@@ -36,7 +37,7 @@
 <script>
   $( function() {
 
-		 $( "#accordion1,#accordion2,#accordion3,#accordion4,#accordion5,#accordion6,#accordion7" ).accordion({
+		 $( "#accordion1,#accordion2,#accordion3,#accordion4,#accordion5,#accordion6,#accordion7,#accordion8,#accordion9,#accordion10,#accordion11,#accordion12,#accordion13,#accordion14,#accordion15,#accordion16,#accordion17,#accordion18,#accordion19,#accordion20,#accordion21,#accordion22,#accordion23,#accordion24,#accordion25,#accordion26,#accordion27,#accordion28,#accordion29,#accordion30" ).accordion({
 			 active: false,
 			 collapsible: true
      });
@@ -78,13 +79,15 @@ include_once "includes/mod_cen/clases/maestro.php";
 $referenteId=$_SESSION['referenteId'];
 
 $referente= new Referente($referenteId);
-$ett1 = $referente->Cargo("Activo");
-$ett2 = $referente->Cargo("Activo");
-$resultado_ett_acargo = $referente->Cargo("Activo");
+$todoReferente= new Referente(null,null,'SNP',null,null,null,null,'Activo');
+$ett1 = $todoReferente->buscar();//$referente->Cargo("Activo");
+$ett2 = $todoReferente->buscar();//$referente->Cargo("Activo");
+$resultado_ett_acargo = $todoReferente->buscar();
+//$referente->Cargo("Activo");
 $informes= new informe();
 ////////////////////////////////////////////////
 // todos los informes creados por referente Conectar Igualdad
-$arrayReferenteConectar = array ('ETT','ETJ','Coordinador');
+$arrayReferenteConectar = array ('SNP','SEP');
 $informeEquipoConectar = $informes->buscar(20,null,$arrayReferenteConectar);
 
 //busqueda de informes de proiridad alta
@@ -424,8 +427,10 @@ echo '<div class="container">';
                     <th>RTI</th>
                   </tr>
                 </thead>
+                <?php
+                  echo "<tbody id='territorial".$fila->referenteId."'>";
+                ?>
 
-                <tbody>
 
                   <?php
                     //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
@@ -445,7 +450,7 @@ echo '<div class="container">';
 
                       $informe = new informe(null,$row->escuelaId);
 
-                      $arrayReferente= ['ETT','ETJ','Coordinador'];
+                      $arrayReferente= ['SNP'];
 
                       $buscarInforme= $informe->buscar(null,null,$arrayReferente);
 

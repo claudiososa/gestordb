@@ -81,9 +81,28 @@
   	$list=array();
     $informe = new informe(null,$_POST['escuelaId']);
     if (isset($_POST['reports'])){
+      switch ($_POST['reports']) {
+        case 'SNP':
+            $arrayReferente= ['SNP'];
+            $informe->referenteId=$_POST['referenteId'];
+            $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC');
+          break;
+        case 'SEP':
+              $arrayReferente= ['SEP'];
+                $informe->referenteId=$_POST['referenteId'];
+              $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC');
+            break;
+        case 'ETT':
+              $arrayReferente= ['ETT','ETJ','Coordinador'];
+              $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC');
+
+            break;
+        default:
+          # code...
+          break;
+      }
       //if ($_POST['reports']=="conectar") {
-        $arrayReferente= ['ETT','ETJ','Coordinador'];
-        $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC');
+
         //Maestro::debbugPHP($buscarInforme);
       //}
 //      $buscarInforme = $informe->buscarInforme();

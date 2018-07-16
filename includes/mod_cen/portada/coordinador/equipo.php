@@ -36,7 +36,7 @@
 <script>
   $( function() {
 
-		 $( "#accordion1,#accordion2,#accordion3,#accordion4,#accordion5,#accordion6,#accordion7" ).accordion({
+		 $( "#accordion1,#accordion2,#accordion3,#accordion4,#accordion5,#accordion6,#accordion7,#accordion8,#accordion9,#accordion10,#accordion11,#accordion12,#accordion13,#accordion14,#accordion15,#accordion16,#accordion17,#accordion18,#accordion19,#accordion20,#accordion21,#accordion22,#accordion23,#accordion24,#accordion25,#accordion26,#accordion27,#accordion28,#accordion29,#accordion30,#accordion31,#accordion32,#accordion33,#accordion34,#accordion35,#accordion36,#accordion37,#accordion38,#accordion39,#accordion40,#accordion41,#accordion42,#accordion43,#accordion44,#accordion45,#accordion46,#accordion47,#accordion48,#accordion49,#accordion50,#accordion51,#accordion52,#accordion53,#accordion54,#accordion55,#accordion56,#accordion57" ).accordion({
 			 active: false,
 			 collapsible: true
      });
@@ -71,16 +71,29 @@ include_once "includes/mod_cen/clases/respuesta.php" ;
 include_once "includes/mod_cen/clases/rtixescuela.php";
 include_once "includes/mod_cen/clases/rti.php";
 include_once "includes/mod_cen/clases/maestro.php";
+include_once "includes/mod_cen/clases/TipoInforme.php";
+include_once "includes/mod_cen/clases/TipoPermisos.php";
 
 
+
+/**
+ * Obtener todas las categorias relacionadas a Planied, coordinacion
+ */
+
+$categoriasPermitidas = new TipoPermisos(null,null,'Coordinador');
+$buscarPermitidas = $categoriasPermitidas->buscar();
+
+ /**********************************************/
 
 //create object referenteId and filter of status active
 $referenteId=$_SESSION['referenteId'];
 
 $referente= new Referente($referenteId);
-$ett1 = $referente->Cargo("Activo");
-$ett2 = $referente->Cargo("Activo");
-$resultado_ett_acargo = $referente->Cargo("Activo");
+$todoReferente= new Referente(null,null,'ETT',null,null,null,null,'Activo');
+$ett1 = $todoReferente->buscar();//$referente->Cargo("Activo");
+$ett2 = $todoReferente->buscar();//$referente->Cargo("Activo");
+$resultado_ett_acargo = $todoReferente->buscar();
+//$referente->Cargo("Activo");
 $informes= new informe();
 ////////////////////////////////////////////////
 // todos los informes creados por referente Conectar Igualdad
@@ -144,6 +157,25 @@ echo '<div class="container">';
           <h3>Informe</h3>
           <div>
             <p>buscar de Informe</p>
+            <form class="form-inline" id="formBuscarInforme" action="" method="post">
+              <input type="text" name="numero" value="" placeholder="N° Esc." size="5" class="form-control">
+              <input type="text" name="titulo" value="" placeholder="Titulo Informe" class="form-control">
+              <select class="form-control" id="seleCategoria" name="categoria">
+                <option value="0">Todas las Categorias...</option>
+                <?php
+                while ($rowCate = mysqli_fetch_object($buscarPermitidas) ) {
+                  echo '<option value="'.$rowCate->tipoId.'">'.$rowCate->nombre.'</option>';
+                }
+                 ?>
+              </select>
+              <select class="form-control" id="seleSubCategoria" name="subCategoria" >
+                <option value="0">Todas las subcategorias...</option>
+              </select>
+              <button type="button" id="buscar" name="button">Buscar</button>          
+            </form>
+            <div id="resultado">
+
+            </div>
           </div>
       </div>
 
