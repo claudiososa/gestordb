@@ -152,8 +152,8 @@ echo '<div class="container">';
           <h3>Informe</h3>
           <div>
             <form class="form-inline" id="formBuscarInforme" action="" method="post">
-              <input type="text" name="numero" id="numero" value="" placeholder="N° Esc." size="5" class="form-control">
-              <input type="text" name="titulo" id="titulo" value="" placeholder="Titulo Informe" class="form-control">
+              <input type="text" name="numero" id="numero" value="" placeholder="N° Esc." size="5" class="form-control"><br><br>
+              <input type="text" name="titulo" id="titulo" value="" placeholder="Titulo Informe" class="form-control"><br><br>
               <select class="form-control" id="seleCategoria" name="categoria">
                 <option value="0">Todas las Categorias...</option>
                 <?php
@@ -161,10 +161,10 @@ echo '<div class="container">';
                   echo '<option value="'.$rowCate->tipoId.'">'.$rowCate->nombre.'</option>';
                 }
                  ?>
-              </select>
+              </select><br><br>
               <select class="form-control" id="seleSubCategoria" name="subCategoria" >
                 <option value="0">Todas las subcategorias...</option>
-              </select>
+              </select><br><br>
               <button type="button" id="buscarInforme" class="btn btn-primary" name="button">Buscar</button>
             </form>
           </div>
@@ -194,7 +194,20 @@ echo '<div class="container">';
   </div>
 
   <div id="resultadoInforme">
-
+    <table id='tableinformes'>
+    <thead>
+      <tr>
+        <th>Fecha Visitta</th>
+        <th>Escuela</th>
+        <th>Titulo</th>
+        <!-- <th>Resp.</th>
+        <th>Fecha</th>
+        <th>Prioridad</th> -->
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
   </div>
 </div>
 

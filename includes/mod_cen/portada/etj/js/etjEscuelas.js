@@ -1,13 +1,14 @@
 $(document).ready(function() {
 
   $('#buscarInforme').click(function() {
+    $('#tableinformes tbody').empty();
      //alert('boton guardar de buscarInforme')
      let buscarInforme='buscarInforme'
      let numero = $('#numero').val()
      let titulo = $('#titulo').val()
      let categoria = $('#seleCategoria').val()
      let subcategoria = $('#seleSubCategoria').val()
-     
+
 
      $.ajax({
        url: 'includes/mod_cen/clases/ajax/ajaxBuscarInforme.php',
@@ -16,9 +17,100 @@ $(document).ready(function() {
        data: {buscarInforme:buscarInforme,numero:numero,titulo:titulo,categoria:categoria,subcategoria:subcategoria}
      })
      .done(function(data) {
+
       for (let item of data) {
-          $(`<p>${item.numero}-${item.titulo}</p>`).appendTo('#resultadoInforme')
+        //$('#tableinformes').find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
+
+        // <td>${item.cantidadLeido}</td>
+        // <td>${item.cantidadRespuesta}</td>
+        // <td>${item.fecha}</td>
+        // <td>${item.prioridad}</td>
+        //$('#tableinformes tbody').find('tbody').after(`<tr class="trinformes">
+
+        $('#tableinformes tbody').append(`<tr class="trinformes">
+
+        <td>${item.numero}</td>
+        <td>${item.fecha}</td>
+        <td><a class="btn btn-default" role="button" id='if${item.informeId2}'>${item.titulo}</a></td>
+
+        </tr>`)
+
+
+
+          //$(`<p>${item.numero}-${item.titulo}</p>`).appendTo('#resultadoInforme')
       }
+
+      $('[id ^=if]').click( function(){
+
+        let informeActual ={
+          informeId: "",
+          escuelaNombre: "",
+          escuelaNumero: "",
+          escuelaCue: "",
+          fecha: "",
+          prioridad: "",
+          categoria:  "",
+          subcategoria:  "",
+          titulo: ""
+        }
+
+               //$('[id ^=if]').on('click', function(){
+          let idPrueba = $(this).attr('id');
+          let informeId = idPrueba.substr(2)
+          $.ajax({
+            url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {informeId:informeId,referenteId:referenteId2}
+          })
+          .done(function(lista) {
+
+            for (let item of lista) {
+                //console.log('item. nombre'+item.nombre)
+                informeActual.escuelaNombre=item.nombre
+                informeActual.escuelaNumero=item.numero
+                informeActual.escuelaCue=item.cue
+                informeActual.fecha=item.fecha
+                informeActual.prioridad=item.prioridad
+                informeActual.categoria=item.categoria
+                informeActual.subcategoria=item.subcategoria
+                informeActual.titulo=item.titulo
+                informeActual.contenido=item.contenido
+                informeActual.informeId=informeId
+                informeActual.escuelaId=item.escuelaId
+
+                /*let escuelaNombre = item.nombre
+                let escuelaNumero = item.numero
+                let escuelaCue = item.cue
+                let fecha = item.fecha
+                let prioridad = item.prioridad
+                let categoria =  item.categoria
+                let subcategoria =  item.subcategoria
+                let titulo =  item.titulo
+                let contenido =  item.contenido*/
+
+            }
+            //console.log(informeActual.escuelaNombre)
+            //console.log("success Ajax Informe");
+          })
+
+          .fail(function() {
+            console.log("error");
+          })
+          .always(function() {
+            //console.log(informeActual.escuelaNombre)
+            //console.log("success Ajax Informe");
+            formPersona(informeActual)
+
+
+
+            //console.log("complete");
+          });
+
+
+
+      });
+
      })
 
   });
