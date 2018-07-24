@@ -151,7 +151,8 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 			$conexion=$nuevaConexion->getConexion();
 
 			$sentencia="SELECT escuelaReferentes.escuelaid,escuelaReferentes.tipoId,personas.personaId,
-									personas.nombre,personas.apellido,referentes.referenteId
+									personas.nombre,personas.apellido,referentes.referenteId,personas.dni,personas.cuil,personas.telefonoC,
+									personas.telefonoM,personas.email,personas.direccion,personas.twitter,personas.fotoPerfil
 			 						FROM personas
 
 									INNER JOIN referentes
