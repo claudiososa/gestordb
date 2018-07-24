@@ -555,7 +555,7 @@ public function buscarInforme($referente=null)
 	}
 
 
-public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL,$order=NULL)
+public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL,$order=NULL,$numero=NULL)
 {
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -586,6 +586,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 										$sentencia.="ON (informes.escuelaId=escuelas.escuelaId)";
 
 									    }
+
 
 
 									$sentencia.=" JOIN referentes
@@ -660,7 +661,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 
 
 		if($this->informeId!=NULL || $this->escuelaId!=NULL || $this->prioridad!=NULL || $this->leido!=NULL
-		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL
+		|| $this->estado!=NULL || $this->tipo!=NULL || $this->referenteId!=NULL || $this->titulo!=NULL || isset($numero)
 		|| $this->fechaVisita!=NULL || $this->contenido!=NULL || $this->nuevoTipo!=NULL || $this->subTipo!=NULL)
 		{
 			$sentencia.=" AND ";
@@ -719,6 +720,16 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		if($this->contenido!=NULL)
 		{
 			$sentencia.=" informes.contenido=$this->contenido && ";
+		}
+
+		if($this->titulo!=NULL)
+		{
+			$sentencia.=" informes.titulo LIKE '%$this->titulo%' && ";
+		}
+
+		if(isset($numero))
+		{
+			$sentencia.=" escuelas.numero = $numero && ";
 		}
 
 

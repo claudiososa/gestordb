@@ -36,12 +36,7 @@
 <script>
   $( function() {
 
-		 $( "#accordion1,#accordion2,#accordion3,#accordion4,#accordion5,#accordion6,#accordion7" ).accordion({
-			 active: false,
-			 collapsible: true
-     });
-
-     $( "#accordionBuscar1,#accordionBuscar2,#accordionBuscar3,#accordionBuscar4,#accordionBuscar5").accordion({
+	   $( "#accordionBuscar1,#accordionBuscar2,#accordionBuscar3,#accordionBuscar4,#accordionBuscar5").accordion({
       active: false,
       collapsible: true
      });
@@ -71,8 +66,19 @@ include_once "includes/mod_cen/clases/respuesta.php" ;
 include_once "includes/mod_cen/clases/rtixescuela.php";
 include_once "includes/mod_cen/clases/rti.php";
 include_once "includes/mod_cen/clases/maestro.php";
+include_once "includes/mod_cen/clases/TipoInforme.php";
+include_once "includes/mod_cen/clases/TipoPermisos.php";
 
 
+
+/**
+ * Obtener todas las categorias relacionadas a Planied, coordinacion
+ */
+
+$categoriasPermitidas = new TipoPermisos(null,null,'Coordinador');
+$buscarPermitidas = $categoriasPermitidas->buscar();
+
+ /**********************************************/
 
 //create object referenteId and filter of status active
 $referenteId=$_SESSION['referenteId'];
@@ -121,7 +127,7 @@ echo '<div class="container">';
       <li><a  href='#tabsBuscar-5'>Documentos</a></li>
     </ul>
     <div id="tabsBuscar-1">
-      <div id='accordionBuscar1'>
+      <!-- <div id='accordionBuscar1'>
         <h3>Escuela</h3>
         <div>
           <p>buscar de escuelas</p>
@@ -129,8 +135,8 @@ echo '<div class="container">';
         //  include 'includes/mod_cen/portada/etj/etjBuscarEscuela.php';
            ?>
         </div>
-      </div>
-      <div id='accordionBuscar2'>
+      </div> -->
+      <!-- <div id='accordionBuscar2'>
           <h3>RTI</h3>
           <div>
             <p>buscar rti</p>
@@ -141,12 +147,33 @@ echo '<div class="container">';
           <div>
             <p>buscar de Referentes</p>
           </div>
-      </div>
+      </div> -->
       <div id='accordionBuscar4'>
           <h3>Informe</h3>
           <div>
-            <p>buscar de Informe</p>
+            <div id="cargando">
+              <img class="img img-responsive cargando" style="display:none;margin:auto;" src="img/iconos/informes/ajax-loader.gif"><br>
+              <b><p class="cargando"align="center"style="display:none;color:#068587;">Buscando Informes, por favor espere...</p></b>
+            </div>
+
+            <form class="form-inline" id="formBuscarInforme" action="" method="post">
+              <input type="text" name="numero" id="numero" value="" placeholder="N° Esc." size="5" class="form-control"><br><br>
+              <input type="text" name="titulo" id="titulo" value="" placeholder="Titulo Informe" class="form-control"><br><br>
+              <select class="form-control" id="seleCategoria" name="categoria">
+                <option value="0">Todas las Categorias...</option>
+                <?php
+                while ($rowCate = mysqli_fetch_object($buscarPermitidas) ) {
+                  echo '<option value="'.$rowCate->tipoId.'">'.$rowCate->nombre.'</option>';
+                }
+                 ?>
+              </select><br><br>
+              <select class="form-control" id="seleSubCategoria" name="subCategoria" >
+                <option value="0">Todas las subcategorias...</option>
+              </select><br><br>
+              <button type="button" id="buscarInforme" class="btn btn-primary" name="button">Buscar</button>
+            </form>
           </div>
+
       </div>
 
     </div>
@@ -172,31 +199,25 @@ echo '<div class="container">';
     </div>
   </div>
 
-	<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
-	</div> -->
-
-	<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
-	</div>
-
-	<div class="col-lg-2 col-md-4 col-sm-4">
-		<a href="index.php?mod=slat&men=user&id=2" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis ETT</h3></a>
-	</div>
-
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
-</div> -->
-
-<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
-</div> -->
-
-<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
-</div> -->
-
+  <div id="resultadoInforme">
+    <table id='tableinformes'>
+    <thead>
+      <tr>
+        <th>Fecha Visitta</th>
+        <th>Escuela</th>
+        <th>Titulo</th>
+        <!-- <th>Resp.</th>
+        <th>Fecha</th>
+        <th>Prioridad</th> -->
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  </div>
 </div>
+
+
 <!--vista mobile-->
 
 <div class="row visible-xs wow zoomIn">
@@ -204,315 +225,7 @@ echo '<div class="container">';
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
-	<!-- <div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
-	</div> -->
 </div>
-
-
-
-<!-- <div class="row visible-xs wow zoomIn">
-	<div class="col-xs-6">
-		<a href="index.php?mod=slat&men=user&id=2" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis ETT</h3></a>
-	</div>
-<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
-</div>
-
-</div> -->
-
-
-<!-- <div class="row visible-xs wow zoomIn">
-
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
-	</div>
-
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
-	</div>
-
-</div> -->
-<?php
-
-		if(mysqli_num_rows($resultado_ett_acargo)>0){
-
-				echo "<div id='tabs'>";
-				 echo "<ul>";
-
-							while ($fila=mysqli_fetch_object($ett1))
-							{
-								$informe_ett= new informe(null,null,$fila->referenteId);
-
-								$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$fila->referenteId,null,$_SESSION['referenteId']);
-								$totalNoLeidos= mysqli_num_rows($informesNoLeidos);
-								$buscar   = ' ';
-								$pos = strpos($fila->apellido, $buscar);
-
-								if ($pos===false) {
-									echo "<li><a  href='#tabs-".$fila->referenteId."'>&nbsp".strtoupper($fila->apellido)." &nbsp<span id='badge-".ltrim($fila->referenteId,'0')."' class='badge badgeNoLeido'>".$totalNoLeidos."</span></a></li>";
-								}else{
-									echo "<li><a  href='#tabs-".$fila->referenteId."'>&nbsp".substr(strtoupper($fila->apellido),0,strpos($fila->apellido,' '))."  &nbsp<span id='badge-".ltrim($fila->referenteId,'0')."' class='badge badgeNoLeido'>".$totalNoLeidos."</span></a></li>";	# code...
-								}
-
-							}
-
-
-				  echo '</ul>';
-					$contador=0;
-					/**
-					 * Creado de tabs por ett, con contenido de sus informes, datos de contacto y calendario de visitas.
-					 */
-					while ($fila=mysqli_fetch_object($ett2))
-					{
-						$informe_ett= new informe(null,null,$fila->referenteId);
-						$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$fila->referenteId,null,$_SESSION['referenteId']);
-						echo "<div id='tabs-$fila->referenteId'>";
-						$leido = new Leido(null,null,$_SESSION['referenteId']);
-						$buscar_alta =$informe_ett->summary('año',null,null,null,null,'2018','Alta',$fila->referenteId);
-						$totalAlta = mysqli_num_rows($buscar_alta);
-						$buscar_media =$informe_ett->summary('año',null,null,null,null,'2018','Media',$fila->referenteId);
-						$totalMedia = mysqli_num_rows($buscar_media);
-						$buscar_normal = $informe_ett->summary('año',null,null,null,null,'2018','Normal',$fila->referenteId);
-						$totalNormal = mysqli_num_rows($buscar_normal);
-						$actual = $informe_ett->summary('año',null,null,null,null,'2018',null,$fila->referenteId);
-						$cantidadActual=mysqli_num_rows($actual);
-						$cantidadNoLeidos=mysqli_num_rows($informesNoLeidos);
-
-						echo "<h4><p align='center' class='nombreApellido'><b>".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</b></p></h4>";
-            echo "<hr class='hrNombreApellido'>";
-						//echo "<p class='alert alert-success'>Total Informes - $cantidadActual</p>";
-						$contador++;
-						echo "<div id='accordion$contador'>";
-            echo '<h3> <span id="badgeNoLeidos-'.ltrim($fila->referenteId,'0').'" class="badge badgeNoLeido">'.$cantidadNoLeidos.'</span>Informes No Leidos</h3>';
-            //<h3>Informes No Leidos <span id='badgeNoLeidos-".$fila->referenteId."' class="badge"> <?php echo $cantidadNoLeidos;</span></h3>
-
-						?>
-							<div>
-								<?php
-                echo "<div class='list-group'>";
-								while ($row = mysqli_fetch_object($informesNoLeidos))
-
-								{
-									switch ($row->prioridad) {
-										case 'Normal':
-											$class="alert alert-success";
-                      $parrafo="color:#646161;";
-											break;
-										case 'Media':
-											$class="alert alert-warning";
-                      $parrafo="color:#646161;";
-											break;
-										case 'Alta':
-											$class="alert alert-danger";
-                      $parrafo="color:#646161;";
-											break;
-										default:
-											# code...
-											break;
-									}
-
-                  //echo "<div class='list-group ".$class."' id='informeId".$row->informeId."'";
-                  echo "<div class='list-group-item  ".$class."'id='informeId".$row->informeId."'>";
-                  echo "<h4 class='list-group-item-heading'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'>&nbsp</span><b>".ucwords($row->titulo)."</b></h4>";
-                  echo "<p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Institución N°:  </b>".$row->numero."  <b></p><p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha V.:</b>".Maestro::formatoFecha($row->fechaVisita)."&nbsp<b> Fecha Carga.:</b> ".Maestro::formatoFecha($row->fechaCarga)." &nbsp<b>Id:</b>".$row->informeId." </p>";
-                  echo "</div>";
-                  //echo "</div>";
-									//echo "<p id='informeId".$row->informeId."' class='".$class."'><b>$row->titulo</b><br>
-											//	<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
-								}
-              echo "</div>";
-								 ?>
-
-							</div>
-							<h3>Informes prioridad Alta <span class="badge badgeAlta"> <?php echo $totalAlta;?></span></h3>
-
-						  <div>
-
-								<?php
-                  echo "<div class='list-group'>";
-								while ($row = mysqli_fetch_object($buscar_alta)) {
-                  echo "<div class='list-group-item alert alert-danger'id='inforalta".$row->informeId."'>";
-                  echo "<h4 class='list-group-item-heading'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'>&nbsp</span><b>".ucwords($row->titulo)."</b></h4>";
-                  echo "<p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Institución N°:  </b>".$row->numero."  <b></p><p class='list-group-item-text'style='".$parrafo."' >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha V.:</b>".Maestro::formatoFecha($row->fechaVisita)."&nbsp<b> Fecha Carga.:</b> ".Maestro::formatoFecha($row->fechaCarga)." &nbsp<b>Id:</b>".$row->informeId." </p>";
-                  echo "</div>";
-
-									// echo "<p id='inforalta".$row->informeId."' class='alert alert-danger'><b>$row->titulo</b><br>
-									// 			<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
-
-								}
-                echo "</div>";
-								?>
-						  </div>
-							<h3>Informes prioridad Media <span class="badge badgeMedia"> <?php echo $totalMedia;?></span></h3>
-						  <div>
-							<?php
-              echo "<div class='list-group'>";
-								while ($row = mysqli_fetch_object($buscar_media)) {
-
-                  echo "<div class='list-group-item alert alert-warning'id='informedi".$row->informeId."'>";
-                  echo "<h4 class='list-group-item-heading'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'>&nbsp</span><b>".ucwords($row->titulo)."</b></h4>";
-                  echo "<p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Institución N°:  </b>".$row->numero."  <b></p><p class='list-group-item-text'style='".$parrafo."' >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha V.:</b>".Maestro::formatoFecha($row->fechaVisita)."&nbsp<b> Fecha Carga.:</b> ".Maestro::formatoFecha($row->fechaCarga)." &nbsp<b>Id:</b>".$row->informeId." </p>";
-                  echo "</div>";
-                    //
-										// echo "<p id='informedi".$row->informeId."' class='alert alert-warning'><b>$row->titulo</b><br>
-  									// 			<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
-
-								}
-                echo "</div>";
-							?>
-						 </div>
-							<h3>Informes prioridad Normal <span class="badge badgeNormal"> <?php echo $totalNormal;?></span></h3>
-						  <div>
-								<?php
-                echo "<div class='list-group'>";
-	 							 while ($row = mysqli_fetch_object($buscar_normal)) {
-                   echo "<div class='list-group-item alert alert-success'id='infornorm".$row->informeId."'>";
-                   echo "<h4 class='list-group-item-heading'> <span class='glyphicon glyphicon-chevron-right' aria-hidden='true'>&nbsp</span><b>".ucwords($row->titulo)."</b></h4>";
-                   echo "<p class='list-group-item-text'style='".$parrafo."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Institución N°:  </b>".$row->numero."  <b></p><p class='list-group-item-text'style='".$parrafo."' >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFecha V.:</b>".Maestro::formatoFecha($row->fechaVisita)."&nbsp<b> Fecha Carga.:</b> ".Maestro::formatoFecha($row->fechaCarga)." &nbsp<b>Id:</b>".$row->informeId." </p>";
-                   echo "</div>";
-                     // id='infornorm".$row->informeId."' class='alert alert-success'><b>$row->titulo</b><br>
-   								// 				<b>Institución N°:  </b>".$row->numero."  <b>Fecha V.:</b>".$row->fechaVisita."<b> Fecha Carga.:</b> ".$row->fechaCarga." <b>Id:</b>".$row->informeId." </p>";
-
-	 							 }
-                   echo "</div>";
-	 						 ?>
-						  </div>
-
-							<h3>Calendario de Visitas realizadas</h3>
-						  <div>
-	 							<p>
-
-                  <?php
-                  include'includes/mod_cen/portada/calendarioEtt.php';
-                   ?>
-              </p>
-						  </div>
-
-              <!-- //
-              // //  echo $fila->referenteId;
-              //   $escuelasCargo = new EscuelaReferentes(null,null,null,$fila->referenteId);
-              // //  var_dump($escuelasCargo);
-              //   $buscarEscuelas = $escuelasCargo->buscar2();
-              //   $totalEscuelas = mysqli_num_rows($buscarEscuelas);
-              //  echo "<h3>Escuelas a cargo <span class='badge'>$totalEscuelas</span></h3>";
-              // echo '<div>';
-              //
-              //   while ($fila2 = mysqli_fetch_object($buscarEscuelas)) {
-              //     echo "<p>$fila2->numero - $fila2->cue -".substr($fila2->nombre,0,35)."</p>";
-              //   } -->
-              <?php
-              $escuelasCargo = new EscuelaReferentes(null,null,null,$fila->referenteId);
-              //ar_dump($escuelasCargo);
-              $buscarEscuelas = $escuelasCargo->buscar2();
-              $totalEscuelas = mysqli_num_rows($buscarEscuelas);
-              echo "<h3>Escuelas a cargo <span class='badge badgeEscuelaCargo'>$totalEscuelas</span></h3>";
-              echo '<div>';
-               ?>
-
-              <div class="row">
-
-              <!-- <div class="container"> -->
-
-
-              <table class="table table-bordered hidden-xs">
-                <thead>
-                  <tr class='danger' >
-                    <th>CUE</th>
-                    <th>N°</th>
-                    <th>Nombre</th>
-                    <th>Informes</th>
-                    <th>Autoridades</th>
-                    <th>RTI</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-
-                  <?php
-                    //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-                  //  $escuelasCargo = new EscuelaReferentes(null,null,'19',$_SESSION['referenteId']);
-                  //  $buscarEscuelas = $escuelasCargo->buscar();
-
-                    $escuela = new Escuela();
-
-                    while ($row = mysqli_fetch_object($buscarEscuelas)) {
-
-                      $rtix= new rtixescuela($row->escuelaId);
-
-                      $buscar_rti=$rtix->buscar();
-
-                      $cantidadRti=mysqli_num_rows($buscar_rti);
-
-
-                      $informe = new informe(null,$row->escuelaId);
-
-                      $arrayReferente= ['ETT','ETJ','Coordinador'];
-
-                      $buscarInforme= $informe->buscar(null,null,$arrayReferente);
-
-                      $cantidadInforme = mysqli_num_rows($buscarInforme);
-
-                      $autoridad = new Autoridades(null,$row->escuelaId);
-                      $buscarAutoridad = $autoridad->buscarAutoridad3('all');
-                      $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
-
-                      $escuela->escuelaId=$row->escuelaId;
-                      $buscarEscuela = $escuela->buscar();
-                      $infoEscuela = mysqli_fetch_object($buscarEscuela);
-
-                      //echo $infoEscuela->numero."<br>";
-                      echo '<tr id="fila'.$infoEscuela->escuelaId.'">';
-                      echo '<td>'.$infoEscuela->cue.'</td>';
-                      echo '<td>'.$infoEscuela->numero.'</td>';
-                      echo '<td>'.substr($infoEscuela->nombre,0,30).'</td>';
-                      echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
-                      echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
-                      if ($cantidadRti > 0 ) {
-                        echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="rti'.$infoEscuela->escuelaId.'" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
-                      }else{
-                        echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
-                      }
-
-
-
-                      echo '</tr>';
-
-                    }
-                  ?>
-
-                </tbody>
-              </table>
-
-              </div>
-
-              <!-- </div> </div container> --> -->
-
-              </div>
-
-						</div>
-
-
-
-						<?php
-
-
-					  echo "</div>";
-					}
-				  echo "</div>";
-
-
-
-				}
-?>
-
-<!--
-<div class="alert alert-info" role="alert">
-	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
-</div>
--->
-
-
 
 
 <br><br><br>

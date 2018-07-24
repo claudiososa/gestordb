@@ -131,7 +131,7 @@
   		$temporal=array(
         'informeId'=>$fila->informeId,
         'referenteId'=>$fila->referenteId,
-  			'titulo'=>$fila->titulo,
+  			'titulo'=>substr($fila->titulo,0,35).'...',
         'escuelaId'=>$fila->escuelaId,
         'cantidad'=>$cantidadInformes,
         'cantidadRespuesta' =>$cantidadRespuesta,

@@ -1,6 +1,156 @@
 $(document).ready(function() {
 
+  $('#buscarInforme').click(function() {
+    let numeroTitulo = $('#numero').val()+$('#titulo').val()
+    let categoria = $('#seleCategoria').val()
 
+    /**
+     *verifica si existen datos cargados para poder realizar la busqueda de informes.
+     *
+     */
+
+
+    if (numeroTitulo=='' && categoria=='0') {
+      alert('Debe seleccionar algun parametro')
+    }else{
+
+    $('#formBuscarInforme').hide()
+    $('.cargando').css('display','block')
+
+    $('#tableinformes tbody').empty();
+     //alert('boton guardar de buscarInforme')
+     let buscarInforme='buscarInforme'
+     let numero = $('#numero').val()
+     let titulo = $('#titulo').val()
+     let categoria = $('#seleCategoria').val()
+     let subcategoria = $('#seleSubCategoria').val()
+
+
+     $.ajax({
+       url: 'includes/mod_cen/clases/ajax/ajaxBuscarInforme.php',
+       type: 'POST',
+       dataType: 'json',
+       data: {buscarInforme:buscarInforme,numero:numero,titulo:titulo,categoria:categoria,subcategoria:subcategoria}
+     })
+     .done(function(data) {
+       $('.cargando').css('display','none')
+       $('#formBuscarInforme').show()
+       console.log(data)
+      if (data.length==0) {
+        $('#tableinformes tbody').append(`<tr class="trinformes">
+        <td class="alert alert-danger">No se encontraron resultados para la busqueda realizada</td>
+        </tr>`)
+        console.log(data.length)
+      } else{
+        console.log('no trae nada')
+      }
+
+      for (let item of data) {
+
+        $('#tableinformes tbody').append(`<tr class="trinformes">
+
+        <td>${item.numero}</td>
+        <td>${item.fecha}</td>
+        <td><a class="btn btn-default" role="button" id='if${item.informeId2}'>${item.titulo}</a></td>
+
+        </tr>`)
+
+
+
+          //$(`<p>${item.numero}-${item.titulo}</p>`).appendTo('#resultadoInforme')
+      }
+
+      $('[id ^=if]').click( function(){
+        let botonId = $(this).attr('id')
+        $(this).removeClass('btn-default').addClass('btn-success')
+        $('[id ^=if]').attr('disabled',true)
+
+        let informeActual ={
+          informeId: "",
+          escuelaNombre: "",
+          escuelaNumero: "",
+          escuelaCue: "",
+          fecha: "",
+          prioridad: "",
+          categoria:  "",
+          subcategoria:  "",
+          titulo: ""
+        }
+
+               //$('[id ^=if]').on('click', function(){
+          let idPrueba = $(this).attr('id');
+          let informeId = idPrueba.substr(2)
+          $.ajax({
+            url: 'includes/mod_cen/clases/ajax/ajaxInforme.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {informeId:informeId,referenteId:referenteId2}
+          })
+          .done(function(lista) {
+            for (let item of lista) {
+                informeActual.escuelaNombre=item.nombre
+                informeActual.escuelaNumero=item.numero
+                informeActual.escuelaCue=item.cue
+                informeActual.fecha=item.fecha
+                informeActual.prioridad=item.prioridad
+                informeActual.categoria=item.categoria
+                informeActual.subcategoria=item.subcategoria
+                informeActual.titulo=item.titulo
+                informeActual.contenido=item.contenido
+                informeActual.informeId=informeId
+                informeActual.escuelaId=item.escuelaId
+
+            }
+          })
+
+          .fail(function() {
+            console.log("error");
+          })
+          .always(function() {
+            //console.log(informeActual.escuelaNombre)
+            //console.log("success Ajax Informe");
+            $('#'+botonId).removeClass('btn-success').addClass('btn-default')
+            formPersona(informeActual)
+
+
+
+            //console.log("complete");
+          });
+
+
+
+      });
+
+     })
+   }
+  });
+
+  $('#seleCategoria').change(function(event) {
+    $('#seleSubCategoria').attr('disabled','disabled')
+  //  alert('cambio de opcion')
+    let idCategoria= $(this).val()
+    $('#seleSubCategoria').find('option').remove().end().append('<option value="0">Todas las Subcategorias...</option>').val('0');
+    $.ajax({
+      url: 'includes/mod_cen/clases/ajax/ajaxCategoriaInforme.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {idCategoria:idCategoria}
+    })
+    .done(function(data) {
+      $('#seleSubCategoria').removeAttr('disabled')
+      for (let item of data) {
+        $(`<option value="${item.subTipoId}">${item.nombre}</option>`).appendTo('#seleSubCategoria')
+      }
+      //console.log("success");
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
+  });
 
   $('[id ^=list]').click( function(){
 

@@ -202,6 +202,8 @@ function formPersona(informeActual)
     $('#myModal').modal('show')
 
     $('#myModal').on('hide.bs.modal', function(){
+      $('[id ^=if]').removeAttr('disabled')
+
 
       if (informeActual.etjPortada) {
         let ajaxLeido = 'leido'

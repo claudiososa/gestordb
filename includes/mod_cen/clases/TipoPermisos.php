@@ -97,7 +97,7 @@ function __construct($tipoPermisosId=NULL,$tipoId=NULL,$tipoReferente=NULL)
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-	//	echo $sentencia;
+		//echo $sentencia;
 		return $conexion->query($sentencia);
 
 	}

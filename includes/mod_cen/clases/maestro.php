@@ -2,7 +2,7 @@
 class Maestro{
 
 	public static function formatoFecha($fecha){
-		$newDate = date("d/m/Y", strtotime($fecha));
+		$newDate = date("d/m/y", strtotime($fecha));
 
 		//$myDateTime = DateTime::createFromFormat('Y-m-d', $fecha);
 		//$newDateString = $myDateTime->format('d-m-Y');
