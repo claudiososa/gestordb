@@ -24,14 +24,19 @@ $('#bodyProgramas'+escuela).empty()
  $('#programas'+escuela).show(function() {
 //
 //     //  agrega contenido al body del panel
-
+  //<input class="btn btn-primary" type="submit" value="ir" id="btn_ir">
 
     $(`<div class="row">
     <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-body" id="informes${escuela}">
-      <h3>informes planied</h3>
+      <p>informes planied</p>
 
+      <div class="form-group">
+       <div class="" id="padreIr">
+
+       </div>
+      </div>
       </div>
     </div>
     </div>
@@ -114,6 +119,7 @@ $('#bodyProgramas'+escuela).empty()
 
 
               }
+
           //     else{   // entra por que no tiene informes cargados
           //
           //       if (click=='informes') {
@@ -151,6 +157,27 @@ $('#bodyProgramas'+escuela).empty()
                 }
 
 
+        $('[id ^=nuevoInforme]').click( function(){
+                                  //alert('nuevo informe')
+            let idPrueba = $(this).attr('id');
+            let escuela_id = idPrueba.substr(12)
+            let escuela = {escuelaId:escuela_id,
+                          numero:'',
+                          cue:'',
+                          nombre:''
+                          }
+            buscarDatosEscuela(escuela)//consulta a tabla escuela... ajax.js
+
+            .then(function(escuela){
+                    informeNuevo(escuela)//inicia modal para carga de informe
+
+                                })
+            .catch(error=> console.log(error + ' Noooo'))
+
+
+          });
+
+
                 //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
                 $('[id ^=if]').click( function(){
 
@@ -176,9 +203,8 @@ $('#bodyProgramas'+escuela).empty()
                       data: {informeId:informeId,referenteId:referenteId2}
                     })
                     .done(function(lista) {
-
                       for (let item of lista) {
-                          //console.log('item. nombre'+item.nombre)
+                        //console.log('item. nombre'+item.nombre)
                           informeActual.escuelaNombre=item.nombre
                           informeActual.escuelaNumero=item.numero
                           informeActual.escuelaCue=item.cue
@@ -297,9 +323,8 @@ $('[id ^=super]').on('click',function(event) {
         /* Act on the event */
       // alert('hola super')
        $('#bodyProgramas'+escuela).empty()
-      $('#programas'+escuela).show(function() {
-    //
-    //     //  agrega contenido al body del panel
+       $('#programas'+escuela).show(function() {
+    //    //     //  agrega contenido al body del panel
           $('<p>informes de escuela del futuro</p>').appendTo('#bodyProgramas'+escuela)
 
       });
