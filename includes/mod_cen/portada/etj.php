@@ -169,7 +169,9 @@ echo '<div class="container">';
               </select><br><br>
               <select class="form-control" id="seleSubCategoria" name="subCategoria" >
                 <option value="0">Todas las subcategorias...</option>
-              </select><br><br>
+              </select>
+              <img class="img img-responsive" id="carga" src="img/iconos/informes/cargar.gif" style="display:none;margin:auto;max-width:3%;"><br>
+              <br><br>
               <button type="button" id="buscarInforme" class="btn btn-primary" name="button">Buscar</button>
             </form>
             <div id="resultadoInforme">
