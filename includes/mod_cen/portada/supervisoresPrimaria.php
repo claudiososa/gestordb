@@ -26,7 +26,7 @@ echo '<div class="container">';
 
 
 <div class="row hidden-xs">
-	<div class="col-lg-3 col-md-3 col-sm-3"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
+	<div class="col-lg-3 col-md-3 col-sm-3"><a href="index.php?mod=slat&men=escuelas&id=33" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
