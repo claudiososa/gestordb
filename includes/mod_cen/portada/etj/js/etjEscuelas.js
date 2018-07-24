@@ -1,6 +1,22 @@
 $(document).ready(function() {
 
   $('#buscarInforme').click(function() {
+    let numeroTitulo = $('#numero').val()+$('#titulo').val()
+    let categoria = $('#seleCategoria').val()
+
+    /**
+     *verifica si existen datos cargados para poder realizar la busqueda de informes.
+     *
+     */
+
+
+    if (numeroTitulo=='' && categoria=='0') {
+      alert('Debe seleccionar algun parametro')
+    }else{
+
+    $('#formBuscarInforme').hide()
+    $('.cargando').css('display','block')
+
     $('#tableinformes tbody').empty();
      //alert('boton guardar de buscarInforme')
      let buscarInforme='buscarInforme'
@@ -17,15 +33,19 @@ $(document).ready(function() {
        data: {buscarInforme:buscarInforme,numero:numero,titulo:titulo,categoria:categoria,subcategoria:subcategoria}
      })
      .done(function(data) {
+       $('.cargando').css('display','none')
+       $('#formBuscarInforme').show()
+       console.log(data)
+      if (data.length==0) {
+        $('#tableinformes tbody').append(`<tr class="trinformes">
+        <td class="alert alert-danger">No se encontraron resultados para la busqueda realizada</td>
+        </tr>`)
+        console.log(data.length)
+      } else{
+        console.log('no trae nada')
+      }
 
       for (let item of data) {
-        //$('#tableinformes').find('tbody').after(`<tr class="trinformes${escuelaIdconCero}">
-
-        // <td>${item.cantidadLeido}</td>
-        // <td>${item.cantidadRespuesta}</td>
-        // <td>${item.fecha}</td>
-        // <td>${item.prioridad}</td>
-        //$('#tableinformes tbody').find('tbody').after(`<tr class="trinformes">
 
         $('#tableinformes tbody').append(`<tr class="trinformes">
 
@@ -41,6 +61,9 @@ $(document).ready(function() {
       }
 
       $('[id ^=if]').click( function(){
+        let botonId = $(this).attr('id')
+        $(this).removeClass('btn-default').addClass('btn-success')
+        $('[id ^=if]').attr('disabled',true)
 
         let informeActual ={
           informeId: "",
@@ -64,9 +87,7 @@ $(document).ready(function() {
             data: {informeId:informeId,referenteId:referenteId2}
           })
           .done(function(lista) {
-
             for (let item of lista) {
-                //console.log('item. nombre'+item.nombre)
                 informeActual.escuelaNombre=item.nombre
                 informeActual.escuelaNumero=item.numero
                 informeActual.escuelaCue=item.cue
@@ -79,19 +100,7 @@ $(document).ready(function() {
                 informeActual.informeId=informeId
                 informeActual.escuelaId=item.escuelaId
 
-                /*let escuelaNombre = item.nombre
-                let escuelaNumero = item.numero
-                let escuelaCue = item.cue
-                let fecha = item.fecha
-                let prioridad = item.prioridad
-                let categoria =  item.categoria
-                let subcategoria =  item.subcategoria
-                let titulo =  item.titulo
-                let contenido =  item.contenido*/
-
             }
-            //console.log(informeActual.escuelaNombre)
-            //console.log("success Ajax Informe");
           })
 
           .fail(function() {
@@ -100,6 +109,7 @@ $(document).ready(function() {
           .always(function() {
             //console.log(informeActual.escuelaNombre)
             //console.log("success Ajax Informe");
+            $('#'+botonId).removeClass('btn-success').addClass('btn-default')
             formPersona(informeActual)
 
 
@@ -112,10 +122,11 @@ $(document).ready(function() {
       });
 
      })
-
+   }
   });
 
   $('#seleCategoria').change(function(event) {
+    $('#seleSubCategoria').attr('disabled','disabled')
   //  alert('cambio de opcion')
     let idCategoria= $(this).val()
     $('#seleSubCategoria').find('option').remove().end().append('<option value="0">Todas las Subcategorias...</option>').val('0');
@@ -126,6 +137,7 @@ $(document).ready(function() {
       data: {idCategoria:idCategoria}
     })
     .done(function(data) {
+      $('#seleSubCategoria').removeAttr('disabled')
       for (let item of data) {
         $(`<option value="${item.subTipoId}">${item.nombre}</option>`).appendTo('#seleSubCategoria')
       }

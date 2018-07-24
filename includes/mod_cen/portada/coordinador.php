@@ -151,6 +151,11 @@ echo '<div class="container">';
       <div id='accordionBuscar4'>
           <h3>Informe</h3>
           <div>
+            <div id="cargando">
+              <img class="img img-responsive cargando" style="display:none;margin:auto;" src="img/iconos/informes/ajax-loader.gif"><br>
+              <b><p class="cargando"align="center"style="display:none;color:#068587;">Buscando Informes, por favor espere...</p></b>
+            </div>
+
             <form class="form-inline" id="formBuscarInforme" action="" method="post">
               <input type="text" name="numero" id="numero" value="" placeholder="N° Esc." size="5" class="form-control"><br><br>
               <input type="text" name="titulo" id="titulo" value="" placeholder="Titulo Informe" class="form-control"><br><br>
@@ -168,6 +173,7 @@ echo '<div class="container">';
               <button type="button" id="buscarInforme" class="btn btn-primary" name="button">Buscar</button>
             </form>
           </div>
+
       </div>
 
     </div>
