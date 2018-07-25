@@ -19,6 +19,7 @@ hr {
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
@@ -305,9 +306,6 @@ if(($_POST))
 
 								// ******Fin de modificaciones para leer de la tabla escuelaReferentes para ETJ******
 								//*****************************************************************************
-
-
-
 								/**
 									 * Buscar director de la institución
 									 * se guarda el objeto con datso en $datoDirector
@@ -391,9 +389,9 @@ if(($_POST))
 
                         </div>
 
-
-
       <br>
+
+
       				<!-- botones por programas -->
       				<div class="row" >
       		<div class="col-md-8 col-md-offset-2">
@@ -421,6 +419,7 @@ if(($_POST))
   <div class="col-md-12" id="programas'.$fila->escuelaId.'" style="display:none">
     <div class="panel panel-default">
       <div class="panel-body" id="bodyProgramas'.$fila->escuelaId.'">
+
 
 
 
@@ -456,145 +455,145 @@ if(($_POST))
 
 
 
-							 <div id="collapse1<?php echo $fila->escuelaId ?>" class="panel-collapse collapse">
+							 <!-- <div id="collapse1<?php echo $fila->escuelaId ?>" class="panel-collapse collapse">
 
 			 				<div class="col-md-6">
-								 <div class="alert alert-success" role="alert">Datos de la Institución</div>
+								 <div class="alert alert-success" role="alert">Datos de la Institución</div> -->
 								 <?php
-								 echo "<div><b>Nº Colegio</b></div>";
-								 echo "<div>".$fila->numero."</div>";
-								 echo "<div><b>CUE</b></div>";
-								 echo "<div>".$fila->cue."</div>";
-								 echo "<div><b>Nombre</b></div>";
-								 echo "<div>".$fila->nombre."</div>";
-								 echo"<div><b>Localidad</b></div>";
-								 echo "<div>".$fila1->nombre."</div>";
-								 echo"<div><b>Dirección</b></div>";
-								 echo "<div>".$fila->domicilio."</div>";
-								 echo"<div><b>Teléfono</b></div>";
-								 echo "<div>".$fila->telefono."</div>";
-								 echo"<div><b>Email</b></div>";
-								 echo "<div>".$fila->email."</div>";
-								 echo "<br></div>";
+								//  echo "<div><b>Nº Colegio</b></div>";
+								//  echo "<div>".$fila->numero."</div>";
+								//  echo "<div><b>CUE</b></div>";
+								//  echo "<div>".$fila->cue."</div>";
+								//  echo "<div><b>Nombre</b></div>";
+								//  echo "<div>".$fila->nombre."</div>";
+								//  echo"<div><b>Localidad</b></div>";
+								//  echo "<div>".$fila1->nombre."</div>";
+								//  echo"<div><b>Dirección</b></div>";
+								//  echo "<div>".$fila->domicilio."</div>";
+								//  echo"<div><b>Teléfono</b></div>";
+								//  echo "<div>".$fila->telefono."</div>";
+								//  echo"<div><b>Email</b></div>";
+								//  echo "<div>".$fila->email."</div>";
+								//  echo "<br></div>";
 
-								 echo '<div class="col-md-6">';
-								 echo '<div class="alert alert-success" role="alert">Informes Creados</div>';
-								 echo"<div><b>Cantidad Total</b></div>";
-								 echo "<div><a href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>Ver todos los informes &nbsp(".$cantInformes.")</a></div>";
-								 echo"<div><b>Últimos Informes creados</b></div>";
-								 echo "<div>";
-								 echo "<ul class='list-group'>";
+								//  echo '<div class="col-md-6">';
+								//  echo '<div class="alert alert-success" role="alert">Informes Creados</div>';
+								//  echo"<div><b>Cantidad Total</b></div>";
+								//  echo "<div><a href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>Ver todos los informes &nbsp(".$cantInformes.")</a></div>";
+								//  echo"<div><b>Últimos Informes creados</b></div>";
+								//  echo "<div>";
+								//  echo "<ul class='list-group'>";
+                 //
+								//  while($ultimos = mysqli_fetch_object($ultimosInformes))
+								//  {
+                 //
+								// 	 $date = date_create($ultimos->fechaCarga);
+								// 	 $fecha=date_format($date, 'd-m-Y');
+								// 	 echo "<li class='list-group-item list-group-item-success'>
+								// 	 <div><a href='index.php?mod=slat&men=informe&id=3&informeId=".$ultimos->informeId."'>".substr($ultimos->titulo,0, 45)."...</a></div>
+								// 	 <div>Fecha Creación: ".$fecha."</div>
+								// 	 <div>Creado por: ".$ultimos->apellido." ".$ultimos->nombre."</div>
+								// 	 </li>";
+								// 	 //echo "<div><a href='index.php?mod=slat&men=informe&id=3&informeId=".$ultimos->informeId."'>".substr($ultimos->titulo,0, 30)."... -> ".$fecha."</a></div>";
+								//  }
+								//  echo "</ul>";
+								//  echo "</div>";
+								//  echo "<br>";
+								//  echo"<div><b><a class='btn btn-primary' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Nuevo Informe</a></b></div>";
+								//  echo "<br></div>";
 
-								 while($ultimos = mysqli_fetch_object($ultimosInformes))
-								 {
-
-									 $date = date_create($ultimos->fechaCarga);
-									 $fecha=date_format($date, 'd-m-Y');
-									 echo "<li class='list-group-item list-group-item-success'>
-									 <div><a href='index.php?mod=slat&men=informe&id=3&informeId=".$ultimos->informeId."'>".substr($ultimos->titulo,0, 45)."...</a></div>
-									 <div>Fecha Creación: ".$fecha."</div>
-									 <div>Creado por: ".$ultimos->apellido." ".$ultimos->nombre."</div>
-									 </li>";
-									 //echo "<div><a href='index.php?mod=slat&men=informe&id=3&informeId=".$ultimos->informeId."'>".substr($ultimos->titulo,0, 30)."... -> ".$fecha."</a></div>";
-								 }
-								 echo "</ul>";
-								 echo "</div>";
-								 echo "<br>";
-								 echo"<div><b><a class='btn btn-primary' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Nuevo Informe</a></b></div>";
-								 echo "<br></div>";
-
-								 echo '<div class="col-md-6">';
-								 echo '<div class="alert alert-success" role="alert">Referente ETT Conectar Igualdad</div>';
-								 echo"<div><b>Apellido y Nombre</b></div>";
-								 echo "<div>".$datoEtt->apellido.", ".$datoEtt->nombre."</div>";
-								 echo"<div><b>Teléfono</b></div>";
-								 echo "<div>".$datoEtt->telefonoM." / ".$datoEtt->telefonoC."</div>";
-								 echo"<div><b>Correo Electrónico</b></div>";
-								 echo "<div>".$datoEtt->email."</div>";
-								 echo "<br></div>";
-
-								 	$facilitador = new FacilEscuelas(null,$fila->escuelaId);
-								 	$buscarFacil= $facilitador->buscar();
-
-									if (mysqli_num_rows($buscarFacil)>0) {
-										echo '<div class="col-md-6">';
-										echo '<div class="alert alert-success" role="alert">Facilitador Escuela del Futuro</div>';
-										while ($filaEscuela = mysqli_fetch_object($buscarFacil))
-										{
-											echo"<div><b>Apellido y Nombre</b></div>";
-											echo "<div>".$filaEscuela->apellido.", ".$filaEscuela->nombre."</div>";
-											echo"<div><b>Teléfono</b></div>";
-											echo "<div>".$filaEscuela->telefonoM." / ".$filaEscuela->telefonoC."</div>";
-											echo"<div><b>Correo Electrónico</b></div>";
-											echo "<div>".$filaEscuela->email."</div>";
-											echo "<br>";
-										}
-										echo "</div>";
-									}
-
-
-
-								 echo '<div class="col-md-6">';
-								 echo '<div class="alert alert-success" role="alert">Referente ETJ Conectar Igualdad</div>';
-								 echo"<div><b>Apellido y Nombre</b></div>";
-								 echo "<div>".$datoEtj->apellido.", ".$datoEtj->nombre."</div>";
-								 echo"<div><b>Teléfono</b></div>";
-								 echo "<div>".$datoEtj->telefonoM." / ".$datoEtj->telefonoC."</div>";
-								 echo"<div><b>Correo Electrónico</b></div>";
-								 echo "<div>".$datoEtj->email."</div>";
-								 echo "<br></div>";
-
-								 echo '<div class="col-md-6">';
-								 echo '<div class="alert alert-success" role="alert">Referente ATT PMI (Plan Mejora Institucional)</div>';
-								 echo"<div><b>Apellido y Nombre</b></div>";
-								 echo "<div>".$datoAtt->apellido.", ".$datoAtt->nombre."</div>";
-								 echo"<div><b>Teléfono</b></div>";
-								 echo "<div>".$datoAtt->telefonoM." / ".$datoAtt->telefonoC."</div>";
-								 echo"<div><b>Correo Electrónico</b></div>";
-								 echo "<div>".$datoAtt->email."</div>";
-								 echo "<br></div>";
-
-								 echo '<div class="col-md-6">';
-								 echo '<div class="alert alert-success" role="alert">Datos de Directivo</div>';
-								 echo"<div><b>Apellido y Nombre</b></div>";
-								 echo "<div>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
-								 echo"<div><b>Teléfono</b></div>";
-								 echo "<div>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";
-								 echo"<div><b>Correo Electrónico</b></div>";
-								 echo "<div>".$datoDirector->email."</div>";
-								 echo "<br></div>";
-
-								 echo '<div class="col-md-6">';
-								 echo '<div class="alert alert-success" role="alert">Datos de Supervisor</div>';
-								 echo"<div><b>Apellido y Nombre</b></div>";
-								 echo "<div>".$datoSupervisor->apellido.", ".$datoSupervisor->nombre."</div>";
-								 echo"<div><b>Teléfono</b></div>";
-								 echo "<div>".$datoSupervisor->telefonoM." / ".$datoSupervisor->telefonoC."</div>";
-								 echo"<div><b>Correo Electrónico</b></div>";
-								 echo "<div>".$datoSupervisor->email."</div>";
-								 echo "<br></div>";
-
-								 echo '<div class="col-md-6">';
-								echo '<div class="alert alert-success" role="alert">Datos de RTI</div>';
-
-								echo"<div><b>Cantidad de RTI</b></div>";
-								echo "<div><a href='index.php?mod=slat&men=escuelas&id=17&escuelaId=".$fila->escuelaId."'>".$cantidadRti."</a></div>";
-								echo "<br></div>";
+								//  echo '<div class="col-md-6">';
+								//  echo '<div class="alert alert-success" role="alert">Referente ETT Conectar Igualdad</div>';
+								//  echo"<div><b>Apellido y Nombre</b></div>";
+								//  echo "<div>".$datoEtt->apellido.", ".$datoEtt->nombre."</div>";
+								//  echo"<div><b>Teléfono</b></div>";
+								//  echo "<div>".$datoEtt->telefonoM." / ".$datoEtt->telefonoC."</div>";
+								//  echo"<div><b>Correo Electrónico</b></div>";
+								//  echo "<div>".$datoEtt->email."</div>";
+								//  echo "<br></div>";
+                //
+								//  	$facilitador = new FacilEscuelas(null,$fila->escuelaId);
+								//  	$buscarFacil= $facilitador->buscar();
+                //
+								// 	if (mysqli_num_rows($buscarFacil)>0) {
+								// 		echo '<div class="col-md-6">';
+								// 		echo '<div class="alert alert-success" role="alert">Facilitador Escuela del Futuro</div>';
+								// 		while ($filaEscuela = mysqli_fetch_object($buscarFacil))
+								// 		{
+								// 			echo"<div><b>Apellido y Nombre</b></div>";
+								// 			echo "<div>".$filaEscuela->apellido.", ".$filaEscuela->nombre."</div>";
+								// 			echo"<div><b>Teléfono</b></div>";
+								// 			echo "<div>".$filaEscuela->telefonoM." / ".$filaEscuela->telefonoC."</div>";
+								// 			echo"<div><b>Correo Electrónico</b></div>";
+								// 			echo "<div>".$filaEscuela->email."</div>";
+								// 			echo "<br>";
+								// 		}
+								// 		echo "</div>";
+								// 	}
+                //
+                //
+                //
+								//  echo '<div class="col-md-6">';
+								//  echo '<div class="alert alert-success" role="alert">Referente ETJ Conectar Igualdad</div>';
+								//  echo"<div><b>Apellido y Nombre</b></div>";
+								//  echo "<div>".$datoEtj->apellido.", ".$datoEtj->nombre."</div>";
+								//  echo"<div><b>Teléfono</b></div>";
+								//  echo "<div>".$datoEtj->telefonoM." / ".$datoEtj->telefonoC."</div>";
+								//  echo"<div><b>Correo Electrónico</b></div>";
+								//  echo "<div>".$datoEtj->email."</div>";
+								//  echo "<br></div>";
+                //
+								//  echo '<div class="col-md-6">';
+								//  echo '<div class="alert alert-success" role="alert">Referente ATT PMI (Plan Mejora Institucional)</div>';
+								//  echo"<div><b>Apellido y Nombre</b></div>";
+								//  echo "<div>".$datoAtt->apellido.", ".$datoAtt->nombre."</div>";
+								//  echo"<div><b>Teléfono</b></div>";
+								//  echo "<div>".$datoAtt->telefonoM." / ".$datoAtt->telefonoC."</div>";
+								//  echo"<div><b>Correo Electrónico</b></div>";
+								//  echo "<div>".$datoAtt->email."</div>";
+								//  echo "<br></div>";
+                //
+								//  echo '<div class="col-md-6">';
+								//  echo '<div class="alert alert-success" role="alert">Datos de Directivo</div>';
+								//  echo"<div><b>Apellido y Nombre</b></div>";
+								//  echo "<div>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
+								//  echo"<div><b>Teléfono</b></div>";
+								//  echo "<div>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";
+								//  echo"<div><b>Correo Electrónico</b></div>";
+								//  echo "<div>".$datoDirector->email."</div>";
+								//  echo "<br></div>";
+                //
+								//  echo '<div class="col-md-6">';
+								//  echo '<div class="alert alert-success" role="alert">Datos de Supervisor</div>';
+								//  echo"<div><b>Apellido y Nombre</b></div>";
+								//  echo "<div>".$datoSupervisor->apellido.", ".$datoSupervisor->nombre."</div>";
+								//  echo"<div><b>Teléfono</b></div>";
+								//  echo "<div>".$datoSupervisor->telefonoM." / ".$datoSupervisor->telefonoC."</div>";
+								//  echo"<div><b>Correo Electrónico</b></div>";
+								//  echo "<div>".$datoSupervisor->email."</div>";
+								//  echo "<br></div>";
+                //
+								//  echo '<div class="col-md-6">';
+								// echo '<div class="alert alert-success" role="alert">Datos de RTI</div>';
+                //
+								// echo"<div><b>Cantidad de RTI</b></div>";
+								// echo "<div><a href='index.php?mod=slat&men=escuelas&id=17&escuelaId=".$fila->escuelaId."'>".$cantidadRti."</a></div>";
+								// echo "<br></div>";
 
 								?>
 
-								</div>
+								<!-- </div>
 
 								</div>
 								</div>
 
-							 </div>
+							 </div> -->
 							<?php
 
 						}
-						  	echo "<div class='span11'>";
-				      	echo "<div id='map'></div>";
-				      	echo "</div>";
+						  	// echo "<div class='span11'>";
+				      	// echo "<div id='map'></div>";
+				      	// echo "</div>";
 
 
 						//}

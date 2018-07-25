@@ -127,6 +127,7 @@ $(document).ready(function() {
 
   $('#seleCategoria').change(function(event) {
     $('#seleSubCategoria').attr('disabled','disabled')
+    $('#carga').show()
   //  alert('cambio de opcion')
     let idCategoria= $(this).val()
     $('#seleSubCategoria').find('option').remove().end().append('<option value="0">Todas las Subcategorias...</option>').val('0');
@@ -138,6 +139,7 @@ $(document).ready(function() {
     })
     .done(function(data) {
       $('#seleSubCategoria').removeAttr('disabled')
+      $('#carga').fadeOut()
       for (let item of data) {
         $(`<option value="${item.subTipoId}">${item.nombre}</option>`).appendTo('#seleSubCategoria')
       }

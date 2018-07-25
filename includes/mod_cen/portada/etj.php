@@ -72,6 +72,14 @@ include_once "includes/mod_cen/clases/rtixescuela.php";
 include_once "includes/mod_cen/clases/rti.php";
 include_once "includes/mod_cen/clases/maestro.php";
 
+/**
+ * Obtener todas las categorias relacionadas a Planied, coordinacion
+ */
+
+$categoriasPermitidas = new TipoPermisos(null,null,'ETJ');
+$buscarPermitidas = $categoriasPermitidas->buscar();
+
+ /**********************************************/
 
 
 //create object referenteId and filter of status active
@@ -143,8 +151,47 @@ echo '<div class="container">';
       <div id='accordionBuscar4'>
           <h3>Informe</h3>
           <div>
-            <p>buscar de Informe</p>
+            <div id="cargando">
+              <img class="img img-responsive cargando" style="display:none;margin:auto;" src="img/iconos/informes/ajax-loader.gif"><br>
+              <b><p class="cargando"align="center"style="display:none;color:#068587;">Buscando Informes, por favor espere...</p></b>
+            </div>
+
+            <form class="form-inline" id="formBuscarInforme" action="" method="post">
+              <input type="text" name="numero" id="numero" value="" placeholder="N° Esc." size="5" class="form-control"><br><br>
+              <input type="text" name="titulo" id="titulo" value="" placeholder="Titulo Informe" class="form-control"><br><br>
+              <select class="form-control" id="seleCategoria" name="categoria">
+                <option value="0">Todas las Categorias...</option>
+                <?php
+                while ($rowCate = mysqli_fetch_object($buscarPermitidas) ) {
+                  echo '<option value="'.$rowCate->tipoId.'">'.$rowCate->nombre.'</option>';
+                }
+                 ?>
+              </select><br><br>
+              <select class="form-control" id="seleSubCategoria" name="subCategoria" >
+                <option value="0">Todas las subcategorias...</option>
+              </select>
+              <img class="img img-responsive" id="carga" src="img/iconos/informes/cargar.gif" style="display:none;margin:auto;max-width:3%;"><br>
+              <br><br>
+              <button type="button" id="buscarInforme" class="btn btn-primary" name="button">Buscar</button>
+            </form>
+            <div id="resultadoInforme">
+              <table id='tableinformes'>
+              <thead>
+                <tr>
+                  <th>Fecha Visitta</th>
+                  <th>Escuela</th>
+                  <th>Titulo</th>
+                  <!-- <th>Resp.</th>
+                  <th>Fecha</th>
+                  <th>Prioridad</th> -->
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+            </div>
           </div>
+
       </div>
 
     </div>
