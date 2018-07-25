@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+
+
   /** al clickear la escuela muestra info de la misma**/
 
   ///// one= agrega contenido una sola vez
@@ -16,7 +19,61 @@ $('[id ^=planied]').on('click',function(event) {
 let escuelaId= $(this).parent().parent().parent().parent().attr('id');
 //alert(escuelaId)
 let escuela= escuelaId.substr(3)
-//alert(escuelaId)
+// escuela tiene el dato: escuelaId
+
+// ******  desde aqui inicia codigo para ajax julio
+let listaReferentes=[]
+
+
+//alert(escuela)
+
+
+
+$.ajax({
+        url: 'includes/mod_cen/clases/ajax/ajaxPlaniedReferentes.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {escuela:escuela}
+      })
+      .done(function(lista) {
+
+          //console.log(item.nombre)
+            
+        
+       // console.log(lista[1].apellido);
+
+        for (let item of lista) {
+            
+          //referenteETT.personaId=item.personaId
+          //referente.nombre=item.nombre
+          //referente.apellido=item.apellido
+          //listaReferentes.push(referente)
+          listaReferentes.push(item)
+          //console.log(listaReferentes.apellido)
+            
+              
+                               
+       }
+       // console.log(listaReferentes[0].apellido)
+        // console.log(listaReferentes[1].apellido)
+      })
+
+      .fail(function() {
+        console.log("error en php");
+      })
+      .always(function() {
+        //console.log(informeActual.escuelaNombre)
+        //console.log("success Ajax Informe");
+        //formPersona(informeActual)
+
+
+
+        //console.log("complete");
+      });
+
+
+
+// aqui termina codigo de julio
 
 //alert('hola planied')
 
@@ -29,17 +86,50 @@ $('#bodyProgramas'+escuela).empty()
     $(`<div class="row">
     <div class="col-md-12">
     <div class="panel panel-default">
+
       <div class="panel-body" id="informes${escuela}">
       <p>informes planied</p>
 
       <div class="form-group">
        <div class="" id="padreIr">
 
+
        </div>
       </div>
       </div>
     </div>
     </div>
+    </div>
+
+
+    <div class="row">
+
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3 align="center">ETT: ${listaReferentes[0].apellido}</h3>
+          <hr>
+
+          <div class="row">
+          <div class="col-md-8">
+          <h4><img src="img/iconos/pruebaFotoPerfil/carnet-de-identidad (2).png" alt="">&nbsp&nbsp&nbsp25652325 / 21-52658985-5</h4>
+          <h4><img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" alt="">&nbsp&nbsp&nbsp15265897</h4>
+
+          <h4><img src="img/iconos/pruebaFotoPerfil/gmail (1).png" alt="">&nbsp&nbsp&nbsp ${listaReferentes[0].email}</h4>
+          <h4><img src="img/iconos/pruebaFotoPerfil/casa.png"alt="">&nbsp&nbsp&nbsp4258698</h4>
+          <h4><img src="img/iconos/pruebaFotoPerfil/casa (5).png" alt="">&nbsp&nbsp&nbsp'.$persona->getDireccion().'</h4>
+          <h4><img src="img/iconos/pruebaFotoPerfil/facebook (1).png" alt="">&nbsp&nbsp&nbsp'.$persona->getFacebook().'</h4>
+          <img src="img/iconos/pruebaFotoPerfil/gorjeo.png" alt="">&nbsp&nbsp&nbsp'.$persona->getTwitter().'</h4>
+          <h4>Informes PLANIED: (5)</h4>
+
+          </div>
+
+          <div class="col-md-4">
+          <img src="img/iconos/pruebaFotoPerfil/foto-perfil.jpg" alt="..." class="img-circle img-responsive">
+          </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     `).appendTo('#bodyProgramas'+escuela)
@@ -233,29 +323,28 @@ $('#bodyProgramas'+escuela).empty()
                     formPersona(informeActual)
 
 
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3 align="center">ETJ: ${listaReferentes[1].apellido}</h3>
+          <hr class='hrStyle'>
+        </div>
+      </div>
+    </div>
 
-                      //console.log("complete");
-                    });
+    </div>
 
-
-
-                });
-
-                //console.log("success");
-              })
-              .fail(function() {
-
-                console.log("error al tratar de traer los informes para listar ");
-              })
-              .always(function() {
-                //console.log("complete");
-              });
-          }
-
-
-    });
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3 align="center">RTI</h3>
+            <hr class='hrStyle'>
+          </div>
+        </div>
+    </div>
+    </div>`).appendTo('#bodyProgramas'+escuela)
  });
-
 
 
 
