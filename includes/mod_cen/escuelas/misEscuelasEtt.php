@@ -196,7 +196,7 @@ echo "</div>";
         echo '<tr id="fila'.$infoEscuela->escuelaId.'">';
         echo '<td>'.$infoEscuela->cue.'</td>';
         echo '<td>'.$infoEscuela->numero.'</td>';
-        echo '<td>'.$infoEscuela->nombre.'</td>';
+        echo '<td><a href="index.php?mod=slat&men=escuelas&id=3&escuelaId='.$infoEscuela->escuelaId.'">'.$infoEscuela->nombre.'</a></td>';
         echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
         echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
         if ($cantidadRti > 0 ) {

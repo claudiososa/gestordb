@@ -1,5 +1,6 @@
 	<?php
 		include_once('includes/mod_cen/clases/escuela.php');
+		include_once('includes/mod_cen/clases/EscuelaReferentes.php');
 		include_once('includes/mod_cen/clases/FacilEscuelas.php');
 		if (!empty($_GET['id']) AND isset($_SESSION["tipo"]))
 		{
@@ -134,7 +135,7 @@
 
 								switch ($_SESSION["tipo"]) {
 									case 'ETT':
-												$escuela=new Escuela($_GET["escuelaId"],$_SESSION['referenteId']);
+												$referente = new EscuelaReferentes(null,$_GET["escuelaId"],'19',$_SESSION['referenteId']);
 												break;
 									case 'ETJ':
 												$escuela=new Escuela($_GET["escuelaId"],$_SESSION['referenteId']);
@@ -154,8 +155,10 @@
 										break;
 								}
 
-								$b_escuela= $escuela->buscarRef($_SESSION["tipo"]);
-								$dato_escuela=mysqli_num_rows($b_escuela);
+								//$b_escuela= $escuela->buscarRef($_SESSION["tipo"]);
+								$buscarReferente= $referente->buscar();
+								$dato_escuela=mysqli_num_rows($buscarReferente);
+
 							}else{
 								$escuela = new FacilEscuelas(null,null,$_SESSION["referenteId"]);
 								$b_escuela = $escuela->buscar();
