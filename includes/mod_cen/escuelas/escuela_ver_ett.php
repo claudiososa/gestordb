@@ -18,6 +18,8 @@ include_once("includes/mod_cen/clases/rti.php");
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/director.php");
 include_once("includes/mod_cen/clases/EscuelaReferentes.php");
+include_once("includes/mod_cen/clases/Autoridades.php");
+include_once("includes/mod_cen/clases/EscuelaTipoAutoridad.php");
 
 /**
  * Inclusión de formulario para la busqueda de Escuelas
@@ -240,44 +242,405 @@ if(($_POST))
 
 						}
 
+										
 
-						
+						/*
+							Inicio de buscador de autoridades (Director y supervisor)
+													
+						*/
+							
+						  switch ($fila->nivel) {
+						  	case 'Primaria Común':
+						  		 // Director de Primaria
+						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'3');
+						  		$existeDirector= $autoridadDirector->existe();
+						  		if ($existeDirector != 0) {
+						  	
+						  		$autoridadDirector = new Autoridades($existeDirector);
+						  		$direDatos = $autoridadDirector->buscar();
+						  		$resultadoDirector=mysqli_fetch_object($direDatos);
+						  		$personaDire = new persona($resultadoDirector->personaId);
+						  		$buscarDirector = $personaDire->buscar();
+						  		$datoDirector=mysqli_fetch_object($buscarDirector);
 
-						/**
-						 * Buscar director de la institución
-						 * se guarda el objeto con datso en $datoDirector
-						 */
+						  		}else{
 
-  				  $director2= director::existeAutoridad($fila->escuelaId);
-						$director = mysqli_fetch_object($director2);
+							  	 $personaDirector= new Persona('1');
+								 $buscarPersona = $personaDirector->buscar();
+								 $datoDirector =mysqli_fetch_object($buscarPersona);
+									}
+								// Supervisor de Primaria
 
- 						$personaDire =  new Persona($director->personaId);
- 						$buscarDirector = $personaDire->buscar();
+								
+								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'4');
+						  		$existeSuper = $autoridadSuper->existe();
+						  		
+						  		if ($existeSuper != 0) {
+						  	
+						  		$autoridadSuper = new Autoridades($existeSuper);
+						  		$superDatos = $autoridadSuper->buscar();
+						  		$resultadoSuper=mysqli_fetch_object($superDatos);
+						  		$personaSuper = new persona($resultadoSuper->personaId);
+						  		$buscarSuper = $personaSuper->buscar();
+						  		$datoSupervisor=mysqli_fetch_object($buscarSuper);
 
- 						$datoDirector=mysqli_fetch_object($buscarDirector);
+						  		}
+						  		else{
 
-						if($director==NULL){
-							 $personaDirector= new Persona('1');
-							 $buscarPersona = $personaDirector->buscar();
-							 $datoDirector =mysqli_fetch_object($buscarPersona);
-						}
+							  	 $personaSuper= new Persona('1');
+								 $buscarSuper = $personaSuper->buscar();
+								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
+								}
+								
+						  		break;
+
+						  	case 'Primaria Especial':
+						  		
+						  		 // Director de Primaria Especial
+						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'28');
+						  		$existeDirector= $autoridadDirector->existe();
+						  		if ($existeDirector != 0) {
+						  	
+						  		$autoridadDirector = new Autoridades($existeDirector);
+						  		$direDatos = $autoridadDirector->buscar();
+						  		$resultadoDirector=mysqli_fetch_object($direDatos);
+						  		$personaDire = new persona($resultadoDirector->personaId);
+						  		$buscarDirector = $personaDire->buscar();
+						  		$datoDirector=mysqli_fetch_object($buscarDirector);
+
+						  		}else{
+
+							  	 $personaDirector= new Persona('1');
+								 $buscarPersona = $personaDirector->buscar();
+								 $datoDirector =mysqli_fetch_object($buscarPersona);
+									}
+								// Supervisor de Primaria Especial
+
+								
+								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'18');
+						  		$existeSuper = $autoridadSuper->existe();
+						  		
+						  		if ($existeSuper != 0) {
+						  	
+						  		$autoridadSuper = new Autoridades($existeSuper);
+						  		$superDatos = $autoridadSuper->buscar();
+						  		$resultadoSuper=mysqli_fetch_object($superDatos);
+						  		$personaSuper = new persona($resultadoSuper->personaId);
+						  		$buscarSuper = $personaSuper->buscar();
+						  		$datoSupervisor=mysqli_fetch_object($buscarSuper);
+
+						  		}
+						  		else{
+
+							  	 $personaSuper= new Persona('1');
+								 $buscarSuper = $personaSuper->buscar();
+								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
+								}
 
 
 
 
-						 /**
-							* [$locali description]
-							* @var Localidad
-							*/
-						  //var_dump($fila->supervisor_id);
-							if($fila->supervisor_id==NULL){
-								$personaSupervisor= new Persona("1");
-							}else{
-								$personaSupervisor= new Persona($fila->supervisor_id);
-							}
+						  		break;
 
-							$buscar_supervisor=$personaSupervisor->buscar();
-							$datoSupervisor=mysqli_fetch_object($buscar_supervisor);
+						  	case 'Secundaria Común':
+						  		
+						  			 // Director de Secundaria Comun
+						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'20');
+						  		$existeDirector= $autoridadDirector->existe();
+						  		if ($existeDirector != 0) {
+						  	
+						  		$autoridadDirector = new Autoridades($existeDirector);
+						  		$direDatos = $autoridadDirector->buscar();
+						  		$resultadoDirector=mysqli_fetch_object($direDatos);
+						  		$personaDire = new persona($resultadoDirector->personaId);
+						  		$buscarDirector = $personaDire->buscar();
+						  		$datoDirector=mysqli_fetch_object($buscarDirector);
+
+						  		}else{
+
+							  	 $personaDirector= new Persona('1');
+								 $buscarPersona = $personaDirector->buscar();
+								 $datoDirector =mysqli_fetch_object($buscarPersona);
+									}
+								// Supervisor de Secundaria
+
+								
+								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'15');
+						  		$existeSuper = $autoridadSuper->existe();
+						  		
+						  		if ($existeSuper != 0) {
+						  	
+						  		$autoridadSuper = new Autoridades($existeSuper);
+						  		$superDatos = $autoridadSuper->buscar();
+						  		$resultadoSuper=mysqli_fetch_object($superDatos);
+						  		$personaSuper = new persona($resultadoSuper->personaId);
+						  		$buscarSuper = $personaSuper->buscar();
+						  		$datoSupervisor=mysqli_fetch_object($buscarSuper);
+
+						  		}
+						  		else{
+
+							  	 $personaSuper= new Persona('1');
+								 $buscarSuper = $personaSuper->buscar();
+								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
+								}
+
+
+
+
+
+						  		break;
+						  	case 'Secundaria Rural':
+						  		
+						  		 // Director de Secundaria Rural
+						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'20');
+						  		$existeDirector= $autoridadDirector->existe();
+						  		if ($existeDirector != 0) {
+						  	
+						  		$autoridadDirector = new Autoridades($existeDirector);
+						  		$direDatos = $autoridadDirector->buscar();
+						  		$resultadoDirector=mysqli_fetch_object($direDatos);
+						  		$personaDire = new persona($resultadoDirector->personaId);
+						  		$buscarDirector = $personaDire->buscar();
+						  		$datoDirector=mysqli_fetch_object($buscarDirector);
+
+						  		}else{
+
+							  	 $personaDirector= new Persona('1');
+								 $buscarPersona = $personaDirector->buscar();
+								 $datoDirector =mysqli_fetch_object($buscarPersona);
+									}
+								// Supervisor de Secundaria Rural
+
+								
+								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'15');
+						  		$existeSuper = $autoridadSuper->existe();
+						  		
+						  		if ($existeSuper != 0) {
+						  	
+						  		$autoridadSuper = new Autoridades($existeSuper);
+						  		$superDatos = $autoridadSuper->buscar();
+						  		$resultadoSuper=mysqli_fetch_object($superDatos);
+						  		$personaSuper = new persona($resultadoSuper->personaId);
+						  		$buscarSuper = $personaSuper->buscar();
+						  		$datoSupervisor=mysqli_fetch_object($buscarSuper);
+
+						  		}
+						  		else{
+
+							  	 $personaSuper= new Persona('1');
+								 $buscarSuper = $personaSuper->buscar();
+								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
+								}
+
+
+
+						  		break;
+						  	case 'Secundaria Técnica':
+						  		
+
+						  			// Director de Secundaria Rural
+						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'25');
+						  		$existeDirector= $autoridadDirector->existe();
+						  		if ($existeDirector != 0) {
+						  	
+						  		$autoridadDirector = new Autoridades($existeDirector);
+						  		$direDatos = $autoridadDirector->buscar();
+						  		$resultadoDirector=mysqli_fetch_object($direDatos);
+						  		$personaDire = new persona($resultadoDirector->personaId);
+						  		$buscarDirector = $personaDire->buscar();
+						  		$datoDirector=mysqli_fetch_object($buscarDirector);
+
+						  		}else{
+
+							  	 $personaDirector= new Persona('1');
+								 $buscarPersona = $personaDirector->buscar();
+								 $datoDirector =mysqli_fetch_object($buscarPersona);
+									}
+								// Supervisor de Secundaria Rural
+
+								
+								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'14');
+						  		$existeSuper = $autoridadSuper->existe();
+						  		
+						  		if ($existeSuper != 0) {
+						  	
+						  		$autoridadSuper = new Autoridades($existeSuper);
+						  		$superDatos = $autoridadSuper->buscar();
+						  		$resultadoSuper=mysqli_fetch_object($superDatos);
+						  		$personaSuper = new persona($resultadoSuper->personaId);
+						  		$buscarSuper = $personaSuper->buscar();
+						  		$datoSupervisor=mysqli_fetch_object($buscarSuper);
+
+						  		}
+						  		else{
+
+							  	 $personaSuper= new Persona('1');
+								 $buscarSuper = $personaSuper->buscar();
+								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
+								}
+
+
+
+
+						  		break;
+						  	
+						  	case 'IEM':
+						  		
+
+						  			 // Director de Secundaria Comun IEM
+						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'20');
+						  		$existeDirector= $autoridadDirector->existe();
+						  		if ($existeDirector != 0) {
+						  	
+						  		$autoridadDirector = new Autoridades($existeDirector);
+						  		$direDatos = $autoridadDirector->buscar();
+						  		$resultadoDirector=mysqli_fetch_object($direDatos);
+						  		$personaDire = new persona($resultadoDirector->personaId);
+						  		$buscarDirector = $personaDire->buscar();
+						  		$datoDirector=mysqli_fetch_object($buscarDirector);
+
+						  		}else{
+
+							  	 $personaDirector= new Persona('1');
+								 $buscarPersona = $personaDirector->buscar();
+								 $datoDirector =mysqli_fetch_object($buscarPersona);
+									}
+								// Supervisor de Secundaria IEM
+
+								
+								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'15');
+						  		$existeSuper = $autoridadSuper->existe();
+						  		
+						  		if ($existeSuper != 0) {
+						  	
+						  		$autoridadSuper = new Autoridades($existeSuper);
+						  		$superDatos = $autoridadSuper->buscar();
+						  		$resultadoSuper=mysqli_fetch_object($superDatos);
+						  		$personaSuper = new persona($resultadoSuper->personaId);
+						  		$buscarSuper = $personaSuper->buscar();
+						  		$datoSupervisor=mysqli_fetch_object($buscarSuper);
+
+						  		}
+						  		else{
+
+							  	 $personaSuper= new Persona('1');
+								 $buscarSuper = $personaSuper->buscar();
+								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
+								}
+
+
+
+
+						  		break;
+						  	case 'ISFD':
+						  		
+						  		 // Rector de ISFD
+						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'22');
+						  		$existeDirector= $autoridadDirector->existe();
+						  		if ($existeDirector != 0) {
+						  	
+						  		$autoridadDirector = new Autoridades($existeDirector);
+						  		$direDatos = $autoridadDirector->buscar();
+						  		$resultadoDirector=mysqli_fetch_object($direDatos);
+						  		$personaDire = new persona($resultadoDirector->personaId);
+						  		$buscarDirector = $personaDire->buscar();
+						  		$datoDirector=mysqli_fetch_object($buscarDirector);
+
+						  		}else{
+
+							  	 $personaDirector= new Persona('1');
+								 $buscarPersona = $personaDirector->buscar();
+								 $datoDirector =mysqli_fetch_object($buscarPersona);
+									}
+								// Supervisor de ISFD
+
+								
+								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'16');
+						  		$existeSuper = $autoridadSuper->existe();
+						  		
+						  		if ($existeSuper != 0) {
+						  	
+						  		$autoridadSuper = new Autoridades($existeSuper);
+						  		$superDatos = $autoridadSuper->buscar();
+						  		$resultadoSuper=mysqli_fetch_object($superDatos);
+						  		$personaSuper = new persona($resultadoSuper->personaId);
+						  		$buscarSuper = $personaSuper->buscar();
+						  		$datoSupervisor=mysqli_fetch_object($buscarSuper);
+
+						  		}
+						  		else{
+
+							  	 $personaSuper= new Persona('1');
+								 $buscarSuper = $personaSuper->buscar();
+								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
+								}
+
+
+
+						  		break;
+
+						  	case 'BSPA':
+						  		
+						  		 // Coordinador bspa
+						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'29');
+						  		$existeDirector= $autoridadDirector->existe();
+						  		if ($existeDirector != 0) {
+						  	
+						  		$autoridadDirector = new Autoridades($existeDirector);
+						  		$direDatos = $autoridadDirector->buscar();
+						  		$resultadoDirector=mysqli_fetch_object($direDatos);
+						  		$personaDire = new persona($resultadoDirector->personaId);
+						  		$buscarDirector = $personaDire->buscar();
+						  		$datoDirector=mysqli_fetch_object($buscarDirector);
+
+						  		}else{
+
+							  	 $personaDirector= new Persona('1');
+								 $buscarPersona = $personaDirector->buscar();
+								 $datoDirector =mysqli_fetch_object($buscarPersona);
+									}
+								// Supervisor de bspa
+
+								
+								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'19');
+						  		$existeSuper = $autoridadSuper->existe();
+						  		
+						  		if ($existeSuper != 0) {
+						  	
+						  		$autoridadSuper = new Autoridades($existeSuper);
+						  		$superDatos = $autoridadSuper->buscar();
+						  		$resultadoSuper=mysqli_fetch_object($superDatos);
+						  		$personaSuper = new persona($resultadoSuper->personaId);
+						  		$buscarSuper = $personaSuper->buscar();
+						  		$datoSupervisor=mysqli_fetch_object($buscarSuper);
+
+						  		}
+						  		else{
+
+							  	 $personaSuper= new Persona('1');
+								 $buscarSuper = $personaSuper->buscar();
+								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
+								}
+
+
+
+						  		break;
+
+						  	default:
+						  		# code...
+						  		break;
+						  }
+
+						 
+
+						  /*
+						  Fin de Autoridades nuevo
+						*/	
+  				       
+
+
+						 
 
 						$locali=new Localidad($fila->localidadId,null);
 						$busca_loc= $locali->buscar();
