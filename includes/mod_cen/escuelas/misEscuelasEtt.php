@@ -10,6 +10,7 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/predioNuevo.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
 
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
@@ -155,6 +156,7 @@ echo "</div>";
       <th>Informes</th>
       <th>Autoridades</th>
       <th>RTI</th>
+      <th>Predio</th>
     </tr>
   </thead>
 
@@ -204,6 +206,7 @@ echo "</div>";
         }else{
           echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
         }
+        echo '<td id="predios'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info22'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
 
 
 
@@ -337,15 +340,10 @@ echo '</div>';
       }
     }
 
-    //echo '<div class="col-md-12">perez juan supervisor primaria</div>';
 
     echo '</div>';
 
     echo '</div>';
-
-
-  //  echo '</div>';
-  //  echo '</div>';
 
 
   }

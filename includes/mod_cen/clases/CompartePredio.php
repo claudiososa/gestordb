@@ -1,5 +1,4 @@
 <?php
-
 include_once('conexionv2.php');
 
 class CompartePredio
@@ -42,11 +41,12 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 
 	public function buscar($limit=NULL)
 	{
-		$nuevaConexion=new Conexion();
-		$conexion=$nuevaConexion->getConexion();
+		// INNER JOIN escuelas
+		// ON escuelaPredio.escuelaId = escuelas.escuelaId
+		$bd=conexion2::getInstance();
 	  $sentencia="SELECT * FROM escuelaPredio";
 
-		if($this->id!=NULL || $this->escuelaId!=NULL || $this->predio!=NULL)
+		if($this->id!=NULL || $this->escuelaId!=NULL || $this->predio!=NULL || $this->referenteId)
 		{
 			$sentencia.=" WHERE ";
 
@@ -58,12 +58,17 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 
 		if($this->escuelaId!=NULL)
 		{
-			$sentencia.=" escuelaId LIKE '%$this->escuelaId%'  && ";
+			$sentencia.=" escuelaId =$this->escuelaId  && ";
 		}
 
 		if($this->predio!=NULL)
 		{
 			$sentencia.=" predio=$this->predio && ";
+		}
+
+		if($this->referenteId!=NULL)
+		{
+			$sentencia.=" referenteId=$this->referenteId && ";
 		}
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
