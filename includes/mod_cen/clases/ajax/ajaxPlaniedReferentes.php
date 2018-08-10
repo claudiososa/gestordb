@@ -1,7 +1,7 @@
 <?php
   //include_once('../informe.php');
  //include_once('../img.php');
-  
+
    include_once('../EscuelaReferentes.php');
    include_once('../referente.php');
    include_once("../persona.php");
@@ -12,22 +12,22 @@
 
   //include_once('../respuesta.php');
   //include_once('../leido.php');
-  
+
  if (isset($_POST['escuela']))
   {
    //$cartel="llego bien";
   	//Maestro::debbugPHP($_POST['escuela']);
     //Maestro::debbugPHP($cartel);
-    
+
   	$arrayPrincipal=array();  // guarda los referentes etj,ett y rti
-    
+
     //*********** Cargamos Datos del ETT *****************//
 
     $escuelaPlanied= new EscuelaReferentes(null,$_POST['escuela']);
-    $ett=$escuelaPlanied->buscarReferente('19'); 
-        
+    $ett=$escuelaPlanied->buscarReferente('19');
+
     if ($ett->personaId != NULL) { // entra si la escuela tiene ETT
-    	
+
       $temporal=array(
       'personaId'=>$ett->personaId,
       'apellido'=>$ett->apellido,
@@ -40,25 +40,24 @@
       'direccion'=>$ett->direccion,
       'twitter'=>$ett->twitter,
       'fotoPerfil'=>$ett->fotoPerfil
-
       );
       $ettRefId=$ett->referenteId;
       array_push($arrayPrincipal,$temporal); // insertamos datos del ett al array principal
 
-      
+
       		//******** Cargamos Datos del ETJ ********//
-      		
+
       		$ettReferente= new Referente($ettRefId);
-      		     		
+
       		$etjAcargo = $ettReferente->buscar();  // buscamos el etj a cargo
-      				
+
       		$datosEtjAcargo=mysqli_fetch_object($etjAcargo);
       		//Maestro::debbugPHP($datosEtjAcargo);
 
-      		$etjReferente= new Referente($datosEtjAcargo->etjcargo); 
-      		
+      		$etjReferente= new Referente($datosEtjAcargo->etjcargo);
+
       		$etjBuscar=$etjReferente->buscar();
-      		
+
 
       		$etjPersonaId= mysqli_fetch_object($etjBuscar);
       		//Maestro::debbugPHP($etjPersonaId);
@@ -85,7 +84,7 @@
 	      );
 	    array_push($arrayPrincipal,$temporal);
 
-  
+
 
 
     }else{   // entra aqui x que no tiene ETT
@@ -112,9 +111,9 @@
       $escuelaPlanied= new EscuelaReferentes(null,$_POST['escuela']);
       $etj=$escuelaPlanied->buscarReferente('20'); // Busco etj de la escuela
 
-       
+
        if ($etj->personaId != NULL) {
-    	    
+
 
 	    $temporal=array(
 	      'personaId'=>$etj->personaId,
@@ -152,14 +151,14 @@
 	    array_push($arrayPrincipal,$temporal);
     }
 
-     
+
 
  }
-      
-      
-        
-    
-   
+
+
+
+
+
 
 // datos de rti
 
@@ -198,13 +197,13 @@
 
 
 
-// fin de datos rti     
+// fin de datos rti
 
     //Maestro::debbugPHP($list);
      Maestro::debbugPHP($arrayPrincipal);
-    //$json = json_encode($list);  
+    //$json = json_encode($list);
     $json = json_encode($arrayPrincipal);
-   
+
     echo $json;
   }
 
