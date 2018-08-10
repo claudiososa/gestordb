@@ -4,6 +4,7 @@ include_once("includes/mod_cen/clases/referente.php");
 include_once("includes/mod_cen/clases/rtixescuela.php");
 include_once("includes/mod_cen/clases/persona.php");
 include_once("includes/mod_cen/clases/rti.php");
+include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 $referenteId=$_GET['referenteId'];
 
@@ -21,12 +22,26 @@ $dato_persona =  mysqli_fetch_object($b_persona);
 //Crear objeto escuela y buscar las escuelas que tiene a cargo el Referente
 if($_SESSION['tipo']=='DirectorNivelSecundario' || $_SESSION['tipo']=='Supervisor-Secundaria' || $_SESSION['tipo']=='Supervisor-General-Secundaria'){
 	$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
-}else{
-	$escuela= new Escuela(null,$referenteId);
-}
+	$escuela_acargo=$escuela->buscar();
+   }else{
+
+	       if ($_SESSION['tipo']=='ETJ' || $_SESSION['tipo']=='Coordinador' ) {
+	  		$escuela=new EscuelaReferentes(null,null,'19',$referenteId); // buscamos las escuelas del ETT
+	        //$resultado=$escuela->buscar2();// devuelve todos los datos de las escuelas del ETT
+			$escuela_acargo=$escuela->buscar2();
+	  
+
+	      } else {
+
+	  		$escuela= new Escuela(null,$referenteId);
+	  		$escuela_acargo=$escuela->buscar();
+	             }
+	
+
+	 }
 
 
-$escuela_acargo=$escuela->buscar();
+
 echo '<div class="table-responsive">';
 echo '<div class="container">';
 
