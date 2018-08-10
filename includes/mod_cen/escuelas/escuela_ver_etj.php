@@ -4,6 +4,7 @@ hr {
     border-top: 2px solid #FFC61B;
   }
 
+
 </style>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript" src="gmap/gmaps.js"></script>
@@ -49,18 +50,6 @@ $b_referente= $c_referente->buscar();
 echo'</div>';
  echo'<br>';
 
- //echo'<a>';
- //echo'<div class="col-md-3 col-md-offset-5 pull-right" onclick="history.back()">';
- //echo'<img class="img-responsive img-circle"  src="includes/mod_cen/portada/imgPortadas/flecha-hacia-la-izquierda (4).png">';
- //echo'</div>';
- //echo'<div class="col-md-3 col-md-offset-5 pull-right hidden-xs" onclick="history.back()">';
- //echo'<p>Volver Atrás</p>';
- //echo'</div>';
- //echo'</a>';
-
-
- //echo'<br>';
- //echo'<br>';
  echo'<br>';
  echo'<br>';
 
@@ -346,56 +335,65 @@ if(($_POST))
 								// echo '<div class="panel panel-default">';
 
 								?>
+
+
                 <div class="col-md-12">
                   <ul class="list-group">
                     <li class="list-group-item">
+
                       <div class="row">
                         <!-- escuela sin foto -->
                       <?php echo '  <div class="col-md-9" id="escuela'.$fila->escuelaId.'">
                           <h4><b>';
     									 		echo $fila->numero." - ".substr($fila->nombre,0,40);
     									 		?></b></h4>
-
-
                         </div>
-
-
                       </div><!-- </row -->
                       <?php echo '<div class="" id="ver'.$fila->escuelaId.'" style="display:none">'; ?>
-                        <div class="col-md-9">
-                          <h4>Cue: <?php echo $fila->cue?></h4>
-                          <h4>Localidad: <?php echo $fila1->nombre ?></h4>
-                        </div>
 
-                        <!-- imagen de escuela -->
-                        <div class="col-md-3">
-                          <br><img class="img-thumbnail" src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" alt="imagen no disponible">
-
-                        </div><!-- </col-md-3 -->
+                        <!-- modificacion -->
                         <div class="row">
-                          <div class="col-md-6">
-                            <img src="img/iconos/pruebaFotoPerfil/ubicacion.png" class="img-responsive" alt="iconoGoogleMaps" align="left"><?php echo $fila->domicilio ?>
+                          <div class="col-md-8">
+                             <div class="row"><!-- padding-left 20px -->
+                              <h4>Cue: <?php echo $fila->cue?></h4>
+                              <h4>Localidad: <?php echo $fila1->nombre ?></h4>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <img src="img/iconos/pruebaFotoPerfil/ubicacion.png" class="img-responsive" alt="iconoGoogleMaps" align="left"><?php echo $fila->domicilio ?>
+                              </div>
+                              <div class="col-md-6">
+                                <?php
+                                if ($fila->telefono) {
+                                  echo '<img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" class="img-responsive" alt="iconoGoogleMaps" align="left">'.$fila->telefono.'';
+                                }
+                                ?>
+                              </div>
+                              <div class="col-md-6">
+                                <?php
+                                if ($fila->email) {
+                                  echo '<img src="img/iconos/pruebaFotoPerfil/gmail (1).png" class="img-responsive" alt="iconoGoogleMaps" align="left">'.$fila->email.'';
+                                }
+                                 ?>
+                              </div>
+                              <!-- <div class="col-md-6">
+                                hola
+                              </div> -->
+
+                            </div>
+
                           </div>
-                          <?php
-                          if ($fila->telefono) {
-
-                            echo '<img src="img/iconos/pruebaFotoPerfil/llamada-smartphone.png" class="img-responsive" alt="iconoGoogleMaps" align="left">'.$fila->telefono.'';
-                          }
-                          if ($fila->email) {
-
-                            echo '<img src="img/iconos/pruebaFotoPerfil/gmail (1).png" class="img-responsive" alt="iconoGoogleMaps" align="left">'.$fila->email.'';
-                          }
-                           ?>
+                          <div class="col-md-4">
+                            <img class="img-thumbnail" src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" alt="imagen no disponible">
+                          </div>
 
                         </div>
+                        <!-- modificacion -->
 
       <br>
-
-
       				<!-- botones por programas -->
       				<div class="row" >
       		<div class="col-md-8 col-md-offset-2">
-
        <?php
       					echo '<div class="btn-group" role="group" aria-label="..." >
         					<button type="button" class="btn btn-default" id="planied'.$fila->escuelaId.'">
@@ -420,9 +418,6 @@ if(($_POST))
     <div class="panel panel-default">
       <div class="panel-body" id="bodyProgramas'.$fila->escuelaId.'">
 
-
-
-
       </div>
     </div>
 
@@ -433,174 +428,21 @@ if(($_POST))
 '; ?>
 <!-- FIN CONTENIDO PROGRAMAS -->
                       </div>
+
                     </li>
 
                   </ul>
 
                 </div>
-
-									<!-- <h1 class="panel-title">
-									 <a data-toggle="collapse" href="#collapse1<?php echo $fila->escuelaId ?>">
-									 	<div class="alert alert-info" role="alert" >
-											<b>
-									 		<?php
-									 		echo $fila->numero." - ".$fila->cue." - ".substr($fila->nombre,0,40);
-									 		?>
-									 		</b>
-										</div>
-									</a>
-								 </h1> -->
-
-
-
-
-
-							 <!-- <div id="collapse1<?php echo $fila->escuelaId ?>" class="panel-collapse collapse">
-
-			 				<div class="col-md-6">
-								 <div class="alert alert-success" role="alert">Datos de la Institución</div> -->
-								 <?php
-								//  echo "<div><b>Nº Colegio</b></div>";
-								//  echo "<div>".$fila->numero."</div>";
-								//  echo "<div><b>CUE</b></div>";
-								//  echo "<div>".$fila->cue."</div>";
-								//  echo "<div><b>Nombre</b></div>";
-								//  echo "<div>".$fila->nombre."</div>";
-								//  echo"<div><b>Localidad</b></div>";
-								//  echo "<div>".$fila1->nombre."</div>";
-								//  echo"<div><b>Dirección</b></div>";
-								//  echo "<div>".$fila->domicilio."</div>";
-								//  echo"<div><b>Teléfono</b></div>";
-								//  echo "<div>".$fila->telefono."</div>";
-								//  echo"<div><b>Email</b></div>";
-								//  echo "<div>".$fila->email."</div>";
-								//  echo "<br></div>";
-
-								//  echo '<div class="col-md-6">';
-								//  echo '<div class="alert alert-success" role="alert">Informes Creados</div>';
-								//  echo"<div><b>Cantidad Total</b></div>";
-								//  echo "<div><a href='index.php?mod=slat&men=informe&id=2&escuelaId=".$fila->escuelaId."'>Ver todos los informes &nbsp(".$cantInformes.")</a></div>";
-								//  echo"<div><b>Últimos Informes creados</b></div>";
-								//  echo "<div>";
-								//  echo "<ul class='list-group'>";
-                 //
-								//  while($ultimos = mysqli_fetch_object($ultimosInformes))
-								//  {
-                 //
-								// 	 $date = date_create($ultimos->fechaCarga);
-								// 	 $fecha=date_format($date, 'd-m-Y');
-								// 	 echo "<li class='list-group-item list-group-item-success'>
-								// 	 <div><a href='index.php?mod=slat&men=informe&id=3&informeId=".$ultimos->informeId."'>".substr($ultimos->titulo,0, 45)."...</a></div>
-								// 	 <div>Fecha Creación: ".$fecha."</div>
-								// 	 <div>Creado por: ".$ultimos->apellido." ".$ultimos->nombre."</div>
-								// 	 </li>";
-								// 	 //echo "<div><a href='index.php?mod=slat&men=informe&id=3&informeId=".$ultimos->informeId."'>".substr($ultimos->titulo,0, 30)."... -> ".$fecha."</a></div>";
-								//  }
-								//  echo "</ul>";
-								//  echo "</div>";
-								//  echo "<br>";
-								//  echo"<div><b><a class='btn btn-primary' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Nuevo Informe</a></b></div>";
-								//  echo "<br></div>";
-
-								//  echo '<div class="col-md-6">';
-								//  echo '<div class="alert alert-success" role="alert">Referente ETT Conectar Igualdad</div>';
-								//  echo"<div><b>Apellido y Nombre</b></div>";
-								//  echo "<div>".$datoEtt->apellido.", ".$datoEtt->nombre."</div>";
-								//  echo"<div><b>Teléfono</b></div>";
-								//  echo "<div>".$datoEtt->telefonoM." / ".$datoEtt->telefonoC."</div>";
-								//  echo"<div><b>Correo Electrónico</b></div>";
-								//  echo "<div>".$datoEtt->email."</div>";
-								//  echo "<br></div>";
-                //
-								//  	$facilitador = new FacilEscuelas(null,$fila->escuelaId);
-								//  	$buscarFacil= $facilitador->buscar();
-                //
-								// 	if (mysqli_num_rows($buscarFacil)>0) {
-								// 		echo '<div class="col-md-6">';
-								// 		echo '<div class="alert alert-success" role="alert">Facilitador Escuela del Futuro</div>';
-								// 		while ($filaEscuela = mysqli_fetch_object($buscarFacil))
-								// 		{
-								// 			echo"<div><b>Apellido y Nombre</b></div>";
-								// 			echo "<div>".$filaEscuela->apellido.", ".$filaEscuela->nombre."</div>";
-								// 			echo"<div><b>Teléfono</b></div>";
-								// 			echo "<div>".$filaEscuela->telefonoM." / ".$filaEscuela->telefonoC."</div>";
-								// 			echo"<div><b>Correo Electrónico</b></div>";
-								// 			echo "<div>".$filaEscuela->email."</div>";
-								// 			echo "<br>";
-								// 		}
-								// 		echo "</div>";
-								// 	}
-                //
-                //
-                //
-								//  echo '<div class="col-md-6">';
-								//  echo '<div class="alert alert-success" role="alert">Referente ETJ Conectar Igualdad</div>';
-								//  echo"<div><b>Apellido y Nombre</b></div>";
-								//  echo "<div>".$datoEtj->apellido.", ".$datoEtj->nombre."</div>";
-								//  echo"<div><b>Teléfono</b></div>";
-								//  echo "<div>".$datoEtj->telefonoM." / ".$datoEtj->telefonoC."</div>";
-								//  echo"<div><b>Correo Electrónico</b></div>";
-								//  echo "<div>".$datoEtj->email."</div>";
-								//  echo "<br></div>";
-                //
-								//  echo '<div class="col-md-6">';
-								//  echo '<div class="alert alert-success" role="alert">Referente ATT PMI (Plan Mejora Institucional)</div>';
-								//  echo"<div><b>Apellido y Nombre</b></div>";
-								//  echo "<div>".$datoAtt->apellido.", ".$datoAtt->nombre."</div>";
-								//  echo"<div><b>Teléfono</b></div>";
-								//  echo "<div>".$datoAtt->telefonoM." / ".$datoAtt->telefonoC."</div>";
-								//  echo"<div><b>Correo Electrónico</b></div>";
-								//  echo "<div>".$datoAtt->email."</div>";
-								//  echo "<br></div>";
-                //
-								//  echo '<div class="col-md-6">';
-								//  echo '<div class="alert alert-success" role="alert">Datos de Directivo</div>';
-								//  echo"<div><b>Apellido y Nombre</b></div>";
-								//  echo "<div>".$datoDirector->apellido.", ".$datoDirector->nombre."</div>";
-								//  echo"<div><b>Teléfono</b></div>";
-								//  echo "<div>".$datoDirector->telefonoM." / ".$datoDirector->telefonoC."</div>";
-								//  echo"<div><b>Correo Electrónico</b></div>";
-								//  echo "<div>".$datoDirector->email."</div>";
-								//  echo "<br></div>";
-                //
-								//  echo '<div class="col-md-6">';
-								//  echo '<div class="alert alert-success" role="alert">Datos de Supervisor</div>';
-								//  echo"<div><b>Apellido y Nombre</b></div>";
-								//  echo "<div>".$datoSupervisor->apellido.", ".$datoSupervisor->nombre."</div>";
-								//  echo"<div><b>Teléfono</b></div>";
-								//  echo "<div>".$datoSupervisor->telefonoM." / ".$datoSupervisor->telefonoC."</div>";
-								//  echo"<div><b>Correo Electrónico</b></div>";
-								//  echo "<div>".$datoSupervisor->email."</div>";
-								//  echo "<br></div>";
-                //
-								//  echo '<div class="col-md-6">';
-								// echo '<div class="alert alert-success" role="alert">Datos de RTI</div>';
-                //
-								// echo"<div><b>Cantidad de RTI</b></div>";
-								// echo "<div><a href='index.php?mod=slat&men=escuelas&id=17&escuelaId=".$fila->escuelaId."'>".$cantidadRti."</a></div>";
-								// echo "<br></div>";
-
-								?>
-
-								<!-- </div>
-
-								</div>
-								</div>
-
-							 </div> -->
-							<?php
+<?php
 
 						}
-						  	// echo "<div class='span11'>";
-				      	// echo "<div id='map'></div>";
-				      	// echo "</div>";
 
-
-						//}
 					}else{
 						$escuela=new Escuela(NULL);
 					}
 			?>
+
 			<script type="text/javascript">
 			$(document).ready(function() {
 				$('#example').DataTable( {
