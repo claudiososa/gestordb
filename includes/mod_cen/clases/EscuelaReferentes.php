@@ -265,7 +265,7 @@ public function buscar2()
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
-		$sentencia="SELECT escuelaReferentes.referenteId,escuelaReferentes.escuelaId,escuelas.numero,escuelas.cue,escuelas.nombre
+		$sentencia="SELECT escuelaReferentes.referenteId,escuelaReferentes.escuelaId,escuelas.numero,escuelas.cue,escuelas.nombre, escuelas.nivel, escuelas.localidadId
 		                    FROM escuelaReferentes
 								INNER JOIN escuelas
 								ON escuelas.escuelaId = escuelaReferentes.escuelaId	";

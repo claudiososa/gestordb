@@ -11,6 +11,7 @@ hr {
 	include_once("includes/mod_cen/clases/departamentos.php");
 	include_once("includes/mod_cen/clases/referente.php");
 	include_once("includes/mod_cen/clases/rtixescuela.php");
+	include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 	$referenteId=$_SESSION['referenteId'];
 
@@ -50,10 +51,24 @@ hr {
 		while ($fila = mysqli_fetch_object($resultado))
 		{
 
+			/* Modificaciones para leer de la tabla escuela referentes */
+			// ***** aqui se modifico la busqueda en tabla escuelaReferentes  ******//
+
+		//$escuelas= new Escuela(null,$registro->referenteId);
+		//$buscarEscuelas=$escuelas->buscar();
+		$escuela=new EscuelaReferentes(null,null,'19',$fila->referenteId); // buscamos las escuelas del ETT
+		$buscar_escuela=$escuela->buscar2();// devuelve todos los datos de las escuelas del ETT
+		$cantidad_escuela=mysqli_num_rows($buscar_escuela); // Guardamos la Cantidad de Escuelas de cada ETT
+
+
+		// ***** fin de modificaciones  ******//////
+
+
+/*
 			$escuela= new Escuela(null,$fila->referenteId);
 			$buscar_escuela = $escuela->buscar();
 			$cantidad_escuela = mysqli_num_rows($buscar_escuela);
-
+*/
 			$cant_rti=0;
 
 			while ($fila2 = mysqli_fetch_object($buscar_escuela))
@@ -77,7 +92,7 @@ hr {
 
 			//$buscar_departamento = $departamento->buscar();
 			$dato_depa = mysqli_fetch_object($depa);
-
+			
 			echo "<tr>";
 			echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
 			//echo "<td>".$fila->tipo."</td>";

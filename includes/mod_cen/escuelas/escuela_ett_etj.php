@@ -5,6 +5,7 @@ include_once("includes/mod_cen/clases/localidades.php");
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/rtixescuela.php");
 include_once("includes/mod_cen/clases/rti.php");
+include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 
 
 $referenteId=$_GET['referenteId'];
@@ -14,8 +15,20 @@ $datoref=mysqli_fetch_object($consulta);
 
 
 if($_SESSION['tipo']=='ETJ' || $_SESSION['tipo']=='Coordinador' ){
-	$escuela= new Escuela(null,$referenteId);
-	$resultado = $escuela->Cargo();
+	//$escuela= new Escuela(null,$referenteId);
+	//$resultado = $escuela->Cargo();
+	/*
+    modificaciones para tabla escuela referente
+    */
+
+        $escuela=new EscuelaReferentes(null,null,'19',$referenteId); // buscamos las escuelas del ETT
+		$resultado=$escuela->buscar2();// devuelve todos los datos de las escuelas del ETT
+		$cantidad_escuela=mysqli_num_rows($resultado); // Guardamos la Cantidad de Escuelas de cada ETT
+
+
+
+    /* fin */
+
 }elseif($_SESSION['tipo']=='CoordinadorPmi'){
 	$escuela= new Escuela(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,$referenteId);
 	$resultado = $escuela->Cargo('ATT');
@@ -42,7 +55,8 @@ if($_SESSION['tipo']=='ETJ' || $_SESSION['tipo']=='Coordinador' ){
 	echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
 	//echo "<tr><th colspan='7'><h2>Escuelas a Cargo de: ".$datoref->nombre.", ".$datoref->apellido."</h2></th></tr>";
 	echo "<thead>";
-	echo "<tr ><th>CUE</th>";
+	echo "<tr><th>CUE</th>";
+	echo "<th>N°</th>";
 	echo "<th>Nombre</th>";
 	echo "<th>Nivel</th>";
 	echo "<th>Localidad</th>";
@@ -62,6 +76,7 @@ while ($fila = mysqli_fetch_object($resultado))
 
 	echo "<tr>";
 	echo "<td>".$fila->cue."</td>";
+	echo "<td>".$fila->numero."</td>";
 	echo "<td>"."<a href='index.php?mod=slat&men=escuelas&id=2&escuelaId=".$fila->escuelaId."'>".$fila->nombre."</a></td>";
 	//echo "<td>".$fila->nombre."</td>";
 	echo "<td>".$fila->nivel."</td>";
