@@ -45,19 +45,17 @@ include_once('includes/mod_cen/clases/persona.php');
           </a>
             <ul class="dropdown-menu">
               <?php
-              if(strpos($_SESSION["nombre"],' ')==0){
+           if(strpos($_SESSION["nombre"],' ')==0){
 
-                echo $persona->getFotoPerfil();
-             echo ucwords(strtolower($_SESSION["nombre"]));
-           }else{
+          //      echo $persona->getFotoPerfil();
+             //echo ucwords(strtolower($_SESSION["nombre"]));
+        //   }else{
 
-             echo ucwords(substr(strtolower($_SESSION["nombre"]),0,strpos($_SESSION["nombre"],' ')));
-             echo $persona->getFotoPerfil();
+            // echo ucwords(substr(strtolower($_SESSION["nombre"]),0,strpos($_SESSION["nombre"],' ')));
+          //   echo $persona->getFotoPerfil();
 
            }
           ?>
-              <!-- <p><?php  $_SESSION["nombre"]?></p> -->
-            <li class="divider"></li>
 
                 <li><a href="index.php?men=mensajes&id=2"><span class="glyphicon glyphicon glyphicon-envelope pull-left" style="color:#068587"></span>&nbsp&nbspMis mensajes</a></li>
                 <li class="divider"></li>
