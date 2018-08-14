@@ -229,7 +229,7 @@ class Referente
 															on referentes.personaId=personas.personaId
 															WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
 															break;
-															
+
 
 				default:
 					# code...
