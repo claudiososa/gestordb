@@ -58,29 +58,29 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 
 		if($this->escuelaId!=NULL)
 		{
-			$sentencia.=" escuelaId =$this->escuelaId  && ";
+			$sentencia.=" escuelaId = $this->escuelaId  && ";
 		}
 
 		if($this->predio!=NULL)
 		{
-			$sentencia.=" predio=$this->predio && ";
+			$sentencia.=" predio = $this->predio && ";
 		}
 
 		if($this->referenteId!=NULL)
 		{
-			$sentencia.=" referenteId=$this->referenteId && ";
+			$sentencia.=" referenteId = $this->referenteId && ";
 		}
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 
 		}
 
-		$sentencia.="  ORDER BY escuelaId DESC";
+		$sentencia.="  ORDER BY id DESC";
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
 		//echo $sentencia;
-		return $conexion->query($sentencia);
+		return $bd->ejecutar($sentencia);
 
 	}
 
