@@ -217,29 +217,6 @@ echo '<div class="container">';
     </div>
   </div>
 
-	<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
-	</div> -->
-
-	<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
-	</div>
-
-	<div class="col-lg-2 col-md-4 col-sm-4">
-		<a href="index.php?mod=slat&men=user&id=2" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis ETT</h3></a>
-	</div>
-
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
-</div> -->
-
-<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
-</div> -->
-
-<!-- <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=videoTutorial&id=1" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
-</div> -->
 
 </div>
 <!--vista mobile-->
@@ -249,35 +226,9 @@ echo '<div class="container">';
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
-	<!-- <div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
-	</div> -->
+
 </div>
 
-
-
-<!-- <div class="row visible-xs wow zoomIn">
-	<div class="col-xs-6">
-		<a href="index.php?mod=slat&men=user&id=2" style="text-decoration:none"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h3 align="center">Mis ETT</h3></a>
-	</div>
-<div class="col-xs-6"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
-	<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
-</div>
-
-</div> -->
-
-
-<!-- <div class="row visible-xs wow zoomIn">
-
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
-	</div>
-
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/laptop.png"><h3 align="center">Video Tutoriales DBMS</h3></a>
-	</div>
-
-</div> -->
 <?php
 
 		if(mysqli_num_rows($resultado_ett_acargo)>0){
@@ -324,7 +275,25 @@ echo '<div class="container">';
 						$cantidadActual=mysqli_num_rows($actual);
 						$cantidadNoLeidos=mysqli_num_rows($informesNoLeidos);
 
-						echo "<h4><p align='center' class='nombreApellido'><b>".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</b></p></h4>";
+            // foto perfil
+
+            $personaId1= strtoupper($fila->personaId);
+            $persona1= new Persona($personaId1);
+            $persona1 = $persona1->getContacto();
+
+            $nomArchivoFoto="./img/perfil/";
+            if ($persona1->getFotoPerfil() == "") {
+                $nomArchivoFoto.= "0000.jpg";
+            }else {
+                $nomArchivoFoto.= $persona1->getFotoPerfil();
+                //$nomArchivoFoto.=".jpg";
+                  }
+          //  echo  " ";
+            // foto perfil
+						echo "<h4 align='center'><p  class='nombreApellido'><img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 55px; height: 55px;' ><b> ".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</b></p></h4>";
+
+
+
             echo "<hr class='hrNombreApellido'>";
 						//echo "<p class='alert alert-success'>Total Informes - $cantidadActual</p>";
 						$contador++;
