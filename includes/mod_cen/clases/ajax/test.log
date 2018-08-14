@@ -1,52 +1,12 @@
-array(2) {
-  [0]=>
-  array(11) {
-    ["personaId"]=>
-    string(4) "1639"
-    ["apellido"]=>
-    string(8) "VIDAURRE"
-    ["nombre"]=>
-    string(5) "JULIO"
-    ["dni"]=>
-    string(8) "27631704"
-    ["cuil"]=>
-    string(11) "20276317048"
-    ["telefonoM"]=>
-    string(10) "3875198191"
-    ["telefonoC"]=>
-    string(10) "3874998917"
-    ["email"]=>
-    string(17) "jfvpipo@gmail.com"
-    ["direccion"]=>
-    string(27) "San Martin 125 B° San Luis"
-    ["twitter"]=>
-    string(0) ""
-    ["fotoPerfil"]=>
-    string(8) "1639.jpg"
-  }
-  [1]=>
-  array(11) {
-    ["personaId"]=>
-    string(4) "0016"
-    ["apellido"]=>
-    string(4) "JURY"
-    ["nombre"]=>
-    string(14) "EMILIO ANTONIO"
-    ["dni"]=>
-    string(8) "14489714"
-    ["cuil"]=>
-    string(11) "20144897146"
-    ["telefonoM"]=>
-    string(10) "3874066345"
-    ["telefonoC"]=>
-    string(10) "3874066345"
-    ["email"]=>
-    string(20) "juryemilio@gmail.com"
-    ["direccion"]=>
-    string(34) "BO. ARTURO ILLIA- BLOCK K- DEPTO 5"
-    ["twitter"]=>
-    string(0) ""
-    ["fotoPerfil"]=>
-    string(0) ""
-  }
+object(mysqli_result)#5 (5) {
+  ["current_field"]=>
+  int(0)
+  ["field_count"]=>
+  int(13)
+  ["lengths"]=>
+  NULL
+  ["num_rows"]=>
+  int(1)
+  ["type"]=>
+  int(0)
 }

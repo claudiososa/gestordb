@@ -51,7 +51,10 @@
 
     $informe =  new informe($_POST['informeId']);
     $buscarInforme = $informe->buscarUnico();
-    //Maestro::debbugPHP($buscarInforme);
+    $referente = new Referente($informe->referenteId);
+    $buscarReferente = $referente->buscar();
+    $datoReferente = mysqli_fetch_object($buscarReferente);
+    Maestro::debbugPHP($buscarInforme);
     $datoInforme = mysqli_fetch_object($buscarInforme);
 
     $list=array();
@@ -67,7 +70,8 @@
       'prioridad' =>$datoInforme->prioridad,
       'titulo' =>$datoInforme->titulo,
       'contenido' =>$datoInforme->contenido,
-      'referente' =>$datoInforme->referenteId
+      'referente' =>$datoInforme->referenteId,
+      'nombreAutor'=>$datoReferente->apellido." ".$datoReferente->nombre
     );
 
     array_push($list,$temporal);

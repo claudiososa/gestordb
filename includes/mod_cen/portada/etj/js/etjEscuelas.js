@@ -47,7 +47,7 @@ $(document).ready(function() {
 
       for (let item of data) {
 
-        $('#tableinformes tbody').append(`<tr class="trinformes">
+        $('#tableinformes tbody').append(`<tr id="${item.referente}" class="trinformes">
 
         <td>${item.numero}</td>
         <td>${item.fecha}</td>
@@ -74,7 +74,9 @@ $(document).ready(function() {
           prioridad: "",
           categoria:  "",
           subcategoria:  "",
-          titulo: ""
+          titulo: "",
+          referenteId: "",
+          nombreAutor: ""
         }
 
                //$('[id ^=if]').on('click', function(){
@@ -99,6 +101,9 @@ $(document).ready(function() {
                 informeActual.contenido=item.contenido
                 informeActual.informeId=informeId
                 informeActual.escuelaId=item.escuelaId
+                informeActual.referenteId=item.referente
+                informeActual.nombreAutor=item.nombreAutor
+
 
             }
           })
