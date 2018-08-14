@@ -51,11 +51,13 @@
 
     $informe =  new informe($_POST['informeId']);
     $buscarInforme = $informe->buscarUnico();
-    $referente = new Referente($informe->referenteId);
+    $datoInforme = mysqli_fetch_object($buscarInforme);
+
+    $referente = new Referente($datoInforme->referenteId);
     $buscarReferente = $referente->buscar();
     $datoReferente = mysqli_fetch_object($buscarReferente);
-    Maestro::debbugPHP($buscarInforme);
-    $datoInforme = mysqli_fetch_object($buscarInforme);
+    Maestro::debbugPHP($datoReferente);
+
 
     $list=array();
     $temporal=array(

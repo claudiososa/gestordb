@@ -24,7 +24,7 @@ function formPersona(informeActual)
               </div>
 
               <div class="row">
-                <div class="col-md-6">Creado por:>${informeActual.nombreAutor} </div><div class="col-md-6">Fecha: ${informeActual.fecha}</div>
+                <div class="col-md-6">Creado por:${informeActual.nombreAutor} </div><div class="col-md-6">Fecha: ${informeActual.fecha}</div>
               </div>
               <div class="row">
                 <div class="col-md-6">Prioridad: ${informeActual.prioridad}</div>
