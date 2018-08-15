@@ -73,7 +73,8 @@
       'titulo' =>$datoInforme->titulo,
       'contenido' =>$datoInforme->contenido,
       'referente' =>$datoInforme->referenteId,
-      'nombreAutor'=>$datoReferente->apellido." ".$datoReferente->nombre
+      'nombreAutor'=>$datoReferente->apellido." ".$datoReferente->nombre,
+      'fotoPerfil'=>$datoReferente->fotoPerfil
     );
 
     array_push($list,$temporal);

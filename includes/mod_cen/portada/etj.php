@@ -5,14 +5,14 @@
 <link rel="stylesheet" href="includes/mod_cen/portada/css/portadaEtjMisEtt.css">
 
 
-<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js?v=<?php echo (rand());?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo (rand());?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
@@ -56,7 +56,7 @@
   } );
 
   </script>
-<script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/js/etjInforme.js?v=<?php echo (rand());?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 
 
@@ -290,7 +290,7 @@ echo '<div class="container">';
                   }
           //  echo  " ";
             // foto perfil
-						echo "<h4 align='center'><p  class='nombreApellido'><img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 55px; height: 55px;' ><b> ".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</b></p></h4>";
+						echo "<h4 align='center'><p  class='nombreApellido'><img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 75px; height: 75px;' ><b> ".strtoupper($fila->apellido).", ".strtoupper($fila->nombre)."</b></p></h4>";
 
 
 
