@@ -1,4 +1,4 @@
-
+<script type="text/javascript" src="includes/mod_cen/referentes/js/fotoPerfil.js"></script>
 <style type="text/css">
 hr {
     border-top: 2px solid #84DBFF;
@@ -87,7 +87,7 @@ echo'<br>';
 		//$departamento = new Departamentos($dato_localidad->departamento);
 		//$buscar_departamento = $departamento->buscar();
 		$dato_depa = mysqli_fetch_object($depa);
-    
+
     $nomArchivoFoto="./img/perfil/";
     if ($persona->getFotoPerfil() == "") {
         $nomArchivoFoto.= "0000.jpg";
@@ -95,8 +95,9 @@ echo'<br>';
         $nomArchivoFoto.= $persona->getFotoPerfil();
         //$nomArchivoFoto.=".jpg";
           }
+          $fotoArchivo= substr($nomArchivoFoto, 13);
 		echo "<tr>";
-    echo "<td><img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 55px; height: 55px;' ></td>";
+    echo "<td><a href='#' id='perfil".$fotoArchivo."'><img  src='$nomArchivoFoto'  alt='perfil' id='foto".$fila->personaId."' class=' img-responsive img-circle' style= 'width: 55px; height: 55px;display:block;margin:auto;' ></a></td>";
 		echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
 		//echo "<td>".$fila->tipo."</td>";
 		echo "<td>"."<a href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>Ver <b>(".$cant_rti. ")</b></a></td>";
@@ -120,6 +121,42 @@ echo'<br>';
 
 
 <br>
+<div class="modal fade" id="fotoPerfil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+		<!--**** Inicio de Header **** -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+				<h4 class="modal-title" id="myModalLabel">
+				<br>
+				</h4>
+
+			</div><!--./modal-header-->
+
+
+			<!-- ***** MODAL BODY ****-->
+
+			<div class="modal-body" id="modal-body" >
+
+			</div>
+			<!-- **** FIN MODAL BODY ****-->
+			<!-- **** INICIO MODAL FOOTER ****-->
+
+			<div class="modal-footer" id="modal-footer">
+
+				<div id="divButton">
+					<button type="button" class="btn btn-default footerButton" data-dismiss="modal">Cerrar</button>
+				</div>
+				<div id="respuestasContenido"></div>
+			</div>
+			<!-- **** FIN MODAL FOOTER ****-->
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 <center>
  <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></center>
 <script type="text/javascript">

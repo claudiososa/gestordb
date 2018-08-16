@@ -8,7 +8,7 @@ $(document).ready(function() {
     //let foto= fotoId.substr(4)
   //alert('hola foto'+foto)
     //alert('holafoto')
-    $('#modal-body').html(`<img  src='./img/perfil/${foto}'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 200px; height: 200px;' >`)
+    $('#modal-body').html(`<img  src='./img/perfil/${foto}'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 200px; height: 200px;display:block;margin:auto;' >`)
       //$('<p>hola mundo</p>').appendTo('#modalBody')
     $('#fotoPerfil').modal('show')
 

@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/referentes/js/fotoPerfil.js"></script>
 <style type="text/css">
 hr {
 		border-top: 2px solid #FFC61B;
@@ -125,7 +126,8 @@ if($_POST)
 							}else {
 									$nomArchivoFoto.= $fila->fotoPerfil;
 							 }
-						echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 45px; height: 45px;' > ";
+							 $fotoArchivo= substr($nomArchivoFoto, 13);
+						echo "<a href='#' id='perfil".$fotoArchivo."'><img  src='$nomArchivoFoto'  alt='perfil' id='foto".$fila->personaId."' class=' img-responsive img-circle' style= 'width: 45px; height: 45px;display:block;margin:auto;' ></a>";
 						//var_dump($nomArchivoFoto);
 						 echo "</td>";
 						echo "<td>".$fila->apellido."</td>";
@@ -157,7 +159,42 @@ echo "</table>";
 echo "</div>";
 echo "</div>";
 ?>
+<div class="modal fade" id="fotoPerfil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+		<!--**** Inicio de Header **** -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 
+				<h4 class="modal-title" id="myModalLabel">
+				<br>
+				</h4>
+
+			</div><!--./modal-header-->
+
+
+			<!-- ***** MODAL BODY ****-->
+
+			<div class="modal-body" id="modal-body" >
+
+			</div>
+			<!-- **** FIN MODAL BODY ****-->
+			<!-- **** INICIO MODAL FOOTER ****-->
+
+			<div class="modal-footer" id="modal-footer">
+
+				<div id="divButton">
+					<button type="button" class="btn btn-default footerButton" data-dismiss="modal">Cerrar</button>
+				</div>
+				<div id="respuestasContenido"></div>
+			</div>
+			<!-- **** FIN MODAL FOOTER ****-->
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 <center>
  <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-buscar-rti.png"></center>
 <script type="text/javascript">

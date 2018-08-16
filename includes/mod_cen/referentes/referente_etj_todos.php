@@ -86,7 +86,7 @@ hr {
           }
 $fotoArchivo= substr($nomArchivoFoto, 13);
 		echo "<tr>";
-		echo "<td><a href='#' id='perfil".$fotoArchivo."'><img  src='$nomArchivoFoto'  alt='perfil' id='foto".$fila->personaId."' class=' img-responsive img-circle' style= 'width: 55px; height: 55px;' ></a></td>";
+		echo "<td><a href='#' id='perfil".$fotoArchivo."'><img  src='$nomArchivoFoto'  alt='perfil' id='foto".$fila->personaId."' class=' img-responsive img-circle' style= 'width: 55px; height: 55px;display:block;margin:auto;' ></a></td>";
 		echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
 		//echo "<td>".$fila->tipo."</td>";
 		echo "<td>"."<a href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>Ver <b>(".$cant_rti. ")</b></a></td>";
