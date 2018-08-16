@@ -4,6 +4,9 @@ function formPersona(informeActual)
   let escuelaId =  informeActual.escuelaId  //$('#escuelaId').val()
   console.log('mi escuela:'+escuelaId)
   console.log(informeActual.escuelaNombre)
+  if (informeActual.fotoPerfil=="") {
+    informeActual.fotoPerfil="0000.jpg"
+  }
     $(`<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -16,22 +19,32 @@ function formPersona(informeActual)
               <h4 class="modal-title" id="myModalLabel"><b>${informeActual.escuelaNombre}</b>
               <br>
               </h4>
-
+              <div class="row">
+                <div class="col-md-6">
+                Creado por:${informeActual.nombreAutor} </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><img src='./img/perfil/${informeActual.fotoPerfil}'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 65px; height: 65px;' ></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">Fecha: ${informeActual.fecha}</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">Cue: ${informeActual.escuelaCue}</div>
+              </div>
               <div class="row">
                 <div class="col-md-6">
               Numero: ${informeActual.escuelaNumero}</div>
-                <div class="col-md-6">Cue: ${informeActual.escuelaCue}</div>
+
               </div>
 
-              <div class="row">
-                <div class="col-md-6">Creado por:> </div><div class="col-md-6">Fecha: ${informeActual.fecha}</div>
-              </div>
               <div class="row">
                 <div class="col-md-6">Prioridad: ${informeActual.prioridad}</div>
               </div>
               <div class="row">
                 <div class="col-md-12">Titulo: ${informeActual.titulo}</div>
               </div>
+
 
               <div class="infoOculta" style="display:none" id="infoOculta${informeActual.informeId}">
                 <div class="row">

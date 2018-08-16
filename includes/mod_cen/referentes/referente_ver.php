@@ -96,11 +96,13 @@ if($_POST)
 
 			echo "<table id='myTable' class='table table-hover table-striped table-condensed tablesorter'>";
 			echo "<thead>";
-			echo "<tr><th>Apellido</th>";
+			echo "<tr><th>Foto</th>";
+			echo "<th>Apellido</th>";
 			echo "<th>Nombre</th>";
 			echo "<th>Tipo</th>";
 			echo "<th>Email</th>";
-			echo "<th>Teléfono</th>";
+			echo "<th>Teléfono Fijo</th>";
+			echo "<th>Teléfono Movil</th>";
 			echo "<th>Ver</th>";
 			echo "</tr>";
       echo "</thead>";
@@ -114,11 +116,24 @@ if($_POST)
 				while ($fila2 = mysqli_fetch_object($buscarReferente))
 					{
 						echo "<tr>";
+						 echo "<td>";
+						 //var_dump($fila);
+						 $nomArchivoFoto="./img/perfil/";
+
+							if ($fila->fotoPerfil == "") {
+									$nomArchivoFoto.= "0000.jpg";
+							}else {
+									$nomArchivoFoto.= $fila->fotoPerfil;
+							 }
+						echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 45px; height: 45px;' > ";
+						//var_dump($nomArchivoFoto);
+						 echo "</td>";
 						echo "<td>".$fila->apellido."</td>";
 						echo "<td>".$fila->nombre."</td>";
 						echo "<td>".$fila2->tipo."</td>";
 						echo "<td>".$fila->email."</td>";
 						echo "<td>".$fila->telefonoC."</td>";
+						echo "<td>".$fila->telefonoM."</td>";
 
 						if($_SESSION["tipo"]=="admin") {
 								echo "<td>"."<a href='index.php?men=referentes&id=2&personaId=".$fila2->personaId."&referenteId=".$fila2->referenteId."'>Ver</a>"."</td>";

@@ -25,7 +25,7 @@
   }
 
 
-    Maestro::debbugPHP($buscarInforme);
+    //Maestro::debbugPHP($buscarInforme);
     $list=array();
     while ($datoInforme = mysqli_fetch_object($buscarInforme)) {
 

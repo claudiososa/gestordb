@@ -19,7 +19,10 @@ $('[id ^=informeId],[id ^=inforalta],[id ^=informedi],[id ^=infornorm],[id ^=inf
      contenido: "",
      escuelaId: "",
      etjPortada: "",
-     referente: ""
+     referente: "",
+     referenteId: "",
+     nombreAutor: "",
+     fotoPerfil: ""
    }
 
           //$('[id ^=if]').on('click', function(){
@@ -48,6 +51,9 @@ $('[id ^=informeId],[id ^=inforalta],[id ^=informedi],[id ^=infornorm],[id ^=inf
            informeActual.informeId=informeId
            informeActual.etjPortada='si'
            informeActual.referente=item.referente
+           informeActual.escuelaId=item.escuelaId           
+           informeActual.nombreAutor=item.nombreAutor
+           informeActual.fotoPerfil=item.fotoPerfil
 
        }
      })

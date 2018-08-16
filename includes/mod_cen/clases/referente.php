@@ -251,7 +251,7 @@ class Referente
 		}else{
 			$sentencia="SELECT
 												referentes.referenteId,referentes.personaId ,referentes.tipo ,referentes.rol ,referentes.etjcargo,
-												referentes.fechaIngreso,referentes.titulo,referentes.estado,referentes.etjcargo2,personas.nombre,personas.apellido,personas.telefonoM,personas.telefonoC,personas.email	";
+												referentes.fechaIngreso,referentes.titulo,referentes.estado,referentes.etjcargo2,personas.nombre,personas.apellido,personas.telefonoM,personas.telefonoC,personas.email,personas.fotoPerfil	";
 		}
 
 	 $sentencia.=" FROM referentes
