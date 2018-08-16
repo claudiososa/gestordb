@@ -40,12 +40,7 @@ $(document).ready(function() {
 
          $('#bodyProgramas'+escuela).empty()
 
-         let personaId= listaReferentes[0].personaId
-         console.log('foto'+personaId);
-         let persona= new Persona(personaId);
-         let persona = persona->getContacto();
-
-         $('#programas'+escuela).show(function() {
+           $('#programas'+escuela).show(function() {
         //     //  agrega contenido al body del panel
 
             $(`<div class="row">
