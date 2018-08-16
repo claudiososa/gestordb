@@ -75,7 +75,7 @@
 							           //$nomArchivoFoto.=".jpg";
 							             }
 
-							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style='width:60%; height:auto;' > "; 
+							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style='width:150px; height:150px;' > "; 
 
 							//$fotperfil=$persona->getFotoPerfil();
 
