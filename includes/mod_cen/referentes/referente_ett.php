@@ -35,7 +35,9 @@ echo'<br>';
 	//$fila=mysqli_fetch_object($resultado);
 	echo "<table class='table table-bordered'>";
 
-	echo "<tr><td>Apellidos, Nombre</td>";
+	echo "<tr>";
+  echo "<td>Foto</td>";
+  echo "<td>Apellidos, Nombre</td>";
 	echo "<td>RTI Cargo</td>";
 	echo "<td>Escuelas</td>";
 	echo "<td>Directores</td>";
@@ -55,13 +57,16 @@ echo'<br>';
 		$cantidad=mysqli_num_rows($buscar_informe);
 
 		////////////////////////////////////////
+    // foto perfil
+    $personaId= $fila->personaId;
+    $persona= new Persona($personaId);
+    $persona = $persona->getContacto();
+    // foto perfil
 
 		//$escuela= new Escuela(null,$fila->referenteId);
     $escuelaReferente= new EscuelaReferentes(null,null,null,$fila->referenteId);
 		$buscar_escuela = $escuelaReferente->buscar();
 		$cantidad_escuela = mysqli_num_rows($buscar_escuela);
-
-
 
 		$cant_rti=0;
 
@@ -74,20 +79,24 @@ echo'<br>';
 		}
 
 		//$cant_rti=$cant_rti+1;
-
-
 		$localidad= new Localidad($fila->localidadId);
 		$buscar_localidad=$localidad->buscar();
 		$dato_localidad=mysqli_fetch_object($buscar_localidad);
 
 		$depa = departamentos::nombre_depa($dato_localidad->departamento);
 		//$departamento = new Departamentos($dato_localidad->departamento);
-
-
 		//$buscar_departamento = $departamento->buscar();
 		$dato_depa = mysqli_fetch_object($depa);
-
+    
+    $nomArchivoFoto="./img/perfil/";
+    if ($persona->getFotoPerfil() == "") {
+        $nomArchivoFoto.= "0000.jpg";
+    }else {
+        $nomArchivoFoto.= $persona->getFotoPerfil();
+        //$nomArchivoFoto.=".jpg";
+          }
 		echo "<tr>";
+    echo "<td><img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 55px; height: 55px;' ></td>";
 		echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
 		//echo "<td>".$fila->tipo."</td>";
 		echo "<td>"."<a href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>Ver <b>(".$cant_rti. ")</b></a></td>";

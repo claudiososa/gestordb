@@ -13,7 +13,7 @@ $(document).ready(function() {
   /*toggle de titulo de escuela*/
 
   /**Contenido sección Planied**/
-  $('[id ^=planied]').on('click',function(event) {
+  $('[id^=planied]').on('click',function(event) {
   /* Act on the event */
     let escuelaId= $(this).parent().parent().parent().parent().attr('id');
     //alert(escuelaId)
@@ -37,7 +37,14 @@ $(document).ready(function() {
            listaReferentes.push(item)
            console.log(item.apellido)
          }
+
          $('#bodyProgramas'+escuela).empty()
+
+         let personaId= listaReferentes[0].personaId
+         console.log('foto'+personaId);
+         let persona= new Persona(personaId);
+         let persona = persona->getContacto();
+
          $('#programas'+escuela).show(function() {
         //     //  agrega contenido al body del panel
 
@@ -55,7 +62,7 @@ $(document).ready(function() {
                 <div class="col-md-6">
                   <div class="panel panel-default">
                     <div class="panel-body">
-                      <h3 align="center">ETT: ${listaReferentes[0].apellido}, ${listaReferentes[0].nombre},${listaReferentes[0].fotoPerfil} </h3>
+                      <h3 align="center">ETT: ${listaReferentes[0].apellido}, ${listaReferentes[0].personaId}</h3>
                       <hr>
                       <div class="row">
                       <div class="col-md-8">
@@ -117,9 +124,9 @@ $(document).ready(function() {
                 // let email =listaReferentes[i]["email"]
                 alert ('rti:'+nombre)
               }
-    let referenteP=
+
                 //$nomArchivoFoto.=".jpg";
-                  }
+
               // #######SUPER####
                       $('[id ^=super]').on('click',function(event) {
                         /* Act on the event */

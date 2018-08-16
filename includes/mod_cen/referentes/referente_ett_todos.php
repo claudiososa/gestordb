@@ -18,6 +18,8 @@ hr {
 	$referente= new Referente();
 	$resultado = $referente->Tipo("ETT","Activo");
 
+
+
 ?>
 
 	<div class="container wow flipInX">
@@ -39,6 +41,7 @@ hr {
 		echo "<table id='ett' class='table table-bordered'>";
 		//echo "<thead>";
 			echo "<tr>";
+			echo "<th>Foto</th>";
 				echo "<th>Apellidos, Nombre</th>";
 				echo "<th>RTI Cargo</th>";
 				echo "<th>Escuelas</th>";
@@ -60,7 +63,16 @@ hr {
 		$buscar_escuela=$escuela->buscar2();// devuelve todos los datos de las escuelas del ETT
 		$cantidad_escuela=mysqli_num_rows($buscar_escuela); // Guardamos la Cantidad de Escuelas de cada ETT
 
-
+		$personaId= $fila->personaId;
+		$persona= new Persona($personaId);
+		$persona = $persona->getContacto();
+		$nomArchivoFoto="./img/perfil/";
+    if ($persona->getFotoPerfil() == "") {
+        $nomArchivoFoto.= "0000.jpg";
+    }else {
+        $nomArchivoFoto.= $persona->getFotoPerfil();
+        //$nomArchivoFoto.=".jpg";
+          }
 		// ***** fin de modificaciones  ******//////
 
 
@@ -92,8 +104,9 @@ hr {
 
 			//$buscar_departamento = $departamento->buscar();
 			$dato_depa = mysqli_fetch_object($depa);
-			
+
 			echo "<tr>";
+			  echo "<td><img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 55px; height: 55px;' ></td>";
 			echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
 			//echo "<td>".$fila->tipo."</td>";
 			echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>".$cant_rti. "</a></td>";
