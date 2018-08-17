@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/mod_cen/referentes/js/fotoPerfil.js"></script>
 <style type="text/css">
 hr {
 
@@ -17,6 +18,8 @@ hr {
 
 	$referente= new Referente();
 	$resultado = $referente->Tipo("ETT","Activo");
+
+
 
 ?>
 
@@ -39,6 +42,7 @@ hr {
 		echo "<table id='ett' class='table table-bordered'>";
 		//echo "<thead>";
 			echo "<tr>";
+			echo "<th>Foto</th>";
 				echo "<th>Apellidos, Nombre</th>";
 				echo "<th>RTI Cargo</th>";
 				echo "<th>Escuelas</th>";
@@ -60,7 +64,17 @@ hr {
 		$buscar_escuela=$escuela->buscar2();// devuelve todos los datos de las escuelas del ETT
 		$cantidad_escuela=mysqli_num_rows($buscar_escuela); // Guardamos la Cantidad de Escuelas de cada ETT
 
-
+		$personaId= $fila->personaId;
+		$persona= new Persona($personaId);
+		$persona = $persona->getContacto();
+		$nomArchivoFoto="./img/perfil/";
+    if ($persona->getFotoPerfil() == "") {
+        $nomArchivoFoto.= "0000.jpg";
+    }else {
+        $nomArchivoFoto.= $persona->getFotoPerfil();
+        //$nomArchivoFoto.=".jpg";
+          }
+					    $fotoArchivo= substr($nomArchivoFoto, 13);
 		// ***** fin de modificaciones  ******//////
 
 
@@ -92,8 +106,9 @@ hr {
 
 			//$buscar_departamento = $departamento->buscar();
 			$dato_depa = mysqli_fetch_object($depa);
-			
+
 			echo "<tr>";
+			 echo "<td><a href='#' id='perfil".$fotoArchivo."'><img  src='$nomArchivoFoto'  alt='perfil' id='foto".$fila->personaId."' class=' img-responsive img-circle' style= 'width: 55px; height: 55px;display:block;margin:auto;' ></a></td>";
 			echo "<td><a href='index.php?mod=slat&men=referentes&id=2&personaId=".$fila->personaId."&referenteId=".$fila->referenteId."'>".$fila->apellido.", ".$fila->nombre."</a></td>";
 			//echo "<td>".$fila->tipo."</td>";
 			echo "<td>"."<a class='btn btn-success' href='index.php?mod=slat&men=user&id=6&referenteId=".$fila->referenteId."'>".$cant_rti. "</a></td>";
@@ -117,6 +132,42 @@ hr {
 	echo "</div>";
 	echo "</div>";
 ?>
+<div class="modal fade" id="fotoPerfil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+		<!--**** Inicio de Header **** -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+				<h4 class="modal-title" id="myModalLabel">
+				<br>
+				</h4>
+
+			</div><!--./modal-header-->
+
+
+			<!-- ***** MODAL BODY ****-->
+
+			<div class="modal-body" id="modal-body" >
+
+			</div>
+			<!-- **** FIN MODAL BODY ****-->
+			<!-- **** INICIO MODAL FOOTER ****-->
+
+			<div class="modal-footer" id="modal-footer">
+
+				<div id="divButton">
+					<button type="button" class="btn btn-default footerButton" data-dismiss="modal">Cerrar</button>
+				</div>
+				<div id="respuestasContenido"></div>
+			</div>
+			<!-- **** FIN MODAL FOOTER ****-->
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 <center>
  <img class="img-responsive img-circle wow bounceInRight" onclick="history.back()"  src="includes/mod_cen/portada/imgPortadas/back/flecha-videos.png"></center>
 
