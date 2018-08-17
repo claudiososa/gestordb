@@ -97,7 +97,7 @@ $informeEquipoConectar = $informes->buscar(20,null,$arrayReferenteConectar);
 
 //busqueda de informes de proiridad alta
 $informe_alta= new Informe(null,null,null,"Alta");
-$buscar_alta =$informe_alta->buscar(20,null,$arrayReferenteConectar);
+$buscar_alta =$informe_alta->buscar(30,null,$arrayReferenteConectar);
 $total = mysqli_num_rows($buscar_alta);
 
 // creación y busqueda de todos los informes
