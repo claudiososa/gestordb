@@ -39,7 +39,44 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 		}
 	}
 
-	public function buscar($limit=NULL)
+
+		public function buscarPredio($count=NULL)
+		{
+			// INNER JOIN escuelas
+			// ON escuelaPredio.escuelaId = escuelas.escuelaId
+			$bd=conexion2::getInstance();
+		  $sentencia="SELECT * FROM escuelaPredio WHERE escuelaId=$this->escuelaId";
+
+			$sentencia.="  ORDER BY id DESC";
+			// if(isset($limit)){
+			// 	$sentencia.=" LIMIT ".$limit;
+			// }
+			//echo $sentencia;
+			$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));# code...
+
+			if ($cantidad > 0) {
+					$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
+					//$bd=conexion2::getInstance();
+				  $sentencia2="SELECT * FROM escuelaPredio
+											 INNER JOIN escuelas
+											 ON escuelas.escuelaId = escuelaPredio.escuelaId
+											 WHERE predio = $dato->predio";
+
+					if (mysqli_num_rows($bd->ejecutar($sentencia2))>1)
+						{
+							$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2));
+						}
+				}
+				if(isset($count)){
+					return $cantidad;
+				}else{
+					return $bd->ejecutar($sentencia2);
+				}
+
+
+		}
+
+	public function buscar($limit=NULL,$count=NULL)
 	{
 		// INNER JOIN escuelas
 		// ON escuelaPredio.escuelaId = escuelas.escuelaId
@@ -80,7 +117,12 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 			$sentencia.=" LIMIT ".$limit;
 		}
 		//echo $sentencia;
-		return $bd->ejecutar($sentencia);
+		if (isset($count)) {
+			return mysqli_num_rows($bd->ejecutar($sentencia));# code...
+		}else{
+			return $bd->ejecutar($sentencia);
+		}
+
 
 	}
 

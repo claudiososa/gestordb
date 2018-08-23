@@ -36,6 +36,7 @@ include_once "includes/mod_cen/clases/leido.php" ;
 include_once "includes/mod_cen/clases/respuesta.php" ;
 include_once "includes/mod_cen/clases/rtixescuela.php";
 include_once "includes/mod_cen/clases/rti.php";
+include_once "includes/mod_cen/clases/CompartePredio.php";
 ?>
 
 <!----------------------------------------------------------------------------->
@@ -190,9 +191,17 @@ echo "</div>";
         $buscarAutoridad = $autoridad->buscarAutoridad3('all');
         $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
 
+
+
         $escuela->escuelaId=$row->escuelaId;
         $buscarEscuela = $escuela->buscar();
         $infoEscuela = mysqli_fetch_object($buscarEscuela);
+
+        //Consulta sobre la cantidad de predio para la escuela actual
+        $predio = new CompartePredio(null,$row->escuelaId);
+
+        $cantidadPredio = $predio->buscarPredio('count');
+
 
         //echo $infoEscuela->numero."<br>";
         echo '<tr id="fila'.$infoEscuela->escuelaId.'">';
@@ -206,7 +215,7 @@ echo "</div>";
         }else{
           echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
         }
-        echo '<td id="predios'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info22'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        echo '<td id="predios'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="pre'.$infoEscuela->escuelaId.'" name="button">'.$cantidadPredio.'</button></td>';
 
 
 

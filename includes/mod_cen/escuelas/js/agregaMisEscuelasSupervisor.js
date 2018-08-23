@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-
-
   $('[id ^=list]').click( function(){
 
     let informeActual ={
@@ -326,17 +324,20 @@ $(document).ready(function() {
   $('[id ^=predios],[id ^=predioM]').on('click', function(){
 
     let escuelaId = $(this).attr('id').substr(7)
-    let click = $(this).attr('id').substr(0,7) // guarda el id del elemento donde se hizo clic, puede ser informes o informeM
+    //alert(escuelaId)
+    let click = $(this).attr('id').substr(0,7)// guarda el id del elemento donde se hizo clic, puede ser informes o informeM
+
     let existe
     let $this = $(this)
 
-    if (click=='predios') {//almacena en variable existe, la clase de la tableinformes en el caso que no existe dicha tabla se guarda comno undefined
+    if (click=='predios') {//almacena en variable existe, la clase de la tablepredios en el caso que no existe dicha tabla se guarda comno undefined
       existe = $('.tablepredios'+escuelaId).attr('class')
     }else{
       //alert('ingresa  por informeM')
       existe = $('.tablepredioM'+escuelaId).attr('class')
       //alert(existe)
     }
+
 
     if (typeof(existe)==='undefined')
     {
@@ -358,15 +359,17 @@ $(document).ready(function() {
 
         for (let item of lista)
         {
-           tablepredio=pad(item.escuelaId,4,0)
+           tablepredio=pad(item.escuelaActual,4,0)
+
            cant= item.cantidad
         }
 
          if (cant > 0) {
 
             if (click=='predios') {
+
                // console.log('item Escuela Id = '+cant)
-             $('#info'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warningStyle"><td colspan="6"><table id=tablepredios${tablepredio}
+             $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warning"><td colspan="6"><table id=tablepredios${tablepredio}
              class="table StyleTable">
              <thead>
                <tr class='warningStyle'>
@@ -396,7 +399,7 @@ $(document).ready(function() {
 
           }else{
 
-             $('#infoM'+escuelaId).parent().parent().after(`<div class="list-group tableinformeM${tableinforme}" id="tableinformeM${tableinforme}"><br><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button><br><div>`)
+             $('#preM'+escuelaId).parent().parent().after(`<div class="list-group tableinformeM${tableinforme}" id="tablepredioM${tablepredio}"><br><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button><br><div>`)
 
           }
 
@@ -405,7 +408,7 @@ $(document).ready(function() {
 
         if (click=='predios') {
        //  console.log('item Escuela Id = '+cant)
-         $('#info'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warningStyle"><td colspan="6"><table id=tablepredios${tablepredio}
+         $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warningStyle"><td colspan="6"><table id=tablepredios${tablepredio}
          class="table StyleTable">
          <thead>
            <tr class='warningStyle'>
@@ -429,7 +432,7 @@ $(document).ready(function() {
          <tbody>`)
 
        }else{
-          $('#infoM'+escuelaId).parent().parent().after(`<p tableinformeM${tableinforme}" id="tableinformeM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button>`)
+          $('#preM'+escuelaId).parent().parent().after(`<p tableinformeM${tableinforme}" id="tableinformeM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button>`)
        }
 
      }
@@ -571,8 +574,8 @@ $(document).ready(function() {
     }else{
         //$('.trinformes'+escuelaId).remove()
 
-        $('.tableinformes'+escuelaId).remove()
-        $('.tableinformeM'+escuelaId).remove()
+        $('.tablepredios'+escuelaId).remove()
+        $('.tablepredioM'+escuelaId).remove()
         //$('.trautoridad'+escuelaId).closest('tr').remove()
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
 
