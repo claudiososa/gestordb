@@ -19,16 +19,20 @@
 
        while ($fila = mysqli_fetch_object($buscarPredio))
        {
-     		$temporal=array(
-           'escuelaActual'=>$_POST['escuelaId'],
-           'escuelaId'=>$fila->escuelaId,
-           'cantidad'=>$cantidadPredio,
-           'nombre' =>$fila->nombre,
-           'numero' =>$fila->numero,
-           'cue' =>$fila->cue
-   		    );
+        if ($fila->escuelaId<>$_POST['escuelaId']) {
+          $temporal=array(
+             'escuelaActual'=>$_POST['escuelaId'],
+             'escuelaId'=>$fila->escuelaId,
+             'cantidad'=>$cantidadPredio,
+             'nombre' =>$fila->nombre,
+             'numero' =>$fila->numero,
+             'cue' =>$fila->cue,
+             'predioId'=>$fila->id
+     		    );
 
-     		array_push($list,$temporal);
+       		array_push($list,$temporal);
+        }
+
      	}
      }
 

@@ -39,6 +39,10 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 		}
 	}
 
+		// public function eliminar(){
+		// 	$bd=Conexion2::getInstance();
+		// 	$sentencia = "DELETE FROM escuelaPredio WHERE "
+		// }
 
 		public function buscarPredio($count=NULL)
 		{
@@ -62,10 +66,9 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 											 ON escuelas.escuelaId = escuelaPredio.escuelaId
 											 WHERE predio = $dato->predio";
 
-					if (mysqli_num_rows($bd->ejecutar($sentencia2))>1)
+					if (mysqli_num_rows($bd->ejecutar($sentencia2))>0)
 						{
-							$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2));
-						}
+							$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2))-1;						}
 				}
 				if(isset($count)){
 					return $cantidad;

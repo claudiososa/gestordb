@@ -364,6 +364,7 @@ $(document).ready(function() {
            cant= item.cantidad
         }
 
+
          if (cant > 0) {
 
             if (click=='predios') {
@@ -373,7 +374,7 @@ $(document).ready(function() {
              class="table StyleTable">
              <thead>
                <tr class='warningStyle'>
-                 <th><h4>Informes</h4></th>
+                 <th><h4>Comparte Predio</h4></th>
                  <th>&nbsp</th>
                  <th>&nbsp</th>
                  <th>&nbsp</th>
@@ -391,11 +392,10 @@ $(document).ready(function() {
                  <th>Escuela</th>
                  <th>Numero</th>
                  <th>CUE</th>
-                 <th>Fecha</th>
-                 <th>Prioridad</th>
+                 <th>Accion</th>
                </tr>
              </thead>
-             <tbody>`)
+             <tbody id='bodyPredio${tablepredio}'></tbody>`)
 
           }else{
 
@@ -425,11 +425,10 @@ $(document).ready(function() {
              <th>Escuela</th>
              <th>Nuemro</th>
              <th>CUE</th>
-             <th>Fecha</th>
-             <th>Prioridad</th>
+             <th>Accion</th>
            </tr>
          </thead>
-         <tbody>`)
+         <tbody id='bodyPredio${item.escuelaId}'></tbody>`)
 
        }else{
           $('#preM'+escuelaId).parent().parent().after(`<p tableinformeM${tableinforme}" id="tableinformeM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button>`)
@@ -441,26 +440,24 @@ $(document).ready(function() {
               //alert(item.escuelaId)
               //console.log(item.cantidad)
             if (item.cantidad > 0) {
-              let escuelaIdconCero = pad(item.escuelaId,4,0)
+              let escuelaIdconCero = pad(item.escuelaActual,4,0)
               let escuela = item.escuelaId
-
-              if (click=='predios') {
+              //alert(item.escuelaId)
+              //if (click=='predios') {
               //console.log('cantidad de leido'+item.cantidadLeido)
-              $('#tablepredios'+escuelaIdconCero).find('tbody').after(`<tr class="trpredios${escuelaIdconCero}">
-
-              <td><a class="btn btn-default" role="button" id='if${item.informeId}'>${item.titulo}</a></td>
-              <td>${item.cantidadLeido}</td>
-              <td>${item.cantidadRespuesta}</td>
-              <td>${item.fecha}</td>
-              <td>${item.prioridad}</td>
-
-              </tr>`)
-            }else{
-              $('#tableinformeM'+escuelaIdconCero).find('div').after(`<a  class="list-group-item">
-              <h5 class="list-group-item-heading trinformes${escuelaIdconCero}"id='if${item.informeId}'><b>${item.titulo}</b></h5>
-              <p class="list-group-item-text">${item.fecha} Prioridad:${item.prioridad}</p><br><p class="btn-group" role="group">
-              <button type="button" class="btn btn-default"disabled="true">Leido: ${item.cantidadLeido}</button><button type="button" disabled="true"class="btn btn-default">Resp.: ${item.cantidadRespuesta}</button></p></a>`)
-            }
+              //$('#tablepredios'+escuelaIdconCero).find('tbody').after(`<tr class="trpredios${escuelaIdconCero}">
+              $(`<tr class="trpredios${escuelaIdconCero}">
+              <td>${item.nombre}</td>
+              <td>${item.numero}</td>
+              <td>${item.cue}</td>
+              <td><a id='quitar${escuelaIdconCero}${item.predioId}' class='btn btn-danger'>Quitar</a></td>
+              </tr>`).appendTo('#bodyPredio'+escuelaIdconCero)
+            // }else{
+            //   $('#tableinformeM'+escuelaIdconCero).find('div').after(`<a  class="list-group-item">
+            //   <h5 class="list-group-item-heading trinformes${escuelaIdconCero}"id='if${item.informeId}'><b>${item.titulo}</b></h5>
+            //   <p class="list-group-item-text">${item.fecha} Prioridad:${item.prioridad}</p><br><p class="btn-group" role="group">
+            //   <button type="button" class="btn btn-default"disabled="true">Leido: ${item.cantidadLeido}</button><button type="button" disabled="true"class="btn btn-default">Resp.: ${item.cantidadRespuesta}</button></p></a>`)
+            // }
 
 
             }else{
@@ -489,6 +486,10 @@ $(document).ready(function() {
 
 
           });
+
+          $('[id ^=quitar]').click( function(){
+            alert($(this).attr('id'))
+          })
 
           //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)
           $('[id ^=if]').click( function(){
