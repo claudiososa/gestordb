@@ -488,7 +488,28 @@ $(document).ready(function() {
           });
 
           $('[id ^=quitar]').click( function(){
-            alert($(this).attr('id'))
+            quitarPredioId = $(this).attr('id').substr(10)
+
+            $.ajax({
+              url: 'includes/mod_cen/clases/ajax/ajaxPredio.php',
+              type: 'POST',
+              dataType: 'json',
+              data: {quitarPredioId:quitarPredioId}
+            })
+            .done(function(data) {
+              for (let item of data) {
+                alert("El predio"+item.predioId+"+eliminado")  
+              }
+
+              console.log("success");
+            })
+            .fail(function() {
+              console.log("error");
+            })
+            .always(function() {
+              console.log("complete");
+            });
+
           })
 
           //$('#info'+escuelaId).parent().parent().html(`</tbody>hola mundo</table>`)

@@ -2,6 +2,24 @@
   include_once('../CompartePredio.php');
   include_once('../maestro.php');
 
+
+  if (isset($_POST['quitarPredioId']))
+   {
+     $list=array();
+     $predio = new CompartePredio($_POST['quitarPredioId']);
+     $quitar = $predio->eliminar();
+
+     $temporal=array(
+        'predioId'=>$quitar
+        );
+
+      array_push($list,$temporal);
+
+      $json = json_encode($list);
+      //Maestro::debbugPHP($json);
+      echo $json;
+   }
+
   if (isset($_POST['predio']))
    {
    	 $list=array();
@@ -35,11 +53,8 @@
 
      	}
      }
+     $json = json_encode($list);
+     //Maestro::debbugPHP($json);
+     echo $json;
 
    }
-
-   $json = json_encode($list);
-   //Maestro::debbugPHP($json);
-   echo $json;
-
-  ?>

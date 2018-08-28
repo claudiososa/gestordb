@@ -39,10 +39,15 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 		}
 	}
 
-		// public function eliminar(){
-		// 	$bd=Conexion2::getInstance();
-		// 	$sentencia = "DELETE FROM escuelaPredio WHERE "
-		// }
+		public function eliminar(){
+			$bd=Conexion2::getInstance();
+			$sentencia = "DELETE FROM escuelaPredio WHERE id=$this->id";
+			if ($bd->ejecutar($sentencia)) {
+				return $ultimoPredio=$bd->lastID();
+			}else{
+				return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno.":".$conexion->error;
+			}
+		}
 
 		public function buscarPredio($count=NULL)
 		{
