@@ -5,6 +5,7 @@
   include_once('../respuesta.php');
   include_once('../leido.php');
   include_once('../maestro.php');
+  include_once('../cadenas.php');
 
 
   if (isset($_POST['informeAdjunto']))//devuelve la lista de archivos adjuntos
@@ -134,11 +135,13 @@
       $buscarLeido = $leido->buscarLeido();
       $cantidadLeido = mysqli_num_rows($buscarLeido);
       //Maestro::debbugPHP($buscarLeido);
-
+      // quitamos acentos del titulo del informe //
+      $cadena= new cadenas(); // clase cadenas para implementar un metodo que elimina los acentos
+      $tituloCadena= $cadena->elimina_acentos($fila->titulo);   
   		$temporal=array(
         'informeId'=>$fila->informeId,
         'referenteId'=>$fila->referenteId,
-  			'titulo'=>substr($fila->titulo,0,35).'...',
+  			'titulo'=>$tituloCadena.'...',
         'escuelaId'=>$fila->escuelaId,
         'cantidad'=>$cantidadInformes,
         'cantidadRespuesta' =>$cantidadRespuesta,
