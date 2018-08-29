@@ -10,13 +10,13 @@
      $quitar = $predio->eliminar();
 
      $temporal=array(
-        'predioId'=>$quitar
+        'predioId'=>$_POST['quitarPredioId']
         );
 
       array_push($list,$temporal);
 
       $json = json_encode($list);
-      //Maestro::debbugPHP($json);
+      Maestro::debbugPHP($json);
       echo $json;
    }
 

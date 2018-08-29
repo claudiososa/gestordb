@@ -446,11 +446,11 @@ $(document).ready(function() {
               //if (click=='predios') {
               //console.log('cantidad de leido'+item.cantidadLeido)
               //$('#tablepredios'+escuelaIdconCero).find('tbody').after(`<tr class="trpredios${escuelaIdconCero}">
-              $(`<tr class="trpredios${escuelaIdconCero}">
+              $(`<tr id="predio${item.predioId}" class="trpredios${escuelaIdconCero}">
               <td>${item.nombre}</td>
               <td>${item.numero}</td>
               <td>${item.cue}</td>
-              <td><a id='quitar${escuelaIdconCero}${item.predioId}' class='btn btn-danger'>Quitar</a></td>
+              <td><a id='quitar${item.numero}${escuelaIdconCero}${item.predioId}' class='btn btn-danger'>Quitar</a></td>
               </tr>`).appendTo('#bodyPredio'+escuelaIdconCero)
             // }else{
             //   $('#tableinformeM'+escuelaIdconCero).find('div').after(`<a  class="list-group-item">
@@ -488,27 +488,36 @@ $(document).ready(function() {
           });
 
           $('[id ^=quitar]').click( function(){
-            quitarPredioId = $(this).attr('id').substr(10)
+            quitarPredioId = $(this).attr('id').substr(14)
+            //alert (quitarPredioId)
+            numEscuela = $(this).attr('id').substr(6,4)
+            let confirma = confirm(`Confirma que desea eliminar la escuela ${numEscuela} del Predio `)
 
-            $.ajax({
-              url: 'includes/mod_cen/clases/ajax/ajaxPredio.php',
-              type: 'POST',
-              dataType: 'json',
-              data: {quitarPredioId:quitarPredioId}
-            })
-            .done(function(data) {
-              for (let item of data) {
-                alert("El predio"+item.predioId+"+eliminado")  
-              }
+            if (confirma == true) {
+              $.ajax({
+                url: 'includes/mod_cen/clases/ajax/ajaxPredio.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {quitarPredioId:quitarPredioId}
+              })
+              .done(function(data) {
+                for (let item of data) {
+                  $('#predio'+item.predioId).hide('slow/400/fast', function() {
+                    
+                  });
+                  //alert("El predio"+item.predioId+"+eliminado")
+                }
 
-              console.log("success");
-            })
-            .fail(function() {
-              console.log("error");
-            })
-            .always(function() {
-              console.log("complete");
-            });
+                console.log("success");
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+              });
+            }
+
 
           })
 
