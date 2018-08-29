@@ -468,7 +468,6 @@ $(document).ready(function() {
 
           $('[id ^=nuevoPredio]').click( function(){
 
-
               let idPrueba = $(this).attr('id');
               let escuela_id = idPrueba.substr(11)
               let escuela = {escuelaId:escuela_id,
@@ -503,7 +502,7 @@ $(document).ready(function() {
               .done(function(data) {
                 for (let item of data) {
                   $('#predio'+item.predioId).hide('slow/400/fast', function() {
-                    
+
                   });
                   //alert("El predio"+item.predioId+"+eliminado")
                 }
