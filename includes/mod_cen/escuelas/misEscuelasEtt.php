@@ -9,7 +9,7 @@
 </script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
+<!-- <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script> -->
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/predioNuevo.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
 
