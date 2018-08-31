@@ -475,7 +475,7 @@ $(document).ready(function() {
                              cue:'',
                              nombre:''
                 }
-              buscarDatosEscuela(escuela)//consulta a tabla escuela... ajax.js
+               buscarDatosEscuela(escuela)//consulta a tabla escuela... ajax.js
 
               .then(function(escuela){
                 predioNuevo(escuela)//inicia modal para carga de informe

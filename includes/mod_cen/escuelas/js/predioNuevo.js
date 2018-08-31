@@ -49,7 +49,7 @@ function predioNuevo(escuela)
             <div class="modal-footer" id="modal-footer">
 
               <div id="divButton">
-                <button type="button" class="btn btn-primary footerButton" id="btnBuscarEscuela">Buscar</button>
+                <button type="button" class="btn btn-primary" id="btnBuscarEscuela">Buscar</button>
                 <button type="button" class="btn btn-default footerButton" data-dismiss="modal">Cerrar</button>
 
               </div>
@@ -62,10 +62,10 @@ function predioNuevo(escuela)
         <div id="container"></div>
             `).appendTo('#padreIr')
 
-    $('#modalBuscarEscuela').modal({
-      backdrop:'static',
-      keyboard: true,
-    });
+    // $('#modalBuscarEscuela').modal({
+    //   backdrop:'static',
+    //   keyboard: true,
+    // });
     $('#modalBuscarEscuela').modal('show')
 
     $('#modalBuscarEscuela').on('hide.bs.modal', function(){
@@ -74,10 +74,13 @@ function predioNuevo(escuela)
 
     $('#modalBuscarEscuela').on('shown.bs.modal', function(){
         $('[id ^=rp]').hide()
+        $('#inputBuscarEscuela').focus();
 
     })
 
     $('#btnBuscarEscuela').click(function(){
+
+
        if (validarInforme()) {
            let valorBoton = $(this).text()
            let informeId = escuela.informeId
@@ -94,38 +97,39 @@ function predioNuevo(escuela)
               $('#divRespuesta').show()
             }else{
               let numeroEscuela = new String($('#inputBuscarEscuela').val())
-              $('#formBuscarEscuela').on('submit',(function(e) {
-                  $.ajax({
-                      url: 'includes/mod_cen/clases/ajax/ajaxEscuela.php',
-                      type: 'POST',
-                      dataType: 'json',
-                      data: {numeroEscuela:numeroEscuela}
-                    })
-                    .done(function(data) {
 
-                      for (let item of data) {
+              function buscarEscuela(){
+                $.ajax({
+                    url: 'includes/mod_cen/clases/ajax/ajaxEscuela.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {numeroEscuela:numeroEscuela}
+                  })
+                  .done(function(data) {
+                    $('#resultado').empty();
+                    for (let item of data) {
+                      $(`<p><input type="checkbox" id="check${item.escuelaId}"name="" value="">${item.numero}- ${item.cue} - ${item.nombre}</p>`).appendTo('#resultado')
+                      console.log("Se guardo con exito... success Ahora");
+                    }
+                    $('#btnBuscarEscuela').attr('disabled',false);
+                    $('#btnBuscarEscuela').html('Seleccionar');
 
-                        (`<p>${item.nombre}</p>`).appendTo('#resultado')
-                        console.log("Se guardo con exito... success Ahora");
-                      }
 
-                      //$("#myModal").modal("hide");
-                    })
-                    .fail(function(dato) {
-                       console.log("error al volver de guardar");
-                     })
-                    .always(function() {
-                      console.log("complete");
-                    });
 
-                })
-              );
+                    //$("#myModal").modal("hide");
+                  })
+                  .fail(function(dato) {
+                     console.log("error al volver de guardar");
+                   })
+                  .always(function() {
+                    console.log("complete");
+                  });
+              }
 
-              $( "#formBuscarEscuela" ).submit();
-
+            buscarEscuela();
 
             }
-            alert('llegue aqui')
+            //alert('llegue aqui')
           }
 })
 
