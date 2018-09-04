@@ -105,7 +105,7 @@ function predioNuevo(escuela)
                      url: 'includes/mod_cen/clases/ajax/ajaxEscuela.php',
                      type: 'POST',
                      dataType: 'json',
-                     data: {numeroEscuela:numeroEscuela}
+                     data: {numeroEscuela:numeroEscuela,escuelaId:escuelaId}
                    })
                    .done(function(data) {
                      $('#resultado').empty();

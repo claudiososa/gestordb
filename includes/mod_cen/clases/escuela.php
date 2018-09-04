@@ -299,6 +299,15 @@ class Escuela
 		}
 	}
 
+	public function buscar2($escuelaId=NULL){
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="SELECT * FROM escuelas WHERE numero=$this->numero AND escuelaId<>$this->escuelaId";
+		$sentencia.="  ORDER BY numero";
+		return $conexion->query($sentencia);
+	}
+
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();

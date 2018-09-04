@@ -30,8 +30,8 @@
     //*****************************************************
       if (isset($_POST['numeroEscuela'])) {
           $arrayPrincipal=array();
-          $escuela =  new Escuela(null,null,null,$_POST['numeroEscuela']);
-          $datoEscuela = $escuela->buscar();
+          $escuela =  new Escuela($_POST['escuelaId'],null,null,$_POST['numeroEscuela']);
+          $datoEscuela = $escuela->buscar2();
           while ($fila = mysqli_fetch_object($datoEscuela)) {
             $item=array();
 
@@ -41,7 +41,7 @@
                        'numero' => $fila->numero
                      ];
             array_push($arrayPrincipal,$item);
-          }          
+          }
           $json = json_encode($arrayPrincipal);
           echo $json;
         }
