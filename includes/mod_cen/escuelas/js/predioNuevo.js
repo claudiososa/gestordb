@@ -78,62 +78,63 @@ function predioNuevo(escuela)
 
     })
 
+
+
     $('#btnBuscarEscuela').click(function(){
 
+      if ($(this).html()=='Buscar') {
+        if (validarInforme()) {
+            let valorBoton = $(this).text()
+            let informeId = escuela.informeId
+            $(this).attr('disabled',true);
+            //$('#formInforme').hide()
+            $('.cargando').css('display','block')
+            //$('#divButton').hide()
 
-       if (validarInforme()) {
-           let valorBoton = $(this).text()
-           let informeId = escuela.informeId
-           $(this).attr('disabled',true);
-           //$('#formInforme').hide()
-           $('.cargando').css('display','block')
-           //$('#divButton').hide()
+            if (valorBoton=="Responder")
+            {
+               $('#divContenido'+informeId).hide()
+               $('#verInforme'+informeId).show()
+               $('#btnSave').html('Enviar')
+               $('#divRespuesta').show()
+             }else{
+               let numeroEscuela = new String($('#inputBuscarEscuela').val())
 
-           if (valorBoton=="Responder")
-           {
-              $('#divContenido'+informeId).hide()
-              $('#verInforme'+informeId).show()
-              $('#btnSave').html('Enviar')
-              $('#divRespuesta').show()
-            }else{
-              let numeroEscuela = new String($('#inputBuscarEscuela').val())
-
-              function buscarEscuela(){
-                $.ajax({
-                    url: 'includes/mod_cen/clases/ajax/ajaxEscuela.php',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {numeroEscuela:numeroEscuela}
-                  })
-                  .done(function(data) {
-                    $('#resultado').empty();
-                    for (let item of data) {
-                      $(`<p><input type="checkbox" id="check${item.escuelaId}"name="" value="">${item.numero}- ${item.cue} - ${item.nombre}</p>`).appendTo('#resultado')
-                      console.log("Se guardo con exito... success Ahora");
-                    }
-                    $('#btnBuscarEscuela').attr('disabled',false);
-                    $('#btnBuscarEscuela').html('Seleccionar');
-
-
-
-                    //$("#myModal").modal("hide");
-                  })
-                  .fail(function(dato) {
-                     console.log("error al volver de guardar");
+               function buscarEscuela(){
+                 $.ajax({
+                     url: 'includes/mod_cen/clases/ajax/ajaxEscuela.php',
+                     type: 'POST',
+                     dataType: 'json',
+                     data: {numeroEscuela:numeroEscuela}
                    })
-                  .always(function() {
-                    console.log("complete");
-                  });
-              }
+                   .done(function(data) {
+                     $('#resultado').empty();
+                     for (let item of data) {
+                       $(`<p><input type="button" id="button${item.escuelaId}" value="Agregar"> ->${item.numero}- ${item.cue} - ${item.nombre} </p>`).appendTo('#resultado')
+                       console.log("Se guardo con exito... success Ahora");
+                     }
+                     $('#btnBuscarEscuela').attr('disabled',false);
+                       $('[id ^=button]').click( function(){
+                         alert($(this).attr('id').substr(6))
+                       });
+                   })
+                   .fail(function(dato) {
+                      console.log("error al volver de guardar");
+                    })
+                   .always(function() {
+                     console.log("complete");
+                   });
+               }
 
-            buscarEscuela();
+             buscarEscuela();
 
-            }
-            //alert('llegue aqui')
-          }
+             }
+             //alert('llegue aqui')
+           }
+      } else if ($(this).html()=='Seleccionar') {
+        alert($(this).html())
+      }
+
 })
-
-
-
 
 }
