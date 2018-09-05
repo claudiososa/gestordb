@@ -370,7 +370,7 @@ $(document).ready(function() {
             if (click=='predios') {
 
                // console.log('item Escuela Id = '+cant)
-             $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warning"><td colspan="6"><table id=tablepredios${tablepredio}
+             $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warning"><td colspan="7"><table id=tablepredios${tablepredio}
              class="table StyleTable">
              <thead>
                <tr class='warningStyle'>
@@ -390,6 +390,7 @@ $(document).ready(function() {
              <thead>
                <tr>
                  <th>Escuela</th>
+                 <th>Direccion</th>
                  <th>Numero</th>
                  <th>CUE</th>
                  <th>Accion</th>
@@ -408,7 +409,7 @@ $(document).ready(function() {
 
         if (click=='predios') {
        //  console.log('item Escuela Id = '+cant)
-         $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${escuelaId} warningStyle"><td colspan="6"><table id=tablepredios${escuelaId}
+         $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${escuelaId} warningStyle"><td colspan="7"><table id=tablepredios${escuelaId}
          class="table StyleTable">
          <thead>
            <tr class='warningStyle'>
@@ -423,6 +424,7 @@ $(document).ready(function() {
          <thead>
            <tr>
              <th>Escuela</th>
+             <th>Direccion</th>
              <th>Nuemro</th>
              <th>CUE</th>
              <th>Accion</th>
@@ -449,6 +451,7 @@ $(document).ready(function() {
               //$('#tablepredios'+escuelaIdconCero).find('tbody').after(`<tr class="trpredios${escuelaIdconCero}">
               $(`<tr id="predio${item.predioId}" class="trpredios${escuelaIdconCero}">
               <td>${item.nombre}</td>
+              <td>${item.direccion}</td>
               <td>${item.numero}</td>
               <td>${item.cue}</td>
               <td><a id='quitar${item.numero}${escuelaIdconCero}${item.predioId}' class='btn btn-danger'>Quitar</a></td>

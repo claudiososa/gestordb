@@ -2,24 +2,28 @@
   include_once('../CompartePredio.php');
   include_once('../maestro.php');
 
-
+/**
+ * pregunta por la escuela que se esta
+ * seleccionando como escuela que comparte predio con la institucion actual
+ */
   if (isset($_POST['agregarEscuelaId']))
    {
 
      $list=array();
      $predio = new CompartePredio(null,$_POST['agregarEscuelaId']);
+     $buscarUnico = $predio->registroUnico();
 
      //busca el escuelaId de la escuela Seleccionada para agregar al predio
      $buscar = $predio->buscarPredio('count');
 
-     if ($buscar == 0) {//sino encuentra  el escuelaId en tabla Predio,
+     if ($buscar == 0 AND $buscarUnico == 'no') {//sino encuentra  el escuelaId en tabla Predio,
        $predio->escuelaId = $_POST['escuelaId'];
 
        //busca el escuelaId de la escuela a cargo a donde quieres agregar la escuela Seleccionada
        $buscarUnico = $predio->registroUnico();
 
        $buscar = $predio->buscarPredio('count');
-              Maestro::debbugPHP($buscarUnico);
+
        if ($buscar == 0 AND $buscarUnico == 'no') {//sino encuentra  el escuelaId en tabla Predio,
          $ultimoPredio = $predio->ultimoPredio();
          $objUltimoPredio = mysqli_fetch_object($ultimoPredio);
@@ -62,7 +66,7 @@
          $temporal=array(
             'predioId'=>$predioNuevo,
             'numero'=>$datoEscuela->numero,
-            'nombre'=>$datoEscuela->nombre,
+            'nombre'=>substr($datoEscuela->nombre,0,30),
             'cue'=>$datoEscuela->cue
             );
        }
@@ -71,21 +75,73 @@
        // $predioId = new CompartePredio(null,$_POST['agregarEscuelaId'],$datoPredio->predio,'22');
        // $predioId->agregar();
      }else{
-       $buscar = $predio->buscarPredio();
-       $nuevoPredio = new CompartePredio(null,$_POST['agregarEscuelaId'],$buscar->predio,'22');
-       $predioNuevo = $nuevoPredio->agregar();
 
-       $nuevoPredio->id = $predioNuevo;
+       //Verifica si existe la escuela actual en la tabla compartirPredio
 
-       $buscarP = $nuevoPredio->buscarPredioId();
-       $datoEscuela = mysqli_fetch_object($buscarP);
+       $predio->escuelaId = $_POST['escuelaId'];
 
-       $temporal=array(
-          'predioId'=>$predioNuevo,
-          'numero'=>$datoEscuela->numero,
-          'nombre'=>$datoEscuela->nombre,
-          'cue'=>$datoEscuela->cue
-          );
+       $unicoActual = $predio->buscarPredio('count');
+
+       if ($unicoActual > 0) {
+         $predio->escuelaId = $_POST['agregarEscuelaId'];
+
+         $buscar = $predio->buscarPredioUnico();
+         $dato1 = mysqli_fetch_object($buscar);
+         //Maestro::debbugPHP($dato1);
+
+         $predio->escuelaId = $_POST['escuelaId'];
+         $buscar = $predio->buscarPredio();
+         $datoPredio = mysqli_fetch_object($buscar);
+         $nuevoPredio = new CompartePredio($dato1->id,$_POST['agregarEscuelaId'],$datoPredio->predio,'22');
+         $predioNuevo = $nuevoPredio->editar();
+
+
+         Maestro::debbugPHP($predioNuevo);
+         $nuevoPredio->id = $predioNuevo;
+
+         $buscarP = $nuevoPredio->buscarPredioId();
+         $datoEscuela = mysqli_fetch_object($buscarP);
+         //Maestro::debbugPHP($datoEscuela);
+         $temporal=array(
+            'predioId'=>$predioNuevo,
+            'numero'=>$datoEscuela->numero,
+            'nombre'=>substr($datoEscuela->nombre,0,30),
+            'cue'=>$datoEscuela->cue
+            );
+       }else{
+
+         $ultimoPredio = $predio->ultimoPredio();
+         $objUltimoPredio = mysqli_fetch_object($ultimoPredio);
+
+         $crearPredio = $objUltimoPredio->predio + 1;
+
+         $nuevoPredio = new CompartePredio(null,$_POST['escuelaId'],$crearPredio,'22');
+         $predioNuevo = $nuevoPredio->agregar();
+
+         $predio->escuelaId = $_POST['agregarEscuelaId'];
+
+         $buscar = $predio->buscarPredioUnico();
+         $dato1 = mysqli_fetch_object($buscar);
+         //Maestro::debbugPHP($crearPredio);
+
+         $nuevoPredio2 = new CompartePredio($dato1->id,$_POST['agregarEscuelaId'],$crearPredio,'22');
+         $predioNuevo = $nuevoPredio2->editar();
+
+         $nuevoPredio->id = $predioNuevo;
+
+         $buscarP = $nuevoPredio->buscarPredioId();
+         $datoEscuela = mysqli_fetch_object($buscarP);
+
+         $temporal=array(
+            'predioId'=>$predioNuevo,
+            'numero'=>$datoEscuela->numero,
+            'nombre'=>substr($datoEscuela->nombre,0,30),
+            'cue'=>$datoEscuela->cue
+            );
+       }
+
+
+
      }
       array_push($list,$temporal);
 
@@ -135,7 +191,8 @@
              'escuelaActual'=>$_POST['escuelaId'],
              'escuelaId'=>$fila->escuelaId,
              'cantidad'=>$cantidadPredio,
-             'nombre' =>$fila->nombre,
+             'nombre' =>substr($fila->nombre,0,30).'...',
+             'direccion' =>substr($fila->direccion,0,30).'...',
              'numero' =>$fila->numero,
              'cue' =>$fila->cue,
              'predioId'=>$fila->id
