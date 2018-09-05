@@ -95,9 +95,10 @@ class Escuela
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="INSERT INTO escuelas (escuelaId,referenteId,cue,numero,nombre,domicilio,nivel,localidadId,turnos,telefono,email,supervisor_id,ubicacion,sitio,facebook,twitter,youtube,referenteIdPmi,referenteIdSuperSec,referenteIdSuperSup,referenteIdSuperAdultos,referenteIdFacilitador)
-		VALUES (NULL,'". $this->referenteId."','". $this->cue."','". $this->numero."','".$this->nombre."','". $this->domicilio."','". $this->nivel."','". $this->localidadId."','". $this->turnos."','".$this->telefono."','".$this->email."','".$this->supervisor."','".$this->ubicacion."','".$this->sitio."','".$this->facebook."','".$this->twitter."','".$this->youtube."','".$this->referenteIdPmi."','".$this->referenteIdSuperSec."','".$this->referenteIdSuperSup."','".$this->referenteIdSuperAdultos."','".$this->referenteIdFacilitador."');";
+		VALUES (NULL,'". $this->referenteId."','". $this->cue."','". $this->numero."','".$this->nombre."','". $this->domicilio."','". $this->nivel."','". $this->localidadId."','". $this->turnos."','".$this->telefono."','".$this->email."',
+			'".$this->supervisor."','".$this->ubicacion."','".$this->sitio."','".$this->facebook."','".$this->twitter."','".$this->youtube."','".$this->referenteIdPmi."','".$this->referenteIdSuperSec."',
+			'".$this->referenteIdSuperSup."','".$this->referenteIdSuperAdultos."','".$this->referenteIdFacilitador."');";
 
-		//echo $sentencia;
 		if ($conexion->query($sentencia)) {
 			//header("Location:index.php?id=1");
 			return 1;
@@ -299,11 +300,18 @@ class Escuela
 		}
 	}
 
-	public function buscar2($escuelaId=NULL){
+	public function buscar2($escuelaId=NULL,$arrayPredios=NULL){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
 		$sentencia="SELECT * FROM escuelas WHERE numero=$this->numero AND escuelaId<>$this->escuelaId";
+
+		if (isset($arrayPredios)) {
+			foreach ($arrayPredios as $valor) {
+				$sentencia.="  AND escuelaId <> $valor ";
+			}
+		}
+
 		$sentencia.="  ORDER BY numero";
 		return $conexion->query($sentencia);
 	}

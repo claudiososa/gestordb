@@ -113,9 +113,38 @@ function predioNuevo(escuela)
                        $(`<p><input type="button" id="button${item.escuelaId}" value="Agregar"> ->${item.numero}- ${item.cue} - ${item.nombre} </p>`).appendTo('#resultado')
                        console.log("Se guardo con exito... success Ahora");
                      }
+
+
                      $('#btnBuscarEscuela').attr('disabled',false);
                        $('[id ^=button]').click( function(){
-                         alert($(this).attr('id').substr(6))
+                         //alert($(this).attr('id').substr(6))
+                         let agregarEscuelaId = $(this).attr('id').substr(6)
+                           $.ajax({
+                             url: 'includes/mod_cen/clases/ajax/ajaxPredio.php',
+                             type: 'POST',
+                             dataType: 'json',
+                             data: {agregarEscuelaId:agregarEscuelaId,escuelaId:escuelaId}
+                           })
+                           .done(function(data) {
+                             for (let item of data) {
+                               //alert(escuelaId)
+                               $(`<tr id="predio${item.predioId}" class="trpredios${escuelaId}">
+                               <td>${item.nombre}</td>
+                               <td>${item.numero}</td>
+                               <td>${item.cue}</td>
+                               <td><a id='quitar${item.numero}${escuelaId}${item.predioId}' class='btn btn-danger'>Quitar</a></td>
+                               </tr>`).appendTo('#bodyPredio'+escuelaId)
+                             }
+                             $('#modalBuscarEscuela').modal('hide')
+                           })
+                           .fail(function(dato) {
+                              console.log("error al volver de guardar");
+                            })
+                           .always(function() {
+                             console.log("complete");
+                           });
+
+
                        });
                    })
                    .fail(function(dato) {

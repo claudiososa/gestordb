@@ -3,6 +3,70 @@
   include_once('../maestro.php');
 
 
+  if (isset($_POST['agregarEscuelaId']))
+   {
+     $list=array();
+     $predio = new CompartePredio(null,$_POST['agregarEscuelaId']);
+     //busca el escuelaId de la escuela Seleccionada para agregar al predio
+     $buscar = $predio->buscarPredio('count');
+
+     if ($buscar == 0) {//sino encuentra  el escuelaId en tabla Predio,
+       $predio->escuelaId = $_POST['escuelaId'];
+       //busca el escuelaId de la escuela a cargo a donde quieres agregar la escuela Seleccionada
+       $buscar = $predio->buscarPredio('count');
+
+       if ($buscar == 0) {//sino encuentra  el escuelaId en tabla Predio,
+         $ultimoPredio = mysqli_fetch_object($predio->ultimoPredio());
+         $datoPredio = $ultimoPredio->predio + 1;
+         $nuevoPredio = new CompartePredio(null,$_POST['escuelaId'],$datoPredio,'22');
+         $predioNuevo = $predioId->agregar();
+
+         $nuevoPredio->id = $predioNuevo;
+
+
+         $datoEscuela = mysqli_fetch_object($nuevoPredio->buscarPredioId());
+
+
+         $temporal=array(
+            'predioId'=>$predioNuevo,
+            'numero'=>$datoEscuela->numero,
+            'nombre'=>$datoEscuela->nombre,
+            'cue'=>$datoEscuela->cue
+            );
+       }else{
+         $buscar = mysqli_fetch_object($predio->buscarPredio());
+
+         $nuevoPredio = new CompartePredio(null,$_POST['agregarEscuelaId'],$buscar->predio,'22');
+
+         $predioNuevo = $nuevoPredio->agregar();
+
+         $nuevoPredio->id = $predioNuevo;
+         $datoEscuela = mysqli_fetch_object($nuevoPredio->buscarPredioId());
+
+
+         $temporal=array(
+            'predioId'=>$predioNuevo,
+            'numero'=>$datoEscuela->numero,
+            'nombre'=>$datoEscuela->nombre,
+            'cue'=>$datoEscuela->cue
+            );
+       }
+
+       // $datoPredio = mysqli_fetch_object($predio->buscarPredio());
+       // $predioId = new CompartePredio(null,$_POST['agregarEscuelaId'],$datoPredio->predio,'22');
+       // $predioId->agregar();
+     }else{
+
+     }
+      array_push($list,$temporal);
+
+      $json = json_encode($list);
+      //Maestro::debbugPHP($json);
+      echo $json;
+   }
+
+
+
   if (isset($_POST['quitarPredioId']))
    {
      $list=array();

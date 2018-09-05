@@ -20,7 +20,7 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 	public function agregar(){
 		$bd=Conexion2::getInstance();
 		$sentencia = "INSERT INTO escuelaPredio (id,escuelaId,predio,referenteId)
-									VALUES (NULL,'".$this->escuelaId."','".$this->predio."','".$this->referenteId."')";
+									VALUES (NULL,$this->escuelaId,$this->predio,$this->referenteId)";
 		if ($bd->ejecutar($sentencia)) {
 			return $ultimoPredio=$bd->lastID();
 		}else{
@@ -49,18 +49,18 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 			}
 		}
 
+		public function ultimoPredio(){
+			$bd=conexion2::getInstance();
+			$sentencia = 'SELECT * FROM escuelaPredio ORDER BY predio DESC LIMIT 1';
+			return $bd->ejecutar($sentencia);
+		}
+
 		public function buscarPredio($count=NULL)
 		{
-			// INNER JOIN escuelas
-			// ON escuelaPredio.escuelaId = escuelas.escuelaId
 			$bd=conexion2::getInstance();
 		  $sentencia="SELECT * FROM escuelaPredio WHERE escuelaId=$this->escuelaId";
-
 			$sentencia.="  ORDER BY id DESC";
-			// if(isset($limit)){
-			// 	$sentencia.=" LIMIT ".$limit;
-			// }
-			//echo $sentencia;
+
 			$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));# code...
 
 			if ($cantidad > 0) {
@@ -83,6 +83,20 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 
 
 		}
+
+		public function buscarPredioId()
+		{
+			$bd=conexion2::getInstance();
+			$sentencia="SELECT * FROM escuelaPredio WHERE id=$this->id
+									INNER JOIN escuelas
+									ON escuelas.escuelaId = escuelaPredio.escuelaId ";
+			$sentencia.="  ORDER BY id DESC";
+
+			return $bd->ejecutar($sentencia);
+		}
+
+
+
 
 	public function buscar($limit=NULL,$count=NULL)
 	{
