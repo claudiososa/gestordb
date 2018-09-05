@@ -408,7 +408,7 @@ $(document).ready(function() {
 
         if (click=='predios') {
        //  console.log('item Escuela Id = '+cant)
-         $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warningStyle"><td colspan="6"><table id=tablepredios${tablepredio}
+         $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${escuelaId} warningStyle"><td colspan="6"><table id=tablepredios${escuelaId}
          class="table StyleTable">
          <thead>
            <tr class='warningStyle'>
@@ -428,7 +428,8 @@ $(document).ready(function() {
              <th>Accion</th>
            </tr>
          </thead>
-         <tbody id='bodyPredio${item.escuelaId}'></tbody>`)
+         <tbody id='bodyPredio${escuelaId}'></tbody>`)
+         //<tbody id='bodyPredio${item.escuelaId}'></tbody>`)
 
        }else{
           $('#preM'+escuelaId).parent().parent().after(`<p tableinformeM${tableinforme}" id="tableinformeM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button>`)
@@ -485,8 +486,9 @@ $(document).ready(function() {
 
 
           });
+          $('[id ^=quitar]').on("click", function(){
 
-          $('[id ^=quitar]').click( function(){
+          //$('[id ^=quitar]').click( function(){
             quitarPredioId = $(this).attr('id').substr(14)
             //alert (quitarPredioId)
             numEscuela = $(this).attr('id').substr(6,4)

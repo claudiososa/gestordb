@@ -118,7 +118,7 @@ function predioNuevo(escuela)
                      $('#btnBuscarEscuela').attr('disabled',false);
                        $('[id ^=button]').click( function(){
                          //alert($(this).attr('id').substr(6))
-                         let agregarEscuelaId = $(this).attr('id').substr(6)
+                         let agregarEscuelaId = $(this).attr('id').substr(6)                         
                            $.ajax({
                              url: 'includes/mod_cen/clases/ajax/ajaxPredio.php',
                              type: 'POST',

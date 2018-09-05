@@ -52,6 +52,7 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 		public function ultimoPredio(){
 			$bd=conexion2::getInstance();
 			$sentencia = 'SELECT * FROM escuelaPredio ORDER BY predio DESC LIMIT 1';
+			//return $sentencia;
 			return $bd->ejecutar($sentencia);
 		}
 
@@ -60,10 +61,10 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 			$bd=conexion2::getInstance();
 		  $sentencia="SELECT * FROM escuelaPredio WHERE escuelaId=$this->escuelaId";
 			$sentencia.="  ORDER BY id DESC";
+			$ejecutar =$bd->ejecutar($sentencia);
+			$cantidad = mysqli_num_rows($ejecutar);# code...
 
-			$cantidad = mysqli_num_rows($bd->ejecutar($sentencia));# code...
-
-			if ($cantidad > 0) {
+			if ($cantidad > 0 ) {
 					$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
 					//$bd=conexion2::getInstance();
 				  $sentencia2="SELECT * FROM escuelaPredio
@@ -75,6 +76,8 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 						{
 							$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2))-1;						}
 				}
+
+
 				if(isset($count)){
 					return $cantidad;
 				}else{
@@ -84,14 +87,44 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 
 		}
 
+
+		public function registroUnico()
+		{
+			$bd=conexion2::getInstance();
+			$sentencia="SELECT * FROM escuelaPredio WHERE escuelaId=$this->escuelaId";
+			$sentencia.="  ORDER BY id DESC";
+
+			if (mysqli_num_rows($bd->ejecutar($sentencia) > 0))
+			{
+				$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
+
+				$sentencia2="SELECT * FROM escuelaPredio WHERE predio=$dato->predio";
+				$sentencia2.="  ORDER BY id DESC";
+				return $sentencia2;
+				$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2));
+
+				if ($cantidad == 1) {
+					return 'si';
+				}else {
+					return 'no';
+				}
+
+			} else {
+				return 'no';
+			}
+
+		}
+
+
 		public function buscarPredioId()
 		{
 			$bd=conexion2::getInstance();
-			$sentencia="SELECT * FROM escuelaPredio WHERE id=$this->id
+			$sentencia="SELECT * FROM escuelaPredio
 									INNER JOIN escuelas
-									ON escuelas.escuelaId = escuelaPredio.escuelaId ";
-			$sentencia.="  ORDER BY id DESC";
-
+									ON escuelas.escuelaId = escuelaPredio.escuelaId
+									WHERE id = $this->id";
+			//$sentencia.="  ORDER BY id DESC";
+			//return $sentencia;
 			return $bd->ejecutar($sentencia);
 		}
 
