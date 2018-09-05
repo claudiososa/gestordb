@@ -94,7 +94,7 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 			$sentencia="SELECT * FROM escuelaPredio WHERE escuelaId=$this->escuelaId";
 			$sentencia.="  ORDER BY id DESC";
 
-			if (mysqli_num_rows($bd->ejecutar($sentencia) > 0))
+			if (mysqli_num_rows($bd->ejecutar($sentencia)) > 0)
 			{
 				$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
 
