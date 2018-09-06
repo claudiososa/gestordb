@@ -74,13 +74,17 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 
 					if (mysqli_num_rows($bd->ejecutar($sentencia2))>0)
 						{
-							$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2))-1;						}
+							$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2))-1;
+						}
+				}elseif(!isset($count)){
+					return $bd->ejecutar($sentencia);
 				}
 
 
 				if(isset($count)){
 					return $cantidad;
 				}else{
+					//return $sentencia2;
 					return $bd->ejecutar($sentencia2);
 				}
 

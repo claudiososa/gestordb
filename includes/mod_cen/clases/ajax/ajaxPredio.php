@@ -98,7 +98,6 @@
          $predioNuevo = $nuevoPredio->editar();
 
 
-         Maestro::debbugPHP($predioNuevo);
          $nuevoPredio->id = $predioNuevo;
 
          $buscarP = $nuevoPredio->buscarPredioId();
@@ -178,19 +177,19 @@
    	 $list=array();
      $predio = new CompartePredio(null,$_POST['escuelaId']);
      $buscarPredio = $predio->buscarPredio();
+
      $cantidadPredio = $predio->buscarPredio('count');
      //$cantidadPredio=mysqli_num_rows($buscarPredio);
+     //$cantidadPredio = $cantidadPredio + 1;
 
 
      if ($cantidadPredio > 0) {
-       //$datoPredio = mysqli_fetch_object($buscarPredio);
-       //$predio2 = new CompartePredio(null,null,$datoPredio->predio);
-       //$buscarPredio2 = $predio2->buscar();
-       //$cantidadPredio2=mysqli_num_rows($buscarPredio2);
-
+       //Maestro::debbugPHP($buscarPredio);
        while ($fila = mysqli_fetch_object($buscarPredio))
        {
-        if ($fila->escuelaId<>$_POST['escuelaId']) {
+
+
+        if ($fila->escuelaId <> $_POST['escuelaId']) {
           $temporal=array(
              'escuelaActual'=>$_POST['escuelaId'],
              'escuelaId'=>$fila->escuelaId,
@@ -202,12 +201,24 @@
              'predioId'=>$fila->id
      		    );
 
-       		array_push($list,$temporal);
-        }
+            array_push($list,$temporal);
 
+        }
      	}
-     }
+
+    }else{
+      $temporal=array(
+         'escuelaActual'=>$_POST['escuelaId'],
+         'cantidad'=>$cantidadPredio,
+        );
+        array_push($list,$temporal);
+
+    }
+
+
      $json = json_encode($list);
+
+     //Maestro::debbugPHP($json);
 
      echo $json;
 

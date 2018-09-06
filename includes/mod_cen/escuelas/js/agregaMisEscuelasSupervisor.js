@@ -322,8 +322,9 @@ $(document).ready(function() {
    * Boton de Predio de cada Escuela
    */
   $('[id ^=predios],[id ^=predioM]').on('click', function(){
-
     let escuelaId = $(this).attr('id').substr(7)
+
+
     //alert(escuelaId)
     let click = $(this).attr('id').substr(0,7)// guarda el id del elemento donde se hizo clic, puede ser informes o informeM
 
@@ -341,6 +342,8 @@ $(document).ready(function() {
 
     if (typeof(existe)==='undefined')
     {
+      $('#pre'+escuelaId).prop('disabled',true)
+
         console.log('definicion de existe'+existe)
         let predio ='all'
         //let reports ='conectar'
@@ -352,6 +355,7 @@ $(document).ready(function() {
         })
         .done(function(lista) {
 
+        $('#pre'+escuelaId).prop('disabled',false)
         let itemEscuela = 0
         let tablepredio = 0
         let cant = 0
@@ -406,7 +410,7 @@ $(document).ready(function() {
 
 
         }else{   // entra por que no tiene informes cargados
-
+          //alert(cant)
         if (click=='predios') {
        //  console.log('item Escuela Id = '+cant)
          $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${escuelaId} warningStyle"><td colspan="7"><table id=tablepredios${escuelaId}
