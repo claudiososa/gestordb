@@ -55,12 +55,13 @@
           $escuela =  new Escuela($_POST['escuelaId'],null,null,$_POST['numeroEscuela']);
           $datoEscuela = $escuela->buscar2(null,$arrayPredios);
           //Maestro::debbugPHP($arrayPredios);
-          Maestro::debbugPHP($datoEscuela);
+          //Maestro::debbugPHP($datoEscuela);
           while ($fila = mysqli_fetch_object($datoEscuela)) {
             $item=array();
 
                 $item=['escuelaId' => $fila->escuelaId,
                        'nombre' => $fila->nombre,
+                       'domicilio' => $fila->domicilio,
                        'cue' => $fila->cue,
                        'numero' => $fila->numero
                      ];

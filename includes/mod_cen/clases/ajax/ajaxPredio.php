@@ -47,6 +47,7 @@
          $temporal=array(
             'predioId'=>$nuevoId,
             'numero'=>$datoEscuela->numero,
+            'domicilio'=>substr($datoEscuela->domicilio,0,30),
             'nombre'=>$datoEscuela->nombre,
             'cue'=>$datoEscuela->cue
             );
@@ -65,6 +66,7 @@
 
          $temporal=array(
             'predioId'=>$predioNuevo,
+            'domicilio'=>substr($datoEscuela->domicilio,0,30),
             'numero'=>$datoEscuela->numero,
             'nombre'=>substr($datoEscuela->nombre,0,30),
             'cue'=>$datoEscuela->cue
@@ -104,6 +106,7 @@
          //Maestro::debbugPHP($datoEscuela);
          $temporal=array(
             'predioId'=>$predioNuevo,
+            'domicilio'=>substr($datoEscuela->domicilio,0,30),
             'numero'=>$datoEscuela->numero,
             'nombre'=>substr($datoEscuela->nombre,0,30),
             'cue'=>$datoEscuela->cue
@@ -134,6 +137,7 @@
 
          $temporal=array(
             'predioId'=>$predioNuevo,
+            'domicilio'=>substr($datoEscuela->domicilio,0,30),
             'numero'=>$datoEscuela->numero,
             'nombre'=>substr($datoEscuela->nombre,0,30),
             'cue'=>$datoEscuela->cue
@@ -192,7 +196,7 @@
              'escuelaId'=>$fila->escuelaId,
              'cantidad'=>$cantidadPredio,
              'nombre' =>substr($fila->nombre,0,30).'...',
-             'direccion' =>substr($fila->direccion,0,30).'...',
+             'domicilio' =>substr($fila->domicilio,0,30).'...',
              'numero' =>$fila->numero,
              'cue' =>$fila->cue,
              'predioId'=>$fila->id

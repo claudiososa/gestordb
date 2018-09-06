@@ -379,7 +379,7 @@ $(document).ready(function() {
                  <th>&nbsp</th>
                  <th>&nbsp</th>
 
-                 <th><button type='button' class='btn btn-warning' id=nuevoPredio${tablepredio} >Agregar Nuevo Predio</button></th>
+                 <th><button type='button' class='btn btn-warning' id=nuevoPredio${tablepredio} >Agregar Nueva Institución</button></th>
 
                </tr>
 
@@ -390,10 +390,10 @@ $(document).ready(function() {
              <thead>
                <tr>
                  <th>Escuela</th>
-                 <th>Direccion</th>
-                 <th>Numero</th>
+                 <th>Dirección</th>
+                 <th>Número</th>
                  <th>CUE</th>
-                 <th>Accion</th>
+                 <th>Acción</th>
                </tr>
              </thead>
              <tbody id='bodyPredio${tablepredio}'></tbody>`)
@@ -424,10 +424,10 @@ $(document).ready(function() {
          <thead>
            <tr>
              <th>Escuela</th>
-             <th>Direccion</th>
+             <th>Dirección</th>
              <th>Nuemro</th>
              <th>CUE</th>
-             <th>Accion</th>
+             <th>Acción</th>
            </tr>
          </thead>
          <tbody id='bodyPredio${escuelaId}'></tbody>`)
@@ -451,7 +451,7 @@ $(document).ready(function() {
               //$('#tablepredios'+escuelaIdconCero).find('tbody').after(`<tr class="trpredios${escuelaIdconCero}">
               $(`<tr id="predio${item.predioId}" class="trpredios${escuelaIdconCero}">
               <td>${item.nombre}</td>
-              <td>${item.direccion}</td>
+              <td>${item.domicilio}</td>
               <td>${item.numero}</td>
               <td>${item.cue}</td>
               <td><a id='quitar${item.numero}${escuelaIdconCero}${item.predioId}' class='btn btn-danger'>Quitar</a></td>
@@ -675,7 +675,7 @@ $(document).ready(function() {
               <th>Nombre</th>
               <th>Telefono</th>
               <th>Email</th>
-              <th>Accion</th>
+              <th>Acción</th>
             </tr>
           </thead>
           `)
@@ -779,7 +779,7 @@ $(document).ready(function() {
               <th>Nombre</th>
               <th>Telefono</th>
               <th>Email</th>
-              <th>Accion</th>
+              <th>Acción</th>
             </tr>
           </thead>
           `)
