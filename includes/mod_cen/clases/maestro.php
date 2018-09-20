@@ -60,6 +60,9 @@ class Maestro{
 			case '20':
 				$resultado = 'Referente ETJ';
 					break;
+			case '45':
+						$resultado = 'Referente Coordinador UNICEF';
+							break;
 			default:
 				# code...
 				break;

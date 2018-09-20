@@ -1,6 +1,8 @@
 <?php
 	include_once('includes/mod_cen/clases/persona.php');
 	include_once('includes/mod_cen/clases/referente.php');
+	include_once("includes/mod_cen/clases/TipoReferentes.php");
+	
 	//$c_referente= new Referente();
 
 	switch ($_SESSION['tipo']) {
@@ -63,6 +65,12 @@
 
 		$referente = $c_referente->getContacto();
 		$_SESSION["tipo"]=$referente->getTipo();
+
+		$tipoReferente = new TipoReferentes(null,$_SESSION["tipo"]);
+		$buscarTipo = $tipoReferente->buscar();
+		$datoTipo=mysqli_fetch_object($buscarTipo);
+
+		$_SESSION["tipoNumero"]=$datoTipo->tipoId;
 		//$persona="SELECT referentes.referenteId,personas.nombre,personas.apellido,personas.personaId FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE referenteId=".$elemento->referenteId."";
 		//$result=$conexion->query($persona);
 		//$dato=mysqli_fetch_object($result);

@@ -9,7 +9,7 @@
 </script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
-<!-- <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script> -->
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/predioNuevo.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
 
@@ -25,6 +25,8 @@
 
 
 <?php
+// var_dump($_SESSION['tipoNumero']);
+// var_dump($_SESSION['tipo']);
 include_once 'includes/mod_cen/clases/EscuelaReferentes.php';
 include_once 'includes/mod_cen/clases/escuela.php';
 include_once 'includes/mod_cen/clases/Autoridades.php';
@@ -165,7 +167,7 @@ echo "</div>";
 
     <?php
       //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-      $escuelasCargo = new EscuelaReferentes(null,null,'19',$_SESSION['referenteId']);
+      $escuelasCargo = new EscuelaReferentes(null,null,$_SESSION['tipoNumero'],$_SESSION['referenteId']);
       $buscarEscuelas = $escuelasCargo->buscar();
 
       $escuela = new Escuela();
@@ -242,7 +244,7 @@ echo "</div>";
 <?php
   //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
   //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-  $escuelasCargo = new EscuelaReferentes(null,null,'19',$_SESSION['referenteId']);
+  $escuelasCargo = new EscuelaReferentes(null,null,$_SESSION['tipoNumero'],$_SESSION['referenteId']);
   $buscarEscuelas = $escuelasCargo->buscar();
 
   $escuela = new Escuela();
@@ -272,8 +274,11 @@ echo "</div>";
     $buscarEscuela = $escuela->buscar();
     $infoEscuela = mysqli_fetch_object($buscarEscuela);
 
-
+    //Consulta sobre la cantidad de predio para la escuela actual
+    $predio = new CompartePredio(null,$row->escuelaId);
+    $cantidadPredio = $predio->buscarPredio('count');
     //
+
     // echo $infoEscuela->numero."<br>";
     // echo '<div class="container visible-xs">';
     echo '<div class="panel panel-primary">';
@@ -348,6 +353,8 @@ echo '</div>';
       echo '<hr>';
       }
     }
+    echo "<hr class='hrSeparador'>";
+    echo '<h4 id="predioM'.$infoEscuela->escuelaId.'"><b id="preM'.$infoEscuela->escuelaId.'">Predios ('.$cantidadPredio.')</b></h4>';
 
 
     echo '</div>';

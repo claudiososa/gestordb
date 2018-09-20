@@ -108,6 +108,9 @@
 			case 'ETTPL':
 							include_once('includes/mod_men/ettPlanLectura.php');
 							break;
+			case 'CAS':
+							include_once('includes/mod_men/ett.php');
+							break;
 			}
 		}
 			else {

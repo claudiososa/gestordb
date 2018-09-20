@@ -107,7 +107,7 @@ function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$logi
 
 		if($this->tipoReferente!=NULL)
 		{
-			$sentencia.=" tipoReferente = $this->tipoReferente && ";
+			$sentencia.=" tipoReferente = '$this->tipoReferente' && ";
 		}
 
 		if($this->cargoAutoridad!=NULL)
@@ -119,7 +119,7 @@ function __construct($tipoId=NULL,$tipoReferente=NULL,$cargoAutoridad=NULL,$logi
 		{
 			$sentencia.=" login = $this->login && ";
 		}
-    
+
     if($this->linea!=NULL)
 		{
 			$sentencia.=" linea = $this->linea && ";

@@ -758,6 +758,13 @@
 									case 23:
 																include("includes/mod_cen/admin/escuelaNuevo_ver_admin.php");
 																break;
+									case 24:
+													if($_SESSION['tipo']=='Coordinador' || $_SESSION['tipo']=='admin' || $_SESSION['tipo']=='ETJ') {
+															include("includes/mod_cen/admin/escuela_asignar_admin_Cas.php");
+													}else {
+															include("includes/mod_cen/denegado.php");
+													}
+													break;
 
 
 				}

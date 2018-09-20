@@ -2,6 +2,8 @@
 include_once("conexionPdo.php");
 include_once("conexion.php");
 include_once("referente.php");
+include_once("EscuelaReferentes.php");
+include_once("TipoReferentes.php");
 include_once("persona.php");
 
 class Login
@@ -46,6 +48,13 @@ public function iniciarSesion()
 				$referente= new Referente($elemento->referenteId);
 				$referente = $referente->getContacto();
 				$_SESSION["tipo"]=$referente->getTipo();
+
+				$tipoReferente = new TipoReferentes(null,$_SESSION["tipo"]);
+				$buscarTipo = $tipoReferente->buscar();
+				$datoTipo=mysqli_fetch_object($buscarTipo);
+
+				$_SESSION["tipoNumero"]=$datoTipo->tipoId;
+
 				$_SESSION["tipoN"]=0;
 				$persona="SELECT referentes.referenteId,personas.nombre,personas.apellido,personas.personaId FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE referenteId=".$elemento->referenteId."";
 				$result=$conexion->query($persona);

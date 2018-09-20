@@ -187,6 +187,9 @@ if(isset($_POST["username"]))
 				case 'ETTPL':
 				  			 	include_once('includes/mod_cen/portada/ettPlanLectura.php');
 								  break;
+				case 'CAS':
+				  			 	include_once('includes/mod_cen/portada/cas.php');
+								  break;
 
 				default:
 					include_once('includes/mod_cen/portada/portadaAdmin.php');
