@@ -173,12 +173,12 @@ if(($_POST))
 						 */
 
 						//****** Modificacion de la busqueda de ETT en escuelaReferentes
-						
+
 						$escuelasETT=new EscuelaReferentes(null,$fila->escuelaId,'19'); // buscamos las escuelas del ETT
 						$buscar_referenteETT=$escuelasETT->buscar2();// devuelve todos los datos de las escuelas del ETT
 						$datoBuscarETT=mysqli_fetch_object($buscar_referenteETT);
-						
-						
+
+
 							if ($datoBuscarETT->referenteId == NULL){  // Preguntamos si no existe ETT para la escuela (tambien puede ser que la escuela no tenga entrada en la tabla escuelaReferentes)
 
 							$referente=new Referente('0001');     // vamos a mostrar Sin, Asignar
@@ -186,9 +186,9 @@ if(($_POST))
 
                             $referente=new Referente($datoBuscarETT->referenteId);  // vamos a mostrar el ETT
 
-						  } 
+						  }
 
-						
+
 						//$referente=new Referente($fila->referenteId);
 						$buscar_referente=$referente->buscar();
 						$datoEtt=mysqli_fetch_object($buscar_referente);
@@ -213,14 +213,14 @@ if(($_POST))
 						 * Buscar dato de persona de referente ETJ de la escuela actual
 						 * guarda el dato en $datoEtj
 						 */
-						if ($datoBuscarETT->referenteId == NULL){  // preguntamos si no tiene ETT asignado 
+						if ($datoBuscarETT->referenteId == NULL){  // preguntamos si no tiene ETT asignado
 
 						$escuelasETJ=new EscuelaReferentes(null,$fila->escuelaId,'20'); // buscamos la escuelas del ETJ
 						$buscar_referenteETJ=$escuelasETJ->buscar2();// devuelve todos los datos de la escuelas del ETJ
 						$datoBuscarETJ=mysqli_fetch_object($buscar_referenteETJ);
 
 								if ($datoBuscarETJ->referenteId == NULL ) {   // preguntamos si NO tiene ETJ asignado (tambien puede ser que la escuela no tenga entrada en la tabla escuelaReferentes)
-									
+
 								$persona= new Referente('0001');     // vamos a mostrar Sin, Asignar
 								$buscar_referente=$persona->buscar();
 								$datoEtj=mysqli_fetch_object($buscar_referente);
@@ -232,7 +232,7 @@ if(($_POST))
 										$datoEtj=mysqli_fetch_object($buscar_referente);
 
 								     }
-						
+
 
 						}else{  // buscamos datos del ETJ a cargo del ETT de la escuela
 
@@ -242,20 +242,20 @@ if(($_POST))
 
 						}
 
-										
+
 
 						/*
 							Inicio de buscador de autoridades (Director y supervisor)
-													
+
 						*/
-							
+
 						  switch ($fila->nivel) {
 						  	case 'Primaria Común':
 						  		 // Director de Primaria
 						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'3');
 						  		$existeDirector= $autoridadDirector->existe();
 						  		if ($existeDirector != 0) {
-						  	
+
 						  		$autoridadDirector = new Autoridades($existeDirector);
 						  		$direDatos = $autoridadDirector->buscar();
 						  		$resultadoDirector=mysqli_fetch_object($direDatos);
@@ -271,12 +271,12 @@ if(($_POST))
 									}
 								// Supervisor de Primaria
 
-								
+
 								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'4');
 						  		$existeSuper = $autoridadSuper->existe();
-						  		
+
 						  		if ($existeSuper != 0) {
-						  	
+
 						  		$autoridadSuper = new Autoridades($existeSuper);
 						  		$superDatos = $autoridadSuper->buscar();
 						  		$resultadoSuper=mysqli_fetch_object($superDatos);
@@ -291,16 +291,16 @@ if(($_POST))
 								 $buscarSuper = $personaSuper->buscar();
 								 $datoSupervisor =mysqli_fetch_object($buscarSuper);
 								}
-								
+
 						  		break;
 
 						  	case 'Primaria Especial':
-						  		
+
 						  		 // Director de Primaria Especial
 						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'28');
 						  		$existeDirector= $autoridadDirector->existe();
 						  		if ($existeDirector != 0) {
-						  	
+
 						  		$autoridadDirector = new Autoridades($existeDirector);
 						  		$direDatos = $autoridadDirector->buscar();
 						  		$resultadoDirector=mysqli_fetch_object($direDatos);
@@ -316,12 +316,12 @@ if(($_POST))
 									}
 								// Supervisor de Primaria Especial
 
-								
+
 								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'18');
 						  		$existeSuper = $autoridadSuper->existe();
-						  		
+
 						  		if ($existeSuper != 0) {
-						  	
+
 						  		$autoridadSuper = new Autoridades($existeSuper);
 						  		$superDatos = $autoridadSuper->buscar();
 						  		$resultadoSuper=mysqli_fetch_object($superDatos);
@@ -343,12 +343,12 @@ if(($_POST))
 						  		break;
 
 						  	case 'Secundaria Común':
-						  		
+
 						  			 // Director de Secundaria Comun
 						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'20');
 						  		$existeDirector= $autoridadDirector->existe();
 						  		if ($existeDirector != 0) {
-						  	
+
 						  		$autoridadDirector = new Autoridades($existeDirector);
 						  		$direDatos = $autoridadDirector->buscar();
 						  		$resultadoDirector=mysqli_fetch_object($direDatos);
@@ -358,18 +358,18 @@ if(($_POST))
 
 						  		}else{
 
-							  	 $personaDirector= new Persona('1');
+							   $personaDirector= new Persona('1');
 								 $buscarPersona = $personaDirector->buscar();
 								 $datoDirector =mysqli_fetch_object($buscarPersona);
 									}
 								// Supervisor de Secundaria
 
-								
+
 								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'15');
 						  		$existeSuper = $autoridadSuper->existe();
-						  		
+
 						  		if ($existeSuper != 0) {
-						  	
+
 						  		$autoridadSuper = new Autoridades($existeSuper);
 						  		$superDatos = $autoridadSuper->buscar();
 						  		$resultadoSuper=mysqli_fetch_object($superDatos);
@@ -391,12 +391,12 @@ if(($_POST))
 
 						  		break;
 						  	case 'Secundaria Rural':
-						  		
+
 						  		 // Director de Secundaria Rural
 						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'20');
 						  		$existeDirector= $autoridadDirector->existe();
 						  		if ($existeDirector != 0) {
-						  	
+
 						  		$autoridadDirector = new Autoridades($existeDirector);
 						  		$direDatos = $autoridadDirector->buscar();
 						  		$resultadoDirector=mysqli_fetch_object($direDatos);
@@ -412,12 +412,12 @@ if(($_POST))
 									}
 								// Supervisor de Secundaria Rural
 
-								
+
 								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'15');
 						  		$existeSuper = $autoridadSuper->existe();
-						  		
+
 						  		if ($existeSuper != 0) {
-						  	
+
 						  		$autoridadSuper = new Autoridades($existeSuper);
 						  		$superDatos = $autoridadSuper->buscar();
 						  		$resultadoSuper=mysqli_fetch_object($superDatos);
@@ -437,13 +437,13 @@ if(($_POST))
 
 						  		break;
 						  	case 'Secundaria Técnica':
-						  		
+
 
 						  			// Director de Secundaria Rural
 						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'25');
 						  		$existeDirector= $autoridadDirector->existe();
 						  		if ($existeDirector != 0) {
-						  	
+
 						  		$autoridadDirector = new Autoridades($existeDirector);
 						  		$direDatos = $autoridadDirector->buscar();
 						  		$resultadoDirector=mysqli_fetch_object($direDatos);
@@ -459,12 +459,12 @@ if(($_POST))
 									}
 								// Supervisor de Secundaria Rural
 
-								
+
 								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'14');
 						  		$existeSuper = $autoridadSuper->existe();
-						  		
+
 						  		if ($existeSuper != 0) {
-						  	
+
 						  		$autoridadSuper = new Autoridades($existeSuper);
 						  		$superDatos = $autoridadSuper->buscar();
 						  		$resultadoSuper=mysqli_fetch_object($superDatos);
@@ -484,15 +484,15 @@ if(($_POST))
 
 
 						  		break;
-						  	
+
 						  	case 'IEM':
-						  		
+
 
 						  			 // Director de Secundaria Comun IEM
 						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'20');
 						  		$existeDirector= $autoridadDirector->existe();
 						  		if ($existeDirector != 0) {
-						  	
+
 						  		$autoridadDirector = new Autoridades($existeDirector);
 						  		$direDatos = $autoridadDirector->buscar();
 						  		$resultadoDirector=mysqli_fetch_object($direDatos);
@@ -508,12 +508,12 @@ if(($_POST))
 									}
 								// Supervisor de Secundaria IEM
 
-								
+
 								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'15');
 						  		$existeSuper = $autoridadSuper->existe();
-						  		
+
 						  		if ($existeSuper != 0) {
-						  	
+
 						  		$autoridadSuper = new Autoridades($existeSuper);
 						  		$superDatos = $autoridadSuper->buscar();
 						  		$resultadoSuper=mysqli_fetch_object($superDatos);
@@ -534,12 +534,12 @@ if(($_POST))
 
 						  		break;
 						  	case 'ISFD':
-						  		
+
 						  		 // Rector de ISFD
 						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'22');
 						  		$existeDirector= $autoridadDirector->existe();
 						  		if ($existeDirector != 0) {
-						  	
+
 						  		$autoridadDirector = new Autoridades($existeDirector);
 						  		$direDatos = $autoridadDirector->buscar();
 						  		$resultadoDirector=mysqli_fetch_object($direDatos);
@@ -555,12 +555,12 @@ if(($_POST))
 									}
 								// Supervisor de ISFD
 
-								
+
 								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'16');
 						  		$existeSuper = $autoridadSuper->existe();
-						  		
+
 						  		if ($existeSuper != 0) {
-						  	
+
 						  		$autoridadSuper = new Autoridades($existeSuper);
 						  		$superDatos = $autoridadSuper->buscar();
 						  		$resultadoSuper=mysqli_fetch_object($superDatos);
@@ -581,12 +581,12 @@ if(($_POST))
 						  		break;
 
 						  	case 'BSPA':
-						  		
+
 						  		 // Coordinador bspa
 						  		$autoridadDirector= new Autoridades(null,$fila->escuelaId,'29');
 						  		$existeDirector= $autoridadDirector->existe();
 						  		if ($existeDirector != 0) {
-						  	
+
 						  		$autoridadDirector = new Autoridades($existeDirector);
 						  		$direDatos = $autoridadDirector->buscar();
 						  		$resultadoDirector=mysqli_fetch_object($direDatos);
@@ -602,12 +602,12 @@ if(($_POST))
 									}
 								// Supervisor de bspa
 
-								
+
 								$autoridadSuper= new Autoridades(null,$fila->escuelaId,'19');
 						  		$existeSuper = $autoridadSuper->existe();
-						  		
+
 						  		if ($existeSuper != 0) {
-						  	
+
 						  		$autoridadSuper = new Autoridades($existeSuper);
 						  		$superDatos = $autoridadSuper->buscar();
 						  		$resultadoSuper=mysqli_fetch_object($superDatos);
@@ -632,15 +632,15 @@ if(($_POST))
 						  		break;
 						  }
 
-						 
+
 
 						  /*
 						  Fin de Autoridades nuevo
-						*/	
-  				       
+						*/
 
 
-						 
+
+
 
 						$locali=new Localidad($fila->localidadId,null);
 						$busca_loc= $locali->buscar();

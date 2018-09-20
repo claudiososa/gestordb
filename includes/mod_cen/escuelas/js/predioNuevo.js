@@ -36,11 +36,12 @@ function predioNuevo(escuela)
                    <label class="control-label cvalidacion">Buscar Escuela</label>
                  </div>
                  <div class="col-md-12">
-                     <input type="text" id="inputBuscarEscuela" placeholder="Ingrese numero" />
+                     <input class="form-control" type="text" id="inputBuscarEscuela" placeholder="Ingrese número" />
                   </div>
-
                </div>
-            <div id='resultado'></div>
+              </form>
+              <br><br><br>
+               <div id='resultado'></div>
             </div>
 
             <!-- **** FIN MODAL BODY ****-->
@@ -110,7 +111,7 @@ function predioNuevo(escuela)
                    .done(function(data) {
                      $('#resultado').empty();
                      for (let item of data) {
-                       $(`<p><input type="button" id="button${item.escuelaId}" value="Agregar"> ->${item.numero}- ${item.cue} - ${item.nombre} </p>`).appendTo('#resultado')
+                       $(`<br><p class="alert alert-info" ><b>${item.numero}- ${item.cue}</b> - ${item.nombre}<br>${item.domicilio}<br> <input type="button" id="button${item.escuelaId}" value="Agregar"> </p>`).appendTo('#resultado')
                        console.log("Se guardo con exito... success Ahora");
                      }
 
@@ -118,7 +119,7 @@ function predioNuevo(escuela)
                      $('#btnBuscarEscuela').attr('disabled',false);
                        $('[id ^=button]').click( function(){
                          //alert($(this).attr('id').substr(6))
-                         let agregarEscuelaId = $(this).attr('id').substr(6)                         
+                         let agregarEscuelaId = $(this).attr('id').substr(6)
                            $.ajax({
                              url: 'includes/mod_cen/clases/ajax/ajaxPredio.php',
                              type: 'POST',
@@ -130,6 +131,7 @@ function predioNuevo(escuela)
                                //alert(escuelaId)
                                $(`<tr id="predio${item.predioId}" class="trpredios${escuelaId}">
                                <td>${item.nombre}</td>
+                               <td>${item.domicilio}</td>
                                <td>${item.numero}</td>
                                <td>${item.cue}</td>
                                <td><a id='quitar${item.numero}${escuelaId}${item.predioId}' class='btn btn-danger'>Quitar</a></td>

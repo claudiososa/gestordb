@@ -10,6 +10,10 @@
    include_once("../rti.php");
    include_once('../maestro.php');
 
+   include_once('../Autoridades.php');
+   include_once('../EscuelaTipoAutoridad.php');
+   include_once('../TipoAutoridades.php');
+
   //include_once('../respuesta.php');
   //include_once('../leido.php');
 
@@ -28,6 +32,9 @@
 
     if ($ett->personaId != NULL) { // entra si la escuela tiene ETT
 
+if ($ett->fotoPerfil == NULL) {
+  $ett->fotoPerfil = '0000.jpg';
+}
       $temporal=array(
       'personaId'=>$ett->personaId,
       'apellido'=>$ett->apellido,
@@ -68,8 +75,11 @@
       		//**** cargamos datos del Etj ****//
 
 
+          if ($etj->fotoPerfil == NULL) {
+            $etj->fotoPerfil = '0000.jpg';
+          }
       	  $temporal=array(
-	      'personaId'=>$etj->personaId,
+        'personaId'=>$etj->personaId,
 	      'apellido'=>$etj->apellido,
 	      'nombre'=>$etj->nombre,
 	      'dni'=>$etj->dni,
@@ -100,7 +110,7 @@
       'email'=>'',
       'direccion'=>'',
       'twitter'=>'',
-      'fotoPerfil'=>''
+      'fotoPerfil'=>'0000.jpg'
 
       );
 
@@ -115,6 +125,9 @@
        if ($etj->personaId != NULL) {
 
 
+       if ($etj->fotoPerfil == NULL) {
+         $etj->fotoPerfil = '0000.jpg';
+       }
 	    $temporal=array(
 	      'personaId'=>$etj->personaId,
 	      'apellido'=>$etj->apellido,
@@ -144,7 +157,7 @@
 	      'email'=>'',
 	      'direccion'=>'',
 	      'twitter'=>'',
-	      'fotoPerfil'=>''
+	      'fotoPerfil'=>'0000.jpg'
 
 	      );
 
@@ -193,6 +206,10 @@
       		array_push($arrayPrincipal,$temporal);
         }
       }
+
+  //Datos director
+
+
 
 
 

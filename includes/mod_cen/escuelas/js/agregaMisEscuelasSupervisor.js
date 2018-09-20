@@ -322,8 +322,9 @@ $(document).ready(function() {
    * Boton de Predio de cada Escuela
    */
   $('[id ^=predios],[id ^=predioM]').on('click', function(){
-
     let escuelaId = $(this).attr('id').substr(7)
+
+
     //alert(escuelaId)
     let click = $(this).attr('id').substr(0,7)// guarda el id del elemento donde se hizo clic, puede ser informes o informeM
 
@@ -333,7 +334,7 @@ $(document).ready(function() {
     if (click=='predios') {//almacena en variable existe, la clase de la tablepredios en el caso que no existe dicha tabla se guarda comno undefined
       existe = $('.tablepredios'+escuelaId).attr('class')
     }else{
-      //alert('ingresa  por informeM')
+    //  alert('ingresa  por informeM')
       existe = $('.tablepredioM'+escuelaId).attr('class')
       //alert(existe)
     }
@@ -341,6 +342,8 @@ $(document).ready(function() {
 
     if (typeof(existe)==='undefined')
     {
+      $('#pre'+escuelaId).prop('disabled',true)
+
         console.log('definicion de existe'+existe)
         let predio ='all'
         //let reports ='conectar'
@@ -351,7 +354,7 @@ $(document).ready(function() {
           data: {predio:predio,referenteId:referenteId2,escuelaId: escuelaId}
         })
         .done(function(lista) {
-
+          $('#pre'+escuelaId).prop('disabled',false)
         let itemEscuela = 0
         let tablepredio = 0
         let cant = 0
@@ -360,17 +363,18 @@ $(document).ready(function() {
         for (let item of lista)
         {
            tablepredio=pad(item.escuelaActual,4,0)
-
+           //console.log('tablepredio'+tablepredio)
            cant= item.cantidad
+        //  console.log('cant'+cant)
         }
 
 
          if (cant > 0) {
-
+// entra por aqui si en desktop hay predios cargados
             if (click=='predios') {
 
-               // console.log('item Escuela Id = '+cant)
-             $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warning"><td colspan="6"><table id=tablepredios${tablepredio}
+//                console.log('item Escuela Id = '+cant)
+             $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${tablepredio} warning"><td colspan="7"><table id='tablepredios${tablepredio}'
              class="table StyleTable">
              <thead>
                <tr class='warningStyle'>
@@ -379,7 +383,7 @@ $(document).ready(function() {
                  <th>&nbsp</th>
                  <th>&nbsp</th>
 
-                 <th><button type='button' class='btn btn-warning' id=nuevoPredio${tablepredio} >Agregar Nuevo Predio</button></th>
+                 <th><button type='button' class='btn btn-warning' id='nuevoPredio${tablepredio}' >Agregar Nueva Institución</button></th>
 
                </tr>
 
@@ -390,25 +394,45 @@ $(document).ready(function() {
              <thead>
                <tr>
                  <th>Escuela</th>
-                 <th>Numero</th>
+                 <th>Dirección</th>
+                 <th>Número</th>
                  <th>CUE</th>
-                 <th>Accion</th>
+                 <th>Acción</th>
                </tr>
              </thead>
              <tbody id='bodyPredio${tablepredio}'></tbody>`)
 
           }else{
+// <button type='button' class='btn btn-warning' id=nuevoPredio${escuelaId} >Crear Nuevo Predio</button><br>
 
-             $('#preM'+escuelaId).parent().parent().after(`<div class="list-group tableinformeM${tableinforme}" id="tablepredioM${tablepredio}"><br><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button><br><div>`)
+//entra por aqui si vista movil tiene informes cargados
+// ##### !!!! Revisar paddings / eliminar <br> #####
+//###### !!!!! Modal de busqueda de escuelas predios cambiar heights/paddings/margin
+             $('#preM'+escuelaId).parent().after(`<div class='container'>
+
+             <button type='button' class='btn btn-warning btnPredioM${tablepredio}' id="nuevoPredio${tablepredio}" >Nuevo Predio</button><br><br>
+             <div class="list-group tablepredioM${tablepredio} table-responsive" id="tablepredioM${tablepredio}">
+
+             <table class="table table-bordered"id="tablepredios${tablepredio}">
+             <thead>
+               <tr>
+                 <th>Escuela</th>
+                 <th>Dirección</th>
+                 <th>N°</th>
+                 <th>CUE</th>
+                 <th>Acción</th>
+               </tr>
+             </thead>
+             <tbody id='bodyPredio${tablepredio}'></tbody><div></div>`)
 
           }
 
 
-        }else{   // entra por que no tiene informes cargados
-
+        }else{   // entra por que no tiene informes cargados vista desktop
+          //alert(cant)
         if (click=='predios') {
        //  console.log('item Escuela Id = '+cant)
-         $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${escuelaId} warningStyle"><td colspan="6"><table id=tablepredios${escuelaId}
+         $('#pre'+escuelaId).parent().parent().after(`<tr class="tablepredios${escuelaId} warningStyle"><td colspan="7"><table id=tablepredios${escuelaId}
          class="table StyleTable">
          <thead>
            <tr class='warningStyle'>
@@ -423,16 +447,35 @@ $(document).ready(function() {
          <thead>
            <tr>
              <th>Escuela</th>
-             <th>Nuemro</th>
+             <th>Dirección</th>
+             <th>Numero</th>
              <th>CUE</th>
-             <th>Accion</th>
+             <th>Acción</th>
            </tr>
          </thead>
          <tbody id='bodyPredio${escuelaId}'></tbody>`)
          //<tbody id='bodyPredio${item.escuelaId}'></tbody>`)
 
        }else{
-          $('#preM'+escuelaId).parent().parent().after(`<p tableinformeM${tableinforme}" id="tableinformeM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoInforme${escuelaId} >Crear Nuevo Informe</button>`)
+         //entra por aqui si vista movil no tiene predios cargados
+        //  ################# modificar estructura de tabla
+         $('#preM'+escuelaId).parent().after(`<div class='container'>
+         <button type='button' class='btn btn-warning btnPredioM${tablepredio}' id="nuevoPredio${tablepredio}" >Nuevo Predio</button><br><br>
+         <div class="list-group tablepredioM${tablepredio} table-responsive" id="tablepredioM${tablepredio}">
+
+         <table class="table table-bordered"id="tablepredios${tablepredio}">
+         <thead>
+           <tr>
+             <th>Escuela</th>
+             <th>Dirección</th>
+             <th>N°</th>
+             <th>CUE</th>
+             <th>Acción</th>
+           </tr>
+         </thead>
+
+         <tbody id='bodyPredio${escuelaId}'></tbody></div></div>`)
+          //$('#preM'+escuelaId).parent().parent().after(`<p tableinformeM${tableinforme}" id="tableinformeM${tableinforme}">Sin informes</p><button type='button' class='btn btn-warning' id=nuevoPredio${escuelaId} >Crear Nuevo Predio1</button>`)
        }
 
      }
@@ -447,8 +490,11 @@ $(document).ready(function() {
               //if (click=='predios') {
               //console.log('cantidad de leido'+item.cantidadLeido)
               //$('#tablepredios'+escuelaIdconCero).find('tbody').after(`<tr class="trpredios${escuelaIdconCero}">
+
+
               $(`<tr id="predio${item.predioId}" class="trpredios${escuelaIdconCero}">
               <td>${item.nombre}</td>
+              <td>${item.domicilio}</td>
               <td>${item.numero}</td>
               <td>${item.cue}</td>
               <td><a id='quitar${item.numero}${escuelaIdconCero}${item.predioId}' class='btn btn-danger'>Quitar</a></td>
@@ -487,7 +533,7 @@ $(document).ready(function() {
 
           });
           $('[id ^=quitar]').on("click", function(){
-
+//console.log('quitar predio')
           //$('[id ^=quitar]').click( function(){
             quitarPredioId = $(this).attr('id').substr(14)
             //alert (quitarPredioId)
@@ -508,7 +554,6 @@ $(document).ready(function() {
                   });
                   //alert("El predio"+item.predioId+"+eliminado")
                 }
-
                 console.log("success");
               })
               .fail(function() {
@@ -608,6 +653,7 @@ $(document).ready(function() {
 
         $('.tablepredios'+escuelaId).remove()
         $('.tablepredioM'+escuelaId).remove()
+        $( '.btnPredioM'+escuelaId).remove()
         //$('.trautoridad'+escuelaId).closest('tr').remove()
         $this.find('i').removeClass('.glyphicon glyphicon-chevron-up').addClass('.glyphicon glyphicon-chevron-down');
 
@@ -672,7 +718,7 @@ $(document).ready(function() {
               <th>Nombre</th>
               <th>Telefono</th>
               <th>Email</th>
-              <th>Accion</th>
+              <th>Acción</th>
             </tr>
           </thead>
           `)
@@ -776,7 +822,7 @@ $(document).ready(function() {
               <th>Nombre</th>
               <th>Telefono</th>
               <th>Email</th>
-              <th>Accion</th>
+              <th>Acción</th>
             </tr>
           </thead>
           `)

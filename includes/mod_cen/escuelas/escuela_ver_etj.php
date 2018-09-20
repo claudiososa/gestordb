@@ -12,10 +12,12 @@ hr {
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/jsEscuelaVerEtj.js"></script>
 <!-- <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script> -->
+<script type="text/javascript" src="includes/mod_cen/clases/ajax/ajaxInforme.php"></script>
+<script type="text/javascript" src="includes/mod_cen/clases/ajax/ajaxPersona.php"></script>
+
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
-
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
@@ -24,6 +26,7 @@ hr {
 <script type="text/javascript">
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
+    let reports = 'ETT'
 </script>
 <?php
 include_once("includes/mod_cen/clases/escuela.php");
@@ -337,7 +340,7 @@ if(($_POST))
 								?>
 
 
-                <div class="col-md-12">
+                <div class="col-md-12" >
                   <ul class="list-group">
                     <li class="list-group-item">
 
@@ -348,15 +351,20 @@ if(($_POST))
     									 		echo $fila->numero." - ".substr($fila->nombre,0,40);
     									 		?></b></h4>
                         </div>
-                      </div><!-- </row -->
+                      </div>
+                      <!-- </row -->
                       <?php echo '<div class="" id="ver'.$fila->escuelaId.'" style="display:none">'; ?>
 
                         <!-- modificacion -->
                         <div class="row">
                           <div class="col-md-8">
-                             <div class="row"><!-- padding-left 20px -->
-                              <h4>Cue: <?php echo $fila->cue?></h4>
-                              <h4>Localidad: <?php echo $fila1->nombre ?></h4>
+                             <div class="row">
+                              <!-- padding-left 20px -->
+                              <div class="col-md-8">
+                                <h5>Cue: <?php echo $fila->cue?></h5>
+                                <h5>Localidad: <?php echo $fila1->nombre ?></h5>
+                              </div>
+
                             </div>
                             <div class="row">
                               <div class="col-md-6">
@@ -392,8 +400,17 @@ if(($_POST))
 
       <br>
       				<!-- botones por programas -->
+              <div class="form-group">
+                <div class="" id="padreIr">
+
+                </div>
+              </div>
+
+
+              
       				<div class="row" >
-      		<div class="col-md-8 col-md-offset-2">
+      		     <div class="col-md-8 col-md-offset-2">
+
        <?php
       					echo '<div class="btn-group" role="group" aria-label="..." >
         					<button type="button" class="btn btn-default" id="planied'.$fila->escuelaId.'">
@@ -401,8 +418,9 @@ if(($_POST))
         					<button type="button" class="btn btn-default" id="super'.$fila->escuelaId.'">SUPERVISION (2)</button>
 
       						<button type="button" class="btn btn-default" id="autoridadesEsc'.$fila->escuelaId.'">AUTORIDADES ESCUELA</button>
-                  <button type="button" class="btn btn-default" id="futuro'.$fila->escuelaId.'">ESC FUTURO</button>
+
       					</div>';
+                  // <button type="button" class="btn btn-default" id="futuro'.$fila->escuelaId.'">ESC FUTURO</button>
         ?>
       				</div>
       				</div>

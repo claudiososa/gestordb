@@ -33,7 +33,7 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 		$sentencia = "UPDATE escuelaPredio SET escuelaId=$this->escuelaId,predio=$this->predio,referenteId=$this->referenteId
 									WHERE id=$this->id";
 		if ($bd->ejecutar($sentencia)) {
-			return $ultimoPredio=$bd->lastID();
+			return $this->id;
 		}else{
 			return $sentencia."<br>"."Error al ejecutar la sentencia".$conexion->errno.":".$conexion->error;
 		}
@@ -70,7 +70,42 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 				  $sentencia2="SELECT * FROM escuelaPredio
 											 INNER JOIN escuelas
 											 ON escuelas.escuelaId = escuelaPredio.escuelaId
-											 WHERE predio = $dato->predio";
+											 WHERE predio = $dato->predio ";
+
+					if (mysqli_num_rows($bd->ejecutar($sentencia2))>0)
+						{
+							$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2))-1;
+						}
+				}elseif(!isset($count)){
+					return $bd->ejecutar($sentencia);
+				}
+
+
+				if(isset($count)){
+					return $cantidad;
+				}else{
+					//return $sentencia2;
+					return $bd->ejecutar($sentencia2);
+				}
+
+
+		}
+
+		public function buscarPredioUnico($count=NULL)
+		{
+			$bd=conexion2::getInstance();
+		  $sentencia="SELECT * FROM escuelaPredio WHERE escuelaId=$this->escuelaId";
+			$sentencia.="  ORDER BY id DESC";
+			$ejecutar =$bd->ejecutar($sentencia);
+			$cantidad = mysqli_num_rows($ejecutar);# code...
+
+			if ($cantidad > 0 ) {
+					$dato = mysqli_fetch_object($bd->ejecutar($sentencia));
+					//$bd=conexion2::getInstance();
+				  $sentencia2="SELECT * FROM escuelaPredio
+											 INNER JOIN escuelas
+											 ON escuelas.escuelaId = escuelaPredio.escuelaId
+											 WHERE predio = $dato->predio AND escuelaPredio.escuelaId=$this->escuelaId";
 
 					if (mysqli_num_rows($bd->ejecutar($sentencia2))>0)
 						{
@@ -100,7 +135,7 @@ function __construct($id=NULL,$escuelaId=NULL,$predio=NULL,$referenteId=NULL)
 
 				$sentencia2="SELECT * FROM escuelaPredio WHERE predio=$dato->predio";
 				$sentencia2.="  ORDER BY id DESC";
-				return $sentencia2;
+				//return $sentencia2;
 				$cantidad = mysqli_num_rows($bd->ejecutar($sentencia2));
 
 				if ($cantidad == 1) {
