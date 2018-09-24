@@ -1,6 +1,10 @@
 <?php
   include_once('../CompartePredio.php');
-  include_once('../maestro.php');
+  //include_once('../maestro.php');
+  include_once('../escuela.php');
+  include_once('../EscuelaReferentes.php');
+  include_once('../referente.php');
+  include_once('../localidades.php');
 
 /**
  * pregunta por la escuela que se esta
@@ -223,3 +227,81 @@
      echo $json;
 
    }
+
+
+//***** para listar escuelas con predio compartido en el buscador de escuelas viejo
+
+   if (isset($_POST['idEscuelaPredio']))
+   {
+     $list=array();
+     $escuelaObj= new escuela($_POST['idEscuelaPredio']);
+     $buscarEscuelas=$escuelaObj->buscar();
+     $datosEscuela=mysqli_fetch_object($buscarEscuelas);
+     //Inicio de busqueda de localidad //
+          $locali=new Localidad($datosEscuela->localidadId,null);
+          $busca_loc= $locali->buscar();
+          $datosLocalidad=mysqli_fetch_object($busca_loc);
+     //Fin de busqueda de localidad
+
+      $perfil="ETT"; // usamos la varible perfil para indicar en el modal si es ett o etj
+
+     $escuelasETT=new EscuelaReferentes(null,$_POST['idEscuelaPredio'],'19'); // buscamos las escuelas del ETT
+     $buscar_referenteETT=$escuelasETT->buscar2();// devuelve todos los datos de las escuelas del ETT
+     $datoBuscarETT=mysqli_fetch_object($buscar_referenteETT);
+
+             
+             if ($datoBuscarETT->referenteId == NULL){ 
+
+                $escuelasETJ=new EscuelaReferentes(null,$_POST['idEscuelaPredio'],'20'); // buscamos la escuelas del ETJ
+                $buscar_referenteETJ=$escuelasETJ->buscar2();// devuelve todos los datos de la escuelas del ETJ
+                $datoBuscarETJ=mysqli_fetch_object($buscar_referenteETJ); 
+                  if ($datoBuscarETJ->referenteId == NULL ){
+                  $referente=new Referente('0001');
+
+                  }else{
+                  $referente=new Referente($datoBuscarETJ->referenteId);
+                  $perfil="ETJ";
+                }
+                    // vamos a mostrar Sin, Asignar
+                }else{
+
+               $referente=new Referente($datoBuscarETT->referenteId);  // vamos a mostrar el ETT
+
+            }
+   $buscar_referente=$referente->buscar();
+   $datoEttEtj=mysqli_fetch_object($buscar_referente);
+
+
+   // buscar datos del etj a cargo de la escuela
+
+   // fin buscar datos del etj a cargo de la escuela
+
+
+     
+          $temporal=array(
+             
+             'escuelaId'=>$datosEscuela->escuelaId,
+             'nombre' =>$datosEscuela->nombre,
+             'numero' =>$datosEscuela->numero,
+             'cue' =>$datosEscuela->cue,
+             'domicilio' =>$datosEscuela->domicilio,
+             'localidad' =>$datosLocalidad->nombre,
+             'perfil'=>$perfil,
+             'nombreEtt'=>$datoEttEtj->nombre,
+             'apellidoEtt'=>$datoEttEtj->apellido,
+             'telefonoEtt'=>$datoEttEtj->telefonoM
+            );
+
+            array_push($list,$temporal);
+
+  
+
+
+     $json = json_encode($list);
+
+     //Maestro::debbugPHP($json);
+
+     echo $json;
+
+   }
+
