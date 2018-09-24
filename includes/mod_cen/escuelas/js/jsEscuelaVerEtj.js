@@ -1,20 +1,41 @@
 $(document).ready(function() {
+
   /** al clickear la escuela muestra info de la misma**/
-  ///// one= agrega contenido una sola vez
-  /*toggle de titulo de escuela*/
+
+  /*inicio toggle de titulo de escuela*/
   $('[id ^=escuela]').on('click',function(event) {
     /* Act on the event */
     let escuelaId= $(this).attr('id');
     //alert(escuelaId)
     let escuela= escuelaId.substr(7)
     $('#ver' +escuela).toggle()
-    console.log('hola escuela')
-  })
-  /*toggle de titulo de escuela*/
+
+  })/*fin toggle de titulo de escuela*/
+
+  // Informes nuevos
+  $('[id ^=nuevoInforme]').click(function(){
+    console.log('click btn nuevo informe')
+    let idPrueba = $(this).attr('id');
+    let escuela_id = idPrueba.substr(12)
+    let escuela = {escuelaId:escuela_id,
+      numero:'',
+      cue:'',
+      nombre:''
+    }
+    buscarDatosEscuela(escuela)//consulta a tabla escuela... ajax.js
+
+    .then(function(escuela){
+      informeNuevo(escuela)//inicia modal para carga de informe
+
+    })
+    .catch(error=> console.log(error + ' Noooo'))
+
+
+  });//fin informes nuevos
 
   /**Contenido sección Planied**/
   $('[id^=planied]').on('click',function(event) {
-  /* Act on the event */
+
     let escuelaId= $(this).parent().parent().parent().parent().attr('id');
     //alert(escuelaId)
     let escuela= escuelaId.substr(3)
@@ -36,23 +57,14 @@ $(document).ready(function() {
           //referenteETT.personaId=item.personaId
            listaReferentes.push(item)
            console.log(item.apellido)
-            console.log(item.fotoPerfil)
-
-        //    console.log(listaReferentes.fotoPerfil)
-          //  if (listaReferentes.fotoPerfil == undefined) {
-          //    listaReferentes.fotoPerfil.push(item.fotoPerfil)="0000.jpg"
-          //    console.log('vacio')
-          //  }
-           //
-          //  let personaId= item.fotoPerfil;
-          //  console.log(personaId)
+           console.log(item.fotoPerfil)
 
          }
 
          $('#bodyProgramas'+escuela).empty()
 
+         //  Function agrega contenido al body del panel PLANIED
            $('#programas'+escuela).show(function() {
-        //     //  agrega contenido al body del panel
 
             $(`<div class="row">
                 <div class="col-md-12">
@@ -124,7 +136,7 @@ $(document).ready(function() {
                     </div>
                 </div>
                 </div>`).appendTo('#bodyProgramas'+escuela)
-                /*RTI*/
+                /* Agrega contenido de RTI*/
 
                 for(var i=2;i<listaReferentes.length;i++){
                    let rti= {
@@ -133,33 +145,8 @@ $(document).ready(function() {
                      telefonoM:listaReferentes[i]["telefonoM"],
                      email:listaReferentes[i]["email"]
                      }
-                      // let apellido =listaReferentes[i]["apellido"]
-                      // let telefonoM =listaReferentes[i]["telefonoM"]
-                      // let email =listaReferentes[i]["email"]
-                      //  alert ('rti:'+nombre)
-                    ////  console.log(rti)
                       $(`<p>${rti.apellido} ${rti.nombre}, <br> Cel:${rti.telefonoM}<br> Email: ${rti.email}</p><br>`).appendTo('#bodyRti'+escuela)
                   }
-
-                //$nomArchivoFoto.=".jpg";
-                $('[id ^=nuevoInforme]').click(function(){
-                    let idPrueba = $(this).attr('id');
-                    let escuela_id = idPrueba.substr(12)
-                    let escuela = {escuelaId:escuela_id,
-                                   numero:'',
-                                   cue:'',
-                                   nombre:''
-                      }
-                    buscarDatosEscuela(escuela)//consulta a tabla escuela... ajax.js
-
-                    .then(function(escuela){
-                      informeNuevo(escuela)//inicia modal para carga de informe
-
-                     })
-                    .catch(error=> console.log(error + ' Noooo'))
-
-
-                });
 // aqui se listan informes de la escuela
                       $('[id ^=informes').on('click',function(event) {
                       //  alert('hola')
@@ -192,7 +179,6 @@ $(document).ready(function() {
                            let tableinforme = 0
                            let cant = 0
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                            for (let item of lista) {
                                tableinforme=pad(item.escuelaId,4,0)
                                cant= item.cantidad
@@ -220,22 +206,17 @@ $(document).ready(function() {
 
                             if (click=='informes') {
                          //  console.log('item Escuela Id = '+cant)
-                         $(`<table class="table table-hover tableinformes${tableinforme}" id=tableinformes${tableinforme}><thead>
-                                   <tr style="font-size:15px;">
-                                     <th>Titulo</th>
-                                     <th>Leido</th>
-                                     <th>Resp.</th>
-                                     <th>Fecha</th>
-                                     <th>Prioridad</th>
-                                   </tr>
-                                 </thead>
-
-                            `).appendTo('#info'+escuelaId)
-
-
-                         }
-
-                       }
+                                 $(`<table class="table table-hover tableinformes${tableinforme}" id=tableinformes${tableinforme}><thead>
+                                           <tr style="font-size:15px;">
+                                             <th>Titulo</th>
+                                             <th>Leido</th>
+                                             <th>Resp.</th>
+                                             <th>Fecha</th>
+                                             <th>Prioridad</th>
+                                           </tr>
+                                         </thead>`).appendTo('#info'+escuelaId)
+                            }
+                          }
 
                             for (let item of lista) {
                                 //alert(item.escuelaId)
@@ -319,7 +300,7 @@ $(document).ready(function() {
 
 
 
-                            });
+                            });//fin click #if
 
                             //console.log("success");
                           })
@@ -347,8 +328,8 @@ $(document).ready(function() {
 
                       });
 
-             });
-      })
+             });// fin function p/agregar contenido a seccion PLANIED
+      })//done
       .fail(function() {
         console.log("error en php");
       })
@@ -361,7 +342,7 @@ $(document).ready(function() {
       // aqui terminamos
       //alert('hola planied')
 
-});
+});//fin contenido seccion PLANIED
 
               // #######SUPER####
                       $('[id ^=super]').on('click',function(event) {

@@ -394,20 +394,21 @@ if(($_POST))
                           <div class="col-md-4">
                             <img class="img-thumbnail" src="img/iconos/busquedaEsc/imagen-no-disponible1.jpg" alt="imagen no disponible">
                           </div>
+                          <?php echo '<button type="button" name="button" id="nuevoInforme'.$fila->escuelaId.'">Nuevo Informe</button>
+                          <div class="form-group">
+                            <div class="" id="padreIr">
+
+                            </div>
+                          </div>'; ?>
 
                         </div>
                         <!-- modificacion -->
 
       <br>
       				<!-- botones por programas -->
-              <div class="form-group">
-                <div class="" id="padreIr">
-
-                </div>
-              </div>
 
 
-              
+
       				<div class="row" >
       		     <div class="col-md-8 col-md-offset-2">
 

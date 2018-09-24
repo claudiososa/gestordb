@@ -4,10 +4,14 @@ hr {
   }
 
 </style>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript" src="gmap/gmaps.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
+
+
 <?php
 include_once("includes/mod_cen/clases/escuela.php");
 include_once("includes/mod_cen/clases/departamentos.php");
@@ -20,10 +24,19 @@ include_once("includes/mod_cen/clases/director.php");
 include_once("includes/mod_cen/clases/EscuelaReferentes.php");
 include_once("includes/mod_cen/clases/Autoridades.php");
 include_once("includes/mod_cen/clases/EscuelaTipoAutoridad.php");
+include_once("includes/mod_cen/clases/CompartePredio.php");
+
 
 /**
  * Inclusión de formulario para la busqueda de Escuelas
  */
+
+   echo '<div class="form-group">';
+     echo '<div class="" id="escPredio">';
+     echo '</div>';
+   echo '</div>';
+ 
+
  echo '<div class="container wow flipInX">';
  echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (3).png"></div><h4><b>Búsqueda de Escuelas</b></h4>';
 
@@ -166,8 +179,16 @@ if(($_POST))
 						$cantInformes = mysqli_num_rows($buscar_informe);
 						$ultimosInformes = $informe->buscar("3");
 
+		// Busqueda de informacion para predio[Inicio]
 
-						/**
+						 $predio = new CompartePredio(null,$fila->escuelaId);
+					     $buscarPredio = $predio->buscarPredio();
+					     $cantidadPredio = $predio->buscarPredio('count');
+					     
+
+		// Busqueda de informacion para predio[Fin]
+
+							/**
 						 * Buscar referente de conectar igualdad de la de la escuela actual
 						 * guarda el dato en $datoEtt - incluye el nombre y apellido del referente
 						 */
@@ -655,7 +676,14 @@ if(($_POST))
 						 	<div class="alert alert-info" role="alert" >
 								<b>
 						 		<?php
-						 		echo $fila->numero." - ".$fila->cue." - ".substr($fila->nombre,0,40);
+
+						 		echo $fila->numero." - ".$fila->cue." - ".substr($fila->nombre,0,40) ;
+						 		if ($cantidadPredio >0) {
+						 			echo '<p align= "right"> Predio Compartido ['.$cantidadPredio.'] </p>';
+						 		}else{
+						 		    echo '<p align= "right"> Predio Sin Compartir ['.$cantidadPredio.'] </p>';
+						 		}
+						 		
 						 		?>
 						 		</b>
 							</div>
@@ -685,6 +713,8 @@ if(($_POST))
 					 echo "<div>".$fila->email."</div>";
 					 echo "<br></div>";
 
+
+
 					 echo '<div class="col-md-6">';
 					 echo '<div class="alert alert-success" role="alert">Informes Creados</div>';
 					 echo"<div><b>Cantidad Total</b></div>";
@@ -711,6 +741,53 @@ if(($_POST))
 					 echo"<div><b><a class='btn btn-primary' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Nuevo Informe</a></b></div>";
 					 echo "<br></div>";
 
+	// ====== Datos de Predio[Inicio] ======== //
+    
+					 echo '<div class="col-md-6">';
+					 echo '<div class="alert alert-success" role="alert">Predio Compartido Con: </div>';
+					 
+					  echo '<table class ="table table-bordered">';  	
+					  echo '<tr>';
+					  echo '<th>N°</th>';
+					  echo '<th>CUE</th>';
+					  echo '<th>Nombre</th>';
+					  echo '</tr>';
+
+					 if ($cantidadPredio > 0) 
+					     {
+					       			     				    
+					      while ($fila1 = mysqli_fetch_object($buscarPredio))
+					       {
+
+					     	if($fila1->escuelaId <> $fila->escuelaId)
+					     	 {
+					        echo '<tr>';
+					       // echo '<td><a class="btn btn-default" role="button" id="mpredio'.$fila1->escuelaId.'" data-toggle="modal" data-target="#myModalM'.$fila1->escuelaId.'" >'.$fila1->numero.'</a></td>';
+					          echo '<td><button type="button" class="btn btn-default" id="mpredio'.$fila1->escuelaId.'" name="button" data-toggle="modal" data-target="#myModalM'.$fila1->escuelaId.'">'.$fila1->numero.'</button></td>';
+					     	//echo '<td><a href="#">'.$fila1->numero.'</a></td>';
+					     	echo '<td>'.$fila1->cue.'</td>';
+					     	echo '<td>'.$fila1->nombre.'</td>';
+					     	echo '</tr>';
+					         }
+				           }
+				          			           			     
+
+					     }else{
+
+
+					     	echo '<tr>';
+					     	echo '<td> NO COMPARTE PREDIO  </td>';
+					     	echo '</tr>';
+					     
+					     }	
+
+
+					 echo '</table>';	
+					 echo '<br></div>';
+
+	// ====== Datos de Predio[FIN] ======== //
+
+
 					 echo '<div class="col-md-6">';
 					 echo '<div class="alert alert-success" role="alert">Referente ETT Conectar Igualdad</div>';
 					 echo"<div><b>Apellido y Nombre</b></div>";
@@ -720,6 +797,8 @@ if(($_POST))
 					 echo"<div><b>Correo Electrónico</b></div>";
 					 echo "<div>".$datoEtt->email."</div>";
 					 echo "<br></div>";
+
+			
 
 					 $facilitador = new FacilEscuelas(null,$fila->escuelaId);
 						$buscarFacil= $facilitador->buscar();
