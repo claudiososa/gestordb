@@ -25,16 +25,6 @@ echo '<div class="container">';
 	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=24" style="text-decoration:none">
 		<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
 	</div>
-	<!--<div class="col-lg-3 col-md-6 col-sm-6"> flipInY bounceIn fadeInDownBig
-		<a href="index.php?mod=slat&men=user&id=2"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h4 align="center">Mis ETT</h4></a>
-	</div>-->
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
-	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
-</div>
-
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=referentes&id=10" style="text-decoration:none">
-	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Buscar RTI</h3></a>
-</div>
 
 <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">
 	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/busqueda (4).png"><h3 align="center">Documentación</h3></a>
@@ -83,22 +73,10 @@ echo '<div class="container">';
 
 
 <br><br><br>
-<!-- <div class="alert alert-info" role="alert">
-	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
-</div>-->
 <?php
 	echo '<div class="row">';
 	?>
-<!-- <div class="col-md-12 hidden-xs">
-		<p class="alert alert-success">Presentación Proyecto trabajo 2018</p>
-		<iframe allowFullScreen frameborder="0" height="564" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="640"></iframe>
-		 <p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
-</div>
-<div class="col-md-12 visible-xs">
-	 <p class="alert alert-success">Presentación Proyecto trabajo 2018</p>
-	 <iframe allowFullScreen frameborder="0" height="240" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="320"></iframe>
-		 <p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
-</div> -->
+
 	<?php
 		echo '<div class="col-md-6">';
 
@@ -219,7 +197,7 @@ echo "<tr id= 'encabezado.$fila->informeId'>";
 echo "</div>";
 echo "<div class='col-md-6'>";
 
-$listadeReferentes= array("Coordinador","ETJ","ETT");
+$listadeReferentes= array("CU","CAS");
 
 //$informes= new informe(NULL,NULL,'0075',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 $informes= new informe();
@@ -230,7 +208,7 @@ if(mysqli_num_rows($b_informe)>0){
 	?>
 	<div class="panel panel-primary">
 		<div class="panel-heading" id="panel2"><span class="panel-title clickable">
-			<h4>Ultimos informes  Conectar Igualdad<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
+			<h4>Ultimos informes  del Equipo<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
 		</div>
 		<div class="panel-body">
 			<?php
@@ -289,140 +267,6 @@ echo "</div>"; // cierra el row n° 1
 ?>
 
 
-<div class="row">
-  <div class="col-md-6">
-
-     <div class="panel panel-primary">
-		<div class="panel-heading" id="panel3"><span class="panel-title clickable">
-			<h4>Ultimos informes  Creados P.M.I.<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-		</div>
-	 <div class="panel-body">
-
-
-			<?php
-
-			$listadeReferentes= array("ATT","CoordinadorPmi");
-			$informes= new informe();
-			//$informes= new informe(NULL,NULL,'0075',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-
-
-            $b_informe = $informes->buscar( 20,"",$listadeReferentes,"exclusiva");
-
-
-
-	echo "<table id='myTable1' class='table table-hover table-striped table-condensed tablesorter'>";
-	echo "<thead>";
-	echo "<tr>";
-	echo "<th>Id</th>";
-	echo "<th>Título</th>";
-	echo "<th>Nº</th>";
-	echo "<th>Creado por...</th>";
-	echo "<th>Prioridad</th>";
-	echo "</tr>";
-	echo "</thead>";
-	echo "<tbody>";
-
-	while ($fila=mysqli_fetch_object($b_informe)) {
-
-		$escuela= new Escuela($fila->escuelaId);
-		$buscar_escuela= $escuela->buscar();
-		$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-		$referente = new Referente($fila->referenteId);
-		$b_referente = $referente->buscar();
-
-		$dato_referente= mysqli_fetch_object($b_referente);
-
-		$persona = new Persona($dato_referente->personaId);
-
-		$b_persona = $persona->buscar();
-
-		$dato_persona=mysqli_fetch_object($b_persona);
-		echo "<tr>";
-		?>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-		<?php
-		echo "<td>".$dato_escuela->numero."</td>";
-		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-		echo "<td>".$fila->prioridad."</td>";
-		echo "</td>";
-
-}
-	echo "</tbody>";
-	echo "</table>";
-
-	?>
-</div>
-</div>
-</div>
-
-<div class='col-md-6'>
-
-	<div class="panel panel-primary">
-
-		<div class="panel-heading" id="panel4"><span class="panel-title clickable">
-			<h4>Ultimos informes  Creados Supervisores<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></h4></span>
-		</div>
-		<div class="panel-body">
-			<?php
-
-			$listadeReferentes= array("DirectorNivelSecundario","Supervisor-General-Secundaria"," Supervisor-Secundaria","DirectorNivelSuperior","SupervisorGeneralSuperior","Supervisor-Nivel-Superior");
-			$informes= new informe();
-			//$informes= new informe(NULL,NULL,'0075',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-
-            $b_informe = $informes->buscar(20,"",$listadeReferentes,"exclusiva");
-
-	echo "<table id='myTable1' class='table table-hover table-striped table-condensed tablesorter'>";
-	echo "<thead>";
-	echo "<tr>";
-	echo "<th>Id</th>";
-	echo "<th>Título</th>";
-	echo "<th>Nº</th>";
-	echo "<th>Creado por...</th>";
-	echo "<th>Prioridad</th>";
-	echo "</tr>";
-	echo "</thead>";
-	echo "<tbody>";
-
-	while ($fila=mysqli_fetch_object($b_informe)) {
-
-		$escuela= new Escuela($fila->escuelaId);
-		$buscar_escuela= $escuela->buscar();
-		$dato_escuela= mysqli_fetch_object($buscar_escuela);
-
-		$referente = new Referente($fila->referenteId);
-		$b_referente = $referente->buscar();
-
-		$dato_referente= mysqli_fetch_object($b_referente);
-
-
-		$persona = new Persona($dato_referente->personaId);
-
-		$b_persona = $persona->buscar();
-
-		$dato_persona=mysqli_fetch_object($b_persona);
-		echo "<tr>";
-		?>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->informeId.'</a>';?></td>
-		<td><?php echo '<a href="index.php?mod=slat&men=informe&id=3&escuelaId='.$fila->escuelaId.'&informeId='.$fila->informeId.'">'.$fila->titulo.'</a>';?></td>
-		<?php
-		echo "<td>".$dato_escuela->numero."</td>";
-		echo "<td>".$dato_persona->apellido."  ".$dato_persona->nombre."</td>";
-		echo "<td>".$fila->prioridad."</td>";
-		echo "</td>";
-
-}
-	echo "</tbody>";
-	echo "</table>";
-
-	?>
-</div>
-</div>
-
-
-</div>
-</div> <!-- cierra el row -->
 
 
 <div class='col-md-12'>
