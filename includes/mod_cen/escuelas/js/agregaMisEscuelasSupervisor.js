@@ -56,6 +56,65 @@ $(document).ready(function() {
 
   });
 
+// para predio
+
+$('[id ^=mpredio]').click( function(){
+
+  let idEscuelaPredio = $(this).attr('id').substr(7)
+  let escuelaDatos ={
+      escuelaId: "",
+      nombre: "",
+      numero: "",
+      cue: "",
+      domicilio:"",
+      localidad:"",
+      perfil:"",
+      nombreEtt:"",
+      apellidoEtt:"",
+      telefonoEtt:""
+          
+    }
+
+    $.ajax({
+        url: 'includes/mod_cen/clases/ajax/ajaxPredio.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {idEscuelaPredio:idEscuelaPredio}
+      })
+      .done(function(lista) {
+        for (let item of lista) {
+          
+            escuelaDatos.escuelaId=item.escuelaId
+            escuelaDatos.nombre=item.nombre
+            escuelaDatos.numero=item.numero
+            escuelaDatos.cue=item.cue
+            escuelaDatos.domicilio=item.domicilio
+            escuelaDatos.localidad=item.localidad
+            escuelaDatos.perfil=item.perfil
+            escuelaDatos.nombreEtt=item.nombreEtt
+            escuelaDatos.apellidoEtt=item.apellidoEtt
+            escuelaDatos.telefonoEtt=item.telefonoEtt
+         
+           //console.log (item.cue)
+           
+        }
+            
+
+      })
+
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+       modalEscuelasPredio(escuelaDatos)
+      // alert(matriculaActual.numero)
+     });
+
+  });
+
+
+// para predio
+
 
   $('[id ^=informes],[id ^=informeM]').on('click', function(){
 
