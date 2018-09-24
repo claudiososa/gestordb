@@ -618,9 +618,10 @@
 					      || $_SESSION['tipo']=='Supervisor-General-Secundaria'
 								|| $_SESSION['tipo']=='DirectorNivelSecundario'
 								|| $_SESSION['tipo']=='CoordinadorPmi'
-								|| $_SESSION['tipo']=='ETJ')
+								|| $_SESSION['tipo']=='ETJ'
+								|| $_SESSION['tipo']=='CU')
 							{
-							   include("includes/mod_cen/admin/loginc.php");
+								 include("includes/mod_cen/admin/loginc.php");
 							}else {
 								include("includes/mod_cen/denegado.php");
 							}

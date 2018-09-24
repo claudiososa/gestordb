@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="includes/mod_cen/portada/css/portadaEtjMisEtt.css">
 
 
-<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js?v=<?php echo (rand());?>"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/cu/js/cuEscuelas.js?v=<?php echo (rand());?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
@@ -439,9 +439,10 @@ echo '<div class="container">';
                   </tr>
                 </thead>
 
-                <tbody>
 
+                <tbody>
                   <?php
+
                     //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
                   //  $escuelasCargo = new EscuelaReferentes(null,null,'19',$_SESSION['referenteId']);
                   //  $buscarEscuelas = $escuelasCargo->buscar();
@@ -459,7 +460,7 @@ echo '<div class="container">';
 
                       $informe = new informe(null,$row->escuelaId);
 
-                      $arrayReferente= ['ETT','ETJ','Coordinador'];
+                      $arrayReferente= ['CU','CAS'];
 
                       $buscarInforme= $informe->buscar(null,null,$arrayReferente);
 
@@ -474,7 +475,9 @@ echo '<div class="container">';
                       $infoEscuela = mysqli_fetch_object($buscarEscuela);
 
                       //echo $infoEscuela->numero."<br>";
-                      echo '<tr id="fila'.$infoEscuela->escuelaId.'">';
+                      echo '<tr class="'.$fila->referenteId.'">';
+
+
                       echo '<td>'.$infoEscuela->cue.'</td>';
                       echo '<td>'.$infoEscuela->numero.'</td>';
                       echo '<td>'.substr($infoEscuela->nombre,0,30).'</td>';

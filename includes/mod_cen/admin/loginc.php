@@ -2,7 +2,7 @@
 	include_once('includes/mod_cen/clases/persona.php');
 	include_once('includes/mod_cen/clases/referente.php');
 	include_once("includes/mod_cen/clases/TipoReferentes.php");
-	
+
 	//$c_referente= new Referente();
 
 	switch ($_SESSION['tipo']) {
@@ -23,6 +23,9 @@
 			break;
 		case 'ETJ':
 				$c_referente= new Referente(null,null,'ETT',null,null,null,null,'Activo');
+				break;
+		case 'CU':
+				$c_referente= new Referente(null,null,'CAS',null,null,null,null,'Activo');
 				break;
 		case 'admin':
 				$c_referente= new Referente(null,null,null,null,null,null,null,'Activo');
