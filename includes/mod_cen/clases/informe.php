@@ -491,7 +491,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									ON escuelas.escuelaId=informes.escuelaId
 									WHERE informes.prioridad='$prioridad' AND informes.referenteId IN (SELECT referenteId FROM referentes WHERE etjcargo = $etjCargo)";
 		$sentencia .=" ORDER BY informes.fechaCarga DESC";
-	  //echo $sentencia;
+	  //return $sentencia;
 		return $conexion->query($sentencia);
 	}
 

@@ -449,6 +449,12 @@
 				case 22:
 								include("includes/mod_cen/escuelas/misEscuelasSuper.php");
 								break;
+				case 23:
+								include("includes/mod_cen/referentes/referente_cu_todos.php");
+								break;
+				case 24:
+								include("includes/mod_cen/escuelas/misEscuelasCAS.php");
+								break;
 }
 
 

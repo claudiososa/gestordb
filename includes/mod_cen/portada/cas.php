@@ -22,7 +22,7 @@ echo '<div class="container">';
 		<img class="img-responsive " src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
-	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
+	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=24" style="text-decoration:none">
 		<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
 	</div>
 	<!--<div class="col-lg-3 col-md-6 col-sm-6"> flipInY bounceIn fadeInDownBig

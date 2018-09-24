@@ -103,8 +103,11 @@
         case 'ETT':
               $arrayReferente= ['ETT','ETJ','Coordinador'];
               $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC');
-
             break;
+        case 'CAS':
+                  $arrayReferente= ['CAS','CU'];
+                  $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC');
+                break;
         default:
           # code...
           break;

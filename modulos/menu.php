@@ -111,6 +111,9 @@
 			case 'CAS':
 							include_once('includes/mod_men/ett.php');
 							break;
+			case 'CU':
+			  			include_once('includes/mod_men/cu.php');
+							break;
 			}
 		}
 			else {

@@ -85,16 +85,15 @@ $(document).ready(function() {
         })
         .done(function(lista) {
 
-          let itemEscuela = 0
+         let itemEscuela = 0
          let tableinforme = 0
          let cant = 0
 
 
          for (let item of lista) {
-             tableinforme=pad(item.escuelaId,4,0)
-             cant= item.cantidad
-
-               }
+              tableinforme=pad(item.escuelaId,4,0)
+              cant= item.cantidad
+         }
 
          if (cant > 0) {
 

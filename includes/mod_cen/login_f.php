@@ -190,6 +190,9 @@ if(isset($_POST["username"]))
 				case 'CAS':
 				  			 	include_once('includes/mod_cen/portada/cas.php');
 								  break;
+				case 'CU':
+									include_once('includes/mod_cen/portada/cu/cu.php');
+									break;
 
 				default:
 					include_once('includes/mod_cen/portada/portadaAdmin.php');
