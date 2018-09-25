@@ -359,6 +359,17 @@ class Referente
 		return $conexion->query($sentencia);
     }
 
+		public function CargoEtj2($estado=null)
+		{
+			$nuevaConexion=new Conexion();
+			$conexion=$nuevaConexion->getConexion();
+
+			$sentencia="SELECT * FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE etjcargo2=".$this->referenteId." AND estado='".$estado."'" ;
+			$sentencia.=" ORDER BY personas.apellido ASC";
+			//echo $sentencia;
+			return $conexion->query($sentencia);
+	    }
+
 		public function tipoReferente(){
  	 	$nuevaConexion=new Conexion();
   		$conexion=$nuevaConexion->getConexion();

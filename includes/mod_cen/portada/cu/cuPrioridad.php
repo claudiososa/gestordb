@@ -10,7 +10,7 @@ $resultado=$informeC->buscarxPrioridad('Alta',$_SESSION['referenteId']);
   <h3 align="center">Informes Prioridad Alta</h3>
     <div class='list-group'>
 <?php
-while ($filaResultado = mysqli_fetch_object($resultado))
+while ($filaResultado = mysqli_fetch_object($buscar_alta))
  {
      ?>
 

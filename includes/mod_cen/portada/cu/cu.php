@@ -76,7 +76,7 @@ include_once "includes/mod_cen/clases/maestro.php";
  * Obtener todas las categorias relacionadas a Planied, coordinacion
  */
 
-$categoriasPermitidas = new TipoPermisos(null,null,'ETJ');
+$categoriasPermitidas = new TipoPermisos(null,null,'CU');
 $buscarPermitidas = $categoriasPermitidas->buscar();
 
  /**********************************************/
@@ -86,18 +86,31 @@ $buscarPermitidas = $categoriasPermitidas->buscar();
 $referenteId=$_SESSION['referenteId'];
 
 $referente= new Referente($referenteId);
-$ett1 = $referente->Cargo("Activo");
-$ett2 = $referente->Cargo("Activo");
-$resultado_ett_acargo = $referente->Cargo("Activo");
+
+if ($_SESSION['referenteId']=="0255") {
+  $ett1 = $referente->Cargo("Activo");
+  $ett2 = $referente->Cargo("Activo");
+  $resultado_ett_acargo = $referente->Cargo("Activo");
+}else{
+  $ett1 = $referente->CargoEtj2("Activo");
+  $ett2 = $referente->CargoEtj2("Activo");
+  $resultado_ett_acargo = $referente->CargoEtj2("Activo");
+}
+
+
+
+
+
 $informes= new informe();
 ////////////////////////////////////////////////
 // todos los informes creados por referente Conectar Igualdad
-$arrayReferenteConectar = array ('ETT','ETJ','Coordinador');
+$arrayReferenteConectar = array ('CU','CAS');
 $informeEquipoConectar = $informes->buscar(20,null,$arrayReferenteConectar);
 
 //busqueda de informes de proiridad alta
 $informe_alta= new Informe(null,null,null,"Alta");
 $buscar_alta =$informe_alta->buscar(20,null,$arrayReferenteConectar);
+//var_dump($buscar_alta);
 $total = mysqli_num_rows($buscar_alta);
 
 // creación y busqueda de todos los informes

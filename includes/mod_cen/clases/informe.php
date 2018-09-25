@@ -641,7 +641,6 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 
 		if($tiporeferente<>NULL){
 			$sinParam=1;
-
 			$sentencia.= " AND ( referentes.tipo='".$tiporeferente."'";
 		}
 
@@ -748,7 +747,7 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-		//echo $sentencia;
+		//return $sentencia;
 		//return $sentencia;//echo $sentencia.'<br><br>';
 		return $conexion->query($sentencia);
 	}
