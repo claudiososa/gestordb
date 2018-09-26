@@ -128,12 +128,18 @@
 						include("includes/mod_cen/escuelas/escuela_vermas.php");
 						break;
 					case 3:
+							$coordinador = 0;
 							if(isset($_GET["escuelaId"])) {
 
 								if ($_SESSION["tipo"]<>'Facilitador'){
 
-
 								switch ($_SESSION["tipo"]) {
+									case 'CU':
+												$coordinador = 1;
+												break;
+									case 'CAS':
+												$referente = new EscuelaReferentes(null,$_GET["escuelaId"],'45',$_SESSION['referenteId']);
+												break;
 									case 'ETT':
 												$referente = new EscuelaReferentes(null,$_GET["escuelaId"],'19',$_SESSION['referenteId']);
 												break;
@@ -156,8 +162,13 @@
 								}
 
 								//$b_escuela= $escuela->buscarRef($_SESSION["tipo"]);
-								$buscarReferente= $referente->buscar();
-								$dato_escuela=mysqli_num_rows($buscarReferente);
+								if ($coordinador==1) {
+									$dato_escuela = 1;
+								}else{
+									$buscarReferente= $referente->buscar();
+									$dato_escuela=mysqli_num_rows($buscarReferente);
+								}
+
 
 							}else{
 								$escuela = new FacilEscuelas(null,null,$_SESSION["referenteId"]);
@@ -166,7 +177,7 @@
 
 							}
 
-								if($dato_escuela>0 || $_SESSION['tipo']=='admin') {
+								if( $dato_escuela > 0 || $_SESSION['tipo']=='admin') {
 							  		include("includes/mod_cen/escuelas/escuela_editar.php");
 								}else {
 									include("includes/mod_cen/denegado.php");
