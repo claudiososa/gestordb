@@ -35,7 +35,7 @@ include_once("includes/mod_cen/clases/CompartePredio.php");
      echo '<div class="" id="escPredio">';
      echo '</div>';
    echo '</div>';
- 
+
 
  echo '<div class="container wow flipInX">';
  echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (3).png"></div><h4><b>Búsqueda de Escuelas</b></h4>';
@@ -184,7 +184,7 @@ if(($_POST))
 						 $predio = new CompartePredio(null,$fila->escuelaId);
 					     $buscarPredio = $predio->buscarPredio();
 					     $cantidadPredio = $predio->buscarPredio('count');
-					     
+
 
 		// Busqueda de informacion para predio[Fin]
 
@@ -683,7 +683,7 @@ if(($_POST))
 						 		}else{
 						 		    echo '<p align= "right"> Predio Sin Compartir ['.$cantidadPredio.'] </p>';
 						 		}
-						 		
+
 						 		?>
 						 		</b>
 							</div>
@@ -742,20 +742,20 @@ if(($_POST))
 					 echo "<br></div>";
 
 	// ====== Datos de Predio[Inicio] ======== //
-    
+
 					 echo '<div class="col-md-6">';
 					 echo '<div class="alert alert-success" role="alert">Predio Compartido Con: </div>';
-					 
-					  echo '<table class ="table table-bordered">';  	
+
+					  echo '<table class ="table table-bordered">';
 					  echo '<tr>';
 					  echo '<th>N°</th>';
 					  echo '<th>CUE</th>';
 					  echo '<th>Nombre</th>';
 					  echo '</tr>';
 
-					 if ($cantidadPredio > 0) 
+					 if ($cantidadPredio > 0)
 					     {
-					       			     				    
+
 					      while ($fila1 = mysqli_fetch_object($buscarPredio))
 					       {
 
@@ -770,7 +770,7 @@ if(($_POST))
 					     	echo '</tr>';
 					         }
 				           }
-				          			           			     
+
 
 					     }else{
 
@@ -778,18 +778,18 @@ if(($_POST))
 					     	echo '<tr>';
 					     	echo '<td> NO COMPARTE PREDIO  </td>';
 					     	echo '</tr>';
-					     
-					     }	
+
+					     }
 
 
-					 echo '</table>';	
+					 echo '</table>';
 					 echo '<br></div>';
 
 	// ====== Datos de Predio[FIN] ======== //
 
 
 					 echo '<div class="col-md-6">';
-					 echo '<div class="alert alert-success" role="alert">Referente ETT Conectar Igualdad</div>';
+					 echo '<div class="alert alert-success" role="alert">Referente ETT Aprender Conectados</div>';
 					 echo"<div><b>Apellido y Nombre</b></div>";
 					 echo "<div>".$datoEtt->apellido.", ".$datoEtt->nombre."</div>";
 					 echo"<div><b>Teléfono</b></div>";
@@ -798,7 +798,7 @@ if(($_POST))
 					 echo "<div>".$datoEtt->email."</div>";
 					 echo "<br></div>";
 
-			
+
 
 					 $facilitador = new FacilEscuelas(null,$fila->escuelaId);
 						$buscarFacil= $facilitador->buscar();
@@ -821,7 +821,7 @@ if(($_POST))
 
 
 					 echo '<div class="col-md-6">';
-					 echo '<div class="alert alert-success" role="alert">Referente ETJ Conectar Igualdad</div>';
+					 echo '<div class="alert alert-success" role="alert">Referente ETJ Aprender Conectados</div>';
 					 echo"<div><b>Apellido y Nombre</b></div>";
 					 echo "<div>".$datoEtj->apellido.", ".$datoEtj->nombre."</div>";
 					 echo"<div><b>Teléfono</b></div>";
