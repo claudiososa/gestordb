@@ -114,7 +114,11 @@
 			case 'CU':
 			  			include_once('includes/mod_men/cu.php');
 							break;
+			case "COORCONECT":
+							include("includes/mod_men/coordinadorConect.php");
+							break;
 			}
+
 		}
 			else {
 			include("includes/mod_men/principal.php");

@@ -24,6 +24,9 @@
 		case 'ETJ':
 				$c_referente= new Referente(null,null,'ETT',null,null,null,null,'Activo');
 				break;
+		case 'COORCONECT':
+				$c_referente= new Referente(null,null,'ETT',null,null,null,null,'Activo');
+				break;
 		case 'CU':
 				$c_referente= new Referente(null,null,'CAS',null,null,null,null,'Activo');
 				break;

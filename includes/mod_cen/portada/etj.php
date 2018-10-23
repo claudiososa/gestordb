@@ -92,7 +92,7 @@ $resultado_ett_acargo = $referente->Cargo("Activo");
 $informes= new informe();
 ////////////////////////////////////////////////
 // todos los informes creados por referente Conectar Igualdad
-$arrayReferenteConectar = array ('ETT','ETJ','Coordinador');
+$arrayReferenteConectar = array ('ETT','ETJ','Coordinador','COORCONECT');
 $informeEquipoConectar = $informes->buscar(20,null,$arrayReferenteConectar);
 
 //busqueda de informes de proiridad alta
@@ -461,7 +461,7 @@ echo '<div class="container">';
 
                       $informe = new informe(null,$row->escuelaId);
 
-                      $arrayReferente= ['ETT','ETJ','Coordinador'];
+                      $arrayReferente= ['ETT','ETJ','Coordinador','COORCONECT'];
 
                       $buscarInforme= $informe->buscar(null,null,$arrayReferente);
 

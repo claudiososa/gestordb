@@ -183,7 +183,7 @@ echo "</div>";
 
         $informe = new informe(null,$row->escuelaId);
 
-        $arrayReferente= ['ETT','ETJ','Coordinador'];
+        $arrayReferente= ['ETT','ETJ','Coordinador','COORCONECT'];
 
         $buscarInforme= $informe->buscar(null,null,$arrayReferente);
 
