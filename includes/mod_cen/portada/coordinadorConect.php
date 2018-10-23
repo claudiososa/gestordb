@@ -121,9 +121,9 @@ echo '<div class="container">';
   <div id="tabsBuscar">
     <ul>
       <li><a  href='#tabsBuscar-1'>Buscar</a></li>
-      <li><a  href='#tabsBuscar-2'>Informe prioridad Alta</a></li>
+      <!-- <li><a  href='#tabsBuscar-2'>Informe prioridad Alta</a></li> -->
       <li><a  href='#tabsBuscar-3'>Conectividad PNCE</a></li>
-      <li><a  href='#tabsBuscar-4'>Aprendizaje Competencias</a></li>
+
       <li><a  href='#tabsBuscar-5'>Documentos</a></li>
     </ul>
     <div id="tabsBuscar-1">
@@ -179,21 +179,21 @@ echo '<div class="container">';
       </div>
 
     </div>
-    <div id="tabsBuscar-2">
+    <!-- <div id="tabsBuscar-2">
       <?php
-      include 'includes/mod_cen/portada/etj/etjPrioridad.php';
+    //  include 'includes/mod_cen/portada/etj/etjPrioridad.php';
        ?>
-    </div>
+    </div> -->
     <div id="tabsBuscar-3">
       <?php
       include 'includes/mod_cen/portada/coordinador/coorConectividad.php';
        ?>
     </div>
-    <div id="tabsBuscar-4">
+    <!-- <div id="tabsBuscar-4">
       <?php
-      include 'includes/mod_cen/portada/etj/etjCompetencias.php';
+      // include 'includes/mod_cen/portada/etj/etjCompetencias.php';
        ?>
-    </div>
+    </div> -->
     <div id="tabsBuscar-5">
       <?php
       include 'includes/mod_cen/portada/etj/etjDocumentos.php';

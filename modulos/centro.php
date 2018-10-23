@@ -630,7 +630,8 @@
 								|| $_SESSION['tipo']=='DirectorNivelSecundario'
 								|| $_SESSION['tipo']=='CoordinadorPmi'
 								|| $_SESSION['tipo']=='ETJ'
-								|| $_SESSION['tipo']=='CU')
+								|| $_SESSION['tipo']=='CU'
+								|| $_SESSION['tipo']=='COORCONECT')
 							{
 								 include("includes/mod_cen/admin/loginc.php");
 							}else {
