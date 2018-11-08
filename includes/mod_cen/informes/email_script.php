@@ -169,7 +169,7 @@ include_once("includes/mod_cen/clases/maestro.php");
 
                     if ($cargo_origen=="ETT") // averiguo si el referente de la escuela es ett
                           {
-                            $para=$para.",".$mail__etj_responsable;;  //agregamos el mail del ETJ superior
+                            $para=$para.",".$mail__etj_responsable;  //agregamos el mail del ETJ superior
                           }
 
                   }
@@ -180,6 +180,19 @@ include_once("includes/mod_cen/clases/maestro.php");
               $dato_ultimo = mysqli_fetch_object($buscar_ultimo);
 
               $linkinforme="index.php?mod=slat&men=informe&id=3&informeId=".$dato_ultimo->informeId;
+             
+              //********** inicio de ultima modificacion *******//
+              // aqui verificar si el mail es de pnce y prioridad alta para mandar mail a luis castro
+              
+              if ($dato_ultimo->prioridad == 'Alta' && $dato_ultimo->nuevotipo == 18) {
+
+                  $para=$para.",luchocachi@gmail.com";
+
+                
+              }
+              //********* fin de ultima modificacion ******////
+
+
               $mailobtenido=$para;
               //$para="jfvpipo@gmail.com";
 
@@ -190,7 +203,8 @@ include_once("includes/mod_cen/clases/maestro.php");
 
             		$enviado=1;
             	} else {
-            		echo "Falló el envio";
+            		echo "Falló el envio ";
+                
             	
               }
 
