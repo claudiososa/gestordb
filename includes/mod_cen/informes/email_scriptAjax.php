@@ -219,6 +219,20 @@ include_once("../../clases/maestro.php");
               //$mailobtenido=$para;
               //$para="jfvpipo@gmail.com";
 
+
+               //********** inicio de ultima modificacion *******//
+              // aqui verificar si el mail es de pnce y prioridad alta para mandar mail a luis castro
+              
+              if ($dato_ultimo->prioridad == 'Alta' && $dato_ultimo->nuevotipo == 18) {
+
+                  $para=$para.",luchocachi@gmail.com";
+
+                
+              }
+
+               //********** fin de ultima modificacion *******//
+
+
               $titulo = "   Nuevo Informe - Prioridad > ".$_POST["prioridad"]." - ".$_POST["titulo"];
               $mensaje = "Este es un mensaje generado por DBMS Conectar Igualdad - 2018 - \n\nTienes un nuevo informe para revisar.\nPrioridad -> ".$_POST["prioridad"]."\nCreado por ".$creadopor." \n\nEnlace al informe ->  http://ticsalta.com.ar/conectar/".$linkinforme;
 
