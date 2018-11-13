@@ -5,14 +5,14 @@
 <link rel="stylesheet" href="includes/mod_cen/portada/css/portadaEtjMisEtt.css">
 
 
-<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js?v=<?php echo (rand());?>"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js?"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js?v=<?php echo (rand());?>"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
@@ -121,7 +121,7 @@ echo '<div class="container">';
   <div id="tabsBuscar">
     <ul>
       <li><a  href='#tabsBuscar-1'>Buscar</a></li>
-      <!-- <li><a  href='#tabsBuscar-2'>Informe prioridad Alta</a></li> -->
+      <li><a  href='#tabsBuscar-2'>Prioridad Alta PNCE</a></li>
       <li><a  href='#tabsBuscar-3'>Conectividad PNCE</a></li>
 
       <li><a  href='#tabsBuscar-5'>Documentos</a></li>
@@ -179,11 +179,11 @@ echo '<div class="container">';
       </div>
 
     </div>
-    <!-- <div id="tabsBuscar-2">
+    <div id="tabsBuscar-2">
       <?php
-    //  include 'includes/mod_cen/portada/etj/etjPrioridad.php';
+      include 'includes/mod_cen/portada/coordinador/coorPrioridad.php';
        ?>
-    </div> -->
+    </div>
     <div id="tabsBuscar-3">
       <?php
       include 'includes/mod_cen/portada/coordinador/coorConectividad.php';
@@ -244,6 +244,3 @@ echo '<div class="container">';
 		 <iframe allowFullScreen frameborder="0" height="240" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="320"></iframe>
 			<p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
 	</div> -->
-
-
-<script type="text/javascript" src="includes/mod_cen/portada/js/animatePortadas.js"></script>

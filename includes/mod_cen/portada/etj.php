@@ -114,6 +114,7 @@ $b_mis_informe = $mis_informes->buscar(10);
 
 echo '<div class="container">';
 ?>
+
 <div class="" id="padreIr">
 </div>
 
