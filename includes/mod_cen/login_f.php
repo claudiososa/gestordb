@@ -1,4 +1,5 @@
 
+<link rel="stylesheet" href="includes/mod_cen/css/login.css"/>
 <?php
 include_once("clases/login.php");
 if(isset($_POST["username"]))
@@ -42,8 +43,70 @@ if(isset($_POST["username"]))
 		<!--<script type="text/javascript" src="includes/mod_cen/formularios/js/form_login.js"></script>-->
 		<br>
 		<div class="container" >
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<img class="usuarioSvg img-responsive"src="includes/mod_cen/css/login/logoCondor.png" alt="">
+							<hr>
 
-	    <div class="row">
+							<!-- <h4 cl>Inicio de Sesión:</h4> -->
+							<form action="" name="iniciosesion"method="POST">
+										<div class="form-group input-group">
+							      	<span class="input-group-addon userLog"><i class="glyphicon glyphicon-user" style="color:#068587"></i></span>
+											<input class="form-control inputLog" type="text" name="username" autofocus=""placeholder="Ingrese Usuario" id="formulario-login"  size="50" required>
+										</div>
+
+										<div class="form-group input-group" >
+							        <span class="input-group-addon userLog"><i class="glyphicon glyphicon-lock" style="color:#068587"></i></span>
+							        <input class="form-control inputLog" type="password" name="password" placeholder="Ingrese Contraseña" size="50" required >
+						    		</div>
+
+							    	<div class="form-group" "input-group" >
+							        <button class="btn btn-lg btn-primary btn-block btnLog" type="submit" id="btnvalidar" value="Ingresar">Ingresar</button>
+								  	</div>
+							</form>
+
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+			<hr>
+<section>
+	<footer>
+		<h3>Aprender Conectados - Salta</h3>
+		<div class="container ">
+			<div class="row redes">
+				<div class="col-md-2">
+					<a href="https://twitter.com/SaltaConectados?lang=es"class="twitter" target="_blank"><img onmouseout="this.src='includes/mod_cen/css/login/twitter1.svg';" onmouseover="this.src='includes/mod_cen/css/login/twitter.svg';" src="includes/mod_cen/css/login/twitter1.svg" class="twitter"alt="twitter Aprender Conectados Salta"></a>
+
+				</div>
+
+				<div class="col-md-2">
+					<a href="https://www.facebook.com/AprenderConectadosSalta/?ref=br_rs" target="_blank"><img onmouseout="this.src='includes/mod_cen/css/login/facebook1.svg';"onmouseover="this.src='includes/mod_cen/css/login/facebook.svg';" src="includes/mod_cen/css/login/facebook1.svg"  class="facebook"alt="Facebook Aprender Conectados Salta"></a>
+
+				</div>
+
+				<div class="col-md-2 ">
+					<a href="https://www.instagram.com/aprenderconectadossalta/" target="_blank"><img onmouseout="this.src='includes/mod_cen/css/login/instagram1.svg';"onmouseover="this.src='includes/mod_cen/css/login/instagram.svg';"src="includes/mod_cen/css/login/instagram1.svg" class="instagram"alt="Instagram Aprender Conectados Salta"></a>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</footer>
+</section>
+
+
+	    <!-- <div class="row">
 
 
 
@@ -70,9 +133,14 @@ if(isset($_POST["username"]))
 </div>
 </div>
 
-	    </div>
+	    </div> -->
 
 	</div>
+	<script type="text/javascript">
+	$(".twitter").mouseover(function(){
+    });
+
+	</script>
 	<?php
 	}
 		if(isset($_SESSION["referenteId"])) {

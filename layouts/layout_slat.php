@@ -4,12 +4,12 @@ session_start();
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-    		<title>DBMS-Conectar</title>
+    		<title>Cóndor</title>
        	<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
        	<meta name="description" content="Sistema de administración de base de datos de Conectar Salta">
        	<meta name="keywords" content="conectar,dbms,salta">
-       	<link rel="shortcut icon" href="img/iconos/logo_icono.png">
+       	<link rel="shortcut icon" href="includes/mod_cen/css/login/condor.png">
 				<script src="js/jquery-3.1.0.min.js"></script>
 				<script type="text/javascript" src="jqueryui/jquery-ui.min.js"></script>
 			 <script src="js/bootstrap.min.js"></script>
