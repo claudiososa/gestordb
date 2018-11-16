@@ -11,8 +11,8 @@ include_once('includes/mod_cen/clases/persona.php');
     $persona = $persona->getContacto();
     ?>
 
-<div class="nav navbar-header col-xs-5" style="margin-top:15px;margin-bottom:10px">
-  <img class="img-responsive"src="img/iconos/logodbms.png" alt="DBMS Conectar" >
+<div class="nav navbar-header col-xs-5" style="margin-top:15px;">
+  <img class="img-responsive"src="includes/mod_cen/css/login/logoCondor.png" style="max-height: 80px;max-width: 150px;" alt="Cóndor" >
 
 </div>
 
@@ -67,10 +67,10 @@ include_once('includes/mod_cen/clases/persona.php');
   <?php
 }else{
   ?>
-  <div class="col-md-12" align="center" style="margin-top:15px;margin-bottom:5px">
+  <!-- <div class="col-md-12" align="center" style="margin-top:15px;margin-bottom:5px">
     <img src="img/iconos/logodbms.png" alt="DBMS Conectar" >
 
-  </div>
+  </div> -->
   <?php
 }
  ?>

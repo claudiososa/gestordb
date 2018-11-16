@@ -1,0 +1,129 @@
+.usuarioSvg{
+  max-height: 100px;
+  max-width: 250px;
+  height: auto;
+  width: auto;
+  display: block;
+  margin: auto;
+  padding: 5px 0;
+}
+
+
+.userLog{
+  border: 1px solid #068787;
+  border-radius: 20px ;
+  background-color: white;
+}
+.inputLog{
+  border: 1px solid #068787;
+  border-radius: 20px;
+  border-left: 0;
+  background-color: white;
+}
+.form-control:focus{
+  border-color:#068787;
+
+}
+.btnLog{
+border-radius: 22px;
+border-color: white;
+background: #085078;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #85D8CE, #085078);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #85D8CE, #085078); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+padding: 8px;
+}
+.btnLog:active:focus{
+  background-color: white;
+  color: #068787;
+  border-color:white;
+
+}
+.btnLog:hover{
+  border-color: white;
+
+}
+footer h3{
+  color:#888787;
+  text-align: center;
+}
+.redes{
+  display: flex;
+  justify-content: space-around;
+}
+img.twitter{
+  height: 60px;
+  width: 60px;
+  display: block;
+  margin: auto;
+}
+img.facebook{
+  height: 60px;
+  width: 60px;
+  display: block;
+  margin: auto;
+}
+img.instagram{
+  height: 60px;
+  width: 60px;
+  display: block;
+  margin: auto;
+}
+/* img.twitter:hover{
+  background-image: url('login/twitter.svg');
+  height: 60px;
+  width: 60px;
+  background-repeat: no-repeat
+} */
+/* footer{
+  position:fixed;
+    bottom:30px;
+
+   width:100%;
+} */
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*media queries*/
+
+@media screen and (max-width:1600px) {
+  body{
+
+    /* border:5px solid orange; */
+
+  }
+
+}
+@media screen and (max-width:991px) {
+  /*******LOGIN*****/
+  body {
+    /* border:5px solid pink; */
+
+  }
+
+}
+
+@media screen and (max-width:767px){
+
+  body {
+    /* border:5px solid red; */
+
+  }
+
+}
+
+/*mi cel :p*/
+@media screen and (max-width:480px) {
+  /*******LOGIN*****/
+  body {
+    /* border:5px solid blue; */
+
+  }
+
+}
+
+@media screen and (max-width:320px) {
+  /*******LOGIN*****/
+  body{
+    /* border: 5px solid green; */
+  }
+
+}
