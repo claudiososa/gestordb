@@ -3,12 +3,13 @@
 <?php
 		include_once('includes/mod_cen/clases/escuela.php');
 		include_once('includes/mod_cen/clases/localidades.php');
+		
 
-        $escuelaId=$_GET['escuelaId'];
+    $escuelaId=$_GET['escuelaId'];
 
 		$escuela= new Escuela($escuelaId);
 		$datos = $escuela->getContacto();
-       $nuevalocalidad = new Localidad($datos->getLocalidadId());
+    $nuevalocalidad = new Localidad($datos->getLocalidadId());
 		$localidad = $nuevalocalidad->getLocalidad();
 
 		$location=new Localidad();

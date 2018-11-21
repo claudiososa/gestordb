@@ -2,6 +2,7 @@
 	include_once("includes/mod_cen/clases/persona.php");
 	include_once("includes/mod_cen/clases/escuela.php");
 	include_once("includes/mod_cen/clases/piso.php");
+	include_once('includes/mod_cen/clases/UpdateData.php');
 	//var_dump($_POST);
 	$escuelaId=$_POST["escuelaId"];
 	$referenteId=$_POST["referenteId"];
@@ -77,6 +78,12 @@
 	$salida= $escuela->editar();
 
 	if ($salida == 1){
+		$fecha=date("Y-m-d H:i:s");
+
+		$update = new UpdateData(null,'escuelas',$escuelaId,$fecha,$referenteId);
+		//var_dump($update);
+		$crear = $update->agregar();
+		var_dump($crear);
 		//echo "Se edito correctamente";
 	}
 	else{
@@ -85,8 +92,8 @@
 	$variablephp = "?men=escuelas&id=2&escuelaId=".$escuelaId."";
 
 	?>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		var variablejs = "<?php echo $variablephp; ?>" ;
 	   function redireccion(){window.location=variablejs;}
 	   setTimeout ("redireccion()", 0);
-	</script>
+	</script> -->
