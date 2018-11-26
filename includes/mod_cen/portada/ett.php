@@ -1,5 +1,6 @@
 <script type="text/javascript" src="includes/mod_cen/documentos/panelportada.js"></script>
 <script type="text/javascript" src="includes/mod_cen/portada/botonLeido.js"></script>
+<link rel="stylesheet" href="includes/mod_cen/portada/css/portadaEtt.css">
 
 <?php
 require_once("includes/mod_cen/clases/informe.php");
@@ -14,9 +15,42 @@ $mis_informes= new informe(null,null,$_SESSION["referenteId"]);
 
 $b_mis_informe = $mis_informes->buscar(10);
 
-echo '<div class="container">';
+//echo '<div class="container">';
 ?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="btn-group btn-group-justified" role="group" aria-label="...">
+				<div class="btn-group" role="group">
+					<a href="index.php?mod=slat&men=user&id=3"><button type="button" class="btn btn-default"><img class="portada" src="includes/mod_cen/portada/imgPortadas/escuela-primaria.svg" alt="MisEscuelas" ><br>  Mis Escuelas</button></a>
+				</div>
+				<div class="btn-group" role="group">
+					<a href="index.php?mod=slat&men=escuelas&id=1"><button type="button" class="btn btn-default"><img class="portada" src="includes/mod_cen/portada/imgPortadas/buscador-de-lupa.svg" alt="BuscarEscuela" ><br>Buscar Escuelas</button></a>
+				</div>
 
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="btn-group btn-group-justified" role="group" aria-label="...">
+				<div class="btn-group" role="group">
+					<a href="index.php?mod=slat&men=escuelas&id=1"><button type="button" class="btn btn-default"><img class="portada" src="includes/mod_cen/portada/imgPortadas/estudiar.svg" alt="MisEscuelas" ><br> Mis Rti</button></a>
+				</div>
+				<div class="btn-group" role="group">
+					<a href="index.php?mod=slat&men=doc&id=1"><button type="button" class="btn btn-default"><img class="portada" src="includes/mod_cen/portada/imgPortadas/carpeta.svg" alt="MisEscuelas" ><br> Documentacion</button></a>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+<!--
 <div class="row hidden-xs wow zoomIn">
 	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=1" style="text-decoration:none">
 		<img class="img-responsive " src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
@@ -25,9 +59,7 @@ echo '<div class="container">';
 	<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=3" style="text-decoration:none">
 		<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/escuela (4).png"><h3 align="center">Mis escuelas</h3></a>
 	</div>
-	<!--<div class="col-lg-3 col-md-6 col-sm-6"> flipInY bounceIn fadeInDownBig
-		<a href="index.php?mod=slat&men=user&id=2"><img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/equipo (3).png"><h4 align="center">Mis ETT</h4></a>
-	</div>-->
+
 <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=user&id=4" style="text-decoration:none">
 	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/seo (2).png"><h3 align="center">Mis RTI</h3></a>
 </div>
@@ -82,7 +114,20 @@ echo '<div class="container">';
 </div>
 
 
-<br><br><br>
+<br><br><br> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- <div class="alert alert-info" role="alert">
 	<h4> <span class="badge">1 </span>&nbsp;<a href="index.php?mod=slat&men=referentes&id=10">Atención!! Nuevo -> Buscador de RTI, por nombre, apellido, etc.</a>  </h4>
 </div>-->

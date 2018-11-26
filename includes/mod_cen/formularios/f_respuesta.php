@@ -38,7 +38,7 @@
         //if($dato_escuela->referenteId==$_SESSION['referenteId'])
           //{
 
-              echo '<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">';
+              echo '<script type="text/javascript" src="includes/mod_cen/formularios/js/nicEdit-latest.js"></script> <script type="text/javascript">';
       //<![CDATA[
               echo 'bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });';
               //echo 'nicEditors.findEditor("TextArea").attr("contentEditable","false");';

@@ -677,7 +677,7 @@ if(($_POST))
 								<b>
 						 		<?php
 
-						 		echo $fila->numero." - ".$fila->cue." - ".substr($fila->nombre,0,40) ;
+						 		echo $fila->numero." - ".$fila->cue." - ".substr($fila->nombre,0,70);
 						 		if ($cantidadPredio >0) {
 						 			echo '<p align= "right"> Predio Compartido ['.$cantidadPredio.'] </p>';
 						 		}else{
