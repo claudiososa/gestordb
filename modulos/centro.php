@@ -300,7 +300,9 @@
 						case 33:
 								 	include("includes/mod_cen/escuelas/escuelaVerSuperPrimaria.php");
 								 	break;
-
+						case 34:
+									include("includes/mod_cen/escuelas/escuelaBuscarAS.php");
+									break;
 
 
 				}
@@ -465,6 +467,9 @@
 								break;
 				case 24:
 								include("includes/mod_cen/escuelas/misEscuelasCAS.php");
+								break;
+			  case 25:
+								include("includes/mod_cen/escuelas/misEscuelasAS.php");
 								break;
 }
 
@@ -780,6 +785,13 @@
 									case 24:
 													if($_SESSION['tipo']=='Coordinador' || $_SESSION['tipo']=='admin' || $_SESSION['tipo']=='ETJ') {
 															include("includes/mod_cen/admin/escuela_asignar_admin_Cas.php");
+													}else {
+															include("includes/mod_cen/denegado.php");
+													}
+													break;
+									case 25:
+													if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
+															include("includes/mod_cen/admin/escuelaAsignarAS.php");
 													}else {
 															include("includes/mod_cen/denegado.php");
 													}

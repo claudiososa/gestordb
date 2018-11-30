@@ -317,6 +317,144 @@ class Escuela
 		return $conexion->query($sentencia);
 	}
 
+
+		public function buscarAs()
+		{
+			$nuevaConexion=new Conexion();
+			$conexion=$nuevaConexion->getConexion();
+
+			$sentencia="SELECT * FROM escuelas LEFT JOIN escuelasMigracion ON escuelas.escuelaId = escuelasMigracion.as_escuelaId INNER JOIN pisoTecnologico ON pisoTecnologico.pi_escuelaId=escuelas.escuelaId ";
+			$carga=0;
+			$cargalocali=0;
+			if($this->referenteId!=NULL || $this->cue!=NULL
+				 || $this->numero!=NULL || $this->nombre!=NULL
+				 || $this->domicilio!=NULL || $this->nivel!=NULL
+				 || $this->localidadId!=NULL || $this->turnos!=NULL
+				 || $this->escuelaId!=NULL || $this->referenteIdPmi!=NULL ||
+				  $this->referenteIdSuperSec!=NULL || $this->referenteIdSuperSup!=NULL || $this->referenteIdSuperAdultos!=NULL || $this->referenteIdFacilitador!=NULL)
+			{
+				$sentencia.=" WHERE ";
+
+
+
+			if($this->referenteId!=NULL)
+			{
+				$sentencia.=" referenteId =$this->referenteId && ";
+				$carga=1;
+			}
+
+			if($this->referenteIdPmi!=NULL)
+			{
+				$sentencia.=" referenteIdPmi =$this->referenteIdPmi && ";
+				$carga=1;
+			}
+
+			if($this->referenteIdSuperAdultos!=NULL)
+			{
+				$sentencia.=" referenteIdSuperAdultos =$this->referenteIdSuperAdultos && ";
+				$carga=1;
+			}
+
+			if($this->referenteIdFacilitador!=NULL)
+			{
+				$sentencia.=" referenteIdFacilitador =$this->referenteIdFacilitador && ";
+				$carga=1;
+			}
+
+			if($this->referenteIdSuperSec!=NULL)
+			{
+				$sentencia.=" referenteIdSuperSec =$this->referenteIdSuperSec && ";
+				$carga=1;
+			}
+
+			if($this->referenteIdSuperSup!=NULL)
+			{
+				$sentencia.=" referenteIdSuperSup =$this->referenteIdSuperSup && ";
+				$carga=1;
+			}
+
+			if($this->cue!=NULL)
+			{
+				$sentencia.=" cue LIKE '%$this->cue%' && ";
+				$carga=1;
+			}
+
+			if($this->numero!=NULL)
+			{
+				$sentencia.=" numero=$this->numero && ";
+				$carga=1;
+			}
+			if($this->escuelaId!=NULL)
+			{
+				$sentencia.=" escuelaId=$this->escuelaId && ";
+				$carga=1;
+			}
+
+			if($this->nombre!=NULL)
+			{
+				$sentencia.=" nombre LIKE '%$this->nombre%' && ";
+				$carga=1;
+			}
+
+			if($this->domicilio!=NULL)
+			{
+				$sentencia.=" domicilio LIKE '%$this->domicilio%' && ";
+				$carga=1;
+			}
+
+			if($this->nivel!=NULL)
+			{
+				$sentencia.=" nivel='$this->nivel' && ";
+				$carga=1;
+			}
+
+			if($this->turnos!=NULL)
+			{
+				$sentencia.=" turnos LIKE '%$this->turnos%' && ";
+				$carga=1;
+			}
+
+
+
+			if($this->localidadId!=NULL)
+			{
+					if($this->localidadId>0)
+						{
+						$localidad= new Localidad(null,null,$this->localidadId);
+						$resultado1=$localidad->buscar();
+						$sentencia.="(";
+						while($fila1=mysqli_fetch_object($resultado1))
+							{
+								$sentencia.=" localidadId=$fila1->localidadId || ";
+				     		}
+
+	$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+				     		$sentencia.=")";
+				     		$cargalocali=1;
+
+					}else{
+
+						$sentencia.=" localidadId > 0 && ";
+						$carga=1;
+
+					}
+
+			}
+
+
+			if($carga==1 && $cargalocali<>1) $sentencia=substr($sentencia,0,strlen($sentencia)-3);
+			//$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+
+			}
+
+			$sentencia.="  ORDER BY numero";
+
+		//echo $sentencia."<br>";
+			return $conexion->query($sentencia);
+
+		}
+
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();
@@ -783,6 +921,31 @@ if(isset($_POST["referente_id"])) {
 					    	   $autoridadEscolar->autoridadesId=$buscarAutoridad;
 							   $editar_autoridad=$autoridadEscolar->editar();
 					         }
+						}
+
+				break;
+
+				case '46': // si es AS actualizador de servidores
+
+				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],19,$dato_persona->personaId);
+						$buscarAutoridad = $autoridadEscolar->existe();
+
+					if ($buscarAutoridad==0)
+					{
+							$autoridadEscolar->agregar();
+
+					}else{
+							if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
+
+										$autoridadEscolar->autoridadesId=$buscarAutoridad;
+									$borrar_autoridad=$autoridadEscolar->eliminar();
+
+
+									 }else{ // tiene referente asignado entonces editamos
+
+									 $autoridadEscolar->autoridadesId=$buscarAutoridad;
+								 $editar_autoridad=$autoridadEscolar->editar();
+									 }
 						}
 
 				break;

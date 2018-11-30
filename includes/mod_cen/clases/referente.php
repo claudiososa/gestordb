@@ -237,6 +237,13 @@ class Referente
 															on referentes.personaId=personas.personaId
 															WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
 															break;
+						  case 'AS':
+															$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido,personas.personaId
+															FROM referentes
+															inner join personas
+															on referentes.personaId=personas.personaId
+															WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
+															break;
 
 
 				default:

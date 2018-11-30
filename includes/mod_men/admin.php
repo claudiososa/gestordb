@@ -19,6 +19,7 @@
         <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tareas<span class="caret"></span></a>
         <ul class="dropdown-menu">
+              <li><a href="index.php?mod=slat&men=admin&id=25&tipo=46">Asignar Escuelas Actualizar Servidor</a></li>
               <li><a href="index.php?mod=slat&men=admin&id=6">Asignar Escuelas Conectar</a></li>
               <li><a href="index.php?mod=slat&men=admin&id=8">Asignar Escuelas PMI</a></li>
               <li><a href="index.php?mod=slat&men=admin&id=15&tipo=4">Asignar Supervisor Nucleo Primaria </a></li>
