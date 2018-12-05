@@ -6,8 +6,9 @@
     let referenteId2 = '<?php echo $_SESSION['referenteId'];?>'
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
     let reports = 'AS'
-    //alert(`Referente Logeado ${referenteId2}`)
 </script>
+
+
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
@@ -26,8 +27,8 @@
 
 
 <?php
-// var_dump($_SESSION['tipoNumero']);
-// var_dump($_SESSION['tipo']);
+ //var_dump($_SESSION['tipoNumero']);
+ //var_dump($_SESSION['tipo']);
 include_once 'includes/mod_cen/clases/EscuelaReferentes.php';
 include_once 'includes/mod_cen/clases/escuela.php';
 include_once 'includes/mod_cen/clases/Autoridades.php';
@@ -48,7 +49,7 @@ include_once "includes/mod_cen/clases/CompartePredio.php";
 
 
 <div class="container">
-  <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Mis Escuelas</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
+  <div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/escuela (2).png"></div><h4><b>Escuelas asignadas para Actualizacion Servidor</b><img class="img-responsive img-circle" onclick="history.back()" align="right" src="includes/mod_cen/portada/imgPortadas/back/flecha-mis-esc.png"></h4>
   <hr class='hrMisEscRed'>
 <br>
 </div>
@@ -167,7 +168,7 @@ echo "</div>";
   <tbody>
 
     <?php
-      //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
+      //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de referenteId
       $escuelasCargo = new EscuelaReferentes(null,null,$_SESSION['tipoNumero'],$_SESSION['referenteId']);
       $buscarEscuelas = $escuelasCargo->buscar();
 

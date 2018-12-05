@@ -1,4 +1,4 @@
-<script src="includes/mod_cen/js/s_ajax_informe.js"></script>
+<script src="includes/mod_cen/js/s_ajax_informe.js?v=<?php echo (rand());?>"></script>
 <?php
 include_once("includes/mod_cen/clases/informe.php");
 include_once("includes/mod_cen/clases/referente.php");

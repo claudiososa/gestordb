@@ -303,6 +303,9 @@
 						case 34:
 									include("includes/mod_cen/escuelas/escuelaBuscarAS.php");
 									break;
+						case 35:
+									include("includes/mod_cen/escuelas/as/listadoEscuelasMigrar.php");
+									break;
 
 
 				}

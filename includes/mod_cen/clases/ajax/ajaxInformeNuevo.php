@@ -2,7 +2,7 @@
   include_once('../img.php');
   include_once('../informe.php');
   include_once('../maestro.php');
- 
+
 
   if (isset($_POST))
   {
@@ -30,6 +30,9 @@
         } elseif($_FILES['input-img']['type'][$i]=='application/pdf') {
           $nombreArchivo='doc_'.$guardar_informe.'_'.$i.'.pdf';
           $tipoArchivo='application/pdf';
+        } elseif($_FILES['input-img']['type'][$i]=='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+          $nombreArchivo='doc_'.$guardar_informe.'_'.$i.'.xlsx';
+          $tipoArchivo='application/excel';
         }
         $fichero_subido = $dir_subida . $nombreArchivo;
 
@@ -53,11 +56,11 @@
 
    if($guardar_informe > 0){
 
-       
+
 
           include_once("../../informes/email_scriptAjax.php");
           //Maestro::debbugPHP($guardar_informe);
-          
+
          }
 
       // $list=array();

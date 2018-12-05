@@ -21,6 +21,7 @@
           <ul class="dropdown-menu">
                 <li><a href="index.php?mod=slat&men=referentes&id=1">Referentes</a></li>
                 <li ><a href="index.php?mod=slat&men=escuelas&id=34">Escuelas</a></li>
+                <li ><a href="index.php?mod=slat&men=escuelas&id=35">Escuelas para Migrar</a></li>
                 <li ><a href="index.php?mod=slat&men=referentes&id=10">RTI</a></li>
                 <li ><a href="index.php?mod=slat&men=user&id=23">Todos los Coordinadores de Aula</a></li>
                 <li ><a href="index.php?mod=slat&men=user&id=7">Todos los ETT</a></li>

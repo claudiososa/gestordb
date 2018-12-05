@@ -29,7 +29,7 @@
 				break;
 		case 'CU':
 				$c_referente= new Referente(null,null,'CAS',null,null,null,null,'Activo');
-				break;
+				break;		
 		case 'admin':
 				$c_referente= new Referente(null,null,null,null,null,null,null,'Activo');
 				break;

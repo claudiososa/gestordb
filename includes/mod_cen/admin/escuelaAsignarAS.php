@@ -30,7 +30,7 @@ if(($_POST))
 				while ($fila = mysqli_fetch_object($resultado))
 				{
 					$objEscuelaReferentes->escuelaId = $fila->escuelaId;
-					$buscarReferente = $objEscuelaReferentes->buscarReferente('46');
+					$buscarReferente = $objEscuelaReferentes->buscarReferente('47');
 					//var_dump($buscarReferente);
 					if ($buscarReferente <>'0') {
 						$encontrado = $buscarReferente->referenteId;
@@ -165,7 +165,7 @@ if(($_POST))
 					 var escuela_id=escuela.substring(4,8);
 
 					 //var snp = 'SNP'
-					 var tipo = '46'
+					 var tipo = '47'
 
 					 $.post("includes/mod_cen/clases/escuela.php", {tipo:tipo,referente_id: referente_id, escuela_id: escuela_id }, function(data){
 					 var resultado = JSON.parse(data);
