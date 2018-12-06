@@ -214,15 +214,29 @@ echo "</div>";
         echo '<td>'.$infoEscuela->numero.'</td>';
 
         $mensajeUpdate ="";
-        $updateData->referenteId = $_SESSION['referenteId'];
-        $updateData->table_name = 'escuelas';
-        $buscarUpdate = $updateData->buscar();
-        $resultadoUpdate = mysqli_num_rows($buscarUpdate);
 
-        echo '<td class="alert alert-danger">
-                <a href="index.php?mod=slat&men=escuelas&id=3&escuelaId='.$infoEscuela->escuelaId.'">'.$infoEscuela->nombre.'</a>
-                <br>Alerta falta actualizar datos
-              </td>';
+        $updateData->referente_id = $_SESSION['referenteId'];
+        $updateData->table_name = 'escuelas';
+        $updateData->table_id = $infoEscuela->escuelaId;
+        $buscarUpdate = $updateData->buscar();
+
+
+        $resultadoUpdate = mysqli_num_rows($buscarUpdate);
+        if ($resultadoUpdate===0) {
+          $mensajeUpdate='Falta actualizar datos';
+          $alert = 'alert-danger';
+        }else{
+          $mensajeUpdate = '';
+          $alert = 'alert-success';
+        }
+
+        //var_dump($resultadoUpdate);
+        //var_dump($updateData);
+
+        echo "<td class='alert $alert'>
+                <a href='index.php?mod=slat&men=escuelas&id=3&escuelaId=$infoEscuela->escuelaId'>$infoEscuela->nombre</a>
+                <br>$mensajeUpdate
+              </td>";
 
         echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
         echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';

@@ -793,7 +793,7 @@
 													}
 													break;
 									case 25:
-													if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin') {
+													if($_SESSION['tipo']=='DNP' || $_SESSION['tipo']=='SGP' || $_SESSION['tipo']=='admin' || $_SESSION['tipo']=='AS') {
 															include("includes/mod_cen/admin/escuelaAsignarAS.php");
 													}else {
 															include("includes/mod_cen/denegado.php");

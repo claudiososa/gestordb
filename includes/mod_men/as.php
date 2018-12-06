@@ -15,6 +15,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li><a href="index.php?mod=slat&men=admin&id=25&tipo=46">Asignar Escuelas</a></li>
         <li class="active"><a href="index.php?mod=slat&men=user&id=25">Mis Escuelas <span class="sr-only">(current)</span></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></a>

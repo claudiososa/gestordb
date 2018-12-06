@@ -38,7 +38,7 @@ function __construct($id=NULL,$table_name=NULL,$table_id=NULL,$updated_date=NULL
 		$bd=conexion2::getInstance();
 	  $sentencia="SELECT * FROM UpdateData";
 
-		if($this->id!=NULL || $this->table_name!=NULL || $this->table_id!=NULL || $this->updated_date!=NULL || $this->referenteId!=NULL)
+		if($this->id!=NULL || $this->table_name!=NULL || $this->table_id!=NULL || $this->updated_date!=NULL || $this->referente_id!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -50,7 +50,7 @@ function __construct($id=NULL,$table_name=NULL,$table_id=NULL,$updated_date=NULL
 
 		if($this->table_name!=NULL)
 		{
-			$sentencia.=" table_name = $this->table_name  && ";
+			$sentencia.=" table_name = '$this->table_name'  && ";
 		}
 
 		if($this->table_id!=NULL)
@@ -63,9 +63,9 @@ function __construct($id=NULL,$table_name=NULL,$table_id=NULL,$updated_date=NULL
 			$sentencia.=" updated_date = $this->updated_date && ";
 		}
 
-		if($this->referenteId!=NULL)
+		if($this->referente_id!=NULL)
 		{
-			$sentencia.=" referenteId = $this->referenteId && ";
+			$sentencia.=" referente_id = $this->referente_id && ";
 		}
 
 		$sentencia=substr($sentencia,0,strlen($sentencia)-3);
@@ -76,7 +76,7 @@ function __construct($id=NULL,$table_name=NULL,$table_id=NULL,$updated_date=NULL
 		if(isset($limit)){
 			$sentencia.=" LIMIT ".$limit;
 		}
-		//echo $sentencia;
+		//return $sentencia;
 		if (isset($count)) {
 			return mysqli_num_rows($bd->ejecutar($sentencia));# code...
 		}else{
