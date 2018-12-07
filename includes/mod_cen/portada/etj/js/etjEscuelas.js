@@ -1,4 +1,37 @@
 $(document).ready(function() {
+  let click = true
+  $('[id ^=as]').click( function(){    
+    let referenteId = $(this).attr('id').substr(2)
+    let tipoReferente = '48'
+
+    if (click) {
+      click = false
+      $.ajax({
+        url: 'includes/mod_cen/clases/ajax/ajaxEscuelaReferente.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {tipoReferente:tipoReferente,referenteId:referenteId}
+     })
+     .done(function(lista) {    
+       $('#divAs'+referenteId).show() 
+       for (let item of lista) {
+         $(`<tr><td>${item.numero}</td><td>${item.cue}</td><td>${item.nombre}</td></tr>`).appendTo('#divAs'+referenteId)
+         }      
+       })
+     .fail(function() {
+        console.log("error");
+     })
+     .always(function() {      
+     });
+    } else {
+      $('#divAs'+referenteId).hide() 
+      click = true
+    }
+  
+  });
+
+
+
 
   $('#buscarInforme').click(function() {
     let numeroTitulo = $('#numero').val()+$('#titulo').val()

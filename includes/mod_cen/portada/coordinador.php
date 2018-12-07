@@ -90,6 +90,17 @@ $ett2 = $todoReferente->buscar();//$referente->Cargo("Activo");
 $resultado_ett_acargo = $todoReferente->buscar();
 //$referente->Cargo("Activo");
 $informes= new informe();
+
+////////////////////////////
+// Actualizacion de Servidores
+
+$todoReferente->setTipo('AS');
+
+$listaReferenteAs = $todoReferente->buscar();
+
+///////////////////////////////////////////////
+
+
 ////////////////////////////////////////////////
 // todos los informes creados por referente Conectar Igualdad
 $arrayReferenteConectar = array ('ETT','ETJ','Coordinador');
@@ -141,13 +152,25 @@ echo '<div class="container">';
           <div>
             <p>buscar rti</p>
           </div>
-      </div>
-      <div id='accordionBuscar3'>
-          <h3>Referente</h3>
-          <div>
-            <p>buscar de Referentes</p>
-          </div>
       </div> -->
+      <div id='accordionBuscar3'>
+          <h3>Actualizacion de Servidores</h3>
+          <div>
+           <?php              
+              $escuelaAs = new EscuelaReferentes(null,null,'48');
+              while ($fila = mysqli_fetch_object($listaReferenteAs) ) {                
+                $escuelaAs->referenteId=$fila->referenteId;                
+                $misEscuelas=mysqli_num_rows($escuelaAs->buscar());
+                echo "<a id='as$fila->referenteId'>$fila->nombre $fila->apellido <b>($misEscuelas)</b><br><br></a>";
+                echo "<div>";
+                echo "<table  style='display:none;' id='divAs$fila->referenteId' border='1' ><tr><td>Numero</td><td>CUE</td><td>Nombre</td></tr></table>";
+                echo "</div>";
+                
+                //echo "<div ></div>";
+              }
+            ?>
+          </div>
+      </div>
       <div id='accordionBuscar4'>
           <h3>Informe</h3>
           <div>

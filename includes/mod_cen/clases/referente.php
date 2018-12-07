@@ -294,7 +294,7 @@ class Referente
 
 		if($this->tipo!=NULL)
 		{
-			$sentencia.=" tipo LIKE '%$this->tipo%' && ";
+			$sentencia.=" tipo = '$this->tipo' && ";
 		}
 
 		if($this->rol!=NULL)
@@ -444,6 +444,11 @@ class Referente
 	{
 		$referenteId=$this->referenteId;
 	}
+
+	public function setTipo($tipo){
+		$this->tipo = $tipo;
+	}
+
 	public function getReferenteId()
 	{
 		return $this->referenteId;
