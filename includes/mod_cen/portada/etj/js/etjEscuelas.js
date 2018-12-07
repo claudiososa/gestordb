@@ -4,6 +4,7 @@ $(document).ready(function() {
     let referenteId = $(this).attr('id').substr(2)
     let tipoReferente = '48'
 
+    
     if (click) {
       click = false
       $.ajax({
@@ -14,8 +15,9 @@ $(document).ready(function() {
      })
      .done(function(lista) {    
        $('#divAs'+referenteId).show() 
+       $('[id ^=filaEscuela]').remove()
        for (let item of lista) {
-         $(`<tr><td>${item.numero}</td><td>${item.cue}</td><td>${item.nombre}</td></tr>`).appendTo('#divAs'+referenteId)
+         $(`<tr id='filaEscuela${item.cue}'><td>${item.numero}</td><td>${item.cue}</td><td>${item.nombre}</td></tr>`).appendTo('#divAs'+referenteId)
          }      
        })
      .fail(function() {
