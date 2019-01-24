@@ -15,7 +15,16 @@ class Departamentos
 	}
 	
 		
+	public function lista($order=null)
+	{
+		$conexion = new Conexion();
+		$nuevaConexion = $conexion->getConexion();
 
+		$smt = "SELECT * FROM departamentos WHERE 1 ORDER BY descripcion $order";
+		
+		return $nuevaConexion->query($smt);
+
+	}	
    public function getDepartamento()
 	{
 		$nuevaConexion=new Conexion();

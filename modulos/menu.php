@@ -120,6 +120,9 @@
 			case "COORCONECT":
 							include("includes/mod_men/coordinadorConect.php");
 							break;
+			case "PRUEBA":
+							include("includes/mod_men/prueba.php");
+							break;				
 			}
 
 		}

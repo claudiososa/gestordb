@@ -12,7 +12,7 @@ session_start();
        	<link rel="shortcut icon" href="includes/mod_cen/css/login/condor.png">
 
 				<?php
-				if ($_SESSION['tipo']=='admin') {
+				if ($_SESSION['tipo']=='admin' OR $_SESSION['tipo']=='PRUEBA') {
 					?>
 					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
