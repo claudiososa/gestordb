@@ -17,16 +17,27 @@
     ?>
     </select>
 
-    <div id="localidad" style="display:none">            
-        <select name="localidad" id="localidad">
-            <option value="0">Seleccione localidad</option>
+    <div id="divLocalidad" style="display:none">            
+        <select class="form-control" name="localidad" id="localidad">
+            <!-- <option value="0">Seleccione localidad</option> -->
             <option value="todos">Todas las localidades</option>
+        </select>
+    </div>    
+    <div id="divNivel" style="display:none">            
+        <select class="form-control" name="nivel" id="nivel">
+            <!-- <option value="0">Seleccione localidad</option> -->
+            <option value="todos">Todas los Niveles</option>
         </select>
     </div>    
 
     <div class="card">
         <div class="card-body" id="cardDepartamento">
             Departamento...
+        </div>
+    </div>    
+    <div class="card">
+        <div class="card-body" id="escuelaListado" style="display:none">
+            Listado
         </div>
     </div>    
 </div>

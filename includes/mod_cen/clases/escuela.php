@@ -301,6 +301,24 @@ class Escuela
 		}
 	}
 
+	public function buscarNivel($nivel=null,$todos=null){
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		if (isset($todos)) {
+			$smt="SELECT * FROM escuelas WHERE nivel ='$nivel'";
+		}else{
+			$smt="SELECT * FROM escuelas WHERE localidadId=$this->localidadId AND nivel ='$nivel'";
+		}
+		
+		//echo $stm;
+		if($conexion->query($smt)){
+			//return 'encontrado';
+			return mysqli_num_rows($conexion->query($smt));
+		}else{
+			return 'error';
+		}
+	}
+
 	public function buscar2($escuelaId=NULL,$arrayPredios=NULL){
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -454,6 +472,15 @@ class Escuela
 			return $conexion->query($sentencia);
 
 		}
+
+	public function buscarAjax()
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+		$sentencia="SELECT cue,numero,nombre FROM escuelas WHERE nivel='$this->nivel' AND localidadId='$this->localidadId' ORDER BY numero ASC";
+
+		return $conexion->query($sentencia);
+	}			
 
 	public function buscar()
 	{
