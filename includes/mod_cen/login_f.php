@@ -267,6 +267,9 @@ if(isset($_POST["username"]))
 				case 'COORCONECT':
 									include_once('includes/mod_cen/portada/coordinadorConect.php');
 									break;
+				case 'PRUEBA':
+									include_once('includes/mod_cen/portada/prueba.php');
+									break;					
 
 				default:
 					include_once('includes/mod_cen/portada/portadaAdmin.php');

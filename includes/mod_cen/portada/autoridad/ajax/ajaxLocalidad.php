@@ -1,12 +1,12 @@
 <?php
-  include_once('../localidades.php');
-  include_once('../maestro.php');
+  include_once('../../../clases/localidades.php');
+  include_once('../../../clases/maestro.php');
 
 
   //verifica que venga desde pedido post desde ajax determinado
-  if (isset($_POST['local']))
+  if (isset($_POST['departamentoId']))
   {
-    $local = new Localidad();
+    $local = new Localidad(null,null,$_POST['departamentoId']);
 
     $buscarLocalidad = $local->buscar();
     $arrayPrincipal=array();
@@ -15,8 +15,7 @@
       $item=array();
 
       $item=['id' => $row->localidadId,
-            'nombre' => $row->nombre
-            ];
+            'descripcion' => $row->nombre];
       array_push($arrayPrincipal,$item);
     }
     //$dato=mysqli_fetch_object($buscarCurso);
