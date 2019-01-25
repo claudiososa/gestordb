@@ -1,0 +1,34 @@
+/* portada admin */
+
+
+/* navbar */
+nav{
+  background-color: #f7f7f7;
+
+}
+.navbar-light .navbar-nav .nav-link {
+    color:#6b6b6b;
+    font-size: 1.2rem;
+}
+/* navbar */
+
+/* filtro */
+
+.filtro{
+  background-color: #e8d1b8;
+  color: #343239;
+}
+
+.form-inline .form-group{
+  flex: 1 0 auto;
+}
+
+.custom-select{
+
+  background-color: #eceaeb;
+  border: 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* filtro */
