@@ -1,15 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-  <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <!-- <a class="navbar-brand" href="#"><img src="new/img/logocondor.svg" alt="logoCondor"></a> -->
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button>
+  </button> -->
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
     <ul class="navbar-nav mr-auto ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="index.php"><img src="new/img/logo condor.svg" alt="Inicio"><span class="sr-only">(current)</span></a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="index.php"><img class="home"src="new/img/home.svg" alt="Inicio"style="fill:red;color:blue;">Inicio<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="index.php"><img class="search"
+          src="new/img/search.svg" alt="busqueda">Buscar<span class="sr-only">(current)</span></a>
+      </li>
+
+      <!-- ####menu admin##### -->
+      <!-- <li class="nav-item">
         <a class="nav-link" href="index.php?men=rtis&id=1">RTI</a>
       </li>
       <li class="nav-item dropdown">
@@ -25,9 +34,6 @@
           <a class="dropdown-item"href="index.php?mod=slat&men=admin&id=17&tipo=6">Asignar Supervisor Inicial </a>
           <a class="dropdown-item"href="index.php?mod=slat&men=admin&id=18&tipo=7">Asignar Supervisor Hospitalaria </a>
           <a class="dropdown-item"href="index.php?mod=slat&men=admin&id=19&tipo=12">Asignar Supervisor Religion </a>
-
-
-          <!-- <div class="dropdown-divider"></div> -->
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
@@ -95,13 +101,13 @@
 
       <li class="nav-item">
         <a class="nav-link textNav" href="index.php?mod=slat&men=escuelas&id=31">Mis escuelas super</a>
-      </li>
-
+      </li> -->
+<!-- ####menu admin##### -->
 
     </ul>
       <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form> -->
-  </div>
+  <!-- </div> -->
 </nav>

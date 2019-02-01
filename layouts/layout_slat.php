@@ -6,8 +6,8 @@ session_start();
 	<head>
     		<title>Cóndor</title>
        	<meta charset="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
+				<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
        	<meta name="description" content="Sistema de administración de base de datos de Conectar Salta">
        	<meta name="keywords" content="conectar,dbms,salta">
        	<link rel="shortcut icon" href="includes/mod_cen/css/login/condor.png">
@@ -21,6 +21,7 @@ session_start();
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 					<script type="text/javascript" src="new/js/jsPortada.js"></script>
+					
 					<link rel="stylesheet" href="new/css/style.css">
 					<?php
 				}else{
@@ -54,6 +55,7 @@ session_start();
 					<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 					<script src="js/fileinput.min.js"></script>
 					<script src="js/locales/es.js"></script>
+					<link rel="stylesheet" href="includes/mod_cen/css/login.css"/>
 					<?php
 				}
 
@@ -88,7 +90,7 @@ session_start();
                     else
     		       		     die ('error al cargar el modulosssss');
 							// echo '</nav>';
-							echo '<article>';
+							// echo '<article>';
 
 							 if (file_exists($path_modulo1))
 		 								 include ($path_modulo1);
@@ -96,7 +98,7 @@ session_start();
 		 								 die ('error al cargar el modulo');
 
 
-		 					 echo '</article>';
+		 					 // echo '</article>';
 						 }else{
 							 if (isset($_SESSION["nombre"])) {
 									 echo '<nav class="navbar navbar-default" >';
