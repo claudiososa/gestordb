@@ -1,6 +1,7 @@
 <?php
   include_once('../../../clases/escuela.php');
   include_once('../../../clases/localidades.php');
+  // include_once('../../../clases/departamentos.php');
   include_once('../../../clases/CompartePredio.php');
   include_once('../../../clases/maestro.php');
 
@@ -54,11 +55,11 @@ if (isset($_POST['departamento'])) {
                      'BSPA' => 0
                     ];
     $item=array();
+
     while ($fila = mysqli_fetch_object($buscarLocalidad)) {       
         $escuela =  new Escuela(null,null,null,null,null,null,null,$fila->localidadId);
         foreach ($niveles as $value) {
             $totalNivel = $escuela->buscarNivel($value);
-
             $nivelesTotal[$value] = $nivelesTotal[$value]+$totalNivel;
 
             // $item = [                
@@ -70,8 +71,8 @@ if (isset($_POST['departamento'])) {
         
     }
     array_push($arrayPrincipal,$nivelesTotal);        
-    $json = json_encode($arrayPrincipal);
-    Maestro::debbugPHP($json);
+    $json = json_encode($arrayPrincipal, JSON_UNESCAPED_UNICODE);
+    
     echo $json;
   }
 
@@ -79,14 +80,35 @@ if (isset($_POST['departamento'])) {
 //*****************************************************
 
   if (isset($_POST['nivel'])) {
+
     $arrayPrincipal=array();    
-    $escuela =  new Escuela(null,null,null,null,null,null,$_POST['nivel'],$_POST['localidad']);
-    $listaEscuela = $escuela->buscarAjax();
+
+    if (isset($_POST['nDepartamento'])) {
+      if ($_POST['localidad']=='todos') {
+        $localidades = new Localidad(null,null,$_POST['nDepartamento']);
+        $buscarLocalidades = $localidades->buscar();
+        $arrayLocalidades = array();
+
+        while ($row = mysqli_fetch_object($buscarLocalidades)) {
+          array_push($arrayLocalidades,$row->localidadId);
+        }
+        $escuela =  new Escuela(null,null,null,null,null,null,$_POST['nivel']);
+        
+        $listaEscuela = $escuela->buscarAjax($arrayLocalidades);
+        // Maestro::debbugPHP($listaEscuela);
+      }else{
+        $escuela =  new Escuela(null,null,null,null,null,null,$_POST['nivel'],$_POST['localidad']);
+        $listaEscuela = $escuela->buscarAjax();
+      }      
+    }    
+
+    
     
     $item=array();
 
     while ($row = mysqli_fetch_object($listaEscuela)) {
         $item = [
+                'escuelaId' => $row->escuelaId,
                 'cue' => $row->cue,
                 'numero' => $row->numero,
                 'nombre' => $row->nombre
@@ -96,7 +118,7 @@ if (isset($_POST['departamento'])) {
     }
 
     $json = json_encode($arrayPrincipal);
-    
+    //Maestro::debbugPHP($json);
     echo $json;
   }
 
@@ -115,11 +137,7 @@ if (isset($_POST['departamento'])) {
                  'numero' => $datoEscuela->numero
                ];
 
-      array_push($arrayPrincipal,$item);
-        //$json = json_encode($arrayPrincipal);
-      //  Maestro::debbugPHP($arrayPrincipal);
-
-      //  array_push($arrayPrincipal,$item);
+      array_push($arrayPrincipal,$item);       
       $json = json_encode($arrayPrincipal);
       echo $json;
     }

@@ -7,6 +7,16 @@
 		$id=$_GET['id'];
 		$men=$_GET['men'];
 		switch ($men){
+			case "abm":
+				  switch ($id) {
+					case 1:
+					    include("includes/mod_cen/admin/programa_abm.php");
+						break;
+					case 2:
+					    include("includes/mod_cen/admin/programa_escuela.php");
+						break;							
+				}
+				break;
 			case "personas":
 				switch ($id) {
 					case 1:
