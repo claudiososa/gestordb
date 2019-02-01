@@ -473,14 +473,54 @@ class Escuela
 
 		}
 
-	public function buscarAjax()
+	public function buscarAjax($departamento=null)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
-		$sentencia="SELECT cue,numero,nombre FROM escuelas WHERE nivel='$this->nivel' AND localidadId='$this->localidadId' ORDER BY numero ASC";
-
+		if (isset($departamento)) {
+			$sentencia="SELECT escuelaId,cue,numero,nombre 
+						FROM escuelas 
+						WHERE ( " ;
+			foreach ($departamento as $value) {
+				if ($value === end($departamento)) {
+					$sentencia.= " localidadId = '$value' ) AND nivel='$this->nivel' ORDER BY numero ASC";
+				}else{
+					$sentencia.= " localidadId = '$value' OR";
+				}				
+			}	
+		}else{
+			$sentencia="SELECT escuelaId,cue,numero,nombre FROM escuelas WHERE nivel='$this->nivel' AND localidadId='$this->localidadId' ORDER BY numero ASC";
+		}
+		
+		
 		return $conexion->query($sentencia);
 	}			
+
+	public function buscarProgramas($programa_id=null)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		
+
+		$sentencia="SELECT escuelas.escuelaId,escuelas.numero,escuelas.cue,escuelas.nombre,programa_escuela.programa_id,programa_escuela.estado 
+					FROM escuelas
+					LEFT JOIN programa_escuela
+					ON programa_escuela.escuela_id = escuelas.escuelaId
+					WHERE escuelas.numero = $this->numero OR (programa_escuela.programa_id=null OR programa_escuela.programa_id=$programa_id)";
+		
+		$resultado = $conexion->query($sentencia);
+		$cant = mysqli_num_rows($resultado);
+
+		// $count = mysqli_num_rows($conexion->query($sentecia));
+		if ($cant > 0) {
+			return $conexion->query($sentencia);
+		}else{
+			return '0';
+		}
+		
+		
+	}
 
 	public function buscar()
 	{

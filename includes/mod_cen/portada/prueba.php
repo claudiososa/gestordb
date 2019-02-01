@@ -1,5 +1,6 @@
-
+<script src="includes/mod_cen/portada/autoridad/js/autoridadListaEscuelas.js"></script>
 <script src="includes/mod_cen/portada/autoridad/js/autoridad.js"></script>
+
 <div class="container">
     <select class="form-control" name="departamento" id="departamento">
     <option value="0">Seleccione departamento</option>

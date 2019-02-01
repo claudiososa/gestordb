@@ -29,6 +29,13 @@
                 <a href="index.php?mod=slat&men=user&id=7">Todos los ETT</a>
             </div>
          </li>
+         <li class="nav-item dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ABM <span class="caret"></span></a>
+          <div class="dropdown-menu">
+                <a href="index.php?mod=slat&men=abm&id=1">Programas</a> 
+                <a href="index.php?mod=slat&men=abm&id=2">Registrar escuela en Programas</a>                
+            </div>
+         </li>
 
       </ul>
 
