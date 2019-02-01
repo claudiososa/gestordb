@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="includes/mod_cen/css/login.css"/>
+
 <?php
 include_once("clases/login.php");
 if(isset($_POST["username"]))
@@ -269,7 +269,7 @@ if(isset($_POST["username"]))
 									break;
 				case 'PRUEBA':
 									include_once('includes/mod_cen/portada/prueba.php');
-									break;					
+									break;
 
 				default:
 					include_once('includes/mod_cen/portada/portadaAdmin.php');
