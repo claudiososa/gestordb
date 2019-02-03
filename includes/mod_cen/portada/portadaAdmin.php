@@ -15,79 +15,91 @@ margin:auto;
   <div class="row">
     <div class="col-md-4">
 
-      <div class="filtro pb-3 pt-3 pl-3">
-        Búsqueda de Escuela
 
-      </div>
-      <form class="form-inline">
-        <div class="form-group mt-2">
-          <input class="form-control form-control-lg mr-sm-2 search" type="search" placeholder="Ingrese número" aria-label="Search">
-          <button class="btn btn-outline-primary peach btn-lg" type="submit"><img onmouseout="this.src='new/img/lupa.png';"onmouseover="this.src='new/img/lupa1.png';"src="new/img/lupa.png"> </button>
-        </div>
+            <div class="filtro pb-3 pt-3 pl-3">
+              Búsqueda de Escuela
 
-      </form>
-      <form class="form-inline">
-        <div class="form-group mt-2">
-          <input class="form-control form-control-lg mr-sm-2 search" type="search" placeholder="Ingrese nombre" aria-label="Search">
-          <button class="btn btn-outline-primary peach btn-lg" type="submit"><img onmouseout="this.src='new/img/lupa.png';"onmouseover="this.src='new/img/lupa1.png';"src="new/img/lupa.png"> </button>
-        </div>
+            </div>
 
-      </form>
-      <form class="form-inline">
-        <div class="form-group mt-2">
-          <input class="form-control form-control-lg mr-sm-2 search" type="search" placeholder="Ingrese cue" aria-label="Search">
-          <button class="btn btn-outline-primary peach btn-lg" type="submit"><img onmouseout="this.src='new/img/lupa.png';"onmouseover="this.src='new/img/lupa1.png';"src="new/img/lupa.png"> </button>
-        </div>
+            <form class="form-inline">
 
-      </form>
-      <!-- busqueda avanzada -->
-      <div class="filtro pb-3 pt-3 pl-3 mt-2">
-        Filtra Resultados
+              <div class="form-group mt-2">
+                <input class="form-control form-control-lg mr-sm-2 search" type="search" placeholder="Ingrese número" aria-label="Search">
 
-      </div>
-      <form class="form-inline">
-        <div class="form-group mt-2">
-          <select class="custom-select custom-select-lg">
-           <option selected>Seleccione Departamento</option>
-           <option value="1">Salta</option>
-           <option value="2">Cafayate</option>
-           <option value="3">Anta</option>
-         </select>
-        </div>
+              </div>
+              <button class="btn btn-outline-primary peach btn-lg" type="submit"><img onmouseout="this.src='new/img/lupa.png';"onmouseover="this.src='new/img/lupa1.png';"src="new/img/lupa.png"> </button>
 
+            </form>
+            <form class="form-inline">
+              <div class="form-group mt-2">
+                <input class="form-control form-control-lg mr-sm-2 search" type="search" placeholder="Ingrese nombre" aria-label="Search">
 
-      </form>
-      <form class="form-inline">
-        <div class="form-group mt-2">
-          <select class="custom-select custom-select-lg">
-           <option selected>Seleccione Localidad</option>
-           <option value="1">Salta</option>
-           <option value="2">Cafayate</option>
-           <option value="3">Anta</option>
-         </select>
-        </div>
+              </div>
+              <button class="btn btn-outline-primary peach btn-lg" type="submit"><img onmouseout="this.src='new/img/lupa.png';"onmouseover="this.src='new/img/lupa1.png';"src="new/img/lupa.png"> </button>
+
+            </form>
+            <form class="form-inline">
+              <div class="form-group mt-2">
+                <input class="form-control form-control-lg mr-sm-2 search" type="search" placeholder="Ingrese cue" aria-label="Search">
+
+              </div>
+              <button class="btn btn-outline-primary peach btn-lg" type="submit"><img onmouseout="this.src='new/img/lupa.png';"onmouseover="this.src='new/img/lupa1.png';"src="new/img/lupa.png"> </button>
+
+            </form>
+            <!-- busqueda avanzada -->
+            <div class="filtro pb-3 pt-3 pl-3 mt-2">
+              Filtra Resultados
+
+            </div>
+            <form class="form-inline">
+              <div class="form-group mt-2">
+                <select class="custom-select custom-select-lg">
+                 <option selected>Seleccione Departamento</option>
+                 <option value="1">Salta</option>
+                 <option value="2">Cafayate</option>
+                 <option value="3">Anta</option>
+               </select>
+              </div>
 
 
-      </form>
-      <form class="form-inline">
-        <div class="form-group mt-2">
-          <select class="custom-select custom-select-lg">
-           <option selected>Seleccione Nivel</option>
-           <option value="1">Salta</option>
-           <option value="2">Cafayate</option>
-           <option value="3">Anta</option>
-         </select>
-        </div>
+            </form>
+            <form class="form-inline">
+              <div class="form-group mt-2">
+                <select class="custom-select custom-select-lg">
+                 <option selected>Seleccione Localidad</option>
+                 <option value="1">Salta</option>
+                 <option value="2">Cafayate</option>
+                 <option value="3">Anta</option>
+               </select>
+              </div>
 
 
-      </form>
+            </form>
+            <form class="form-inline">
+              <div class="form-group mt-2">
+                <select class="custom-select custom-select-lg">
+                 <option selected>Seleccione Nivel</option>
+                 <option value="1">Salta</option>
+                 <option value="2">Cafayate</option>
+                 <option value="3">Anta</option>
+               </select>
+              </div>
+
+
+            </form>
+
+
+
+
+
+
 
     </div>
 
     <!-- fin de filtros -->
 
     <!-- resultados de busqueda -->
-    <div class="col">
+    <div class="col-md-8">
 
       <!-- Reemplazar id,data-target,aria-controls por ej. escuelaId -->
       <div class="accordion" id="accordionExample">
@@ -98,15 +110,36 @@ margin:auto;
                 E.E.T 3149
               </button>
               <!-- cambiar imagenes-horribleeeeeeeeesss! -->
-              <img class="imgInfo" src="new/img/info.png" data-toggle="modal" data-target="#exampleModalCenter" alt="informacion">
-              <img class="imgInfo" src="new/img/map.png" alt="ubicacion">
+              <span class=" imgInfo oi oi-people"data-toggle="modal" data-target="#exampleModalCenter" alt="informacion"></span>
+              <span class=" imgInfo oi oi-map-marker"></span>
+              <!-- <img class="imgInfo" src="new/img/info.png" > -->
+              <!-- <img class="imgInfo" src="new/img/map.png" alt="ubicacion"> -->
 
             </h2>
           </div>
 
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+              <!-- body programas -->
+              <div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Conectar</a>
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Pmi</a>
+      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">info de conectar</div>
+      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">info de pmi</div>
+      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+    </div>
+  </div>
+</div>
+              <!-- body programas -->
             </div>
           </div>
         </div>
@@ -116,8 +149,8 @@ margin:auto;
               <button class="btn btn-link  dropdown-toggle btnLink" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 Collapsible Group Item #2
               </button>
-              <img class="imgInfo" src="new/img/info.png" alt="informacion">
-              <img class="imgInfo" src="new/img/map.png" alt="ubicacion">
+              <span class=" imgInfo oi oi-people"data-toggle="modal" data-target="#exampleModalCenter" alt="informacion"></span>
+              <span class=" imgInfo oi oi-map-marker"></span>
             </h2>
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -162,11 +195,51 @@ margin:auto;
         </button>
       </div>
       <div class="modal-body">
-        <div class="btn-group-vertical" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-outline-info">Director zsdsadsdsdd</button>
-      <button type="button" class="btn btn-outline-info">vice ekjlskjerskde</button>
-      <button type="button" class="btn btn-outline-info">Super:sdgfgdsfgk</button>
-    </div>
+        <!-- body modal -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#director" role="tab" aria-controls="director" aria-selected="true">Director/a</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#vice" role="tab" aria-controls="vice" aria-selected="false">Vicedirector/a</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#super" role="tab" aria-controls="super" aria-selected="false">Supervisor/a</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="director" role="tabpanel" aria-labelledby="home-tab">
+              <div class="card">
+                <div class="card-body">
+                  <span class="oi oi-person"> Nombre y apellido</span>
+                  <br>
+                  <span class="oi oi-phone">3875565</span>
+                </div>
+              </div>
+
+            </div>
+            <div class="tab-pane fade" id="vice" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="card">
+                <div class="card-body">
+                  <span class="oi oi-person"> Nombre y apellido</span>
+                  <br>
+                  <span class="oi oi-phone">387992565</span>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="super" role="tabpanel" aria-labelledby="contact-tab">
+              <div class="card">
+                <div class="card-body">
+                  <span class="oi oi-person"> Nombre y apellido</span>
+                  <br>
+                  <span class="oi oi-phone"> 38754991</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        <!-- body modal -->
       </div>
 
     </div>

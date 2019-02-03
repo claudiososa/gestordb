@@ -1,21 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light"> -->
   <!-- <a class="navbar-brand" href="#"><img src="new/img/logocondor.svg" alt="logoCondor"></a> -->
   <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button> -->
 
   <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-    <ul class="navbar-nav mr-auto ml-auto">
+    <!-- <ul class="navbar-nav mr-auto ml-auto"> -->
       <!-- <li class="nav-item">
         <a class="nav-link" href="index.php"><img src="new/img/logo condor.svg" alt="Inicio"><span class="sr-only">(current)</span></a>
       </li> -->
-      <li class="nav-item">
-        <a class="nav-link" href="index.php"><img class="home"src="new/img/home.svg" alt="Inicio"style="fill:red;color:blue;">Inicio<span class="sr-only">(current)</span></a>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="index.php"><span class="oi oi-home"></span><span class="textHomeMenu">Inicio</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="index.php"><img class="search"
-          src="new/img/search.svg" alt="busqueda">Buscar<span class="sr-only">(current)</span></a>
-      </li>
+        <a class="nav-link" href="index.php"><span class="oi oi-magnifying-glass"></span><span class="textSearchMenu">Buscar</span></a>
+      </li> -->
+
+
 
       <!-- ####menu admin##### -->
       <!-- <li class="nav-item">
@@ -104,10 +105,43 @@
       </li> -->
 <!-- ####menu admin##### -->
 
-    </ul>
+    <!-- </ul> -->
+
+
+
+        <!-- <a class=" dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+
+        <!-- </a> -->
+
+
+
+
+
       <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form> -->
   <!-- </div> -->
+
+<!-- </nav> -->
+
+
+<nav class="nav ">
+  <a class="navbar-brand condor" href="#">
+   <img src="new/img/text4281.png" width="80px" height="50px" alt="">
+ </a>
+
+  <a class="nav-link" href="index.php"><span class="oi oi-home"></span><span class="textHomeMenu">Inicio</span></a>
+  <a class="nav-link" href="index.php"><span class="oi oi-magnifying-glass"></span><span class="textSearchMenu">Buscar</span></a>
+  <a class="nav-link"href="#"><?php
+  $nomArchivoFoto="./img/perfil/";
+  if ($persona->getFotoPerfil() == "") {
+      $nomArchivoFoto.= "0000.jpg";
+  }else {
+      $nomArchivoFoto.= $persona->getFotoPerfil();
+  }
+
+  echo  "<img src='$nomArchivoFoto'  alt='perfil'  class='rounded-circle' style= 'width: 35px; height: 35px;' > ";
+    ?></a>
+
 </nav>
