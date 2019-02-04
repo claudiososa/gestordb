@@ -1,1 +1,5 @@
-string(267) "[{"id":"0070","nombre":"ESCUELA DE COMERCIO A.AGUADO (TARTAGAL)...","numero":"5002","cue":"660033100","estado":"1","programa_id":"1"},{"id":"0070","nombre":"ESCUELA DE COMERCIO A.AGUADO (TARTAGAL)...","numero":"5002","cue":"660033100","estado":"1","programa_id":"2"}]"
+string(301) "SELECT escuelas.escuelaId,escuelas.numero,escuelas.cue,escuelas.nombre,programa_escuela.programa_id,programa_escuela.estado 
+					FROM escuelas
+					LEFT JOIN programa_escuela
+					ON programa_escuela.escuela_id = escuelas.escuelaId AND programa_escuela.programa_id=1
+					WHERE escuelas.numero = 5002"

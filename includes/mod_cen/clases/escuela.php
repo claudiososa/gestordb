@@ -506,12 +506,12 @@ class Escuela
 		$sentencia="SELECT escuelas.escuelaId,escuelas.numero,escuelas.cue,escuelas.nombre,programa_escuela.programa_id,programa_escuela.estado 
 					FROM escuelas
 					LEFT JOIN programa_escuela
-					ON programa_escuela.escuela_id = escuelas.escuelaId
-					WHERE escuelas.numero = $this->numero OR (programa_escuela.programa_id=null OR programa_escuela.programa_id=$programa_id)";
+					ON programa_escuela.escuela_id = escuelas.escuelaId AND programa_escuela.programa_id=$programa_id
+					WHERE escuelas.numero = $this->numero";
 		
 		$resultado = $conexion->query($sentencia);
 		$cant = mysqli_num_rows($resultado);
-
+		//return $sentencia;
 		// $count = mysqli_num_rows($conexion->query($sentecia));
 		if ($cant > 0) {
 			return $conexion->query($sentencia);

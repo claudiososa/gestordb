@@ -8,7 +8,7 @@ if ($_POST['numero']) {
     $arrayPrincipal=array();
     $escuela = new Escuela(null,null,null,$_POST['numero']);      
     $buscarEscuela = $escuela->buscarProgramas($_POST['programa_id']);    
-    
+    //Maestro::debbugPHP($buscarEscuela);
     if ($buscarEscuela=='0') {
         $item= [
             'id' => 0,
@@ -19,8 +19,8 @@ if ($_POST['numero']) {
         while ($row = mysqli_fetch_object($buscarEscuela)) {
             $item=array();
 
-            if($row->programa_id == null)
-            {
+            // if($row->programa_id == null)
+            // {
                 $item= [
                     'id' =>$row->escuelaId,
                     'nombre' => substr($row->nombre,0,65).'...',
@@ -30,17 +30,19 @@ if ($_POST['numero']) {
                     'programa_id' => $row->programa_id
                 ];
                 array_push($arrayPrincipal,$item);
-            }elseif ($row->programa_id<>$_POST['programa_id'] ) {
-                $item= [
-                    'id' =>$row->escuelaId,
-                    'nombre' => substr($row->nombre,0,65).'...',
-                    'numero' => $row->numero,
-                    'cue' => $row->cue,
-                    'estado' => $row->estado,
-                    'programa_id' => $row->programa_id
-                ];
-                array_push($arrayPrincipal,$item);
-               }
+            // }elseif ($row->programa_id<>$_POST['programa_id'] ) 
+            
+            // {
+            //     $item= [
+            //         'id' =>$row->escuelaId,
+            //         'nombre' => substr($row->nombre,0,65).'...',
+            //         'numero' => $row->numero,
+            //         'cue' => $row->cue,
+            //         'estado' => $row->estado,
+            //         'programa_id' => $row->programa_id
+            //     ];
+            //     array_push($arrayPrincipal,$item);
+            // }
                
                //else{
             //     $item= [
@@ -59,7 +61,7 @@ if ($_POST['numero']) {
     
     
     $json = json_encode($arrayPrincipal, JSON_UNESCAPED_UNICODE);
-    Maestro::debbugPHP($json);
+//    Maestro::debbugPHP($json);
     echo $json;    
 }
 
