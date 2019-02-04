@@ -49,7 +49,7 @@
                 <div class='row' id='ultimasAgregadas'>
                     <?php
                         $programa_escuela = new Programa_escuela();
-                        $buscarProgramas = $programa_escuela->buscar();
+                        $buscarProgramas = $programa_escuela->buscar('5');
                         
                         while ($row = mysqli_fetch_object($buscarProgramas)) {
                             echo "<div class='col-md-12' id='rowAgregada$row->id'>
