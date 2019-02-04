@@ -177,11 +177,35 @@ $(document).ready(function () {
                 // $('#divNivel').show()
                 for(let item of lista)
                 {
-                    $(`<div><p class="alert alert-dark">
-                    <button id="idEscuela${item.escuelaId}" type="button" class="btn btn-primary">
-                    ${item.numero} <span class="badge badge-light"></span>
-                    </button>    
-                    ${item.cue}  ${item.nombre}</p></div><div style="display:none" id="detalleEscuela${item.escuelaId}">Datos Datos</div>`).appendTo("#escuelaListado");                                     
+                    $(`<div class="accordion" id="accordionExample">
+                    <div class="card">
+                      <div class="card-header cardHeaderStyle" id="headingOne">
+                        <h2 class="mb-0">
+                          <button class="btn btn-link  dropdown-toggle btnLink" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          ${item.numero} - ${item.cue} - ${item.nombre}
+                          </button>              
+                          <span class=" imgInfo oi oi-people"data-toggle="modal" data-target="#exampleModalCenter" alt="informacion"></span>
+                          <span class=" imgInfo oi oi-map-marker"></span>              
+                        </h2>
+                      </div>
+            
+                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                          <!-- body programas -->             
+                          <!-- body programas -->
+                        </div>
+                      </div>          
+                    </div>
+                    
+                  </div>
+                    
+                    `).appendTo("#escuelaListado")
+                    
+                    // $(`<div><p class="alert alert-dark">
+                    // <button id="idEscuela${item.escuelaId}" type="button" class="btn btn-primary">
+                    // ${item.numero} <span class="badge badge-light"></span>
+                    // </button>    
+                    // ${item.cue}  ${item.nombre}</p></div><div style="display:none" id="detalleEscuela${item.escuelaId}">Datos Datos</div>`).appendTo("#escuelaListado");                                     
                 }
                 $('#escuelaListado').show(1000)
                 
