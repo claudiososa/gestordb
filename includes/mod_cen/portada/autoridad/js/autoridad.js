@@ -177,11 +177,11 @@ $(document).ready(function () {
                 // $('#divNivel').show()
                 for(let item of lista)
                 {
-                    $(`<div class="accordion" id="accordionExample">
+                    $(`
                     <div class="card">
-                      <div class="card-header cardHeaderStyle" id="headingOne">
+                      <div class="card-header cardHeaderStyle" id="heading${item.escuelaId}">
                         <h2 class="mb-0">
-                          <button class="btn btn-link  dropdown-toggle btnLink" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <button class="btn btn-link  dropdown-toggle btnLink" type="button" data-toggle="collapse" data-target="#collapse${item.escuelaId}" aria-expanded="true" aria-controls="collapse${item.escuelaId}">
                           ${item.numero} - ${item.cue} - ${item.nombre}
                           </button>              
                           <span class=" imgInfo oi oi-people"data-toggle="modal" data-target="#exampleModalCenter" alt="informacion"></span>
@@ -189,16 +189,14 @@ $(document).ready(function () {
                         </h2>
                       </div>
             
-                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div id="collapse${item.escuelaId}" class="collapse" aria-labelledby="heading${item.escuelaId}" data-parent="#escuelaListado">
                         <div class="card-body">
                           <!-- body programas -->             
                           <!-- body programas -->
                         </div>
                       </div>          
-                    </div>
-                    
-                  </div>
-                    
+                    </div>                 
+                  
                     `).appendTo("#escuelaListado")
                     
                     // $(`<div><p class="alert alert-dark">

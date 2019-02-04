@@ -100,8 +100,10 @@ margin:auto;
     <!-- fin de filtros -->
 
     <!-- resultados de busqueda -->
-    <div class="col-md-8" id="escuelaListado">
-      
+    <div class="col-md-8" >
+      <div class="accordion" id="escuelaListado">
+
+      </div>
     </div>
     <!-- resultados de busqueda -->
 
