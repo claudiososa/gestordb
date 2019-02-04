@@ -1,0 +1,179 @@
+/* portada admin */
+
+
+/* navbar */
+nav{
+  background-color: #f7f7f7;
+
+}
+.navbar-light .navbar-nav .nav-link {
+    color:#6b6b6b;
+    font-size: 1.2rem;
+}
+
+
+.nav-link{
+  color: #6b6b6b;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+a:hover{
+  color: #e8d1b8;
+}
+a.navbar-brand.condor{
+  padding-left: 30px;
+}
+span.oi.oi-home ,
+span.oi.oi-magnifying-glass{
+  padding-right: 5px;
+
+}
+.oi:empty:before {
+  font-size: 1rem;
+}
+/* navbar */
+
+/* filtro */
+
+.filtro{
+  background-color: #e8d1b8;
+  color: #343239;
+}
+
+.form-inline .form-group{
+  flex: 1 0 auto;
+}
+
+.custom-select{
+
+  background-color: #eceaeb;
+  border: 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* filtro */
+.search:focus{
+  border-color: #E8D1B8;
+  box-shadow: 0 0 0 0.2rem rgb(232,209,184);
+
+}
+.search{
+  background-color: transparent;
+  /* border: 0;
+  font-weight: bold; */
+  font-size: 1.2rem;
+
+}
+.search::placeholder{
+  /* color: #495057; */
+}
+
+/* boton peach */
+.btn-outline-primary.peach {
+    color: #E8D1B8;
+    background-color: transparent;
+    background-image: none;
+    border-color:#E8D1B8;
+   padding-top: 6px;
+    padding-bottom: 6px;
+    margin-top: 6px;
+
+}
+
+.btn-outline-primary.peach:hover {
+    color: #495057;
+    background-color: #E8D1B8;
+    border-color: #E8D1B8;
+}
+
+.btn-outline-primary.peach:active:focus {
+    color: #495057;
+    background-color: #E8D1B8;
+    border-color: #E8D1B8;
+    /*REVISAR
+
+     box-shadow: 0 0 0 0.2rem rgb(232,209,184); */
+}
+/* boton peach */
+
+/* collapsable card */
+.card-header.cardHeaderStyle{
+  background-color: #fff;
+  border-bottom: 0;
+}
+
+/* ###### boton link */
+button.btn.btn-link.dropdown-toggle.btnLink {
+    color: #343239;
+    /* text-decoration: none; */
+}
+span.imgInfo{
+  float: right;
+  color: #4A4A4A;
+  /* width: 16px;
+ height: 16px; */
+
+  /* padding-top: 5px; */
+  margin-left: 5px;
+}
+
+/* collapsable card */
+
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*media queries*/
+
+@media screen and (max-width:1600px) {
+  body{
+
+    border:5px solid orange;
+
+  }
+
+}
+@media screen and (max-width:991px) {
+  /*******LOGIN*****/
+  body {
+    border:5px solid pink;
+
+  }
+
+}
+
+@media screen and (max-width:767px){
+
+  body {
+    border:5px solid red;
+
+
+  }
+  ul.navbar-nav.mr-auto.ml-auto{
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .textHomeMenu ,
+  .textSearchMenu{
+    display: none;
+  }
+
+}
+
+/*mi cel :p*/
+@media screen and (max-width:480px) {
+  /*******LOGIN*****/
+  body {
+    border:5px solid blue;
+
+  }
+
+}
+
+@media screen and (max-width:320px) {
+  /*******LOGIN*****/
+  body{
+    border: 5px solid green;
+  }
+
+}
