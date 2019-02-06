@@ -70,6 +70,10 @@ include_once "includes/mod_cen/clases/TipoInforme.php";
 include_once "includes/mod_cen/clases/TipoPermisos.php";
 
 
+$escuela = new Escuela(null,null,null,null,null,null,'Sistema Virtual');
+
+$buscar = $escuela->buscar();
+
 
 /**
  * Obtener todas las categorias relacionadas a Planied, coordinacion
@@ -197,6 +201,28 @@ echo '<div class="container">';
                 <br><br>
               <button type="button" id="buscarInforme" class="btn btn-primary" name="button">Buscar</button>
             </form>
+          </div>
+      </div>
+      <div id='accordionBuscar5'>
+          <h3>Mediada por Tic</h3>
+          <div>
+          <?php
+            while ($row = mysqli_fetch_object($buscar)) {
+              echo 'Escuela Sede:'.$row->nombre.'<br>'.$row->cue.'<br>';
+              $escuela->nivel = '';
+              $escuela->aulaS = $row->escuelaId;
+
+              $buscarAulas = $escuela->buscar();
+              echo '<br>Aulas satelites<br><br>';
+              while ($row = mysqli_fetch_object($buscarAulas)) {
+                echo $row->nombre.'<br>'.$row->cue.'<br>';
+                echo 'ULTIMOS 5 INFORMES<br>';
+              }
+              
+            }
+
+          ?>
+            
           </div>
 
       </div>

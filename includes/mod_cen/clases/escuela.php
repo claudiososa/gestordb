@@ -27,6 +27,8 @@ class Escuela
 	private $referenteIdSuperAdultos;
 	private $referenteIdFacilitador;
 	private $email;
+	private $aulaS;
+	private $aulaSUbica;
 
  	function __construct($escuelaId=NULL,
 											$referenteId=NULL,
@@ -49,7 +51,9 @@ class Escuela
 											$referenteIdSuperSup=NULL,
 											$referenteIdSuperAdultos=NULL,
 											$referenteIdFacilitador=NULL,
-											$email=NULL)
+											$email=NULL,
+											$aulaS=NULL,
+											$aulaSUbica=NULL)
 	{
 			 //seteo los atributos
 		 	$this->escuelaId = $escuelaId;
@@ -74,6 +78,8 @@ class Escuela
 			$this->referenteIdSuperSup = $referenteIdSuperSup;
 			$this->referenteIdSuperAdultos = $referenteIdSuperAdultos;
 			$this->referenteIdSuperAdultos = $referenteIdFacilitador;
+			$this->aulaS = $aulaS;
+			$this->aulaSUbica = $aulaSUbica;
 	}
 
 	public static function estructura($campo,$tabla){
@@ -469,6 +475,7 @@ class Escuela
 			$sentencia.="  ORDER BY numero";
 
 		//echo $sentencia."<br>";
+		return $sentencia;
 			return $conexion->query($sentencia);
 
 		}
@@ -535,7 +542,9 @@ class Escuela
 			 || $this->domicilio!=NULL || $this->nivel!=NULL
 			 || $this->localidadId!=NULL || $this->turnos!=NULL
 			 || $this->escuelaId!=NULL || $this->referenteIdPmi!=NULL ||
-			  $this->referenteIdSuperSec!=NULL || $this->referenteIdSuperSup!=NULL || $this->referenteIdSuperAdultos!=NULL || $this->referenteIdFacilitador!=NULL)
+			  $this->referenteIdSuperSec!=NULL || $this->referenteIdSuperSup!=NULL || 
+			  $this->referenteIdSuperAdultos!=NULL || $this->referenteIdFacilitador!=NULL 
+			  || $this->aulaS!=NULL || $this->aulaSUbica!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -591,6 +600,18 @@ class Escuela
 		if($this->escuelaId!=NULL)
 		{
 			$sentencia.=" escuelaId=$this->escuelaId && ";
+			$carga=1;
+		}
+
+		if($this->aulaS!=NULL)
+		{
+			$sentencia.=" aulaS=$this->aulaS && ";
+			$carga=1;
+		}
+
+		if($this->aulaSUbica!=NULL)
+		{
+			$sentencia.=" aulaSUbica=$this->aulaSUbica && ";
 			$carga=1;
 		}
 
@@ -797,6 +818,16 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 	public function getSitio()
 	{
 		return $this->sitio;
+	}
+
+	public function getAulaS()
+	{
+		return $this->aulaS;
+	}
+
+	public function getAulaSUbica()
+	{
+		return $this->aulaSUbica;
 	}
 
 	public function __set($var,$valor)
