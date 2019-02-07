@@ -1048,6 +1048,31 @@ if(isset($_POST["referente_id"])) {
 
 				break;
 
+				case '33': // si es SSUP Supervisor de Superior
+
+				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],19,$dato_persona->personaId);
+						$buscarAutoridad = $autoridadEscolar->existe();
+
+					if ($buscarAutoridad==0)
+					{
+							$autoridadEscolar->agregar();
+
+					}else{
+							if ($dato_persona->personaId == 1) { // esta sin asignar entonces borramos
+
+										$autoridadEscolar->autoridadesId=$buscarAutoridad;
+									$borrar_autoridad=$autoridadEscolar->eliminar();
+
+
+									 }else{ // tiene referente asignado entonces editamos
+
+									 $autoridadEscolar->autoridadesId=$buscarAutoridad;
+								 $editar_autoridad=$autoridadEscolar->editar();
+									 }
+						}
+
+				break;
+
 				case '12': // si es Sup. Religion
 
 				$autoridadEscolar = new Autoridades(null,$_POST["escuela_id"],12,$dato_persona->personaId);

@@ -146,7 +146,7 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
     }
 
 	public function buscarReferente($tipo=NULL)
-		{
+	{
 			$nuevaConexion=new Conexion();
 			$conexion=$nuevaConexion->getConexion();
 
@@ -165,7 +165,7 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 									WHERE escuelaReferentes.tipoId =".$tipo." AND escuelaReferentes.escuelaId=$this->escuelaId";
 
 			$sentencia.="  ORDER BY escuelaReferentes.escuelaReferentesId ASC";
-			//echo $sentencia;
+			
 			if (mysqli_num_rows($conexion->query($sentencia))==0) {
 				$dato = '0';
 			}else{
@@ -173,9 +173,9 @@ function __construct($escuelaReferentesId=NULL,$escuelaId=NULL,$tipoId=NULL,
 			}
 			return $dato;
 
+	}
 
-			//return 'hola mundo';
-		}
+
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();

@@ -60,6 +60,9 @@ class Maestro{
 			case '20':
 				$resultado = 'Referente ETJ';
 					break;
+			case '33':
+				$resultado = 'Referente Supervisor Superior';
+				break;		
 			case '45':
 						$resultado = 'Referente Coordinador UNICEF';
 							break;

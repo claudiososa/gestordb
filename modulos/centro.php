@@ -809,6 +809,13 @@
 															include("includes/mod_cen/denegado.php");
 													}
 													break;
+									case 26:
+													if($_SESSION['tipo']=='SSUP' || $_SESSION['tipo']=='SGS' || $_SESSION['tipo']=='admin') {
+															include("includes/mod_cen/admin/escuelaAsignarSSUP.php");
+													}else {
+															include("includes/mod_cen/denegado.php");
+													}
+													break;				
 
 
 				}
