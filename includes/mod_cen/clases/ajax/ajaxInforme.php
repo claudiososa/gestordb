@@ -111,7 +111,7 @@
         case 'SSUP':
                 $arrayReferente= ['SSUP'];
                 $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC',null,'SSUP');
-                Maestro::debbugPHP($buscarInforme);
+                //Maestro::debbugPHP($buscarInforme);
               break;        
         default:
           # code...

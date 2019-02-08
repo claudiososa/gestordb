@@ -183,7 +183,7 @@ if(isset($_POST["username"]))
 						include_once('includes/mod_cen/portada/directorNivelSuperior.php');
 						break;
 				case 'SGSUP':
-						include_once('includes/mod_cen/portada/supervisorGeneralSuperior.php');
+						include_once('includes/mod_cen/portada/sgsup/sgsup.php');
 						break;
 				case 'SupervisorGeneralAdultos':
 						include_once('includes/mod_cen/portada/supervisorGeneralAdultos.php');
