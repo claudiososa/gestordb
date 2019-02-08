@@ -9,7 +9,7 @@
 				include("includes/mod_men/etj.php");
 				break;
 			case "admin":
-				include("includes/mod_men/admin.php");
+				include("includes/mod_men/admin2.php");
 				break;
 			case "Coordinador":
 				include("includes/mod_men/coordinador.php");
@@ -47,7 +47,7 @@
 			case "DirectorNivelSuperior":
 									include("includes/mod_men/directorNivelSuperior.php");
 									break;
-			case "SupervisorGeneralSuperior":
+			case "SGSUP":
 									include("includes/mod_men/supervisorGeneralSuperior.php");
 									break;
 			case "Secretariodegestion":
@@ -123,6 +123,9 @@
 			case "PRUEBA":
 							include("includes/mod_men/prueba.php");
 							break;				
+			case "SSUP":
+							include("includes/mod_men/supervisor-nivel-superior.php");
+							break;
 			}
 
 		}

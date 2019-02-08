@@ -57,7 +57,7 @@
     $referente = new Referente($datoInforme->referenteId);
     $buscarReferente = $referente->buscar();
     $datoReferente = mysqli_fetch_object($buscarReferente);
-    Maestro::debbugPHP($datoReferente);
+    //Maestro::debbugPHP($datoReferente);
 
 
     $list=array();
@@ -108,6 +108,11 @@
                   $arrayReferente= ['CAS','CU'];
                   $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC');
                 break;
+        case 'SSUP':
+                $arrayReferente= ['SSUP'];
+                $buscarInforme= $informe->buscar(null,null,$arrayReferente,null,'ASC',null,'SSUP');
+                Maestro::debbugPHP($buscarInforme);
+              break;        
         default:
           # code...
           break;
@@ -123,6 +128,7 @@
 
     //$buscarInforme = $informe->buscarInforme();
     $cantidadInformes=mysqli_num_rows($buscarInforme);
+    //Maestro::debbugPHP($cantidadInformes);
     $respuesta = new Respuesta();
     $leido = new Leido();
 

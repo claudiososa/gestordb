@@ -16,7 +16,7 @@
 				$c_referente= new Referente(null,null,'Supervisor-Nivel-Superior',null,null,null,null,'Activo');
 				break;
 		case 'DirectorNivelSuperior':
-				$c_referente= new Referente(null,null,'Supervisor-Nivel-Superior',null,null,null,null,'Activo');
+				$c_referente= new Referente(null,null,'SSUP',null,null,null,null,'Activo');
 				break;
 		case 'Coordinador':
 			$c_referente= new Referente(null,null,null,null,null,null,null,'Activo');

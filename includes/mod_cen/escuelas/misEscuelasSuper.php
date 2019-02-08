@@ -162,7 +162,7 @@ echo "</div>";
 
     <?php
       //Seleccino todas las escuelas que tiene a cargo el referente loegado mediante el dato de personaId
-      $escuelasCargo = new EscuelaReferentes(null,null,$_SESSION['tipoN'],$_SESSION['referenteId']);
+      $escuelasCargo = new EscuelaReferentes(null,null,$_SESSION['tipoNumero'],$_SESSION['referenteId']);
       $buscarEscuelas = $escuelasCargo->buscar();
 
       $escuela = new Escuela();
@@ -181,9 +181,9 @@ echo "</div>";
         $arrayReferente= [$_SESSION['tipo']];
 
         $buscarInforme= $informe->buscar(null,null,$arrayReferente);
-
+        //var_dump($buscarInforme);
         $cantidadInforme = mysqli_num_rows($buscarInforme);
-
+        
         $autoridad = new Autoridades(null,$row->escuelaId);
         $buscarAutoridad = $autoridad->buscarAutoridad3('all');
         $cantidadAutoridades = mysqli_num_rows($buscarAutoridad);
@@ -197,7 +197,13 @@ echo "</div>";
         echo '<td>'.$infoEscuela->cue.'</td>';
         echo '<td>'.$infoEscuela->numero.'</td>';
         echo '<td>'.$infoEscuela->nombre.'</td>';
-        echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        if ($cantidadInforme > 0) {
+          echo '<td id="informes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        } else {
+          echo '<td id="sinInformes'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        }
+        
+        
         echo '<td id="row'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="autoridad'.$infoEscuela->escuelaId.'" name="button">'.$cantidadAutoridades.' </button><span id="verAutoridad'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
         if ($cantidadRti > 0 ) {
           echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" id="rti'.$infoEscuela->escuelaId.'" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';

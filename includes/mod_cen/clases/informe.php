@@ -575,8 +575,9 @@ public function buscarInforme($referente=null)
 	}
 
 
-public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL,$order=NULL,$numero=NULL)
+public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoConsulta=NULL,$order=NULL,$numero=NULL,$ajaxConsulta=NULL)
 {
+		
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 
@@ -614,29 +615,55 @@ public function buscar($limit=NULL,$tiporeferente=NULL,$listaRefer=NULL,$tipoCon
 									JOIN personas
 									ON personas.personaId=referentes.personaId ";
 									$sentencia.=" WHERE ";
+									
 									$cantExclusiva=0;
 									$encontrado=0;
-									if(!isset($tiporeferente) || !isset($listaRefer ) || isset($tipoConsulta )){ //si el metodo no se llamada con los parametros tipode referente y listaRef entonces verifica los permisos
-										while ($fila = mysqli_fetch_object($buscarTipo)) { //recorre las categorias exclusivas
-												$objTipoPermiso = new TipoPermisos(null,$fila->tipoInformeId);
-												$buscarTipoPermiso=$objTipoPermiso->buscar();
+									if (isset($ajaxConsulta)) {
+										if(!isset($tiporeferente) || !isset($listaRefer ) || isset($tipoConsulta )){ //si el metodo no se llamada con los parametros tipode referente y listaRef entonces verifica los permisos
+											while ($fila = mysqli_fetch_object($buscarTipo)) { //recorre las categorias exclusivas
+													$objTipoPermiso = new TipoPermisos(null,$fila->tipoInformeId);
+													$buscarTipoPermiso=$objTipoPermiso->buscar();
 
-												while ($row = mysqli_fetch_object($buscarTipoPermiso)) { //recorre los permisos para la categoria exclusiva
+													while ($row = mysqli_fetch_object($buscarTipoPermiso)) { //recorre los permisos para la categoria exclusiva
 
-													if (isset($_SESSION['tipo'])==$row->tipoReferente) { //si el usuario logueado es igual al tipo de referente que tiene permiso entonces cambia el estado de $encontrado
-														$encontrado=1;
+														if ($ajaxConsulta==$row->tipoReferente) { //si el usuario logueado es igual al tipo de referente que tiene permiso entonces cambia el estado de $encontrado
+															$encontrado=1;
+														}
 													}
-												}
-												if ($encontrado==0) {//si encontrado es igual a 0, significaque ,el ,usuario ,logueado no tiene permiso a esta categoria de informe
-													$sentencia.=" informes.nuevotipo<>".$fila->tipoInformeId." AND";	# code...
-													$cantExclusiva=1;
-												}
-												$encontrado=0;
+													if ($encontrado==0) {//si encontrado es igual a 0, significaque ,el ,usuario ,logueado no tiene permiso a esta categoria de informe
+														$sentencia.=" informes.nuevotipo<>".$fila->tipoInformeId." AND";	# code...
+														$cantExclusiva=1;
+													}
+													$encontrado=0;
 
-												//var_dump($fila);
+													//var_dump($fila);
+											}
+
 										}
+									}else{	
+										if(!isset($tiporeferente) || !isset($listaRefer ) || isset($tipoConsulta )){ //si el metodo no se llamada con los parametros tipode referente y listaRef entonces verifica los permisos
+											while ($fila = mysqli_fetch_object($buscarTipo)) { //recorre las categorias exclusivas
+													$objTipoPermiso = new TipoPermisos(null,$fila->tipoInformeId);
+													$buscarTipoPermiso=$objTipoPermiso->buscar();
 
+													while ($row = mysqli_fetch_object($buscarTipoPermiso)) { //recorre los permisos para la categoria exclusiva
+
+														if (isset($_SESSION['tipo'])==$row->tipoReferente) { //si el usuario logueado es igual al tipo de referente que tiene permiso entonces cambia el estado de $encontrado
+															$encontrado=1;
+														}
+													}
+													if ($encontrado==0) {//si encontrado es igual a 0, significaque ,el ,usuario ,logueado no tiene permiso a esta categoria de informe
+														$sentencia.=" informes.nuevotipo<>".$fila->tipoInformeId." AND";	# code...
+														$cantExclusiva=1;
+													}
+													$encontrado=0;
+
+													//var_dump($fila);
+											}
+
+										}
 									}
+
 									if($cantExclusiva==1){
 										$sentencia=substr($sentencia,0,strlen($sentencia)-3);
 									}else{
