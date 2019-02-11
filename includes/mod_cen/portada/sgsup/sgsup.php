@@ -409,7 +409,7 @@ echo '<div class="container">';
 	 							<p>
 
                   <?php
-                  include'includes/mod_cen/portada/calendarioEtt.php';
+                  include'includes/mod_cen/portada/calendarioSsup.php';
                    ?>
               </p>
 						  </div>
