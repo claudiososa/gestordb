@@ -13,9 +13,11 @@ $buscar_ref=$ref->buscar();
 $registro = mysqli_fetch_object($buscar_ref);
 
 $escuelas = new EscuelaReferentes(null,null,'33',$registro->referenteId); // buscamos las escuelas del SUPERVISOR
-$buscarEscuelas=$escuelas->buscar2();// devuelve todos los datos de las escuelas del SUPERVISOR
-$cantEscuelas=mysqli_num_rows($buscarEscuelas); // Guardamos la Cantidad de Escuelas de cada SUPERVISOR
-$referente=$registro->referenteId;  // guardamos en la variable $referente el referenteId del SUPERVISOR
+
+$buscarEscuelas = $escuelas->buscar2();// devuelve todos los datos de las escuelas del SUPERVISOR
+$cantEscuelas = mysqli_num_rows($buscarEscuelas); // Guardamos la Cantidad de Escuelas de cada SUPERVISOR
+
+$referente = $registro->referenteId;  // guardamos en la variable $referente el referenteId del SUPERVISOR
 
 $informeMesReferente = new Informe();
 // Buscamos los informes creados por el ETT en el mes que indiquemos en el año actual

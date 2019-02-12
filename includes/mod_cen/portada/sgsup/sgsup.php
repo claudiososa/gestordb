@@ -409,7 +409,7 @@ echo '<div class="container">';
 	 							<p>
 
                   <?php
-                  include'includes/mod_cen/portada/calendarioSsup.php';
+                  include'includes/mod_cen/portada/sgsup/calendarioSsup.php';
                    ?>
               </p>
 						  </div>

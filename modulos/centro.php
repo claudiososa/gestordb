@@ -316,6 +316,10 @@
 						case 35:
 									include("includes/mod_cen/escuelas/as/listadoEscuelasMigrar.php");
 									break;
+						case 36:
+									include("includes/mod_cen/portada/sgsup/documento_escuela_categoria.php");
+									break;
+
 
 
 				}

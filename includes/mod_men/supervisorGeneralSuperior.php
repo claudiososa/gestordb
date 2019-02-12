@@ -27,13 +27,20 @@
           </ul>
         </li>
         <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentos<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-                <li class=""><a href="index.php?mod=slat&men=doc&id=1">Ver Documentación<span class="sr-only">(current)</span></a></li>
-                <li class=""><a href="index.php?mod=slat&men=informe&id=17">Subir Documento Nuevo<span class="sr-only">(current)</span></a></li>
-                <li ><a href="index.php?mod=slat&men=informe&id=20">Listar Documentos</a></li>
-        </ul>
-      </li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentos<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+                  <li class=""><a href="index.php?mod=slat&men=doc&id=1">Ver Documentación<span class="sr-only">(current)</span></a></li>
+                  <li class=""><a href="index.php?mod=slat&men=informe&id=17">Subir Documento Nuevo<span class="sr-only">(current)</span></a></li>
+                  <li ><a href="index.php?mod=slat&men=informe&id=20">Listar Documentos</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Institutos<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+                  <li class=""><a href="index.php?mod=slat&men=escuelas&id=36">Categorias de Documentos<span class="sr-only">(current)</span></a></li>                                    
+          </ul>
+        </li>
 
 
           
