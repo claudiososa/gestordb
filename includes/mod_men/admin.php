@@ -1,8 +1,8 @@
 <!-- <nav class="navbar navbar-expand-lg navbar-light"> -->
   <!-- <a class="navbar-brand" href="#"><img src="new/img/logocondor.svg" alt="logoCondor"></a> -->
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
 
   <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
     <!-- <ul class="navbar-nav mr-auto ml-auto"> -->
@@ -126,22 +126,272 @@
 <!-- </nav> -->
 
 
-<nav class="nav ">
+<!-- <nav class="navbar navbar-expand-lg fixed-top"> -->
+  <!-- <div class="d-flex justify-content-around"> -->
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   <a class="navbar-brand condor" href="#">
    <img src="new/img/text4281.png" width="80px" height="50px" alt="">
  </a>
 
+ <section class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <h5 class="text-white h4">Collapsed content</h5>
+      <span class="text-muted">Toggleable via the navbar brand.</span>
+    </div>
+  </section> -->
+
+<!--
   <a class="nav-link" href="index.php"><span class="oi oi-home"></span><span class="textHomeMenu">Inicio</span></a>
   <a class="nav-link" href="index.php"><span class="oi oi-magnifying-glass"></span><span class="textSearchMenu">Buscar</span></a>
-  <a class="nav-link"href="#"><?php
-  $nomArchivoFoto="./img/perfil/";
-  if ($persona->getFotoPerfil() == "") {
-      $nomArchivoFoto.= "0000.jpg";
-  }else {
-      $nomArchivoFoto.= $persona->getFotoPerfil();
+  <a class="nav-link"href="index.php?men=user&id=1"><span class="oi oi-power-standby"></span><span class="textOffMenu">Cerrar Sesión</span>
+  </a> -->
+
+    <!-- </div> -->
+
+<!-- </nav> -->
+<header>
+
+  <nav class="navbar fixed-top flex-md-nowrap p-0 shadow">
+
+    <button class="navbar-toggler menuBtn" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="oi oi-menu"></span>
+    </button>
+    <!-- ============================================================== -->
+          <!-- Logo -->
+          <!-- ============================================================== -->
+          <div class="navbar-header">
+              <a class="navbar-brand" href="">
+                  <!-- Logo icon --><b>
+
+                      <!-- Logo icon -->
+                      <img src="new/img/text4281.png" width="80px" height="50px" alt="">
+                  </b>
+                  <!--End Logo icon -->
+               </a>
+          </div>
+          <!-- ============================================================== -->
+          <!-- End Logo -->
+          <!-- ============================================================== -->
+          <div class="navbar">
+
+            <!-- ============================================================== -->
+                  <!-- User profile and search -->
+                  <!-- ============================================================== -->
+                  <ul class="navbar-nav my-lg-0">
+                      <!-- ============================================================== -->
+                      <!-- Profile -->
+                      <!-- ============================================================== -->
+                      <li class="nav-item">
+
+                          <a class="nav-link" href="index.php?men=user&id=1"><span class="oi oi-power-standby"></span><span class="textOffMenu" >Cerrar Sesión</span></a>
+                      </li>
+                  </ul>
+            </div>
+
+
+
+            <!-- ============================================================== -->
+            <!-- SIDEBAR -->
+            <!-- ============================================================== -->
+
+  <!-- <a class="navbar-brand condor col-sm-3 col-md-2 mr-0" href="#">
+   <img src="new/img/text4281.png" width="80px" height="50px" alt="">
+  </a> -->
+
+  <!-- <ul class="navbar-nav px-3">
+  <li class="nav-item text-nowrap">
+
+    <a class="nav-link"href="index.php?men=user&id=1"><span class="oi oi-power-standby"></span><span class="textOffMenu" >Cerrar Sesión</span>
+    </a>
+  </li>
+
+  </ul> -->
+
+  </nav>
+
+</header>
+
+
+<aside class="left-sidebar collapsing" id="navbarToggleExternalContent">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul>
+                  <li class="nav-item">
+                    <a  class="nav-link"href="index.php">
+                      <span class="oi oi-home"></span>
+                      Inicio <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.php">
+                      <span class="oi oi-magnifying-glass"></span>
+                      Buscar
+                    </a>
+                  </li>
+
+                  <div class="dropdown-divider"></div>
+                  <li class="nav-item">
+                    <a class="nav-link menuAside" href="#"  data-toggle="collapse"  data-target="#sidebarName" aria-controls="sidebarName" aria-expanded="false" aria-label="sidebarName"> Asignación Escuelas
+                    <span class="oi oi-chevron-bottom bottomIconAside"></span>
+                    </a>
+                    <div class="collapse" id="sidebarName">
+                      <ul class="nav nav-sm flex-column">
+
+
+
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=25&tipo=46" class="nav-link">Actualización Servidores</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=6" class="nav-link">Referentes Conectar</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=8" class="nav-link">Referentes PMI</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=15&tipo=4" class="nav-link">Sup. Nucleo Primaria</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=16&tipo=5" class="nav-link">Sup. Especial Primaria</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=17&tipo=6" class="nav-link">Sup. Inicial</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=17&tipo=6" class="nav-link">Supervisor Inicial</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=18&tipo=7" class="nav-link">Sup. Hospitalaria</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=19&tipo=12" class="nav-link">Sup. Religión</a>
+                        </li>
+
+                      </ul>
+
+                    </div>
+                  </li>
+                  <div class="dropdown-divider"></div>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.php?mod=slat&men=admin&id=3">
+                      <span class="oi oi-people"></span>
+                      Login como...
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.php">
+                      <span class="oi oi-magnifying-glass"></span>
+                      Buscar
+                    </a>
+                  </li>
+
+
+
+                </ul>
+
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+        <!-- Bottom points-->
+        <div class="sidebar-footer">
+            <!-- item--><a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+            <!-- item--><a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
+            <!-- item--><a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+        <!-- End Bottom points-->
+
+    </aside>
+
+<!--
+
+<div class="container-fluid">
+<div class="row">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar" >
+  <br>
+     <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">
+          <span class="oi oi-home"></span>
+          Inicio <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span class="oi oi-magnifying-glass"></span>
+          Buscar
+        </a>
+      </li>
+      <div class="dropdown-divider"></div>
+      <li class="nav-item">
+        <a class="nav-link" href="#"  data-toggle="collapse"  data-target="#sidebarName" aria-controls="sidebarName" aria-expanded="false" aria-label="sidebarName">
+
+          <!-- Menu
+          <span class="oi oi-plus"></span>
+        </a>
+        <div class="collapse" id="sidebarName">
+          <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+              <a href="#" class="nav-link">Otra opcion</a>
+            </li>
+
+          </ul>
+
+        </div>
+      </li>
+      <div class="dropdown-divider"></div>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">
+          <span class="oi oi-home"></span>
+          Documentois
+         <span class="sr-only"></span>
+        </a>
+      </li>
+
+    </ul>
+
+
+  </div>
+</nav> -->
+<script type="text/javascript">
+// ==============================================================
+// Slimscrollbars
+// ==============================================================
+$('.scroll-sidebar').slimScroll({
+    position: 'left',
+    size: "5px",
+    height: '100%',
+    color: '#dcdcdc'
+});
+
+</script>
+<script type="text/javascript">
+let media= window.matchMedia('screen and (max-width:1023px)')
+
+media.addListener(menu)
+
+function menu(event){
+  if (event.matches) {
+    console.log('responsive');
+    $('#navbarToggleExternalContent').removeClass('collapsing').addClass('collapse')
+
+
+  }else{
+    $('#navbarToggleExternalContent').removeClass('collapse').addClass('collapsing')
   }
 
-  echo  "<img src='$nomArchivoFoto'  alt='perfil'  class='rounded-circle' style= 'width: 35px; height: 35px;' > ";
-    ?></a>
+}
 
-</nav>
+</script>

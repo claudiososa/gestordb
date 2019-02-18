@@ -71,9 +71,7 @@ session_start();
 	</head>
 	<body>
     		<!-- <div class="container"> -->
-    			   <header>
 
-          	 </header>
 						 <article>
 							 <?php
 						 if (file_exists($path_modulo6))
