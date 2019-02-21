@@ -488,6 +488,9 @@
 			  case 25:
 								include("includes/mod_cen/escuelas/misEscuelasAS.php");
 								break;
+				case 26:
+								include("includes/mod_cen/escuelas/misEscuelasSuperSuperior.php");
+								break;					
 }
 
 

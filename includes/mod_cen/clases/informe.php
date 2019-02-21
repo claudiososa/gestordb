@@ -496,7 +496,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 	}
 
 
-	public function buscarxCategoria($categoriaId,$etjCargo=null)
+	public function buscarxCategoria($categoriaId,$etjCargo=null,$prioridad=null)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -517,6 +517,29 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 	  //echo $sentencia;
 		return $conexion->query($sentencia);
 	}
+
+	public function buscarxCategoria2($categoriaId,$etjCargo=null,$prioridad=null)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia = "SELECT informes.informeId,informes.referenteId,informes.titulo,
+												 informes.contenido,informes.fechaVisita,informes.fechaCarga,informes.prioridad,informes.nuevotipo,
+												 tipoinformes.nombre AS tipoNombre,SubTipoInforme.nombre AS subNombre,
+												 escuelas.escuelaId,escuelas.nombre AS escuelaNombre,escuelas.numero,escuelas.cue
+									FROM informes
+									INNER JOIN tipoinformes
+									ON tipoinformes.tipoInformeId=informes.nuevotipo
+									INNER JOIN SubTipoInforme
+									ON SubTipoInforme.subTipoId=informes.subtipo
+									INNER JOIN escuelas
+									ON escuelas.escuelaId=informes.escuelaId
+									WHERE tipoinformes.tipoInformeId=$categoriaId ";
+		$sentencia .=" ORDER BY informes.fechaCarga DESC LIMIT 5";
+	  //echo $sentencia;
+		return $conexion->query($sentencia);
+	}
+
 	public function buscarxCategoriaCoor($categoriaId)
 	{
 		$nuevaConexion=new Conexion();

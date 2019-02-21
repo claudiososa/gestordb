@@ -1,23 +1,24 @@
 <?php
 include_once('conexionv2.php');
 
-class DocumentoEscuelaCategoria
+class DocumentoEscuelaPermiso
 {
-	private $id;
- 	private $description;
+	 private $id;
+     private $id_category;
+     private $id_tipoReferentes;
  	
 
-    function __construct($id=NULL,$description=NULL)
+    function __construct($id=NULL,$id_category=NULL,$id_tipoReferentes=NULL)
 	{
 		$this->id= $id;
- 		$this->description = $description; 		
+        $this->id_category = $id_category;
+        $this->id_tipoReferentes = $id_tipoReferentes;  		
  	}
 
 	public function agregar(){
 		$bd=Conexion2::getInstance();
-		$sentencia = "INSERT INTO Documento_escuela_categoria (id,description)
-									VALUES (NULL,'$this->description')";
-		//return $sentencia;
+		$sentencia = "INSERT INTO Documento_escuela_permiso (id,id_category,id_tipoReferentes)
+									VALUES (NULL,$this->id_category,$this->id_tipoReferentes)";
 		if ($bd->ejecutar($sentencia)) {
 			return $ultimoId=$bd->lastID();
 		}else{
@@ -27,7 +28,9 @@ class DocumentoEscuelaCategoria
 
 	public function editar(){
 		$bd=Conexion2::getInstance();
-		$sentencia = "UPDATE Documento_escuela_categoria SET description='$this->description' WHERE id=$this->id";
+		$sentencia = "UPDATE Documento_escuela_permiso 
+                      SET id_category=$this->id_category, id_tipoReferentes=$this->id_tipoReferentes 
+                      WHERE id=$this->id";
 		
 		if ($bd->ejecutar($sentencia)) {
 			return $this->id;
@@ -38,7 +41,7 @@ class DocumentoEscuelaCategoria
 
 	public function eliminar(){
 		$bd=Conexion2::getInstance();
-		$sentencia = "DELETE FROM Documento_escuela_categoria WHERE id=$this->id";
+		$sentencia = "DELETE FROM Documento_escuela_permiso WHERE id=$this->id";
 		if ($bd->ejecutar($sentencia)) {
 			return $ultimoestado=$bd->lastID();
 		}else{
@@ -50,9 +53,9 @@ class DocumentoEscuelaCategoria
 	{
 		$bd=conexion2::getInstance();
 		if (!isset($unico)) {
-			$sentencia="SELECT * FROM Documento_escuela_categoria";
+			$sentencia="SELECT * FROM Documento_escuela_permiso";
 
-			if($this->id!=NULL || $this->description!=NULL)
+			if($this->id!=NULL || $this->id_category!=NULL || $this->id_tipoReferentes!=NULL)
 			{
 				$sentencia.=" WHERE ";
 
@@ -62,9 +65,14 @@ class DocumentoEscuelaCategoria
 				$sentencia.=" id = $this->id && ";
 			}
 
-			if($this->description!=NULL)
+			if($this->id_category!=NULL)
 			{
-				$sentencia.=" description = $this->description  && ";
+				$sentencia.=" id_category = $this->id_category  && ";
+            }
+            
+            if($this->id_tipoReferentes!=NULL)
+			{
+				$sentencia.=" id_tipoReferentes = $this->id_tipoReferentes  && ";
 			}
 			
 
@@ -76,15 +84,14 @@ class DocumentoEscuelaCategoria
 			if(isset($limit)){
 				$sentencia.=" LIMIT ".$limit;
 			}
-			//return $sentencia;
+			//echo $sentencia;
 			if (isset($count)) {
 				return mysqli_num_rows($bd->ejecutar($sentencia));# code...
 			}else{
 				return $bd->ejecutar($sentencia);
 			}
 		} else {
-			$sentencia="SELECT * FROM Documento_escuela_categoria WHERE id=$this->id";
-			
+			$sentencia="SELECT * FROM Documento_escuela_permiso WHERE id=$this->id";
 			return $bd->ejecutar($sentencia);
 		}
 		

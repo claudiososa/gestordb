@@ -41,7 +41,7 @@
 			 collapsible: true
      });
 
-     $( "#accordionBuscar1,#accordionBuscar2,#accordionBuscar3,#accordionBuscar4,#accordionBuscar5").accordion({
+     $( "#accordionBuscar1,#accordionBuscar2,#accordionBuscar3,#accordionBuscar4,#accordionBuscar5,#accordionBuscar6").accordion({
       active: false,
       collapsible: true
      });
@@ -138,6 +138,7 @@ echo '<div class="container">';
       <!-- <li><a  href='#tabsBuscar-3'>Conectividad PNCE</a></li>
       <li><a  href='#tabsBuscar-4'>Aprendizaje Competencias</a></li> -->
       <li><a  href='#tabsBuscar-5'>Documentos</a></li>
+      <li><a  href='#tabsBuscar-6'>Informe 5240</a></li>
     </ul>
     <div id="tabsBuscar-1">
       <!-- <div id='accordionBuscar1'>
@@ -224,6 +225,11 @@ echo '<div class="container">';
     <div id="tabsBuscar-5">
       <?php
       include 'includes/mod_cen/portada/cu/cuDocumentos.php';
+       ?>
+    </div>
+    <div id="tabsBuscar-6">
+      <?php
+      include 'includes/mod_cen/portada/cu/cuInforme5240.php';
        ?>
     </div>
   </div>
