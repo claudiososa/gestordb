@@ -127,8 +127,18 @@ $mis_informes= new informe(null,null,$_SESSION["referenteId"]);
 
 $b_mis_informe = $mis_informes->buscar(10);
 
-echo '<div class="container">';
+//echo '<div class="container">';
 ?>
+<div class="page-wrapper">
+  <div class="container-fluid">
+    <div class="row page-titles">
+      <div class="col-md-5 col-8 align-self-center">
+        <h5 class=" m-b-0 m-t-0">Búsqueda de Escuelas</h5>
+
+      </div>
+
+    </div>
+
 <div class="" id="padreIr">
 </div>
 
@@ -264,19 +274,20 @@ echo '<div class="container">';
     </thead>
     <tbody>
     </tbody>
-  </table>
+    </table>
   </div>
+</div>
 </div>
 
 
 <!--vista mobile-->
 
-<div class="row visible-xs wow zoomIn">
+<!-- <div class="row visible-xs wow zoomIn">
 	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
 		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
 	</div>
 
-</div>
+</div> -->
 
 
 <br><br><br>

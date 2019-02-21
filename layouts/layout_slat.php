@@ -13,7 +13,7 @@ session_start();
        	<link rel="shortcut icon" href="includes/mod_cen/css/login/condor.png">
 
 				<?php
-				if ($_SESSION['tipo']=='admin' OR $_SESSION['tipo']=='PRUEBA') {
+				if ($_SESSION['tipo']=='admin' OR $_SESSION['tipo']=='PRUEBA' OR $_SESSION['tipo']=='Coordinador') {
 					?>
 					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 					<script src="js/jquery-3.1.0.min.js"></script>
@@ -24,7 +24,10 @@ session_start();
 					<script type="text/javascript" src="new/js/jsPortada.js"></script>
 					<link href="new/img/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 					<link rel="stylesheet" href="new/css/style.css">
-
+					<script src="js/jquery-3.1.0.min.js"></script>
+					<script type="text/javascript" src="jqueryui/jquery-ui.min.js"></script>
+					<script src="js/jquery-ui.js"></script>
+					<link rel="stylesheet" href="css/jquery-ui.css">
 					<?php
 				}else{
 					?>

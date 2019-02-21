@@ -9,7 +9,7 @@
 				include("includes/mod_men/etj.php");
 				break;
 			case "admin":
-				include("includes/mod_men/admin2.php");
+				include("includes/mod_men/admin.php");
 				break;
 			case "Coordinador":
 				include("includes/mod_men/coordinador.php");
