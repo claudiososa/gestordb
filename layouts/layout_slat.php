@@ -24,10 +24,13 @@ session_start();
 					<script type="text/javascript" src="new/js/jsPortada.js"></script>
 					<link href="new/img/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 					<link rel="stylesheet" href="new/css/style.css">
-					<script src="js/jquery-3.1.0.min.js"></script>
+					
 					<script type="text/javascript" src="jqueryui/jquery-ui.min.js"></script>
 					<script src="js/jquery-ui.js"></script>
 					<link rel="stylesheet" href="css/jquery-ui.css">
+					<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+					<script src="js/fileinput.min.js"></script>
+					<script src="js/locales/es.js"></script>
 					<?php
 				}else{
 					?>
@@ -85,7 +88,7 @@ session_start();
 					 </article>
 					 <?php
 
-					 if ($_SESSION['tipo']=='admin') {
+					 if ($_SESSION['tipo']=='admin' OR $_SESSION['tipo']=='Coordinador') {
              // echo '<nav class="navbar navbar-default" >';
 
                     if (file_exists($path_modulo2))

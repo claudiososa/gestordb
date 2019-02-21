@@ -148,8 +148,8 @@ $b_mis_informe = $mis_informes->buscar(10);
       <li><a  href='#tabsBuscar-1'>Buscar</a></li>
       <li><a  href='#tabsBuscar-2'>Informe prioridad Alta</a></li>
       <li><a  href='#tabsBuscar-3'>Conectividad PNCE</a></li>
-      <li><a  href='#tabsBuscar-4'>Aprendizaje Competencias</a></li>
-      <li><a  href='#tabsBuscar-5'>Documentos</a></li>
+      <li><a  href='#tabsBuscar-4'>Informes 5240</a></li>
+      <li><a  href='#tabsBuscar-5'>Informes 5212</a></li>
     </ul>
     <div id="tabsBuscar-1">
       <!-- <div id='accordionBuscar1'>
@@ -250,14 +250,19 @@ $b_mis_informe = $mis_informes->buscar(10);
     </div>
     <div id="tabsBuscar-4">
       <?php
-      include 'includes/mod_cen/portada/coordinador/coorCompetencias.php';
+        include 'includes/mod_cen/portada/coordinador/coordinadorInformes5240.php';
        ?>
     </div>
     <div id="tabsBuscar-5">
       <?php
-      include 'includes/mod_cen/portada/etj/etjDocumentos.php';
+      include 'includes/mod_cen/portada/coordinador/coordinadorInformes5212.php';
        ?>
     </div>
+    <!-- <div id="tabsBuscar-5"> -->
+      <?php
+      // include 'includes/mod_cen/portada/etj/etjDocumentos.php';
+       ?>
+    <!-- </div> -->
   </div>
 
   <div id="resultadoInforme">

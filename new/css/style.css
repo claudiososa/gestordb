@@ -368,9 +368,9 @@ span.imgInfo{
 
 @media (min-width: 1281px) {
 
-  body{
+  /* body{
     border: 2px solid green;
-  }
+  } */
 
 }
 
@@ -381,9 +381,9 @@ span.imgInfo{
 
 @media (min-width: 1025px) and (max-width: 1280px) {
 
-  body{
+  /* body{
     border: 2px solid pink;
-  }
+  } */
 
 }
 
@@ -393,9 +393,9 @@ span.imgInfo{
 */
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  body{
+  /* body{
     border: 2px solid red;
-  }
+  } */
   button.navbar-toggler.menuBtn{
     display: inline-block;
   }
@@ -412,9 +412,9 @@ span.imgInfo{
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
 
-  body{
+  /* body{
     border: 2px solid blue;
-  }
+  } */
 }
 
 /*
@@ -424,9 +424,9 @@ span.imgInfo{
 
 @media (min-width: 481px) and (max-width: 767px) {
 
-  body{
+  /* body{
     border: 2px solid purple;
-  }
+  } */
   button.navbar-toggler.menuBtn{
     display: inline-block;
   }
@@ -440,9 +440,9 @@ span.imgInfo{
 
 @media (min-width: 320px) and (max-width: 480px) {
 
-  body{
+  /* body{
     border: 2px solid aqua;
-  }
+  } */
   button.navbar-toggler.menuBtn{
     display: inline-block;
   }
@@ -451,9 +451,9 @@ span.imgInfo{
 
 @media screen and (max-width:320px) {
 
-  body{
+  /* body{
   border: 5px solid black;
- }
+ } */
  button.navbar-toggler.menuBtn{
    display: inline-block;
  }
