@@ -11,10 +11,10 @@ include_once('includes/mod_cen/clases/persona.php');
     $persona = $persona->getContacto();
     ?>
 
-<div class="nav navbar-header col-xs-5" style="margin-top:15px;">
+<!-- <div class="nav navbar-header col-xs-5" style="margin-top:15px;">
   <img class="img-responsive"src="includes/mod_cen/css/login/logoCondor.png" style="max-height: 80px;max-width: 150px;" alt="Cóndor" >
 
-</div>
+</div> -->
 
   <div class=" pull-right" style="margin-top:10px;margin-bottom:10px">
       <ul class="nav navbar-nav navbar-right">
@@ -29,15 +29,15 @@ include_once('includes/mod_cen/clases/persona.php');
             //   echo $persona->getFotoPerfil();
             // }
 
-          $nomArchivoFoto="./img/perfil/";
-          if ($persona->getFotoPerfil() == "") {
-              $nomArchivoFoto.= "0000.jpg";
-          }else {
-              $nomArchivoFoto.= $persona->getFotoPerfil();
-          }
-
-          echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 35px; height: 35px;' > ";
-            ?>
+          // $nomArchivoFoto="./img/perfil/";
+          // if ($persona->getFotoPerfil() == "") {
+          //     $nomArchivoFoto.= "0000.jpg";
+          // }else {
+          //     $nomArchivoFoto.= $persona->getFotoPerfil();
+          // }
+          //
+          // echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 35px; height: 35px;' > ";
+          //   ?>
             <!-- <span class="caret"></span> -->
           </a>
             <ul class="dropdown-menu">
