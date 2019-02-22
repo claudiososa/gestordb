@@ -319,6 +319,9 @@
 						case 36:
 									include("includes/mod_cen/portada/sgsup/documento_escuela_categoria.php");
 									break;
+						case 37:
+									include("includes/mod_cen/escuelas/buscador_escuelas_old.php");
+									break;			
 
 
 

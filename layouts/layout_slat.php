@@ -31,6 +31,7 @@ session_start();
 					<link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 					<script src="js/fileinput.min.js"></script>
 					<script src="js/locales/es.js"></script>
+					<link rel="stylesheet" href="css/style.css"/>
 					<?php
 				}else{
 					?>

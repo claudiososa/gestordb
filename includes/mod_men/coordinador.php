@@ -74,7 +74,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="index.php">
+                    <a class="nav-link" href="index.php?mod=slat&men=escuelas&id=37">
                       <span class="oi oi-magnifying-glass"></span>
                       Buscar
                     </a>
@@ -137,15 +137,7 @@
                       <span class="oi oi-people"></span>
                       Login como...
                     </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="index.php">
-                      <span class="oi oi-magnifying-glass"></span>
-                      Buscar
-                    </a>
-                  </li>
-
-
+                  </li>                
 
                 </ul>
 

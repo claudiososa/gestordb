@@ -12,7 +12,7 @@
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/legacy.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informes.js"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/coordinador/js/informes.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarPersona.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/jsValidarInforme.js"></script>
 <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
