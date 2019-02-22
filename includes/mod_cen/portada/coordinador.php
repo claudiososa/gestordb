@@ -7,7 +7,7 @@
 
 <script type="text/javascript" src="includes/mod_cen/portada/etj/js/etjEscuelas.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js"></script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/coordinador/js/informeNuevo.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/picker.date.js"></script>

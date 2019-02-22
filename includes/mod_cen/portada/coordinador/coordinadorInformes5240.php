@@ -1,6 +1,6 @@
 <?php
 $informeC = new informe();
-$resultado=$informeC->buscarxCategoria2('27');
+$resultado=$informeC->buscarxCategoria2('27',Null,Null,'661234500','661234500');
 
 ?>
 <div class="container-fluid">
@@ -26,7 +26,7 @@ $resultado=$informeC->buscarxCategoria2('27');
 
 <?php
 $informeC = new informe();
-$resultado=$informeC->buscarxCategoria2('29');
+$resultado=$informeC->buscarxCategoria2('29',Null,Null,'661234500','661234500');
 
 ?>
 <div class="container-fluid">
@@ -52,7 +52,7 @@ $resultado=$informeC->buscarxCategoria2('29');
 
 <?php
 $informeC = new informe();
-$resultado=$informeC->buscarxCategoria2('30');
+$resultado=$informeC->buscarxCategoria2('30',Null,Null,'661234500','661234500');
 
 ?>
 <div class="container-fluid">

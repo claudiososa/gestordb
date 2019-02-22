@@ -518,7 +518,7 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 		return $conexion->query($sentencia);
 	}
 
-	public function buscarxCategoria2($categoriaId,$etjCargo=null,$prioridad=null)
+	public function buscarxCategoria2($categoriaId,$etjCargo=null,$prioridad=null,$cue1=null,$cue2=null)
 	{
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
@@ -535,6 +535,12 @@ function __construct($informeId=NULL,$escuelaId=NULL,$referenteId=NULL,$priorida
 									INNER JOIN escuelas
 									ON escuelas.escuelaId=informes.escuelaId
 									WHERE tipoinformes.tipoInformeId=$categoriaId ";
+		if (isset($cue1)) {
+			$sentencia .=" AND escuelas.cue = $cue1 ";
+		}
+		if (isset($cue2)) {
+			$sentencia .=" OR escuelas.aulaS = $cue2 ";
+		}
 		$sentencia .=" ORDER BY informes.fechaCarga DESC LIMIT 5";
 	  //echo $sentencia;
 		return $conexion->query($sentencia);
