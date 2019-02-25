@@ -7,11 +7,11 @@ if($_POST)
 	$buscarPass=$login->passActual();
 	$contraActual=$buscarPass->getPassword();
 	$dato=$_POST["contra_actual"];
-	//echo $dato;	
+	//echo $dato;
 	if(md5($dato)==$contraActual) {
 		if($_POST["contra_nueva"]==$_POST["contra_nueva2"]) {
-			$pass=new Login($_SESSION["username"],$_POST["contra_nueva"],null);			
-			$cambio=$pass->cambioPass();	
+			$pass=new Login($_SESSION["username"],$_POST["contra_nueva"],null);
+			$cambio=$pass->cambioPass();
 			if ($cambio==1){
 				//echo "<h1>La contraseña fue modificada con éxito</h1>";
 				?>
@@ -19,14 +19,18 @@ if($_POST)
 			      function redireccion(){window.location="?men=personas&id=2";}
 			      setTimeout ("redireccion()", 0); //el tiempo expresado en milisegundos
 				</script>
-				<?php		
-			}			
+				<?php
+			}
 		}else {
-			echo "<h1>contraseña nueva no coinciden</h1><br><br>";		
+			echo "<h1>contraseña nueva no coinciden</h1><br><br>";
 		}
-	}else {	
-			 	
+	}else {
+
 	 	echo "<h1>Contraseña actual incorrecta</h1><br><br>";
 	}
 }
+if ($_SESSION['tipo']=='admin' OR $_SESSION['tipo']=='Coordinador') {
+include_once("includes/mod_cen/formularios/bst_f_cambio_pass.php");
+}else{
 include_once("includes/mod_cen/formularios/f_cambio_pass.php");
+}

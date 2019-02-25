@@ -12,6 +12,7 @@
 		$location=new Localidad();
 		$resultado=$location->buscar();
 		?>
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
@@ -75,7 +76,7 @@
 							           //$nomArchivoFoto.=".jpg";
 							             }
 
-							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style='width:150px; height:150px;' > "; 
+							       echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style='width:150px; height:150px;' > ";
 
 							//$fotperfil=$persona->getFotoPerfil();
 

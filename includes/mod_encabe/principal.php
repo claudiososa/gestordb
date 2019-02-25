@@ -9,17 +9,19 @@ include_once('includes/mod_cen/clases/persona.php');
     $personaId= $_SESSION["personaId"];
     $persona= new Persona($personaId);
     $persona = $persona->getContacto();
-    ?>
+  //  var_dump($persona);
+  ?>
 
-<!-- <div class="nav navbar-header col-xs-5" style="margin-top:15px;">
+<div class="nav navbar-header col-xs-5" style="margin-top:15px;">
   <img class="img-responsive"src="includes/mod_cen/css/login/logoCondor.png" style="max-height: 80px;max-width: 150px;" alt="Cóndor" >
 
-</div> -->
+</div>
 
   <div class=" pull-right" style="margin-top:10px;margin-bottom:10px">
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown" style="margin-right:14px">
-            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style='color:#068587;'><?php
+            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style='color:#068587;'>
+              <?php
             // if(strpos($_SESSION["nombre"],' ')==0)
             // {
             //   echo $persona->getFotoPerfil();
@@ -29,26 +31,26 @@ include_once('includes/mod_cen/clases/persona.php');
             //   echo $persona->getFotoPerfil();
             // }
 
-          // $nomArchivoFoto="./img/perfil/";
-          // if ($persona->getFotoPerfil() == "") {
-          //     $nomArchivoFoto.= "0000.jpg";
-          // }else {
-          //     $nomArchivoFoto.= $persona->getFotoPerfil();
-          // }
-          //
-          // echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 35px; height: 35px;' > ";
-          //   ?>
-            <!-- <span class="caret"></span> -->
+          $nomArchivoFoto="./img/perfil/";
+          if ($persona->getFotoPerfil() == "") {
+              $nomArchivoFoto.= "0000.jpg";
+          }else {
+              $nomArchivoFoto.= $persona->getFotoPerfil();
+          }
+
+          echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 35px; height: 35px;' > ";
+            ?>
+            <span class="caret"></span>
           </a>
             <ul class="dropdown-menu">
               <?php
            if(strpos($_SESSION["nombre"],' ')==0){
 
           //      echo $persona->getFotoPerfil();
-             //echo ucwords(strtolower($_SESSION["nombre"]));
-        //   }else{
-
-            // echo ucwords(substr(strtolower($_SESSION["nombre"]),0,strpos($_SESSION["nombre"],' ')));
+          //    echo ucwords(strtolower($_SESSION["nombre"]));
+          // }else{
+          //
+          //   echo ucwords(substr(strtolower($_SESSION["nombre"]),0,strpos($_SESSION["nombre"],' ')));
           //   echo $persona->getFotoPerfil();
 
            }
