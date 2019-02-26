@@ -79,7 +79,7 @@ session_start();
 	<body>
 
 		<?php
-		 if ($_SESSION['tipo']!='admin' OR $_SESSION['tipo']!='Coordinador') {
+		 if ($_SESSION['tipo'] != 'Coordinador') {
 		  if (file_exists($path_modulo6)){
 		 	include ($path_modulo6);
 		 }else{
