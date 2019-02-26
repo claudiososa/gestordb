@@ -14,7 +14,7 @@
 						break;
 					case 2:
 					    include("includes/mod_cen/admin/programa_escuela.php");
-						break;							
+						break;
 				}
 				break;
 			case "personas":
@@ -26,11 +26,16 @@
 						include("includes/mod_cen/personas/persona_vermas.php");
 						break;
 					case 3:
-						if($_GET["personaId"]==$_SESSION["personaId"] OR $_SESSION["tipo"=="admin"]) {
+						// if($_GET["personaId"]==$_SESSION["personaId"]) {
+						// 	include("includes/mod_cen/personas/persona_editar.php");
+						if ($_SESSION['tipo']=='admin' OR $_SESSION['tipo']=='Coordinador') {
+							include("includes/mod_cen/personas/bst_persona_editar.php");
+						}else{
 							include("includes/mod_cen/personas/persona_editar.php");
-						}else {
-							include("includes/mod_cen/denegado.php");
 						}
+						// else {
+						// 	include("includes/mod_cen/denegado.php");
+						// }
 
 						break;
 					case 4:
@@ -321,7 +326,7 @@
 									break;
 						case 37:
 									include("includes/mod_cen/escuelas/buscador_escuelas_old.php");
-									break;			
+									break;
 
 
 
@@ -493,7 +498,7 @@
 								break;
 				case 26:
 								include("includes/mod_cen/escuelas/misEscuelasSuperSuperior.php");
-								break;					
+								break;
 }
 
 
@@ -825,7 +830,7 @@
 													}else {
 															include("includes/mod_cen/denegado.php");
 													}
-													break;				
+													break;
 
 
 				}

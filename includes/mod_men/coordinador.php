@@ -13,7 +13,7 @@
                   <!-- Logo icon --><b>
 
                       <!-- Logo icon -->
-                      <img src="new/img/text4281.png" width="80px" height="50px" alt="">
+                      <img src="new/img/letra4.png" width="80px" height="50px" alt="">
                   </b>
                   <!--End Logo icon -->
                </a>
@@ -32,7 +32,28 @@
                       <!-- ============================================================== -->
                       <li class="nav-item">
 
-                          <a class="nav-link" href="index.php?men=user&id=1"><span class="oi oi-power-standby"></span><span class="textOffMenu" >Cerrar Sesión</span></a>
+                        <?php
+                         include_once('includes/mod_cen/clases/persona.php');
+
+                        if (isset($_SESSION["nombre"])) {
+                          $personaId= $_SESSION["personaId"];
+                          $persona= new Persona($personaId);
+                          $persona = $persona->getContacto();
+                        //  var_dump($persona);
+                      }
+
+                        $nomArchivoFoto="./img/perfil/";
+                        if ($persona->getFotoPerfil() == "") {
+                        $nomArchivoFoto.= "0000.jpg";
+                        }else {
+                        $nomArchivoFoto.= $persona->getFotoPerfil();
+                        }
+
+                        echo  "<img src='$nomArchivoFoto'  alt='perfil'  class=' img-responsive rounded-circle' style= 'width: 35px; height: 35px;' > ";
+                        ?>
+
+
+                          <!-- <a class="nav-link" href="index.php?men=user&id=1"><span class="oi oi-power-standby"></span><span class="textOffMenu" >Cerrar Sesión</span></a> -->
                       </li>
                   </ul>
             </div>
@@ -137,7 +158,15 @@
                       <span class="oi oi-people"></span>
                       Login como...
                     </a>
-                  </li>                
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" href="index.php">
+                      <span class="oi oi-magnifying-glass"></span>
+                      Buscar
+                    </a>
+                  </li> -->
+
+
 
                 </ul>
 
@@ -145,6 +174,15 @@
             <!-- End Sidebar navigation -->
         </div>
         <!-- End Sidebar scroll-->
+        <!-- Bottom points-->
+        <div class="sidebar-footer">
+          <?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."' class='link' data-toggle='tooltip' title='Settings'>";?><span class="oi oi-cog"></span></a>
+          <?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."' class='link' data-toggle='tooltip' title='pass'>";?><span class="oi oi-lock-locked"></span></a>
+
+          <!-- <a href="index.php?men=mensajes&id=2" class="link" data-toggle="tooltip" title="Email"><span class="oi oi-envelope-closed"></span></a> -->
+          <a href="index.php?men=user&id=1" class="link" data-toggle="tooltip" title="Logout"><span class="oi oi-power-standby"></span></a>
+        </div>
+        <!-- End Bottom points-->
 
 
     </aside>

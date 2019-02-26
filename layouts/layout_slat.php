@@ -24,7 +24,7 @@ session_start();
 					<script type="text/javascript" src="new/js/jsPortada.js"></script>
 					<link href="new/img/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
 					<link rel="stylesheet" href="new/css/style.css">
-					
+
 					<script type="text/javascript" src="jqueryui/jquery-ui.min.js"></script>
 					<script src="js/jquery-ui.js"></script>
 					<link rel="stylesheet" href="css/jquery-ui.css">
@@ -77,25 +77,26 @@ session_start();
 				-->
 	</head>
 	<body>
-    		<!-- <div class="container"> -->
 
-						 <article>
-							 <?php
-						 if (file_exists($path_modulo6))
-								 include ($path_modulo6);
-						 else
-								 die ('error al cargar el modulo');
-						 ?>
-					 </article>
-					 <?php
+		<?php
+		 if ($_SESSION['tipo'] != 'Coordinador') {
+		  if (file_exists($path_modulo6)){
+		 	include ($path_modulo6);
+		 }else{
+		 	die ('error al cargar el modulosssss');
+		 }
+
+	 }
 
 					 if ($_SESSION['tipo']=='admin' OR $_SESSION['tipo']=='Coordinador') {
              // echo '<nav class="navbar navbar-default" >';
 
-                    if (file_exists($path_modulo2))
+                    if (file_exists($path_modulo2)){
+
     		       		     include ($path_modulo2);
-                    else
+                    }else{
     		       		     die ('error al cargar el modulosssss');
+										}
 							// echo '</nav>';
 							// echo '<article>';
 
@@ -107,7 +108,7 @@ session_start();
 
 		 					 // echo '</article>';
 						 }else{
-							 if (isset($_SESSION["nombre"])) {
+
 									 echo '<nav class="navbar navbar-default" >';
 
 												 if (file_exists($path_modulo2))
@@ -124,7 +125,7 @@ session_start();
 
 
 									 echo '</article>';
-								 }
+
 						 }
 
 

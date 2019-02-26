@@ -146,6 +146,29 @@ sidebar navigation
     color: #26c6da;
 } */
 
+
+
+/*******************
+sidebar footer
+******************/
+.sidebar-footer {
+  position: fixed;
+  z-index: 10;
+  bottom: 0px;
+  left: 0px;
+  -webkit-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  width: 240px;
+  background: #fff;
+  border-top: 1px solid rgba(120, 130, 140, 0.13); }
+  .sidebar-footer a {
+    padding: 15px;
+    width: 33.333337%;
+    float: left;
+    text-align: center;
+    font-size: 18px; }
+
 /********************
 menu sidebar
 ********************/
@@ -233,7 +256,7 @@ box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 *******************/
 .page-titles {
   background: #ffffff;
-  margin: 0 -30px 30px;
+  margin: 60px -30px 30px;
   padding: 15px;
   -webkit-box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
@@ -318,7 +341,10 @@ box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
      box-shadow: 0 0 0 0.2rem rgb(232,209,184); */
 }
 
-span.oi.oi-magnifying-glass.searchIcon{
+span.oi.oi-magnifying-glass.searchIcon,
+span.oi.oi-cog,
+span.oi.oi-lock-locked,
+span.oi.oi-power-standby{
   color: #7a7a7a;
 }
 /* boton peach */
