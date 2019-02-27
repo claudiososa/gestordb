@@ -51,7 +51,7 @@ include_once("includes/mod_cen/clases/CompartePredio.php");
  echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (3).png"></div><h4><b>Búsqueda de Escuelas</b></h4>';
 
  echo '<hr>';
- echo'</div>';
+ 
  echo'<br>';
   echo'<br>';
 	 echo'<br>';
@@ -719,7 +719,7 @@ if(($_POST))
                 ?>
                     <div class="card-body">
 
- 				<div class="col-md-6">
+ 				<div class="col-md">
 					 <div class="alert alert-success" role="alert">Datos de la Institución</div>
 					 <?php
 					 echo "<div><b>Nº Colegio</b></div>";
@@ -909,7 +909,7 @@ if(($_POST))
               //echo "</div>";
               echo "</div>";
               echo "</div>";
-
+			  echo "</div>";
 
 			//}
 		}else{

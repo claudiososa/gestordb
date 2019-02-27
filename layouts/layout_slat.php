@@ -79,14 +79,13 @@ session_start();
 	<body>
 
 		<?php
-		 if ($_SESSION['tipo'] != 'Coordinador') {
+		 if ($_SESSION['tipo'] <> 'Coordinador' AND $_SESSION['tipo'] <> 'admin') {
 		  if (file_exists($path_modulo6)){
 		 	include ($path_modulo6);
-		 }else{
+		  }else{
 		 	die ('error al cargar el modulosssss');
-		 }
-
-	 }
+		  } 
+	     }
 
 					 if ($_SESSION['tipo']=='admin' OR $_SESSION['tipo']=='Coordinador') {
              // echo '<nav class="navbar navbar-default" >';
