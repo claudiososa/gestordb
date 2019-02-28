@@ -525,6 +525,9 @@
 					case 7:
 					         include("includes/mod_cen/documentos/documentoPortadas.php");
 					break;
+					case 8:
+					         include("includes/mod_cen/documentos/bst-documento.php");
+					break;                                                                          
 					}
 					break;
 					case "estadistica":
@@ -557,7 +560,9 @@
 								break;
 
 						}
+						
 						break;
+
 
 
 

@@ -153,6 +153,35 @@
                     </div>
                   </li>
                   <div class="dropdown-divider"></div>
+
+                  <li class="nav-item">
+                    <a class="nav-link menuAside" href="#"  data-toggle="collapse"  data-target="#sidebarNameDoc" aria-controls="sidebarNameDoc" aria-expanded="false" aria-label="sidebarNameDoc"> <span class="oi oi-folder"></span>Documentos
+                    <span class="oi oi-chevron-bottom bottomIconAside"></span>
+                    </a>
+                    <div class="collapse" id="sidebarNameDoc">
+                      <ul class="nav nav-sm flex-column">
+
+
+
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=doc&id=8" class="nav-link">Ver Documentos</a></li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=admin&id=6" class="nav-link">Subir Documento</a>
+                        </li>
+                        <li class="nav-item">
+
+                          <a href="index.php?mod=slat&men=informe&id=20" class="nav-link">Listar Documentos</a>
+                        </li>
+                        
+
+                      </ul>
+
+                    </div>
+                  </li>
+                  <li class="dropdown-divider"></li>
+
                   <li class="nav-item">
                     <a class="nav-link" href="index.php?mod=slat&men=admin&id=3">
                       <span class="oi oi-people"></span>
