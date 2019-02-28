@@ -168,13 +168,13 @@
                           <a href="index.php?mod=slat&men=doc&id=8" class="nav-link">Ver Documentos</a></li>
                         <li class="nav-item">
 
-                          <a href="index.php?mod=slat&men=admin&id=6" class="nav-link">Subir Documento</a>
+                          <a href="index.php?mod=slat&men=informe&id=26" class="nav-link">Subir Documento</a>
                         </li>
                         <li class="nav-item">
 
-                          <a href="index.php?mod=slat&men=informe&id=20" class="nav-link">Listar Documentos</a>
+                          <a href="index.php?mod=slat&men=informe&id=27" class="nav-link">Listar Documentos</a>
                         </li>
-                        
+
 
                       </ul>
 

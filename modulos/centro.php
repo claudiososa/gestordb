@@ -527,7 +527,7 @@
 					break;
 					case 8:
 					         include("includes/mod_cen/documentos/bst-documento.php");
-					break;                                                                          
+					break;
 					}
 					break;
 					case "estadistica":
@@ -560,7 +560,7 @@
 								break;
 
 						}
-						
+
 						break;
 
 
@@ -647,6 +647,12 @@
 						case 25:
 									 include("includes/mod_cen/informes/buscarInformesAutoridad.php");
 	 								 break;
+						case 26:
+			 						 include("includes/mod_cen/documentos/bst_nuevo_documento.php");
+			 	 					 break;
+						case 27:
+				 					 include("includes/mod_cen/documentos/bst_listarDocumentos.php");
+				 				  	break;
 
 					}
 					break;
