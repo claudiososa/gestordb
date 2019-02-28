@@ -29,13 +29,13 @@ include_once("includes/mod_cen/clases/Documento.php");
 
           <div class="row">
             <div class="col-3">
-              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">              
                 <?php
                   $num=1;
                   $sub_num=1;
                    while ($filaResultado = mysqli_fetch_object($resultado)){
                      $idcateg=$filaResultado->categoriaDocId;
-                     ?>
+                     ?>                   
                      <a class="nav-link"
                      id="v-pills-home-tab<?php echo $filaResultado->categoriaDocId; ?>"
                      data-toggle="pill"
@@ -56,8 +56,8 @@ include_once("includes/mod_cen/clases/Documento.php");
                   $documentos = new Documento(null,$fila->categoriaDocId);
 
                   $resultadoBuscar = $documentos->buscar();
-                ?>
-                  <div class="tab-pane fade" id="#collapseprincipal<?php echo $fila->categoriaDocId; ?>" role="tabpanel" aria-labelledby="v-pills-home-tab<?php echo $fila->categoriaDocId; ?>">
+                ?>                  
+                  <div class="tab-pane fade" id="collapseprincipal<?php echo $fila->categoriaDocId; ?>" role="tabpanel" aria-labelledby="v-pills-home-tab<?php echo $fila->categoriaDocId; ?>">
 
 
                     <?php
