@@ -216,6 +216,7 @@ $b_mis_informe = $mis_informes->buscar(10);
       <div id='accordionBuscar5'>
           <h3>Mediada por Tic</h3>
           <div>
+          <div id='accordion'></div>
           <?php
             while ($row = mysqli_fetch_object($buscar)) {
               echo 'Escuela Sede:'.$row->nombre.'<br>'.$row->cue.'<br>';

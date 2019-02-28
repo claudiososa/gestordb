@@ -130,7 +130,7 @@ echo '<div class="container">';
 <div class="" id="padreIr">
 </div>
 
-<div class="hidden-xs  wow zoomIn">
+<div class="">
   <div id="tabsBuscar">
     <ul>
       <li><a  href='#tabsBuscar-1'>Buscar</a></li>
@@ -237,14 +237,7 @@ echo '<div class="container">';
 
 </div>
 <!--vista mobile-->
-
-<div class="row visible-xs wow zoomIn">
-	<div class="col-xs-6"><a href="index.php?mod=slat&men=escuelas&id=18" style="text-decoration:none">
-		<img class="img-responsive"src="includes/mod_cen/portada/imgPortadas/busqueda.png"><h3 align="center">Búsqueda escuelas</h3></a>
-	</div>
-
-
-</div>
+<br>
 
 <?php
 
