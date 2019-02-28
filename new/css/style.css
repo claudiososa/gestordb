@@ -176,7 +176,8 @@ menu sidebar
 
 span.oi.oi-home ,
 span.oi.oi-magnifying-glass,
-span.oi.oi-people{
+span.oi.oi-people,
+span.oi.oi-folder{
   padding-right: 5px;
 
 }
