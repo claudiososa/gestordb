@@ -16,7 +16,7 @@ include_once("includes/mod_cen/clases/Documento.php");
   <div class="container-fluid">
     <div class="row page-titles">
       <div class="col-md-5 col-8 align-self-center">
-        <h5 class=" m-b-0 m-t-0">Ver Documentos</h5>
+        <h5 class=" m-b-0 m-t-0 text-secondary">Documentos / Ver Documentos</h5>
 
       </div>
 
@@ -29,14 +29,14 @@ include_once("includes/mod_cen/clases/Documento.php");
 
           <div class="row">
             <div class="col-3">
-              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">              
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <?php
                   $num=1;
                   $sub_num=1;
                    while ($filaResultado = mysqli_fetch_object($resultado)){
                      $idcateg=$filaResultado->categoriaDocId;
-                     ?>                   
-                     <a class="nav-link"
+                     ?>
+                     <a class="nav-link doc"
                      id="v-pills-home-tab<?php echo $filaResultado->categoriaDocId; ?>"
                      data-toggle="pill"
                      href="#collapseprincipal<?php echo $filaResultado->categoriaDocId; ?>" role="tab"
@@ -56,18 +56,28 @@ include_once("includes/mod_cen/clases/Documento.php");
                   $documentos = new Documento(null,$fila->categoriaDocId);
 
                   $resultadoBuscar = $documentos->buscar();
-                ?>                  
+                ?>
                   <div class="tab-pane fade" id="collapseprincipal<?php echo $fila->categoriaDocId; ?>" role="tabpanel" aria-labelledby="v-pills-home-tab<?php echo $fila->categoriaDocId; ?>">
 
 
                     <?php
                       while ($filaResultado2 = mysqli_fetch_object($resultadoBuscar)) {
                         // code...
+                        // var_dump($filaResultado2)
 
-                        echo $filaResultado2->titulo;?>
+                        ?>
 
-                        <a href="documentacion/<?php echo $filaResultado2->nombreArchivo;?>" download="<?php echo $filaResultado2->nombreArchivo;?>"><button type="button" class="btn btn-default btn-lg">  <span class="pull-right glyphicon glyphicon glyphicon-download-alt"></span>
-                          </button></a><br><?php echo $filaResultado2->descripcion;?>
+                        <ul class="list-group">
+
+                          <li class="list-group-item "><p class="text-info mb-0">
+                            <?php echo $filaResultado2->titulo;?><a href="documentacion/<?php echo $filaResultado2->nombreArchivo;?>" download="<?php echo $filaResultado2->nombreArchivo;?>">
+                          <span class="oi oi-data-transfer-download float-right" style="color:#17a2b8;" ></span>  </a></p><p class="text-secondary mb-0"><?php echo ucfirst(strtolower($filaResultado2->descripcion)) ;?></p>
+
+                          </li>
+
+                        </ul>
+
+
                       <?php
                       }
                       ?>
