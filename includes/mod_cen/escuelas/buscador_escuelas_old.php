@@ -51,7 +51,7 @@ include_once("includes/mod_cen/clases/CompartePredio.php");
  echo'<div class="col-md-1"><img class="img-responsive img-circle" src="includes/mod_cen/portada/imgPortadas/busqueda (3).png"></div><h4><b>Búsqueda de Escuelas</b></h4>';
 
  echo '<hr>';
- 
+
  echo'<br>';
   echo'<br>';
 	 echo'<br>';
@@ -72,7 +72,7 @@ if(($_POST))
 				$cantidadEscuela=mysqli_num_rows($resultado2);
 				$primero=0;
 				$cantidad=0;
-				?>		
+				?>
 				<script type="text/javascript">
 				var map;
 				$(document).ready(function(){
@@ -151,7 +151,7 @@ if(($_POST))
 				$arreglo["0"]="0";
 				$i=0;
                 echo "<div class='row'>";
-                echo '<div id="accordion">';        
+                echo '<div id="accordion">';
 
 				while ($fila = mysqli_fetch_object($resultado2))
 				{
@@ -668,7 +668,7 @@ if(($_POST))
 						  Fin de Autoridades nuevo
                         */
                         ?>
-<!-- 
+<!--
                         <div id="accordion">
                         <div class="card">
                           <div class="card-header" id="headingOne">
@@ -678,7 +678,7 @@ if(($_POST))
                               </button>
                             </h5>
                           </div>
-                      
+
                           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                               Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
@@ -692,7 +692,7 @@ if(($_POST))
 						$locali=new Localidad($fila->localidadId,null);
 						$busca_loc= $locali->buscar();
 						$fila1=mysqli_fetch_object($busca_loc);
-                    
+
 					echo '<div class="card">';
 					// echo '<div class="panel panel-default">';
 					//echo '<div class="panel-heading">';
@@ -701,7 +701,7 @@ if(($_POST))
                         <h5 class="mb-0">
                             <?php
                             echo  "<button class='btn btn-link' data-toggle='collapse' data-target='#collapseOne$fila->escuelaId' aria-expanded='false' aria-controls='collapseOne'>";
-                            
+
                                     echo $fila->numero." - ".$fila->cue." - ".substr($fila->nombre,0,70);
                                     if ($cantidadPredio >0) {
                                         echo '<p align= "right"> Predio Compartido ['.$cantidadPredio.'] </p>';
@@ -714,7 +714,7 @@ if(($_POST))
                     </div>
 
 
-                <?php                    
+                <?php
                     echo "<div id='collapseOne$fila->escuelaId' class='collapse' aria-labelledby='headingOne' data-parent='#accordion'>";
                 ?>
                     <div class="card-body">
@@ -763,7 +763,7 @@ if(($_POST))
 					 echo "</ul>";
 					 echo "</div>";
 					 echo "<br>";
-					 echo"<div><b><a class='btn btn-primary' href='index.php?mod=slat&men=informe&id=1&escuelaId=".$fila->escuelaId."'>Crear Nuevo Informe</a></b></div>";
+					 echo"<div><b><a class='btn btn-primary' href='index.php?mod=slat&men=informe&id=28&escuelaId=".$fila->escuelaId."'>Crear Nuevo Informe</a></b></div>";
 					 echo "<br></div>";
 
 	// ====== Datos de Predio[Inicio] ======== //

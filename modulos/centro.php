@@ -653,6 +653,9 @@
 						case 27:
 				 					 include("includes/mod_cen/documentos/bst_listarDocumentos.php");
 				 				  	break;
+						case 28:
+										include("includes/mod_cen/informes/bst_new_update_report.php");
+										break;
 
 					}
 					break;
