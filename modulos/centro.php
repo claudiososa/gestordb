@@ -133,7 +133,9 @@
 					case 13:
 								include("includes/mod_cen/referentes/referente_verEF.php");
 						break;
-
+						case 14:
+										include("includes/mod_cen/referentes/referente_verPersona.php");
+										break;
 
 				}
 				break;
@@ -656,6 +658,9 @@
 						case 27:
 				 					 include("includes/mod_cen/documentos/bst_listarDocumentos.php");
 				 				  	break;
+						case 28:
+										include("includes/mod_cen/informes/bst_new_update_report.php");
+										break;
 
 					}
 					break;

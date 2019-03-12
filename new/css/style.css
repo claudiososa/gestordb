@@ -380,6 +380,15 @@ span.imgInfo{
 }
 
 
+/******************************documentos******************/
+.nav-pills .nav-link.doc.active{
+background-color: #68c2d1;
+}
+
+
+/******************************documentos******************/
+
+
 
 /* modal datos autoridades de institucion */
 

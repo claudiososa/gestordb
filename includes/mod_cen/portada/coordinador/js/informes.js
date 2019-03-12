@@ -12,64 +12,23 @@ function formPersona(informeActual)
           <div class="modal-content">
           <!--**** Inicio de Header **** -->
             <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel"><b>${informeActual.escuelaNombre}</b></h5>
+
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-
-              <h5 class="modal-title" id="myModalLabel"><b>${informeActual.escuelaNombre}</b></h5>
-              <br>
-              <div class="row">
-                <div class="col-md-12">
-                Creado por:${informeActual.nombreAutor} </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12"><img src='./img/perfil/${informeActual.fotoPerfil}'  alt='perfil'  class=' img-responsive img-circle' style= 'width: 65px; height: 65px;' ></div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">Fecha: ${informeActual.fecha}</div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">Cue: ${informeActual.escuelaCue}</div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-              Numero: ${informeActual.escuelaNumero}</div>
-
-              </div>
-
-              <div class="row">
-                <div class="col-md-12">Prioridad: ${informeActual.prioridad}</div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">Titulo: ${informeActual.titulo}</div>
-              </div>
-
-
-              <div class="infoOculta" style="display:none" id="infoOculta${informeActual.informeId}">
-                <div class="row">
-                  <div class="col-md-12">Categoria: ${informeActual.categoria}</div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">Subcategoria:${informeActual.subcategoria}
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">Departamento:</div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-4 col-md-offset-5">
-                  <img class="clickable verMas" id="verMas${informeActual.informeId}" src="includes/mod_cen/escuelas/js/redimensionar.png">
-                </div>
-              </div>
             </div> <!--./modal-header-->
 
 
             <!-- ***** MODAL BODY ****-->
 
             <div class="modal-body" id="modal-body" >
+            <h6><b>Creado por:</b>${informeActual.nombreAutor} </h6><img src='./img/perfil/${informeActual.fotoPerfil}'  alt='perfil'  class=' img-responsive rounded' style= 'width: 65px; height: 65px;' >
+            <h6><b>Fecha:</b> ${informeActual.fecha}, <b>Cue:</b> ${informeActual.escuelaCue}, <b>Prioridad:</b> ${informeActual.prioridad}</h6>
+
+            <h6><b>Titulo:</b> ${informeActual.titulo}</h6>
+              <h6><b>Categoria:</b> ${informeActual.categoria}</h6>
+                <h6><b>Subcategoria:</b> ${informeActual.subcategoria}</h6>
               <form name="form" enctype="multipart/form-data" class="informef" id="formInforme" action="" method="post">
               </form>
             </div>
@@ -86,7 +45,7 @@ function formPersona(informeActual)
               <div id="divButton">
                 <button type="button" class="btn btn-default footerButton" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary footerButton" id="btnSave">Responder</button>
-              </div>
+              </div><br>
               <div id="respuestasContenido"></div>
             </div>
             <!-- **** FIN MODAL FOOTER ****-->
