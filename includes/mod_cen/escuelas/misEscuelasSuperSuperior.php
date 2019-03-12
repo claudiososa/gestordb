@@ -7,7 +7,7 @@
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
     let reports =   '<?php echo $_SESSION['tipo'];?>'
 </script>
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/supervisorSuperior/js/escuelasSuperior.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
@@ -156,6 +156,7 @@ echo "</div>";
       <th>Autoridades</th>
       <th>RTI</th>
       <th>Docs</th>
+      <th>Carreras</th>
     </tr>
   </thead>
 
@@ -212,7 +213,8 @@ echo "</div>";
           echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
         }
 
-        echo '<td id="docs'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="info'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        echo '<td id="docs'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="doc'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        echo '<td id="carrera'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="carr'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
 
         echo '</tr>';
         ?>

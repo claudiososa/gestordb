@@ -15,6 +15,9 @@
 					case 2:
 					    include("includes/mod_cen/admin/programa_escuela.php");
 						break;
+					case 3:
+					    include("includes/mod_cen/admin/carreras_abm.php");
+						break;
 				}
 				break;
 			case "personas":

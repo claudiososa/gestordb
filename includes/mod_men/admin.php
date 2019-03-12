@@ -180,6 +180,20 @@
 
                     </div>
                   </li>
+                  <div class="dropdown-divider"></div>
+
+                  <li class="nav-item">
+                    <a class="nav-link menuAside" href="#"  data-toggle="collapse"  data-target="#sidebarNameCar" aria-controls="sidebarNameDoc" aria-expanded="false" aria-label="sidebarNameDoc"> <span class="oi oi-folder"></span>Carreras
+                    <span class="oi oi-chevron-bottom bottomIconAside"></span>
+                    </a>
+                    <div class="collapse" id="sidebarNameCar">
+                      <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                          <a href="index.php?mod=slat&men=abm&id=3" class="nav-link">Crear/Modif.</a>
+                        </li>                        
+                      </ul>
+                    </div>
+                  </li>
                   <li class="dropdown-divider"></li>
 
                   <li class="nav-item">
