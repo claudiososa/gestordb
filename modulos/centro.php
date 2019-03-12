@@ -130,7 +130,9 @@
 					case 13:
 								include("includes/mod_cen/referentes/referente_verEF.php");
 						break;
-
+						case 14:
+										include("includes/mod_cen/referentes/referente_verPersona.php");
+										break;
 
 				}
 				break;
