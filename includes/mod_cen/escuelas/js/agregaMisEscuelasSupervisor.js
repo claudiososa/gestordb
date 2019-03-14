@@ -72,7 +72,7 @@ $('[id ^=mpredio]').click( function(){
       nombreEtt:"",
       apellidoEtt:"",
       telefonoEtt:""
-          
+
     }
 
     $.ajax({
@@ -83,7 +83,7 @@ $('[id ^=mpredio]').click( function(){
       })
       .done(function(lista) {
         for (let item of lista) {
-          
+
             escuelaDatos.escuelaId=item.escuelaId
             escuelaDatos.nombre=item.nombre
             escuelaDatos.numero=item.numero
@@ -94,11 +94,11 @@ $('[id ^=mpredio]').click( function(){
             escuelaDatos.nombreEtt=item.nombreEtt
             escuelaDatos.apellidoEtt=item.apellidoEtt
             escuelaDatos.telefonoEtt=item.telefonoEtt
-         
+
            //console.log (item.cue)
-           
+
         }
-            
+
 
       })
 
@@ -916,6 +916,7 @@ $('[id ^=mpredio]').click( function(){
 
           $('[id ^=idAuto]').click( function(){
             //alert('hola autoridad')
+          //  console.log('hola autoridad');
               let idAutoridad = $(this).attr('id')
               $('#tipoId').val(idAutoridad)
 
@@ -936,7 +937,7 @@ $('[id ^=mpredio]').click( function(){
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Datos personales</h4>
+                          <h4 class="modal-title">Datossadbk personales</h4>
                         </div>
 
                         <div class="modal-body" id="modal-body" >
@@ -1106,6 +1107,7 @@ $('[id ^=mpredio]').click( function(){
                         $('#txtemail').val('')
                         $('#localidad').val('0')
                       }else{
+                        $('#txtdni').prop('disabled',true);
                         $('#btnEditar').show()
                         $('#statusDni').val('1')
                         console.log('encontrado')
@@ -1120,7 +1122,7 @@ $('[id ^=mpredio]').click( function(){
                           $(' #btnBuscarDni').show()
                           $('#btnEditar').hide()
                           $('#statusDni, #localidad').val('0')
-                          $('#txtdni').val('').focus()
+                          $('#txtdni').val('').focus().prop('disabled',false);
                           $('#txtidpersona, #txtnombre, #txtapellido, #txtcuil, #txttelefonoM, #txtemail').val('')
                         });
 
