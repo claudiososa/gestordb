@@ -294,6 +294,7 @@ function formPersona()
 
     console.log('Estado de update '+update)
 
+
 /////validacion formulario
 function validarpersona(){
           let letras=  /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ_\s]+$/;

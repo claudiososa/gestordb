@@ -23,8 +23,8 @@ echo '<div class="container">';
 	</div>
 
 
-<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=referentes&id=10" style="text-decoration:none">
-	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Buscar RTI</h3></a>
+<div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=escuelas&id=38" style="text-decoration:none">
+	<img class="img-responsive "src="includes/mod_cen/portada/imgPortadas/la-busqueda-de-empleo.png"><h3 align="center">Registrar Escuela Migrada</h3></a>
 </div>
 
 <div class="col-lg-2 col-md-4 col-sm-4"><a href="index.php?mod=slat&men=doc&id=1" style="text-decoration:none">

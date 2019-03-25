@@ -1735,8 +1735,10 @@ $(document).ready(function() {
         //evento al hacer click en el td con id que inicia en row // corresponde a Carreras
         $('[id ^=carr]').on('click', function(){
           
-          let escuelaId = $(this).attr('id').substr(4)
-          console.log('escuelaId de carr'+escuelaId)
+          let escuelaId = $(this).attr('id').substr(7)
+          let atributoIdCarrera = $(this).attr('id')
+
+          //console.log('escuelaId de carrClick'+escuelaId)
           let $this = $(this)
           let existeCarrera = $('.tableCarreras'+escuelaId).attr('class')
       
@@ -1751,14 +1753,14 @@ $(document).ready(function() {
               })
               .done(function(lista) {
                 //alert(lista)
-                let tableinforme = 0
+                let tableCarrera = 0
       
                 for (let item of lista) {
                     tableCarrera=pad(item.escuelaId,4,0)
       
                 }
                 console.log('tableCarrera'+tableCarrera)
-                $('#carr'+escuelaId).parent().parent().after(`<tr class="tableCarreras${tableCarrera} success"><td colspan="6"><table class="table StyleTable1">
+                $('#carr'+escuelaId).parent().parent().after(`<tr class="tableCarreras${tableCarrera} success"><td colspan="8"><table class="table StyleTable1">
                 <thead>
                 <tr class='success'>
                 <th><h4>Carreras</h4></th>
@@ -1775,7 +1777,8 @@ $(document).ready(function() {
               <table id=tableCarreras${tableCarrera} class="table StyleTable1">
       
               <thead>
-              <tr>                    
+              <tr>  
+                    <th>Id</th>                  
                     <th>Nombre</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Cierre</th>
@@ -1793,12 +1796,12 @@ $(document).ready(function() {
                   if (item.id != '0') {
       
                     $('#tableCarreras'+escuelaIdconCero).find('thead').after(`<tbody><tr class="trinformes${escuelaIdconCero}">
-                    <td>${item.id}</td>
+                    <td id="idECarrera${item.id}">${item.id}</td>
                     <td><a id='eInforme' href=''>${item.nombre}</a></td>
                     <td><a id='eInforme' href=''>${item.fecha_inicio}</a></td>
                     <td><a id='eInforme' href=''>${item.fecha_final}</a></td>
                     <td><a id='eInforme' href=''>${item.estado}</a></td>
-                    <td id='${item.escuelaId}'><img class='img-responsive' src='img/iconos/lapiz (4).png'  id='idCarrera${item.idCarrera}'></td>
+                    <td id='${item.escuelaId}'><img class='img-responsive' src='img/iconos/lapiz (4).png'  id='idCarrera${item.id}'></td>
                     </tr>`)
                     //</tbody></table>`)
                     $('.trautoridad'+item.escuelaId).hide()
@@ -1807,7 +1810,7 @@ $(document).ready(function() {
                      $('#tableCarreras'+escuelaIdconCero).find('thead').after(`<tbody><tr class="trinformes${escuelaIdconCero}">
                      <td>${item.id}</td>
                      <td colspan="3">Sin Asignar</td>
-                     <td id='${item.escuelaId}'><img class='img-responsive' src='img/iconos/lapiz (4).png'  id='idAuto${item.idCarrera}'></td>
+                     <td id='${item.escuelaId}'><img class='img-responsive' src='img/iconos/lapiz (4).png'  id='idCarrera${item.idCarrera}'></td>
                      </tr>`)
                   }
                 }
@@ -1816,12 +1819,15 @@ $(document).ready(function() {
       
                 $('[id ^=idCarrera]').click( function(){
                   //alert('hola autoridad')
-                    let idCarrera = $(this).attr('id')
+                    
+                    let idCarrera = $(this).attr('id').substr(9)
+
+                    
                     $('#tipoId').val(idCarrera)
       
                     let escuelaActual= $(this).parent().attr('id')
-      
-                    console.log(idAutoridad)
+                    //let escuelaIdconCero = pad(item.escuelaId,4,0)
+                    console.log(idCarrera)
                     formCarrera()
       
       
@@ -1836,23 +1842,12 @@ $(document).ready(function() {
                             <div class="modal-content">
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Datos personales</h4>
+                                <h4 class="modal-title">Carrera ddddd</h4>
                               </div>
       
                               <div class="modal-body" id="modal-body" >
                               <form action="" method="post" id="form1">
-                                <div class="form-group">
-                                  <div class="col-md-12">
-                                    <div class="col-md-6"><label for="" class="control-label validaciond">Nro. de Documento</label>
-                                    <input  class="form-control" name="txtdni" type="text" maxlength="8" id="txtdni" autofocus="autofocus" required />
-                                    <span class="hide errord">Campo Obligatorio. Ingrese solo números (8)</span>
-                                    </div>
-                                    <div class="col-md-6 buscar"><br>
-                                    <button type="button" class="btn btn-danger" id="btnBuscarDni">Buscar</button>
-      
-                                    </div>
-      
-                                  </div>
+                                <div class="form-group">                                  
                                   <div class="col-md-12">
                                       <input name="txtidpersona" type="hidden" id="statusDni" value="0" />
                                       <input name="txtidpersona" type="hidden" id="txtidpersona" value="" />
@@ -1866,7 +1861,7 @@ $(document).ready(function() {
                                     <label for="" class="control-label validacion">Nombre Carrera</label>
                                   </div>
                                   <div class="col-md-12">
-                                    <select id="selectCarrera">
+                                    <select id="selectCarrera" class="form-control">
                                     </select>
                                   </div>
       
@@ -1877,7 +1872,7 @@ $(document).ready(function() {
                                     <label for="" class="control-label validacionn">Fecha de Inicio</label>
                                   </div>
                                   <div class="col-md-12">
-                                    <input class="form-control" type="text" name="txtnombre" placeholder="Ingrese solo letras" id="txtnombre" class="hades" required />
+                                    <input class="form-control" type="date" id="fechaInicio" class="hades" required />
                                     <span class="hide errorn">Campo Obligatorio. Ingrese solo letras</span>
                                   </div>
                                 </div>
@@ -1887,7 +1882,7 @@ $(document).ready(function() {
                                     <label for="" class="control-label validacionc">Fecha Final</label>
                                   </div>
                                   <div class="col-md-12">
-                                    <input class="form-control" type="number" maxlength="11" placeholder="Ingrese solo Números sin guiones" name="txtcuil" id="txtcuil" class="hades" required/>
+                                    <input class="form-control" type="date"  name="txtcuil" id="fechaFinal" class="hades" required/>
                                     <span class="hide errorc">Campo Obligatorio. Ingrese solo números sin guiones.</span>
                                   </div>
                                 </div>
@@ -1897,22 +1892,77 @@ $(document).ready(function() {
                                     <label for="" class="control-label validacionl">Estado</label>
                                   </div>
                                   <div class="col-md-12">
-                                    <select class="form-control" name="localidad" id="localidad">
+                                    <select class="form-control" name="estado" id="estado">
       
                                     <option value="0">Seleccione...</option>
       
       
-                                    `)
+                                    `)                                    
+
+                                    
+
                                     $.ajax({
-                                      url: 'includes/mod_cen/clases/ajax/ajaxLocalidad.php',
+                                      url: 'includes/mod_cen/clases/ajax/ajaxCarreras.php',
                                       type: 'POST',
                                       dataType: 'json',
-                                      data: {local: 'local'}
+                                      data: {local: 'local',fecha:'fecha',idCarrera:idCarrera}
                                     })
                                     .done(function(lista) {
+                                      
                                       for (let item of lista) {
-                                        $('#localidad').append(`<option value="${item.id}">${item.nombre}</option>`)
+                                        //alert(item.fecha_inicio)  
+                                        //$('#fechaInicio').html(item.final_inicio)
+                                        $('#fechaInicio').val(item.fecha_inicio)
+                                        $('#fechaFinal').val(item.fecha_final)   
                                       }
+                                     
+                                      console.log("successFecha");
+                                    })
+                                    .fail(function() {
+                                      console.log("error");
+                                    })
+                                    .always(function() {
+                                      console.log("complete");
+                                    });
+
+                                    
+
+                                    $.ajax({//trae la lista de carreras posibles, indicando seleccionada la actual
+                                      url: 'includes/mod_cen/clases/ajax/ajaxCarreras.php',
+                                      type: 'POST',
+                                      dataType: 'html',
+                                      data: {local: 'local',listaCarreras:'lista',idCarrera:idCarrera}
+                                    })
+                                    .done(function(dataHtml) {
+                                      //for (let item of lista) {
+                                        $('#selectCarrera').empty()
+                                        console.log(dataHtml)
+                                        //(dataHtml).appendTo('#selectCarrera')
+                                        $('#selectCarrera').append(`${dataHtml}`)
+                                    //$('#selectCarrera').append(`<option value="${item.id}">${item.nombre}</option>`)
+                                      //}
+                                      console.log("successCarreras");
+                                    })
+                                    .fail(function() {
+                                      console.log("error");
+                                    })
+                                    .always(function() {
+                                      console.log("complete");
+                                    });
+
+                                    
+                                    $.ajax({
+                                      url: 'includes/mod_cen/clases/ajax/ajaxCarreras.php',
+                                      type: 'POST',
+                                      dataType: 'html',
+                                      data: {local: 'local',idCarrera:idCarrera,estados:'estados'}
+                                    })
+                                    .done(function(lista) {
+                                      console.log(lista)
+                                      //for (let item of lista) {
+
+                                        $('#estado').empty().append(lista)
+                                      //}
                                       console.log("success");
                                     })
                                     .fail(function() {
@@ -1921,6 +1971,8 @@ $(document).ready(function() {
                                     .always(function() {
                                       console.log("complete");
                                     });
+      
+      
       
       
                                     $("#modal-body").append(`
@@ -1933,29 +1985,34 @@ $(document).ready(function() {
                                 
                               </form>
                               </div>
-                              <div class="modal-footer">                                
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" id="btnSave">Guardar</button>
+                              <div class="modal-footer">                                                                
+                                <button type="button" class="btn btn-primary" id="btnSave">Modificar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                               </div>
                             </div><!-- /.modal-content -->
                           </div><!-- /.modal-dialog -->
                         </div><!-- /.modal -->
                         `)
                       $('#myModal').modal('show')
-                      $('.ctxtnombre, .ctxtapellido, .ctxtcuil, .ctxttelefonoM, .ctxtemail, .clocalidad').hide()
+                      //$('.ctxtnombre, .ctxtapellido, .ctxtcuil, .ctxttelefonoM, .ctxtemail, .clocalidad').hide()
                       $('#myModal').on('hide.bs.modal', function(){
                         $('#myModal').remove()
                       })
       
                       $('#myModal').on('shown.bs.modal', function(){
                         $('#txtdni').focus()
+
+                        function validarCarrera(){
+                          return true;
+                        }
+                        
       
                         let camposOcultos = $('.ctxtnombre, .ctxtapellido, .ctxtcuil, .ctxttelefonoM, .ctxtemail, .clocalidad')
                         let escuelaId = $('#txtescuelaid').val()
                         console.log('desde txtescuelaid'+escuelaId)
                         let tipoId = $('#tipoId').val().substr(6)
                         $('#btnEditar').hide()
-                          $('#btnSave').hide()
+                          //$('#btnSave').hide()
                         //let idPrueba = $(this).attr('id');
                         //let tipoId = $('#idAuto').attr('id')
       
@@ -1973,7 +2030,7 @@ $(document).ready(function() {
                             if (item.id=='0') {
                               console.log('no encontrado')
                               //  $('#btnSave').show()
-                              camposOcultos.hide()
+                              //camposOcultos.hide()
                               // $('#btnEditar').hide()
                               // $('#btnSave').hide()
                               $('#statusDni').val('0')
@@ -1995,7 +2052,7 @@ $(document).ready(function() {
       
                               $('#btnNew').click(function(event) {
                                 $(this).hide()
-                                camposOcultos.hide()
+                                //camposOcultos.hide()
                                 $(' #btnBuscarDni').show()
                                 $('#btnEditar').hide()
                                 $('#statusDni, #localidad').val('0')
@@ -2028,53 +2085,44 @@ $(document).ready(function() {
                         });
                       })
       
-                      $('#btnSave, #btnEditar').on('click',function(){
-                        console.log('boton guardar')
-                             let id = $('#txtidpersona').val()
-                        let nombre = $('#txtnombre').val()
-                        let apellido = $('#txtapellido').val()
-                        let cuil = $('#txtcuil').val()
-                        let telefonoM = $('#txttelefonoM').val()
-                        let email = $('#txtemail').val()
-                        let localidad = $('#localidad').val()
-                        let txtdni = $('#txtdni').val()
-                        let escuelaId = $('#txtescuelaid').val()
-                        let tipoId = $('#tipoId').val()
-                        //let tipoId = $('#modulo').val()
-                        console.log('txtdni' + txtdni)
-                        let update = $('#statusDni').val()
+                      $('#btnSave').on('click',function(){
+                        console.log('boton Modificar')
+                        console.log($('#estado').val())
+                        let carreraId = $('#selectCarrera').val()
+                        //let carrera = $('#selectCarrera').val()
+                        let fechaInicio = $('#fechaInicio').val()
+                        let fechaFinal = $('#fechaFinal').val()
+                        let estado = $('#estado').val()
       
-                        console.log('Estado de update '+update)
-      
-      
-                          ////////////////////////////////////////////////
-                    if (validarpersona()) {
-                //   alert ('validacion correcta')
-      
-                      let tipoIdSave = $('#tipoId').val().substr(6)
-      
+                        ////////////////////////////////////////////////
+                    //if (validarCarrera()) {
+                      
+                      //console.log($('#estado').val())
+                      //let fechaInicio = $('#fechaInicio').val()
+                      //let fechaFinal = $('#fechaFinal').val()
+                      //let estado = $('#estado').val()
+
                         $.ajax({
-                          url: 'includes/mod_cen/clases/ajax/ajaxPersona.php',
+                          url: 'includes/mod_cen/clases/ajax/ajaxCarreras.php',
                           type: 'POST',
                           dataType: 'json',
                           data: {
                                 btnSave:'btnSave',
-                                escuelaId:escuelaId,
-                                tipoId:tipoIdSave,
-                                update: update,
-                                personaId:id,
-                                nombre:nombre,
-                                apellido:apellido,
-                                txtdni:txtdni,
-                                cuil:cuil,
-                                telefonoM:telefonoM,
-                                email:email,
-                                localidad:localidad}
+                                escuelaCarreraId:idCarrera,
+                                escuelaId:escuelaId,                                
+                                carreraId:carreraId,
+                                fechaInicio:fechaInicio,
+                                fechaFinal:fechaFinal,
+                                estado:estado
+                                }
                         })
-                        .done(function(lista) {
-      
-      
+                        .done(function(lista) {                                 
+                          
+
+                          $(`#${atributoIdCarrera}`).click();
                           for (let item of lista) {
+
+                            
                             if (item.status=='new') {
       
       
@@ -2083,6 +2131,7 @@ $(document).ready(function() {
                               console.log('se actualizo con exito')
                             }
                               //$('#myModal').remove()
+
                               $('#myModal').modal('hide')
       
                           }
@@ -2095,7 +2144,7 @@ $(document).ready(function() {
                           console.log("complete");
                         });
       
-                    }
+                   // }
                         //$('#myModal').remove()
                         //$('#myModal').hide()
       
@@ -2426,7 +2475,7 @@ $(document).ready(function() {
       
                               $('#btnNew').click(function(event) {
                                 $(this).hide()
-                                camposOcultos.hide()
+                                //camposOcultos.hide()
                                 $(' #btnBuscarDni').show()
                                 $('#btnEditar').hide()
                                 $('#statusDni, #localidad').val('0')

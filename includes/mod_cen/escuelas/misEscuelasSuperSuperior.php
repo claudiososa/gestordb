@@ -7,8 +7,8 @@
     let tipoR = '<?php echo $_SESSION['tipo'];?>'
     let reports =   '<?php echo $_SESSION['tipo'];?>'
 </script>
-<script type="text/javascript" src="includes/mod_cen/portada/supervisorSuperior/js/escuelasSuperior.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/validarMisEscuelasSnp.js?v=<?php echo(rand()); ?>"></script>
+<script type="text/javascript" src="includes/mod_cen/portada/supervisorSuperior/js/escuelasSuperior.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/informeNuevo.js?v=<?php echo(rand()); ?>"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js?v=<?php echo(rand()); ?>"></script>
 
