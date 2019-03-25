@@ -1,5 +1,5 @@
 
-<script type="text/javascript" src="includes/mod_cen/escuelas/js/ajax.js"></script>
+<script type="text/javascript" src="includes/mod_cen/escuelas/js/registrarMigracion.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="includes/mod_cen/escuelas/js/agregaMisEscuelasSupervisor.js"></script>
@@ -54,13 +54,15 @@ if(($_POST)){
     <?php
         while ($row = mysqli_fetch_object($resultado)){
             echo "<tr>";
-            echo "<td>$row->escuelaId</td>";
-            echo "<td>$row->numero</td>";
-            echo "<td>$row->cue</td>";
-            echo "<td>$row->nombre</td>";
-            echo "<td><button class='btn btn-warning'>Registrar</button></td>";
+            echo "<td class='id'>$row->escuelaId</td>";
+            echo "<td class='numero'>$row->numero</td>";
+            echo "<td class='cue'>$row->cue</td>";
+            echo "<td class='nombre'>$row->nombre</td>";
+            echo "<td><button id='registrar$row->escuelaId' data-toggle='modal' data-target='#modalRegistrar' class='btn btn-warning'>Registrar</button></td>";
             echo "</tr>";
         }
+
+        
         ?>
     </table>
     <?php
@@ -69,3 +71,53 @@ if(($_POST)){
 	$escuela=new Escuela(NULL);
 }
 ?>
+
+<div class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+		<!--**** Inicio de Header **** -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+				<h4 class="modal-title" id="myModalLabel">Formulario de registración de migración
+				<br>
+				</h4>
+
+			</div><!--./modal-header-->
+
+
+			<!-- ***** MODAL BODY ****-->
+
+			<div class="modal-body" id="modal-body" >
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <div class='col-md-12 alert alert-success'>Datos de Escuela</div>                            
+                            <div class='col-md-6'>Numero:<br><input class='form-control' type="text" id="numero" name="numero" value=""></div>
+                            <div class='col-md-6'>Cue:<br><input class='form-control' type="text" id="cue" name="cue" value=""></div>                        
+                            <div class='col-md-12'>Escuela:<br><input class='form-control' type="text" id="nombre" name="nombre"  value=""></div>
+                    </div>        
+                    <div class='col-md-12 alert alert-success'>
+                        <div class='col-md-12 alert alert-success'>Fecha y observaciones</div>                            
+                        <div class='col-md-12'>Fecha:<br><input class='form-control' type="date" name="date"  value=""></div>
+                        <div class='col-md-12'>Observaciones:<br><textarea class='form-control' name="observaciones" rows="4" cols="50"></textarea></div>
+                    </div>    
+                </div>
+			</div>
+			<!-- **** FIN MODAL BODY ****-->
+			<!-- **** INICIO MODAL FOOTER ****-->
+
+			<div class="modal-footer" id="modal-footer">
+
+				<div id="divButton">
+					<!-- <button type="button" class="btn btn-default footerButton" data-dismiss="modal">Cerrar</button> -->
+                    <button type="button" class="btn btn-primary" id="guardarMigracion">Guardar</button>
+				</div>
+				<div id="respuestasContenido"></div>
+			</div>
+			<!-- **** FIN MODAL FOOTER ****-->
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
