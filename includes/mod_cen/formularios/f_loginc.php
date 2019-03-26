@@ -6,12 +6,12 @@
 		<div class="form-group">
 			<div class="row page-titles">
 				<div class="col-md-5 col-8 align-self-center">
-					<h5 class=" m-b-0 m-t-0">Login como Referente</h5>
+					<h5 class=" m-b-0 m-t-0 text-secondary">Login como Referente</h5>
 
 				</div>
 
 			</div>
-				
+
 			</div>
 			<div class="form-group">
 				<div class="col-md-3">

@@ -133,7 +133,7 @@ $b_mis_informe = $mis_informes->buscar(10);
   <div class="container-fluid">
     <div class="row page-titles">
       <div class="col-md-5 col-8 align-self-center">
-        <h5 class=" m-b-0 m-t-0">Búsqueda de Escuelas</h5>
+        <h5 class=" m-b-0 m-t-0 text-secondary">Búsqueda de Escuelas</h5>
 
       </div>
 
@@ -170,16 +170,16 @@ $b_mis_informe = $mis_informes->buscar(10);
       <div id='accordionBuscar3'>
           <h3>Actualizacion de Servidores</h3>
           <div>
-           <?php              
+           <?php
               $escuelaAs = new EscuelaReferentes(null,null,'48');
-              while ($fila = mysqli_fetch_object($listaReferenteAs) ) {                
-                $escuelaAs->referenteId=$fila->referenteId;                
+              while ($fila = mysqli_fetch_object($listaReferenteAs) ) {
+                $escuelaAs->referenteId=$fila->referenteId;
                 $misEscuelas=mysqli_num_rows($escuelaAs->buscar());
                 echo "<a id='as$fila->referenteId'>$fila->nombre $fila->apellido <b>($misEscuelas)</b><br><br></a>";
                 echo "<div>";
                 echo "<table  style='display:none;' id='divAs$fila->referenteId' border='1' ><tr><td>Numero</td><td>CUE</td><td>Nombre</td></tr></table>";
                 echo "</div>";
-                
+
                 //echo "<div ></div>";
               }
             ?>
@@ -229,11 +229,11 @@ $b_mis_informe = $mis_informes->buscar(10);
                 echo $row->nombre.'<br>'.$row->cue.'<br>';
                 echo 'ULTIMOS 5 INFORMES<br>';
               }
-              
+
             }
 
           ?>
-            
+
           </div>
 
       </div>

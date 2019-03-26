@@ -9,7 +9,7 @@ body{
  navbar
  ******************* */
 nav{
-  background-color: #e8d1b8;
+  background-color: #074684;
 
 }
 .navbar-light .navbar-nav .nav-link {
@@ -26,10 +26,10 @@ button.navbar-toggler.menuBtn{
 span.textOffMenu{
   color: #6b6b6b;
 }
-span.oi.oi-power-standby{
+/* span.oi.oi-power-standby{
   color:#6b6b6b;
   padding-right: 5px;
-}
+} */
 
 .nav-link{
   color: #6b6b6b;
@@ -90,7 +90,7 @@ sidebar navigation
 
 }
 .sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
-          color:#E8D1B8;
+          color:#074684;
           /* background-color: red; */
 }
 .sidebar-nav ul li a.active {
@@ -147,6 +147,17 @@ sidebar navigation
 } */
 
 
+/********************
+footer
+********************/
+span.iconFooter{
+  color: #074684;
+
+}
+
+/********************
+footer
+********************/
 
 /*******************
 sidebar footer
@@ -280,8 +291,8 @@ box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 /* filtro */
 
 .filtro{
-  background-color: #e8d1b8;
-  color: #6b6b6b;
+  background-color: #eef5f9;
+  color: #074684;
 }
 
 .form-inline .form-group{
@@ -300,7 +311,7 @@ box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 
 /********formularios input search******/
 .search:focus{
-  border-color: #e8d1b8;
+  border-color: #eef5f9;
   box-shadow: 0 0 0 0.2rem rgb(248,249,250);
 
 }
@@ -316,8 +327,8 @@ box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
 /* boton peach */
-.btn-outline-primary.peach {
-    color: #F8F9FA;
+.btn-outline-light.peach {
+    color: #074684;
     background-color: transparent;
     background-image: none;
     border-color: #ced4da;
@@ -327,7 +338,7 @@ box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 
 }
 
-.btn-outline-primary.peach:hover {
+.btn-outline-light.peach:hover {
     color: #495057;
     background-color: #ECEAEB;
     border-color: #ECEAEB;
@@ -343,9 +354,10 @@ box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
 span.oi.oi-magnifying-glass.searchIcon,
-span.oi.oi-cog,
+/* span.oi.oi-cog,
 span.oi.oi-lock-locked,
-span.oi.oi-power-standby{
+span.oi.oi-power-standby */
+{
   color: #7a7a7a;
 }
 /* boton peach */
