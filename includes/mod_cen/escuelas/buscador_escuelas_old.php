@@ -35,7 +35,7 @@ include_once("includes/mod_cen/clases/CompartePredio.php");
   <div class="container-fluid">
     <div class="row page-titles">
       <div class="col-md-5 col-8 align-self-center">
-        <h5 class=" m-b-0 m-t-0">Búsqueda de Escuelas</h5>
+        <h5 class=" m-b-0 m-t-0 text-secondary">Búsqueda de Escuelas</h5>
 
       </div>
 

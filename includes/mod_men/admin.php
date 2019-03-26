@@ -13,7 +13,7 @@
                   <!-- Logo icon --><b>
 
                       <!-- Logo icon -->
-                      <img src="new/img/letra4.png" width="80px" height="50px" alt="">
+                      <img src="new/img/text.png" width="80px" height="50px" alt="">
                   </b>
                   <!--End Logo icon -->
                </a>
@@ -205,11 +205,11 @@
         <!-- End Sidebar scroll-->
         <!-- Bottom points-->
         <div class="sidebar-footer">
-          <?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."' class='link' data-toggle='tooltip' title='Settings'>";?><span class="oi oi-cog"></span></a>
-          <?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."' class='link' data-toggle='tooltip' title='pass'>";?><span class="oi oi-lock-locked"></span></a>
+          <?php echo "<a href='index.php?mod=slat&men=personas&id=3&personaId=".$_SESSION['personaId']."' class='link' data-toggle='tooltip' title='Editar perfil'>";?><span class="oi oi-cog iconFooter"></span></a>
+          <?php echo "<a href='index.php?mod=slat&men=personas&id=6&personaId=".$_SESSION['personaId']."' class='link' data-toggle='tooltip' title='Cambiar contraseña'>";?><span class="oi oi-lock-locked iconFooter"></span></a>
 
           <!-- <a href="index.php?men=mensajes&id=2" class="link" data-toggle="tooltip" title="Email"><span class="oi oi-envelope-closed"></span></a> -->
-          <a href="index.php?men=user&id=1" class="link" data-toggle="tooltip" title="Logout"><span class="oi oi-power-standby"></span></a>
+          <a href="index.php?men=user&id=1" data-toggle="tooltip" data-placement="top" title="Cerrar Sesion"class="link" ><span class="oi oi-power-standby iconFooter"></span></a>
         </div>
         <!-- End Bottom points-->
 

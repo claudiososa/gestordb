@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row page-titles">
       <div class="col-md-5 col-8 align-self-center">
-        <h5 class=" m-b-0 m-t-0">Búsqueda de Escuelas</h5>
+        <h5 class=" m-b-0 m-t-0 text-secondary">Búsqueda de Escuelas</h5>
 
       </div>
 
@@ -11,11 +11,14 @@
 
     <!-- contenido de buscador -->
     <div class="row">
-      <div class="col-lg-4 col-xlg-3 col-md-5">
+      <!-- <div class="col-1 px-0 py-0">
+        <span class="oi oi-caret-right"></span>
+      </div> -->
+      <div class="col-lg-4 col-xlg-3 col-md-4 px-0 py-0">
         <div class="card">
           <div class="card-body">
             <div class="filtro pb-3 pt-3 pl-2 pr-2">
-              <h6>Buscá escuela por N°, nombre o CUE</h6>
+              <h6 class="mb-0">Buscá escuela por N°, nombre o CUE</h6>
 
             </div>
 
@@ -23,7 +26,7 @@
               <div class="input-group mt-2">
                 <input type="search" class="form-control form-control-lg mr-sm-2 search" placeholder="Número" aria-label="Search">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-primary peach btn-lg" type="submit"><span class="oi oi-magnifying-glass searchIcon"></span> </button>
+                  <button class="btn btn-outline-light peach btn-lg" type="submit"><span class="oi oi-magnifying-glass searchIcon"></span> </button>
                 </div>
               </div>
 
@@ -32,7 +35,7 @@
               <div class="input-group mt-2">
                 <input type="search" class="form-control form-control-lg mr-sm-2 search" placeholder="CUE" aria-label="Search">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-primary peach btn-lg" type="submit">
+                  <button class="btn btn-outline-light peach btn-lg" type="submit">
                   <!-- <img onmouseout="this.src='new/img/lupa.png';"onmouseover="this.src='new/img/lupa1.png';"src="new/img/lupa.png">  -->
                   <span class="oi oi-magnifying-glass searchIcon"></span>
                 </button>
@@ -44,7 +47,7 @@
               <div class="input-group mt-2">
                 <input type="search" class="form-control form-control-lg mr-sm-2 search" placeholder="Nombre" aria-label="Search">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-primary peach btn-lg" type="submit"><span class="oi oi-magnifying-glass searchIcon"></span></button>
+                  <button class="btn btn-outline-light peach btn-lg" type="submit"><span class="oi oi-magnifying-glass searchIcon"></span></button>
                 </div>
               </div>
 
@@ -52,12 +55,12 @@
 
             <!-- busqueda avanzada -->
             <div class="filtro pb-3 pt-3 pl-2 pr-2 mt-2">
-              <h6>Buscá escuelas por departamentos</h6>
+              <h6 class="mb-0">Buscá escuelas por departamentos</h6>
 
             </div>
             <form class="form-inline">
               <div class="form-group mt-2">
-              <select name="departamento" id="departamento" class="custom-select custom-select-lg">
+              <select name="departamento" id="departamento" class="custom-select custom-select-lg search">
                 <option value="0">Seleccione departamento</option>
                 <option value="todos">Toda la provincia</option>
                 <?php
@@ -77,7 +80,7 @@
             <form class="form-inline">
               <!-- <div class="form-group mt-2"> -->
                 <div class="form-group mt-2" id="divLocalidad" style="display:none">
-                  <select class="custom-select custom-select-lg" name="localidad" id="localidad">
+                  <select class="custom-select custom-select-lg search" name="localidad" id="localidad">
                       <!-- <option value="0">Seleccione localidad</option> -->
                       <option value="todos">Todas las localidades</option>
                   </select>
@@ -85,7 +88,7 @@
            </form>
             <form class="form-inline">
               <div class="form-group mt-2" id="divNivel" style="display:none">
-                <select class="custom-select custom-select-lg" name="nivel" id="nivel">
+                <select class="custom-select custom-select-lg search" name="nivel" id="nivel">
                     <!-- <option value="0">Seleccione localidad</option> -->
                     <option value="todos">Todas los Niveles</option>
                 </select>
@@ -102,7 +105,7 @@
 
 
       <!-- contenido -->
-      <div class="col-lg-8 col-xlg-9 col-md-7">
+      <div class="col-lg-7 col-xlg-8 col-md-8">
         <div class="card">
           <div class="card-body">
             <!-- resultados de busqueda -->
@@ -153,7 +156,7 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="director" role="tabpanel" aria-labelledby="home-tab">
               <div class="card">
-                <div class="card-body">
+                <div class="card-body px-1 py-1">
                   <span class="oi oi-person modalIcon"> Nombre y apellido</span>
                   <br>
                   <span class="oi oi-phone modalIcon">3875565</span>
