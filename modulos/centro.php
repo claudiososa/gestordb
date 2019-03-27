@@ -333,7 +333,7 @@
 									include("includes/mod_cen/escuelas/buscador_escuelas_old.php");
 									break;
 						case 38:
-									include("includes/mod_cen/escuelas/registrarEscuelaMigrada.php");
+									include("includes/mod_cen/migracion_servidores/php/registrar_escuela_migrada.php");
 									break;			
 
 

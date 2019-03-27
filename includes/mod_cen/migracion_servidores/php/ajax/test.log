@@ -1,0 +1,12 @@
+array(5) {
+  ["ajaxGuardarMigracion"]=>
+  string(0) ""
+  ["referenteId"]=>
+  string(4) "0275"
+  ["escuelaId"]=>
+  string(0) ""
+  ["dateMigracion"]=>
+  string(10) "2019-03-09"
+  ["observaciones"]=>
+  string(10) "cassssssss"
+}
