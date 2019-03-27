@@ -3,19 +3,19 @@
 		<form action='' method='POST'>
 		  <div class="form-group">
 		    <label>Número</label>
-		    <input type="text" class="form-control"  name="numero" placeholder="Ingrese número" autofocus>
+		    <input type="text" class="form-control search"  name="numero" placeholder="Ingrese número" autofocus>
 
 		  </div>
 		  <div class="form-group">
 		    <label >Cue</label>
-		    <input type="text" class="form-control" name="cue" placeholder="Ingrese CUE">
+		    <input type="text" class="form-control search" name="cue" placeholder="Ingrese CUE">
 		  </div>
 			<div class="form-group">
 				<label >Nombre</label>
-				<input type="text" class="form-control" name="nombre" placeholder="Ingrese Nombre">
+				<input type="text" class="form-control search" name="nombre" placeholder="Ingrese Nombre">
 			</div>
 			<div class="form-group">
-				<label >Departamento</label>
+				<label class="search" >Departamento</label>
 				<?php
 				 $departamento= new Departamentos();
 				 $total=$departamento->getTotal();?>
