@@ -35,6 +35,7 @@ include_once "includes/mod_cen/clases/leido.php" ;
 include_once "includes/mod_cen/clases/respuesta.php" ;
 include_once "includes/mod_cen/clases/rtixescuela.php";
 include_once "includes/mod_cen/clases/rti.php";
+include_once "includes/mod_cen/clases/EscuelaCarrera.class.php";
 ?>
 
 <!----------------------------------------------------------------------------->
@@ -155,7 +156,7 @@ echo "</div>";
       <th>Informes</th>
       <th>Autoridades</th>
       <th>RTI</th>
-      <th>Docs</th>
+      <!-- <th>Docs</th> -->
       <th>Carreras</th>
     </tr>
   </thead>
@@ -168,6 +169,7 @@ echo "</div>";
       $buscarEscuelas = $escuelasCargo->buscar();
 
       $escuela = new Escuela();
+      
 
       while ($row = mysqli_fetch_object($buscarEscuelas)) {
 
@@ -185,6 +187,10 @@ echo "</div>";
         $buscarInforme= $informe->buscar(null,null,$arrayReferente);
         //var_dump($buscarInforme);
         $cantidadInforme = mysqli_num_rows($buscarInforme);
+        
+        $escuela_carrera = new EscuelaCarrera(null,$row->escuelaId);
+
+        $cantidadCarrera = $escuela_carrera->buscarEscuelaCarrera(null,'cantidad');       
         
         $autoridad = new Autoridades(null,$row->escuelaId);
         $buscarAutoridad = $autoridad->buscarAutoridad3('all');
@@ -213,8 +219,8 @@ echo "</div>";
           echo '<td id="tecnico'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-success" name="button">'.$cantidadRti.' </button><span id="verRti'.$infoEscuela->escuelaId.'" class="pull-right clickable"></span></td>';
         }
 
-        echo '<td id="docs'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="doc'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
-        echo '<td id="carrera'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="carr'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        // echo '<td id="docs'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="doc'.$infoEscuela->escuelaId.'" name="button">'.$cantidadInforme.'</button></td>';
+        echo '<td id="carrera'.$infoEscuela->escuelaId.'"><button type="button" class="btn btn-warning" id="carr'.$infoEscuela->escuelaId.'" name="button">'.$cantidadCarrera.'</button></td>';
 
         echo '</tr>';
         ?>

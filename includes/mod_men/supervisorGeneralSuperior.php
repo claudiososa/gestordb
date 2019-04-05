@@ -26,6 +26,15 @@
                 <li ><a href="index.php?mod=slat&men=referentes&id=10">RTI</a></li>
           </ul>
         </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Carreras<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+                <li><a href="index.php?mod=slat&men=abm&id=3">Administrar Carreras</a></li>
+                <li ><a href="index.php?mod=slat&men=abm&id=4">Asignar Carrera a Instituto</a></li>                
+                <li ><a href="index.php?mod=slat&men=abm&id=5">Ver todas las carreras registradas</a></li>                
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentos<span class="caret"></span></a>
           <ul class="dropdown-menu">

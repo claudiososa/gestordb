@@ -18,6 +18,12 @@
 					case 3:
 					    include("includes/mod_cen/admin/carreras_abm.php");
 						break;
+					case 4:
+					    include("includes/mod_cen/admin/carrera_escuela.php");
+						break;
+					case 5:
+					    include("includes/mod_cen/admin/carrera_ver.php");
+						break;
 				}
 				break;
 			case "personas":

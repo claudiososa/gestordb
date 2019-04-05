@@ -524,6 +524,35 @@ class Escuela
 			return $conexion->query($sentencia);
 		}else{
 			return '0';
+		}		
+	}
+
+	public function buscarCarreras($programa_id=null)
+	{
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		
+
+		$sentencia="SELECT escuelas.escuelaId,
+						   escuelas.numero,
+						   escuelas.cue,
+						   escuelas.nombre,
+						   escuelas_carreras.carrera_id,
+						   escuelas_carreras.estado 
+					FROM escuelas
+					LEFT JOIN escuelas_carreras
+					ON escuelas_carreras.escuelaId = escuelas.escuelaId AND escuelas_carreras.carrera_id=$programa_id
+					WHERE escuelas.numero = $this->numero";
+		
+		$resultado = $conexion->query($sentencia);
+		$cant = mysqli_num_rows($resultado);
+		//return $sentencia;
+		// $count = mysqli_num_rows($conexion->query($sentecia));
+		if ($cant > 0) {
+			return $conexion->query($sentencia);
+		}else{
+			return '0';
 		}
 		
 		

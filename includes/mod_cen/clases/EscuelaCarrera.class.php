@@ -23,8 +23,9 @@ class EscuelaCarrera
 
 	public function agregar(){
 		$bd=Conexion2::getInstance();
-		$sentencia = "INSERT INTO escuelas_carrerass (id,escuelaId,carrera_id,fecha_inicio,fecha_final,estado)
-							 VALUES (NULL,'$this->escuelaId','$this->carrera_id','$this->fecha_inicio','$this->fecha_final','$this->estado',)";		
+		$sentencia = "INSERT INTO escuelas_carreras (id,escuelaId,carrera_id,fecha_inicio,fecha_final,estado)
+							 VALUES (NULL,'$this->escuelaId','$this->carrera_id','$this->fecha_inicio','$this->fecha_final','$this->estado')";		
+		//return $sentencia;
 		if ($bd->ejecutar($sentencia)) {
 			return $ultimoId=$bd->lastID();
 		}else{
@@ -60,7 +61,81 @@ class EscuelaCarrera
 		}
     }
     
-    
+	
+	public function buscarEscuelaCarrera($limit=NULL,$count=NULL,$unico=NULL)
+	{
+        $bd=conexion2::getInstance();
+        
+		if (!isset($unico)) {
+			$sentencia="SELECT escuelas.nombre,escuelas.escuelaId,escuelas.numero,escuelas.cue,
+							   escuelas_carreras.escuelaId,carreras.id,
+							   carreras.nombre AS nombreCarrera,
+							   escuelas_carreras.fecha_inicio,
+							   escuelas_carreras.fecha_final,
+							   escuelas_carreras.estado
+			FROM escuelas_carreras
+			INNER JOIN escuelas
+			ON escuelas.escuelaId = escuelas_carreras.escuelaId
+			INNER JOIN carreras
+			ON carreras.id = escuelas_carreras.carrera_id";
+
+			if($this->id!=NULL || $this->escuelaId!=NULL || $this->carrera_id!=NULL || $this->fecha_inicio!=NULL || $this->fecha_final!=NULL || $this->estado!=NULL)
+			{
+				$sentencia.=" WHERE ";
+
+
+			if($this->id!=NULL)
+			{
+				$sentencia.=" id = $this->id && ";
+			}
+
+			if($this->escuelaId!=NULL)
+			{
+				$sentencia.=" escuelas_carreras.escuelaId = $this->escuelaId  && ";
+            }
+            
+            if($this->carrera_id!=NULL)
+			{
+				$sentencia.=" carrera_id = $this->carrera_id  && ";
+            }
+            
+            if($this->fecha_inicio!=NULL)
+			{
+				$sentencia.=" fecha_inicio = '$this->fecha_inicio'  && ";
+            }
+            
+            if($this->fecha_final!=NULL)
+			{
+				$sentencia.=" fecha_final = '$this->fecha_final'  && ";
+            }
+            
+            if($this->estado!=NULL)
+			{
+				$sentencia.=" estado = '$this->estado'  && ";
+			}
+			
+
+			$sentencia=substr($sentencia,0,strlen($sentencia)-3);
+
+			}
+
+			$sentencia.="  ORDER BY escuelas.numero ASC";
+			if(isset($limit)){
+				$sentencia.=" LIMIT ".$limit;
+			}
+			//return $sentencia;
+			if (isset($count)) {
+				return mysqli_num_rows($bd->ejecutar($sentencia));# code...
+			}else{
+				return $bd->ejecutar($sentencia);
+			}
+		} else {
+			$sentencia="SELECT * FROM escuelas_carreras WHERE id=$this->id";
+			
+			return $bd->ejecutar($sentencia);
+		}	    
+	}
+
 	public function buscar($limit=NULL,$count=NULL,$unico=NULL)
 	{
         $bd=conexion2::getInstance();
@@ -73,7 +148,7 @@ class EscuelaCarrera
                         escuelas_carreras.estado
                         FROM escuelas_carreras
                         INNER JOIN carreras
-                        ON carreras.id = escuelas_carreras.carrera_id";
+						ON carreras.id = escuelas_carreras.carrera_id";
 
 			if($this->id!=NULL || $this->escuelaId!=NULL || $this->carrera_id!=NULL || $this->fecha_inicio!=NULL || $this->fecha_final!=NULL || $this->estado!=NULL)
 			{
@@ -129,11 +204,7 @@ class EscuelaCarrera
 			$sentencia="SELECT * FROM escuelas_carreras WHERE id=$this->id";
 			
 			return $bd->ejecutar($sentencia);
-		}
-		
-	    
-
-
+		}	    
 	}
 
 	public function __get($var)
