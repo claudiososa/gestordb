@@ -241,7 +241,7 @@ echo '<div class="container">';
 							{
 								$informe_ett= new informe(null,null,$fila->referenteId);
 
-								$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$fila->referenteId,null,$_SESSION['referenteId']);
+								$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2019',null,$fila->referenteId,null,$_SESSION['referenteId']);
 								$totalNoLeidos= mysqli_num_rows($informesNoLeidos);
 								$buscar   = ' ';
 								$pos = strpos($fila->apellido, $buscar);
@@ -263,16 +263,16 @@ echo '<div class="container">';
 					while ($fila=mysqli_fetch_object($ett2))
 					{
 						$informe_ett= new informe(null,null,$fila->referenteId);
-						$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2018',null,$fila->referenteId,null,$_SESSION['referenteId']);
+						$informesNoLeidos = $informe_ett->summary('noLeido',null,null,null,null,'2019',null,$fila->referenteId,null,$_SESSION['referenteId']);
 						echo "<div id='tabs-$fila->referenteId'>";
 						$leido = new Leido(null,null,$_SESSION['referenteId']);
-						$buscar_alta =$informe_ett->summary('año',null,null,null,null,'2018','Alta',$fila->referenteId);
+						$buscar_alta =$informe_ett->summary('año',null,null,null,null,'2019','Alta',$fila->referenteId);
 						$totalAlta = mysqli_num_rows($buscar_alta);
-						$buscar_media =$informe_ett->summary('año',null,null,null,null,'2018','Media',$fila->referenteId);
+						$buscar_media =$informe_ett->summary('año',null,null,null,null,'2019','Media',$fila->referenteId);
 						$totalMedia = mysqli_num_rows($buscar_media);
-						$buscar_normal = $informe_ett->summary('año',null,null,null,null,'2018','Normal',$fila->referenteId);
+						$buscar_normal = $informe_ett->summary('año',null,null,null,null,'2019','Normal',$fila->referenteId);
 						$totalNormal = mysqli_num_rows($buscar_normal);
-						$actual = $informe_ett->summary('año',null,null,null,null,'2018',null,$fila->referenteId);
+						$actual = $informe_ett->summary('año',null,null,null,null,'2019',null,$fila->referenteId);
 						$cantidadActual=mysqli_num_rows($actual);
 						$cantidadNoLeidos=mysqli_num_rows($informesNoLeidos);
 
@@ -535,12 +535,12 @@ echo '<div class="container">';
 	echo '<div class="row">';
 	?>
 	<!-- <div class="col-md-12 hidden-xs">
-			<p class="alert alert-success">Presentación Proyecto trabajo 2018</p>
+			<p class="alert alert-success">Presentación Proyecto trabajo 2019</p>
 			<iframe allowFullScreen frameborder="0" height="564" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="640"></iframe>
 			 <p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
 		</div>
 		<div class="col-md-12 visible-xs">
-		 <p class="alert alert-success">Presentación Proyecto trabajo 2018</p>
+		 <p class="alert alert-success">Presentación Proyecto trabajo 2019</p>
 		 <iframe allowFullScreen frameborder="0" height="240" mozallowfullscreen src="https://player.vimeo.com/video/258948009" webkitAllowFullScreen width="320"></iframe>
 			<p><a href="https://vimeo.com/user72995653">Mensaje para el equipo</a></p>
 	</div> -->
