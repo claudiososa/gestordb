@@ -340,7 +340,10 @@
 									break;
 						case 38:
 									include("includes/mod_cen/migracion_servidores/php/registrar_escuela_migrada.php");
-									break;			
+									break;		
+						case 39:
+									include("includes/mod_cen/escuelas/escuela_buscar_superior.php");
+									break;				
 
 
 
@@ -670,6 +673,9 @@
 						case 28:
 										include("includes/mod_cen/informes/bst_new_update_report.php");
 										break;
+						case 29:
+							include("includes/mod_cen/informes/calendarByMonthSup.php");
+						break;
 
 					}
 					break;

@@ -96,7 +96,8 @@ class Referente
 
 	}
 
-	public function buscarRef($tipo=NULL,$etj=NULL){
+	public function buscarRef($tipo=NULL,$etj=NULL,$sup=NULL){
+		
 		$nuevaConexion=new Conexion();
 		$conexion=$nuevaConexion->getConexion();
 		if(isset($tipo)<>null){
@@ -104,7 +105,12 @@ class Referente
 			WHERE tipo='".$tipo."' AND estado='Activo' ORDER BY apellido ASC";
 		}elseif(isset($etj)<>null){
 			$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido FROM referentes inner join personas on referentes.personaId=personas.personaId
-			WHERE etjcargo=".$etj." AND estado='Activo' ORDER BY apellido ASC";
+			WHERE etjcargo=".$etj." AND estado='Activo' ORDER BY apellido ASC";		
+		
+		}elseif(isset($sup)<>null){
+			$sentencia="SELECT referentes.referenteId, personas.nombre, personas.apellido FROM referentes inner join personas on referentes.personaId=personas.personaId
+			WHERE etjcargo2=".$sup." AND estado='Activo' ORDER BY apellido ASC";		
+
 		}else{
 			$sentencia="SELECT * FROM referentes inner join personas on referentes.personaId=personas.personaId
 			WHERE (tipo='ETT' OR tipo='ETJ') AND estado='Activo' ORDER BY apellido ASC";
@@ -380,6 +386,17 @@ class Referente
 			$conexion=$nuevaConexion->getConexion();
 
 			$sentencia="SELECT * FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE etjcargo2=".$this->referenteId." AND estado='".$estado."'" ;
+			$sentencia.=" ORDER BY personas.apellido ASC";
+			//echo $sentencia;
+			return $conexion->query($sentencia);
+			}
+			
+			public function CargoEtj3($estado=null)
+		{
+			$nuevaConexion=new Conexion();
+			$conexion=$nuevaConexion->getConexion();
+
+			$sentencia="SELECT * FROM referentes inner join personas on referentes.personaId=personas.personaId WHERE etjcargo3=".$this->referenteId." AND estado='".$estado."'" ;
 			$sentencia.=" ORDER BY personas.apellido ASC";
 			//echo $sentencia;
 			return $conexion->query($sentencia);

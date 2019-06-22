@@ -76,15 +76,14 @@
 
                 ?>
                 <table class='table' id='misMigraciones'>
-                    <thead>
-                    
-                    <tr>
-                        <td>Id</td>
-                        <td>Numero</td>
-                        <td>Cue</td>
-                        <td>Nombre</td>
-                        <td>Accion</td>
-                    </tr>
+                    <thead>                    
+                        <tr>
+                            <td>Id</td>
+                            <td>Numero</td>
+                            <td>Cue</td>
+                            <td>Nombre</td>
+                            <td>Accion</td>
+                        </tr>
                     </thead>
                     <tbody>
                 <?php

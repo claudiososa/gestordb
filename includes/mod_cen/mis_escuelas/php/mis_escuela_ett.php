@@ -215,20 +215,20 @@ echo "</div>";
 
         $mensajeUpdate ="";
 
-        $updateData->referente_id = $_SESSION['referenteId'];
-        $updateData->table_name = 'escuelas';
-        $updateData->table_id = $infoEscuela->escuelaId;
-        $buscarUpdate = $updateData->buscar();
+        // $updateData->referente_id = $_SESSION['referenteId'];
+        // $updateData->table_name = 'escuelas';
+        // $updateData->table_id = $infoEscuela->escuelaId;
+        // $buscarUpdate = $updateData->buscar();
 
 
-        $resultadoUpdate = mysqli_num_rows($buscarUpdate);
-        if ($resultadoUpdate===0) {
-          $mensajeUpdate='Falta actualizar datos';
-          $alert = 'alert-danger';
-        }else{
-          $mensajeUpdate = '';
-          $alert = 'alert-success';
-        }
+        // $resultadoUpdate = mysqli_num_rows($buscarUpdate);
+        // if ($resultadoUpdate===0) {
+        //   $mensajeUpdate='Falta actualizar datos';
+        //   $alert = 'alert-danger';
+        // }else{
+        //   $mensajeUpdate = '';
+        //   $alert = 'alert-success';
+        // }
 
         //var_dump($resultadoUpdate);
         //var_dump($updateData);

@@ -91,6 +91,10 @@ if ($_SESSION['referenteId']=="0255") {
   $ett1 = $referente->Cargo("Activo");
   $ett2 = $referente->Cargo("Activo");
   $resultado_ett_acargo = $referente->Cargo("Activo");
+}elseif($_SESSION['referenteId']=="0287"){
+  $ett1 = $referente->CargoEtj3("Activo");
+  $ett2 = $referente->CargoEtj3("Activo");
+  $resultado_ett_acargo = $referente->CargoEtj3("Activo");
 }else{
   $ett1 = $referente->CargoEtj2("Activo");
   $ett2 = $referente->CargoEtj2("Activo");
