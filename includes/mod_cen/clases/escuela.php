@@ -29,6 +29,10 @@ class Escuela
 	private $email;
 	private $aulaS;
 	private $aulaSUbica;
+	private $pc_escritorio;
+	private $conectividad;
+	private $rti;
+	
 
  	function __construct($escuelaId=NULL,
 											$referenteId=NULL,
@@ -53,7 +57,10 @@ class Escuela
 											$referenteIdFacilitador=NULL,
 											$email=NULL,
 											$aulaS=NULL,
-											$aulaSUbica=NULL)
+											$aulaSUbica=NULL,
+											$conectividad=NULL,
+											$rti=NULL,
+											$pc_escritorio=NULL)
 	{
 			 //seteo los atributos
 		 	$this->escuelaId = $escuelaId;
@@ -80,6 +87,9 @@ class Escuela
 			$this->referenteIdSuperAdultos = $referenteIdFacilitador;
 			$this->aulaS = $aulaS;
 			$this->aulaSUbica = $aulaSUbica;
+			$this->conectividad = $conectividad;
+			$this->pc_escritorio = $pc_escritorio;
+			$this->rti = $rti;
 	}
 
 	public static function estructura($campo,$tabla){
@@ -149,7 +159,15 @@ class Escuela
 											domicilio = '$this->domicilio',
 											localidadId = '$this->localidadId',
 											telefono = '$this->telefono'
-										WHERE escuelaId = '$this->escuelaId'";
+										WHERE escuelaId = $this->escuelaId ";
+
+		}else if ($tipo=='conectividad'){
+			$sentencia="UPDATE escuelas
+									SET 
+										conectividad = '$this->conectividad',
+										pc_escritorio = '$this->pc_escritorio',
+										rti = $this->rti
+										WHERE escuelaId = $this->escuelaId ";
 
 		}else{
 			$sentencia="UPDATE escuelas SET referenteId ='$this->referenteId',
@@ -166,10 +184,12 @@ class Escuela
 																										facebook = '$this->facebook',
 																										twitter = '$this->twitter',
 																										youtube = '$this->youtube',
-																										email = '$this->email'
+																										email = '$this->email',
+																										conectividad = '$this->conectividad',
+																										pc_escritorio = '$this->pc_escritorio'
 																										WHERE escuelaId = '$this->escuelaId'";
 		}
-
+		//return($sentencia);
 		if ($conexion->query($sentencia)) {
 			return 1;
 		}else
@@ -573,7 +593,7 @@ class Escuela
 			 || $this->escuelaId!=NULL || $this->referenteIdPmi!=NULL ||
 			  $this->referenteIdSuperSec!=NULL || $this->referenteIdSuperSup!=NULL || 
 			  $this->referenteIdSuperAdultos!=NULL || $this->referenteIdFacilitador!=NULL 
-			  || $this->aulaS!=NULL || $this->aulaSUbica!=NULL)
+			  || $this->aulaS!=NULL || $this->aulaSUbica!=NULL || $this->conectividad!=NULL || $this->pc_escritorio!=NULL  || $this->rti!=NULL)
 		{
 			$sentencia.=" WHERE ";
 
@@ -659,6 +679,24 @@ class Escuela
 		if($this->nivel!=NULL)
 		{
 			$sentencia.=" nivel='$this->nivel' && ";
+			$carga=1;
+		}
+
+		if($this->conectividad!=NULL)
+		{
+			$sentencia.=" conectividad='$this->conectividad' && ";
+			$carga=1;
+		}
+
+		if($this->rti!=NULL)
+		{
+			$sentencia.=" rti=$this->rti && ";
+			$carga=1;
+		}
+
+		if($this->pc_escritorio!=NULL)
+		{
+			$sentencia.=" pc_escritorio='$this->pc_escritorio' && ";
 			$carga=1;
 		}
 
@@ -755,7 +793,9 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 	 	$this->ubicacion = $elemento->ubicacion;
 	 	$this->sitio = $elemento->sitio;
 	 	$this->facebook = $elemento->facebook;
-	 	$this->twitter = $elemento->twitter;
+		$this->twitter = $elemento->twitter;
+		$this->conectividad = $elemento->conectividad;
+		$this->pc_escritorio = $elemento->pc_escritorio;
 	 	$this->youtube = $elemento->youtube;
 		$this->referenteIdPmi = $elemento->referenteIdPmi;
 		$this->referenteIdSuperSec = $elemento->referenteIdSuperSec;
@@ -842,6 +882,21 @@ $sentencia=substr($sentencia,0,strlen($sentencia)-3);
 	public function getYoutube()
 	{
 		return $this->youtube;
+	}
+
+	public function getConectividad()
+	{
+		return $this->conectividad;
+	}
+
+	public function getRti()
+	{
+		return $this->rti;
+	}
+
+	public function getPc_escritorio()
+	{
+		return $this->pc_escritorio;
 	}
 
 	public function getSitio()

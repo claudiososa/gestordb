@@ -516,6 +516,9 @@
 				case 26:
 								include("includes/mod_cen/escuelas/misEscuelasSuperSuperior.php");
 								break;
+				case 27:
+								include("includes/mod_cen/mis_escuelas/php/conectividad_ett.php");
+								break;
 }
 
 
