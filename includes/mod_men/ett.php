@@ -16,6 +16,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.php?mod=slat&men=user&id=3">Mis Escuelas <span class="sr-only">(current)</span></a></li>
+        <li><a href="index.php?mod=slat&men=user&id=27">Datos de Conectividad</a></li>
         <li><a href="index.php?mod=slat&men=user&id=4">Mis RTI</a></li>
         <!--<li><a href="index.php?mod=slat&men=admin&id=5">Asignar Mis Escuelas</a></li>-->
         <li class="dropdown">

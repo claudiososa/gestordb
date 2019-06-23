@@ -15,7 +15,7 @@ $(document).ready(function() {
     if ($(`#form${id}`).length === 0) {      
 
         $(`
-            <form action="index.php?mod=slat&men=user&id=27" method="POST" id="form${id}" >
+            <form action="index.php?mod=slat&men=user&id=27" method="POST" id="form${id}">
 
             <input type="hidden" name="escuela_id" id="escuela_id" value="${id}">
             <div class="form-group">
@@ -32,7 +32,7 @@ $(document).ready(function() {
               </div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" id="pnce" class="check_conectividad  form-control"  name="type_conectividad[]" value="1">PNCE / Plan Nacional de Conectividad Escolar              
+                  <input type="checkbox" id="pnce" class="check_conectividad  form-control"  name="type_conectividad[]" value="1"> PLAN NACIONAL<br> CONECTIVIDAD ESC.
                 </label>
               </div>
               <hr>

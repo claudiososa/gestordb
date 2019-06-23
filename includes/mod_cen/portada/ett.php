@@ -20,6 +20,8 @@ $b_mis_informe = $mis_informes->buscar(10);
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
+		
+			<div class="alert alert-info"><a href="index.php?mod=slat&men=user&id=27"><strong>Click aquí </strong> para acceder a carga de datos de Conectividad y RTI 2019</a></div>
 			<div class="btn-group btn-group-justified" role="group" aria-label="...">
 				<div class="btn-group" role="group">
 					<a href="index.php?mod=slat&men=user&id=3"><button type="button" class="btn btn-default"><img class="portada" src="includes/mod_cen/portada/imgPortadas/escuela-primaria.svg" alt="MisEscuelas" ><br>  Mis Escuelas</button></a>

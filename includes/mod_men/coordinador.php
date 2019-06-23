@@ -101,6 +101,13 @@
                     </a>
                   </li>
 
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.php?mod=slat&men=escuelas&id=40">
+                      <span class="oi oi-magnifying-glass"></span>
+                      Datos Conectividad
+                    </a>
+                  </li>
+
                   <div class="dropdown-divider"></div>
                   <li class="nav-item">
                     <a class="nav-link menuAside" href="#"  data-toggle="collapse"  data-target="#sidebarName" aria-controls="sidebarName" aria-expanded="false" aria-label="sidebarName"> Asignación Escuelas

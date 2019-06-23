@@ -65,6 +65,7 @@
                  <li><a href="index.php?mod=slat&men=encuentros&id=3">Todos Encuentros</a></li>
           </ul>
         </li>
+        <li><a href="index.php?mod=slat&men=escuelas&id=40">Datos Conectividad</a></li>
         <li><a href="index.php?mod=slat&men=admin&id=3">Login como...</a></li>
       </ul>
 

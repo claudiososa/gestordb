@@ -578,6 +578,35 @@ class Escuela
 		
 	}
 
+	public function buscar_conectividad(){
+		$nuevaConexion=new Conexion();
+		$conexion=$nuevaConexion->getConexion();
+
+		$sentencia="SELECT escuelas.escuelaId,
+						   escuelas.numero, 
+						   escuelas.cue, 
+						   escuelas.nombre as nombre_escuela,
+						   escuelas.pc_escritorio,
+						   escuelas.rti,
+						   escuelas.conectividad,
+						   personas.apellido,
+						   personas.nombre 
+					FROM escuelas					
+					LEFT JOIN escuelaReferentes
+					ON escuelaReferentes.escuelaId = escuelas.escuelaId					
+					LEFT JOIN referentes
+					ON referentes.referenteId = escuelaReferentes.referenteId && escuelaReferentes.tipoId = 19
+					INNER JOIN personas
+					ON personas.personaId = referentes.personaId
+					
+		WHERE 1";	
+
+		$sentencia.="  ORDER BY escuelas.numero";
+
+
+		return $conexion->query($sentencia);
+	}
+
 	public function buscar()
 	{
 		$nuevaConexion=new Conexion();

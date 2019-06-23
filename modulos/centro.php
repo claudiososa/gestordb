@@ -343,6 +343,9 @@
 									break;		
 						case 39:
 									include("includes/mod_cen/escuelas/escuela_buscar_superior.php");
+									break;
+					  case 40:
+									include("includes/mod_cen/escuelas/datos_conectvidad_rti.php");
 									break;				
 
 
