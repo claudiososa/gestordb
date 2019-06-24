@@ -47,6 +47,7 @@
           </ul>
         </li>
 		  <!-- <li><a href="index.php?mod=slat&men=escuelas&id=12">ADM</a></li> -->
+      <li><a href="index.php?mod=slat&men=escuelas&id=40">Datos Conectividad</a></li>
 		  <li><a href="index.php?mod=slat&men=admin&id=3">Login como..</a></li>
       <!-- <li class=""><a href="index.php?mod=slat&men=estadistica&id=1">Estadisticas<span class="sr-only">(current)</span></a></li> -->
       </li>
